@@ -6,5 +6,4 @@ const mainReducer = combineReducers({
     auth,
 });
 
-// const rootReducer = reduceReducers(mainReducer);
 export default mainReducer;

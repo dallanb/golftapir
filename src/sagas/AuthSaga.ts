@@ -1,18 +1,18 @@
-import { all, takeLatest } from 'redux-saga/effects';
+import { AnyAction } from 'redux';
+import { all, call, put, takeLatest } from 'redux-saga/effects';
 import { message } from 'antd';
-import { AuthTypes } from '../reducers/AuthReducer';
+import AuthActions, { AuthTypes } from '../reducers/AuthReducer';
+import { AuthService } from '../services';
 
-function* login({
-    username,
-    password,
-}: {
-    username: string;
-    password: string;
-}) {
+function* login({ email, password }: AnyAction) {
     try {
-        message.success('Registration successful!');
+        const res = yield call(AuthService.login, { email, password });
+        console.log(res);
+        yield put(AuthActions.loginSuccess());
+        message.success('Login successful!');
     } catch (err) {
-        message.error('Could not create user');
+        yield put(AuthActions.loginFailure(err));
+        message.error('Login unsuccessful');
     }
 }
 
