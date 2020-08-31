@@ -3,7 +3,7 @@ import { set as _set } from 'lodash';
 import { setCoreApiHeaders } from './utils';
 
 class ClientProxy {
-    getUrl = (url: string, endpoint: string) => `${url}${endpoint}`;
+    getUrl = (url: string, endpoint: string) => `https://${url}${endpoint}`;
 
     ajax = async ({
         url,
@@ -21,6 +21,7 @@ class ClientProxy {
             method,
             url,
         };
+        console.log(options);
 
         if (method === 'GET') {
             _set(options, 'params', data);
