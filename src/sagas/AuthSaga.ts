@@ -7,7 +7,6 @@ import { AuthService } from '../services';
 function* login({ email, password }: AnyAction) {
     try {
         const res = yield call(AuthService.login, { email, password });
-        console.log(res);
         yield put(AuthActions.loginSuccess());
         message.success('Login successful!');
     } catch (err) {
@@ -16,6 +15,24 @@ function* login({ email, password }: AnyAction) {
     }
 }
 
+function* register({ email, username, password }: AnyAction) {
+    try {
+        const res = yield call(AuthService.register, {
+            email,
+            username,
+            password,
+        });
+        yield put(AuthActions.registerSuccess());
+        message.success('Register successful!');
+    } catch (err) {
+        yield put(AuthActions.registerFailure(err));
+        message.error('Register unsuccessful');
+    }
+}
+
 export default function* UserSaga() {
-    yield all([takeLatest(AuthTypes.LOGIN, login)]);
+    yield all([
+        takeLatest(AuthTypes.LOGIN, login),
+        takeLatest(AuthTypes.REGISTER, register),
+    ]);
 }

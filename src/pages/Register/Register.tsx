@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { Button, Form, Input } from 'antd';
 import AuthActions from '../../reducers/AuthReducer';
 import ModalActions from '../../reducers/ModalReducer';
-import { LoginProps } from './types';
-import './Login.scss';
+import { RegisterProps } from './types';
+import './Register.scss';
 
 const layout = {
     labelCol: { span: 8 },
@@ -15,18 +15,17 @@ const tailLayout = {
     wrapperCol: { offset: 8, span: 16 },
 };
 
-class Login extends PureComponent<LoginProps> {
+class Register extends PureComponent<RegisterProps> {
     onFinish = (values: any) => {
-        const { login } = this.props;
-        const { email, password } = values;
-        login(email, password);
+        const { register } = this.props;
+        const { email, username, password } = values;
+        register(email, username, password);
     };
 
     onFinishFailed = (errorInfo: any) => {
-        console.log(errorInfo);
         const { setMessageModal } = this.props;
         setMessageModal(true, {
-            head: 'Login Failed',
+            head: 'Register Failed',
             body: 'Please check your inputted fields',
         });
     };
@@ -35,12 +34,12 @@ class Login extends PureComponent<LoginProps> {
         return (
             <Form
                 {...layout}
-                name="login"
+                name="register"
                 initialValues={{ remember: true }}
                 onFinish={this.onFinish}
                 onFinishFailed={this.onFinishFailed}
             >
-                <h1>Login</h1>
+                <h1>Register</h1>
                 <Form.Item
                     label="Email"
                     name="email"
@@ -48,6 +47,18 @@ class Login extends PureComponent<LoginProps> {
                         {
                             required: true,
                             message: 'Please input your email address!',
+                        },
+                    ]}
+                >
+                    <Input />
+                </Form.Item>
+                <Form.Item
+                    label="Username"
+                    name="username"
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Please input your username!',
                         },
                     ]}
                 >
@@ -78,8 +89,8 @@ class Login extends PureComponent<LoginProps> {
 
 const mapDispatchToProps = (dispatch: any) => {
     return {
-        login(email: string, password: string) {
-            return dispatch(AuthActions.login(email, password));
+        register(email: string, username: string, password: string) {
+            return dispatch(AuthActions.register(email,username,  password));
         },
         setMessageModal(isOpen: boolean, data: any) {
             return dispatch(ModalActions.setMessageModal(isOpen, data));
@@ -87,4 +98,4 @@ const mapDispatchToProps = (dispatch: any) => {
     };
 };
 
-export default connect(null, mapDispatchToProps)(Login);
+export default connect(null, mapDispatchToProps)(Register);

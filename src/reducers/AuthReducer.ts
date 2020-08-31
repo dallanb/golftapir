@@ -7,6 +7,9 @@ const { Types, Creators } = createActions(
         login: ['email', 'password'],
         loginSuccess: null,
         loginFailure: ['err'],
+        register: ['email', 'username', 'password'],
+        registerSuccess: null,
+        registerFailure: ['err'],
     },
     {
         prefix: 'AUTH_',
@@ -45,10 +48,34 @@ function loginFailure(state: any, { err }: any) {
     });
 }
 
+function register(state = INITIAL_STATE) {
+    return Immutable.merge(state, {
+        isSubmitting: true,
+        err: null,
+    });
+}
+
+function registerSuccess(state: any) {
+    return Immutable.merge(state, {
+        isSubmitting: false,
+        err: null,
+    });
+}
+
+function registerFailure(state: any, { err }: any) {
+    return Immutable.merge(state, {
+        isSubmitting: false,
+        err,
+    });
+}
+
 const HANDLERS = {
     [Types.LOGIN]: login,
     [Types.LOGIN_SUCCESS]: loginSuccess,
     [Types.LOGIN_FAILURE]: loginFailure,
+    [Types.REGISTER]: register,
+    [Types.REGISTER_SUCCESS]: registerSuccess,
+    [Types.REGISTER_FAILURE]: registerFailure,
 };
 
 export const reducer = createReducer(INITIAL_STATE, HANDLERS);
