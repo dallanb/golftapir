@@ -8,10 +8,12 @@
     .sider-layout {
         .sider-layout-title {
             height: 32px;
-            background: rgba(255, 255, 255, 0.2);
+            background: url(../../assets/images/tapir_white.png);
+            background-size: cover;
             margin: 16px;
             display: flex;
             color: white;
+            filter: invert(1);
             .sider-layout-title-text {
                 align-content: end;
             }
@@ -27,7 +29,7 @@
 
             div {
                 padding: 24px;
-                min-height: 360px;
+                min-height: 100%;
             }
         }
     }
