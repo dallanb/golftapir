@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { Button, Form, Input } from 'antd';
 import AuthActions from '../../reducers/AuthReducer';
@@ -15,7 +15,7 @@ const tailLayout = {
     wrapperCol: { offset: 8, span: 16 },
 };
 
-class Register extends PureComponent<RegisterProps> {
+class Register extends React.PureComponent<RegisterProps> {
     onFinish = (values: any) => {
         const { register } = this.props;
         const { email, username, password } = values;
@@ -90,7 +90,7 @@ class Register extends PureComponent<RegisterProps> {
 const mapDispatchToProps = (dispatch: any) => {
     return {
         register(email: string, username: string, password: string) {
-            return dispatch(AuthActions.register(email,username,  password));
+            return dispatch(AuthActions.register(email, username, password));
         },
         setMessageModal(isOpen: boolean, data: any) {
             return dispatch(ModalActions.setMessageModal(isOpen, data));

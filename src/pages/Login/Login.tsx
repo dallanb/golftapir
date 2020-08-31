@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { Button, Form, Input } from 'antd';
 import AuthActions from '../../reducers/AuthReducer';
@@ -15,7 +15,7 @@ const tailLayout = {
     wrapperCol: { offset: 8, span: 16 },
 };
 
-class Login extends PureComponent<LoginProps> {
+class Login extends React.PureComponent<LoginProps> {
     onFinish = (values: any) => {
         const { login } = this.props;
         const { email, password } = values;

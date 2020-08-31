@@ -1,0 +1,37 @@
+.app-layout-view {
+    min-height: 100vh !important;
+
+    .logo {
+        color: white;
+    }
+
+    .sider-layout {
+        .sider-layout-title {
+            height: 32px;
+            background: rgba(255, 255, 255, 0.2);
+            margin: 16px;
+            display: flex;
+            color: white;
+            .sider-layout-title-text {
+                align-content: end;
+            }
+        }
+    }
+
+    .content-layout {
+        .content-layout-background {
+            background: white;
+        }
+        .content-layout-content {
+            margin: 16px;
+
+            div {
+                padding: 24px;
+                min-height: 360px;
+            }
+        }
+    }
+    .footer {
+        text-align: center;
+    }
+}

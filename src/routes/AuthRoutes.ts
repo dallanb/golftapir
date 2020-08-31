@@ -1,5 +1,4 @@
-import Login from '../pages/Login';
-import Register from '../pages/Register';
+import { Login, Register } from '../pages';
 
 export default [
     {
@@ -8,6 +7,6 @@ export default [
     },
     {
         path: '/register',
-        component: Register
-    }
+        component: Register,
+    },
 ];
