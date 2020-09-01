@@ -30,7 +30,7 @@ function* register({ email, username, password }: AnyAction) {
     }
 }
 
-export default function* UserSaga() {
+export default function* AuthSaga() {
     yield all([
         takeLatest(AuthTypes.LOGIN, login),
         takeLatest(AuthTypes.REGISTER, register),

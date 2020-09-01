@@ -3,8 +3,8 @@ import { Layout, Menu, PageHeader } from 'antd';
 import memoize from 'memoize-one';
 import { AppLayoutProps, AppLayoutState } from './types';
 import appRoutes from '../../routes/AppRoutes';
+import { navigateTo } from '../../routes/history';
 import './AppLayout.scss';
-import { IconTitle } from '../../components';
 
 const { Content, Footer, Sider } = Layout;
 
@@ -18,9 +18,18 @@ class AppLayout extends React.PureComponent<AppLayoutProps, AppLayoutState> {
         this.setState({ collapsed });
     };
 
+    onClick = (path: string) => {
+        console.log(path);
+        navigateTo(path);
+    };
+
     getMenuItems = memoize(() => {
         return appRoutes.map((appRoute, index) => (
-            <Menu.Item key={index} icon={React.createElement(appRoute.icon)}>
+            <Menu.Item
+                key={index}
+                icon={React.createElement(appRoute.icon)}
+                onClick={() => this.onClick(appRoute.path)}
+            >
                 {appRoute.name}
             </Menu.Item>
         ));

@@ -6,6 +6,7 @@ import {
     HomeFilled,
     MessageFilled,
     NotificationFilled,
+    SettingFilled,
 } from '@ant-design/icons';
 
 export default [
@@ -44,5 +45,11 @@ export default [
         // component: Home,
         name: 'Wagers',
         icon: DollarCircleFilled,
+    },
+    {
+        path: '/settings',
+        // component: Home,
+        name: 'Settings',
+        icon: SettingFilled,
     },
 ];
