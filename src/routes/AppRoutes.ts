@@ -1,5 +1,8 @@
 import { Home } from '../pages';
 import {
+    CrownFilled,
+    DollarCircleFilled,
+    FlagFilled,
     HomeFilled,
     MessageFilled,
     NotificationFilled,
@@ -23,5 +26,23 @@ export default [
         // component: Home,
         name: 'Messages',
         icon: MessageFilled,
+    },
+    {
+        path: '/competitors',
+        // component: Home,
+        name: 'Competitors',
+        icon: CrownFilled,
+    },
+    {
+        path: '/contests',
+        // component: Home,
+        name: 'Contests',
+        icon: FlagFilled,
+    },
+    {
+        path: '/wagers',
+        // component: Home,
+        name: 'Wagers',
+        icon: DollarCircleFilled,
     },
 ];

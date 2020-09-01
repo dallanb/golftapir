@@ -7,8 +7,8 @@ import './Home.scss';
 class Home extends React.PureComponent<HomeProps> {
     render() {
         return (
-            <AppLayout>
-                <h1>Welcome Home</h1>
+            <AppLayout title="Home" subTitle="Welcome back Dallan">
+                <div>Hey Dood</div>
             </AppLayout>
         );
     }

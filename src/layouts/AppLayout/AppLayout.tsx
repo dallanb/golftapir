@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layout, Menu } from 'antd';
+import { Layout, Menu, PageHeader } from 'antd';
 import memoize from 'memoize-one';
 import { AppLayoutProps, AppLayoutState } from './types';
 import appRoutes from '../../routes/AppRoutes';
@@ -27,7 +27,7 @@ class AppLayout extends React.PureComponent<AppLayoutProps, AppLayoutState> {
     });
 
     render() {
-        const { children } = this.props;
+        const { title, subTitle, children } = this.props;
         const { collapsed } = this.state;
         return (
             <Layout className="app-layout-view">
@@ -49,7 +49,10 @@ class AppLayout extends React.PureComponent<AppLayoutProps, AppLayoutState> {
                 <Layout className="content-layout">
                     <Content className="content-layout-content">
                         <div className="content-layout-background">
-                            {children}
+                            <PageHeader title={title} subTitle={subTitle} />
+                            <div className="content-layout-children">
+                                {children}
+                            </div>
                         </div>
                     </Content>
                     <Footer className="footer">
