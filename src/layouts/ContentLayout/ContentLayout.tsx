@@ -1,6 +1,7 @@
 import React from 'react';
 import { ContentLayoutProps, ContentLayoutState } from './types';
 import { Layout, PageHeader } from 'antd';
+import './ContentLayout.scss';
 
 const { Content, Footer } = Layout;
 
@@ -14,7 +15,9 @@ class ContentLayout extends React.Component<
             <Layout className="content-layout">
                 <Content className="content-layout-content">
                     <div className="content-layout-background">
-                        <PageHeader title={title} subTitle={subTitle} />
+                        {title && (
+                            <PageHeader title={title} subTitle={subTitle} />
+                        )}
                         <div className="content-layout-children">
                             {children}
                         </div>

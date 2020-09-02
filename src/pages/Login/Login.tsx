@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Button, Form, Input } from 'antd';
 import AuthActions from '../../reducers/AuthReducer';
 import ModalActions from '../../reducers/ModalReducer';
+import { ContentLayout } from '../../layouts';
 import { LoginProps } from './types';
 import './Login.scss';
 
@@ -33,45 +34,46 @@ class Login extends React.PureComponent<LoginProps> {
 
     render() {
         return (
-            <Form
-                {...layout}
-                name="login"
-                initialValues={{ remember: true }}
-                onFinish={this.onFinish}
-                onFinishFailed={this.onFinishFailed}
-            >
-                <h1>Login</h1>
-                <Form.Item
-                    label="Email"
-                    name="email"
-                    rules={[
-                        {
-                            required: true,
-                            message: 'Please input your email address!',
-                        },
-                    ]}
+            <ContentLayout>
+                <Form
+                    {...layout}
+                    name="login"
+                    initialValues={{ remember: true }}
+                    onFinish={this.onFinish}
+                    onFinishFailed={this.onFinishFailed}
                 >
-                    <Input />
-                </Form.Item>
-                <Form.Item
-                    label="Password"
-                    name="password"
-                    rules={[
-                        {
-                            required: true,
-                            message: 'Please input your password!',
-                        },
-                    ]}
-                >
-                    <Input.Password />
-                </Form.Item>
+                    <Form.Item
+                        label="Email"
+                        name="email"
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Please input your email address!',
+                            },
+                        ]}
+                    >
+                        <Input />
+                    </Form.Item>
+                    <Form.Item
+                        label="Password"
+                        name="password"
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Please input your password!',
+                            },
+                        ]}
+                    >
+                        <Input.Password />
+                    </Form.Item>
 
-                <Form.Item {...tailLayout}>
-                    <Button type="primary" htmlType="submit">
-                        Submit
-                    </Button>
-                </Form.Item>
-            </Form>
+                    <Form.Item {...tailLayout}>
+                        <Button type="primary" htmlType="submit">
+                            Submit
+                        </Button>
+                    </Form.Item>
+                </Form>
+            </ContentLayout>
         );
     }
 }

@@ -1,0 +1,14 @@
+.auth-layout-view {
+    min-height: 100vh !important;
+
+    .logo {
+        color: white;
+    }
+
+    .auth-layout-title {
+        background: url(../../assets/images/tapir_white.png);
+        height: 50px;
+        width: 275px;
+        background-size: cover;
+    }
+}

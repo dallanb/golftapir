@@ -1,0 +1,15 @@
+.content-layout {
+    .content-layout-background {
+        background: white;
+        height: 100%;
+    }
+    .content-layout-content {
+        margin: 16px;
+        .content-layout-children {
+            padding: 24px;
+        }
+    }
+}
+.footer {
+    text-align: center;
+}

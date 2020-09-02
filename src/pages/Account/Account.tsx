@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import _ from 'lodash';
 import { AccountProps } from './types';
 import { ContentLayout } from '../../layouts';
 import AccountActions from '../../reducers/AccountReducer';
