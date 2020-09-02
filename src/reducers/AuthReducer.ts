@@ -23,6 +23,7 @@ const INITIAL_STATE = {
     data: undefined,
     isFetching: false,
     isSubmitting: false,
+    isLoggedIn: false,
     err: undefined,
 };
 
@@ -38,6 +39,7 @@ function loginSuccess(state: any) {
     return Immutable.merge(state, {
         isSubmitting: false,
         err: null,
+        isLoggedIn: true,
     });
 }
 

@@ -1,22 +1,29 @@
 import React from 'react';
+import { compose } from 'redux';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { Button, Form, Input } from 'antd';
+import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import AuthActions from '../../reducers/AuthReducer';
 import ModalActions from '../../reducers/ModalReducer';
-import { ContentLayout } from '../../layouts';
 import { LoginProps } from './types';
 import './Login.scss';
 
-const layout = {
-    labelCol: { span: 8 },
-    wrapperCol: { span: 16 },
-};
-
-const tailLayout = {
-    wrapperCol: { offset: 8, span: 16 },
-};
-
 class Login extends React.PureComponent<LoginProps> {
+    componentDidMount() {
+        const { isLoggedIn, history } = this.props;
+        if (isLoggedIn) {
+            history.push('/app/home');
+        }
+    }
+
+    componentDidUpdate(prevProps: Readonly<LoginProps>) {
+        const { isLoggedIn, history } = this.props;
+        if (isLoggedIn) {
+            history.push('/app/home');
+        }
+    }
+
     onFinish = (values: any) => {
         const { login } = this.props;
         const { email, password } = values;
@@ -34,16 +41,14 @@ class Login extends React.PureComponent<LoginProps> {
 
     render() {
         return (
-            <ContentLayout>
+            <div className="login-view">
                 <Form
-                    {...layout}
                     name="login"
                     initialValues={{ remember: true }}
                     onFinish={this.onFinish}
                     onFinishFailed={this.onFinishFailed}
                 >
                     <Form.Item
-                        label="Email"
                         name="email"
                         rules={[
                             {
@@ -52,10 +57,14 @@ class Login extends React.PureComponent<LoginProps> {
                             },
                         ]}
                     >
-                        <Input />
+                        <Input
+                            prefix={
+                                <UserOutlined className="site-form-item-icon" />
+                            }
+                            placeholder="Email"
+                        />
                     </Form.Item>
                     <Form.Item
-                        label="Password"
                         name="password"
                         rules={[
                             {
@@ -64,19 +73,30 @@ class Login extends React.PureComponent<LoginProps> {
                             },
                         ]}
                     >
-                        <Input.Password />
+                        <Input
+                            prefix={
+                                <LockOutlined className="site-form-item-icon" />
+                            }
+                            type="password"
+                            placeholder="Password"
+                        />
                     </Form.Item>
-
-                    <Form.Item {...tailLayout}>
+                    <Form.Item className="form-item-submit">
                         <Button type="primary" htmlType="submit">
                             Submit
                         </Button>
                     </Form.Item>
                 </Form>
-            </ContentLayout>
+            </div>
         );
     }
 }
+
+const mapStateToProps = ({ auth }: any) => {
+    return {
+        isLoggedIn: auth.isLoggedIn,
+    };
+};
 
 const mapDispatchToProps = (dispatch: any) => {
     return {
@@ -89,4 +109,7 @@ const mapDispatchToProps = (dispatch: any) => {
     };
 };
 
-export default connect(null, mapDispatchToProps)(Login);
+export default compose(
+    withRouter,
+    connect(mapStateToProps, mapDispatchToProps)
+)(Login);
