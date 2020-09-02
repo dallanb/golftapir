@@ -1,4 +1,4 @@
-import { Home } from '../pages';
+import { Account, Home } from '../../pages';
 import {
     CrownFilled,
     DollarCircleFilled,
@@ -11,44 +11,44 @@ import {
 
 export default [
     {
-        path: '/home',
+        path: '/app/home',
         component: Home,
         name: 'Home',
         icon: HomeFilled,
     },
     {
-        path: '/notifications',
+        path: '/app/notifications',
         // component: Home,
         name: 'Notifications',
         icon: NotificationFilled,
     },
     {
-        path: '/messages',
+        path: '/app/messages',
         // component: Home,
         name: 'Messages',
         icon: MessageFilled,
     },
     {
-        path: '/competitors',
+        path: '/app/competitors',
         // component: Home,
         name: 'Competitors',
         icon: CrownFilled,
     },
     {
-        path: '/contests',
+        path: '/app/contests',
         // component: Home,
         name: 'Contests',
         icon: FlagFilled,
     },
     {
-        path: '/wagers',
+        path: '/app/wagers',
         // component: Home,
         name: 'Wagers',
         icon: DollarCircleFilled,
     },
     {
-        path: '/settings',
-        // component: Home,
+        path: '/app/settings',
+        component: Account,
         name: 'Settings',
         icon: SettingFilled,
     },

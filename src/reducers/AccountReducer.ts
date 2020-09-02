@@ -4,10 +4,10 @@ import { createActions, createReducer } from 'reduxsauce';
 
 const { Types, Creators } = createActions(
     {
-        fetchAccount: ['email', 'password'],
+        fetchAccount: ['uuid'],
         fetchAccountSuccess: null,
         fetchAccountFailure: ['err'],
-        fetchAccounts: ['email', 'username', 'password'],
+        fetchAccounts: null,
         fetchAccountsSuccess: null,
         fetchAccountsFailure: ['err'],
     },

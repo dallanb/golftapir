@@ -1,15 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { AppLayout } from '../../layouts';
 import { HomeProps } from './types';
+import { ContentLayout } from '../../layouts';
 import './Home.scss';
 
 class Home extends React.PureComponent<HomeProps> {
     render() {
         return (
-            <AppLayout title="Home" subTitle="Welcome back Dallan">
+            <ContentLayout title="Home" subTitle="Home Page">
                 <div>Hey Dood</div>
-            </AppLayout>
+            </ContentLayout>
         );
     }
 }

@@ -1,9 +1,9 @@
 import React, { Fragment } from 'react';
 import { Route, Switch } from 'react-router-dom';
 
-// routes
-import AuthRoutes from './AuthRoutes';
-import HomeRoutes from './HomeRoutes';
+// apps
+import Auth from './Auth';
+import MemberApp from './MemberApp';
 // components
 import MessageModal from '../components/MessageModal';
 
@@ -11,45 +11,11 @@ export const Routes = (
     <Fragment>
         <MessageModal />
         <Switch>
-            {AuthRoutes.map(
-                ({
-                    path,
-                    component,
-                    exact,
-                }: {
-                    path: string;
-                    component: any;
-                    exact?: boolean;
-                }) => (
-                    <Route
-                        key={path}
-                        path={path}
-                        component={component}
-                        exact={exact}
-                    />
-                )
-            )}
-            {HomeRoutes.map(
-                ({
-                    path,
-                    component,
-                    exact,
-                }: {
-                    path: string;
-                    component: any;
-                    exact?: boolean;
-                }) => (
-                    <Route
-                        key={path}
-                        path={path}
-                        component={component}
-                        exact={exact}
-                    />
-                )
-            )}
-            <Route>
-                <div>NO MATCH</div>
-            </Route>
+            <Route path="/auth" component={Auth} />
+            <Route
+                path="/app"
+                render={({ match: { url } }) => MemberApp(url)}
+            />
         </Switch>
     </Fragment>
 );

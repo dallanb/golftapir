@@ -1,1 +1,2 @@
-export { default as AppLayout } from './AppLayout';
+export { default as MemberAppLayout } from './MemberAppLayout';
+export { default as ContentLayout } from './ContentLayout';
