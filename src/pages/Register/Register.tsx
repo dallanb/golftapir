@@ -1,21 +1,29 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
+import { compose } from 'redux';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { Button, Form, Input } from 'antd';
+import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import AuthActions from '../../reducers/AuthReducer';
 import ModalActions from '../../reducers/ModalReducer';
 import { RegisterProps } from './types';
 import './Register.scss';
 
-const layout = {
-    labelCol: { span: 8 },
-    wrapperCol: { span: 16 },
-};
+class Register extends React.PureComponent<RegisterProps> {
+    componentDidMount() {
+        const { isLoggedIn, history } = this.props;
+        if (isLoggedIn) {
+            history.push('/app/home');
+        }
+    }
 
-const tailLayout = {
-    wrapperCol: { offset: 8, span: 16 },
-};
+    componentDidUpdate(prevProps: Readonly<RegisterProps>) {
+        const { isLoggedIn, history } = this.props;
+        if (isLoggedIn) {
+            history.push('/app/home');
+        }
+    }
 
-class Register extends PureComponent<RegisterProps> {
     onFinish = (values: any) => {
         const { register } = this.props;
         const { email, username, password } = values;
@@ -32,65 +40,84 @@ class Register extends PureComponent<RegisterProps> {
 
     render() {
         return (
-            <Form
-                {...layout}
-                name="register"
-                initialValues={{ remember: true }}
-                onFinish={this.onFinish}
-                onFinishFailed={this.onFinishFailed}
-            >
-                <h1>Register</h1>
-                <Form.Item
-                    label="Email"
-                    name="email"
-                    rules={[
-                        {
-                            required: true,
-                            message: 'Please input your email address!',
-                        },
-                    ]}
+            <div className="register-view">
+                <Form
+                    name="register"
+                    initialValues={{ remember: true }}
+                    onFinish={this.onFinish}
+                    onFinishFailed={this.onFinishFailed}
                 >
-                    <Input />
-                </Form.Item>
-                <Form.Item
-                    label="Username"
-                    name="username"
-                    rules={[
-                        {
-                            required: true,
-                            message: 'Please input your username!',
-                        },
-                    ]}
-                >
-                    <Input />
-                </Form.Item>
-                <Form.Item
-                    label="Password"
-                    name="password"
-                    rules={[
-                        {
-                            required: true,
-                            message: 'Please input your password!',
-                        },
-                    ]}
-                >
-                    <Input.Password />
-                </Form.Item>
+                    <Form.Item
+                        name="email"
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Please input your email address!',
+                            },
+                        ]}
+                    >
+                        <Input
+                            prefix={
+                                <UserOutlined className="site-form-item-icon" />
+                            }
+                            placeholder="Email"
+                        />
+                    </Form.Item>
+                    <Form.Item
+                        name="username"
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Please input your username!',
+                            },
+                        ]}
+                    >
+                        <Input
+                            prefix={
+                                <UserOutlined className="site-form-item-icon" />
+                            }
+                            placeholder="Username"
+                        />
+                    </Form.Item>
+                    <Form.Item
+                        name="password"
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Please input your password!',
+                            },
+                        ]}
+                    >
+                        <Input
+                            prefix={
+                                <LockOutlined className="site-form-item-icon" />
+                            }
+                            type="password"
+                            placeholder="Password"
+                        />
+                    </Form.Item>
 
-                <Form.Item {...tailLayout}>
-                    <Button type="primary" htmlType="submit">
-                        Submit
-                    </Button>
-                </Form.Item>
-            </Form>
+                    <Form.Item className="form-item-submit">
+                        <Button type="primary" htmlType="submit">
+                            Submit
+                        </Button>
+                    </Form.Item>
+                </Form>
+            </div>
         );
     }
 }
 
+const mapStateToProps = ({ auth }: any) => {
+    return {
+        isLoggedIn: auth.isLoggedIn,
+    };
+};
+
 const mapDispatchToProps = (dispatch: any) => {
     return {
         register(email: string, username: string, password: string) {
-            return dispatch(AuthActions.register(email,username,  password));
+            return dispatch(AuthActions.register(email, username, password));
         },
         setMessageModal(isOpen: boolean, data: any) {
             return dispatch(ModalActions.setMessageModal(isOpen, data));
@@ -98,4 +125,7 @@ const mapDispatchToProps = (dispatch: any) => {
     };
 };
 
-export default connect(null, mapDispatchToProps)(Register);
+export default compose(
+    withRouter,
+    connect(mapStateToProps, mapDispatchToProps)
+)(Register);

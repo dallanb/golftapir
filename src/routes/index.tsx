@@ -1,8 +1,9 @@
 import React, { Fragment } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 
-// routes
-import AuthRoutes from './AuthRoutes';
+// apps
+import Auth from './Auth';
+import MemberApp from './MemberApp';
 // components
 import MessageModal from '../components/MessageModal';
 
@@ -10,24 +11,14 @@ export const Routes = (
     <Fragment>
         <MessageModal />
         <Switch>
-            {AuthRoutes.map(
-                ({
-                    path,
-                    component,
-                    exact,
-                }: {
-                    path: string;
-                    component: any;
-                    exact?: boolean;
-                }) => (
-                    <Route
-                        key={path}
-                        path={path}
-                        component={component}
-                        exact={exact}
-                    />
-                )
-            )}
+            <Route path="/auth" render={({ match: { url } }) => Auth(url)} />
+            <Route
+                path="/app"
+                render={({ match: { url } }) => <MemberApp url={url} />}
+            />
+            <Route>
+                <Redirect to="/app" />
+            </Route>
         </Switch>
     </Fragment>
 );

@@ -1,0 +1,23 @@
+.member-app-layout-view {
+    min-height: 100vh !important;
+
+    .logo {
+        color: white;
+    }
+
+    .sider-layout {
+        .sider-layout-title {
+            height: 32px;
+            background: url(../../assets/images/tapir_white.png);
+            background-size: cover;
+            margin: 16px;
+            display: flex;
+            color: white;
+            filter: invert(1);
+
+            .sider-layout-title-text {
+                align-content: end;
+            }
+        }
+    }
+}

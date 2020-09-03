@@ -1,0 +1,25 @@
+// Colours
+.ant-layout {
+    background: #dadde2 !important;
+}
+.ant-layout-sider {
+    background: #333333 !important;
+    .ant-layout-sider-trigger {
+        background: #3f3f3f;
+    }
+}
+.ant-menu {
+    &.ant-menu-dark,
+    &.ant-menu-dark:not(.ant-menu-horizontal) {
+        background: #333333;
+        .ant-menu-item {
+            &.ant-menu-item-selected {
+                background: #232323;
+            }
+        }
+    }
+}
+
+.ant-layout-footer {
+  background: #dadde2 !important;
+}

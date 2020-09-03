@@ -4,12 +4,16 @@ import { createActions, createReducer } from 'reduxsauce';
 
 const { Types, Creators } = createActions(
     {
+        ping: null,
         login: ['email', 'password'],
-        loginSuccess: null,
+        loginSuccess: ['data'],
         loginFailure: ['err'],
         register: ['email', 'username', 'password'],
         registerSuccess: null,
         registerFailure: ['err'],
+        refresh: null,
+        refreshSuccess: null,
+        refreshFailure: ['err'],
     },
     {
         prefix: 'AUTH_',
@@ -23,6 +27,8 @@ const INITIAL_STATE = {
     data: undefined,
     isFetching: false,
     isSubmitting: false,
+    isLoggedIn: false,
+    forceLogout: false,
     err: undefined,
 };
 
@@ -34,10 +40,13 @@ function login(state = INITIAL_STATE) {
     });
 }
 
-function loginSuccess(state: any) {
+function loginSuccess(state: any, { data }: any) {
     return Immutable.merge(state, {
         isSubmitting: false,
         err: null,
+        isLoggedIn: true,
+        forceLogout: false,
+        data,
     });
 }
 
@@ -55,15 +64,40 @@ function register(state = INITIAL_STATE) {
     });
 }
 
-function registerSuccess(state: any) {
+function registerSuccess(state: any, {data}: any) {
     return Immutable.merge(state, {
         isSubmitting: false,
         err: null,
+        isLoggedIn: true,
+        forceLogout: false,
+        data,
     });
 }
 
 function registerFailure(state: any, { err }: any) {
     return Immutable.merge(state, {
+        isSubmitting: false,
+        err,
+    });
+}
+function refresh(state = INITIAL_STATE) {
+    return Immutable.merge(state, {
+        isFetching: true,
+        err: null,
+    });
+}
+
+function refreshSuccess(state: any, {}: any) {
+    return Immutable.merge(state, {
+        isSubmitting: false,
+        err: null,
+        isLoggedIn: true,
+    });
+}
+
+function refreshFailure(state: any, { err }: any) {
+    return Immutable.merge(state, {
+        forceLogout: true,
         isSubmitting: false,
         err,
     });
@@ -76,6 +110,9 @@ const HANDLERS = {
     [Types.REGISTER]: register,
     [Types.REGISTER_SUCCESS]: registerSuccess,
     [Types.REGISTER_FAILURE]: registerFailure,
+    [Types.REFRESH]: refresh,
+    [Types.REFRESH_SUCCESS]: refreshSuccess,
+    [Types.REFRESH_FAILURE]: refreshFailure,
 };
 
 export const reducer = createReducer(INITIAL_STATE, HANDLERS);

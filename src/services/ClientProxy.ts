@@ -1,9 +1,29 @@
 import axios from 'axios';
+import qs from 'querystring';
 import { set as _set } from 'lodash';
 import { setCoreApiHeaders } from './utils';
 
 class ClientProxy {
-    getUrl = (url: string, endpoint: string) => `https://${url}${endpoint}`;
+    private _accessToken: any;
+
+    constructor() {
+        this._accessToken = null;
+    }
+
+    get accessToken(): any {
+        return this._accessToken;
+    }
+
+    set accessToken(token: any) {
+        this._accessToken = token;
+    }
+
+    getUrl = (url: string, endpoint: string, query: any = {}) => {
+        const queryString = qs.stringify(query);
+        return queryString
+            ? `https://${url}${endpoint}?${queryString}`
+            : `https://${url}${endpoint}`;
+    };
 
     ajax = async ({
         url,
@@ -13,15 +33,22 @@ class ClientProxy {
     }: {
         url: string;
         method: string;
-        data: any;
+        data?: any;
         headers: any;
     }) => {
         const options = {
             headers,
             method,
             url,
+            withCredentials: true,
         };
-        console.log(options);
+
+        if (this.accessToken) {
+            options.headers = {
+                ...options.headers,
+                Authorization: `Bearer ${this.accessToken}`,
+            };
+        }
 
         if (method === 'GET') {
             _set(options, 'params', data);
@@ -45,18 +72,17 @@ class ClientProxy {
     get = ({
         url,
         endpoint,
-        data = {},
+        query = {},
         headers = {},
     }: {
         url: string;
         endpoint: string;
-        data: any;
-        headers: any;
+        query?: any;
+        headers?: any;
     }) => {
         return this.ajax({
-            url: this.getUrl(url, endpoint),
+            url: this.getUrl(url, endpoint, query),
             method: 'GET',
-            data,
             headers: setCoreApiHeaders(headers),
         });
     };
@@ -65,12 +91,14 @@ class ClientProxy {
         url,
         endpoint,
         data = {},
+        query = {},
         headers = {},
     }: {
         url: string;
         endpoint: string;
         data: any;
-        headers: any;
+        query?: any;
+        headers?: any;
     }) => {
         return this.ajax({
             url: this.getUrl(url, endpoint),
@@ -89,7 +117,7 @@ class ClientProxy {
         url: string;
         endpoint: string;
         data: any;
-        headers: any;
+        headers?: any;
     }) => {
         return this.ajax({
             url: this.getUrl(url, endpoint),
@@ -108,7 +136,7 @@ class ClientProxy {
         url: string;
         endpoint: string;
         data: any;
-        headers: any;
+        headers?: any;
     }) => {
         return this.ajax({
             url: this.getUrl(url, endpoint),
