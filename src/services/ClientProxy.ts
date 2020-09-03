@@ -26,6 +26,7 @@ class ClientProxy {
             headers,
             method,
             url,
+            withCredentials: true,
         };
 
         if (method === 'GET') {
