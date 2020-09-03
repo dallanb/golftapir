@@ -10,6 +10,7 @@ import {
     selectIsLoggedIn,
 } from '../../selectors/AuthSelectors';
 import AuthActions from '../../reducers/AuthReducer';
+import { ComponentRoute } from '../types';
 
 const MemberApp = ({ url }: { url: string }) => {
     const isLoggedIn = useSelector(selectIsLoggedIn);
@@ -20,15 +21,7 @@ const MemberApp = ({ url }: { url: string }) => {
         <MemberAppLayout>
             <Switch>
                 {accountRoutes.map(
-                    ({
-                        path,
-                        component,
-                        exact,
-                    }: {
-                        path: string;
-                        component: any;
-                        exact?: boolean;
-                    }) => (
+                    ({ path, component, exact }: ComponentRoute) => (
                         <ProtectedRoute
                             key={path}
                             path={`${url}${path}`}
@@ -41,20 +34,15 @@ const MemberApp = ({ url }: { url: string }) => {
                     )
                 )}
                 {homeRoutes.map(
-                    ({
-                        path,
-                        component,
-                        exact,
-                    }: {
-                        path: string;
-                        component: any;
-                        exact?: boolean;
-                    }) => (
-                        <Route
+                    ({ path, component, exact }: ComponentRoute) => (
+                        <ProtectedRoute
                             key={path}
                             path={`${url}${path}`}
                             component={component}
                             exact={exact}
+                            isLoggedIn={isLoggedIn}
+                            forceLogout={forceLogout}
+                            refresh={() => dispatch(AuthActions.refresh())}
                         />
                     )
                 )}

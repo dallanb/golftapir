@@ -64,10 +64,13 @@ function register(state = INITIAL_STATE) {
     });
 }
 
-function registerSuccess(state: any) {
+function registerSuccess(state: any, {data}: any) {
     return Immutable.merge(state, {
         isSubmitting: false,
         err: null,
+        isLoggedIn: true,
+        forceLogout: false,
+        data,
     });
 }
 

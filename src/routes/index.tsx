@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 
 // apps
 import Auth from './Auth';
@@ -16,6 +16,9 @@ export const Routes = (
                 path="/app"
                 render={({ match: { url } }) => <MemberApp url={url} />}
             />
+            <Route>
+                <Redirect to="/app" />
+            </Route>
         </Switch>
     </Fragment>
 );

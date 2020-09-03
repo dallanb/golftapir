@@ -28,7 +28,9 @@ function* register({ email, username, password }: AnyAction) {
             username,
             password,
         });
-        yield put(AuthActions.registerSuccess());
+        const { user, access_token } = res;
+        ClientProxy.accessToken = access_token;
+        yield put(AuthActions.registerSuccess(user));
         message.success('Register successful!');
     } catch (err) {
         yield put(AuthActions.registerFailure(err));

@@ -3,21 +3,14 @@ import { Route, Switch } from 'react-router-dom';
 import loginRoutes from './loginRoutes';
 import registerRoutes from './registerRoutes';
 import { AuthLayout } from '../../layouts';
+import { ComponentRoute } from '../types';
 
 function Auth(url: string) {
     return (
         <AuthLayout>
             <Switch>
                 {loginRoutes.map(
-                    ({
-                        path,
-                        component,
-                        exact,
-                    }: {
-                        path: string;
-                        component: any;
-                        exact?: boolean;
-                    }) => (
+                    ({ path, component, exact }: ComponentRoute) => (
                         <Route
                             key={path}
                             path={`${url}${path}`}
@@ -27,15 +20,7 @@ function Auth(url: string) {
                     )
                 )}
                 {registerRoutes.map(
-                    ({
-                        path,
-                        component,
-                        exact,
-                    }: {
-                        path: string;
-                        component: any;
-                        exact?: boolean;
-                    }) => (
+                    ({ path, component, exact }: ComponentRoute) => (
                         <Route
                             key={path}
                             path={`${url}${path}`}

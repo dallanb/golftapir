@@ -31,7 +31,6 @@ class Login extends React.PureComponent<LoginProps> {
     };
 
     onFinishFailed = (errorInfo: any) => {
-        console.log(errorInfo);
         const { setMessageModal } = this.props;
         setMessageModal(true, {
             head: 'Login Failed',
