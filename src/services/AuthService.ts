@@ -2,6 +2,12 @@ import ClientProxy from './ClientProxy';
 import config from '../config.json';
 
 export default {
+    ping() {
+        return ClientProxy.get({
+            url: config.AUTH_URL,
+            endpoint: `/ping`,
+        });
+    },
     login(data: { email: string; password: string }) {
         return ClientProxy.post({
             url: config.AUTH_URL,
@@ -16,6 +22,12 @@ export default {
             endpoint: `/register`,
             data: data,
             headers: {},
+        });
+    },
+    refresh() {
+        return ClientProxy.get({
+            url: config.AUTH_URL,
+            endpoint: `/refresh`,
         });
     },
 };

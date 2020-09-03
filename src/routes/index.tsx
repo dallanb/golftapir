@@ -14,8 +14,7 @@ export const Routes = (
             <Route path="/auth" render={({ match: { url } }) => Auth(url)} />
             <Route
                 path="/app"
-
-                render={({ match: { url } }) => MemberApp(url)}
+                render={({ match: { url } }) => <MemberApp url={url} />}
             />
         </Switch>
     </Fragment>

@@ -4,6 +4,20 @@ import { set as _set } from 'lodash';
 import { setCoreApiHeaders } from './utils';
 
 class ClientProxy {
+    private _accessToken: any;
+
+    constructor() {
+        this._accessToken = null;
+    }
+
+    get accessToken(): any {
+        return this._accessToken;
+    }
+
+    set accessToken(token: any) {
+        this._accessToken = token;
+    }
+
     getUrl = (url: string, endpoint: string, query: any = {}) => {
         const queryString = qs.stringify(query);
         return queryString
@@ -28,6 +42,13 @@ class ClientProxy {
             url,
             withCredentials: true,
         };
+
+        if (this.accessToken) {
+            options.headers = {
+                ...options.headers,
+                Authorization: `Bearer ${this.accessToken}`,
+            };
+        }
 
         if (method === 'GET') {
             _set(options, 'params', data);
