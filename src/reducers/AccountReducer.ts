@@ -5,10 +5,10 @@ import { createActions, createReducer } from 'reduxsauce';
 const { Types, Creators } = createActions(
     {
         fetchAccount: ['uuid'],
-        fetchAccountSuccess: null,
+        fetchAccountSuccess: ['data'],
         fetchAccountFailure: ['err'],
         fetchAccounts: null,
-        fetchAccountsSuccess: null,
+        fetchAccountsSuccess: ['data'],
         fetchAccountsFailure: ['err'],
     },
     {
@@ -34,10 +34,11 @@ function fetchAccount(state = INITIAL_STATE) {
     });
 }
 
-function fetchAccountSuccess(state: any) {
+function fetchAccountSuccess(state: any, { data }: any) {
     return Immutable.merge(state, {
         isSubmitting: false,
         err: null,
+        data,
     });
 }
 
@@ -55,10 +56,11 @@ function fetchAccounts(state = INITIAL_STATE) {
     });
 }
 
-function fetchAccountsSuccess(state: any) {
+function fetchAccountsSuccess(state: any, { data }: any) {
     return Immutable.merge(state, {
         isSubmitting: false,
         err: null,
+        data,
     });
 }
 
