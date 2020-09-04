@@ -1,10 +1,10 @@
-import Yup, { object } from 'yup';
+import * as Yup from 'yup';
 
 export const fieldSchema = [
-    {
-        name: 'avatar',
-        type: 'avatar',
-    },
+    // {
+    //     name: 'avatar',
+    //     type: 'avatar',
+    // },
     {
         name: 'username',
         options: {

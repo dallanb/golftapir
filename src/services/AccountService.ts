@@ -16,4 +16,11 @@ export default {
             query,
         });
     },
+    updateAccount(uuid: string, data: any = {}) {
+        return ClientProxy.put({
+            url: config.ACCOUNT_URL,
+            endpoint: `/accounts/${uuid}`,
+            data,
+        });
+    },
 };

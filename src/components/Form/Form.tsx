@@ -1,5 +1,6 @@
 import { Formik } from 'formik';
 import React from 'react';
+import { Button, Form as AntdForm } from 'antd';
 import defaultFormRenderer from './defaultFormRenderer';
 import defaultFieldRenderer from './defaultFieldRenderer';
 import { FormProps } from './types';
@@ -17,12 +18,27 @@ class Form extends React.Component<FormProps> {
     prepareForm = () => {
         const { fieldSchema } = this.props;
         const fields = this.fieldRenderer(fieldSchema);
+        const submit = this.renderSubmit();
+        return this.formRenderer(fields, submit);
+    };
 
-        return this.formRenderer(fields);
+    renderSubmit = () => {
+        const { submitButton } = this.props;
+        if (submitButton) {
+            return submitButton;
+        }
+        return (
+            <AntdForm.Item>
+                <Button type="primary" htmlType="submit">
+                    Submit
+                </Button>
+            </AntdForm.Item>
+        );
     };
 
     render() {
         const { initialValues, validationSchema, onSubmit } = this.props;
+        console.log(this.props);
         return (
             <Formik
                 initialValues={initialValues}

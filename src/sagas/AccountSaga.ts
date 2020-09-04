@@ -31,9 +31,21 @@ function* fetchAccounts() {
     }
 }
 
+function* updateAccount({ values }: any) {
+    try {
+        const res = yield call(AccountService.updateAccount, values);
+        const { accounts } = res;
+        yield put(AccountActions.updateAccountSuccess(accounts));
+    } catch (err) {
+        yield put(AccountActions.updateAccountFailure(err));
+        message.error('Error updating Accounts information');
+    }
+}
+
 export default function* AccountSaga() {
     yield all([
         takeLatest(AccountTypes.FETCH_ACCOUNT, fetchAccount),
         takeLatest(AccountTypes.FETCH_ACCOUNTS, fetchAccounts),
+        takeLatest(AccountTypes.UPDATE_ACCOUNT, updateAccount),
     ]);
 }

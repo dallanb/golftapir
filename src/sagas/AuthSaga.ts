@@ -41,9 +41,9 @@ function* register({ email, username, password }: AnyAction) {
 function* refresh() {
     try {
         const res = yield call(AuthService.refresh);
-        const { access_token } = res;
+        const { access_token, user } = res;
         ClientProxy.accessToken = access_token;
-        yield put(AuthActions.refreshSuccess());
+        yield put(AuthActions.refreshSuccess(user));
     } catch (err) {
         yield put(AuthActions.refreshFailure(err));
         message.error('Session expired');

@@ -10,6 +10,9 @@ const { Types, Creators } = createActions(
         fetchAccounts: null,
         fetchAccountsSuccess: ['data'],
         fetchAccountsFailure: ['err'],
+        updateAccount: ['values'],
+        updateAccountSuccess: ['data'],
+        updateAccountFailure: ['err'],
     },
     {
         prefix: 'ACCOUNT_',
@@ -71,6 +74,28 @@ function fetchAccountsFailure(state: any, { err }: any) {
     });
 }
 
+function updateAccount(state = INITIAL_STATE) {
+    return Immutable.merge(state, {
+        isSubmitting: true,
+        err: null,
+    });
+}
+
+function updateAccountSuccess(state: any, { data }: any) {
+    return Immutable.merge(state, {
+        isSubmitting: false,
+        err: null,
+        data,
+    });
+}
+
+function updateAccountFailure(state: any, { err }: any) {
+    return Immutable.merge(state, {
+        isSubmitting: false,
+        err,
+    });
+}
+
 const HANDLERS = {
     [Types.FETCH_ACCOUNT]: fetchAccount,
     [Types.FETCH_ACCOUNT_SUCCESS]: fetchAccountSuccess,
@@ -78,6 +103,9 @@ const HANDLERS = {
     [Types.FETCH_ACCOUNTS]: fetchAccounts,
     [Types.FETCH_ACCOUNTS_SUCCESS]: fetchAccountsSuccess,
     [Types.FETCH_ACCOUNTS_FAILURE]: fetchAccountsFailure,
+    [Types.UPDATE_ACCOUNT]: updateAccount,
+    [Types.UPDATE_ACCOUNT_SUCCESS]: updateAccountSuccess,
+    [Types.UPDATE_ACCOUNT_FAILURE]: updateAccountFailure,
 };
 
 export const reducer = createReducer(INITIAL_STATE, HANDLERS);
