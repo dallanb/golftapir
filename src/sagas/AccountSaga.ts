@@ -10,7 +10,8 @@ function* fetchAccount({ uuid }: AnyAction) {
             include: 'phone,address,avatar',
         });
         console.log(res);
-        yield put(AccountActions.fetchAccountSuccess());
+        const { accounts } = res;
+        yield put(AccountActions.fetchAccountSuccess(accounts));
     } catch (err) {
         yield put(AccountActions.fetchAccountFailure(err));
         message.error('Error fetching Account information');
@@ -22,8 +23,8 @@ function* fetchAccounts() {
         const res = yield call(AccountService.fetchAccounts, {
             include: 'phone,address,avatar',
         });
-        console.log(res);
-        yield put(AccountActions.fetchAccountsSuccess());
+        const { accounts } = res;
+        yield put(AccountActions.fetchAccountsSuccess(accounts));
     } catch (err) {
         yield put(AccountActions.fetchAccountsFailure(err));
         message.error('Error fetching Accounts information');
