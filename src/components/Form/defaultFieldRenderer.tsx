@@ -1,8 +1,8 @@
 import React from 'react';
 import { Input } from 'antd';
 
-const defaultFieldRenderer = (schema: any): any =>
-    schema.map(({ name, type = 'input', options = {} }: any) => {
+const defaultFieldRenderer = (schema: any, formik: any): any => {
+    const builder = ({ name, type = 'input', options = {} }: any) => {
         let field;
         switch (type) {
             case 'input':
@@ -14,6 +14,8 @@ const defaultFieldRenderer = (schema: any): any =>
                 throw new Error('Invalid field type');
         }
         return field;
-    });
+    };
 
+    return schema.map((field: any) => builder(field));
+};
 export default defaultFieldRenderer;

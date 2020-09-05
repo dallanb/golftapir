@@ -15,9 +15,10 @@ class Form extends React.Component<FormProps> {
         this.fieldRenderer = props.fieldRenderer || defaultFieldRenderer;
     }
 
-    prepareForm = () => {
+    prepareForm = (formik: any) => {
+        console.log(formik);
         const { fieldSchema } = this.props;
-        const fields = this.fieldRenderer(fieldSchema);
+        const fields = this.fieldRenderer(fieldSchema, formik);
         const submit = this.renderSubmit();
         return this.formRenderer(fields, submit);
     };
@@ -45,7 +46,7 @@ class Form extends React.Component<FormProps> {
                 validationSchema={validationSchema}
                 onSubmit={onSubmit}
             >
-                {this.prepareForm()}
+                {(formik) => this.prepareForm(formik)}
             </Formik>
         );
     }
