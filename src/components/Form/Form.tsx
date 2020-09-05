@@ -19,8 +19,8 @@ class Form extends React.Component<FormProps> {
         console.log(formik);
         const { fieldSchema } = this.props;
         const fields = this.fieldRenderer(fieldSchema, formik);
-        const submit = this.renderSubmit();
-        return this.formRenderer(fields, submit);
+        const submitComponent = this.renderSubmit();
+        return this.formRenderer(fields, formik.handleSubmit, submitComponent);
     };
 
     renderSubmit = () => {

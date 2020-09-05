@@ -6,7 +6,13 @@ const defaultFieldRenderer = (schema: any, formik: any): any => {
         let field;
         switch (type) {
             case 'input':
-                field = <Input key={name} name={name} />;
+                field = (
+                    <Input
+                        key={name}
+                        name={name}
+                        onChange={formik.handleChange}
+                    />
+                );
                 break;
             case 'avatar':
                 break;

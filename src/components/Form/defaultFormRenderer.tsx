@@ -1,10 +1,14 @@
 import React from 'react';
 import { Form } from 'antd';
 
-const defaultFormRenderer = (fields: any, submit: JSX.Element): JSX.Element => (
-    <Form>
+const defaultFormRenderer = (
+    fields: any,
+    handleSubmit: any,
+    SubmitComponent: JSX.Element
+): JSX.Element => (
+    <Form onFinish={handleSubmit}>
         {fields}
-        {submit}
+        {SubmitComponent}
     </Form>
 );
 
