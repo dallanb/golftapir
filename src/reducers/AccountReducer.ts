@@ -10,7 +10,7 @@ const { Types, Creators } = createActions(
         fetchAccounts: null,
         fetchAccountsSuccess: ['data'],
         fetchAccountsFailure: ['err'],
-        updateAccount: ['values'],
+        updateAccount: ['uuid', 'values'],
         updateAccountSuccess: ['data'],
         updateAccountFailure: ['err'],
     },

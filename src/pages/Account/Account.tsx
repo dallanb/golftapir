@@ -14,13 +14,12 @@ class Account extends React.PureComponent<AccountProps> {
     }
 
     render() {
-        const { isFetching, isSubmitting } = this.props;
-
+        const { isFetching, isSubmitting, data } = this.props;
         return (
             <ContentLayout
                 title="Account"
                 subTitle="Update Account Settings"
-                showSpinner={isFetching || isSubmitting}
+                showSpinner={isFetching || isSubmitting || !data}
             >
                 <AccountForm />
             </ContentLayout>
@@ -32,6 +31,7 @@ const mapStateToProps = ({ account }: any) => {
     return {
         isFetching: _.get(account, ['isFetching'], true),
         isSubmitting: _.get(account, ['isSubmitting'], true),
+        data: _.get(account, ['data'], null),
     };
 };
 

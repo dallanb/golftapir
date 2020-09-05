@@ -9,7 +9,6 @@ function* fetchAccount({ uuid }: AnyAction) {
         const res = yield call(AccountService.fetchAccount, uuid, {
             include: 'phone,address,avatar',
         });
-        console.log(res);
         const { accounts } = res;
         yield put(AccountActions.fetchAccountSuccess(accounts));
     } catch (err) {
@@ -31,9 +30,10 @@ function* fetchAccounts() {
     }
 }
 
-function* updateAccount({ values }: any) {
+function* updateAccount({ uuid, values }: any) {
     try {
-        const res = yield call(AccountService.updateAccount, values);
+
+        const res = yield call(AccountService.updateAccount, uuid, values);
         const { accounts } = res;
         yield put(AccountActions.updateAccountSuccess(accounts));
     } catch (err) {

@@ -16,11 +16,15 @@ class Form extends React.Component<FormProps> {
     }
 
     prepareForm = (formik: any) => {
-        console.log(formik);
-        const { fieldSchema } = this.props;
+        const { fieldSchema, initialValues } = this.props;
         const fields = this.fieldRenderer(fieldSchema, formik);
         const submitComponent = this.renderSubmit();
-        return this.formRenderer(fields, formik.handleSubmit, submitComponent);
+        return this.formRenderer(
+            initialValues,
+            fields,
+            formik.handleSubmit,
+            submitComponent
+        );
     };
 
     renderSubmit = () => {
@@ -39,7 +43,6 @@ class Form extends React.Component<FormProps> {
 
     render() {
         const { initialValues, validationSchema, onSubmit } = this.props;
-        console.log(this.props);
         return (
             <Formik
                 initialValues={initialValues}

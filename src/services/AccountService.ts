@@ -17,6 +17,8 @@ export default {
         });
     },
     updateAccount(uuid: string, data: any = {}) {
+        console.log(uuid);
+        console.log(data);
         return ClientProxy.put({
             url: config.ACCOUNT_URL,
             endpoint: `/accounts/${uuid}`,

@@ -17,12 +17,11 @@ class AccountForm extends React.PureComponent<AccountFormProps> {
             ..._.pick(authData, ['username', 'email']),
         };
     };
-    handleSubmit = (values: FormikValues) => {
-        console.log(values);
+    handleSubmit = ({ first_name, last_name }: FormikValues) => {
         const { updateAccount } = this.props;
+        updateAccount({ first_name, last_name });
     };
     render() {
-        const { accountData } = this.props;
         return (
             <Form
                 fieldSchema={fieldSchema}
@@ -44,7 +43,7 @@ const mapStateToProps = ({ auth, account }: any) => {
 const mapDispatchToProps = (dispatch: any) => {
     return {
         updateAccount(values: FormikValues) {
-            return dispatch(AccountActions.updateAccount(values));
+            return dispatch(AccountActions.updateAccount('me', values));
         },
     };
 };

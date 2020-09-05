@@ -1,4 +1,5 @@
 import * as Yup from 'yup';
+import InputWrapper from '../../../components/InputWrapper';
 
 export const fieldSchema = [
     // {
@@ -7,22 +8,30 @@ export const fieldSchema = [
     // },
     {
         name: 'username',
+        label: 'Username',
+        wrapper: InputWrapper,
         options: {
             readonly: true,
         },
     },
     {
         name: 'email',
+        label: 'Email',
+        wrapper: InputWrapper,
         options: {
             readonly: true,
         },
     },
     {
         name: 'first_name',
+        label: 'First Name',
+        wrapper: InputWrapper,
         options: {},
     },
     {
         name: 'last_name',
+        label: 'Last Name',
+        wrapper: InputWrapper,
         options: {},
     },
 ];
