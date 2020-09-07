@@ -1,5 +1,6 @@
 import * as Yup from 'yup';
 import InputWrapper from '../../../components/InputWrapper';
+import CONSTANTS from '../../../locale/en-CA';
 
 export const fieldSchema = [
     {
@@ -53,6 +54,10 @@ export const validationSchema = Yup.object({
     avatar: Yup.string(),
     username: Yup.string(),
     email: Yup.string(),
-    first_name: Yup.string(),
-    last_name: Yup.string(),
+    first_name: Yup.string()
+        .required(CONSTANTS.ACCOUNT.VALIDATION.FIRST_NAME_REQUIRED)
+        .max(100, CONSTANTS.ACCOUNT.VALIDATION.FIRST_NAME_MAX_LENGTH),
+    last_name: Yup.string()
+        .required(CONSTANTS.ACCOUNT.VALIDATION.LAST_NAME_REQUIRED)
+        .max(100, CONSTANTS.ACCOUNT.VALIDATION.LAST_NAME_MAX_LENGTH),
 });
