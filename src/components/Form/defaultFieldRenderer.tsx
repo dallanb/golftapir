@@ -19,6 +19,7 @@ const defaultFieldRenderer = (schema: any, formik: any): any => {
         wrapperOptions = {},
     }: any) => {
         let field;
+        console.log(formik);
         switch (type) {
             case 'input':
                 field = (
@@ -49,6 +50,12 @@ const defaultFieldRenderer = (schema: any, formik: any): any => {
                         key={name}
                         onChange={(value) => {
                             formik.setFieldValue(name, value);
+                            if (_.get(options, ['dependants'])) {
+                                options.dependants.forEach(
+                                    (dependant: string) =>
+                                        formik.setFieldValue(dependant, value)
+                                );
+                            }
                         }}
                     >
                         {mapCountryOptions()}

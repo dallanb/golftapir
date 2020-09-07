@@ -13,6 +13,9 @@ const CONSTANTS = {
                 PROVINCE: 'Province/State',
                 COUNTRY: 'Country',
                 POSTAL_CODE: 'Postal Code / Zip Code',
+                PHONE_NUMBER: 'Phone Number',
+                PHONE_COUNTRY_CODE: 'Phone Country Code',
+                PHONE_EXTENSION: 'Phone Extension',
             },
             VALIDATION: {
                 FIRST_NAME_MAX_LENGTH:

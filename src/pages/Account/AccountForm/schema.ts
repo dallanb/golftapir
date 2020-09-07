@@ -89,13 +89,39 @@ export const fieldSchema = [
         wrapperOptions: {
             label: FORM.LABELS.COUNTRY,
         },
-        options: {},
+        options: {
+            dependants: ['phone.country_code'],
+        },
     },
     {
         name: 'address.postal_code',
         wrapper: InputWrapper,
         wrapperOptions: {
             label: FORM.LABELS.POSTAL_CODE,
+        },
+        options: {},
+    },
+    {
+        name: 'phone.number',
+        wrapper: InputWrapper,
+        wrapperOptions: {
+            label: FORM.LABELS.PHONE_NUMBER,
+        },
+        options: {},
+    },
+    {
+        name: 'phone.country_code',
+        wrapper: InputWrapper,
+        wrapperOptions: {
+            label: FORM.LABELS.PHONE_COUNTRY_CODE,
+            hidden: true,
+        },
+    },
+    {
+        name: 'phone.extension',
+        wrapper: InputWrapper,
+        wrapperOptions: {
+            label: FORM.LABELS.PHONE_EXTENSION,
         },
         options: {},
     },
@@ -120,4 +146,7 @@ export const validationSchema = Yup.object({
     'address.province': Yup.string(),
     'address.country': Yup.string(),
     'address.postal_code': Yup.string(),
+    'phone.number': Yup.string(),
+    'phone.country_code': Yup.string(),
+    'phone.extension': Yup.string(),
 });
