@@ -1,6 +1,7 @@
 import * as Yup from 'yup';
 import InputWrapper from '../../../components/InputWrapper';
 import CONSTANTS from '../../../locale/en-CA';
+import { object } from 'yup';
 
 const FORM = CONSTANTS.ACCOUNT.FORM;
 
@@ -137,16 +138,23 @@ export const validationSchema = Yup.object({
     last_name: Yup.string()
         .required(FORM.VALIDATION.LAST_NAME_REQUIRED)
         .max(100, FORM.VALIDATION.LAST_NAME_MAX_LENGTH),
-    // 'address.line_1': Yup.string().required(
-    //     FORM.VALIDATION.ADDRESS_LINE_1_REQUIRED
-    // ),
-    'address.line_1': Yup.string(),
-    'address.line_2': Yup.string(),
-    'address.city': Yup.string(),
-    'address.province': Yup.string(),
-    'address.country': Yup.string(),
-    'address.postal_code': Yup.string(),
-    'phone.number': Yup.string(),
-    'phone.country_code': Yup.string(),
-    'phone.extension': Yup.string(),
+    address: Yup.object({
+        line_1: Yup.string().required(FORM.VALIDATION.ADDRESS_LINE_1_REQUIRED),
+        line_2: Yup.string().nullable(),
+        city: Yup.string().required(FORM.VALIDATION.ADDRESS_CITY_REQUIRED),
+        province: Yup.string().required(
+            FORM.VALIDATION.ADDRESS_PROVINCE_REQUIRED
+        ),
+        country: Yup.string().required(
+            FORM.VALIDATION.ADDRESS_COUNTRY_REQUIRED
+        ),
+        postal_code: Yup.string().required(
+            FORM.VALIDATION.ADDRESS_POSTAL_REQUIRED
+        ),
+    }),
+    phone: Yup.object({
+        number: Yup.string(),
+        country_code: Yup.string(),
+        extension: Yup.string(),
+    }),
 });

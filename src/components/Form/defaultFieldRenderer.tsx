@@ -71,11 +71,10 @@ const defaultFieldRenderer = (schema: any, formik: any): any => {
             const hasError = formik.errors[name];
             const submittedError = hasError && submitted;
             const touchedError = hasError && touched;
-
             field = wrap(wrapper, field, {
                 name: antdFormatName(name),
                 hasFeedback: submittedError || touchedError,
-                help: touched ? hasError : '',
+                help: hasError || '',
                 validateStatus:
                     submittedError || touchedError ? 'error' : 'success',
                 ...wrapperOptions,
