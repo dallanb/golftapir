@@ -1,7 +1,8 @@
 import React from 'react';
-import { Input, Upload, Button } from 'antd';
+import { Input, Upload, Button, Select } from 'antd';
 import { UploadOutlined } from '@ant-design/icons/lib';
 import _ from 'lodash';
+import { mapCountryOptions } from './utils';
 
 const defaultFieldRenderer = (schema: any, formik: any): any => {
     const wrap = (Wrapper: any, field: any, options: any) => (
@@ -18,6 +19,7 @@ const defaultFieldRenderer = (schema: any, formik: any): any => {
         wrapperOptions = {},
     }: any) => {
         let field;
+        console.log(formik);
         switch (type) {
             case 'input':
                 field = (
@@ -35,14 +37,23 @@ const defaultFieldRenderer = (schema: any, formik: any): any => {
                         key={name}
                         name={name}
                         onChange={(info) => {
-                            formik.setFieldValue(
-                                'avatar',
-                                info.file.originFileObj
-                            );
+                            formik.setFieldValue(name, info.file.originFileObj);
                         }}
                     >
                         <Button icon={<UploadOutlined />}>Upload</Button>
                     </Upload>
+                );
+                break;
+            case 'country-select':
+                field = (
+                    <Select
+                        key={name}
+                        onChange={(value) => {
+                            formik.setFieldValue(name, value);
+                        }}
+                    >
+                        {mapCountryOptions()}
+                    </Select>
                 );
                 break;
             default:

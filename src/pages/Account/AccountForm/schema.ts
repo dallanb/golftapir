@@ -2,13 +2,15 @@ import * as Yup from 'yup';
 import InputWrapper from '../../../components/InputWrapper';
 import CONSTANTS from '../../../locale/en-CA';
 
+const FORM = CONSTANTS.ACCOUNT.FORM;
+
 export const fieldSchema = [
     {
         name: 'avatar',
         type: 'avatar',
         wrapper: InputWrapper,
         wrapperOptions: {
-            label: 'Avatar',
+            label: FORM.LABELS.AVATAR,
             valuePropName: 'file',
         },
     },
@@ -16,7 +18,7 @@ export const fieldSchema = [
         name: 'username',
         wrapper: InputWrapper,
         wrapperOptions: {
-            label: 'Username',
+            label: FORM.LABELS.USERNAME,
         },
         options: {
             readonly: true,
@@ -26,7 +28,7 @@ export const fieldSchema = [
         name: 'email',
         wrapper: InputWrapper,
         wrapperOptions: {
-            label: 'Email',
+            label: FORM.LABELS.EMAIL,
         },
         options: {
             readonly: true,
@@ -36,7 +38,7 @@ export const fieldSchema = [
         name: 'first_name',
         wrapper: InputWrapper,
         wrapperOptions: {
-            label: 'First Name',
+            label: FORM.LABELS.FIRST_NAME,
         },
         options: {},
     },
@@ -44,7 +46,56 @@ export const fieldSchema = [
         name: 'last_name',
         wrapper: InputWrapper,
         wrapperOptions: {
-            label: 'Last Name',
+            label: FORM.LABELS.LAST_NAME,
+        },
+        options: {},
+    },
+    {
+        name: 'address.line_1',
+        wrapper: InputWrapper,
+        wrapperOptions: {
+            label: FORM.LABELS.ADDRESS_LINE_1,
+        },
+        options: {},
+    },
+    {
+        name: 'address.line_2',
+        wrapper: InputWrapper,
+        wrapperOptions: {
+            label: FORM.LABELS.ADDRESS_LINE_2,
+        },
+        options: {},
+    },
+    {
+        name: 'address.city',
+        wrapper: InputWrapper,
+        wrapperOptions: {
+            label: FORM.LABELS.CITY,
+        },
+        options: {},
+    },
+    {
+        name: 'address.province',
+        wrapper: InputWrapper,
+        wrapperOptions: {
+            label: FORM.LABELS.PROVINCE,
+        },
+        options: {},
+    },
+    {
+        name: 'address.country',
+        type: 'country-select',
+        wrapper: InputWrapper,
+        wrapperOptions: {
+            label: FORM.LABELS.COUNTRY,
+        },
+        options: {},
+    },
+    {
+        name: 'address.postal_code',
+        wrapper: InputWrapper,
+        wrapperOptions: {
+            label: FORM.LABELS.POSTAL_CODE,
         },
         options: {},
     },
@@ -55,9 +106,18 @@ export const validationSchema = Yup.object({
     username: Yup.string(),
     email: Yup.string(),
     first_name: Yup.string()
-        .required(CONSTANTS.ACCOUNT.VALIDATION.FIRST_NAME_REQUIRED)
-        .max(100, CONSTANTS.ACCOUNT.VALIDATION.FIRST_NAME_MAX_LENGTH),
+        .required(FORM.VALIDATION.FIRST_NAME_REQUIRED)
+        .max(100, FORM.VALIDATION.FIRST_NAME_MAX_LENGTH),
     last_name: Yup.string()
-        .required(CONSTANTS.ACCOUNT.VALIDATION.LAST_NAME_REQUIRED)
-        .max(100, CONSTANTS.ACCOUNT.VALIDATION.LAST_NAME_MAX_LENGTH),
+        .required(FORM.VALIDATION.LAST_NAME_REQUIRED)
+        .max(100, FORM.VALIDATION.LAST_NAME_MAX_LENGTH),
+    // 'address.line_1': Yup.string().required(
+    //     FORM.VALIDATION.ADDRESS_LINE_1_REQUIRED
+    // ),
+    'address.line_1': Yup.string(),
+    'address.line_2': Yup.string(),
+    'address.city': Yup.string(),
+    'address.province': Yup.string(),
+    'address.country': Yup.string(),
+    'address.postal_code': Yup.string(),
 });
