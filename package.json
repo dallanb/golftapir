@@ -29,7 +29,8 @@
         "sass-loader": "^10.0.1",
         "seamless-immutable": "^7.1.4",
         "typescript": "~3.7.2",
-        "yup": "^0.29.3"
+        "yup": "^0.29.3",
+        "yup-phone": "^1.2.5"
     },
     "scripts": {
         "start": "react-scripts start",

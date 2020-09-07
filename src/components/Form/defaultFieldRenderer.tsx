@@ -27,6 +27,7 @@ const defaultFieldRenderer = (schema: any, formik: any): any => {
                         name={name}
                         onChange={formik.handleChange}
                         readOnly={_.get(options, ['readonly'], false)}
+                        bordered={!_.get(options, ['readonly'], false)}
                     />
                 );
                 break;

@@ -29,6 +29,8 @@ const CONSTANTS = {
                 ADDRESS_PROVINCE_REQUIRED: 'Province is required',
                 ADDRESS_COUNTRY_REQUIRED: 'Country is required',
                 ADDRESS_POSTAL_REQUIRED: 'Postal / Zip Code is required',
+                PHONE_NUMBER_REQUIRED: 'Phone Number is required',
+                PHONE_NUMBER_MATCHES: 'Phone Number is invalid'
             },
         },
     },

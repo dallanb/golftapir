@@ -1,7 +1,7 @@
 import * as Yup from 'yup';
+import 'yup-phone';
 import InputWrapper from '../../../components/InputWrapper';
 import CONSTANTS from '../../../locale/en-CA';
-import { object } from 'yup';
 
 const FORM = CONSTANTS.ACCOUNT.FORM;
 
@@ -153,8 +153,10 @@ export const validationSchema = Yup.object({
         ),
     }),
     phone: Yup.object({
-        number: Yup.string(),
+        number: Yup.string()
+            .required(FORM.VALIDATION.PHONE_NUMBER_REQUIRED)
+            .phone(FORM.VALIDATION.PHONE_NUMBER_MATCHES),
         country_code: Yup.string(),
-        extension: Yup.string(),
+        extension: Yup.string().nullable(),
     }),
 });
