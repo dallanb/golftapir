@@ -2,36 +2,49 @@ import * as Yup from 'yup';
 import InputWrapper from '../../../components/InputWrapper';
 
 export const fieldSchema = [
-    // {
-    //     name: 'avatar',
-    //     type: 'avatar',
-    // },
+    {
+        name: 'avatar',
+        type: 'avatar',
+        wrapper: InputWrapper,
+        wrapperOptions: {
+            label: 'Avatar',
+            valuePropName: 'file',
+        },
+    },
     {
         name: 'username',
-        label: 'Username',
         wrapper: InputWrapper,
+        wrapperOptions: {
+            label: 'Username',
+        },
         options: {
             readonly: true,
         },
     },
     {
         name: 'email',
-        label: 'Email',
         wrapper: InputWrapper,
+        wrapperOptions: {
+            label: 'Email',
+        },
         options: {
             readonly: true,
         },
     },
     {
         name: 'first_name',
-        label: 'First Name',
         wrapper: InputWrapper,
+        wrapperOptions: {
+            label: 'First Name',
+        },
         options: {},
     },
     {
         name: 'last_name',
-        label: 'Last Name',
         wrapper: InputWrapper,
+        wrapperOptions: {
+            label: 'Last Name',
+        },
         options: {},
     },
 ];

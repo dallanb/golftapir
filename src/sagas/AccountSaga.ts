@@ -32,12 +32,22 @@ function* fetchAccounts() {
 
 function* updateAccount({ uuid, values }: any) {
     try {
-
         const res = yield call(AccountService.updateAccount, uuid, values);
         const { accounts } = res;
         yield put(AccountActions.updateAccountSuccess(accounts));
     } catch (err) {
         yield put(AccountActions.updateAccountFailure(err));
+        message.error('Error updating Accounts information');
+    }
+}
+function* updateAvatar({ uuid, avatar }: any) {
+    try {
+        const res = yield call(AccountService.updateAvatar, uuid, avatar);
+        // const { accounts } = res;
+        console.log(res);
+        yield put(AccountActions.updateAvatarSuccess());
+    } catch (err) {
+        yield put(AccountActions.updateAvatarFailure(err));
         message.error('Error updating Accounts information');
     }
 }
@@ -47,5 +57,6 @@ export default function* AccountSaga() {
         takeLatest(AccountTypes.FETCH_ACCOUNT, fetchAccount),
         takeLatest(AccountTypes.FETCH_ACCOUNTS, fetchAccounts),
         takeLatest(AccountTypes.UPDATE_ACCOUNT, updateAccount),
+        takeLatest(AccountTypes.UPDATE_AVATAR, updateAvatar),
     ]);
 }

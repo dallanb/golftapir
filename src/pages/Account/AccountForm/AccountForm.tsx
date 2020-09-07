@@ -13,12 +13,22 @@ class AccountForm extends React.PureComponent<AccountFormProps> {
         const { accountData, authData } = this.props;
 
         return {
-            ..._.pick(accountData, ['first_name', 'last_name']),
+            ..._.pick(accountData, [
+                'first_name',
+                'last_name',
+                'avatar',
+                'address',
+                'phone',
+            ]),
             ..._.pick(authData, ['username', 'email']),
         };
     };
-    handleSubmit = ({ first_name, last_name }: FormikValues) => {
-        const { updateAccount } = this.props;
+    handleSubmit = (values: FormikValues) => {
+        const { updateAccount, updateAvatar } = this.props;
+        const { first_name, last_name, avatar } = values;
+        if (!_.isEmpty(avatar)) {
+            updateAvatar(avatar);
+        }
         updateAccount({ first_name, last_name });
     };
     render() {
@@ -44,6 +54,9 @@ const mapDispatchToProps = (dispatch: any) => {
     return {
         updateAccount(values: FormikValues) {
             return dispatch(AccountActions.updateAccount('me', values));
+        },
+        updateAvatar(avatar: File) {
+            return dispatch(AccountActions.updateAvatar('me', avatar));
         },
     };
 };

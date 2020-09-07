@@ -1,5 +1,6 @@
 import React from 'react';
-import { Input } from 'antd';
+import { Input, Upload, Button } from 'antd';
+import { UploadOutlined } from '@ant-design/icons/lib';
 import _ from 'lodash';
 
 const defaultFieldRenderer = (schema: any, formik: any): any => {
@@ -11,10 +12,10 @@ const defaultFieldRenderer = (schema: any, formik: any): any => {
 
     const builder = ({
         name,
-        label,
         wrapper,
         type = 'input',
         options = {},
+        wrapperOptions = {},
     }: any) => {
         let field;
         switch (type) {
@@ -29,13 +30,27 @@ const defaultFieldRenderer = (schema: any, formik: any): any => {
                 );
                 break;
             case 'avatar':
+                field = (
+                    <Upload
+                        key={name}
+                        name={name}
+                        onChange={(info) => {
+                            formik.setFieldValue(
+                                'avatar',
+                                info.file.originFileObj
+                            );
+                        }}
+                    >
+                        <Button icon={<UploadOutlined />}>Upload</Button>
+                    </Upload>
+                );
                 break;
             default:
                 throw new Error('Invalid field type');
         }
 
         if (wrapper) {
-            field = wrap(wrapper, field, { name, label });
+            field = wrap(wrapper, field, { name, ...wrapperOptions });
         }
 
         return field;
