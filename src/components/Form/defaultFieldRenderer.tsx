@@ -50,7 +50,20 @@ const defaultFieldRenderer = (schema: any, formik: any): any => {
         }
 
         if (wrapper) {
-            field = wrap(wrapper, field, { name, ...wrapperOptions });
+            const touched = formik.touched[name];
+            const submitted = formik.submitCount > 0;
+            const hasError = formik.errors[name];
+            const submittedError = hasError && submitted;
+            const touchedError = hasError && touched;
+
+            field = wrap(wrapper, field, {
+                name,
+                hasFeedback: submittedError || touchedError,
+                help: touched ? hasError : '',
+                validateStatus:
+                    submittedError || touchedError ? 'error' : 'success',
+                ...wrapperOptions,
+            });
         }
 
         return field;

@@ -1,5 +1,6 @@
 import ClientProxy from './ClientProxy';
 import config from '../config.json';
+import { getFormData } from './utils';
 
 export default {
     fetchAccount(uuid: string, query: any = {}) {
@@ -24,10 +25,15 @@ export default {
         });
     },
     updateAvatar(uuid: string, avatar: any = {}) {
-        return ClientProxy.put({
+        const formData = getFormData({ avatar });
+
+        return ClientProxy.post({
             url: config.ACCOUNT_URL,
             endpoint: `/accounts/${uuid}/avatars`,
-            data: avatar,
+            data: formData,
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
         });
     },
 };
