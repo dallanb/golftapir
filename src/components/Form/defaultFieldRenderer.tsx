@@ -19,7 +19,6 @@ const defaultFieldRenderer = (schema: any, formik: any): any => {
         wrapperOptions = {},
     }: any) => {
         let field;
-        console.log(formik);
         switch (type) {
             case 'input':
                 field = (
