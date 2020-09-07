@@ -9,8 +9,8 @@ function* fetchAccount({ uuid }: AnyAction) {
         const res = yield call(AccountService.fetchAccount, uuid, {
             include: 'phone,address,avatar',
         });
-        console.log(res);
-        yield put(AccountActions.fetchAccountSuccess());
+        const { accounts } = res;
+        yield put(AccountActions.fetchAccountSuccess(accounts));
     } catch (err) {
         yield put(AccountActions.fetchAccountFailure(err));
         message.error('Error fetching Account information');
@@ -22,11 +22,33 @@ function* fetchAccounts() {
         const res = yield call(AccountService.fetchAccounts, {
             include: 'phone,address,avatar',
         });
-        console.log(res);
-        yield put(AccountActions.fetchAccountsSuccess());
+        const { accounts } = res;
+        yield put(AccountActions.fetchAccountsSuccess(accounts));
     } catch (err) {
         yield put(AccountActions.fetchAccountsFailure(err));
         message.error('Error fetching Accounts information');
+    }
+}
+
+function* updateAccount({ uuid, values }: any) {
+    try {
+        const res = yield call(AccountService.updateAccount, uuid, values);
+        const { accounts } = res;
+        yield put(AccountActions.updateAccountSuccess(accounts));
+    } catch (err) {
+        yield put(AccountActions.updateAccountFailure(err));
+        message.error('Error updating Accounts information');
+    }
+}
+function* updateAvatar({ uuid, avatar }: any) {
+    try {
+        const res = yield call(AccountService.updateAvatar, uuid, avatar);
+        // const { accounts } = res;
+        console.log(res);
+        yield put(AccountActions.updateAvatarSuccess());
+    } catch (err) {
+        yield put(AccountActions.updateAvatarFailure(err));
+        message.error('Error updating Accounts information');
     }
 }
 
@@ -34,5 +56,7 @@ export default function* AccountSaga() {
     yield all([
         takeLatest(AccountTypes.FETCH_ACCOUNT, fetchAccount),
         takeLatest(AccountTypes.FETCH_ACCOUNTS, fetchAccounts),
+        takeLatest(AccountTypes.UPDATE_ACCOUNT, updateAccount),
+        takeLatest(AccountTypes.UPDATE_AVATAR, updateAvatar),
     ]);
 }

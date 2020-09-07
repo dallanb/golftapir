@@ -1,6 +1,6 @@
 import React from 'react';
 import { ContentLayoutProps, ContentLayoutState } from './types';
-import { Layout, PageHeader } from 'antd';
+import { Layout, PageHeader, Spin } from 'antd';
 import './ContentLayout.scss';
 
 const { Content, Footer } = Layout;
@@ -9,8 +9,16 @@ class ContentLayout extends React.Component<
     ContentLayoutProps,
     ContentLayoutState
 > {
+    renderContent = () => {
+        const { showSpinner, children } = this.props;
+        if (showSpinner) {
+            return <Spin />;
+        }
+        return children;
+    };
+
     render() {
-        const { title, subTitle, children } = this.props;
+        const { title, subTitle } = this.props;
         return (
             <Layout className="content-layout">
                 <Content className="content-layout-content">
@@ -19,7 +27,7 @@ class ContentLayout extends React.Component<
                             <PageHeader title={title} subTitle={subTitle} />
                         )}
                         <div className="content-layout-children">
-                            {children}
+                            {this.renderContent()}
                         </div>
                     </div>
                 </Content>

@@ -12,7 +12,7 @@ const { Types, Creators } = createActions(
         registerSuccess: null,
         registerFailure: ['err'],
         refresh: null,
-        refreshSuccess: null,
+        refreshSuccess: ['data'],
         refreshFailure: ['err'],
     },
     {
@@ -64,7 +64,7 @@ function register(state = INITIAL_STATE) {
     });
 }
 
-function registerSuccess(state: any, {data}: any) {
+function registerSuccess(state: any, { data }: any) {
     return Immutable.merge(state, {
         isSubmitting: false,
         err: null,
@@ -87,11 +87,12 @@ function refresh(state = INITIAL_STATE) {
     });
 }
 
-function refreshSuccess(state: any, {}: any) {
+function refreshSuccess(state: any, { data }: any) {
     return Immutable.merge(state, {
         isSubmitting: false,
         err: null,
         isLoggedIn: true,
+        data,
     });
 }
 

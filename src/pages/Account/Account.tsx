@@ -1,7 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import _ from 'lodash';
 import { AccountProps } from './types';
 import { ContentLayout } from '../../layouts';
+import AccountForm from './AccountForm';
 import AccountActions from '../../reducers/AccountReducer';
 import './Account.scss';
 
@@ -12,13 +14,26 @@ class Account extends React.PureComponent<AccountProps> {
     }
 
     render() {
+        const { isFetching, isSubmitting, data } = this.props;
         return (
-            <ContentLayout title="Account" subTitle="Update Account Settings">
-                <div>THE GOOD SHIT</div>
+            <ContentLayout
+                title="Account"
+                subTitle="Update Account Settings"
+                showSpinner={isFetching || isSubmitting || !data}
+            >
+                <AccountForm />
             </ContentLayout>
         );
     }
 }
+
+const mapStateToProps = ({ account }: any) => {
+    return {
+        isFetching: _.get(account, ['isFetching'], true),
+        isSubmitting: _.get(account, ['isSubmitting'], true),
+        data: _.get(account, ['data'], null),
+    };
+};
 
 const mapDispatchToProps = (dispatch: any) => {
     return {
@@ -28,4 +43,4 @@ const mapDispatchToProps = (dispatch: any) => {
     };
 };
 
-export default connect(null, mapDispatchToProps)(Account);
+export default connect(mapStateToProps, mapDispatchToProps)(Account);

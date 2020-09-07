@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import { store } from './store/configStore';
 import { App } from './components';
 import * as serviceWorker from './serviceWorker';
+
 import './index.css';
 import 'antd/dist/antd.css';
 
