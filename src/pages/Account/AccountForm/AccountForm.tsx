@@ -17,15 +17,21 @@ class AccountForm extends React.PureComponent<AccountFormProps> {
                 'first_name',
                 'last_name',
                 'avatar',
-                'address',
                 'phone',
+            ]),
+            address: _.pick(accountData.address, [
+                'city',
+                'country',
+                'line_1',
+                'line_2',
+                'postal_code',
+                'province',
             ]),
             ..._.pick(authData, ['username', 'email']),
         };
     };
     handleSubmit = (values: FormikValues) => {
         const { updateAccount, updateAvatar, accountData } = this.props;
-        console.log(values);
         const { first_name, last_name, address, avatar } = values;
         if (!_.isEqual(avatar, accountData.avatar)) {
             updateAvatar(avatar);

@@ -2,7 +2,7 @@ import React from 'react';
 import { Input, Upload, Button, Select } from 'antd';
 import { UploadOutlined } from '@ant-design/icons/lib';
 import _ from 'lodash';
-import { mapCountryOptions } from './utils';
+import { antdFormatName, mapCountryOptions } from './utils';
 
 const defaultFieldRenderer = (schema: any, formik: any): any => {
     const wrap = (Wrapper: any, field: any, options: any) => (
@@ -19,7 +19,6 @@ const defaultFieldRenderer = (schema: any, formik: any): any => {
         wrapperOptions = {},
     }: any) => {
         let field;
-        console.log(formik);
         switch (type) {
             case 'input':
                 field = (
@@ -68,7 +67,7 @@ const defaultFieldRenderer = (schema: any, formik: any): any => {
             const touchedError = hasError && touched;
 
             field = wrap(wrapper, field, {
-                name,
+                name: antdFormatName(name),
                 hasFeedback: submittedError || touchedError,
                 help: touched ? hasError : '',
                 validateStatus:
