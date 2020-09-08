@@ -3,8 +3,11 @@ import { Input, Upload, Button, Select } from 'antd';
 import { UploadOutlined } from '@ant-design/icons/lib';
 import _ from 'lodash';
 import { antdFormatName, mapCountryOptions } from './utils';
+import { FieldRendererProps } from './types';
 
-const defaultFieldRenderer = (schema: any, formik: any): any => {
+let defaultFieldRenderer: FieldRendererProps;
+
+defaultFieldRenderer = (schema, formik) => {
     const wrap = (Wrapper: any, field: any, options: any) => (
         <Wrapper key={options.name} {...options}>
             {field}

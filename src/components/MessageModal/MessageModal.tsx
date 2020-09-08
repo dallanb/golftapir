@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { MessageModalProps } from './types';
 import ModalActions from '../../reducers/ModalReducer';
 import './MessageModal.scss';
+import { ModalStateInterface } from '../../reducers/types';
 
 class MessageModal extends React.PureComponent<MessageModalProps> {
     acknowledgeModal = () => {
@@ -40,7 +41,7 @@ class MessageModal extends React.PureComponent<MessageModalProps> {
     }
 }
 
-const mapStateToProps = ({ modal }: any) => {
+const mapStateToProps = ({ modal }: ModalStateInterface) => {
     return {
         isOpen: modal.isOpen,
         data: modal.data,

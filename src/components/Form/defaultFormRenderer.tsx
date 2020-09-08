@@ -1,12 +1,15 @@
 import React from 'react';
 import { Form } from 'antd';
+import { FormRendererProps } from './types';
 
-const defaultFormRenderer = (
-    initialValues: any,
-    fields: any,
-    handleSubmit: any,
-    SubmitComponent: JSX.Element
-): JSX.Element => (
+let defaultFormRenderer: FormRendererProps;
+
+defaultFormRenderer = (
+    initialValues,
+    fields,
+    handleSubmit,
+    SubmitComponent
+) => (
     <Form initialValues={initialValues} onFinish={handleSubmit}>
         {fields}
         {SubmitComponent}

@@ -22,8 +22,18 @@ const { Types, Creators } = createActions(
 export const AuthTypes = Types;
 export default Creators;
 
+/* ------------- Interface ------------- */
+export interface AuthInterface {
+    readonly data: any;
+    readonly isFetching: boolean;
+    readonly isSubmitting: boolean;
+    readonly isLoggedIn: boolean;
+    readonly forceLogout: boolean;
+    readonly err?: Error;
+}
+
 /* ------------- Initial State ------------- */
-const INITIAL_STATE = {
+const INITIAL_STATE: AuthInterface = {
     data: undefined,
     isFetching: false,
     isSubmitting: false,
