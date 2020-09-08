@@ -3,6 +3,7 @@ import { all, call, put, takeLatest } from 'redux-saga/effects';
 import { message } from 'antd';
 import AuthActions, { AuthTypes } from '../reducers/AuthReducer';
 import { ClientProxy, AuthService } from '../services';
+import CONSTANTS from '../locale/en-CA';
 
 function* ping() {
     yield call(AuthService.ping);
@@ -14,10 +15,10 @@ function* login({ email, password }: AnyAction) {
         const { user, access_token } = res;
         ClientProxy.accessToken = access_token;
         yield put(AuthActions.loginSuccess(user));
-        message.success('Login successful!');
+        message.success(CONSTANTS.AUTH.SUCCESS.LOGIN);
     } catch (err) {
         yield put(AuthActions.loginFailure(err));
-        message.error('Login unsuccessful');
+        message.error(CONSTANTS.AUTH.ERROR.LOGIN);
     }
 }
 
@@ -31,10 +32,10 @@ function* register({ email, username, password }: AnyAction) {
         const { user, access_token } = res;
         ClientProxy.accessToken = access_token;
         yield put(AuthActions.registerSuccess(user));
-        message.success('Register successful!');
+        message.success(CONSTANTS.AUTH.SUCCESS.REGISTER);
     } catch (err) {
         yield put(AuthActions.registerFailure(err));
-        message.error('Register unsuccessful');
+        message.error(CONSTANTS.AUTH.ERROR.REGISTER);
     }
 }
 
@@ -46,7 +47,7 @@ function* refresh() {
         yield put(AuthActions.refreshSuccess(user));
     } catch (err) {
         yield put(AuthActions.refreshFailure(err));
-        message.error('Session expired');
+        message.error(CONSTANTS.AUTH.ERROR.SESSION);
     }
 }
 

@@ -11,6 +11,7 @@ import {
 } from '../../selectors/AuthSelectors';
 import AuthActions from '../../reducers/AuthReducer';
 import { ComponentRoute } from '../types';
+import contestRoutes from './contestRoutes';
 
 const MemberApp = ({ url }: { url: string }) => {
     const isLoggedIn = useSelector(selectIsLoggedIn);
@@ -29,6 +30,19 @@ const MemberApp = ({ url }: { url: string }) => {
                             exact={exact}
                             isLoggedIn={isLoggedIn}
                             forceLogout={forceLogout}
+                            refresh={() => dispatch(AuthActions.refresh())}
+                        />
+                    )
+                )}
+                {contestRoutes.map(
+                    ({ path, component, exact }: ComponentRoute) => (
+                        <ProtectedRoute
+                            key={`${url}${path}`}
+                            component={component}
+                            isLoggedIn={isLoggedIn}
+                            forceLogout={forceLogout}
+                            path={`${url}${path}`}
+                            exact={exact}
                             refresh={() => dispatch(AuthActions.refresh())}
                         />
                     )
