@@ -15,8 +15,14 @@ const { Types, Creators } = createActions(
 export const ModalTypes = Types;
 export default Creators;
 
+/* ------------- Interface ------------- */
+export interface ModalInterface {
+    readonly isOpen: boolean;
+    readonly data: any;
+}
+
 /* ------------- Initial State ------------- */
-const INITIAL_STATE = {
+const INITIAL_STATE: ModalInterface = {
     isOpen: false,
     data: undefined,
 };

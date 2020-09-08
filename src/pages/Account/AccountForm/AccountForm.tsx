@@ -5,6 +5,10 @@ import _ from 'lodash';
 import { AccountFormProps } from './types';
 import { Form } from '../../../components';
 import AccountActions from '../../../reducers/AccountReducer';
+import {
+    AccountStateInterface,
+    AuthStateInterface,
+} from '../../../reducers/types';
 import { fieldSchema, validationSchema } from './schema';
 import './AccountForm.scss';
 
@@ -50,10 +54,16 @@ class AccountForm extends React.PureComponent<AccountFormProps> {
     }
 }
 
-const mapStateToProps = ({ auth, account }: any) => {
+const mapStateToProps = ({
+    auth,
+    account,
+}: {
+    auth: AuthStateInterface;
+    account: AccountStateInterface;
+}) => {
     return {
-        accountData: account.data,
-        authData: auth.data,
+        accountData: _.get(account, ['data'], undefined),
+        authData: _.get(auth, ['data'], undefined),
     };
 };
 

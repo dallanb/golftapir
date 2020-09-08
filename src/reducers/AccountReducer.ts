@@ -24,8 +24,16 @@ const { Types, Creators } = createActions(
 export const AccountTypes = Types;
 export default Creators;
 
+/* ------------- Interface ------------- */
+export interface AccountInterface {
+    readonly data: any;
+    readonly isFetching: boolean;
+    readonly isSubmitting: boolean;
+    readonly err?: Error;
+}
+
 /* ------------- Initial State ------------- */
-const INITIAL_STATE = {
+const INITIAL_STATE: AccountInterface = {
     data: undefined,
     isFetching: false,
     isSubmitting: false,

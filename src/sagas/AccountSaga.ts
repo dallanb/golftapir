@@ -30,7 +30,7 @@ function* fetchAccounts() {
     }
 }
 
-function* updateAccount({ uuid, values }: any) {
+function* updateAccount({ uuid, values }: AnyAction) {
     try {
         const res = yield call(AccountService.updateAccount, uuid, values);
         const { accounts } = res;
@@ -40,7 +40,7 @@ function* updateAccount({ uuid, values }: any) {
         message.error('Error updating Accounts information');
     }
 }
-function* updateAvatar({ uuid, avatar }: any) {
+function* updateAvatar({ uuid, avatar }: AnyAction) {
     try {
         const res = yield call(AccountService.updateAvatar, uuid, avatar);
         // const { accounts } = res;

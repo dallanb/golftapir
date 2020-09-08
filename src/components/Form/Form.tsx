@@ -1,13 +1,13 @@
-import { Formik } from 'formik';
+import { Formik, FormikProps, FormikValues } from 'formik';
 import React from 'react';
 import { Button, Form as AntdForm } from 'antd';
 import defaultFormRenderer from './defaultFormRenderer';
 import defaultFieldRenderer from './defaultFieldRenderer';
-import { FormProps } from './types';
+import { FieldRendererProps, FormProps, FormRendererProps } from './types';
 
 class Form extends React.Component<FormProps> {
-    private readonly formRenderer: any;
-    private readonly fieldRenderer: any;
+    private readonly formRenderer: FormRendererProps;
+    private readonly fieldRenderer: FieldRendererProps;
 
     constructor(props: FormProps) {
         super(props);
@@ -15,7 +15,7 @@ class Form extends React.Component<FormProps> {
         this.fieldRenderer = props.fieldRenderer || defaultFieldRenderer;
     }
 
-    prepareForm = (formik: any) => {
+    prepareForm = (formik: FormikProps<FormikValues>): JSX.Element => {
         const { fieldSchema, initialValues } = this.props;
         const fields = this.fieldRenderer(fieldSchema, formik);
         const submitComponent = this.renderSubmit();
@@ -27,7 +27,7 @@ class Form extends React.Component<FormProps> {
         );
     };
 
-    renderSubmit = () => {
+    renderSubmit = (): JSX.Element => {
         const { submitButton } = this.props;
         if (submitButton) {
             return submitButton;
@@ -49,7 +49,9 @@ class Form extends React.Component<FormProps> {
                 validationSchema={validationSchema}
                 onSubmit={onSubmit}
             >
-                {(formik) => this.prepareForm(formik)}
+                {(formik: FormikProps<FormikValues>) =>
+                    this.prepareForm(formik)
+                }
             </Formik>
         );
     }
