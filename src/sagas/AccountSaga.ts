@@ -3,6 +3,7 @@ import { all, call, put, takeLatest } from 'redux-saga/effects';
 import { message } from 'antd';
 import AccountActions, { AccountTypes } from '../reducers/AccountReducer';
 import { AccountService } from '../services';
+import CONSTANTS from '../locale/en-CA';
 
 function* fetchAccount({ uuid }: AnyAction) {
     try {
@@ -13,7 +14,7 @@ function* fetchAccount({ uuid }: AnyAction) {
         yield put(AccountActions.fetchAccountSuccess(accounts));
     } catch (err) {
         yield put(AccountActions.fetchAccountFailure(err));
-        message.error('Error fetching Account information');
+        message.error(CONSTANTS.ACCOUNT.ERROR.FETCH);
     }
 }
 
@@ -26,7 +27,7 @@ function* fetchAccounts() {
         yield put(AccountActions.fetchAccountsSuccess(accounts));
     } catch (err) {
         yield put(AccountActions.fetchAccountsFailure(err));
-        message.error('Error fetching Accounts information');
+        message.error(CONSTANTS.ACCOUNT.ERROR.FETCH_ALL);
     }
 }
 
@@ -37,7 +38,7 @@ function* updateAccount({ uuid, values }: AnyAction) {
         yield put(AccountActions.updateAccountSuccess(accounts));
     } catch (err) {
         yield put(AccountActions.updateAccountFailure(err));
-        message.error('Error updating Accounts information');
+        message.error(CONSTANTS.ACCOUNT.ERROR.UPDATE);
     }
 }
 function* updateAvatar({ uuid, avatar }: AnyAction) {
@@ -48,7 +49,7 @@ function* updateAvatar({ uuid, avatar }: AnyAction) {
         yield put(AccountActions.updateAvatarSuccess());
     } catch (err) {
         yield put(AccountActions.updateAvatarFailure(err));
-        message.error('Error updating Accounts information');
+        message.error(CONSTANTS.ACCOUNT.ERROR.UPDATE_AVATAR);
     }
 }
 

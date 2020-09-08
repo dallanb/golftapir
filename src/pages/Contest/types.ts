@@ -2,5 +2,5 @@ export interface ContestProps {
     data: any;
     isFetching: boolean;
     isSubmitting: boolean;
-    fetchMyContests: () => any;
+    fetchContests: () => any;
 }

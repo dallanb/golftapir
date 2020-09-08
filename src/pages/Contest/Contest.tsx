@@ -9,8 +9,8 @@ import './Contest.scss';
 
 class Contest extends React.PureComponent<ContestProps> {
     componentDidMount() {
-        const { fetchMyContests } = this.props;
-        fetchMyContests();
+        const { fetchContests } = this.props;
+        fetchContests();
     }
 
     render() {
@@ -37,8 +37,8 @@ const mapStateToProps = ({ contest }: ContestStateInterface) => {
 
 const mapDispatchToProps = (dispatch: any) => {
     return {
-        fetchMyContests() {
-            return dispatch(ContestActions.fetchContests('me'));
+        fetchContests() {
+            return dispatch(ContestActions.fetchContests());
         },
     };
 };

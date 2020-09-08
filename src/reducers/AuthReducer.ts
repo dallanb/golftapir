@@ -100,6 +100,7 @@ function refresh(state = INITIAL_STATE) {
 function refreshSuccess(state: any, { data }: any) {
     return Immutable.merge(state, {
         isSubmitting: false,
+        isFetching: false,
         err: null,
         isLoggedIn: true,
         data,

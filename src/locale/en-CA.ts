@@ -30,8 +30,34 @@ const CONSTANTS = {
                 ADDRESS_COUNTRY_REQUIRED: 'Country is required',
                 ADDRESS_POSTAL_REQUIRED: 'Postal / Zip Code is required',
                 PHONE_NUMBER_REQUIRED: 'Phone Number is required',
-                PHONE_NUMBER_MATCHES: 'Phone Number is invalid'
+                PHONE_NUMBER_MATCHES: 'Phone Number is invalid',
             },
+        },
+        ERROR: {
+            UPDATE: 'Error updating Account information',
+            UPDATE_AVATAR: 'Error updating Account avatar',
+            FETCH: 'Error fetching Account information',
+            FETCH_ALL: 'Error fetching Accounts information',
+        },
+    },
+    AUTH: {
+        SUCCESS: {
+            LOGIN: 'Login successful!',
+            REGISTER: 'Registration successful!',
+        },
+        ERROR: {
+            LOGIN: 'Login unsuccessful',
+            REGISTER: 'Registration unsuccessful',
+            SESSION: 'Session expired',
+        },
+    },
+    CONTEST: {
+        SUCCESS: {
+            CREATE: 'Contest creation successful!',
+        },
+        ERROR: {
+            FETCH: 'Error fetching Contest information',
+            FETCH_ALL: 'Error fetching Contests information',
         },
     },
 };

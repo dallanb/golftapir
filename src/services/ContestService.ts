@@ -5,7 +5,14 @@ export default {
     fetchContest(uuid: string, query: any = {}) {
         return ClientProxy.get({
             url: config.CONTEST_URL,
-            endpoint: `/contest/${uuid}`,
+            endpoint: `/contests/${uuid}`,
+            query,
+        });
+    },
+    fetchContests(query: any = {}) {
+        return ClientProxy.get({
+            url: config.CONTEST_URL,
+            endpoint: `/contests`,
             query,
         });
     },
