@@ -2,7 +2,7 @@ import React from 'react';
 import { Input, Upload, Button, Select } from 'antd';
 import { UploadOutlined } from '@ant-design/icons/lib';
 import _ from 'lodash';
-import { mapCountryOptions } from './utils';
+import { antdFormatName, mapCountryOptions } from './utils';
 
 const defaultFieldRenderer = (schema: any, formik: any): any => {
     const wrap = (Wrapper: any, field: any, options: any) => (
@@ -19,7 +19,6 @@ const defaultFieldRenderer = (schema: any, formik: any): any => {
         wrapperOptions = {},
     }: any) => {
         let field;
-        console.log(formik);
         switch (type) {
             case 'input':
                 field = (
@@ -28,6 +27,7 @@ const defaultFieldRenderer = (schema: any, formik: any): any => {
                         name={name}
                         onChange={formik.handleChange}
                         readOnly={_.get(options, ['readonly'], false)}
+                        bordered={!_.get(options, ['readonly'], false)}
                     />
                 );
                 break;
@@ -50,6 +50,12 @@ const defaultFieldRenderer = (schema: any, formik: any): any => {
                         key={name}
                         onChange={(value) => {
                             formik.setFieldValue(name, value);
+                            if (_.get(options, ['dependants'])) {
+                                options.dependants.forEach(
+                                    (dependant: string) =>
+                                        formik.setFieldValue(dependant, value)
+                                );
+                            }
                         }}
                     >
                         {mapCountryOptions()}
@@ -66,11 +72,10 @@ const defaultFieldRenderer = (schema: any, formik: any): any => {
             const hasError = formik.errors[name];
             const submittedError = hasError && submitted;
             const touchedError = hasError && touched;
-
             field = wrap(wrapper, field, {
-                name,
+                name: antdFormatName(name),
                 hasFeedback: submittedError || touchedError,
-                help: touched ? hasError : '',
+                help: hasError || '',
                 validateStatus:
                     submittedError || touchedError ? 'error' : 'success',
                 ...wrapperOptions,

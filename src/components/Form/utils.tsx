@@ -8,3 +8,6 @@ export const mapCountryOptions = () =>
             {country.name}
         </Select.Option>
     ));
+
+// AntD requires that we format nested values like this ['foo', 0, 'bar'] instead of 'foo.0.bar' so we will normalize that here
+export const antdFormatName = (name: any) => name.split('.');

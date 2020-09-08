@@ -1,4 +1,5 @@
 import * as Yup from 'yup';
+import 'yup-phone';
 import InputWrapper from '../../../components/InputWrapper';
 import CONSTANTS from '../../../locale/en-CA';
 
@@ -89,13 +90,39 @@ export const fieldSchema = [
         wrapperOptions: {
             label: FORM.LABELS.COUNTRY,
         },
-        options: {},
+        options: {
+            dependants: ['phone.country_code'],
+        },
     },
     {
         name: 'address.postal_code',
         wrapper: InputWrapper,
         wrapperOptions: {
             label: FORM.LABELS.POSTAL_CODE,
+        },
+        options: {},
+    },
+    {
+        name: 'phone.number',
+        wrapper: InputWrapper,
+        wrapperOptions: {
+            label: FORM.LABELS.PHONE_NUMBER,
+        },
+        options: {},
+    },
+    {
+        name: 'phone.country_code',
+        wrapper: InputWrapper,
+        wrapperOptions: {
+            label: FORM.LABELS.PHONE_COUNTRY_CODE,
+            hidden: true,
+        },
+    },
+    {
+        name: 'phone.extension',
+        wrapper: InputWrapper,
+        wrapperOptions: {
+            label: FORM.LABELS.PHONE_EXTENSION,
         },
         options: {},
     },
@@ -111,13 +138,25 @@ export const validationSchema = Yup.object({
     last_name: Yup.string()
         .required(FORM.VALIDATION.LAST_NAME_REQUIRED)
         .max(100, FORM.VALIDATION.LAST_NAME_MAX_LENGTH),
-    // 'address.line_1': Yup.string().required(
-    //     FORM.VALIDATION.ADDRESS_LINE_1_REQUIRED
-    // ),
-    'address.line_1': Yup.string(),
-    'address.line_2': Yup.string(),
-    'address.city': Yup.string(),
-    'address.province': Yup.string(),
-    'address.country': Yup.string(),
-    'address.postal_code': Yup.string(),
+    address: Yup.object({
+        line_1: Yup.string().required(FORM.VALIDATION.ADDRESS_LINE_1_REQUIRED),
+        line_2: Yup.string().nullable(),
+        city: Yup.string().required(FORM.VALIDATION.ADDRESS_CITY_REQUIRED),
+        province: Yup.string().required(
+            FORM.VALIDATION.ADDRESS_PROVINCE_REQUIRED
+        ),
+        country: Yup.string().required(
+            FORM.VALIDATION.ADDRESS_COUNTRY_REQUIRED
+        ),
+        postal_code: Yup.string().required(
+            FORM.VALIDATION.ADDRESS_POSTAL_REQUIRED
+        ),
+    }),
+    phone: Yup.object({
+        number: Yup.string()
+            .required(FORM.VALIDATION.PHONE_NUMBER_REQUIRED)
+            .phone(FORM.VALIDATION.PHONE_NUMBER_MATCHES),
+        country_code: Yup.string(),
+        extension: Yup.string().nullable(),
+    }),
 });
