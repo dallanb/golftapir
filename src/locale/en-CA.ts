@@ -58,6 +58,7 @@ const CONSTANTS = {
         ERROR: {
             FETCH: 'Error fetching Contest information',
             FETCH_ALL: 'Error fetching Contests information',
+            CREATE: 'Contest creation unsuccessful',
         },
     },
 };
