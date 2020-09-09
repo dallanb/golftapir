@@ -16,12 +16,12 @@ class Contest extends React.PureComponent<ContestProps> {
     }
 
     render() {
-        const { isFetching, isSubmitting, data } = this.props;
+        const { data } = this.props;
         return (
             <ContentLayout
                 title="Contests"
                 subTitle="View Contests"
-                showSpinner={isFetching || isSubmitting || !data}
+                showSpinner={!data}
             >
                 <CreateContestButton />
                 <ContestList />

@@ -1,4 +1,6 @@
 export interface ContestListProps {
     data: any;
-    total: number
+    metadata: any;
+    isFetching: boolean;
+    fetchContests: (options: any) => any;
 }

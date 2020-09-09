@@ -7,7 +7,7 @@ const { Types, Creators } = createActions(
         fetchContest: ['uuid'],
         fetchContestSuccess: ['data', 'metadata'],
         fetchContestFailure: ['err'],
-        fetchContests: null,
+        fetchContests: ['options', 'append'],
         fetchContestsSuccess: ['data', 'metadata'],
         fetchContestsFailure: ['err'],
         createContest: ['data'],

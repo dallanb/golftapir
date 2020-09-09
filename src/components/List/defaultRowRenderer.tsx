@@ -3,12 +3,14 @@ import { RowRendererProps } from './types';
 import { Card } from 'antd';
 
 let defaultRowRenderer: RowRendererProps;
-defaultRowRenderer = ({ index, style, data }) => {
-    const item = data[index];
-    console.log(item);
+defaultRowRenderer = ({ style, index }, items) => {
+    let body = 'Loading...';
+    if (index < items.length) {
+        body = index;
+    }
     return (
         <Card style={style} key={index}>
-            DALLAN BHATTI
+            {body}
         </Card>
     );
 };

@@ -14,34 +14,31 @@ class List extends React.PureComponent<ListProps, ListState> {
         this.rowRenderer = props.rowRenderer || defaultRowRenderer;
     }
 
-    // loadMoreItems = () => {
-    //     const { isFetching, loadMore } = this.props;
-    //     if (!isFetching) {
-    //         loadMore();
-    //     }
-    // };
-
-    loadMoreItems = (startIndex: number, stopIndex: number): Promise<void> => {
-        const { loadMore } = this.props;
-        return new Promise((resolve) =>
-            loadMore(startIndex, stopIndex, resolve)
-        );
+    loadMoreItems = (startIndex: number, stopIndex: number): any => {
+        console.log(startIndex);
+        console.log(stopIndex);
+        const { loadNextPage, isNextPageLoading } = this.props;
+        return isNextPageLoading
+            ? () => {}
+            : new Promise((resolve) =>
+                  loadNextPage(startIndex, stopIndex, resolve)
+              );
     };
 
     isItemLoaded = (index: number) => {
-        const { loadCount } = this.props;
-        return index <= loadCount;
+        const { hasNextPage, items } = this.props;
+        return !hasNextPage || index < items.length;
     };
 
     render() {
-        const { count, size, data } = this.props;
-        console.log(this.props);
+        const { count, items, minimumBatchSize, size } = this.props;
 
         return (
             <InfiniteLoader
                 isItemLoaded={this.isItemLoaded}
                 loadMoreItems={this.loadMoreItems}
                 itemCount={count}
+                minimumBatchSize={minimumBatchSize}
             >
                 {({ onItemsRendered, ref }) => (
                     <section>
@@ -50,11 +47,11 @@ class List extends React.PureComponent<ListProps, ListState> {
                             itemCount={count}
                             itemSize={size}
                             onItemsRendered={onItemsRendered}
-                            height={600}
-                            width={600}
+                            height={500}
+                            width={500}
                             ref={ref}
                         >
-                            {this.rowRenderer}
+                            {(props) => this.rowRenderer(props, items)}
                         </FixedSizeList>
                     </section>
                 )}

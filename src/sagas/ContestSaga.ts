@@ -1,9 +1,11 @@
 import { AnyAction } from 'redux';
-import { all, call, put, takeLatest } from 'redux-saga/effects';
+import { all, call, put, select, takeLatest } from 'redux-saga/effects';
 import { message } from 'antd';
 import ContestActions, { ContestTypes } from '../reducers/ContestReducer';
 import { ContestService } from '../services';
 import CONSTANTS from '../locale/en-CA';
+import { selectData } from '../selectors/ContestSelectors';
+import { Simulate } from 'react-dom/test-utils';
 
 function* fetchContest({ uuid }: AnyAction) {
     try {
@@ -16,13 +18,17 @@ function* fetchContest({ uuid }: AnyAction) {
         message.error(CONSTANTS.CONTEST.ERROR.FETCH);
     }
 }
-function* fetchContests() {
+function* fetchContests({ options, append }: AnyAction) {
     try {
-        const res = yield call(ContestService.fetchContests);
-        console.log(res);
+        const res = yield call(ContestService.fetchContests, options);
         const { contests, _metadata: metadata } = res;
-        console.log(metadata);
-        yield put(ContestActions.fetchContestsSuccess(contests, metadata));
+        const data = append ? yield select(selectData) : [];
+        yield put(
+            ContestActions.fetchContestsSuccess(
+                [...data, ...contests],
+                metadata
+            )
+        );
     } catch (err) {
         yield put(ContestActions.fetchContestsFailure(err));
         message.error(CONSTANTS.CONTEST.ERROR.FETCH);
