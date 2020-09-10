@@ -1,6 +1,9 @@
+import React from 'react';
 import * as Yup from 'yup';
 import 'yup-phone';
+import AccountActions from '../../../reducers/AccountReducer';
 import InputWrapper from '../../../components/InputWrapper';
+import SearchWrapper from './SearchWrapper';
 
 export const fieldSchema = [
     {
@@ -18,6 +21,18 @@ export const fieldSchema = [
             hidden: true,
         },
         options: {},
+    },
+    {
+        name: 'participants',
+        type: 'search',
+        wrapper: SearchWrapper,
+        wrapperOptions: {
+            label: 'Participants',
+        },
+        options: {
+            ref: React.createRef<any>(),
+            onSearch: (value: string) => AccountActions.searchAccounts(value),
+        },
     },
 ];
 

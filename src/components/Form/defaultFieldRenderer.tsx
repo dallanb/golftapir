@@ -4,6 +4,7 @@ import { UploadOutlined } from '@ant-design/icons/lib';
 import _ from 'lodash';
 import { antdFormatName, mapCountryOptions } from './utils';
 import { FieldRendererProps } from './types';
+import { useDispatch, useSelector } from 'react-redux';
 
 let defaultFieldRenderer: FieldRendererProps;
 
@@ -14,7 +15,7 @@ defaultFieldRenderer = (schema, formik) => {
         </Wrapper>
     );
 
-    const builder = ({
+    const Builder = ({
         name,
         wrapper,
         type = 'input',
@@ -22,16 +23,37 @@ defaultFieldRenderer = (schema, formik) => {
         wrapperOptions = {},
     }: any) => {
         let field;
+        const fieldRef = _.get(options, ['ref'], undefined);
+        const dispatch = useDispatch();
+
         switch (type) {
             case 'input':
                 field = (
                     <Input
                         key={name}
                         name={name}
+                        ref={fieldRef}
                         onChange={formik.handleChange}
                         readOnly={_.get(options, ['readonly'], false)}
                         bordered={!_.get(options, ['readonly'], false)}
                     />
+                );
+                break;
+            case 'search':
+                field = (
+                    <Select
+                        key={name}
+                        ref={fieldRef}
+                        onChange={(value) => {
+                            formik.setFieldValue(name, value);
+                        }}
+                        showSearch
+                        onSearch={(value) => {
+                            dispatch(options.onSearch(value));
+                        }}
+                    >
+                        {useSelector(select)}
+                    </Select>
                 );
                 break;
             case 'avatar':
@@ -39,6 +61,7 @@ defaultFieldRenderer = (schema, formik) => {
                     <Upload
                         key={name}
                         name={name}
+                        ref={fieldRef}
                         onChange={(info) => {
                             formik.setFieldValue(name, info.file.originFileObj);
                         }}
@@ -51,6 +74,7 @@ defaultFieldRenderer = (schema, formik) => {
                 field = (
                     <Select
                         key={name}
+                        ref={fieldRef}
                         onChange={(value) => {
                             formik.setFieldValue(name, value);
                             if (_.get(options, ['dependants'])) {
@@ -81,6 +105,7 @@ defaultFieldRenderer = (schema, formik) => {
                 help: hasError || '',
                 validateStatus:
                     submittedError || touchedError ? 'error' : 'success',
+                childRef: fieldRef,
                 ...wrapperOptions,
             });
         }
@@ -88,6 +113,6 @@ defaultFieldRenderer = (schema, formik) => {
         return field;
     };
 
-    return schema.map((field: any) => builder(field));
+    return schema.map((field: any) => Builder(field));
 };
 export default defaultFieldRenderer;

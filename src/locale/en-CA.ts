@@ -38,6 +38,7 @@ const CONSTANTS = {
             UPDATE_AVATAR: 'Error updating Account avatar',
             FETCH: 'Error fetching Account information',
             FETCH_ALL: 'Error fetching Accounts information',
+            SEARCH_ALL: 'Error searching Accounts information',
         },
     },
     AUTH: {

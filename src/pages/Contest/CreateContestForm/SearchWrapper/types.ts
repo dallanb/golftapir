@@ -1,8 +1,9 @@
 import { Ref } from 'react';
 
-export interface InputWrapperProps {
+export interface SearchWrapperProps {
     name: string;
     rules?: any;
     children: any;
     childRef: Ref<any>;
+    onKeyDown: (e: Event) => any;
 }
