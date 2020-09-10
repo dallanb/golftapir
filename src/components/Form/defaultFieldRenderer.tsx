@@ -42,23 +42,17 @@ defaultFieldRenderer = (schema, formik) => {
                 );
                 break;
             case 'search-select':
+                //https://ant.design/components/select/#components-select-demo-select-users
                 field = (
                     <Select
                         key={name}
                         ref={fieldRef}
-                        onChange={(value) => {
-                            if (_.get(options, ['multiple'])) {
-                                value = [
-                                    ..._.get(formik, ['values', name], []),
-                                    value,
-                                ];
-                            }
-                            formik.setFieldValue(name, value);
-                        }}
+                        onChange={(value) => formik.setFieldValue(name, value)}
                         showSearch
                         onSearch={(value) => {
                             dispatch(options.onSearch(value));
                         }}
+                        mode="multiple"
                         optionFilterProp="children"
                     >
                         {options.optionRenderer(accountData)}

@@ -10,7 +10,7 @@ export const participantSearchSelectOptionRenderer = (participants: any[]) =>
         }) => (
             <Select.Option
                 key={participant.uuid}
-                value={JSON.stringify(participant)}
+                value={participant.uuid}
             >{`${participant.first_name} ${participant.last_name}`}</Select.Option>
         )
     );
