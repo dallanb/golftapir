@@ -41,14 +41,14 @@ const INITIAL_STATE: ContestInterface = {
 /* ------------- Reducers ------------- */
 function fetchContest(state = INITIAL_STATE) {
     return Immutable.merge(state, {
-        isSubmitting: true,
+        isFetching: true,
         err: null,
     });
 }
 
 function fetchContestSuccess(state: any, { data, metadata }: any) {
     return Immutable.merge(state, {
-        isSubmitting: false,
+        isFetching: false,
         err: null,
         data,
         metadata,
@@ -57,21 +57,21 @@ function fetchContestSuccess(state: any, { data, metadata }: any) {
 
 function fetchContestFailure(state: any, { err }: any) {
     return Immutable.merge(state, {
-        isSubmitting: false,
+        isFetching: false,
         err,
     });
 }
 
 function fetchContests(state = INITIAL_STATE) {
     return Immutable.merge(state, {
-        isSubmitting: true,
+        isFetching: true,
         err: null,
     });
 }
 
 function fetchContestsSuccess(state: any, { data, metadata }: any) {
     return Immutable.merge(state, {
-        isSubmitting: false,
+        isFetching: false,
         err: null,
         data,
         metadata,
@@ -80,7 +80,7 @@ function fetchContestsSuccess(state: any, { data, metadata }: any) {
 
 function fetchContestsFailure(state: any, { err }: any) {
     return Immutable.merge(state, {
-        isSubmitting: false,
+        isFetching: false,
         err,
     });
 }

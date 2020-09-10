@@ -1,6 +1,5 @@
 export interface ListProps {
     rowRenderer?: RowRendererProps;
-    count: number;
     size: number;
     hasNextPage: boolean;
     isNextPageLoading: boolean;

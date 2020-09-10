@@ -5,7 +5,6 @@ import ContestActions, { ContestTypes } from '../reducers/ContestReducer';
 import { ContestService } from '../services';
 import CONSTANTS from '../locale/en-CA';
 import { selectData } from '../selectors/ContestSelectors';
-import { Simulate } from 'react-dom/test-utils';
 
 function* fetchContest({ uuid }: AnyAction) {
     try {
