@@ -1,8 +1,8 @@
 import { createSelector } from 'reselect';
 import _ from 'lodash';
 
-const getContest = (state: any) => state.contest;
+const getAccount = (state: any) => state.account;
 
-export const selectData = createSelector([getContest], (contest) =>
-    _.get(contest, ['data'], false)
+export const selectData = createSelector([getAccount], (account) =>
+    _.get(account, ['data'], false)
 );

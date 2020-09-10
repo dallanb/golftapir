@@ -1,10 +1,11 @@
 import React from 'react';
 import { Input, Upload, Button, Select } from 'antd';
 import { UploadOutlined } from '@ant-design/icons/lib';
+import { useDispatch, useSelector } from 'react-redux';
 import _ from 'lodash';
 import { antdFormatName, mapCountryOptions } from './utils';
 import { FieldRendererProps } from './types';
-import { useDispatch, useSelector } from 'react-redux';
+import { selectData } from '../../selectors/AccountSelectors';
 
 let defaultFieldRenderer: FieldRendererProps;
 
@@ -25,6 +26,7 @@ defaultFieldRenderer = (schema, formik) => {
         let field;
         const fieldRef = _.get(options, ['ref'], undefined);
         const dispatch = useDispatch();
+        const accountData = useSelector(selectData) || [];
 
         switch (type) {
             case 'input':
@@ -39,20 +41,27 @@ defaultFieldRenderer = (schema, formik) => {
                     />
                 );
                 break;
-            case 'search':
+            case 'search-select':
                 field = (
                     <Select
                         key={name}
                         ref={fieldRef}
                         onChange={(value) => {
+                            if (_.get(options, ['multiple'])) {
+                                value = [
+                                    ..._.get(formik, ['values', name], []),
+                                    value,
+                                ];
+                            }
                             formik.setFieldValue(name, value);
                         }}
                         showSearch
                         onSearch={(value) => {
                             dispatch(options.onSearch(value));
                         }}
+                        optionFilterProp="children"
                     >
-                        {useSelector(select)}
+                        {options.optionRenderer(accountData)}
                     </Select>
                 );
                 break;
@@ -101,6 +110,7 @@ defaultFieldRenderer = (schema, formik) => {
             const touchedError = hasError && touched;
             field = wrap(wrapper, field, {
                 name: antdFormatName(name),
+                formik,
                 hasFeedback: submittedError || touchedError,
                 help: hasError || '',
                 validateStatus:
