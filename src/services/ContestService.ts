@@ -16,4 +16,11 @@ export default {
             query,
         });
     },
+    createContest(data: any = {}) {
+        return ClientProxy.post({
+            url: config.CONTEST_URL,
+            endpoint: `/contests`,
+            data,
+        });
+    },
 };

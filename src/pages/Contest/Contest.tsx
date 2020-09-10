@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
+import ContestList from './ContestList';
+import CreateContestButton from './CreateContestButton';
 import { ContestProps } from './types';
 import { ContentLayout } from '../../layouts';
 import ContestActions from '../../reducers/ContestReducer';
@@ -14,14 +16,15 @@ class Contest extends React.PureComponent<ContestProps> {
     }
 
     render() {
-        const { isFetching, isSubmitting, data } = this.props;
+        const { data } = this.props;
         return (
             <ContentLayout
-                title="Contest"
-                subTitle="Update Contest Settings"
-                showSpinner={isFetching || isSubmitting || !data}
+                title="Contests"
+                subTitle="View Contests"
+                showSpinner={!data}
             >
-                YO
+                <CreateContestButton />
+                <ContestList />
             </ContentLayout>
         );
     }
