@@ -57,7 +57,7 @@ function* searchAccounts({ key }: any) {
     try {
         const res = yield call(AccountService.searchAccounts, {
             key,
-            fields: 'first_name,last_name',
+            fields: 'name',
         });
         const { accounts } = res;
         yield put(AccountActions.searchAccountsSuccess(accounts));

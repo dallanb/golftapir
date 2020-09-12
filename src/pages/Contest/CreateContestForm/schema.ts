@@ -4,7 +4,7 @@ import 'yup-phone';
 import AccountActions from '../../../reducers/AccountReducer';
 import InputWrapper from '../../../components/InputWrapper';
 import SearchWrapper from './SearchWrapper';
-import {participantSearchSelectOptionRenderer} from "./utils";
+import { participantSearchSelectOptionRenderer } from './utils';
 
 export const fieldSchema = [
     {
@@ -34,7 +34,9 @@ export const fieldSchema = [
             ref: React.createRef<any>(),
             onSearch: (value: string) => AccountActions.searchAccounts(value),
             multiple: true,
-            optionRenderer: (participants: any[]) => participantSearchSelectOptionRenderer(participants)
+            debounce: 500,
+            optionRenderer: (participants: any[]) =>
+                participantSearchSelectOptionRenderer(participants),
         },
     },
 ];

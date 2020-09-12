@@ -47,13 +47,13 @@ defaultFieldRenderer = (schema, formik) => {
                     <Select
                         key={name}
                         ref={fieldRef}
+                        mode="multiple"
                         onChange={(value) => formik.setFieldValue(name, value)}
                         showSearch
-                        onSearch={(value) => {
+                        onSearch={_.debounce((value) => {
                             dispatch(options.onSearch(value));
-                        }}
-                        mode="multiple"
-                        optionFilterProp="children"
+                        }, _.get(options, ['debounce']))}
+                        filterOption={false}
                     >
                         {options.optionRenderer(accountData)}
                     </Select>
