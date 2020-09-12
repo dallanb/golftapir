@@ -6,7 +6,7 @@ let defaultRowRenderer: RowRendererProps;
 defaultRowRenderer = ({ style, index }, items) => {
     let body = 'Loading...';
     if (index < items.length) {
-        body = index;
+        body = items[index].name;
     }
     return (
         <Card style={style} key={index}>

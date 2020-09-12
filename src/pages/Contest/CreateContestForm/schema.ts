@@ -3,7 +3,6 @@ import * as Yup from 'yup';
 import 'yup-phone';
 import AccountActions from '../../../reducers/AccountReducer';
 import InputWrapper from '../../../components/InputWrapper';
-import SearchWrapper from './SearchWrapper';
 import { participantSearchSelectOptionRenderer } from './utils';
 
 export const fieldSchema = [
@@ -24,9 +23,16 @@ export const fieldSchema = [
         options: {},
     },
     {
+        name: 'name',
+        wrapper: InputWrapper,
+        wrapperOptions: {
+            label: 'Name',
+        },
+    },
+    {
         name: 'participants',
         type: 'search-select',
-        wrapper: SearchWrapper,
+        wrapper: InputWrapper,
         wrapperOptions: {
             label: 'Participants',
         },
@@ -44,4 +50,6 @@ export const fieldSchema = [
 export const validationSchema = Yup.object({
     owner_uuid: Yup.string(),
     sport_uuid: Yup.string(),
+    name: Yup.string(),
+    participants: Yup.array(),
 });
