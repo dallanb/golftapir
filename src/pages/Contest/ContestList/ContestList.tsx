@@ -10,7 +10,7 @@ import './ContestList.scss';
 class ContestList extends React.PureComponent<ContestListProps> {
     loadMore = (start: number, stop: number, resolve: () => any) => {
         const { fetchContests } = this.props;
-        fetchContests({ page: (stop + 1) / 10, per_page: 10 });
+        fetchContests({ page: Math.floor(stop / 100) + 1, per_page: 100 });
         resolve();
     };
 
@@ -18,7 +18,6 @@ class ContestList extends React.PureComponent<ContestListProps> {
         const { metadata, data, isFetching } = this.props;
         return (
             <List
-                count={metadata.total_count}
                 size={150}
                 items={data}
                 hasNextPage={
@@ -26,7 +25,7 @@ class ContestList extends React.PureComponent<ContestListProps> {
                 }
                 loadNextPage={this.loadMore}
                 isNextPageLoading={isFetching}
-                minimumBatchSize={10}
+                minimumBatchSize={100}
             />
         );
     }
@@ -36,7 +35,7 @@ const mapStateToProps = ({ contest }: ContestStateInterface) => {
     return {
         metadata: _.get(contest, ['metadata'], 0),
         data: _.get(contest, ['data'], []),
-        isFetching: _.get(contest, ['fetching'], false),
+        isFetching: _.get(contest, ['isFetching'], false),
     };
 };
 

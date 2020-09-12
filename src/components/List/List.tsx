@@ -1,6 +1,6 @@
 import React from 'react';
 import { FixedSizeList } from 'react-window';
-import AutoSizer from 'react-virtualized-auto-sizer';
+// import AutoSizer from 'react-virtualized-auto-sizer';
 import InfiniteLoader from 'react-window-infinite-loader';
 import { ListProps, ListState, RowRendererProps } from './types';
 import defaultRowRenderer from './defaultRowRenderer';
@@ -15,11 +15,9 @@ class List extends React.PureComponent<ListProps, ListState> {
     }
 
     loadMoreItems = (startIndex: number, stopIndex: number): any => {
-        console.log(startIndex);
-        console.log(stopIndex);
         const { loadNextPage, isNextPageLoading } = this.props;
         return isNextPageLoading
-            ? () => {}
+            ? new Promise((resolve) => resolve())
             : new Promise((resolve) =>
                   loadNextPage(startIndex, stopIndex, resolve)
               );
@@ -31,20 +29,22 @@ class List extends React.PureComponent<ListProps, ListState> {
     };
 
     render() {
-        const { count, items, minimumBatchSize, size } = this.props;
+        const { hasNextPage, items, minimumBatchSize, size } = this.props;
 
         return (
             <InfiniteLoader
                 isItemLoaded={this.isItemLoaded}
                 loadMoreItems={this.loadMoreItems}
-                itemCount={count}
+                itemCount={hasNextPage ? items.length + 1 : items.length}
                 minimumBatchSize={minimumBatchSize}
             >
                 {({ onItemsRendered, ref }) => (
                     <section>
                         <FixedSizeList
                             className="List"
-                            itemCount={count}
+                            itemCount={
+                                hasNextPage ? items.length + 1 : items.length
+                            }
                             itemSize={size}
                             onItemsRendered={onItemsRendered}
                             height={500}

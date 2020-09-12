@@ -16,6 +16,9 @@ const { Types, Creators } = createActions(
         updateAvatar: ['uuid', 'avatar'],
         updateAvatarSuccess: ['data'],
         updateAvatarFailure: ['err'],
+        searchAccounts: ['key'],
+        searchAccountsSuccess: ['data'],
+        searchAccountsFailure: ['err'],
     },
     {
         prefix: 'ACCOUNT_',
@@ -127,6 +130,23 @@ function updateAvatarFailure(state: any, { err }: any) {
         err,
     });
 }
+function searchAccounts(state: any) {
+    return Immutable.merge(state, {
+        isFetching: true,
+    });
+}
+function searchAccountsSuccess(state: any, { data }: any) {
+    return Immutable.merge(state, {
+        isFetching: false,
+        data,
+    });
+}
+function searchAccountsFailure(state: any, { err }: any) {
+    return Immutable.merge(state, {
+        isFetching: false,
+        err,
+    });
+}
 
 const HANDLERS = {
     [Types.FETCH_ACCOUNT]: fetchAccount,
@@ -141,6 +161,9 @@ const HANDLERS = {
     [Types.UPDATE_AVATAR]: updateAvatar,
     [Types.UPDATE_AVATAR_SUCCESS]: updateAvatarSuccess,
     [Types.UPDATE_AVATAR_FAILURE]: updateAvatarFailure,
+    [Types.SEARCH_ACCOUNTS]: searchAccounts,
+    [Types.SEARCH_ACCOUNTS_SUCCESS]: searchAccountsSuccess,
+    [Types.SEARCH_ACCOUNTS_FAILURE]: searchAccountsFailure,
 };
 
 export const reducer = createReducer(INITIAL_STATE, HANDLERS);

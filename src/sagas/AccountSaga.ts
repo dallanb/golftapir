@@ -30,7 +30,6 @@ function* fetchAccounts() {
         message.error(CONSTANTS.ACCOUNT.ERROR.FETCH_ALL);
     }
 }
-
 function* updateAccount({ uuid, values }: AnyAction) {
     try {
         const res = yield call(AccountService.updateAccount, uuid, values);
@@ -41,6 +40,7 @@ function* updateAccount({ uuid, values }: AnyAction) {
         message.error(CONSTANTS.ACCOUNT.ERROR.UPDATE);
     }
 }
+
 function* updateAvatar({ uuid, avatar }: AnyAction) {
     try {
         const res = yield call(AccountService.updateAvatar, uuid, avatar);
@@ -53,11 +53,26 @@ function* updateAvatar({ uuid, avatar }: AnyAction) {
     }
 }
 
+function* searchAccounts({ key }: any) {
+    try {
+        const res = yield call(AccountService.searchAccounts, {
+            key,
+            fields: 'name',
+        });
+        const { accounts } = res;
+        yield put(AccountActions.searchAccountsSuccess(accounts));
+    } catch (err) {
+        yield put(AccountActions.searchAccountsFailure(err));
+        message.error(CONSTANTS.ACCOUNT.ERROR.SEARCH_ALL);
+    }
+}
+
 export default function* AccountSaga() {
     yield all([
         takeLatest(AccountTypes.FETCH_ACCOUNT, fetchAccount),
         takeLatest(AccountTypes.FETCH_ACCOUNTS, fetchAccounts),
         takeLatest(AccountTypes.UPDATE_ACCOUNT, updateAccount),
         takeLatest(AccountTypes.UPDATE_AVATAR, updateAvatar),
+        takeLatest(AccountTypes.SEARCH_ACCOUNTS, searchAccounts),
     ]);
 }

@@ -1,9 +1,10 @@
+import React from 'react';
 import * as Yup from 'yup';
 import 'yup-phone';
+import AccountActions from '../../../reducers/AccountReducer';
 import InputWrapper from '../../../components/InputWrapper';
-import CONSTANTS from '../../../locale/en-CA';
-
-const FORM = CONSTANTS.ACCOUNT.FORM;
+import SearchWrapper from './SearchWrapper';
+import { participantSearchSelectOptionRenderer } from './utils';
 
 export const fieldSchema = [
     {
@@ -21,6 +22,22 @@ export const fieldSchema = [
             hidden: true,
         },
         options: {},
+    },
+    {
+        name: 'participants',
+        type: 'search-select',
+        wrapper: SearchWrapper,
+        wrapperOptions: {
+            label: 'Participants',
+        },
+        options: {
+            ref: React.createRef<any>(),
+            onSearch: (value: string) => AccountActions.searchAccounts(value),
+            multiple: true,
+            debounce: 500,
+            optionRenderer: (participants: any[]) =>
+                participantSearchSelectOptionRenderer(participants),
+        },
     },
 ];
 

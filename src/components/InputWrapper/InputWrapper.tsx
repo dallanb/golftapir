@@ -5,7 +5,7 @@ import './InputWrapper.scss';
 
 class InputWrapper extends React.PureComponent<InputWrapperProps> {
     render() {
-        const { children, ...restProps } = this.props;
+        const { children, childRef, ...restProps } = this.props;
         return <Form.Item {...restProps}>{children}</Form.Item>;
     }
 }

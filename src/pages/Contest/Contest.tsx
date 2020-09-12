@@ -12,7 +12,7 @@ import './Contest.scss';
 class Contest extends React.PureComponent<ContestProps> {
     componentDidMount() {
         const { fetchContests } = this.props;
-        fetchContests();
+        fetchContests({ page: 1, per_page: 100 });
     }
 
     render() {
@@ -40,8 +40,8 @@ const mapStateToProps = ({ contest }: ContestStateInterface) => {
 
 const mapDispatchToProps = (dispatch: any) => {
     return {
-        fetchContests() {
-            return dispatch(ContestActions.fetchContests());
+        fetchContests(options: { page: number; per_page: number }) {
+            return dispatch(ContestActions.fetchContests(options));
         },
     };
 };
