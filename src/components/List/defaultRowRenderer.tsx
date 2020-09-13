@@ -3,7 +3,7 @@ import { RowRendererProps } from './types';
 import { Card } from 'antd';
 
 let defaultRowRenderer: RowRendererProps;
-defaultRowRenderer = ({ style, index }, items) => {
+defaultRowRenderer = ({ style, index }, items, history) => {
     let body = 'Loading...';
     if (index < items.length) {
         body = items[index].name;

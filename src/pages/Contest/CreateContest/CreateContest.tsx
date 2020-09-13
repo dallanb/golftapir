@@ -1,5 +1,5 @@
 import React from 'react';
-import CreateContestForm from '../CreateContestForm';
+import CreateContestForm from './components/CreateContestForm';
 import { CreateContestProps } from './types';
 import { ContentLayout } from '../../../layouts';
 import './CreateContest.scss';

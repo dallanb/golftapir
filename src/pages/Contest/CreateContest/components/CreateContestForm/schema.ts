@@ -1,8 +1,8 @@
 import React from 'react';
 import * as Yup from 'yup';
 import 'yup-phone';
-import AccountActions from '../../../reducers/AccountReducer';
-import InputWrapper from '../../../components/InputWrapper';
+import AccountActions from '../../../../../reducers/AccountReducer';
+import InputWrapper from '../../../../../components/InputWrapper';
 import { participantSearchSelectOptionRenderer } from './utils';
 
 export const fieldSchema = [

@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 import { FixedSizeList } from 'react-window';
 // import AutoSizer from 'react-virtualized-auto-sizer';
 import InfiniteLoader from 'react-window-infinite-loader';
@@ -29,7 +30,13 @@ class List extends React.PureComponent<ListProps, ListState> {
     };
 
     render() {
-        const { hasNextPage, items, minimumBatchSize, size } = this.props;
+        const {
+            hasNextPage,
+            items,
+            minimumBatchSize,
+            size,
+            history,
+        } = this.props;
 
         return (
             <InfiniteLoader
@@ -51,7 +58,7 @@ class List extends React.PureComponent<ListProps, ListState> {
                             width={500}
                             ref={ref}
                         >
-                            {(props) => this.rowRenderer(props, items)}
+                            {(props) => this.rowRenderer(props, items, history)}
                         </FixedSizeList>
                     </section>
                 )}
@@ -60,4 +67,4 @@ class List extends React.PureComponent<ListProps, ListState> {
     }
 }
 
-export default List;
+export default withRouter(List);

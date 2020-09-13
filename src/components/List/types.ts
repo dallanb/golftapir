@@ -1,4 +1,6 @@
-export interface ListProps {
+import { RouteComponentProps } from 'react-router-dom';
+
+export interface ListProps extends RouteComponentProps<any> {
     rowRenderer?: RowRendererProps;
     size: number;
     hasNextPage: boolean;
@@ -11,5 +13,9 @@ export interface ListProps {
 export interface ListState {}
 
 export interface RowRendererProps {
-    (props: { index: any; style: any; data: any }, items: any): JSX.Element;
+    (
+        props: { index: any; style: any; data: any },
+        items: any,
+        history: any
+    ): JSX.Element;
 }

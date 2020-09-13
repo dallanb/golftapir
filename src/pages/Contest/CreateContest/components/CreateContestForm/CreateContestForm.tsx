@@ -2,13 +2,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { FormikValues } from 'formik';
 import { CreateContestFormProps } from './types';
-import { Form } from '../../../components';
-import ContestActions from '../../../reducers/ContestReducer';
+import { Form } from '../../../../../components';
+import ContestActions from '../../../../../reducers/ContestReducer';
 import { fieldSchema, validationSchema } from './schema';
 import './CreateContestForm.scss';
 import _ from 'lodash';
-import { AuthStateInterface } from '../../../reducers/types';
-import config from '../../../config.json';
+import { AuthStateInterface } from '../../../../../reducers/types';
+import config from '../../../../../config.json';
 
 class CreateContestForm extends React.PureComponent<CreateContestFormProps> {
     prepareInitialValues = () => {
