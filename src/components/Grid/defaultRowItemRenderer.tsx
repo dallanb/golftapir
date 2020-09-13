@@ -1,18 +1,8 @@
 import React from 'react';
-import { Row } from 'react-table';
-import { GridChildComponentProps } from 'react-window';
+import { RowItemRendererProps } from './types';
 
-export type ItemData = {
-    rows: Row<any>[];
-    prepareRow: (row: Row<any>) => void;
-};
-
-export const defaultRowItemRenderer: React.FunctionComponent<
-    Omit<GridChildComponentProps, 'data'> & {
-        data: ItemData;
-    }
-> = (props) => {
-    const { rowIndex, columnIndex, data, style } = props;
+let defaultRowItemRenderer: RowItemRendererProps;
+defaultRowItemRenderer = ({ rowIndex, columnIndex, data, style }) => {
     const { rows, prepareRow } = data;
     // get row
     const row = rows[rowIndex];
@@ -30,3 +20,5 @@ export const defaultRowItemRenderer: React.FunctionComponent<
         <div {...column.getCellProps({ style })}>{column.render('Cell')}</div>
     );
 };
+
+export default defaultRowItemRenderer;

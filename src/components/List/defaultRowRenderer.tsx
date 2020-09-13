@@ -3,10 +3,11 @@ import { RowRendererProps } from './types';
 import { Card } from 'antd';
 
 let defaultRowRenderer: RowRendererProps;
-defaultRowRenderer = ({ style, index }, items, history) => {
+defaultRowRenderer = ({ style, index, data }, history) => {
+    console.log(data);
     let body = 'Loading...';
-    if (index < items.length) {
-        body = items[index].name;
+    if (index < data.length) {
+        body = data[index].name;
     }
     return (
         <Card style={style} key={index}>

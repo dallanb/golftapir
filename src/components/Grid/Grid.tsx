@@ -4,7 +4,7 @@ import { GridProps as FixedSizeGridProps } from 'react-window';
 import { GridProps, RowItemRendererProps } from './types';
 import './Grid.scss';
 import InfiniteLoader from 'react-window-infinite-loader';
-import { defaultRowItemRenderer } from './defaultRowItemRenderer';
+import defaultRowItemRenderer from './defaultRowItemRenderer';
 
 class Grid extends React.PureComponent<GridProps> {
     private readonly rowItemRenderer: RowItemRendererProps;
@@ -24,7 +24,11 @@ class Grid extends React.PureComponent<GridProps> {
             itemData,
         } = this.props;
         return (
-            <InfiniteLoader isItemLoaded={} loadMoreItems={} itemCount={}>
+            <InfiniteLoader
+                isItemLoaded={isItemLoaded}
+                loadMoreItems={loadMoreItems}
+                itemCount={itemCount}
+            >
                 {({ onItemsRendered, ref }) => (
                     <FixedSizeGrid
                         columnWidth={100}
@@ -33,6 +37,9 @@ class Grid extends React.PureComponent<GridProps> {
                         height={400}
                         rowCount={4}
                         width={100}
+                        itemData={itemData}
+                        initialScrollTop={100 * scrollState.rowIndex}
+                        initialScrollLeft={100 * scrollState.columnIndex}
                         onItemsRendered={({
                             visibleRowStartIndex,
                             visibleColumnStartIndex,
@@ -53,7 +60,7 @@ class Grid extends React.PureComponent<GridProps> {
                         }}
                         ref={ref}
                     >
-                        {(props) => this.rowItemRenderer(props, items, history)}
+                        {(props) => this.rowItemRenderer(props)}
                     </FixedSizeGrid>
                 )}
             </InfiniteLoader>

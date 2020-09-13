@@ -5,8 +5,8 @@ import { ContestListTileProps } from './types';
 
 import './ContestListTile.scss';
 let ContestListTile: ContestListTileProps;
-ContestListTile = ({ index, style }, items, history) => {
-    const item = _.get(items, [index], undefined);
+ContestListTile = ({ index, style, data }, history) => {
+    const item = _.get(data, [index], undefined);
     const handleClick = (uuid: string) => {
         history.push(`/app/contests/${uuid}`);
     };

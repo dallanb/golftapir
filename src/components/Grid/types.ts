@@ -23,4 +23,11 @@ export interface RowItemProps {
     prepareRows: (row: Row<any>[]) => void;
 }
 
-export interface RowItemRendererProps {}
+export interface RowItemRendererProps {
+    (props: {
+        rowIndex: any;
+        columnIndex: any;
+        style: any;
+        data: any;
+    }): JSX.Element;
+}

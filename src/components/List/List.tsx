@@ -52,13 +52,14 @@ class List extends React.PureComponent<ListProps, ListState> {
                             itemCount={
                                 hasNextPage ? items.length + 1 : items.length
                             }
+                            itemData={items}
                             itemSize={size}
                             onItemsRendered={onItemsRendered}
                             height={500}
                             width={500}
                             ref={ref}
                         >
-                            {(props) => this.rowRenderer(props, items, history)}
+                            {(props) => this.rowRenderer(props, history)}
                         </FixedSizeList>
                     </section>
                 )}

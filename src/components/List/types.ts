@@ -13,9 +13,5 @@ export interface ListProps extends RouteComponentProps<any> {
 export interface ListState {}
 
 export interface RowRendererProps {
-    (
-        props: { index: any; style: any; data: any },
-        items: any,
-        history: any
-    ): JSX.Element;
+    (props: { index: any; style: any; data: any }, history: any): JSX.Element;
 }
