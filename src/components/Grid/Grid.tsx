@@ -2,9 +2,9 @@ import React from 'react';
 import { FixedSizeGrid } from 'react-window';
 import { GridProps as FixedSizeGridProps } from 'react-window';
 import { GridProps, RowItemRendererProps } from './types';
-import './Grid.scss';
 import InfiniteLoader from 'react-window-infinite-loader';
 import defaultRowItemRenderer from './defaultRowItemRenderer';
+import './Grid.scss';
 
 class Grid extends React.PureComponent<GridProps> {
     private readonly rowItemRenderer: RowItemRendererProps;
