@@ -1,5 +1,5 @@
 import ClientProxy from './ClientProxy';
-import config from '../config.json';
+import config from 'config';
 
 export default {
     fetchContest(uuid: string, query: any = {}) {

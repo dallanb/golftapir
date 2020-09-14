@@ -1,10 +1,10 @@
 import { AnyAction } from 'redux';
 import { all, call, put, select, takeLatest } from 'redux-saga/effects';
 import { message } from 'antd';
-import ContestActions, { ContestTypes } from '../reducers/ContestReducer';
-import { ContestService } from '../services';
-import CONSTANTS from '../locale/en-CA';
-import { selectData } from '../selectors/ContestSelectors';
+import ContestActions, { ContestTypes } from '@reducers/ContestReducer';
+import { ContestService } from '@services';
+import CONSTANTS from '@locale/en-CA';
+import { selectData } from '@selectors/ContestSelectors';
 
 function* fetchContest({ uuid }: AnyAction) {
     try {

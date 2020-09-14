@@ -1,4 +1,4 @@
-import { Account } from '../../pages';
+import { Account } from '@pages';
 
 export default [
     {

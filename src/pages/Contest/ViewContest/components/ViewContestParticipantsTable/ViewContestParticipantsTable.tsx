@@ -2,8 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import { ViewContestParticipantsTableProps } from './types';
+import Grid from '@components/Grid';
 import './ViewContestParticipantsTable.scss';
-import Grid from '../../../../../components/Grid';
 
 class ViewContestParticipantsTable extends React.PureComponent<
     ViewContestParticipantsTableProps

@@ -13,7 +13,30 @@
         "moduleResolution": "node",
         "baseUrl": "./src",
         "typeRoots": ["node_modules/@types", "src/typings"],
-        "esModuleInterop": true
+        "esModuleInterop": true,
+        "paths": {
+            "config": ["config"],
+            "@components/*": ["components/*"],
+            "@components": ["components/index.ts"],
+            "@layouts/*": ["layouts/*"],
+            "@layouts": ["layouts/index.ts"],
+            "@locale/*": ["locale/*"],
+            "@locale": ["locale/index.ts"],
+            "@pages/*": ["pages/*"],
+            "@pages": ["pages/index.ts"],
+            "@reducers/*": ["reducers/*"],
+            "@reducers": ["reducers/index.ts"],
+            "@routes/*": ["routes/*"],
+            "@routes": ["routes/index.ts"],
+            "@sagas/*": ["sagas/*"],
+            "@sagas": ["sagas/index.ts"],
+            "@selectors/*": ["selectors/*"],
+            "@selectors": ["selectors/index.ts"],
+            "@services/*": ["services/*"],
+            "@services": ["services/index.ts"],
+            "@utils/*": ["utils/*"],
+            "@utils": ["utils/index.ts"]
+        }
     },
     "include": ["src/**/*"],
     "exclude": ["node_modules"]

@@ -1,48 +1,83 @@
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
 module.exports = {
     entry: path.resolve(__dirname, 'src', 'index.tsx'),
     output: {
         filename: 'bundle.js',
-        path: path.resolve(__dirname, 'dist')
+        path: path.resolve(__dirname, 'dist'),
+        publicPath: '/',
     },
-    mode: "development",
+    mode: 'development',
     resolve: {
-        extensions: ['.js', '.ts', '.tsx']
+        extensions: ['.js', '.ts', '.tsx'],
+        alias: {
+            config: path.resolve(__dirname, 'src/config'),
+            '@components': path.resolve(__dirname, 'src/components'),
+            '@layouts': path.resolve(__dirname, 'src/layouts'),
+            '@locale': path.resolve(__dirname, 'src/locale'),
+            '@pages': path.resolve(__dirname, 'src/pages'),
+            '@reducers': path.resolve(__dirname, 'src/reducers'),
+            '@routes': path.resolve(__dirname, 'src/routes'),
+            '@sagas': path.resolve(__dirname, 'src/sagas'),
+            '@selectors': path.resolve(__dirname, 'src/selectors'),
+            '@services': path.resolve(__dirname, 'src/services'),
+            '@utils': path.resolve(__dirname, 'src/utils'),
+        },
     },
     devServer: {
         contentBase: path.resolve(__dirname, 'dist'),
-        port: 3000
+        port: 3000,
+        public: 'local.techtapir.com:3000',
+        historyApiFallback: true,
     },
     module: {
         rules: [
             {
-                test: /\.tsx$/,
-                use: ['ts-loader']
+                test: /\.tsx?$/,
+                use: ['ts-loader'],
+                exclude: /node_modules/,
             },
             {
                 test: /\.html/,
-                use: ['html-loader']
+                use: ['html-loader'],
             },
             {
-                test: /\.s(a|c)ss$/,
+                test: /\.(sass|scss|css)$/,
                 use: [
                     'style-loader',
                     {
                         loader: 'css-loader',
                         options: {
                             modules: {
-                                localIdentName: '[local]'
-                            }
-                        }
+                                localIdentName: '[local]',
+                            },
+                        },
                     },
-                    'sass-loader'
-                ]
-            }
-        ]
+                    'sass-loader',
+                ],
+            },
+            {
+                test: /\.txt$/i,
+                use: 'raw-loader',
+            },
+            {
+                test: /\.json$/,
+                loader: 'json-loader',
+            },
+            {
+                test: /\.(png|jpe?g|gif)$/i,
+                use: [
+                    {
+                        loader: 'file-loader',
+                    },
+                ],
+            },
+        ],
     },
     plugins: [
-        new HTMLWebpackPlugin({
-            template: path.resolve(__dirname, 'public', 'index.html')
-        })
-    ]
+        new HtmlWebpackPlugin({
+            template: path.resolve(__dirname, 'public', 'index.html'),
+        }),
+    ],
 };

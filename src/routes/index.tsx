@@ -5,7 +5,7 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import Auth from './Auth';
 import MemberApp from './MemberApp';
 // components
-import MessageModal from '../components/MessageModal';
+import MessageModal from '@components/MessageModal';
 
 export const Routes = (
     <Fragment>

@@ -1,6 +1,6 @@
-import { Contest } from '../../pages';
-import CreateContest from '../../pages/Contest/CreateContest';
-import ViewContest from '../../pages/Contest/ViewContest';
+import { Contest } from '@pages';
+import CreateContest from '@pages/Contest/CreateContest';
+import ViewContest from '@pages/Contest/ViewContest';
 
 export default [
     {

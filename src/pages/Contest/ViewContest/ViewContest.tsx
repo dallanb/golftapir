@@ -4,10 +4,10 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import _ from 'lodash';
 import { ViewContestProps } from './types';
-import { ContentLayout } from '../../../layouts';
-import ContestActions from '../../../reducers/ContestReducer';
-import './ViewContest.scss';
+import { ContentLayout } from '@layouts';
+import ContestActions from '@reducers/ContestReducer';
 import ViewContestParticipantsTable from './components/ViewContestParticipantsTable';
+import './ViewContest.scss';
 
 class ViewContest extends React.PureComponent<ViewContestProps> {
     componentDidMount() {
