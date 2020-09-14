@@ -1,7 +1,7 @@
 import { AnyAction } from 'redux';
 import { all, call, put, takeLatest } from 'redux-saga/effects';
 import { message } from 'antd';
-import AccountActions, { AccountTypes } from '@reducers/AccountReducer';
+import AccountActions, { AccountTypes } from '@reducers/data/AccountReducer';
 import { AccountService } from '@services';
 import CONSTANTS from '@locale/en-CA';
 
@@ -30,6 +30,7 @@ function* fetchAccounts() {
         message.error(CONSTANTS.ACCOUNT.ERROR.FETCH_ALL);
     }
 }
+
 function* updateAccount({ uuid, values }: AnyAction) {
     try {
         const res = yield call(AccountService.updateAccount, uuid, values);

@@ -1,7 +1,7 @@
-import { ModalInterface } from './ModalReducer';
-import { AccountInterface } from './AccountReducer';
-import { AuthInterface } from './AuthReducer';
-import { ContestInterface } from './ContestReducer';
+import { ModalInterface } from './ui/ModalReducer';
+import { AccountInterface } from './data/AccountReducer';
+import { AuthInterface } from './data/AuthReducer';
+import { ContestInterface } from './data/ContestReducer';
 
 export interface ModalStateInterface {
     readonly modal: ModalInterface;

@@ -1,11 +1,11 @@
 import React from 'react';
 import { Button, Card } from 'antd';
 import _ from 'lodash';
-import { ContestListTileProps } from './types';
+import { ContestsListTileProps } from './types';
 
-import './ContestListTile.scss';
-let ContestListTile: ContestListTileProps;
-ContestListTile = ({ index, style, data }, history) => {
+import './ContestsListTile.scss';
+let ContestsListTile: ContestsListTileProps;
+ContestsListTile = ({ index, style, data }, history) => {
     const item = _.get(data, [index], undefined);
     const handleClick = (uuid: string) => {
         history.push(`/app/contests/${uuid}`);
@@ -27,4 +27,4 @@ ContestListTile = ({ index, style, data }, history) => {
     );
 };
 
-export default ContestListTile;
+export default ContestsListTile;

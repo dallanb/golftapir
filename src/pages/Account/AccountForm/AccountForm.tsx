@@ -4,7 +4,7 @@ import { FormikValues } from 'formik';
 import _ from 'lodash';
 import { AccountFormProps } from './types';
 import { Form } from '@components';
-import AccountActions from '@reducers/AccountReducer';
+import AccountActions from '@reducers/data/AccountReducer';
 import { AccountStateInterface, AuthStateInterface } from '@reducers/types';
 import { fieldSchema, validationSchema } from './schema';
 import './AccountForm.scss';

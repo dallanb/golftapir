@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, Modal } from 'antd';
 import { connect } from 'react-redux';
 import { MessageModalProps } from './types';
-import ModalActions from '@reducers/ModalReducer';
+import ModalActions from '@reducers/ui/ModalReducer';
 import { ModalStateInterface } from '@reducers/types';
 import './MessageModal.scss';
 

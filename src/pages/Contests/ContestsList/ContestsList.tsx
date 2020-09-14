@@ -1,14 +1,14 @@
 import React from 'react';
 import _ from 'lodash';
 import { connect } from 'react-redux';
-import { ContestListProps } from './types';
+import { ContestsListProps } from './types';
 import { List } from '@components';
-import ContestActions from '@reducers/ContestReducer';
+import ContestActions from '@reducers/data/ContestReducer';
 import { ContestStateInterface } from '@reducers/types';
-import ContestListTile from './components/ContestListTile';
-import './ContestList.scss';
+import ContestsListTile from './ContestsListTile';
+import './ContestsList.scss';
 
-class ContestList extends React.PureComponent<ContestListProps> {
+class ContestsList extends React.PureComponent<ContestsListProps> {
     loadMore = (start: number, stop: number, resolve: () => any) => {
         const { fetchContests } = this.props;
         fetchContests({ page: Math.floor(stop / 100) + 1, per_page: 100 });
@@ -27,7 +27,7 @@ class ContestList extends React.PureComponent<ContestListProps> {
                 loadNextPage={this.loadMore}
                 isNextPageLoading={isFetching}
                 minimumBatchSize={100}
-                rowRenderer={ContestListTile}
+                rowRenderer={ContestsListTile}
             />
         );
     }
@@ -48,4 +48,4 @@ const mapDispatchToProps = (dispatch: any) => {
         },
     };
 };
-export default connect(mapStateToProps, mapDispatchToProps)(ContestList);
+export default connect(mapStateToProps, mapDispatchToProps)(ContestsList);

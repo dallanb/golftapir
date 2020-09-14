@@ -4,7 +4,7 @@ import { createActions, createReducer } from 'reduxsauce';
 
 const { Types, Creators } = createActions(
     {
-        fetchContest: ['uuid'],
+        fetchContest: ['uuid', 'options'],
         fetchContestSuccess: ['data', 'metadata'],
         fetchContestFailure: ['err'],
         fetchContests: ['options', 'append'],
@@ -13,6 +13,9 @@ const { Types, Creators } = createActions(
         createContest: ['data'],
         createContestSuccess: null,
         createContestFailure: ['err'],
+        fetchContestParticipants: ['uuid'],
+        fetchContestParticipantsSuccess: ['data', 'metadata'],
+        fetchContestParticipantsFailure: ['err'],
     },
     {
         prefix: 'CONTEST_',
@@ -104,6 +107,30 @@ function createContestFailure(state: any, { err }: any) {
         err,
     });
 }
+
+function fetchContestParticipants(state = INITIAL_STATE) {
+    return Immutable.merge(state, {
+        isFetching: true,
+        err: null,
+    });
+}
+
+function fetchContestParticipantsSuccess(state: any, { data, metadata }: any) {
+    return Immutable.merge(state, {
+        isFetching: false,
+        err: null,
+        data,
+        metadata,
+    });
+}
+
+function fetchContestParticipantsFailure(state: any, { err }: any) {
+    return Immutable.merge(state, {
+        isFetching: false,
+        err,
+    });
+}
+
 const HANDLERS = {
     [Types.FETCH_CONTEST]: fetchContest,
     [Types.FETCH_CONTEST_SUCCESS]: fetchContestSuccess,
@@ -114,6 +141,9 @@ const HANDLERS = {
     [Types.CREATE_CONTEST]: createContest,
     [Types.CREATE_CONTEST_SUCCESS]: createContestSuccess,
     [Types.CREATE_CONTEST_FAILURE]: createContestFailure,
+    [Types.FETCH_CONTEST_PARTICIPANTS]: fetchContestParticipants,
+    [Types.FETCH_CONTEST_PARTICIPANTS_SUCCESS]: fetchContestParticipantsSuccess,
+    [Types.FETCH_CONTEST_PARTICIPANTS_FAILURE]: fetchContestParticipantsFailure,
 };
 
 export const reducer = createReducer(INITIAL_STATE, HANDLERS);

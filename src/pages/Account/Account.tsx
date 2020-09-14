@@ -4,7 +4,9 @@ import _ from 'lodash';
 import { AccountProps } from './types';
 import { ContentLayout } from '@layouts';
 import AccountForm from './AccountForm';
-import AccountActions from '@reducers/AccountReducer';
+import AccountActions, {
+    AccountInterface,
+} from '@reducers/data/AccountReducer';
 import { AccountStateInterface } from '@reducers/types';
 import './Account.scss';
 
@@ -28,7 +30,13 @@ class Account extends React.PureComponent<AccountProps> {
     }
 }
 
-const mapStateToProps = ({ account }: AccountStateInterface) => {
+const mapStateToProps = ({
+    account,
+    accountPage,
+}: {
+    account: AccountInterface;
+    accountPage: any;
+}) => {
     return {
         isFetching: _.get(account, ['isFetching'], true),
         isSubmitting: _.get(account, ['isSubmitting'], true),

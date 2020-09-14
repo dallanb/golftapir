@@ -1,7 +1,7 @@
 import { PropsWithChildren } from 'react';
 import { ListChildComponentProps } from 'react-window';
 
-export interface ContestListTileProps {
+export interface ContestsListTileProps {
     (
         rowData: PropsWithChildren<ListChildComponentProps>,
         history: any

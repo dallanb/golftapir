@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { FormikValues } from 'formik';
 import { CreateContestFormProps } from './types';
 import { Form } from '@components';
-import ContestActions from '@reducers/ContestReducer';
+import ContestActions from '@reducers/data/ContestReducer';
 import { fieldSchema, validationSchema } from './schema';
 import './CreateContestForm.scss';
 import _ from 'lodash';

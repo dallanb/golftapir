@@ -1,6 +1,6 @@
-export interface ContestProps {
+import { RouteComponentProps } from 'react-router-dom';
+export interface ContestProps extends RouteComponentProps {
+    fetchContestParticipants: (uuid: string) => void;
     data: any;
     isFetching: boolean;
-    isSubmitting: boolean;
-    fetchContests: (options: { page: number; per_page: number }) => any;
 }

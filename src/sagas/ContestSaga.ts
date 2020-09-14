@@ -1,14 +1,15 @@
 import { AnyAction } from 'redux';
 import { all, call, put, select, takeLatest } from 'redux-saga/effects';
 import { message } from 'antd';
-import ContestActions, { ContestTypes } from '@reducers/ContestReducer';
+import _ from 'lodash';
+import ContestActions, { ContestTypes } from '@reducers/data/ContestReducer';
 import { ContestService } from '@services';
 import CONSTANTS from '@locale/en-CA';
 import { selectData } from '@selectors/ContestSelectors';
 
-function* fetchContest({ uuid }: AnyAction) {
+function* fetchContest({ uuid, options }: AnyAction) {
     try {
-        const res = yield call(ContestService.fetchContest, uuid);
+        const res = yield call(ContestService.fetchContest, uuid, options);
         console.log(res);
         const { contests, _metadata: metadata } = res;
         yield put(ContestActions.fetchContestSuccess(contests, metadata));
@@ -42,6 +43,26 @@ function* createContest({ data }: any) {
     } catch (err) {
         yield put(ContestActions.createContestFailure(err));
         message.error(CONSTANTS.CONTEST.ERROR.CREATE);
+    }
+}
+
+function* fetchContestParticipants({ uuid }: any) {
+    try {
+        const res = yield call(ContestService.fetchContest, uuid, {
+            include: 'participants',
+        });
+        console.log(res);
+        const participants = _.get(res, ['contests', 'participants'], []).map(
+            ({ uuid }: { uuid: string }) => uuid
+        );
+        if (!participants.length) {
+            yield put(
+                ContestActions.fetchContestParticipantsSuccess(participants)
+            );
+        }
+    } catch (err) {
+        yield put(ContestActions.fetchContestParticipantsFailure(err));
+        message.error(CONSTANTS.CONTEST.ERROR.FETCH_PARTICIPANTS);
     }
 }
 

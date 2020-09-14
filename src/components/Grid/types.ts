@@ -5,17 +5,22 @@ export interface GridProps {
     // are there still more items to load?
     hasNextPage: boolean;
     // Callback function that knows how to load more items
-    loadMoreItems: (startIndex: number, stopIndex: number) => Promise<any>;
+    loadMoreItems: (
+        startIndex: number,
+        stopIndex: number,
+        resolve: () => void
+    ) => void;
     //Callback function determining if the item at an index is loaded
-    isItemLoaded: (index: number) => boolean;
+    isItemLoading: boolean;
     scrollState: {
         rowIndex: number;
         columnIndex: number;
     };
     setScrollRowAndColumn: (rowIndex: number, columnIndex: number) => void;
     itemCount: number;
-    itemData: RowItemProps;
+    items: any;
     rowItemRenderer?: RowItemRendererProps;
+    columnsSchema: any[];
 }
 
 export interface RowItemProps {

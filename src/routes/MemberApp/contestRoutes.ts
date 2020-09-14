@@ -1,19 +1,16 @@
-import { Contest } from '@pages';
-import CreateContest from '@pages/Contest/CreateContest';
-import ViewContest from '@pages/Contest/ViewContest';
-
+import { Contest, Contests, ContestsCreate } from '@pages';
 export default [
     {
         path: '/contests',
-        component: Contest,
+        component: Contests,
         exact: true,
     },
     {
         path: '/contests/create',
-        component: CreateContest,
+        component: ContestsCreate,
     },
     {
         path: '/contests/:uuid',
-        component: ViewContest,
+        component: Contest,
     },
 ];
