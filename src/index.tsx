@@ -5,7 +5,7 @@ import { store } from './store/configStore';
 import { App } from './components';
 import * as serviceWorker from './serviceWorker';
 
-import './index.css';
+import './index.scss';
 import 'antd/dist/antd.css';
 
 ReactDOM.render(

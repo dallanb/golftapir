@@ -2,9 +2,9 @@ import React from 'react';
 import { Button, Modal } from 'antd';
 import { connect } from 'react-redux';
 import { MessageModalProps } from './types';
-import ModalActions from '../../reducers/ModalReducer';
+import ModalActions from '@reducers/ModalReducer';
+import { ModalStateInterface } from '@reducers/types';
 import './MessageModal.scss';
-import { ModalStateInterface } from '../../reducers/types';
 
 class MessageModal extends React.PureComponent<MessageModalProps> {
     acknowledgeModal = () => {

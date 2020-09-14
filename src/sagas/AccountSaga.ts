@@ -1,9 +1,9 @@
 import { AnyAction } from 'redux';
 import { all, call, put, takeLatest } from 'redux-saga/effects';
 import { message } from 'antd';
-import AccountActions, { AccountTypes } from '../reducers/AccountReducer';
-import { AccountService } from '../services';
-import CONSTANTS from '../locale/en-CA';
+import AccountActions, { AccountTypes } from '@reducers/AccountReducer';
+import { AccountService } from '@services';
+import CONSTANTS from '@locale/en-CA';
 
 function* fetchAccount({ uuid }: AnyAction) {
     try {

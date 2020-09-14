@@ -5,11 +5,11 @@ import { withRouter } from 'react-router-dom';
 import _ from 'lodash';
 import { Button, Form, Input } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
-import AuthActions from '../../reducers/AuthReducer';
-import ModalActions from '../../reducers/ModalReducer';
+import AuthActions from '@reducers/AuthReducer';
+import ModalActions from '@reducers/ModalReducer';
+import { AuthStateInterface } from '@reducers/types';
 import { LoginProps } from './types';
 import './Login.scss';
-import { AuthStateInterface } from '../../reducers/types';
 
 class Login extends React.PureComponent<LoginProps> {
     componentDidMount() {

@@ -2,9 +2,10 @@ import React from 'react';
 import _ from 'lodash';
 import { connect } from 'react-redux';
 import { ContestListProps } from './types';
-import { List } from '../../../components';
-import ContestActions from '../../../reducers/ContestReducer';
-import { ContestStateInterface } from '../../../reducers/types';
+import { List } from '@components';
+import ContestActions from '@reducers/ContestReducer';
+import { ContestStateInterface } from '@reducers/types';
+import ContestListTile from './components/ContestListTile';
 import './ContestList.scss';
 
 class ContestList extends React.PureComponent<ContestListProps> {
@@ -26,6 +27,7 @@ class ContestList extends React.PureComponent<ContestListProps> {
                 loadNextPage={this.loadMore}
                 isNextPageLoading={isFetching}
                 minimumBatchSize={100}
+                rowRenderer={ContestListTile}
             />
         );
     }

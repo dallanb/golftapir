@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import memoize from 'memoize-one';
 import _ from 'lodash';
 import { MemberAppLayoutProps, MemberAppLayoutState } from './types';
-import memberAppRoutes from '../../routes/MemberApp/statics';
+import memberAppRoutes from '@routes/MemberApp/statics';
 import './MemberAppLayout.scss';
 
 const { Sider } = Layout;

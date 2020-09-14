@@ -3,13 +3,10 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import accountRoutes from './accountRoutes';
 import homeRoutes from './homeRoutes';
-import { MemberAppLayout } from '../../layouts';
-import { ProtectedRoute } from '../../components';
-import {
-    selectForceLogout,
-    selectIsLoggedIn,
-} from '../../selectors/AuthSelectors';
-import AuthActions from '../../reducers/AuthReducer';
+import { MemberAppLayout } from '@layouts';
+import { ProtectedRoute } from '@components';
+import { selectForceLogout, selectIsLoggedIn } from '@selectors/AuthSelectors';
+import AuthActions from '@reducers/AuthReducer';
 import { ComponentRoute } from '../types';
 import contestRoutes from './contestRoutes';
 

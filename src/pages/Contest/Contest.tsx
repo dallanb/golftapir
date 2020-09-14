@@ -2,11 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import ContestList from './ContestList';
-import CreateContestButton from './CreateContestButton';
+import CreateContestButton from './CreateContest/components/CreateContestButton';
 import { ContestProps } from './types';
-import { ContentLayout } from '../../layouts';
-import ContestActions from '../../reducers/ContestReducer';
-import { ContestStateInterface } from '../../reducers/types';
+import { ContentLayout } from '@layouts';
+import ContestActions from '@reducers/ContestReducer';
+import { ContestStateInterface } from '@reducers/types';
 import './Contest.scss';
 
 class Contest extends React.PureComponent<ContestProps> {

@@ -1,5 +1,6 @@
-import { Contest } from '../../pages';
-import CreateContest from '../../pages/Contest/CreateContest';
+import { Contest } from '@pages';
+import CreateContest from '@pages/Contest/CreateContest';
+import ViewContest from '@pages/Contest/ViewContest';
 
 export default [
     {
@@ -10,5 +11,9 @@ export default [
     {
         path: '/contests/create',
         component: CreateContest,
+    },
+    {
+        path: '/contests/:uuid',
+        component: ViewContest,
     },
 ];

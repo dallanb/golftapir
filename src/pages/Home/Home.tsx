@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { HomeProps } from './types';
-import { ContentLayout } from '../../layouts';
+import { ContentLayout } from '@layouts';
 import './Home.scss';
 
 class Home extends React.PureComponent<HomeProps> {
