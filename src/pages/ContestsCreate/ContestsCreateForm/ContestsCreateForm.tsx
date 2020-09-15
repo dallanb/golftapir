@@ -1,15 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { FormikValues } from 'formik';
-import { ContestsCreateFormProps } from './types';
+import _ from 'lodash';
+import { ContestsCreateFormProps, StateInterface } from './types';
 import { Form } from '@components';
 import ContestActions from '@reducers/data/ContestReducer';
+import { withTarget } from '@utils';
+import constants from '@constants';
 import { fieldSchema, validationSchema } from './schema';
-import _ from 'lodash';
 import config from 'config';
-import { AuthInterface } from '@reducers/data/AuthReducer';
 import './ContestsCreateForm.scss';
-import { ContestsCreatePageInterface } from '@reducers/ui/ContestsCreatePage';
 
 class ContestsCreateForm extends React.PureComponent<ContestsCreateFormProps> {
     prepareInitialValues = () => {
@@ -37,23 +37,24 @@ class ContestsCreateForm extends React.PureComponent<ContestsCreateFormProps> {
     }
 }
 
-const mapStateToProps = ({
-    contestsCreatePage,
-}: {
-    contestsCreatePage: {
-        ui: ContestsCreatePageInterface;
-        data: AuthInterface;
-    };
-}) => {
+const mapStateToProps = ({ contestsCreatePage }: StateInterface) => {
+    const {
+        data: { auth },
+    } = contestsCreatePage;
     return {
-        authData: _.get(contestsCreatePage, ['data', 'data'], undefined),
+        authData: auth.data,
     };
 };
 
 const mapDispatchToProps = (dispatch: any) => {
     return {
         createContest(values: FormikValues) {
-            return dispatch(ContestActions.createContest(values));
+            return dispatch(
+                withTarget(
+                    ContestActions.createContest,
+                    constants.TARGETS.CONTESTS_CREATE_PAGE
+                )(values)
+            );
         },
     };
 };

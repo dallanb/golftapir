@@ -1,13 +1,12 @@
 // @ts-ignore
 import { static as Immutable } from 'seamless-immutable';
 import { createReducer } from 'reduxsauce';
-import { AccountTypes } from '@reducers/data/AccountReducer';
 
 /* ------------- Interface ------------- */
-export interface AccountPageInterface {}
+export interface ContestContainerInterface {}
 
 /* ------------- Initial State ------------- */
-const INITIAL_STATE: AccountPageInterface = {};
+const INITIAL_STATE: ContestContainerInterface = {};
 
 /* ------------- Reducers ------------- */
 

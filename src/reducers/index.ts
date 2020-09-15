@@ -1,47 +1,65 @@
 import { combineReducers } from 'redux';
+import { filterActions } from 'redux-ignore';
+import constants from '@constants';
 /* ------------- Reducers ------------- */
 import { account, auth, contest } from './data';
 import {
-    accountPage,
-    contestPage,
-    contestsCreatePage,
-    contestsPage,
-    loginPage,
+    accountContainer,
+    contestContainer,
+    contestsCreateContainer,
+    contestsContainer,
+    loginContainer,
     modal,
-    registerPage,
+    registerContainer,
 } from './ui';
 
 const mainReducer = combineReducers({
     accountPage: combineReducers({
-        ui: accountPage,
+        ui: combineReducers({ accountContainer }),
         data: combineReducers({
-            account,
+            account: filterActions(
+                account,
+                (action: any) =>
+                    action.target === constants.TARGETS.ACCOUNT_PAGE
+            ),
             auth,
         }),
     }),
     auth,
     contestPage: combineReducers({
-        ui: contestPage,
-        data: contest,
+        ui: combineReducers({ contestContainer }),
+        data: combineReducers({
+            contest: filterActions(
+                contest,
+                (action: any) =>
+                    action.target === constants.TARGETS.CONTEST_PAGE
+            ),
+        }),
     }),
     contestsPage: combineReducers({
-        ui: contestsPage,
-        data: contest,
+        ui: combineReducers({ contestsContainer }),
+        data: combineReducers({
+            contest: filterActions(
+                contest,
+                (action: any) =>
+                    action.target === constants.TARGETS.CONTESTS_PAGE
+            ),
+        }),
     }),
     contestsCreatePage: combineReducers({
-        ui: contestsCreatePage,
-        data: auth,
+        ui: combineReducers({ contestsCreateContainer }),
+        data: combineReducers({ auth }),
     }),
     // homePage: combineReducers({
     //     data: {},
     // }),
     loginPage: combineReducers({
-        ui: loginPage,
-        data: auth,
+        ui: combineReducers({ loginContainer }),
+        data: combineReducers({ auth }),
     }),
     registerPage: combineReducers({
-        ui: registerPage,
-        data: auth,
+        ui: combineReducers({ registerContainer }),
+        data: combineReducers({ auth }),
     }),
     modal,
 });

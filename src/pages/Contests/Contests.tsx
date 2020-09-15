@@ -1,14 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import _ from 'lodash';
 import ContestsList from './ContestsList';
 import ContestsCreateButton from '../ContestsCreate/ContestsCreateButton';
-import { ContestsProps } from './types';
+import { ContestsProps, StateInterface } from './types';
 import { ContentLayout } from '@layouts';
-import ContestActions, {
-    ContestInterface,
-} from '@reducers/data/ContestReducer';
-import { ContestPageInterface } from '@reducers/ui/ContestPageReducer';
+import { withTarget } from '@utils';
+import constants from '@constants';
+import ContestActions from '@reducers/data/ContestReducer';
 import './Contests.scss';
 
 class Contests extends React.PureComponent<ContestsProps> {
@@ -32,22 +30,26 @@ class Contests extends React.PureComponent<ContestsProps> {
     }
 }
 
-const mapStateToProps = ({
-    contestPage,
-}: {
-    contestPage: { ui: ContestPageInterface; data: ContestInterface };
-}) => {
+const mapStateToProps = ({ contestsPage }: StateInterface) => {
+    const {
+        data: { contest },
+    } = contestsPage;
     return {
-        isFetching: _.get(contestPage, ['data', 'isFetching'], true),
-        isSubmitting: _.get(contestPage, ['data', 'isSubmitting'], true),
-        data: _.get(contestPage, ['data', 'data'], null),
+        isFetching: contest.isFetching,
+        isSubmitting: contest.isSubmitting,
+        data: contest.data,
     };
 };
 
 const mapDispatchToProps = (dispatch: any) => {
     return {
         fetchContests(options: { page: number; per_page: number }) {
-            return dispatch(ContestActions.fetchContests(options));
+            return dispatch(
+                withTarget(
+                    ContestActions.fetchContests,
+                    constants.TARGETS.CONTESTS_PAGE
+                )(options)
+            );
         },
     };
 };

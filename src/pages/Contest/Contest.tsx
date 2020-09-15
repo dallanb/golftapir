@@ -3,12 +3,11 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import _ from 'lodash';
-import { ContestProps } from './types';
+import { ContestProps, StateInterface } from './types';
 import { ContentLayout } from '@layouts';
-import ContestActions, {
-    ContestInterface,
-} from '@reducers/data/ContestReducer';
-import { ContestPageInterface } from '@reducers/ui/ContestPageReducer';
+import { withTarget } from '@utils';
+import constants from '@constants';
+import ContestActions from '@reducers/data/ContestReducer';
 import ViewContestParticipantsTable from './ContestParticipantsTable';
 import './Contest.scss';
 
@@ -19,7 +18,6 @@ class Contests extends React.PureComponent<ContestProps> {
             fetchContestParticipants,
         } = this.props;
         const uuid = _.get(params, ['uuid'], null);
-        console.log(uuid);
         fetchContestParticipants(uuid);
     }
 
@@ -41,21 +39,25 @@ class Contests extends React.PureComponent<ContestProps> {
     }
 }
 
-const mapStateToProps = ({
-    contestPage,
-}: {
-    contestPage: { ui: ContestPageInterface; data: ContestInterface };
-}) => {
+const mapStateToProps = ({ contestPage }: StateInterface) => {
+    const {
+        data: { contest },
+    } = contestPage;
     return {
-        data: _.get(contestPage, ['data', 'data']),
-        isFetching: _.get(contestPage, ['data', 'isFetching']),
+        data: contest.data,
+        isFetching: contest.isFetching,
     };
 };
 
 const mapDispatchToProps = (dispatch: any) => {
     return {
         fetchContestParticipants(uuid: string) {
-            dispatch(ContestActions.fetchContestParticipants(uuid));
+            dispatch(
+                withTarget(
+                    ContestActions.fetchContestParticipants,
+                    constants.TARGETS.CONTEST_PAGE
+                )(uuid)
+            );
         },
     };
 };

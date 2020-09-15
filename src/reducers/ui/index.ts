@@ -1,7 +1,7 @@
-export { reducer as accountPage } from './AccountPageReducer';
-export { reducer as contestPage } from './ContestPageReducer';
-export { reducer as contestsPage } from './ContestsPageReducer';
-export { reducer as contestsCreatePage } from './ContestsCreatePage';
-export { reducer as loginPage } from './LoginPageReducer';
-export { reducer as registerPage } from './RegisterPageReducer';
+export { reducer as accountContainer } from './AccountContainerReducer';
+export { reducer as contestContainer } from './ContestContainerReducer';
+export { reducer as contestsContainer } from './ContestsContainerReducer';
+export { reducer as contestsCreateContainer } from './ContestsCreateContainerReducer';
+export { reducer as loginContainer } from './LoginContainerReducer';
+export { reducer as registerContainer } from './RegisterContainerReducer';
 export { reducer as modal } from './ModalReducer';

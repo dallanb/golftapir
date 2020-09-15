@@ -12,10 +12,10 @@ import { createActions, createReducer } from 'reduxsauce';
 // export default Creators;
 
 /* ------------- Interface ------------- */
-export interface RegisterPageInterface {}
+export interface RegisterContainerInterface {}
 
 /* ------------- Initial State ------------- */
-const INITIAL_STATE: RegisterPageInterface = {};
+const INITIAL_STATE: RegisterContainerInterface = {};
 
 /* ------------- Reducers ------------- */
 

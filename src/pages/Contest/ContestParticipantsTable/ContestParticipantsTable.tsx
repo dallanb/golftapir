@@ -8,8 +8,8 @@ import {
 } from './types';
 import Grid from '@components/Grid';
 import { columnsSchema } from '@pages/Contest/ContestParticipantsTable/schema';
-import { ContestPageInterface } from '@reducers/ui/ContestPageReducer';
 import { ContestInterface } from '@reducers/data/ContestReducer';
+import { ContestContainerInterface } from '@reducers/ui/ContestContainerReducer';
 import './ContestParticipantsTable.scss';
 
 class ContestParticipantsTable extends React.PureComponent<
@@ -57,7 +57,7 @@ class ContestParticipantsTable extends React.PureComponent<
 const mapStateToProps = ({
     contestPage,
 }: {
-    contestPage: { ui: ContestPageInterface; data: ContestInterface };
+    contestPage: { ui: ContestContainerInterface; data: ContestInterface };
 }) => {
     return {};
 };

@@ -1,14 +1,12 @@
 import React from 'react';
-import _ from 'lodash';
 import { connect } from 'react-redux';
-import { ContestsListProps } from './types';
+import { ContestsListProps, StateInterface } from './types';
 import { List } from '@components';
-import ContestActions, {
-    ContestInterface,
-} from '@reducers/data/ContestReducer';
+import { withTarget } from '@utils';
+import constants from '@constants';
+import ContestActions from '@reducers/data/ContestReducer';
 import ContestsListTile from './ContestsListTile';
 import './ContestsList.scss';
-import { ContestPageInterface } from '@reducers/ui/ContestPageReducer';
 
 class ContestsList extends React.PureComponent<ContestsListProps> {
     loadMore = (start: number, stop: number, resolve: () => any) => {
@@ -35,22 +33,26 @@ class ContestsList extends React.PureComponent<ContestsListProps> {
     }
 }
 
-const mapStateToProps = ({
-    contestsPage,
-}: {
-    contestsPage: { ui: ContestPageInterface; data: ContestInterface };
-}) => {
+const mapStateToProps = ({ contestsPage }: StateInterface) => {
+    const {
+        data: { contest },
+    } = contestsPage;
     return {
-        metadata: _.get(contestsPage, ['data', 'metadata'], 0),
-        data: _.get(contestsPage, ['data', 'data'], []),
-        isFetching: _.get(contestsPage, ['data', 'isFetching'], false),
+        metadata: contest.metadata,
+        data: contest.data,
+        isFetching: contest.isFetching,
     };
 };
 
 const mapDispatchToProps = (dispatch: any) => {
     return {
         fetchContests(options: any) {
-            return dispatch(ContestActions.fetchContests(options, true));
+            return dispatch(
+                withTarget(
+                    ContestActions.fetchContests,
+                    constants.TARGETS.CONTESTS_PAGE
+                )(options, true)
+            );
         },
     };
 };

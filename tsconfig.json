@@ -18,6 +18,7 @@
             "config": ["config"],
             "@components/*": ["components/*"],
             "@components": ["components/index.ts"],
+            "@constants": ["constants/index.ts"],
             "@layouts/*": ["layouts/*"],
             "@layouts": ["layouts/index.ts"],
             "@locale/*": ["locale/*"],

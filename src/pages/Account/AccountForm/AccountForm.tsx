@@ -2,13 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { FormikValues } from 'formik';
 import _ from 'lodash';
-import { AccountFormProps } from './types';
+import { AccountFormProps, StateInterface } from './types';
 import { Form } from '@components';
-import AccountActions, {
-    AccountInterface,
-} from '@reducers/data/AccountReducer';
-import { AuthInterface } from '@reducers/data/AuthReducer';
-import { AccountPageInterface } from '@reducers/ui/AccountPageReducer';
+import { withTarget } from '@utils';
+import constants from '@constants';
+import AccountActions from '@reducers/data/AccountReducer';
 import { fieldSchema, validationSchema } from './schema';
 import './AccountForm.scss';
 
@@ -54,27 +52,33 @@ class AccountForm extends React.PureComponent<AccountFormProps> {
     }
 }
 
-const mapStateToProps = ({
-    accountPage,
-}: {
-    accountPage: {
-        ui: AccountPageInterface;
-        data: { account: AccountInterface; auth: AuthInterface };
-    };
-}) => {
+const mapStateToProps = ({ accountPage }: StateInterface) => {
+    const {
+        data: { account, auth },
+    } = accountPage;
     return {
-        accountData: _.get(accountPage, ['data', 'account', 'data'], undefined),
-        authData: _.get(accountPage, ['data', 'auth', 'data'], undefined),
+        accountData: account.data,
+        authData: auth.data,
     };
 };
 
 const mapDispatchToProps = (dispatch: any) => {
     return {
         updateAccount(values: FormikValues) {
-            return dispatch(AccountActions.updateAccount('me', values));
+            return dispatch(
+                withTarget(
+                    AccountActions.updateAccount,
+                    constants.TARGETS.ACCOUNT_PAGE
+                )('me', values)
+            );
         },
         updateAvatar(avatar: File) {
-            return dispatch(AccountActions.updateAvatar('me', avatar));
+            return dispatch(
+                withTarget(
+                    AccountActions.updateAvatar,
+                    constants.TARGETS.ACCOUNT_PAGE
+                )('me', avatar)
+            );
         },
     };
 };
