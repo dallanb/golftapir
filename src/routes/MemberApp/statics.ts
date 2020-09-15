@@ -1,4 +1,5 @@
-import { Account, Home } from '../../pages';
+import Home from '@pages/Home';
+
 import {
     CrownFilled,
     DollarCircleFilled,
@@ -48,7 +49,7 @@ export default [
     },
     {
         path: '/app/settings',
-        component: Account,
+        // component: Account,
         name: 'Settings',
         icon: SettingFilled,
     },

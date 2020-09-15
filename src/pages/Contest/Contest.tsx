@@ -11,7 +11,7 @@ import ContestActions from '@reducers/ContestReducer';
 import ViewContestParticipantsTable from './ContestParticipantsTable';
 import './Contest.scss';
 
-class Contests extends React.PureComponent<ContestProps> {
+class Contest extends React.PureComponent<ContestProps> {
     componentDidMount() {
         const {
             match: { params },
@@ -65,4 +65,4 @@ const mapDispatchToProps = (dispatch: any) => {
 export default compose(
     withRouter,
     connect(mapStateToProps, mapDispatchToProps)
-)(Contests);
+)(Contest);

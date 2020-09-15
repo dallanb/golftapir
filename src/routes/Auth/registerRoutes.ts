@@ -1,4 +1,4 @@
-import { Register } from '@pages';
+import Register from '@pages/Register';
 
 export default [
     {

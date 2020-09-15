@@ -1,4 +1,4 @@
-import { Login } from '@pages';
+import Login from '@pages/Login';
 
 export default [
     {

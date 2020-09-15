@@ -5,7 +5,7 @@ import registerRoutes from './registerRoutes';
 import { AuthLayout } from '@layouts';
 import { ComponentRoute } from '../types';
 
-function Auth(url: string) {
+function Auth({ url }: { url: string }) {
     return (
         <AuthLayout>
             <Switch>

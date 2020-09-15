@@ -11,7 +11,10 @@ export const Routes = (
     <Fragment>
         <MessageModal />
         <Switch>
-            <Route path="/auth" render={({ match: { url } }) => Auth(url)} />
+            <Route
+                path="/auth"
+                render={({ match: { url } }) => <Auth url={url} />}
+            />
             <Route
                 path="/app"
                 render={({ match: { url } }) => <MemberApp url={url} />}

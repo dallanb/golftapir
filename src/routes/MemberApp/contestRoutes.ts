@@ -1,4 +1,7 @@
-import { Contest, Contests, ContestsCreate } from '@pages';
+import Contests from '@pages/Contests';
+import ContestsCreate from '@pages/ContestsCreate';
+import Contest from '@pages/ContestsCreate';
+
 export default [
     {
         path: '/contests',
