@@ -1,4 +1,4 @@
-import { ContestsContainerInterface } from './reducer';
+import { ContestsPageInterface } from './reducer';
 import { ContestInterface } from '@reducers/ContestReducer';
 
 export interface ContestsProps {
@@ -10,7 +10,7 @@ export interface ContestsProps {
 
 export interface StateInterface {
     contestsPage: {
-        ui: ContestsContainerInterface;
+        ui: ContestsPageInterface;
         data: { contest: ContestInterface };
     };
 }

@@ -1,3 +1,15 @@
+// Component
+
 export { default } from './Register';
-export { reducer as registerContainer } from './reducer';
-export { default as RegisterContainerSaga } from './saga';
+
+// Reducer
+import { combineReducers } from 'redux';
+import { reducer } from './reducer';
+import { reducer as auth } from '@reducers/AuthReducer';
+export const registerPageReducer = combineReducers({
+    ui: reducer,
+    data: combineReducers({ auth }),
+});
+
+// Saga
+export { default as RegisterPageSaga } from './saga';

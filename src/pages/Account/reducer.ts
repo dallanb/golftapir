@@ -2,10 +2,10 @@
 import { createReducer } from 'reduxsauce';
 
 /* ------------- Interface ------------- */
-export interface AccountContainerInterface {}
+export interface AccountPageInterface {}
 
 /* ------------- Initial State ------------- */
-const INITIAL_STATE: AccountContainerInterface = {};
+const INITIAL_STATE: AccountPageInterface = {};
 
 /* ------------- Reducers ------------- */
 

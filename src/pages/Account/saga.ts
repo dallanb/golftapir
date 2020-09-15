@@ -1,5 +1,5 @@
 import { all } from 'redux-saga/effects';
 
-export default function* AccountContainerSaga() {
+export default function* AccountPageSaga() {
     yield all([]);
 }

@@ -1,5 +1,5 @@
 import { all } from 'redux-saga/effects';
 
-export default function* ContestsCreateContainerSaga() {
+export default function* ContestsCreatePageSaga() {
     yield all([]);
 }

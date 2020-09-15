@@ -1,27 +1,27 @@
 export {
     default as Account,
-    accountContainer,
-    AccountContainerSaga,
+    accountPageReducer,
+    AccountPageSaga,
 } from './Account';
 export {
     default as Contest,
-    contestContainer,
-    ContestContainerSaga,
+    contestPageReducer,
+    ContestPageSaga,
 } from './Contest';
 export {
     default as Contests,
-    contestsContainer,
-    ContestsContainerSaga,
+    contestsPageReducer,
+    ContestsPageSaga,
 } from './Contests';
 export {
     default as ContestsCreate,
-    contestsCreateContainer,
-    ContestsCreateContainerSaga,
+    contestsCreatePageReducer,
+    ContestsCreatePageSaga,
 } from './ContestsCreate';
 export { default as Home } from './Home';
-export { default as Login, loginContainer, LoginContainerSaga } from './Login';
+export { default as Login, loginPageReducer, LoginPageSaga } from './Login';
 export {
     default as Register,
-    registerContainer,
-    RegisterContainerSaga,
+    registerPageReducer,
+    RegisterPageSaga,
 } from './Register';

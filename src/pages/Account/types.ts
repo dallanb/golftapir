@@ -1,4 +1,4 @@
-import { AccountContainerInterface } from './reducer';
+import { AccountPageInterface } from './reducer';
 import { AccountInterface } from '@reducers/AccountReducer';
 import { AuthInterface } from '@reducers/AuthReducer';
 
@@ -11,7 +11,7 @@ export interface AccountProps {
 
 export interface StateInterface {
     accountPage: {
-        ui: AccountContainerInterface;
+        ui: AccountPageInterface;
         data: { account: AccountInterface; auth: AuthInterface };
     };
 }

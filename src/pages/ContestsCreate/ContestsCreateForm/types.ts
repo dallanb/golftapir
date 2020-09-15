@@ -1,5 +1,5 @@
 import { FormikValues } from 'formik';
-import { ContestsCreateContainerInterface } from '../reducer';
+import { ContestsCreatePageInterface } from '../reducer';
 import { AuthInterface } from '@reducers/AuthReducer';
 
 export interface ContestsCreateFormProps {
@@ -9,7 +9,7 @@ export interface ContestsCreateFormProps {
 
 export interface StateInterface {
     contestsCreatePage: {
-        ui: ContestsCreateContainerInterface;
+        ui: ContestsCreatePageInterface;
         data: { auth: AuthInterface };
     };
 }

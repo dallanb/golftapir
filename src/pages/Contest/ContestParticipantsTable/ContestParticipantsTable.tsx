@@ -9,7 +9,7 @@ import {
 import Grid from '@components/Grid';
 import { columnsSchema } from '@pages/Contest/ContestParticipantsTable/schema';
 import { ContestInterface } from '@reducers/ContestReducer';
-import { ContestContainerInterface } from '../reducer';
+import { ContestPageInterface } from '../reducer';
 import './ContestParticipantsTable.scss';
 
 class ContestParticipantsTable extends React.PureComponent<
@@ -57,7 +57,7 @@ class ContestParticipantsTable extends React.PureComponent<
 const mapStateToProps = ({
     contestPage,
 }: {
-    contestPage: { ui: ContestContainerInterface; data: ContestInterface };
+    contestPage: { ui: ContestPageInterface; data: ContestInterface };
 }) => {
     return {};
 };

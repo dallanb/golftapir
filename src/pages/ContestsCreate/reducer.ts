@@ -3,10 +3,10 @@ import { static as Immutable } from 'seamless-immutable';
 import { createReducer } from 'reduxsauce';
 
 /* ------------- Interface ------------- */
-export interface ContestsCreateContainerInterface {}
+export interface ContestsCreatePageInterface {}
 
 /* ------------- Initial State ------------- */
-const INITIAL_STATE: ContestsCreateContainerInterface = {};
+const INITIAL_STATE: ContestsCreatePageInterface = {};
 
 /* ------------- Reducers ------------- */
 

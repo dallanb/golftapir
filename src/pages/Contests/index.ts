@@ -1,3 +1,22 @@
+// Component
 export { default } from './Contests';
-export { reducer as contestsContainer } from './reducer';
-export { default as ContestsContainerSaga } from './saga';
+
+// Reducer
+import { combineReducers } from 'redux';
+import { filterActions } from 'redux-ignore';
+import constants from '@constants';
+import { reducer } from './reducer';
+import { reducer as contest } from '@reducers/ContestReducer';
+export const contestsPageReducer = combineReducers({
+    ui: reducer,
+    data: combineReducers({
+        contest: filterActions(
+            contest,
+            (action: any) =>
+                action.target === constants.TARGETS.CONTESTS_PAGE
+        ),
+    }),
+});
+
+// Saga
+export { default as ContestsPageSaga } from './saga';
