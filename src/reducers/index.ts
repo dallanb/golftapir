@@ -1,19 +1,36 @@
 import { combineReducers } from 'redux';
 /* ------------- Reducers ------------- */
 import { account, auth, contest } from './data';
-import { loginPage, modal, registerPage } from './ui';
+import {
+    accountPage,
+    contestPage,
+    contestsCreatePage,
+    contestsPage,
+    loginPage,
+    modal,
+    registerPage,
+} from './ui';
 
 const mainReducer = combineReducers({
     accountPage: combineReducers({
-        data: account,
+        ui: accountPage,
+        data: combineReducers({
+            account,
+            auth,
+        }),
     }),
     auth,
     contestPage: combineReducers({
-        // ui:
+        ui: contestPage,
         data: contest,
     }),
     contestsPage: combineReducers({
+        ui: contestsPage,
         data: contest,
+    }),
+    contestsCreatePage: combineReducers({
+        ui: contestsCreatePage,
+        data: auth,
     }),
     // homePage: combineReducers({
     //     data: {},

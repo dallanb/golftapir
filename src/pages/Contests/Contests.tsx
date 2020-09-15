@@ -8,6 +8,7 @@ import { ContentLayout } from '@layouts';
 import ContestActions, {
     ContestInterface,
 } from '@reducers/data/ContestReducer';
+import { ContestPageInterface } from '@reducers/ui/ContestPageReducer';
 import './Contests.scss';
 
 class Contests extends React.PureComponent<ContestsProps> {
@@ -31,11 +32,15 @@ class Contests extends React.PureComponent<ContestsProps> {
     }
 }
 
-const mapStateToProps = ({ contest }: { contest: ContestInterface }) => {
+const mapStateToProps = ({
+    contestPage,
+}: {
+    contestPage: { ui: ContestPageInterface; data: ContestInterface };
+}) => {
     return {
-        isFetching: _.get(contest, ['isFetching'], true),
-        isSubmitting: _.get(contest, ['isSubmitting'], true),
-        data: _.get(contest, ['data'], null),
+        isFetching: _.get(contestPage, ['data', 'isFetching'], true),
+        isSubmitting: _.get(contestPage, ['data', 'isSubmitting'], true),
+        data: _.get(contestPage, ['data', 'data'], null),
     };
 };
 

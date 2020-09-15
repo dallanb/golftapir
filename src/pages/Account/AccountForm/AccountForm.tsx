@@ -7,9 +7,10 @@ import { Form } from '@components';
 import AccountActions, {
     AccountInterface,
 } from '@reducers/data/AccountReducer';
+import { AuthInterface } from '@reducers/data/AuthReducer';
+import { AccountPageInterface } from '@reducers/ui/AccountPageReducer';
 import { fieldSchema, validationSchema } from './schema';
 import './AccountForm.scss';
-import { AuthInterface } from '@reducers/data/AuthReducer';
 
 class AccountForm extends React.PureComponent<AccountFormProps> {
     prepareInitialValues = () => {
@@ -54,15 +55,16 @@ class AccountForm extends React.PureComponent<AccountFormProps> {
 }
 
 const mapStateToProps = ({
-    auth,
-    account,
+    accountPage,
 }: {
-    auth: AuthInterface;
-    account: AccountInterface;
+    accountPage: {
+        ui: AccountPageInterface;
+        data: { account: AccountInterface; auth: AuthInterface };
+    };
 }) => {
     return {
-        accountData: _.get(account, ['data'], undefined),
-        authData: _.get(auth, ['data'], undefined),
+        accountData: _.get(accountPage, ['data', 'account', 'data'], undefined),
+        authData: _.get(accountPage, ['data', 'auth', 'data'], undefined),
     };
 };
 

@@ -5,7 +5,10 @@ import { withRouter } from 'react-router-dom';
 import _ from 'lodash';
 import { ContestProps } from './types';
 import { ContentLayout } from '@layouts';
-import ContestActions from '@reducers/data/ContestReducer';
+import ContestActions, {
+    ContestInterface,
+} from '@reducers/data/ContestReducer';
+import { ContestPageInterface } from '@reducers/ui/ContestPageReducer';
 import ViewContestParticipantsTable from './ContestParticipantsTable';
 import './Contest.scss';
 
@@ -38,10 +41,14 @@ class Contests extends React.PureComponent<ContestProps> {
     }
 }
 
-const mapStateToProps = ({ contest }: any) => {
+const mapStateToProps = ({
+    contestPage,
+}: {
+    contestPage: { ui: ContestPageInterface; data: ContestInterface };
+}) => {
     return {
-        data: _.get(contest, ['data']),
-        isFetching: _.get(contest, ['isFetching']),
+        data: _.get(contestPage, ['data', 'data']),
+        isFetching: _.get(contestPage, ['data', 'isFetching']),
     };
 };
 

@@ -8,6 +8,7 @@ import ContestActions, {
 } from '@reducers/data/ContestReducer';
 import ContestsListTile from './ContestsListTile';
 import './ContestsList.scss';
+import { ContestPageInterface } from '@reducers/ui/ContestPageReducer';
 
 class ContestsList extends React.PureComponent<ContestsListProps> {
     loadMore = (start: number, stop: number, resolve: () => any) => {
@@ -34,11 +35,15 @@ class ContestsList extends React.PureComponent<ContestsListProps> {
     }
 }
 
-const mapStateToProps = ({ contest }: { contest: ContestInterface }) => {
+const mapStateToProps = ({
+    contestsPage,
+}: {
+    contestsPage: { ui: ContestPageInterface; data: ContestInterface };
+}) => {
     return {
-        metadata: _.get(contest, ['metadata'], 0),
-        data: _.get(contest, ['data'], []),
-        isFetching: _.get(contest, ['isFetching'], false),
+        metadata: _.get(contestsPage, ['data', 'metadata'], 0),
+        data: _.get(contestsPage, ['data', 'data'], []),
+        isFetching: _.get(contestsPage, ['data', 'isFetching'], false),
     };
 };
 

@@ -9,6 +9,7 @@ import _ from 'lodash';
 import config from 'config';
 import { AuthInterface } from '@reducers/data/AuthReducer';
 import './ContestsCreateForm.scss';
+import { ContestsCreatePageInterface } from '@reducers/ui/ContestsCreatePage';
 
 class ContestsCreateForm extends React.PureComponent<ContestsCreateFormProps> {
     prepareInitialValues = () => {
@@ -21,8 +22,6 @@ class ContestsCreateForm extends React.PureComponent<ContestsCreateFormProps> {
     };
 
     handleSubmit = (values: FormikValues) => {
-        console.log(values);
-        // add createContest api
         const { createContest } = this.props;
         createContest(values);
     };
@@ -38,9 +37,16 @@ class ContestsCreateForm extends React.PureComponent<ContestsCreateFormProps> {
     }
 }
 
-const mapStateToProps = ({ auth }: { auth: AuthInterface }) => {
+const mapStateToProps = ({
+    contestsCreatePage,
+}: {
+    contestsCreatePage: {
+        ui: ContestsCreatePageInterface;
+        data: AuthInterface;
+    };
+}) => {
     return {
-        authData: _.get(auth, ['data'], undefined),
+        authData: _.get(contestsCreatePage, ['data', 'data'], undefined),
     };
 };
 

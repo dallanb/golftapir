@@ -1,14 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
+import { Spin } from 'antd';
 import {
     ContestParticipantsTableProps,
     ContestParticipantsTableState,
 } from './types';
 import Grid from '@components/Grid';
-import './ContestParticipantsTable.scss';
 import { columnsSchema } from '@pages/Contest/ContestParticipantsTable/schema';
-import { Spin } from 'antd';
+import { ContestPageInterface } from '@reducers/ui/ContestPageReducer';
+import { ContestInterface } from '@reducers/data/ContestReducer';
+import './ContestParticipantsTable.scss';
 
 class ContestParticipantsTable extends React.PureComponent<
     ContestParticipantsTableProps,
@@ -52,7 +54,11 @@ class ContestParticipantsTable extends React.PureComponent<
     }
 }
 
-const mapStateToProps = ({ contest }: any) => {
+const mapStateToProps = ({
+    contestPage,
+}: {
+    contestPage: { ui: ContestPageInterface; data: ContestInterface };
+}) => {
     return {};
 };
 
