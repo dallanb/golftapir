@@ -3,8 +3,9 @@ import _ from 'lodash';
 import { connect } from 'react-redux';
 import { ContestsListProps } from './types';
 import { List } from '@components';
-import ContestActions from '@reducers/data/ContestReducer';
-import { ContestStateInterface } from '@reducers/types';
+import ContestActions, {
+    ContestInterface,
+} from '@reducers/data/ContestReducer';
 import ContestsListTile from './ContestsListTile';
 import './ContestsList.scss';
 
@@ -33,7 +34,7 @@ class ContestsList extends React.PureComponent<ContestsListProps> {
     }
 }
 
-const mapStateToProps = ({ contest }: ContestStateInterface) => {
+const mapStateToProps = ({ contest }: { contest: ContestInterface }) => {
     return {
         metadata: _.get(contest, ['metadata'], 0),
         data: _.get(contest, ['data'], []),

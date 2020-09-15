@@ -1,16 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { FormikValues } from 'formik';
-import { CreateContestFormProps } from './types';
+import { ContestsCreateFormProps } from './types';
 import { Form } from '@components';
 import ContestActions from '@reducers/data/ContestReducer';
 import { fieldSchema, validationSchema } from './schema';
-import './CreateContestForm.scss';
 import _ from 'lodash';
-import { AuthStateInterface } from '@reducers/types';
 import config from 'config';
+import { AuthInterface } from '@reducers/data/AuthReducer';
+import './ContestsCreateForm.scss';
 
-class CreateContestForm extends React.PureComponent<CreateContestFormProps> {
+class ContestsCreateForm extends React.PureComponent<ContestsCreateFormProps> {
     prepareInitialValues = () => {
         const { authData } = this.props;
 
@@ -38,7 +38,7 @@ class CreateContestForm extends React.PureComponent<CreateContestFormProps> {
     }
 }
 
-const mapStateToProps = ({ auth }: { auth: AuthStateInterface }) => {
+const mapStateToProps = ({ auth }: { auth: AuthInterface }) => {
     return {
         authData: _.get(auth, ['data'], undefined),
     };
@@ -52,4 +52,4 @@ const mapDispatchToProps = (dispatch: any) => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(CreateContestForm);
+export default connect(mapStateToProps, mapDispatchToProps)(ContestsCreateForm);

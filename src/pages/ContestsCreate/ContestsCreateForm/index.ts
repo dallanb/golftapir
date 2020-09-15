@@ -1,1 +1,1 @@
-export { default } from './CreateContestForm';
+export { default } from './ContestsCreateForm';

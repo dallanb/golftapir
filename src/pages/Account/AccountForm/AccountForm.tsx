@@ -4,10 +4,12 @@ import { FormikValues } from 'formik';
 import _ from 'lodash';
 import { AccountFormProps } from './types';
 import { Form } from '@components';
-import AccountActions from '@reducers/data/AccountReducer';
-import { AccountStateInterface, AuthStateInterface } from '@reducers/types';
+import AccountActions, {
+    AccountInterface,
+} from '@reducers/data/AccountReducer';
 import { fieldSchema, validationSchema } from './schema';
 import './AccountForm.scss';
+import { AuthInterface } from '@reducers/data/AuthReducer';
 
 class AccountForm extends React.PureComponent<AccountFormProps> {
     prepareInitialValues = () => {
@@ -55,8 +57,8 @@ const mapStateToProps = ({
     auth,
     account,
 }: {
-    auth: AuthStateInterface;
-    account: AccountStateInterface;
+    auth: AuthInterface;
+    account: AccountInterface;
 }) => {
     return {
         accountData: _.get(account, ['data'], undefined),

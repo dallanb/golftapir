@@ -5,8 +5,9 @@ import ContestsList from './ContestsList';
 import ContestsCreateButton from '../ContestsCreate/ContestsCreateButton';
 import { ContestsProps } from './types';
 import { ContentLayout } from '@layouts';
-import ContestActions from '@reducers/data/ContestReducer';
-import { ContestStateInterface } from '@reducers/types';
+import ContestActions, {
+    ContestInterface,
+} from '@reducers/data/ContestReducer';
 import './Contests.scss';
 
 class Contests extends React.PureComponent<ContestsProps> {
@@ -30,7 +31,7 @@ class Contests extends React.PureComponent<ContestsProps> {
     }
 }
 
-const mapStateToProps = ({ contest }: ContestStateInterface) => {
+const mapStateToProps = ({ contest }: { contest: ContestInterface }) => {
     return {
         isFetching: _.get(contest, ['isFetching'], true),
         isSubmitting: _.get(contest, ['isSubmitting'], true),

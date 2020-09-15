@@ -1,6 +1,6 @@
 import { FormikValues } from 'formik';
 
-export interface CreateContestFormProps {
+export interface ContestsCreateFormProps {
     authData: any;
     createContest: (values: FormikValues) => void;
 }

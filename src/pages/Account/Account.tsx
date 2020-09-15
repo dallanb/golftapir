@@ -7,8 +7,8 @@ import AccountForm from './AccountForm';
 import AccountActions, {
     AccountInterface,
 } from '@reducers/data/AccountReducer';
-import { AccountStateInterface } from '@reducers/types';
 import './Account.scss';
+import { AccountPageInterface } from '@reducers/ui/AccountPageReducer';
 
 class Account extends React.PureComponent<AccountProps> {
     componentDidMount() {
@@ -31,16 +31,14 @@ class Account extends React.PureComponent<AccountProps> {
 }
 
 const mapStateToProps = ({
-    account,
     accountPage,
 }: {
-    account: AccountInterface;
-    accountPage: any;
+    accountPage: AccountPageInterface;
 }) => {
     return {
-        isFetching: _.get(account, ['isFetching'], true),
-        isSubmitting: _.get(account, ['isSubmitting'], true),
-        data: _.get(account, ['data'], null),
+        isFetching: _.get(accountPage, ['isFetching'], true),
+        isSubmitting: _.get(accountPage, ['isSubmitting'], true),
+        data: _.get(accountPage, ['data'], null),
     };
 };
 
