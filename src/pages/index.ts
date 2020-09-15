@@ -1,7 +1,27 @@
-export { default as Account } from './Account';
-export { default as Contest } from './Contest';
-export { default as Contests } from './Contests';
-export { default as ContestsCreate } from './ContestsCreate';
+export {
+    default as Account,
+    accountContainer,
+    AccountContainerSaga,
+} from './Account';
+export {
+    default as Contest,
+    contestContainer,
+    ContestContainerSaga,
+} from './Contest';
+export {
+    default as Contests,
+    contestsContainer,
+    ContestsContainerSaga,
+} from './Contests';
+export {
+    default as ContestsCreate,
+    contestsCreateContainer,
+    ContestsCreateContainerSaga,
+} from './ContestsCreate';
 export { default as Home } from './Home';
-export { default as Login } from './Login';
-export { default as Register } from './Register';
+export { default as Login, loginContainer, LoginContainerSaga } from './Login';
+export {
+    default as Register,
+    registerContainer,
+    RegisterContainerSaga,
+} from './Register';

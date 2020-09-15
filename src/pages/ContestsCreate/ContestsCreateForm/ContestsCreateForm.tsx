@@ -4,7 +4,7 @@ import { FormikValues } from 'formik';
 import _ from 'lodash';
 import { ContestsCreateFormProps, StateInterface } from './types';
 import { Form } from '@components';
-import ContestActions from '@reducers/data/ContestReducer';
+import ContestActions from '@reducers/ContestReducer';
 import { withTarget } from '@utils';
 import constants from '@constants';
 import { fieldSchema, validationSchema } from './schema';

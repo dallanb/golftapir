@@ -4,7 +4,7 @@ import { ContestsListProps, StateInterface } from './types';
 import { List } from '@components';
 import { withTarget } from '@utils';
 import constants from '@constants';
-import ContestActions from '@reducers/data/ContestReducer';
+import ContestActions from '@reducers/ContestReducer';
 import ContestsListTile from './ContestsListTile';
 import './ContestsList.scss';
 

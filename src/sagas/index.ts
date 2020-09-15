@@ -5,6 +5,14 @@ import AccountSaga from './AccountSaga';
 import AuthSaga from './AuthSaga';
 import ContestSaga from './ContestSaga';
 import ModalSaga from './ModalSaga';
+import {
+    AccountContainerSaga,
+    ContestContainerSaga,
+    ContestsContainerSaga,
+    ContestsCreateContainerSaga,
+    LoginContainerSaga,
+    RegisterContainerSaga,
+} from '@pages';
 
 /* ------------- Connect Types To Sagas ------------- */
 export default function* root() {
@@ -13,5 +21,11 @@ export default function* root() {
         fork(AuthSaga),
         fork(ContestSaga),
         fork(ModalSaga),
+        fork(AccountContainerSaga),
+        fork(ContestContainerSaga),
+        fork(ContestsContainerSaga),
+        fork(ContestsCreateContainerSaga),
+        fork(LoginContainerSaga),
+        fork(RegisterContainerSaga),
     ]);
 }

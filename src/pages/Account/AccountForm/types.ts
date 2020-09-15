@@ -1,7 +1,7 @@
 import { FormikValues } from 'formik';
-import { AccountContainerInterface } from '@reducers/ui/AccountContainerReducer';
-import { AccountInterface } from '@reducers/data/AccountReducer';
-import { AuthInterface } from '@reducers/data/AuthReducer';
+import { AccountContainerInterface } from '../reducer';
+import { AccountInterface } from '@reducers/AccountReducer';
+import { AuthInterface } from '@reducers/AuthReducer';
 
 export interface AccountFormProps {
     accountData: any;

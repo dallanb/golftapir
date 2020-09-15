@@ -39,6 +39,7 @@ const CONSTANTS = {
             FETCH: 'Error fetching Account information',
             FETCH_ALL: 'Error fetching Accounts information',
             SEARCH_ALL: 'Error searching Accounts information',
+            BULK_FETCH_ALL: 'Error fetch Accounts information',
         },
     },
     AUTH: {

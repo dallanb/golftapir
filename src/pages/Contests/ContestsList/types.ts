@@ -1,5 +1,5 @@
-import { ContestsContainerInterface } from '@reducers/ui/ContestsContainerReducer';
-import { ContestInterface } from '@reducers/data/ContestReducer';
+import { ContestsContainerInterface } from '../reducer';
+import { ContestInterface } from '@reducers/ContestReducer';
 
 export interface ContestsListProps {
     data: any;

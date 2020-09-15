@@ -5,7 +5,7 @@ import { ContentLayout } from '@layouts';
 import constants from '@constants';
 import { withTarget } from '@utils';
 import AccountForm from './AccountForm';
-import AccountActions from '@reducers/data/AccountReducer';
+import AccountActions from '@reducers/AccountReducer';
 import './Account.scss';
 
 class Account extends React.PureComponent<AccountProps> {

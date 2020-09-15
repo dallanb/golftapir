@@ -6,7 +6,7 @@ import { AccountFormProps, StateInterface } from './types';
 import { Form } from '@components';
 import { withTarget } from '@utils';
 import constants from '@constants';
-import AccountActions from '@reducers/data/AccountReducer';
+import AccountActions from '@reducers/AccountReducer';
 import { fieldSchema, validationSchema } from './schema';
 import './AccountForm.scss';
 

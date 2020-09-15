@@ -19,6 +19,9 @@ const { Types, Creators } = createActions(
         searchAccounts: ['key'],
         searchAccountsSuccess: ['data'],
         searchAccountsFailure: ['err'],
+        bulkFetchAccounts: null,
+        bulkFetchAccountsSuccess: ['data'],
+        bulkFetchAccountsFailure: ['err'],
     },
     {
         prefix: 'ACCOUNT_',
@@ -148,6 +151,28 @@ function searchAccountsFailure(state: any, { err }: any) {
     });
 }
 
+function bulkFetchAccounts(state = INITIAL_STATE) {
+    return Immutable.merge(state, {
+        isSubmitting: true,
+        err: null,
+    });
+}
+
+function bulkFetchAccountsSuccess(state: any, { data }: any) {
+    return Immutable.merge(state, {
+        isSubmitting: false,
+        err: null,
+        data,
+    });
+}
+
+function bulkFetchAccountsFailure(state: any, { err }: any) {
+    return Immutable.merge(state, {
+        isSubmitting: false,
+        err,
+    });
+}
+
 const HANDLERS = {
     [Types.FETCH_ACCOUNT]: fetchAccount,
     [Types.FETCH_ACCOUNT_SUCCESS]: fetchAccountSuccess,
@@ -164,6 +189,9 @@ const HANDLERS = {
     [Types.SEARCH_ACCOUNTS]: searchAccounts,
     [Types.SEARCH_ACCOUNTS_SUCCESS]: searchAccountsSuccess,
     [Types.SEARCH_ACCOUNTS_FAILURE]: searchAccountsFailure,
+    [Types.BULK_FETCH_ACCOUNTS]: bulkFetchAccounts,
+    [Types.BULK_FETCH_ACCOUNTS_SUCCESS]: bulkFetchAccountsSuccess,
+    [Types.BULK_FETCH_ACCOUNTS_FAILURE]: bulkFetchAccountsFailure,
 };
 
 export const reducer = createReducer(INITIAL_STATE, HANDLERS);

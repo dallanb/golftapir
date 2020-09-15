@@ -1,7 +1,7 @@
 import { AnyAction } from 'redux';
 import { all, call, put, takeLatest } from 'redux-saga/effects';
 import { message } from 'antd';
-import AuthActions, { AuthTypes } from '@reducers/data/AuthReducer';
+import AuthActions, { AuthTypes } from '@reducers/AuthReducer';
 import { ClientProxy, AuthService } from '@services';
 import CONSTANTS from '@locale/en-CA';
 

@@ -7,7 +7,7 @@ import { ContestProps, StateInterface } from './types';
 import { ContentLayout } from '@layouts';
 import { withTarget } from '@utils';
 import constants from '@constants';
-import ContestActions from '@reducers/data/ContestReducer';
+import ContestActions from '@reducers/ContestReducer';
 import ViewContestParticipantsTable from './ContestParticipantsTable';
 import './Contest.scss';
 

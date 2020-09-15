@@ -1,7 +1,7 @@
 import { AnyAction } from 'redux';
 import { all, call, put, takeLatest } from 'redux-saga/effects';
 import { message } from 'antd';
-import AccountActions, { AccountTypes } from '@reducers/data/AccountReducer';
+import AccountActions, { AccountTypes } from '@reducers/AccountReducer';
 import { AccountService } from '@services';
 import CONSTANTS from '@locale/en-CA';
 import { withTarget } from '@utils';
@@ -61,7 +61,7 @@ function* updateAvatar({ uuid, avatar, target }: AnyAction) {
     }
 }
 
-function* searchAccounts({ key, target }: any) {
+function* searchAccounts({ key, target }: AnyAction) {
     try {
         const res = yield call(AccountService.searchAccounts, {
             key,
@@ -79,6 +79,28 @@ function* searchAccounts({ key, target }: any) {
     }
 }
 
+function* bulkFetchAccounts({ uuids, options, target }: AnyAction) {
+    try {
+        const res = yield call(
+            AccountService.bulkFetchAccounts,
+            uuids,
+            options
+        );
+        const { accounts } = res;
+        yield put(
+            withTarget(
+                AccountActions.bulkFetchAccountsSuccess,
+                target
+            )(accounts)
+        );
+    } catch (err) {
+        yield put(
+            withTarget(AccountActions.bulkFetchAccountsFailure, target)(err)
+        );
+        message.error(CONSTANTS.ACCOUNT.ERROR.BULK_FETCH_ALL);
+    }
+}
+
 export default function* AccountSaga() {
     yield all([
         takeLatest(AccountTypes.FETCH_ACCOUNT, fetchAccount),
@@ -86,5 +108,6 @@ export default function* AccountSaga() {
         takeLatest(AccountTypes.UPDATE_ACCOUNT, updateAccount),
         takeLatest(AccountTypes.UPDATE_AVATAR, updateAvatar),
         takeLatest(AccountTypes.SEARCH_ACCOUNTS, searchAccounts),
+        takeLatest(AccountTypes.BULK_FETCH_ACCOUNTS, bulkFetchAccounts),
     ]);
 }

@@ -1,6 +1,6 @@
 import { FormikValues } from 'formik';
-import { ContestsCreateContainerInterface } from '@reducers/ui/ContestsCreateContainerReducer';
-import { AuthInterface } from '@reducers/data/AuthReducer';
+import { ContestsCreateContainerInterface } from '../reducer';
+import { AuthInterface } from '@reducers/AuthReducer';
 
 export interface ContestsCreateFormProps {
     authData: any;

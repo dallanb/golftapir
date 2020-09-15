@@ -8,8 +8,8 @@ import {
 } from './types';
 import Grid from '@components/Grid';
 import { columnsSchema } from '@pages/Contest/ContestParticipantsTable/schema';
-import { ContestInterface } from '@reducers/data/ContestReducer';
-import { ContestContainerInterface } from '@reducers/ui/ContestContainerReducer';
+import { ContestInterface } from '@reducers/ContestReducer';
+import { ContestContainerInterface } from '../reducer';
 import './ContestParticipantsTable.scss';
 
 class ContestParticipantsTable extends React.PureComponent<

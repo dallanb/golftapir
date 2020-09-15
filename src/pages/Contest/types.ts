@@ -1,6 +1,6 @@
 import { RouteComponentProps } from 'react-router-dom';
-import { ContestInterface } from '@reducers/data/ContestReducer';
-import { ContestContainerInterface } from '@reducers/ui/ContestContainerReducer';
+import { ContestInterface } from '@reducers/ContestReducer';
+import { ContestContainerInterface } from './reducer';
 
 export interface ContestProps extends RouteComponentProps {
     fetchContestParticipants: (uuid: string) => void;

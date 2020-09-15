@@ -5,8 +5,8 @@ import { withRouter } from 'react-router-dom';
 import _ from 'lodash';
 import { Button, Form, Input } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
-import AuthActions, { AuthInterface } from '@reducers/data/AuthReducer';
-import ModalActions from '@reducers/ui/ModalReducer';
+import AuthActions, { AuthInterface } from '@reducers/AuthReducer';
+import ModalActions from '@reducers/ModalReducer';
 import { LoginProps } from './types';
 import './Login.scss';
 

@@ -1,15 +1,4 @@
-// @ts-ignore
-import { static as Immutable } from 'seamless-immutable';
-import { createActions, createReducer } from 'reduxsauce';
-
-// const { Types, Creators } = createActions(
-//     {},
-//     {
-//         prefix: 'LOGIN_PAGE_',
-//     }
-// );
-// export const LoginPageTypes = Types;
-// export default Creators;
+import { createReducer } from 'reduxsauce';
 
 /* ------------- Interface ------------- */
 export interface LoginContainerInterface {}

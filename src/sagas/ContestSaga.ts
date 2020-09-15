@@ -1,8 +1,17 @@
 import { AnyAction } from 'redux';
-import { all, call, put, select, takeLatest } from 'redux-saga/effects';
+import {
+    all,
+    call,
+    put,
+    race,
+    select,
+    take,
+    takeLatest,
+} from 'redux-saga/effects';
 import { message } from 'antd';
 import _ from 'lodash';
-import ContestActions, { ContestTypes } from '@reducers/data/ContestReducer';
+import ContestActions, { ContestTypes } from '@reducers/ContestReducer';
+import AccountActions, { AccountTypes } from '@reducers/AccountReducer';
 import { ContestService } from '@services';
 import CONSTANTS from '@locale/en-CA';
 import { selectData } from '@selectors/ContestSelectors';
@@ -54,20 +63,52 @@ function* createContest({ data, target }: any) {
 
 function* fetchContestParticipants({ uuid, target }: any) {
     try {
-        const res = yield call(ContestService.fetchContest, uuid, {
-            include: 'participants',
+        // const res = yield call(ContestService.fetchContest, uuid, {
+        //     include: 'participants',
+        // });
+        yield put(
+            withTarget(ContestActions.fetchContest, target)(uuid, {
+                include: 'participants',
+            })
+        );
+
+        const { failure } = yield race({
+            success: take(ContestTypes.FETCH_CONTEST_SUCCESS),
+            failure: take(ContestTypes.FETCH_CONTEST_FAILURE),
         });
-        console.log(res);
-        const participants = _.get(res, ['contests', 'participants'], []).map(
+
+        if (failure) {
+            throw new Error(CONSTANTS.CONTEST.ERROR.FETCH);
+        }
+
+        console.log(yield select(selectData));
+
+        const { participants = [] } = yield select(selectData); // does target play any part in this selection???
+
+        const participantsUUIDs = participants.map(
             ({ uuid }: { uuid: string }) => uuid
         );
-        if (!participants.length) {
+
+        console.log(participantsUUIDs);
+        if (!participantsUUIDs.length) {
             yield put(
                 withTarget(
                     ContestActions.fetchContestParticipantsSuccess,
                     target
-                )(participants)
+                )(participantsUUIDs)
             );
+        } else {
+            yield put(
+                withTarget(
+                    AccountActions.bulkFetchAccounts,
+                    target
+                )(participantsUUIDs, { include: 'participants' })
+            );
+            const { success, failure } = yield race({
+                success: take(AccountTypes.BULK_FETCH_ACCOUNTS_SUCCESS),
+                failure: take(AccountTypes.BULK_FETCH_ACCOUNTS_FAILURE),
+            });
+            console.log(success);
         }
     } catch (err) {
         yield put(
@@ -85,5 +126,9 @@ export default function* ContestSaga() {
         takeLatest(ContestTypes.FETCH_CONTEST, fetchContest),
         takeLatest(ContestTypes.FETCH_CONTESTS, fetchContests),
         takeLatest(ContestTypes.CREATE_CONTEST, createContest),
+        takeLatest(
+            ContestTypes.FETCH_CONTEST_PARTICIPANTS,
+            fetchContestParticipants
+        ),
     ]);
 }

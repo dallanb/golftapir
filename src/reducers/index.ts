@@ -2,16 +2,18 @@ import { combineReducers } from 'redux';
 import { filterActions } from 'redux-ignore';
 import constants from '@constants';
 /* ------------- Reducers ------------- */
-import { account, auth, contest } from './data';
+import { reducer as auth } from './AuthReducer';
+import { reducer as account } from './AccountReducer';
+import { reducer as contest } from './ContestReducer';
+import { reducer as modal } from './ModalReducer';
 import {
     accountContainer,
     contestContainer,
     contestsCreateContainer,
     contestsContainer,
     loginContainer,
-    modal,
     registerContainer,
-} from './ui';
+} from '@pages';
 
 const mainReducer = combineReducers({
     accountPage: combineReducers({
@@ -29,6 +31,11 @@ const mainReducer = combineReducers({
     contestPage: combineReducers({
         ui: combineReducers({ contestContainer }),
         data: combineReducers({
+            account: filterActions(
+                account,
+                (action: any) =>
+                    action.target === constants.TARGETS.CONTEST_PAGE
+            ),
             contest: filterActions(
                 contest,
                 (action: any) =>

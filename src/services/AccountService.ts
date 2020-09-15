@@ -43,4 +43,12 @@ export default {
             query,
         });
     },
+    bulkFetchAccounts(data: any, query: any = {}) {
+        return ClientProxy.post({
+            url: config.ACCOUNT_URL,
+            endpoint: `/accounts/bulk`,
+            data,
+            query,
+        });
+    },
 };
