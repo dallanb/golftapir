@@ -1,8 +1,3 @@
-import Register from '@pages/Register';
+import { RegisterPageRoutes } from '@pages/Register';
 
-export default [
-    {
-        path: '/register',
-        component: Register,
-    },
-];
+export default [...RegisterPageRoutes];

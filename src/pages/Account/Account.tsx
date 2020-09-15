@@ -10,8 +10,8 @@ import './Account.scss';
 
 class Account extends React.PureComponent<AccountProps> {
     componentDidMount() {
-        const { fetchMyAccount } = this.props;
-        fetchMyAccount();
+        const { fetchAccount } = this.props;
+        fetchAccount();
     }
 
     render() {
@@ -40,7 +40,7 @@ const mapStateToProps = ({ accountPage }: StateInterface) => {
 
 const mapDispatchToProps = (dispatch: any) => {
     return {
-        fetchMyAccount() {
+        fetchAccount() {
             return dispatch(
                 withTarget(
                     AccountActions.fetchAccount,

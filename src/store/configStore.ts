@@ -4,7 +4,7 @@ import { createLogger } from 'redux-logger';
 import rootReducer from '../reducers';
 import rootSaga from '../sagas';
 
-function configStore() {
+function configStore(): any {
     const middleware = [];
     const enhancers = [];
     let monitor = null;

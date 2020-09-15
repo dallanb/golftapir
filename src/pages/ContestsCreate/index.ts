@@ -12,3 +12,6 @@ export const contestsCreatePageReducer = combineReducers({
 
 // Saga
 export { default as ContestsCreatePageSaga } from './saga';
+
+// Routes
+export { default as ContestsCreatePageRoutes } from './routes';

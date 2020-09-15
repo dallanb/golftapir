@@ -12,11 +12,13 @@ export const contestsPageReducer = combineReducers({
     data: combineReducers({
         contest: filterActions(
             contest,
-            (action: any) =>
-                action.target === constants.TARGETS.CONTESTS_PAGE
+            (action: any) => action.target === constants.TARGETS.CONTESTS_PAGE
         ),
     }),
 });
 
 // Saga
 export { default as ContestsPageSaga } from './saga';
+
+// Routes
+export { default as ContestsPageRoutes } from './routes';

@@ -21,3 +21,6 @@ export const accountPageReducer = combineReducers({
 
 // Saga
 export { default as AccountPageSaga } from './saga';
+
+// Routes
+export { default as AccountPageRoutes } from './routes';

@@ -13,3 +13,6 @@ export const registerPageReducer = combineReducers({
 
 // Saga
 export { default as RegisterPageSaga } from './saga';
+
+// Routes
+export { default as RegisterPageRoutes } from './routes';

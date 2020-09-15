@@ -1,8 +1,3 @@
-import Login from '@pages/Login';
+import { LoginPageRoutes } from '@pages/Login';
 
-export default [
-    {
-        path: '/login',
-        component: Login,
-    },
-];
+export default [...LoginPageRoutes];

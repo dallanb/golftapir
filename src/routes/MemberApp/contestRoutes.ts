@@ -1,19 +1,9 @@
-import Contests from '@pages/Contests';
-import ContestsCreate from '@pages/ContestsCreate';
-import Contest from '@pages/ContestsCreate';
+import { ContestsPageRoutes } from '@pages/Contests';
+import { ContestsCreatePageRoutes } from '@pages/ContestsCreate';
+import { ContestPageRoutes } from '@pages/Contest';
 
 export default [
-    {
-        path: '/contests',
-        component: Contests,
-        exact: true,
-    },
-    {
-        path: '/contests/create',
-        component: ContestsCreate,
-    },
-    {
-        path: '/contests/:uuid',
-        component: Contest,
-    },
+    ...ContestsPageRoutes,
+    ...ContestsCreatePageRoutes,
+    ...ContestPageRoutes,
 ];

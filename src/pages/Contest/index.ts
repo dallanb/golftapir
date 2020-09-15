@@ -24,3 +24,6 @@ export const contestPageReducer = combineReducers({
 
 // Saga
 export { default as ContestPageSaga } from './saga';
+
+// Routes
+export { default as ContestPageRoutes } from './routes';
