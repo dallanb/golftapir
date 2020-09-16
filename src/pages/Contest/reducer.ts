@@ -4,12 +4,14 @@ import { createActions, createReducer } from 'reduxsauce';
 import { ContestTypes } from '@reducers/ContestReducer';
 import { normalizeContestParticipants } from '@pages/Contest/utils';
 import { AccountTypes } from '@reducers/AccountReducer';
+import CONSTANTS from '@locale/en-CA';
 
 const { Types, Creators } = createActions(
     {
         init: ['uuid'],
         initSuccess: null,
         initFailure: ['err'],
+        terminate: null,
     },
     {
         prefix: 'CONTEST_PAGE_',
@@ -23,6 +25,8 @@ export interface ContestPageInterface {
     readonly isFetching: boolean;
     readonly isInitialized: boolean;
     readonly err?: Error;
+    readonly name: string;
+    readonly description: string;
     readonly contestParticipants: any[];
 }
 
@@ -31,6 +35,8 @@ const INITIAL_STATE: ContestPageInterface = {
     isFetching: false,
     isInitialized: false,
     err: undefined,
+    name: '',
+    description: CONSTANTS.PAGES.CONTEST.DESCRIPTION,
     contestParticipants: [],
 };
 
@@ -59,9 +65,14 @@ function initFailure(state: any, { err }: any) {
     });
 }
 
+function terminate() {
+    return INITIAL_STATE;
+}
+
 function fetchContestSuccess(state: any, { data }: any) {
-    const { participants: contestParticipants = [] } = data;
+    const { participants: contestParticipants = [], name } = data;
     return Immutable.merge(state, {
+        name,
         contestParticipants,
     });
 }
@@ -80,6 +91,7 @@ const HANDLERS = {
     [Types.INIT]: init,
     [Types.INIT_SUCCESS]: initSuccess,
     [Types.INIT_FAILURE]: initFailure,
+    [Types.TERMINATE]: terminate,
     [ContestTypes.FETCH_CONTEST_SUCCESS]: fetchContestSuccess,
     [AccountTypes.BULK_FETCH_ACCOUNTS_SUCCESS]: bulkFetchAccountsSuccess,
 };

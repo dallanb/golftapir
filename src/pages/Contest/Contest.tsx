@@ -19,12 +19,17 @@ class Contest extends React.PureComponent<ContestProps> {
         init(uuid);
     }
 
+    componentWillUnmount() {
+        const { terminate } = this.props;
+        terminate();
+    }
+
     render() {
-        const { data, isInitialized } = this.props;
+        const { title, subtitle, isInitialized } = this.props;
         return (
             <ContentLayout
-                title={_.get(data, ['name'], '')}
-                subTitle="Contests Info"
+                title={title}
+                subTitle={subtitle}
                 showSpinner={!isInitialized}
             >
                 <ContestParticipantsTable />
@@ -34,12 +39,10 @@ class Contest extends React.PureComponent<ContestProps> {
 }
 
 const mapStateToProps = ({ contestPage }: StateInterface) => {
-    const {
-        data: { contest },
-        ui,
-    } = contestPage;
+    const { ui } = contestPage;
     return {
-        data: contest.data,
+        title: ui.name,
+        subtitle: ui.description,
         isInitialized: ui.isInitialized,
     };
 };
@@ -48,6 +51,9 @@ const mapDispatchToProps = (dispatch: any) => {
     return {
         init(uuid: string) {
             return dispatch(ContestPageActions.init(uuid));
+        },
+        terminate(uuid: string) {
+            return dispatch(ContestPageActions.terminate(uuid));
         },
     };
 };

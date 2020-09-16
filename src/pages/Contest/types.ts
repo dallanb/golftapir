@@ -5,7 +5,9 @@ import { AccountInterface } from '@reducers/AccountReducer';
 
 export interface ContestProps extends RouteComponentProps {
     init: (uuid: string) => void;
-    data: any;
+    terminate: () => void;
+    title: string;
+    subtitle: string;
     isInitialized: boolean;
 }
 
