@@ -101,7 +101,7 @@ class ClientProxy {
         headers?: any;
     }) => {
         return this.ajax({
-            url: this.getUrl(url, endpoint),
+            url: this.getUrl(url, endpoint, query),
             method: 'POST',
             data,
             headers: setCoreApiHeaders(headers),

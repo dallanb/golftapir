@@ -2,10 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { FormikValues } from 'formik';
 import _ from 'lodash';
-import { AccountFormProps } from './types';
+import { AccountFormProps, StateInterface } from './types';
 import { Form } from '@components';
+import { withTarget } from '@utils';
+import constants from '@constants';
 import AccountActions from '@reducers/AccountReducer';
-import { AccountStateInterface, AuthStateInterface } from '@reducers/types';
 import { fieldSchema, validationSchema } from './schema';
 import './AccountForm.scss';
 
@@ -51,26 +52,33 @@ class AccountForm extends React.PureComponent<AccountFormProps> {
     }
 }
 
-const mapStateToProps = ({
-    auth,
-    account,
-}: {
-    auth: AuthStateInterface;
-    account: AccountStateInterface;
-}) => {
+const mapStateToProps = ({ accountPage }: StateInterface) => {
+    const {
+        data: { account, auth },
+    } = accountPage;
     return {
-        accountData: _.get(account, ['data'], undefined),
-        authData: _.get(auth, ['data'], undefined),
+        accountData: account.data,
+        authData: auth.data,
     };
 };
 
 const mapDispatchToProps = (dispatch: any) => {
     return {
         updateAccount(values: FormikValues) {
-            return dispatch(AccountActions.updateAccount('me', values));
+            return dispatch(
+                withTarget(
+                    AccountActions.updateAccount,
+                    constants.TARGETS.ACCOUNT_PAGE
+                )('me', values)
+            );
         },
         updateAvatar(avatar: File) {
-            return dispatch(AccountActions.updateAvatar('me', avatar));
+            return dispatch(
+                withTarget(
+                    AccountActions.updateAvatar,
+                    constants.TARGETS.ACCOUNT_PAGE
+                )('me', avatar)
+            );
         },
     };
 };

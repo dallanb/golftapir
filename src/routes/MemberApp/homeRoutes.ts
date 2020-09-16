@@ -1,8 +1,3 @@
-import { Home } from '@pages';
+import { HomePageRoutes } from '@pages/Home';
 
-export default [
-    {
-        path: '/home',
-        component: Home,
-    },
-];
+export default [...HomePageRoutes];

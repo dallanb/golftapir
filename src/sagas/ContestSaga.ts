@@ -1,46 +1,62 @@
 import { AnyAction } from 'redux';
-import { all, call, put, select, takeLatest } from 'redux-saga/effects';
+import {
+    all,
+    call,
+    put,
+    race,
+    select,
+    take,
+    takeLatest,
+} from 'redux-saga/effects';
 import { message } from 'antd';
+import _ from 'lodash';
 import ContestActions, { ContestTypes } from '@reducers/ContestReducer';
+import AccountActions, { AccountTypes } from '@reducers/AccountReducer';
 import { ContestService } from '@services';
 import CONSTANTS from '@locale/en-CA';
 import { selectData } from '@selectors/ContestSelectors';
+import { withTarget } from '@utils';
 
-function* fetchContest({ uuid }: AnyAction) {
+function* fetchContest({ uuid, options, target }: AnyAction) {
     try {
-        const res = yield call(ContestService.fetchContest, uuid);
+        const res = yield call(ContestService.fetchContest, uuid, options);
         console.log(res);
         const { contests, _metadata: metadata } = res;
-        yield put(ContestActions.fetchContestSuccess(contests, metadata));
+        yield put(
+            withTarget(ContestActions.fetchContestSuccess, target)(
+                contests,
+                metadata
+            )
+        );
     } catch (err) {
-        yield put(ContestActions.fetchContestFailure(err));
+        yield put(withTarget(ContestActions.fetchContestFailure, target)(err));
         message.error(CONSTANTS.CONTEST.ERROR.FETCH);
     }
 }
-function* fetchContests({ options, append }: AnyAction) {
+function* fetchContests({ options, append, target }: AnyAction) {
     try {
         const res = yield call(ContestService.fetchContests, options);
         const { contests, _metadata: metadata } = res;
         const data = append ? yield select(selectData) : [];
         yield put(
-            ContestActions.fetchContestsSuccess(
+            withTarget(ContestActions.fetchContestsSuccess, target)(
                 [...data, ...contests],
                 metadata
             )
         );
     } catch (err) {
-        yield put(ContestActions.fetchContestsFailure(err));
+        yield put(withTarget(ContestActions.fetchContestsFailure, target)(err));
         message.error(CONSTANTS.CONTEST.ERROR.FETCH);
     }
 }
-function* createContest({ data }: any) {
+function* createContest({ data, target }: any) {
     try {
         const res = yield call(ContestService.createContest, data);
         console.log(res);
-        yield put(ContestActions.createContestSuccess());
+        yield put(withTarget(ContestActions.createContestSuccess, target)());
         message.success(CONSTANTS.CONTEST.SUCCESS.CREATE);
     } catch (err) {
-        yield put(ContestActions.createContestFailure(err));
+        yield put(withTarget(ContestActions.createContestFailure, target)(err));
         message.error(CONSTANTS.CONTEST.ERROR.CREATE);
     }
 }

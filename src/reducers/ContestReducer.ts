@@ -4,7 +4,7 @@ import { createActions, createReducer } from 'reduxsauce';
 
 const { Types, Creators } = createActions(
     {
-        fetchContest: ['uuid'],
+        fetchContest: ['uuid', 'options'],
         fetchContestSuccess: ['data', 'metadata'],
         fetchContestFailure: ['err'],
         fetchContests: ['options', 'append'],
@@ -104,6 +104,7 @@ function createContestFailure(state: any, { err }: any) {
         err,
     });
 }
+
 const HANDLERS = {
     [Types.FETCH_CONTEST]: fetchContest,
     [Types.FETCH_CONTEST_SUCCESS]: fetchContestSuccess,

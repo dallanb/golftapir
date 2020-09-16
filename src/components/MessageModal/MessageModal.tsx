@@ -2,8 +2,7 @@ import React from 'react';
 import { Button, Modal } from 'antd';
 import { connect } from 'react-redux';
 import { MessageModalProps } from './types';
-import ModalActions from '@reducers/ModalReducer';
-import { ModalStateInterface } from '@reducers/types';
+import ModalActions, { ModalInterface } from '@reducers/ModalReducer';
 import './MessageModal.scss';
 
 class MessageModal extends React.PureComponent<MessageModalProps> {
@@ -41,7 +40,7 @@ class MessageModal extends React.PureComponent<MessageModalProps> {
     }
 }
 
-const mapStateToProps = ({ modal }: ModalStateInterface) => {
+const mapStateToProps = ({ modal }: { modal: ModalInterface }) => {
     return {
         isOpen: modal.isOpen,
         data: modal.data,

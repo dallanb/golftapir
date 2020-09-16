@@ -1,49 +1,59 @@
 import React from 'react';
+import { compose } from 'redux';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import _ from 'lodash';
-import ContestList from './ContestList';
-import CreateContestButton from './CreateContest/components/CreateContestButton';
-import { ContestProps } from './types';
+import { ContestProps, StateInterface } from './types';
 import { ContentLayout } from '@layouts';
-import ContestActions from '@reducers/ContestReducer';
-import { ContestStateInterface } from '@reducers/types';
+import ContestPageActions from './reducer';
+import ContestParticipantsTable from './ContestParticipantsTable';
 import './Contest.scss';
 
 class Contest extends React.PureComponent<ContestProps> {
     componentDidMount() {
-        const { fetchContests } = this.props;
-        fetchContests({ page: 1, per_page: 100 });
+        const {
+            match: { params },
+            init,
+        } = this.props;
+        const uuid = _.get(params, ['uuid'], null);
+        init(uuid);
     }
 
     render() {
-        const { data } = this.props;
+        const { data, isInitialized } = this.props;
+        console.log(data);
         return (
             <ContentLayout
-                title="Contests"
-                subTitle="View Contests"
-                showSpinner={!data}
+                title={_.get(data, ['name'], '')}
+                subTitle="Contests Info"
+                showSpinner={!isInitialized}
             >
-                <CreateContestButton />
-                <ContestList />
+                <ContestParticipantsTable />
             </ContentLayout>
         );
     }
 }
 
-const mapStateToProps = ({ contest }: ContestStateInterface) => {
+const mapStateToProps = ({ contestPage }: StateInterface) => {
+    const {
+        data: { contest },
+        ui,
+    } = contestPage;
     return {
-        isFetching: _.get(contest, ['isFetching'], true),
-        isSubmitting: _.get(contest, ['isSubmitting'], true),
-        data: _.get(contest, ['data'], null),
+        data: contest.data,
+        isInitialized: ui.isInitialized,
     };
 };
 
 const mapDispatchToProps = (dispatch: any) => {
     return {
-        fetchContests(options: { page: number; per_page: number }) {
-            return dispatch(ContestActions.fetchContests(options));
+        init(uuid: string) {
+            return dispatch(ContestPageActions.init(uuid));
         },
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Contest);
+export default compose(
+    withRouter,
+    connect(mapStateToProps, mapDispatchToProps)
+)(Contest);

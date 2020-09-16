@@ -1,21 +1,22 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import _ from 'lodash';
-import { AccountProps } from './types';
+import { AccountProps, StateInterface } from './types';
 import { ContentLayout } from '@layouts';
+import constants from '@constants';
+import { withTarget } from '@utils';
 import AccountForm from './AccountForm';
 import AccountActions from '@reducers/AccountReducer';
-import { AccountStateInterface } from '@reducers/types';
 import './Account.scss';
 
 class Account extends React.PureComponent<AccountProps> {
     componentDidMount() {
-        const { fetchMyAccount } = this.props;
-        fetchMyAccount();
+        const { fetchAccount } = this.props;
+        fetchAccount();
     }
 
     render() {
         const { isFetching, isSubmitting, data } = this.props;
+
         return (
             <ContentLayout
                 title="Account"
@@ -28,18 +29,24 @@ class Account extends React.PureComponent<AccountProps> {
     }
 }
 
-const mapStateToProps = ({ account }: AccountStateInterface) => {
+const mapStateToProps = ({ accountPage }: StateInterface) => {
+    const account = accountPage.data.account;
     return {
-        isFetching: _.get(account, ['isFetching'], true),
-        isSubmitting: _.get(account, ['isSubmitting'], true),
-        data: _.get(account, ['data'], null),
+        isFetching: account.isFetching,
+        isSubmitting: account.isSubmitting,
+        data: account.data,
     };
 };
 
 const mapDispatchToProps = (dispatch: any) => {
     return {
-        fetchMyAccount() {
-            return dispatch(AccountActions.fetchAccount('me'));
+        fetchAccount() {
+            return dispatch(
+                withTarget(
+                    AccountActions.fetchAccount,
+                    constants.TARGETS.ACCOUNT_PAGE
+                )('me')
+            );
         },
     };
 };

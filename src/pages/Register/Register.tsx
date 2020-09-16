@@ -5,9 +5,8 @@ import { withRouter } from 'react-router-dom';
 import _ from 'lodash';
 import { Button, Form, Input } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
-import AuthActions from '@reducers/AuthReducer';
+import AuthActions, { AuthInterface } from '@reducers/AuthReducer';
 import ModalActions from '@reducers/ModalReducer';
-import { AuthStateInterface } from '@reducers/types';
 import { RegisterProps } from './types';
 import './Register.scss';
 
@@ -110,7 +109,7 @@ class Register extends React.PureComponent<RegisterProps> {
     }
 }
 
-const mapStateToProps = ({ auth }: AuthStateInterface) => {
+const mapStateToProps = ({ auth }: { auth: AuthInterface }) => {
     return {
         isLoggedIn: _.get(auth, ['isLoggedIn'], false),
     };

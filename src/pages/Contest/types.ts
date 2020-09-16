@@ -1,6 +1,17 @@
-export interface ContestProps {
+import { RouteComponentProps } from 'react-router-dom';
+import { ContestInterface } from '@reducers/ContestReducer';
+import { ContestPageInterface } from './reducer';
+import { AccountInterface } from '@reducers/AccountReducer';
+
+export interface ContestProps extends RouteComponentProps {
+    init: (uuid: string) => void;
     data: any;
-    isFetching: boolean;
-    isSubmitting: boolean;
-    fetchContests: (options: { page: number; per_page: number }) => any;
+    isInitialized: boolean;
+}
+
+export interface StateInterface {
+    contestPage: {
+        ui: ContestPageInterface;
+        data: { contest: ContestInterface; account: AccountInterface };
+    };
 }

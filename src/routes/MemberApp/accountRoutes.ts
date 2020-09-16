@@ -1,8 +1,3 @@
-import { Account } from '@pages';
+import { AccountPageRoutes } from '@pages/Account';
 
-export default [
-    {
-        path: '/settings',
-        component: Account,
-    },
-];
+export default [...(AccountPageRoutes || [])];
