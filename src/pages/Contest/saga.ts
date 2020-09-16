@@ -1,5 +1,4 @@
 import { AnyAction } from 'redux';
-import _ from 'lodash';
 import { all, put, race, select, take, takeLatest } from 'redux-saga/effects';
 import ContestPageActions, { ContestPageTypes } from '@pages/Contest/reducer';
 import AccountActions, { AccountTypes } from '@reducers/AccountReducer';

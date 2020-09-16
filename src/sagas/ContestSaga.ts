@@ -1,15 +1,6 @@
 import { AnyAction } from 'redux';
-import {
-    all,
-    call,
-    put,
-    race,
-    select,
-    take,
-    takeLatest,
-} from 'redux-saga/effects';
+import { all, call, put, select, takeLatest } from 'redux-saga/effects';
 import { message } from 'antd';
-import _ from 'lodash';
 import ContestActions, { ContestTypes } from '@reducers/ContestReducer';
 import { ContestService } from '@services';
 import CONSTANTS from '@locale/en-CA';
@@ -49,7 +40,7 @@ function* fetchContests({ options, append, target }: AnyAction) {
 }
 function* createContest({ data, target }: any) {
     try {
-        const res = yield call(ContestService.createContest, data);
+        yield call(ContestService.createContest, data);
         yield put(withTarget(ContestActions.createContestSuccess, target)());
         message.success(CONSTANTS.CONTEST.SUCCESS.CREATE);
     } catch (err) {
