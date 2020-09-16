@@ -6,7 +6,7 @@ import _ from 'lodash';
 import { ContestProps, StateInterface } from './types';
 import { ContentLayout } from '@layouts';
 import ContestPageActions from './reducer';
-import ViewContestParticipantsTable from './ContestParticipantsTable';
+import ContestParticipantsTable from './ContestParticipantsTable';
 import './Contest.scss';
 
 class Contest extends React.PureComponent<ContestProps> {
@@ -20,18 +20,15 @@ class Contest extends React.PureComponent<ContestProps> {
     }
 
     render() {
-        const { data, isFetching, init } = this.props;
+        const { data, isInitialized } = this.props;
+        console.log(data);
         return (
             <ContentLayout
                 title={_.get(data, ['name'], '')}
                 subTitle="Contests Info"
-                showSpinner={!data}
+                showSpinner={!isInitialized}
             >
-                <ViewContestParticipantsTable
-                    data={data}
-                    fetchContestParticipants={init}
-                    isFetching={isFetching}
-                />
+                <ContestParticipantsTable />
             </ContentLayout>
         );
     }
@@ -40,10 +37,11 @@ class Contest extends React.PureComponent<ContestProps> {
 const mapStateToProps = ({ contestPage }: StateInterface) => {
     const {
         data: { contest },
+        ui,
     } = contestPage;
     return {
         data: contest.data,
-        isFetching: contest.isFetching,
+        isInitialized: ui.isInitialized,
     };
 };
 

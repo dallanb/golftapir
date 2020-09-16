@@ -8,8 +8,7 @@ import {
 } from './types';
 import Grid from '@components/Grid';
 import { columnsSchema } from '@pages/Contest/ContestParticipantsTable/schema';
-import { ContestInterface } from '@reducers/ContestReducer';
-import { ContestPageInterface } from '../reducer';
+import { StateInterface } from '../types';
 import './ContestParticipantsTable.scss';
 
 class ContestParticipantsTable extends React.PureComponent<
@@ -20,11 +19,7 @@ class ContestParticipantsTable extends React.PureComponent<
         scrollState: { rowIndex: 0, columnIndex: 0 },
     };
 
-    loadMore = (start: number, stop: number, resolve: () => void) => {
-        const { data, fetchContestParticipants } = this.props;
-        // fetchContestParticipants(data.uuid);
-        resolve();
-    };
+    loadMore = (start: number, stop: number, resolve: () => void) => resolve();
 
     setScrollRowAndColumn = (rowIndex: number, columnIndex: number) => {
         this.setState({
@@ -34,8 +29,8 @@ class ContestParticipantsTable extends React.PureComponent<
 
     render() {
         const { data, isFetching } = this.props;
+        console.log(this.props);
         const { scrollState } = this.state;
-        if (!data.participants) return <Spin />;
         return (
             <div>
                 C'est un table
@@ -45,8 +40,8 @@ class ContestParticipantsTable extends React.PureComponent<
                     isItemLoading={isFetching}
                     scrollState={scrollState}
                     setScrollRowAndColumn={this.setScrollRowAndColumn}
-                    itemCount={data.participants.length}
-                    items={data.participants}
+                    itemCount={data.length}
+                    items={data}
                     columnsSchema={columnsSchema}
                 />
             </div>
@@ -54,12 +49,14 @@ class ContestParticipantsTable extends React.PureComponent<
     }
 }
 
-const mapStateToProps = ({
-    contestPage,
-}: {
-    contestPage: { ui: ContestPageInterface; data: ContestInterface };
-}) => {
-    return {};
+const mapStateToProps = ({ contestPage }: StateInterface) => {
+    const {
+        data: { account },
+    } = contestPage;
+    return {
+        data: account.data,
+        isFetching: false,
+    };
 };
 
 export default connect(mapStateToProps)(ContestParticipantsTable);

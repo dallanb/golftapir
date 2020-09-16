@@ -3,7 +3,6 @@ import { RowItemRendererProps } from './types';
 
 let defaultRowItemRenderer: RowItemRendererProps;
 defaultRowItemRenderer = ({ rowIndex, columnIndex, data, style }) => {
-    console.log(data);
     const { rows, prepareRow } = data;
     // get row
     const row = rows[rowIndex];
