@@ -1,5 +1,7 @@
 import { Row } from 'react-table';
 import { RowRendererProps } from '../List/types';
+import Grid from '@components/Grid/Grid';
+import React from 'react';
 
 export interface GridProps {
     // are there still more items to load?
@@ -21,6 +23,12 @@ export interface GridProps {
     items: any;
     rowItemRenderer?: RowItemRendererProps;
     columnsSchema: any[];
+    columnWidth: number;
+    rowHeight: number;
+    columnCount: number;
+    height: number;
+    rowCount: number;
+    width: number;
 }
 
 export interface RowItemProps {

@@ -11,7 +11,6 @@ import {
 import { message } from 'antd';
 import _ from 'lodash';
 import ContestActions, { ContestTypes } from '@reducers/ContestReducer';
-import AccountActions, { AccountTypes } from '@reducers/AccountReducer';
 import { ContestService } from '@services';
 import CONSTANTS from '@locale/en-CA';
 import { selectData } from '@selectors/ContestSelectors';
@@ -20,7 +19,6 @@ import { withTarget } from '@utils';
 function* fetchContest({ uuid, options, target }: AnyAction) {
     try {
         const res = yield call(ContestService.fetchContest, uuid, options);
-        console.log(res);
         const { contests, _metadata: metadata } = res;
         yield put(
             withTarget(ContestActions.fetchContestSuccess, target)(
@@ -52,7 +50,6 @@ function* fetchContests({ options, append, target }: AnyAction) {
 function* createContest({ data, target }: any) {
     try {
         const res = yield call(ContestService.createContest, data);
-        console.log(res);
         yield put(withTarget(ContestActions.createContestSuccess, target)());
         message.success(CONSTANTS.CONTEST.SUCCESS.CREATE);
     } catch (err) {

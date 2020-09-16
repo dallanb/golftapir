@@ -21,7 +21,6 @@ class Contest extends React.PureComponent<ContestProps> {
 
     render() {
         const { data, isInitialized } = this.props;
-        console.log(data);
         return (
             <ContentLayout
                 title={_.get(data, ['name'], '')}

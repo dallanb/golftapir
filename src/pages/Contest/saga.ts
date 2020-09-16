@@ -33,7 +33,7 @@ function* init({ uuid }: AnyAction) {
         );
         if (!accounts.length) {
             yield put(
-                withTarget(AccountActions.bulkFetchAccountsSuccess, target)({})
+                withTarget(AccountActions.bulkFetchAccountsSuccess, target)([])
             );
         } else {
             yield put(
