@@ -22,7 +22,7 @@ class ContestParticipantsTable extends React.PureComponent<
 
     loadMore = (start: number, stop: number, resolve: () => void) => {
         const { data, fetchContestParticipants } = this.props;
-        fetchContestParticipants(data.uuid);
+        // fetchContestParticipants(data.uuid);
         resolve();
     };
 

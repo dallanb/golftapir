@@ -3,7 +3,7 @@ import { ContestInterface } from '@reducers/ContestReducer';
 import { ContestPageInterface } from './reducer';
 
 export interface ContestProps extends RouteComponentProps {
-    fetchContestParticipants: (uuid: string) => void;
+    init: (uuid: string) => void;
     data: any;
     isFetching: boolean;
 }

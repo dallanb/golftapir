@@ -61,74 +61,10 @@ function* createContest({ data, target }: any) {
     }
 }
 
-function* fetchContestParticipants({ uuid, target }: any) {
-    try {
-        // const res = yield call(ContestService.fetchContest, uuid, {
-        //     include: 'participants',
-        // });
-        yield put(
-            withTarget(ContestActions.fetchContest, target)(uuid, {
-                include: 'participants',
-            })
-        );
-
-        const { failure } = yield race({
-            success: take(ContestTypes.FETCH_CONTEST_SUCCESS),
-            failure: take(ContestTypes.FETCH_CONTEST_FAILURE),
-        });
-
-        if (failure) {
-            throw new Error(CONSTANTS.CONTEST.ERROR.FETCH);
-        }
-
-        console.log(yield select(selectData));
-
-        const { participants = [] } = yield select(selectData); // does target play any part in this selection???
-
-        const participantsUUIDs = participants.map(
-            ({ uuid }: { uuid: string }) => uuid
-        );
-
-        console.log(participantsUUIDs);
-        if (!participantsUUIDs.length) {
-            yield put(
-                withTarget(
-                    ContestActions.fetchContestParticipantsSuccess,
-                    target
-                )(participantsUUIDs)
-            );
-        } else {
-            yield put(
-                withTarget(
-                    AccountActions.bulkFetchAccounts,
-                    target
-                )(participantsUUIDs, { include: 'participants' })
-            );
-            const { success, failure } = yield race({
-                success: take(AccountTypes.BULK_FETCH_ACCOUNTS_SUCCESS),
-                failure: take(AccountTypes.BULK_FETCH_ACCOUNTS_FAILURE),
-            });
-            console.log(success);
-        }
-    } catch (err) {
-        yield put(
-            withTarget(
-                ContestActions.fetchContestParticipantsFailure,
-                target
-            )(err)
-        );
-        message.error(CONSTANTS.CONTEST.ERROR.FETCH_PARTICIPANTS);
-    }
-}
-
 export default function* ContestSaga() {
     yield all([
         takeLatest(ContestTypes.FETCH_CONTEST, fetchContest),
         takeLatest(ContestTypes.FETCH_CONTESTS, fetchContests),
         takeLatest(ContestTypes.CREATE_CONTEST, createContest),
-        takeLatest(
-            ContestTypes.FETCH_CONTEST_PARTICIPANTS,
-            fetchContestParticipants
-        ),
     ]);
 }

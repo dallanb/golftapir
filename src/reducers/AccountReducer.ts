@@ -19,7 +19,7 @@ const { Types, Creators } = createActions(
         searchAccounts: ['key'],
         searchAccountsSuccess: ['data'],
         searchAccountsFailure: ['err'],
-        bulkFetchAccounts: null,
+        bulkFetchAccounts: ['uuid', 'options'],
         bulkFetchAccountsSuccess: ['data'],
         bulkFetchAccountsFailure: ['err'],
     },

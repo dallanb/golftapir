@@ -5,9 +5,7 @@ import { withRouter } from 'react-router-dom';
 import _ from 'lodash';
 import { ContestProps, StateInterface } from './types';
 import { ContentLayout } from '@layouts';
-import { withTarget } from '@utils';
-import constants from '@constants';
-import ContestActions from '@reducers/ContestReducer';
+import ContestPageActions from './reducer';
 import ViewContestParticipantsTable from './ContestParticipantsTable';
 import './Contest.scss';
 
@@ -15,14 +13,14 @@ class Contest extends React.PureComponent<ContestProps> {
     componentDidMount() {
         const {
             match: { params },
-            fetchContestParticipants,
+            init,
         } = this.props;
         const uuid = _.get(params, ['uuid'], null);
-        fetchContestParticipants(uuid);
+        init(uuid);
     }
 
     render() {
-        const { data, isFetching, fetchContestParticipants } = this.props;
+        const { data, isFetching, init } = this.props;
         return (
             <ContentLayout
                 title={_.get(data, ['name'], '')}
@@ -31,7 +29,7 @@ class Contest extends React.PureComponent<ContestProps> {
             >
                 <ViewContestParticipantsTable
                     data={data}
-                    fetchContestParticipants={fetchContestParticipants}
+                    fetchContestParticipants={init}
                     isFetching={isFetching}
                 />
             </ContentLayout>
@@ -51,13 +49,8 @@ const mapStateToProps = ({ contestPage }: StateInterface) => {
 
 const mapDispatchToProps = (dispatch: any) => {
     return {
-        fetchContestParticipants(uuid: string) {
-            dispatch(
-                withTarget(
-                    ContestActions.fetchContestParticipants,
-                    constants.TARGETS.CONTEST_PAGE
-                )(uuid)
-            );
+        init(uuid: string) {
+            return dispatch(ContestPageActions.init(uuid));
         },
     };
 };

@@ -4,18 +4,15 @@ import { createActions, createReducer } from 'reduxsauce';
 
 const { Types, Creators } = createActions(
     {
-        fetchContest: ['uuid', 'options', 'target'],
-        fetchContestSuccess: ['data', 'metadata', 'target'],
-        fetchContestFailure: ['err', 'target'],
-        fetchContests: ['options', 'append', 'target'],
-        fetchContestsSuccess: ['data', 'metadata', 'target'],
-        fetchContestsFailure: ['err', 'target'],
-        createContest: ['data', 'target'],
-        createContestSuccess: ['target'],
-        createContestFailure: ['err', 'target'],
-        fetchContestParticipants: ['uuid', 'target'],
-        fetchContestParticipantsSuccess: ['data', 'metadata', 'target'],
-        fetchContestParticipantsFailure: ['err', 'target'],
+        fetchContest: ['uuid', 'options'],
+        fetchContestSuccess: ['data', 'metadata'],
+        fetchContestFailure: ['err'],
+        fetchContests: ['options', 'append'],
+        fetchContestsSuccess: ['data', 'metadata'],
+        fetchContestsFailure: ['err'],
+        createContest: ['data'],
+        createContestSuccess: null,
+        createContestFailure: ['err'],
     },
     {
         prefix: 'CONTEST_',
@@ -108,29 +105,6 @@ function createContestFailure(state: any, { err }: any) {
     });
 }
 
-function fetchContestParticipants(state = INITIAL_STATE) {
-    return Immutable.merge(state, {
-        isFetching: true,
-        err: null,
-    });
-}
-
-function fetchContestParticipantsSuccess(state: any, { data, metadata }: any) {
-    return Immutable.merge(state, {
-        isFetching: false,
-        err: null,
-        data,
-        metadata,
-    });
-}
-
-function fetchContestParticipantsFailure(state: any, { err }: any) {
-    return Immutable.merge(state, {
-        isFetching: false,
-        err,
-    });
-}
-
 const HANDLERS = {
     [Types.FETCH_CONTEST]: fetchContest,
     [Types.FETCH_CONTEST_SUCCESS]: fetchContestSuccess,
@@ -141,9 +115,6 @@ const HANDLERS = {
     [Types.CREATE_CONTEST]: createContest,
     [Types.CREATE_CONTEST_SUCCESS]: createContestSuccess,
     [Types.CREATE_CONTEST_FAILURE]: createContestFailure,
-    [Types.FETCH_CONTEST_PARTICIPANTS]: fetchContestParticipants,
-    [Types.FETCH_CONTEST_PARTICIPANTS_SUCCESS]: fetchContestParticipantsSuccess,
-    [Types.FETCH_CONTEST_PARTICIPANTS_FAILURE]: fetchContestParticipantsFailure,
 };
 
 export const reducer = createReducer(INITIAL_STATE, HANDLERS);
