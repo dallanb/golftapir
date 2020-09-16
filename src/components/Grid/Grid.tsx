@@ -1,8 +1,6 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { FixedSizeGrid } from 'react-window';
-import { GridProps as FixedSizeGridProps } from 'react-window';
-import { useTable } from 'react-table';
-import { GridProps, RowItemRendererProps } from './types';
+import { GridProps } from './types';
 import InfiniteLoader from 'react-window-infinite-loader';
 import defaultRowItemRenderer from './defaultRowItemRenderer';
 import './Grid.scss';
@@ -13,8 +11,7 @@ const Grid: React.FunctionComponent<GridProps> = ({
     isItemLoading,
     itemCount,
     hasNextPage,
-    columnsSchema,
-    items,
+    itemData,
     scrollState,
     setScrollRowAndColumn,
     columnWidth,
@@ -24,19 +21,6 @@ const Grid: React.FunctionComponent<GridProps> = ({
     rowCount,
     width,
 }) => {
-    const { headers, rows, prepareRow } = useTable({
-        data: items,
-        columns: columnsSchema,
-    });
-
-    const itemData = useMemo(
-        () => ({
-            headers,
-            rows,
-            prepareRow,
-        }),
-        [headers, rows, prepareRow]
-    );
     return (
         <InfiniteLoader
             isItemLoaded={(index) => !hasNextPage || index < itemCount}
@@ -80,7 +64,7 @@ const Grid: React.FunctionComponent<GridProps> = ({
                     }}
                     ref={ref}
                 >
-                    {(props) => rowItemRenderer(props)}
+                    {rowItemRenderer}
                 </FixedSizeGrid>
             )}
         </InfiniteLoader>

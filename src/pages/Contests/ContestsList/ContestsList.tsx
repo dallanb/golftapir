@@ -16,7 +16,7 @@ class ContestsList extends React.PureComponent<ContestsListProps> {
     };
 
     render() {
-        const { metadata, data, isFetching } = this.props;
+        const { metadata, data, isFetching, history } = this.props;
         return (
             <List
                 size={150}
@@ -27,7 +27,7 @@ class ContestsList extends React.PureComponent<ContestsListProps> {
                 loadNextPage={this.loadMore}
                 isNextPageLoading={isFetching}
                 minimumBatchSize={100}
-                rowRenderer={ContestsListTile}
+                rowRenderer={(props) => ContestsListTile({ props, history })}
             />
         );
     }

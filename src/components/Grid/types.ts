@@ -1,6 +1,4 @@
 import { Row } from 'react-table';
-import { RowRendererProps } from '../List/types';
-import Grid from '@components/Grid/Grid';
 import React from 'react';
 
 export interface GridProps {
@@ -20,9 +18,8 @@ export interface GridProps {
     };
     setScrollRowAndColumn: (rowIndex: number, columnIndex: number) => void;
     itemCount: number;
-    items: any;
-    rowItemRenderer?: RowItemRendererProps;
-    columnsSchema: any[];
+    itemData: any;
+    rowItemRenderer?: React.FunctionComponent<RowItemRendererProps>;
     columnWidth: number;
     rowHeight: number;
     columnCount: number;
@@ -31,16 +28,9 @@ export interface GridProps {
     width: number;
 }
 
-export interface RowItemProps {
-    rows: Row<any>[];
-    prepareRows: (row: Row<any>[]) => void;
-}
-
 export interface RowItemRendererProps {
-    (props: {
-        rowIndex: any;
-        columnIndex: any;
-        style: any;
-        data: any;
-    }): JSX.Element;
+    rowIndex: any;
+    columnIndex: any;
+    style: any;
+    data: any;
 }

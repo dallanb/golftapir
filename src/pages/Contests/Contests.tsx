@@ -1,4 +1,6 @@
 import React from 'react';
+import { compose } from 'redux';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import ContestsList from './ContestsList';
 import ContestsCreateButton from '../ContestsCreate/ContestsCreateButton';
@@ -16,7 +18,7 @@ class Contests extends React.PureComponent<ContestsProps> {
     }
 
     render() {
-        const { data } = this.props;
+        const { data, history } = this.props;
         return (
             <ContentLayout
                 title="Contests"
@@ -24,7 +26,7 @@ class Contests extends React.PureComponent<ContestsProps> {
                 showSpinner={!data}
             >
                 <ContestsCreateButton />
-                <ContestsList />
+                <ContestsList history={history} />
             </ContentLayout>
         );
     }
@@ -54,4 +56,7 @@ const mapDispatchToProps = (dispatch: any) => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Contests);
+export default compose(
+    withRouter,
+    connect(mapStateToProps, mapDispatchToProps)
+)(Contests);
