@@ -1,5 +1,5 @@
 export interface ContestParticipantsTableProps {
-    data: any;
+    items: any;
     isFetching: boolean;
 }
 

@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import _ from 'lodash';
 import {
     ContestParticipantsTableProps,
     ContestParticipantsTableState,
@@ -27,7 +26,7 @@ class ContestParticipantsTable extends React.PureComponent<
     };
 
     render() {
-        const { data, isFetching } = this.props;
+        const { items, isFetching } = this.props;
         const { scrollState } = this.state;
         return (
             <div>
@@ -37,15 +36,15 @@ class ContestParticipantsTable extends React.PureComponent<
                     isItemLoading={isFetching}
                     scrollState={scrollState}
                     setScrollRowAndColumn={this.setScrollRowAndColumn}
-                    itemCount={data.length}
-                    items={data}
+                    itemCount={items.length}
+                    items={items}
                     columnsSchema={columnsSchema}
                     columnWidth={100}
                     rowHeight={40}
                     columnCount={columnsSchema.length}
                     height={100}
-                    rowCount={data.length}
-                    width={300}
+                    rowCount={items.length}
+                    width={400}
                 />
             </div>
         );
@@ -54,10 +53,10 @@ class ContestParticipantsTable extends React.PureComponent<
 
 const mapStateToProps = ({ contestPage }: StateInterface) => {
     const {
-        data: { account },
+        ui: { contestParticipants },
     } = contestPage;
     return {
-        data: account.data,
+        items: contestParticipants,
         isFetching: false,
     };
 };

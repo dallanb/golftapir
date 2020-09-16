@@ -8,6 +8,17 @@ const constants = {
         LOGIN_PAGE: 'LOGIN_PAGE',
         REGISTER_PAGE: 'REGISTER_PAGE',
     },
+    STATUS: {
+        PENDING: {
+            COLOUR: 'orange',
+        },
+        ACTIVE: {
+            COLOUR: 'green',
+        },
+        INACTIVE: {
+            COLOUR: 'red',
+        },
+    },
 };
 
 export default constants;
