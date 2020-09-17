@@ -3,10 +3,19 @@ import { AuthInterface } from '@reducers/AuthReducer';
 
 export interface RegisterProps extends RouteComponentProps<any> {
     isLoggedIn: boolean;
-    register: (email: string, username: string, password: string) => any;
-    setMessageModal: (isOpen: boolean, data: any) => any;
+    init: () => void;
+}
+
+export interface RegisterPageInterface {
+    readonly isFetching: boolean;
+    readonly isInitialized: boolean;
+    readonly err?: Error;
+    readonly title: string;
+    readonly description: string;
+    readonly formInitialValues: any;
 }
 
 export interface StateProps {
     auth: AuthInterface;
+    registerPage: RegisterPageInterface;
 }

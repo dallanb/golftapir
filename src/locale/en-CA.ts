@@ -32,6 +32,36 @@ const CONSTANTS = {
         },
     },
     PAGES: {
+        LOGIN: {
+            TITLE: 'Login',
+            DESCRIPTION: 'Enter your login credentials',
+            FORM: {
+                LABELS: {
+                    EMAIL: 'Email',
+                    PASSWORD: 'Password',
+                },
+                VALIDATION: {
+                    EMAIL_REQUIRED: 'Please input your email address!',
+                    PASSWORD_REQUIRED: 'Please input your password!',
+                },
+            },
+        },
+        REGISTER: {
+            TITLE: 'Register',
+            DESCRIPTION: 'Enter your information',
+            FORM: {
+                LABELS: {
+                    USERNAME: 'Username',
+                    EMAIL: 'Email',
+                    PASSWORD: 'Password',
+                },
+                VALIDATION: {
+                    USERNAME_REQUIRED: 'Please input your username!',
+                    EMAIL_REQUIRED: 'Please input your email address!',
+                    PASSWORD_REQUIRED: 'Please input your password!',
+                },
+            },
+        },
         CONTEST: {
             DESCRIPTION: 'Contest Info',
         },
@@ -42,6 +72,15 @@ const CONSTANTS = {
         CONTESTS_CREATE: {
             TITLE: 'Contests',
             DESCRIPTION: 'Create Contest',
+            FORM: {
+                LABELS: {
+                    NAME: 'Name',
+                    PARTICIPANTS: 'Participants',
+                },
+                VALIDATION: {
+                    NAME_REQUIRED: 'Name is a required field',
+                },
+            },
         },
         ACCOUNT: {
             TITLE: 'Account',
