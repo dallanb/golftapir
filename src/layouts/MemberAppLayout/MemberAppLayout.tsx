@@ -5,6 +5,7 @@ import memoize from 'memoize-one';
 import _ from 'lodash';
 import { MemberAppLayoutProps, MemberAppLayoutState } from './types';
 import memberAppRoutes from '@routes/MemberApp/statics';
+import { AccountTile } from '@components';
 import './MemberAppLayout.scss';
 
 const { Sider } = Layout;
@@ -14,7 +15,6 @@ class MemberAppLayout extends React.Component<
     MemberAppLayoutState
 > {
     state = {
-        collapsed: false,
         selectedKeys: [],
         currentPath: this.props.location.pathname,
     };
@@ -36,10 +36,6 @@ class MemberAppLayout extends React.Component<
         return nextState;
     }
 
-    onCollapse = (collapsed: boolean) => {
-        this.setState({ collapsed });
-    };
-
     onClick = ({ key }: { key: any }, path: string) => {
         const { history } = this.props;
         history.push(path);
@@ -58,16 +54,11 @@ class MemberAppLayout extends React.Component<
     );
 
     render() {
-        const { children } = this.props;
-        const { collapsed, selectedKeys } = this.state;
+        const { name, avatar, children } = this.props;
+        const { selectedKeys } = this.state;
         return (
             <Layout className="member-app-layout-view">
-                <Sider
-                    collapsible
-                    collapsed={collapsed}
-                    onCollapse={this.onCollapse}
-                    className="sider-layout"
-                >
+                <Sider className="sider-layout">
                     <div className="sider-layout-title" />
                     <Menu
                         theme="dark"
@@ -77,6 +68,9 @@ class MemberAppLayout extends React.Component<
                     >
                         {this.getMenuItems()}
                     </Menu>
+                    <div className="sider-layout-footer">
+                        <AccountTile name={name} avatar={avatar} />
+                    </div>
                 </Sider>
                 {children}
             </Layout>

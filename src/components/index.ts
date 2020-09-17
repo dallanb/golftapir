@@ -1,3 +1,4 @@
+export { default as AccountTile } from './AccountTile';
 export { default as App } from './App';
 export { default as Avatar } from './Avatar';
 export { default as Form } from './Form';
