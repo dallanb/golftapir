@@ -3,25 +3,22 @@ import { combineReducers } from 'redux';
 import { reducer as auth } from './AuthReducer';
 import { reducer as modal } from './ModalReducer';
 import {
-    accountPageReducer,
-    contestPageReducer,
-    contestsCreatePageReducer,
-    contestsPageReducer,
-    loginPageReducer,
-    registerPageReducer,
+    accountPage,
+    contestPage,
+    contestsPage,
+    contestsCreatePage,
+    loginPage,
+    registerPage,
 } from '@pages';
 
 const mainReducer = combineReducers({
-    accountPage: accountPageReducer,
+    accountPage,
     auth,
-    contestPage: contestPageReducer,
-    contestsPage: contestsPageReducer,
-    contestsCreatePage: contestsCreatePageReducer,
-    // homePage: combineReducers({
-    //     data: {},
-    // }),
-    loginPage: loginPageReducer,
-    registerPage: registerPageReducer,
+    contestPage,
+    contestsPage,
+    contestsCreatePage,
+    loginPage,
+    registerPage,
     modal,
 });
 

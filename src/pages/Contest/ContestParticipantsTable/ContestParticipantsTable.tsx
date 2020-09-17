@@ -1,47 +1,27 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import _ from 'lodash';
-import { Spin } from 'antd';
-import {
-    ContestParticipantsTableProps,
-    ContestParticipantsTableState,
-} from './types';
-import Grid from '@components/Grid';
-import { columnsSchema } from '@pages/Contest/ContestParticipantsTable/schema';
+import { ContestParticipantsTableProps } from './types';
+import { columnsSchema } from './schema';
 import { StateInterface } from '../types';
+import { Table } from '@components';
 import './ContestParticipantsTable.scss';
 
 class ContestParticipantsTable extends React.PureComponent<
-    ContestParticipantsTableProps,
-    ContestParticipantsTableState
+    ContestParticipantsTableProps
 > {
-    state = {
-        scrollState: { rowIndex: 0, columnIndex: 0 },
-    };
-
     loadMore = (start: number, stop: number, resolve: () => void) => resolve();
 
-    setScrollRowAndColumn = (rowIndex: number, columnIndex: number) => {
-        this.setState({
-            scrollState: { rowIndex, columnIndex },
-        });
-    };
-
     render() {
-        const { data, isFetching } = this.props;
-        console.log(this.props);
-        const { scrollState } = this.state;
+        const { items, isFetching } = this.props;
         return (
             <div>
-                C'est un table
-                <Grid
+                <Table
+                    size={150}
+                    items={items}
                     hasNextPage={false}
-                    loadMoreItems={this.loadMore}
-                    isItemLoading={isFetching}
-                    scrollState={scrollState}
-                    setScrollRowAndColumn={this.setScrollRowAndColumn}
-                    itemCount={data.length}
-                    items={data}
+                    loadNextPage={this.loadMore}
+                    isNextPageLoading={isFetching}
+                    minimumBatchSize={100}
                     columnsSchema={columnsSchema}
                 />
             </div>
@@ -50,11 +30,9 @@ class ContestParticipantsTable extends React.PureComponent<
 }
 
 const mapStateToProps = ({ contestPage }: StateInterface) => {
-    const {
-        data: { account },
-    } = contestPage;
+    const { contestParticipants: items } = contestPage;
     return {
-        data: account.data,
+        items,
         isFetching: false,
     };
 };

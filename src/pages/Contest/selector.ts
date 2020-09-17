@@ -7,7 +7,7 @@ export const selectData = createSelector([getContestPage], (contestPage) =>
     _.get(contestPage, ['data'], false)
 );
 
-export const selectContestData = createSelector(
+export const selectContestParticipants = createSelector(
     [getContestPage],
-    (contestPage) => _.get(contestPage, ['data', 'contest', 'data'], false)
+    (contestPage) => _.get(contestPage, ['contestParticipants'], [])
 );

@@ -12,6 +12,7 @@ module.exports = {
     resolve: {
         extensions: ['.js', '.ts', '.tsx'],
         alias: {
+            '@actions': path.resolve(__dirname, 'src/actions'),
             config: path.resolve(__dirname, 'src/config'),
             '@components': path.resolve(__dirname, 'src/components'),
             '@constants': path.resolve(__dirname, 'src/constants'),

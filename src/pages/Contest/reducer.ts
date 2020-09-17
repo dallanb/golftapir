@@ -1,32 +1,18 @@
 // @ts-ignore
 import { static as Immutable } from 'seamless-immutable';
-import { createActions, createReducer } from 'reduxsauce';
-
-const { Types, Creators } = createActions(
-    {
-        init: ['uuid'],
-        initSuccess: null,
-        initFailure: ['err'],
-    },
-    {
-        prefix: 'CONTEST_PAGE_',
-    }
-);
-export const ContestPageTypes = Types;
-export default Creators;
-
-/* ------------- Interface ------------- */
-export interface ContestPageInterface {
-    readonly isFetching: boolean;
-    readonly isInitialized: boolean;
-    readonly err?: Error;
-}
+import { createReducer } from 'reduxsauce';
+import CONSTANTS from '@locale/en-CA';
+import { ContestPageTypes } from './actions';
+import { ContestPageInterface } from './types';
 
 /* ------------- Initial State ------------- */
 const INITIAL_STATE: ContestPageInterface = {
     isFetching: false,
     isInitialized: false,
     err: undefined,
+    title: '',
+    description: CONSTANTS.PAGES.CONTEST.DESCRIPTION,
+    contestParticipants: [],
 };
 
 /* ------------- Reducers ------------- */
@@ -54,10 +40,22 @@ function initFailure(state: any, { err }: any) {
     });
 }
 
+function terminate() {
+    return INITIAL_STATE;
+}
+
+function set(state: any, { data }: any) {
+    return Immutable.merge(state, {
+        ...data,
+    });
+}
+
 const HANDLERS = {
-    [Types.INIT]: init,
-    [Types.INIT_SUCCESS]: initSuccess,
-    [Types.INIT_FAILURE]: initFailure,
+    [ContestPageTypes.INIT]: init,
+    [ContestPageTypes.INIT_SUCCESS]: initSuccess,
+    [ContestPageTypes.INIT_FAILURE]: initFailure,
+    [ContestPageTypes.TERMINATE]: terminate,
+    [ContestPageTypes.SET]: set,
 };
 
 export const reducer = createReducer(INITIAL_STATE, HANDLERS);

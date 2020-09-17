@@ -1,17 +1,14 @@
-import { RouteComponentProps } from 'react-router-dom';
+import React from 'react';
+import { ListChildComponentProps } from 'react-window';
 
-export interface ListProps extends RouteComponentProps<any> {
-    rowRenderer?: RowRendererProps;
+export interface ListProps {
+    rowRenderer?: React.FunctionComponent<ListChildComponentProps>;
     size: number;
     hasNextPage: boolean;
     isNextPageLoading: boolean;
     items: any;
     loadNextPage: (start: number, stop: number, resolve: () => void) => void;
     minimumBatchSize: number;
-}
-
-export interface ListState {}
-
-export interface RowRendererProps {
-    (props: { index: any; style: any; data: any }, history: any): JSX.Element;
+    height?: number;
+    width?: number;
 }

@@ -1,26 +1,7 @@
 // @ts-ignore
 import { static as Immutable } from 'seamless-immutable';
-import { createActions, createReducer } from 'reduxsauce';
-
-const { Types, Creators } = createActions(
-    {
-        ping: null,
-        login: ['email', 'password'],
-        loginSuccess: ['data'],
-        loginFailure: ['err'],
-        register: ['email', 'username', 'password'],
-        registerSuccess: null,
-        registerFailure: ['err'],
-        refresh: null,
-        refreshSuccess: ['data'],
-        refreshFailure: ['err'],
-    },
-    {
-        prefix: 'AUTH_',
-    }
-);
-export const AuthTypes = Types;
-export default Creators;
+import { createReducer } from 'reduxsauce';
+import { AuthTypes } from '@actions';
 
 /* ------------- Interface ------------- */
 export interface AuthInterface {
@@ -116,15 +97,15 @@ function refreshFailure(state: any, { err }: any) {
 }
 
 const HANDLERS = {
-    [Types.LOGIN]: login,
-    [Types.LOGIN_SUCCESS]: loginSuccess,
-    [Types.LOGIN_FAILURE]: loginFailure,
-    [Types.REGISTER]: register,
-    [Types.REGISTER_SUCCESS]: registerSuccess,
-    [Types.REGISTER_FAILURE]: registerFailure,
-    [Types.REFRESH]: refresh,
-    [Types.REFRESH_SUCCESS]: refreshSuccess,
-    [Types.REFRESH_FAILURE]: refreshFailure,
+    [AuthTypes.LOGIN]: login,
+    [AuthTypes.LOGIN_SUCCESS]: loginSuccess,
+    [AuthTypes.LOGIN_FAILURE]: loginFailure,
+    [AuthTypes.REGISTER]: register,
+    [AuthTypes.REGISTER_SUCCESS]: registerSuccess,
+    [AuthTypes.REGISTER_FAILURE]: registerFailure,
+    [AuthTypes.REFRESH]: refresh,
+    [AuthTypes.REFRESH_SUCCESS]: refreshSuccess,
+    [AuthTypes.REFRESH_FAILURE]: refreshFailure,
 };
 
 export const reducer = createReducer(INITIAL_STATE, HANDLERS);

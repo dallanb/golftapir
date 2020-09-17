@@ -1,60 +1,42 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { FormikValues } from 'formik';
-import _ from 'lodash';
-import { ContestsCreateFormProps, StateInterface } from './types';
+import { ContestsCreateFormProps } from './types';
+import { StateProps } from '../types';
 import { Form } from '@components';
-import ContestActions from '@reducers/ContestReducer';
-import { withTarget } from '@utils';
-import constants from '@constants';
+import ContestActions from '@actions/ContestActions';
 import { fieldSchema, validationSchema } from './schema';
-import config from 'config';
 import './ContestsCreateForm.scss';
 
 class ContestsCreateForm extends React.PureComponent<ContestsCreateFormProps> {
-    prepareInitialValues = () => {
-        const { authData } = this.props;
-
-        return {
-            sport_uuid: config.GOLF_UUID,
-            owner_uuid: _.get(authData, ['uuid']),
-        };
-    };
-
     handleSubmit = (values: FormikValues) => {
         const { createContest } = this.props;
         createContest(values);
     };
     render() {
+        const { initialValues } = this.props;
         return (
             <Form
                 fieldSchema={fieldSchema}
                 validationSchema={validationSchema}
-                initialValues={this.prepareInitialValues()}
+                initialValues={initialValues}
                 onSubmit={this.handleSubmit}
             />
         );
     }
 }
 
-const mapStateToProps = ({ contestsCreatePage }: StateInterface) => {
-    const {
-        data: { auth },
-    } = contestsCreatePage;
+const mapStateToProps = ({ contestsCreatePage }: StateProps) => {
+    const { createFormInitialValues: initialValues } = contestsCreatePage;
     return {
-        authData: auth.data,
+        initialValues,
     };
 };
 
 const mapDispatchToProps = (dispatch: any) => {
     return {
         createContest(values: FormikValues) {
-            return dispatch(
-                withTarget(
-                    ContestActions.createContest,
-                    constants.TARGETS.CONTESTS_CREATE_PAGE
-                )(values)
-            );
+            return dispatch(ContestActions.createContest(values));
         },
     };
 };

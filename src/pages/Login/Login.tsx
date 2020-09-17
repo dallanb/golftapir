@@ -2,12 +2,11 @@ import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import _ from 'lodash';
 import { Button, Form, Input } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
-import AuthActions, { AuthInterface } from '@reducers/AuthReducer';
+import AuthActions from '@actions/AuthActions';
 import ModalActions from '@reducers/ModalReducer';
-import { LoginProps } from './types';
+import { LoginProps, StateProps } from './types';
 import './Login.scss';
 
 class Login extends React.PureComponent<LoginProps> {
@@ -92,9 +91,10 @@ class Login extends React.PureComponent<LoginProps> {
     }
 }
 
-const mapStateToProps = ({ auth }: { auth: AuthInterface }) => {
+const mapStateToProps = ({ auth }: StateProps) => {
+    const { isLoggedIn } = auth;
     return {
-        isLoggedIn: _.get(auth, ['isLoggedIn'], false),
+        isLoggedIn,
     };
 };
 

@@ -6,7 +6,7 @@ import homeRoutes from './homeRoutes';
 import { MemberAppLayout } from '@layouts';
 import { ProtectedRoute } from '@components';
 import { selectForceLogout, selectIsLoggedIn } from '@selectors/AuthSelectors';
-import AuthActions from '@reducers/AuthReducer';
+import AuthActions from '@actions/AuthActions';
 import { ComponentRoute } from '../types';
 import contestRoutes from './contestRoutes';
 

@@ -2,10 +2,12 @@ import React from 'react';
 import { Button, Card } from 'antd';
 import _ from 'lodash';
 import { ContestsListTileProps } from './types';
-
 import './ContestsListTile.scss';
-let ContestsListTile: ContestsListTileProps;
-ContestsListTile = ({ index, style, data }, history) => {
+
+const ContestsListTile: React.FunctionComponent<ContestsListTileProps> = ({
+    props: { index, style, data },
+    history,
+}) => {
     const item = _.get(data, [index], undefined);
     const handleClick = (uuid: string) => {
         history.push(`/app/contests/${uuid}`);

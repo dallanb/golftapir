@@ -1,4 +1,3 @@
-
 {
     "compileOnSave": true,
     "compilerOptions": {
@@ -15,6 +14,8 @@
         "typeRoots": ["node_modules/@types", "src/typings"],
         "esModuleInterop": true,
         "paths": {
+            "@actions/*": ["actions/*"],
+            "@actions": ["actions/index.ts"],
             "config": ["config"],
             "@components/*": ["components/*"],
             "@components": ["components/index.ts"],

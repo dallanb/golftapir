@@ -1,37 +1,37 @@
 export {
     default as Account,
-    accountPageReducer,
+    reducer as accountPage,
     AccountPageSaga,
     AccountPageRoutes,
 } from './Account';
 export {
     default as Contest,
-    contestPageReducer,
+    reducer as contestPage,
     ContestPageSaga,
     ContestPageRoutes,
 } from './Contest';
 export {
     default as Contests,
-    contestsPageReducer,
+    reducer as contestsPage,
     ContestsPageSaga,
     ContestsPageRoutes,
 } from './Contests';
 export {
     default as ContestsCreate,
-    contestsCreatePageReducer,
+    reducer as contestsCreatePage,
     ContestsCreatePageSaga,
     ContestsCreatePageRoutes,
 } from './ContestsCreate';
 export { default as Home, HomePageRoutes } from './Home';
 export {
     default as Login,
-    loginPageReducer,
+    reducer as loginPage,
     LoginPageSaga,
     LoginPageRoutes,
 } from './Login';
 export {
     default as Register,
-    registerPageReducer,
+    reducer as registerPage,
     RegisterPageSaga,
     RegisterPageRoutes,
 } from './Register';

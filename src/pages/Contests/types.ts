@@ -1,16 +1,26 @@
-import { ContestsPageInterface } from './reducer';
-import { ContestInterface } from '@reducers/ContestReducer';
-
-export interface ContestsProps {
-    data: any;
-    isFetching: boolean;
-    isSubmitting: boolean;
-    fetchContests: (options: { page: number; per_page: number }) => any;
+import { RouteComponentProps } from 'react-router-dom';
+export interface ContestsProps extends RouteComponentProps<any> {
+    title: string;
+    description: string;
+    init: () => void;
+    terminate: () => void;
+    isInitialized: boolean;
+    history: any;
 }
 
 export interface StateInterface {
-    contestsPage: {
-        ui: ContestsPageInterface;
-        data: { contest: ContestInterface };
+    contestsPage: ContestsPageInterface;
+}
+
+export interface ContestsPageInterface {
+    readonly isFetching: boolean;
+    readonly isInitialized: boolean;
+    readonly err?: Error;
+    readonly title: string;
+    readonly description: string;
+    readonly contestsList: {
+        data: any;
+        metadata: any;
+        isFetching: boolean;
     };
 }

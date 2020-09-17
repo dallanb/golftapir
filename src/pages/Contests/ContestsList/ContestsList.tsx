@@ -1,10 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { ContestsListProps, StateInterface } from './types';
+import { ContestsListProps } from './types';
+import { StateInterface } from '../types';
 import { List } from '@components';
-import { withTarget } from '@utils';
-import constants from '@constants';
-import ContestActions from '@reducers/ContestReducer';
+import ContestActions from '@actions/ContestActions';
 import ContestsListTile from './ContestsListTile';
 import './ContestsList.scss';
 
@@ -16,7 +15,7 @@ class ContestsList extends React.PureComponent<ContestsListProps> {
     };
 
     render() {
-        const { metadata, data, isFetching } = this.props;
+        const { metadata, data, isFetching, history } = this.props;
         return (
             <List
                 size={150}
@@ -27,7 +26,7 @@ class ContestsList extends React.PureComponent<ContestsListProps> {
                 loadNextPage={this.loadMore}
                 isNextPageLoading={isFetching}
                 minimumBatchSize={100}
-                rowRenderer={ContestsListTile}
+                rowRenderer={(props) => ContestsListTile({ props, history })}
             />
         );
     }
@@ -35,24 +34,19 @@ class ContestsList extends React.PureComponent<ContestsListProps> {
 
 const mapStateToProps = ({ contestsPage }: StateInterface) => {
     const {
-        data: { contest },
+        contestsList: { metadata, data, isFetching },
     } = contestsPage;
     return {
-        metadata: contest.metadata,
-        data: contest.data,
-        isFetching: contest.isFetching,
+        metadata,
+        data,
+        isFetching,
     };
 };
 
 const mapDispatchToProps = (dispatch: any) => {
     return {
         fetchContests(options: any) {
-            return dispatch(
-                withTarget(
-                    ContestActions.fetchContests,
-                    constants.TARGETS.CONTESTS_PAGE
-                )(options, true)
-            );
+            return dispatch(ContestActions.fetchContests(options, true));
         },
     };
 };
