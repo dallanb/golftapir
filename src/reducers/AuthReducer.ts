@@ -108,4 +108,4 @@ const HANDLERS = {
     [AuthTypes.REFRESH_FAILURE]: refreshFailure,
 };
 
-export const reducer = createReducer(INITIAL_STATE, HANDLERS);
+export default createReducer(INITIAL_STATE, HANDLERS);

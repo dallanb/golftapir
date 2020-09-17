@@ -17,10 +17,6 @@ const ProtectedRoute = ({
         if (isLoggedIn) {
             return <Component {...props} />;
         }
-        if (!refresh) {
-            return <Redirect to="/auth/login" />;
-        }
-        refresh();
     };
     return <Route {...restProps} render={protect} />;
 };

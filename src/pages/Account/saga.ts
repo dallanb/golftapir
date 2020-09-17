@@ -1,5 +1,5 @@
 import { all, put, race, select, take, takeLatest } from 'redux-saga/effects';
-import { AccountActions, ContestTypes } from '@actions';
+import { AccountActions, AccountTypes, ContestTypes } from '@actions';
 import CONSTANTS from '@locale/en-CA';
 import AccountPageActions, { AccountPageTypes } from './actions';
 import { selectData } from '@selectors/AuthSelectors';
@@ -13,8 +13,8 @@ function* init() {
             })
         );
         const { success, failure } = yield race({
-            success: take(ContestTypes.FETCH_ACCOUNT_SUCCESS),
-            failure: take(ContestTypes.FETCH_ACCOUNT_FAILURE),
+            success: take(AccountTypes.FETCH_ACCOUNT_SUCCESS),
+            failure: take(AccountTypes.FETCH_ACCOUNT_FAILURE),
         });
 
         if (failure) {
@@ -24,7 +24,6 @@ function* init() {
         const { data } = success;
         const authData = yield select(selectData);
         const updateFormInitialValues = prepareInitialValues(data, authData);
-
         yield put(AccountPageActions.set({ data, updateFormInitialValues }));
 
         yield put(AccountPageActions.initSuccess());

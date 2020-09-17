@@ -16,6 +16,8 @@
         "paths": {
             "@actions/*": ["actions/*"],
             "@actions": ["actions/index.ts"],
+            "@apps/*": ["apps/*"],
+            "@apps": ["apps/index.ts"],
             "config": ["config"],
             "@components/*": ["components/*"],
             "@components": ["components/index.ts"],
@@ -28,8 +30,6 @@
             "@pages": ["pages/index.ts"],
             "@reducers/*": ["reducers/*"],
             "@reducers": ["reducers/index.ts"],
-            "@routes/*": ["routes/*"],
-            "@routes": ["routes/index.ts"],
             "@sagas/*": ["sagas/*"],
             "@sagas": ["sagas/index.ts"],
             "@selectors/*": ["selectors/*"],

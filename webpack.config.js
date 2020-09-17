@@ -13,6 +13,7 @@ module.exports = {
         extensions: ['.js', '.ts', '.tsx'],
         alias: {
             '@actions': path.resolve(__dirname, 'src/actions'),
+            '@apps': path.resolve(__dirname, 'src/apps'),
             config: path.resolve(__dirname, 'src/config'),
             '@components': path.resolve(__dirname, 'src/components'),
             '@constants': path.resolve(__dirname, 'src/constants'),
@@ -20,7 +21,6 @@ module.exports = {
             '@locale': path.resolve(__dirname, 'src/locale'),
             '@pages': path.resolve(__dirname, 'src/pages'),
             '@reducers': path.resolve(__dirname, 'src/reducers'),
-            '@routes': path.resolve(__dirname, 'src/routes'),
             '@sagas': path.resolve(__dirname, 'src/sagas'),
             '@selectors': path.resolve(__dirname, 'src/selectors'),
             '@services': path.resolve(__dirname, 'src/services'),

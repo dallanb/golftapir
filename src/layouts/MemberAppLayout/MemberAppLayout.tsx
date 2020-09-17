@@ -4,7 +4,6 @@ import { withRouter } from 'react-router-dom';
 import memoize from 'memoize-one';
 import _ from 'lodash';
 import { MemberAppLayoutProps, MemberAppLayoutState } from './types';
-import memberAppRoutes from '@routes/MemberApp/statics';
 import { AccountTile } from '@components';
 import './MemberAppLayout.scss';
 
@@ -29,8 +28,8 @@ class MemberAppLayout extends React.Component<
 
         if (prevPath !== nextPath || !prevState.selectedKeys.length) {
             nextState.currentPath = nextPath;
-            nextState.selectedKeys[0] = memberAppRoutes
-                .findIndex(({ path }) => path === nextPath)
+            nextState.selectedKeys[0] = nextProps.menuRoutes
+                .findIndex(({ path }: any) => path === nextPath)
                 .toString();
         }
         return nextState;
@@ -41,8 +40,8 @@ class MemberAppLayout extends React.Component<
         history.push(path);
     };
 
-    getMenuItems = memoize(() =>
-        memberAppRoutes.map((memberAppRoute, index) => (
+    getMenuItems = memoize((menuRoutes) =>
+        menuRoutes.map((memberAppRoute: any, index: number) => (
             <Menu.Item
                 key={index}
                 icon={React.createElement(memberAppRoute.icon)}
@@ -54,7 +53,7 @@ class MemberAppLayout extends React.Component<
     );
 
     render() {
-        const { name, avatar, children } = this.props;
+        const { name, avatar, menuRoutes, children } = this.props;
         const { selectedKeys } = this.state;
         return (
             <Layout className="member-app-layout-view">
@@ -66,7 +65,7 @@ class MemberAppLayout extends React.Component<
                         selectedKeys={selectedKeys}
                         mode="inline"
                     >
-                        {this.getMenuItems()}
+                        {this.getMenuItems(menuRoutes)}
                     </Menu>
                     <div className="sider-layout-footer">
                         <AccountTile name={name} avatar={avatar} />
