@@ -1,7 +1,7 @@
 import React from 'react';
 import * as Yup from 'yup';
 import 'yup-phone';
-import AccountActions from '@reducers/AccountReducer';
+import AccountActions from '@actions/AccountActions';
 import InputWrapper from '@components/InputWrapper';
 import { participantSearchSelectOptionRenderer } from './utils';
 

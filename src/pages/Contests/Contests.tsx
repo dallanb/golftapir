@@ -5,25 +5,28 @@ import { connect } from 'react-redux';
 import ContestsList from './ContestsList';
 import ContestsCreateButton from '../ContestsCreate/ContestsCreateButton';
 import { ContestsProps, StateInterface } from './types';
+import ContestsPageActions from './actions';
 import { ContentLayout } from '@layouts';
-import { withTarget } from '@utils';
-import constants from '@constants';
-import ContestActions from '@reducers/ContestReducer';
 import './Contests.scss';
 
 class Contests extends React.PureComponent<ContestsProps> {
     componentDidMount() {
-        const { fetchContests } = this.props;
-        fetchContests({ page: 1, per_page: 100 });
+        const { init } = this.props;
+        init();
+    }
+
+    componentWillUnmount() {
+        const { terminate } = this.props;
+        terminate();
     }
 
     render() {
-        const { data, history } = this.props;
+        const { title, description, isInitialized, history } = this.props;
         return (
             <ContentLayout
-                title="Contests"
-                subTitle="View Contests"
-                showSpinner={!data}
+                title={title}
+                subTitle={description}
+                showSpinner={!isInitialized}
             >
                 <ContestsCreateButton />
                 <ContestsList history={history} />
@@ -33,25 +36,21 @@ class Contests extends React.PureComponent<ContestsProps> {
 }
 
 const mapStateToProps = ({ contestsPage }: StateInterface) => {
-    const {
-        data: { contest },
-    } = contestsPage;
+    const { isInitialized, title, description } = contestsPage;
     return {
-        isFetching: contest.isFetching,
-        isSubmitting: contest.isSubmitting,
-        data: contest.data,
+        isInitialized,
+        title,
+        description,
     };
 };
 
 const mapDispatchToProps = (dispatch: any) => {
     return {
-        fetchContests(options: { page: number; per_page: number }) {
-            return dispatch(
-                withTarget(
-                    ContestActions.fetchContests,
-                    constants.TARGETS.CONTESTS_PAGE
-                )(options)
-            );
+        init() {
+            return dispatch(ContestsPageActions.init());
+        },
+        terminate() {
+            return dispatch(ContestsPageActions.terminate());
         },
     };
 };

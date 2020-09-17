@@ -35,7 +35,17 @@ const CONSTANTS = {
         CONTEST: {
             DESCRIPTION: 'Contest Info',
         },
+        CONTESTS: {
+            TITLE: 'Contests',
+            DESCRIPTION: 'View Contests',
+        },
+        CONTESTS_CREATE: {
+            TITLE: 'Contests',
+            DESCRIPTION: 'Create Contest',
+        },
         ACCOUNT: {
+            TITLE: 'Account',
+            DESCRIPTION: 'Update Account Settings',
             FORM: {
                 LABELS: {
                     AVATAR: 'Avatar',

@@ -2,26 +2,29 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { AccountProps, StateInterface } from './types';
 import { ContentLayout } from '@layouts';
-import constants from '@constants';
-import { withTarget } from '@utils';
 import AccountForm from './AccountForm';
-import AccountActions from '@reducers/AccountReducer';
+import AccountPageActions from './actions';
 import './Account.scss';
 
 class Account extends React.PureComponent<AccountProps> {
     componentDidMount() {
-        const { fetchAccount } = this.props;
-        fetchAccount();
+        const { init } = this.props;
+        init();
+    }
+
+    componentWillUnmount() {
+        const { terminate } = this.props;
+        terminate();
     }
 
     render() {
-        const { isFetching, isSubmitting, data } = this.props;
+        const { title, description, isInitialized } = this.props;
 
         return (
             <ContentLayout
-                title="Account"
-                subTitle="Update Account Settings"
-                showSpinner={isFetching || isSubmitting || !data}
+                title={title}
+                subTitle={description}
+                showSpinner={isInitialized}
             >
                 <AccountForm />
             </ContentLayout>
@@ -30,23 +33,21 @@ class Account extends React.PureComponent<AccountProps> {
 }
 
 const mapStateToProps = ({ accountPage }: StateInterface) => {
-    const account = accountPage.data.account;
+    const { title, description, isInitialized } = accountPage;
     return {
-        isFetching: account.isFetching,
-        isSubmitting: account.isSubmitting,
-        data: account.data,
+        title,
+        description,
+        isInitialized,
     };
 };
 
 const mapDispatchToProps = (dispatch: any) => {
     return {
-        fetchAccount() {
-            return dispatch(
-                withTarget(
-                    AccountActions.fetchAccount,
-                    constants.TARGETS.ACCOUNT_PAGE
-                )('me')
-            );
+        init() {
+            return dispatch(AccountPageActions.init());
+        },
+        terminate() {
+            return dispatch(AccountPageActions.terminate());
         },
     };
 };

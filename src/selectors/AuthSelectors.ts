@@ -10,3 +10,7 @@ export const selectIsLoggedIn = createSelector([getAuth], (auth) =>
 export const selectForceLogout = createSelector([getAuth], (auth) =>
     _.get(auth, ['forceLogout'], false)
 );
+
+export const selectData = createSelector([getAuth], (auth) =>
+    _.get(auth, ['data'], false)
+);

@@ -30,11 +30,9 @@ class ContestParticipantsTable extends React.PureComponent<
 }
 
 const mapStateToProps = ({ contestPage }: StateInterface) => {
-    const {
-        ui: { contestParticipants },
-    } = contestPage;
+    const { contestParticipants: items } = contestPage;
     return {
-        items: contestParticipants,
+        items,
         isFetching: false,
     };
 };

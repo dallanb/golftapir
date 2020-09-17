@@ -5,7 +5,7 @@ import { withRouter } from 'react-router-dom';
 import _ from 'lodash';
 import { ContestProps, StateInterface } from './types';
 import { ContentLayout } from '@layouts';
-import ContestPageActions from './reducer';
+import ContestPageActions from './actions';
 import ContestParticipantsTable from './ContestParticipantsTable';
 import './Contest.scss';
 
@@ -25,11 +25,11 @@ class Contest extends React.PureComponent<ContestProps> {
     }
 
     render() {
-        const { title, subtitle, isInitialized } = this.props;
+        const { title, description, isInitialized } = this.props;
         return (
             <ContentLayout
                 title={title}
-                subTitle={subtitle}
+                subTitle={description}
                 showSpinner={!isInitialized}
             >
                 <ContestParticipantsTable />
@@ -39,11 +39,11 @@ class Contest extends React.PureComponent<ContestProps> {
 }
 
 const mapStateToProps = ({ contestPage }: StateInterface) => {
-    const { ui } = contestPage;
+    const { title, description, isInitialized } = contestPage;
     return {
-        title: ui.name,
-        subtitle: ui.description,
-        isInitialized: ui.isInitialized,
+        title,
+        description,
+        isInitialized,
     };
 };
 
@@ -52,8 +52,8 @@ const mapDispatchToProps = (dispatch: any) => {
         init(uuid: string) {
             return dispatch(ContestPageActions.init(uuid));
         },
-        terminate(uuid: string) {
-            return dispatch(ContestPageActions.terminate(uuid));
+        terminate() {
+            return dispatch(ContestPageActions.terminate());
         },
     };
 };

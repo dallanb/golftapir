@@ -4,48 +4,26 @@ import { FormikValues } from 'formik';
 import _ from 'lodash';
 import { AccountFormProps, StateInterface } from './types';
 import { Form } from '@components';
-import { withTarget } from '@utils';
-import constants from '@constants';
-import AccountActions from '@reducers/AccountReducer';
+import AccountActions from '@actions/AccountActions';
 import { fieldSchema, validationSchema } from './schema';
 import './AccountForm.scss';
 
 class AccountForm extends React.PureComponent<AccountFormProps> {
-    prepareInitialValues = () => {
-        const { accountData, authData } = this.props;
-
-        return {
-            ..._.pick(accountData, ['first_name', 'last_name', 'avatar']),
-            address: _.pick(accountData.address, [
-                'city',
-                'country',
-                'line_1',
-                'line_2',
-                'postal_code',
-                'province',
-            ]),
-            phone: _.pick(accountData.phone, [
-                'number',
-                'country_code',
-                'extension',
-            ]),
-            ..._.pick(authData, ['username', 'email']),
-        };
-    };
     handleSubmit = (values: FormikValues) => {
-        const { updateAccount, updateAvatar, accountData } = this.props;
+        const { updateAccount, updateAvatar, data } = this.props;
         const { first_name, last_name, address, phone, avatar } = values;
-        if (!_.isEqual(avatar, accountData.avatar)) {
+        if (!_.isEqual(avatar, data.avatar)) {
             updateAvatar(avatar);
         }
         updateAccount({ first_name, last_name, address, phone });
     };
     render() {
+        const { initialValues } = this.props;
         return (
             <Form
                 fieldSchema={fieldSchema}
                 validationSchema={validationSchema}
-                initialValues={this.prepareInitialValues()}
+                initialValues={initialValues}
                 onSubmit={this.handleSubmit}
             />
         );
@@ -53,32 +31,20 @@ class AccountForm extends React.PureComponent<AccountFormProps> {
 }
 
 const mapStateToProps = ({ accountPage }: StateInterface) => {
-    const {
-        data: { account, auth },
-    } = accountPage;
+    const { updateFormInitialValues: initialValues, data } = accountPage;
     return {
-        accountData: account.data,
-        authData: auth.data,
+        data,
+        initialValues,
     };
 };
 
 const mapDispatchToProps = (dispatch: any) => {
     return {
         updateAccount(values: FormikValues) {
-            return dispatch(
-                withTarget(
-                    AccountActions.updateAccount,
-                    constants.TARGETS.ACCOUNT_PAGE
-                )('me', values)
-            );
+            return dispatch(AccountActions.updateAccount('me', values));
         },
         updateAvatar(avatar: File) {
-            return dispatch(
-                withTarget(
-                    AccountActions.updateAvatar,
-                    constants.TARGETS.ACCOUNT_PAGE
-                )('me', avatar)
-            );
+            return dispatch(AccountActions.updateAvatar('me', avatar));
         },
     };
 };

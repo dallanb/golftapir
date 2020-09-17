@@ -1,23 +1,19 @@
 import { AnyAction } from 'redux';
 import { all, put, race, select, take, takeLatest } from 'redux-saga/effects';
-import ContestPageActions, { ContestPageTypes } from '@pages/Contest/reducer';
-import AccountActions, { AccountTypes } from '@reducers/AccountReducer';
-import ContestActions, { ContestTypes } from '@reducers/ContestReducer';
-import { selectContestData } from './selector';
-import { withTarget } from '@utils';
-import constants from '@constants';
+import ContestPageActions, { ContestPageTypes } from './actions';
+import AccountActions, { AccountTypes } from '@actions/AccountActions';
+import ContestActions, { ContestTypes } from '@actions/ContestActions';
 import CONSTANTS from '@locale/en-CA';
-
-const target = constants.TARGETS.CONTEST_PAGE;
+import { normalizeContestParticipants } from '@pages/Contest/utils';
 
 function* init({ uuid }: AnyAction) {
     try {
         yield put(
-            withTarget(ContestActions.fetchContest, target)(uuid, {
+            ContestActions.fetchContest(uuid, {
                 include: 'participants',
             })
         );
-        const { failure } = yield race({
+        const { success, failure } = yield race({
             success: take(ContestTypes.FETCH_CONTEST_SUCCESS),
             failure: take(ContestTypes.FETCH_CONTEST_FAILURE),
         });
@@ -26,27 +22,37 @@ function* init({ uuid }: AnyAction) {
             throw new Error(CONSTANTS.CONTEST.ERROR.FETCH);
         }
 
-        const { participants = [] } = yield select(selectContestData);
+        const {
+            data: { participants, name: title },
+        } = success;
+
+        yield put(ContestPageActions.set({ title }));
+
         const accounts = participants.map(
             ({ user_uuid }: { user_uuid: string }) => user_uuid
         );
         if (!accounts.length) {
-            yield put(
-                withTarget(AccountActions.bulkFetchAccountsSuccess, target)([])
-            );
+            yield put(AccountActions.bulkFetchAccountsSuccess([]));
         } else {
             yield put(
-                withTarget(AccountActions.bulkFetchAccounts, target)(accounts, {
+                AccountActions.bulkFetchAccounts(accounts, {
                     include: 'avatar',
                 })
             );
-            const { failure } = yield race({
+            const { success, failure } = yield race({
                 success: take(AccountTypes.BULK_FETCH_ACCOUNTS_SUCCESS),
                 failure: take(AccountTypes.BULK_FETCH_ACCOUNTS_FAILURE),
             });
             if (failure) {
                 throw new Error(CONSTANTS.CONTEST.ERROR.FETCH);
             }
+
+            const { data: accountParticipants } = success;
+            const contestParticipants = normalizeContestParticipants(
+                participants,
+                accountParticipants
+            );
+            yield put(ContestPageActions.set({ contestParticipants }));
         }
 
         yield put(ContestPageActions.initSuccess());

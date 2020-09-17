@@ -1,85 +1,70 @@
 import { AnyAction } from 'redux';
 import { all, call, put, takeLatest } from 'redux-saga/effects';
 import { message } from 'antd';
-import AccountActions, { AccountTypes } from '@reducers/AccountReducer';
+import AccountActions, { AccountTypes } from '@actions/AccountActions';
 import { AccountService } from '@services';
 import CONSTANTS from '@locale/en-CA';
-import { withTarget } from '@utils';
 
-function* fetchAccount({ uuid, target }: AnyAction) {
+function* fetchAccount({ uuid, options }: AnyAction) {
     try {
-        const res = yield call(AccountService.fetchAccount, uuid, {
-            include: 'phone,address,avatar',
-        });
+        const res = yield call(AccountService.fetchAccount, uuid, options);
         const { accounts } = res;
-        yield put(
-            withTarget(AccountActions.fetchAccountSuccess, target)(accounts)
-        );
+        yield put(AccountActions.fetchAccountSuccess(accounts));
     } catch (err) {
-        yield put(withTarget(AccountActions.fetchAccountFailure, target)(err));
+        yield put(AccountActions.fetchAccountFailure(err));
         message.error(CONSTANTS.ACCOUNT.ERROR.FETCH);
     }
 }
 
-function* fetchAccounts({ target }: AnyAction) {
+function* fetchAccounts({ options }: AnyAction) {
     try {
-        const res = yield call(AccountService.fetchAccounts, {
-            include: 'phone,address,avatar',
-        });
+        const res = yield call(AccountService.fetchAccounts, options);
         const { accounts } = res;
-        yield put(
-            withTarget(AccountActions.fetchAccountsSuccess, target)(accounts)
-        );
+        yield put(AccountActions.fetchAccountsSuccess(accounts));
     } catch (err) {
-        yield put(withTarget(AccountActions.fetchAccountsFailure, target)(err));
+        yield put(AccountActions.fetchAccountsFailure(err));
         message.error(CONSTANTS.ACCOUNT.ERROR.FETCH_ALL);
     }
 }
 
-function* updateAccount({ uuid, values, target }: AnyAction) {
+function* updateAccount({ uuid, values }: AnyAction) {
     try {
         const res = yield call(AccountService.updateAccount, uuid, values);
         const { accounts } = res;
-        yield put(
-            withTarget(AccountActions.updateAccountSuccess, target)(accounts)
-        );
+        yield put(AccountActions.updateAccountSuccess(accounts));
     } catch (err) {
-        yield put(withTarget(AccountActions.updateAccountFailure, target)(err));
+        yield put(AccountActions.updateAccountFailure(err));
         message.error(CONSTANTS.ACCOUNT.ERROR.UPDATE);
     }
 }
 
-function* updateAvatar({ uuid, avatar, target }: AnyAction) {
+function* updateAvatar({ uuid, avatar }: AnyAction) {
     try {
         const res = yield call(AccountService.updateAvatar, uuid, avatar);
         // const { accounts } = res;
         console.log(res);
-        yield put(withTarget(AccountActions.updateAvatarSuccess, target)());
+        yield put(AccountActions.updateAvatarSuccess());
     } catch (err) {
-        yield put(withTarget(AccountActions.updateAvatarFailure, target)(err));
+        yield put(AccountActions.updateAvatarFailure(err));
         message.error(CONSTANTS.ACCOUNT.ERROR.UPDATE_AVATAR);
     }
 }
 
-function* searchAccounts({ key, target }: AnyAction) {
+function* searchAccounts({ key }: AnyAction) {
     try {
         const res = yield call(AccountService.searchAccounts, {
             key,
             fields: 'name',
         });
         const { accounts } = res;
-        yield put(
-            withTarget(AccountActions.searchAccountsSuccess, target)(accounts)
-        );
+        yield put(AccountActions.searchAccountsSuccess(accounts));
     } catch (err) {
-        yield put(
-            withTarget(AccountActions.searchAccountsFailure, target)(err)
-        );
+        yield put(AccountActions.searchAccountsFailure(err));
         message.error(CONSTANTS.ACCOUNT.ERROR.SEARCH_ALL);
     }
 }
 
-function* bulkFetchAccounts({ uuid, options, target }: AnyAction) {
+function* bulkFetchAccounts({ uuid, options }: AnyAction) {
     try {
         const res = yield call(
             AccountService.bulkFetchAccounts,
@@ -87,16 +72,9 @@ function* bulkFetchAccounts({ uuid, options, target }: AnyAction) {
             options
         );
         const { accounts } = res;
-        yield put(
-            withTarget(
-                AccountActions.bulkFetchAccountsSuccess,
-                target
-            )(accounts)
-        );
+        yield put(AccountActions.bulkFetchAccountsSuccess(accounts));
     } catch (err) {
-        yield put(
-            withTarget(AccountActions.bulkFetchAccountsFailure, target)(err)
-        );
+        yield put(AccountActions.bulkFetchAccountsFailure(err));
         message.error(CONSTANTS.ACCOUNT.ERROR.BULK_FETCH_ALL);
     }
 }
