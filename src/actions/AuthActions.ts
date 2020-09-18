@@ -12,6 +12,9 @@ const { Types, Creators } = createActions(
         refresh: null,
         refreshSuccess: ['data'],
         refreshFailure: ['err'],
+        logout: null,
+        logoutSuccess: null,
+        logoutFailure: ['err'],
     },
     {
         prefix: 'AUTH_',
@@ -19,5 +22,3 @@ const { Types, Creators } = createActions(
 );
 export const AuthTypes = Types;
 export default Creators;
-
-

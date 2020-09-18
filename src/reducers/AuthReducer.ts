@@ -97,6 +97,29 @@ function refreshFailure(state: any, { err }: any) {
     });
 }
 
+function logout(state = INITIAL_STATE) {
+    return Immutable.merge(state, {
+        isSubmitting: true,
+        err: null,
+    });
+}
+
+function logoutSuccess(state: any) {
+    return Immutable.merge(state, {
+        isSubmitting: false,
+        err: null,
+        isLoggedIn: false,
+        forceLogout: true,
+    });
+}
+
+function logoutFailure(state: any, { err }: any) {
+    return Immutable.merge(state, {
+        isSubmitting: false,
+        err,
+    });
+}
+
 const HANDLERS = {
     [AuthTypes.LOGIN]: login,
     [AuthTypes.LOGIN_SUCCESS]: loginSuccess,
@@ -107,6 +130,9 @@ const HANDLERS = {
     [AuthTypes.REFRESH]: refresh,
     [AuthTypes.REFRESH_SUCCESS]: refreshSuccess,
     [AuthTypes.REFRESH_FAILURE]: refreshFailure,
+    [AuthTypes.LOGOUT]: logout,
+    [AuthTypes.LOGOUT_SUCCESS]: logoutSuccess,
+    [AuthTypes.LOGOUT_FAILURE]: logoutFailure,
 };
 
 export default createReducer(INITIAL_STATE, HANDLERS);

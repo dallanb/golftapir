@@ -1,30 +1,25 @@
 import { AnyAction } from 'redux';
-import { all, put, race, select, take, takeLatest } from 'redux-saga/effects';
+import {
+    all,
+    call,
+    put,
+    race,
+    select,
+    take,
+    takeLatest,
+} from 'redux-saga/effects';
 import ContestPageActions, { ContestPageTypes } from './actions';
 import AccountActions, { AccountTypes } from '@actions/AccountActions';
 import ContestActions, { ContestTypes } from '@actions/ContestActions';
 import CONSTANTS from '@locale/en-CA';
 import { normalizeContestParticipants } from '@pages/Contest/utils';
 
+// Action Handlers
 function* init({ uuid }: AnyAction) {
     try {
-        yield put(
-            ContestActions.fetchContest(uuid, {
-                include: 'participants',
-            })
-        );
-        const { success, failure } = yield race({
-            success: take(ContestTypes.FETCH_CONTEST_SUCCESS),
-            failure: take(ContestTypes.FETCH_CONTEST_FAILURE),
-        });
-
-        if (failure) {
-            throw new Error(CONSTANTS.CONTEST.ERROR.FETCH);
-        }
-
         const {
             data: { participants, name: title },
-        } = success;
+        } = yield call(fetchContest, uuid);
 
         yield put(ContestPageActions.set({ title }));
 
@@ -34,20 +29,10 @@ function* init({ uuid }: AnyAction) {
         if (!accounts.length) {
             yield put(AccountActions.bulkFetchAccountsSuccess([]));
         } else {
-            yield put(
-                AccountActions.bulkFetchAccounts(accounts, {
-                    include: 'avatar',
-                })
+            const { data: accountParticipants } = yield call(
+                bulkFetchAccounts,
+                accounts
             );
-            const { success, failure } = yield race({
-                success: take(AccountTypes.BULK_FETCH_ACCOUNTS_SUCCESS),
-                failure: take(AccountTypes.BULK_FETCH_ACCOUNTS_FAILURE),
-            });
-            if (failure) {
-                throw new Error(CONSTANTS.CONTEST.ERROR.FETCH);
-            }
-
-            const { data: accountParticipants } = success;
             const contestParticipants = normalizeContestParticipants(
                 participants,
                 accountParticipants
@@ -59,6 +44,42 @@ function* init({ uuid }: AnyAction) {
     } catch (err) {
         yield put(ContestPageActions.initFailure(err));
     }
+}
+
+// Helpers
+function* fetchContest(uuid: string) {
+    yield put(
+        ContestActions.fetchContest(uuid, {
+            include: 'participants',
+        })
+    );
+    const { success, failure } = yield race({
+        success: take(ContestTypes.FETCH_CONTEST_SUCCESS),
+        failure: take(ContestTypes.FETCH_CONTEST_FAILURE),
+    });
+
+    if (failure) {
+        throw new Error(CONSTANTS.CONTEST.ERROR.FETCH);
+    }
+
+    return success;
+}
+
+function* bulkFetchAccounts(accounts: string[]) {
+    yield put(
+        AccountActions.bulkFetchAccounts(accounts, {
+            include: 'avatar',
+        })
+    );
+    const { success, failure } = yield race({
+        success: take(AccountTypes.BULK_FETCH_ACCOUNTS_SUCCESS),
+        failure: take(AccountTypes.BULK_FETCH_ACCOUNTS_FAILURE),
+    });
+    if (failure) {
+        throw new Error(CONSTANTS.CONTEST.ERROR.FETCH);
+    }
+
+    return success;
 }
 
 export default function* ContestPageSaga() {

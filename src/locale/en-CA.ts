@@ -12,10 +12,12 @@ const CONSTANTS = {
     AUTH: {
         SUCCESS: {
             LOGIN: 'Login successful!',
+            LOGOUT: 'Logout successful!',
             REGISTER: 'Registration successful!',
         },
         ERROR: {
             LOGIN: 'Login unsuccessful',
+            LOGOUT: 'Logout unsuccessful',
             REGISTER: 'Registration unsuccessful',
             SESSION: 'Session expired',
         },
@@ -45,6 +47,10 @@ const CONSTANTS = {
                     PASSWORD_REQUIRED: 'Please input your password!',
                 },
             },
+        },
+        LOGOUT: {
+            TITLE: 'Logout',
+            DESCRIPTION: 'Logout',
         },
         REGISTER: {
             TITLE: 'Register',

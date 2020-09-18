@@ -51,11 +51,24 @@ function* refresh() {
     }
 }
 
+function* logout() {
+    try {
+        const res = yield call(AuthService.logout);
+        ClientProxy.accessToken = null;
+        yield put(AuthActions.logoutSuccess());
+        message.success(CONSTANTS.AUTH.SUCCESS.LOGOUT);
+    } catch (err) {
+        yield put(AuthActions.logoutFailure(err));
+        message.error(CONSTANTS.AUTH.ERROR.LOGOUT);
+    }
+}
+
 export default function* AuthSaga() {
     yield all([
         takeLatest(AuthTypes.PING, ping),
         takeLatest(AuthTypes.LOGIN, login),
         takeLatest(AuthTypes.REGISTER, register),
         takeLatest(AuthTypes.REFRESH, refresh),
+        takeLatest(AuthTypes.LOGOUT, logout),
     ]);
 }
