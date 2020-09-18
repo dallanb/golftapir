@@ -12,27 +12,13 @@ import BaseActions, { BaseTypes } from './actions';
 import { AccountActions, AccountTypes, AuthActions, AuthTypes } from '@actions';
 import { selectIsLoggedIn } from '@selectors/AuthSelectors';
 
+// Action Handlers
 function* init() {
     try {
         const isLoggedIn = yield select(selectIsLoggedIn);
         if (!isLoggedIn) yield call(refresh);
 
-        // move this stuff to its own generator (all occurences of this kind of stuff
-        yield put(
-            AccountActions.fetchAccount('me', {
-                include: 'avatar',
-            })
-        );
-        const { success, failure } = yield race({
-            success: take(AccountTypes.FETCH_ACCOUNT_SUCCESS),
-            failure: take(AccountTypes.FETCH_ACCOUNT_FAILURE),
-        });
-
-        if (failure) {
-            throw new Error(failure);
-        }
-
-        const { data: me } = success;
+        const { data: me } = yield call(fetchAccount);
         yield put(BaseActions.set({ me }));
 
         yield put(BaseActions.initSuccess());
@@ -41,6 +27,7 @@ function* init() {
     }
 }
 
+// Helpers
 function* refresh() {
     yield put(AuthActions.refresh());
     const { failure, timeout } = yield race({
@@ -56,6 +43,24 @@ function* refresh() {
         yield put(AuthActions.refreshFailure());
         throw new Error('refresh failure');
     }
+}
+
+function* fetchAccount() {
+    yield put(
+        AccountActions.fetchAccount('me', {
+            include: 'avatar',
+        })
+    );
+    const { success, failure } = yield race({
+        success: take(AccountTypes.FETCH_ACCOUNT_SUCCESS),
+        failure: take(AccountTypes.FETCH_ACCOUNT_FAILURE),
+    });
+
+    if (failure) {
+        throw new Error(failure);
+    }
+
+    return success;
 }
 
 export default function* BaseSaga() {
