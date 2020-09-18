@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card } from 'antd';
 import { Avatar } from '@components';
+import { withS3URL } from '@utils';
 import { AccountTileProps } from './types';
 import './AccountTile.scss';
 
@@ -10,7 +11,7 @@ const AccountTile: React.FunctionComponent<AccountTileProps> = ({
 }) => {
     return (
         <Card>
-            <Avatar src={avatar && avatar} name={name} />
+            <Avatar src={avatar && withS3URL(avatar)} name={name} />
             {name}
         </Card>
     );

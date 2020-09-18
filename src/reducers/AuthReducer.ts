@@ -84,6 +84,7 @@ function refreshSuccess(state: any, { data }: any) {
         isFetching: false,
         err: null,
         isLoggedIn: true,
+        forceLogout: false,
         data,
     });
 }

@@ -2,12 +2,14 @@
 import { static as Immutable } from 'seamless-immutable';
 import { createReducer } from 'reduxsauce';
 import { BaseTypes } from './actions';
+import { AccountTypes } from '@actions';
 
 /* ------------- Interface ------------- */
 export interface AccountPageInterface {
     readonly isFetching: boolean;
     readonly isInitialized: boolean;
     readonly err?: Error;
+    readonly me: any;
 }
 
 /* ------------- Initial State ------------- */
@@ -15,6 +17,7 @@ const INITIAL_STATE: AccountPageInterface = {
     isFetching: false,
     isInitialized: false,
     err: undefined,
+    me: undefined,
 };
 
 /* ------------- Reducers ------------- */

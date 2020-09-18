@@ -9,8 +9,12 @@ import './Login.scss';
 
 class Login extends React.PureComponent<LoginProps> {
     componentDidMount() {
-        const { init } = this.props;
-        init();
+        const { isLoggedIn, history, init } = this.props;
+        if (isLoggedIn) {
+            history.push('/app/home');
+        } else {
+            init();
+        }
     }
 
     componentDidUpdate(prevProps: Readonly<LoginProps>) {

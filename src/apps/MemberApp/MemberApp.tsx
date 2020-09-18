@@ -9,11 +9,17 @@ import { routes, protectedRoutes } from './routes';
 import { AuthActions } from '@actions';
 import BaseActions from './actions';
 import statics from '@apps/MemberApp/statics';
+import _ from 'lodash';
 
 class MemberApp extends React.Component<MemberAppProps> {
     componentDidMount() {
         const { init } = this.props;
         init();
+    }
+
+    componentWillUnmount() {
+        const { terminate } = this.props;
+        terminate();
     }
 
     render() {
@@ -23,10 +29,12 @@ class MemberApp extends React.Component<MemberAppProps> {
             isLoggedIn,
             forceLogout,
             refresh,
+            name,
+            avatar,
         } = this.props;
         if (!isInitialized) return <Spin />;
         return (
-            <MemberAppLayout name="DALLAN BHATTI" menuRoutes={statics}>
+            <MemberAppLayout name={name} avatar={avatar} menuRoutes={statics}>
                 <Switch>
                     {routes.map(
                         ({ path, component, exact }: ComponentRoute) => (
@@ -59,10 +67,15 @@ class MemberApp extends React.Component<MemberAppProps> {
 }
 
 const mapStateToProps = ({ base, auth }: any) => {
-    const { isInitialized } = base;
+    const { me, isInitialized } = base;
     const { isLoggedIn, forceLogout } = auth;
 
+    const first_name = _.get(me, ['first_name'], '');
+    const last_name = _.get(me, ['last_name'], '');
+
     return {
+        name: `${first_name} ${last_name}`,
+        avatar: _.get(me, ['avatar', 's3_filename'], ''),
         isInitialized,
         isLoggedIn,
         forceLogout,
@@ -73,6 +86,9 @@ const mapDispatchToProps = (dispatch: any) => {
     return {
         init() {
             dispatch(BaseActions.init());
+        },
+        terminate() {
+            dispatch(BaseActions.terminate());
         },
         refresh() {
             dispatch(AuthActions.refresh());

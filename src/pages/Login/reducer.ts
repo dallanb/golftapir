@@ -27,6 +27,7 @@ function init(state = INITIAL_STATE) {
 function initSuccess(state = INITIAL_STATE) {
     return Immutable.merge(state, {
         isFetching: false,
+        forceLogout: false,
         isInitialized: true,
         err: null,
     });
