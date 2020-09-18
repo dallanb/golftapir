@@ -1,3 +1,11 @@
 .user-card {
   display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  .user-card-avatar{
+  }
+  .user-card-name{
+    padding-left: 5px;
+  }
 }

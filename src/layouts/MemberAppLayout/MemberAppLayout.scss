@@ -20,8 +20,13 @@
             }
         }
         .sider-layout-footer {
+            width: 100%;
             position: absolute;
             bottom: 0;
+            button {
+                background: #3f3f3f;
+                color: #fff;
+            }
         }
     }
 }

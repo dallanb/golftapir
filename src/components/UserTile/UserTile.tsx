@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button } from 'antd';
+import { UpOutlined } from '@ant-design/icons';
 import UserCard from './UserCard';
 import UserMenu from './UserMenu';
 import UserPopover from './UserPopover';

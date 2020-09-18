@@ -8,8 +8,10 @@ import './UserCard.scss';
 const UserCard: React.FunctionComponent<UserCardProps> = ({ name, avatar }) => {
     return (
         <div className="user-card">
-            <Avatar src={avatar && withS3URL(avatar)} name={name} />
-            {name}
+            <div className="user-card-avatar">
+                <Avatar src={avatar && withS3URL(avatar)} name={name} />
+            </div>
+            <div className="user-card-name">{name}</div>
         </div>
     );
 };
