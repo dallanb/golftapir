@@ -37,7 +37,7 @@ function initSuccess(state = INITIAL_STATE) {
 function initFailure(state: any, { err }: any) {
     return Immutable.merge(state, {
         isFetching: false,
-        isInitialized: false,
+        isInitialized: true,
         err,
     });
 }
