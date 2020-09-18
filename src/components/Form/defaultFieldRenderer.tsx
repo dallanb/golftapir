@@ -1,11 +1,10 @@
 import React from 'react';
 import { Input, Upload, Button, Select } from 'antd';
 import { UploadOutlined } from '@ant-design/icons/lib';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import _ from 'lodash';
 import { antdFormatName, mapCountryOptions } from './utils';
 import { FieldRendererProps } from './types';
-import { selectData } from '@selectors/AccountSelectors';
 
 let defaultFieldRenderer: FieldRendererProps;
 
@@ -26,7 +25,6 @@ defaultFieldRenderer = (schema, formik) => {
         let field;
         const fieldRef = _.get(options, ['ref'], undefined);
         const dispatch = useDispatch();
-        const accountData = useSelector(selectData) || []; // fix this because we should not be pulling from the redux store here
         switch (type) {
             case 'input':
                 field = (
@@ -76,8 +74,9 @@ defaultFieldRenderer = (schema, formik) => {
                             dispatch(options.onSearch(value));
                         }, _.get(options, ['debounce']))}
                         filterOption={false}
+                        tagRender={_.get(options, ['tagRenderer'], undefined)}
                     >
-                        {options.optionRenderer(accountData)}
+                        {options.optionRenderer()}
                     </Select>
                 );
                 break;

@@ -3,6 +3,8 @@ import _ from 'lodash';
 
 const getContestsCreatePage = (state: any) => state.contestsCreatePage;
 
-export const selectData = createSelector([getContestsCreatePage], (contestsCreatePage) =>
-    _.get(contestsCreatePage, ['data'], false)
+export const selectCreateFormSearchParticipants = createSelector(
+    [getContestsCreatePage],
+    (contestsCreatePage) =>
+        _.get(contestsCreatePage, ['createFormSearchParticipants'], [])
 );

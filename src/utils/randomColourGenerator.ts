@@ -3,7 +3,7 @@ import { getRandomInt } from '@utils';
 const colourList = [
     'red',
     'orange',
-    'yellow',
+    // 'yellow',
     'green',
     'blue',
     'indigo',
