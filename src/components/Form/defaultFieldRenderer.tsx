@@ -27,7 +27,6 @@ defaultFieldRenderer = (schema, formik) => {
         const fieldRef = _.get(options, ['ref'], undefined);
         const dispatch = useDispatch();
         const accountData = useSelector(selectData) || []; // fix this because we should not be pulling from the redux store here
-
         switch (type) {
             case 'input':
                 field = (
@@ -38,6 +37,29 @@ defaultFieldRenderer = (schema, formik) => {
                         onChange={formik.handleChange}
                         readOnly={_.get(options, ['readonly'], false)}
                         bordered={!_.get(options, ['readonly'], false)}
+                        placeholder={_.get(options, ['placeholder'], undefined)}
+                        prefix={
+                            _.get(options, ['prefixRenderer'], undefined) &&
+                            options.prefixRenderer()
+                        }
+                    />
+                );
+                break;
+            case 'password':
+                field = (
+                    <Input
+                        key={name}
+                        name={name}
+                        ref={fieldRef}
+                        type="password"
+                        onChange={formik.handleChange}
+                        readOnly={_.get(options, ['readonly'], false)}
+                        bordered={!_.get(options, ['readonly'], false)}
+                        placeholder={_.get(options, ['placeholder'], undefined)}
+                        prefix={
+                            _.get(options, ['prefixRenderer'], undefined) &&
+                            options.prefixRenderer()
+                        }
                     />
                 );
                 break;

@@ -1,19 +1,7 @@
 // @ts-ignore
 import { static as Immutable } from 'seamless-immutable';
-import { createActions, createReducer } from 'reduxsauce';
-
-const { Types, Creators } = createActions(
-    {
-        confirmModal: null,
-        setMessageModal: ['isOpen', 'data'],
-    },
-    {
-        prefix: 'MODAL_',
-    }
-);
-
-export const ModalTypes = Types;
-export default Creators;
+import { createReducer } from 'reduxsauce';
+import { ModalTypes } from '@actions';
 
 /* ------------- Interface ------------- */
 export interface ModalInterface {
@@ -39,7 +27,7 @@ function setMessageModal(
 }
 
 const HANDLERS = {
-    [Types.SET_MESSAGE_MODAL]: setMessageModal,
+    [ModalTypes.SET_MESSAGE_MODAL]: setMessageModal,
 };
 
-export const reducer = createReducer(INITIAL_STATE, HANDLERS);
+export default createReducer(INITIAL_STATE, HANDLERS);

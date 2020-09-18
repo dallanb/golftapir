@@ -84,6 +84,7 @@ function refreshSuccess(state: any, { data }: any) {
         isFetching: false,
         err: null,
         isLoggedIn: true,
+        forceLogout: false,
         data,
     });
 }
@@ -108,4 +109,4 @@ const HANDLERS = {
     [AuthTypes.REFRESH_FAILURE]: refreshFailure,
 };
 
-export const reducer = createReducer(INITIAL_STATE, HANDLERS);
+export default createReducer(INITIAL_STATE, HANDLERS);

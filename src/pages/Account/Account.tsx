@@ -24,7 +24,7 @@ class Account extends React.PureComponent<AccountProps> {
             <ContentLayout
                 title={title}
                 subTitle={description}
-                showSpinner={isInitialized}
+                showSpinner={!isInitialized}
             >
                 <AccountForm />
             </ContentLayout>

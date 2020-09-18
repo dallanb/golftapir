@@ -3,10 +3,19 @@ import { AuthInterface } from '@reducers/AuthReducer';
 
 export interface LoginProps extends RouteComponentProps<any> {
     isLoggedIn: boolean;
-    login: (email: string, password: string) => any;
-    setMessageModal: (isOpen: boolean, data: any) => any;
+    init: () => void;
+}
+
+export interface LoginPageInterface {
+    readonly isFetching: boolean;
+    readonly isInitialized: boolean;
+    readonly err?: Error;
+    readonly title: string;
+    readonly description: string;
+    readonly formInitialValues: any;
 }
 
 export interface StateProps {
     auth: AuthInterface;
+    loginPage: LoginPageInterface;
 }

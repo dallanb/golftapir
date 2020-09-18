@@ -1,8 +1,7 @@
-import { applyMiddleware, compose, createStore } from 'redux';
+import { applyMiddleware, compose, createStore, combineReducers } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import { createLogger } from 'redux-logger';
-import rootReducer from '@reducers';
-import rootSaga from '@sagas';
+import { memberAppReducer, memberAppSaga } from '../MemberApp';
 
 function configStore(): any {
     const middleware = [];
@@ -22,7 +21,7 @@ function configStore(): any {
     enhancers.push(applyMiddleware(...middleware));
 
     const store = createStore(
-        rootReducer,
+        memberAppReducer,
         undefined,
         compose(
             ...enhancers,
@@ -31,7 +30,7 @@ function configStore(): any {
         )
     );
 
-    sagaMiddleware.run(rootSaga);
+    sagaMiddleware.run(memberAppSaga);
 
     return { store };
 }

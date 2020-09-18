@@ -9,7 +9,7 @@ const { Types, Creators } = createActions(
         set: ['data'],
     },
     {
-        prefix: 'CONTESTS_PAGE_',
+        prefix: 'ACCOUNT_PAGE_',
     }
 );
 export const AccountPageTypes = Types;

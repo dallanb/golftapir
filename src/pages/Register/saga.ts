@@ -1,5 +1,14 @@
-import { all } from 'redux-saga/effects';
+import { all, put, takeLatest } from 'redux-saga/effects';
+import RegisterPageActions, { RegisterPageTypes } from './actions';
+
+function* init() {
+    try {
+        yield put(RegisterPageActions.initSuccess());
+    } catch (err) {
+        yield put(RegisterPageActions.initFailure());
+    }
+}
 
 export default function* RegisterPageSaga() {
-    yield all([]);
+    yield all([takeLatest(RegisterPageTypes.INIT, init)]);
 }

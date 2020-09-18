@@ -1,5 +1,14 @@
-import { all } from 'redux-saga/effects';
+import { all, put, takeLatest } from 'redux-saga/effects';
+import LoginPageActions, { LoginPageTypes } from './actions';
+
+function* init() {
+    try {
+        yield put(LoginPageActions.initSuccess());
+    } catch (err) {
+        yield put(LoginPageActions.initFailure());
+    }
+}
 
 export default function* LoginPageSaga() {
-    yield all([]);
+    yield all([takeLatest(LoginPageTypes.INIT, init)]);
 }

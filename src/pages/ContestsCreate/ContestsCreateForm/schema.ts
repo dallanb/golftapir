@@ -4,6 +4,9 @@ import 'yup-phone';
 import AccountActions from '@actions/AccountActions';
 import InputWrapper from '@components/InputWrapper';
 import { participantSearchSelectOptionRenderer } from './utils';
+import CONSTANTS from '@locale/en-CA';
+
+const FORM = CONSTANTS.PAGES.CONTESTS_CREATE.FORM;
 
 export const fieldSchema = [
     {
@@ -26,7 +29,7 @@ export const fieldSchema = [
         name: 'name',
         wrapper: InputWrapper,
         wrapperOptions: {
-            label: 'Name',
+            label: FORM.LABELS.NAME,
         },
     },
     {
@@ -34,7 +37,7 @@ export const fieldSchema = [
         type: 'search-select',
         wrapper: InputWrapper,
         wrapperOptions: {
-            label: 'Participants',
+            label: FORM.LABELS.PARTICIPANTS,
         },
         options: {
             ref: React.createRef<any>(),
@@ -50,6 +53,6 @@ export const fieldSchema = [
 export const validationSchema = Yup.object({
     owner_uuid: Yup.string(),
     sport_uuid: Yup.string(),
-    name: Yup.string(),
+    name: Yup.string().required(FORM.VALIDATION.NAME_REQUIRED),
     participants: Yup.array(),
 });
