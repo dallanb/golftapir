@@ -35,3 +35,9 @@ export {
     RegisterPageSaga,
     RegisterPageRoutes,
 } from './Register';
+export {
+    default as Logout,
+    reducer as logoutPage,
+    LogoutPageSaga,
+    LogoutPageRoutes,
+} from './Logout';

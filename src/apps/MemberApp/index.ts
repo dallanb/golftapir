@@ -12,6 +12,7 @@ import {
     contestsCreatePage,
     loginPage,
     registerPage,
+    logoutPage,
 } from '@pages';
 
 export const memberAppReducer = combineReducers({
@@ -22,6 +23,7 @@ export const memberAppReducer = combineReducers({
     contestsPage,
     contestsCreatePage,
     loginPage,
+    logoutPage,
     registerPage,
     modal,
 });
@@ -35,6 +37,7 @@ import {
     ContestsPageSaga,
     ContestsCreatePageSaga,
     LoginPageSaga,
+    LogoutPageSaga,
     RegisterPageSaga,
 } from '@pages';
 import { default as BaseSaga } from './saga';
@@ -51,6 +54,7 @@ export function* memberAppSaga() {
         fork(ContestsPageSaga),
         fork(ContestsCreatePageSaga),
         fork(LoginPageSaga),
+        fork(LogoutPageSaga),
         fork(RegisterPageSaga),
     ]);
 }

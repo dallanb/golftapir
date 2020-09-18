@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import memoize from 'memoize-one';
 import _ from 'lodash';
 import { MemberAppLayoutProps, MemberAppLayoutState } from './types';
-import { AccountTile } from '@components';
+import { UserTile } from '@components';
 import './MemberAppLayout.scss';
 
 const { Sider } = Layout;
@@ -35,7 +35,7 @@ class MemberAppLayout extends React.Component<
         return nextState;
     }
 
-    onClick = ({ key }: { key: any }, path: string) => {
+    menuItemOnClick = ({ key }: { key: any }, path: string) => {
         const { history } = this.props;
         history.push(path);
     };
@@ -45,12 +45,26 @@ class MemberAppLayout extends React.Component<
             <Menu.Item
                 key={index}
                 icon={React.createElement(memberAppRoute.icon)}
-                onClick={(item) => this.onClick(item, memberAppRoute.path)}
+                onClick={(item) =>
+                    this.menuItemOnClick(item, memberAppRoute.path)
+                }
             >
                 {memberAppRoute.name}
             </Menu.Item>
         ))
     );
+
+    getUserTileMenuItems = () => {
+        const { history } = this.props;
+        return (
+            <Menu.Item
+                key="logout"
+                onClick={() => history.push(`/auth/logout`)}
+            >
+                Logout
+            </Menu.Item>
+        );
+    };
 
     render() {
         const { name, avatar, menuRoutes, children } = this.props;
@@ -68,7 +82,11 @@ class MemberAppLayout extends React.Component<
                         {this.getMenuItems(menuRoutes)}
                     </Menu>
                     <div className="sider-layout-footer">
-                        <AccountTile name={name} avatar={avatar} />
+                        <UserTile
+                            name={name}
+                            avatar={avatar}
+                            menu={this.getUserTileMenuItems}
+                        />
                     </div>
                 </Sider>
                 {children}

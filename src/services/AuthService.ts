@@ -30,4 +30,12 @@ export default {
             endpoint: `/refresh`,
         });
     },
+    logout() {
+        return ClientProxy.post({
+            url: config.AUTH_URL,
+            endpoint: `/logout`,
+            data: {},
+            headers: {},
+        });
+    },
 };
