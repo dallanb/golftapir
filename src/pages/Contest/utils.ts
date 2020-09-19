@@ -12,7 +12,8 @@ export const normalizeContestParticipants = (
             {
                 ..._.pick(
                     accounts.find(
-                        (account: any) => account.uuid === participant.user_uuid
+                        (account: any) =>
+                            account.membership_uuid === participant.user_uuid
                     ),
                     ['first_name', 'last_name', 'avatar']
                 ),
