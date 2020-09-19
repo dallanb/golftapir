@@ -8,28 +8,19 @@ import {
     take,
     takeLatest,
 } from 'redux-saga/effects';
-import _ from 'lodash';
 import config from 'config';
 import ContestsCreatePageActions, { ContestsCreatePageTypes } from './actions';
 import { selectMe } from '@selectors/BaseSelector';
-import { selectData } from '@selectors/AuthSelectors';
 import { AccountActions, AccountTypes } from '@actions';
-import { selectCreateFormSearchParticipants } from '@pages/ContestsCreate/selector';
 
 // Action Handlers
 function* init() {
     try {
         const me = yield select(selectMe);
-        yield put(
-            ContestsCreatePageActions.set({
-                createFormSearchParticipants: [{ ...me }],
-            })
-        );
-        const data = yield select(selectData);
         const createFormInitialValues = {
-            owner_uuid: _.get(data, ['uuid']),
+            owner_uuid: me.membership_uuid,
             sport_uuid: config.GOLF_UUID,
-            participants: [me.uuid],
+            participants: [me.membership_uuid],
         };
         yield put(ContestsCreatePageActions.set({ createFormInitialValues }));
         yield put(ContestsCreatePageActions.initSuccess());

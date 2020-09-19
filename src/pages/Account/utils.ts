@@ -1,8 +1,14 @@
 import _ from 'lodash';
 
-export const prepareInitialValues = (accountData: any, authData: any) => {
+export const prepareInitialValues = (accountData: any) => {
     return {
-        ..._.pick(accountData, ['first_name', 'last_name', 'avatar']),
+        ..._.pick(accountData, [
+            'username',
+            'email',
+            'first_name',
+            'last_name',
+            'avatar',
+        ]),
         address: _.pick(accountData.address, [
             'city',
             'country',
@@ -16,6 +22,5 @@ export const prepareInitialValues = (accountData: any, authData: any) => {
             'country_code',
             'extension',
         ]),
-        ..._.pick(authData, ['username', 'email']),
     };
 };
