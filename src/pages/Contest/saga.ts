@@ -67,9 +67,12 @@ function* fetchContest(uuid: string) {
 
 function* bulkFetchAccounts(accounts: string[]) {
     yield put(
-        AccountActions.bulkFetchAccounts(accounts, {
-            include: 'avatar',
-        })
+        AccountActions.bulkFetchAccounts(
+            { key: 'membership_uuid', value: accounts },
+            {
+                include: 'avatar',
+            }
+        )
     );
     const { success, failure } = yield race({
         success: take(AccountTypes.BULK_FETCH_ACCOUNTS_SUCCESS),

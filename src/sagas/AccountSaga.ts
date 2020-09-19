@@ -64,11 +64,11 @@ function* searchAccounts({ key }: AnyAction) {
     }
 }
 
-function* bulkFetchAccounts({ uuid: membership_uuid, options }: AnyAction) {
+function* bulkFetchAccounts({ within, options }: AnyAction) {
     try {
         const res = yield call(
             AccountService.bulkFetchAccounts,
-            { membership_uuid },
+            { within },
             options
         );
         const { accounts } = res;

@@ -59,9 +59,6 @@ function registerSuccess(state: any, { data }: any) {
     return Immutable.merge(state, {
         isSubmitting: false,
         err: null,
-        isLoggedIn: true,
-        forceLogout: false,
-        data,
     });
 }
 
