@@ -10,6 +10,7 @@ services:
     volumes:
       - ${HUNCHO_DIR}/services/golftapir/dist/.:/usr/share/nginx/dist
       - ${HUNCHO_DIR}/services/golftapir/public/.:/usr/share/nginx/public
+      - ${HUNCHO_DIR}/secrets/golftapir/firebase-messaging-sw.js:/usr/share/nginx/public/firebase-messaging-sw.js
     ports:
       - 80:80
 #    networks:

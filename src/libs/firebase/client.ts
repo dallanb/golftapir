@@ -31,7 +31,12 @@ class Client {
             if (!this.messaging) {
                 throw new Error('Wait for Firebase Client to be Ready');
             }
+            const registration = await navigator.serviceWorker.register(
+                '/public/firebase-messaging-sw.js'
+            );
+            this.messaging.useServiceWorker(registration);
             await this.messaging?.requestPermission();
+            console.log('REQUESTING');
             const token = await this.messaging?.getToken();
             console.log(token);
             return token;
