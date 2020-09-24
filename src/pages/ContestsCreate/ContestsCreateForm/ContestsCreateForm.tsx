@@ -15,7 +15,6 @@ class ContestsCreateForm extends React.PureComponent<ContestsCreateFormProps> {
     };
     render() {
         const { initialValues } = this.props;
-        console.log(initialValues);
         return (
             <Form
                 fieldSchema={fieldSchema}

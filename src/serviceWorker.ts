@@ -1,3 +1,5 @@
+import configuration from 'config';
+
 // This optional code is used to register a service worker.
 // register() is not called by default.
 
@@ -26,7 +28,10 @@ type Config = {
 };
 
 export function register(config?: Config) {
-    if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
+    if (
+        configuration.NODE_ENV === 'production' &&
+        'serviceWorker' in navigator
+    ) {
         // The URL constructor is available in all browsers that support SW.
         const publicUrl = new URL(
             process.env.PUBLIC_URL!,
@@ -40,8 +45,9 @@ export function register(config?: Config) {
         }
 
         window.addEventListener('load', () => {
-            const swUrl = `${process.env.PUBLIC_URL}/service-worker.js`;
-
+            const swUrl = `${process.env.PUBLIC_URL}/firebase-messaging-sw.js`;
+            console.log(isLocalhost);
+            console.log(swUrl);
             if (isLocalhost) {
                 // This is running on localhost. Let's check if a service worker still exists or not.
                 checkValidServiceWorker(swUrl, config);

@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { FormikValues } from 'formik';
-import _ from 'lodash';
+import {isEqual as _isEqual } from 'lodash';
 import { AccountFormProps, StateInterface } from './types';
 import { Form } from '@components';
 import AccountActions from '@actions/AccountActions';
@@ -12,7 +12,7 @@ class AccountForm extends React.PureComponent<AccountFormProps> {
     handleSubmit = (values: FormikValues) => {
         const { updateAccount, updateAvatar, data } = this.props;
         const { first_name, last_name, address, phone, avatar } = values;
-        if (!_.isEqual(avatar, data.avatar)) {
+        if (!_isEqual(avatar, data.avatar)) {
             updateAvatar(avatar);
         }
         updateAccount({ first_name, last_name, address, phone });

@@ -1,0 +1,26 @@
+version: "3.2"
+
+services:
+  golftapir:
+    container_name: golftapir
+    build:
+      context: ${HUNCHO_DIR}/services/golftapir/proxy
+      dockerfile: ${HUNCHO_DIR}/services/golftapir/proxy/build/Dockerfile
+    restart: unless-stopped
+    volumes:
+      - ${HUNCHO_DIR}/services/golftapir/dist/.:/usr/share/nginx/dist
+      - ${HUNCHO_DIR}/services/golftapir/public/.:/usr/share/nginx/public
+      - ${HUNCHO_DIR}/secrets/golftapir/firebase-messaging-sw.js:/usr/share/nginx/public/firebase-messaging-sw.js
+      - ${HUNCHO_DIR}/secrets/golftapir/firebase-messaging-sw.js:/usr/share/nginx/dist/firebase-messaging-sw.js
+    ports:
+      - 80:80
+    networks:
+      - kong-net
+
+networks:
+  default:
+    external:
+      name: build_app-net
+  kong-net:
+    external:
+      name: build_kong-net

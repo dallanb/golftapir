@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Card } from 'antd';
-import _ from 'lodash';
+import {get as _get} from 'lodash';
 import { ContestsListTileProps } from './types';
 import './ContestsListTile.scss';
 
@@ -8,7 +8,7 @@ const ContestsListTile: React.FunctionComponent<ContestsListTileProps> = ({
     props: { index, style, data },
     history,
 }) => {
-    const item = _.get(data, [index], undefined);
+    const item = _get(data, [index], undefined);
     const handleClick = (uuid: string) => {
         history.push(`/app/contests/${uuid}`);
     };
@@ -20,7 +20,7 @@ const ContestsListTile: React.FunctionComponent<ContestsListTileProps> = ({
             </div>
             <div className="contest-list-tile-button">
                 <Button
-                    onClick={() => handleClick(_.get(item, ['uuid'], null))}
+                    onClick={() => handleClick(_get(item, ['uuid'], null))}
                 >
                     View
                 </Button>

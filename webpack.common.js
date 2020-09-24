@@ -1,5 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
+const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 
 module.exports = {
     entry: path.resolve(__dirname, 'src', 'index.tsx'),
@@ -8,7 +10,6 @@ module.exports = {
         path: path.resolve(__dirname, 'dist'),
         publicPath: '/',
     },
-    mode: 'development',
     resolve: {
         extensions: ['.js', '.ts', '.tsx'],
         alias: {
@@ -18,6 +19,7 @@ module.exports = {
             '@components': path.resolve(__dirname, 'src/components'),
             '@constants': path.resolve(__dirname, 'src/constants'),
             '@layouts': path.resolve(__dirname, 'src/layouts'),
+            '@libs': path.resolve(__dirname, 'src/libs'),
             '@locale': path.resolve(__dirname, 'src/locale'),
             '@pages': path.resolve(__dirname, 'src/pages'),
             '@reducers': path.resolve(__dirname, 'src/reducers'),
@@ -26,12 +28,6 @@ module.exports = {
             '@services': path.resolve(__dirname, 'src/services'),
             '@utils': path.resolve(__dirname, 'src/utils'),
         },
-    },
-    devServer: {
-        contentBase: path.resolve(__dirname, 'dist'),
-        port: 3000,
-        public: 'local.techtapir.com:3000',
-        historyApiFallback: true,
     },
     module: {
         rules: [
@@ -81,5 +77,16 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, 'public', 'index.html'),
         }),
+        new Dotenv(),
+        new LodashModuleReplacementPlugin,
     ],
+    optimization: {
+        splitChunks: { // CommonsChunkPlugin()
+            name: 'vendor',
+            minChunks: 2
+        },
+        noEmitOnErrors: true, // NoEmitOnErrorsPlugin
+        concatenateModules: true, //ModuleConcatenationPlugin
+        minimize: true // UglifyJSPlugin
+    }
 };

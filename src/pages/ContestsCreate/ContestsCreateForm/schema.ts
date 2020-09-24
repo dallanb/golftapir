@@ -1,9 +1,12 @@
 import React from 'react';
 import * as Yup from 'yup';
 import 'yup-phone';
-import AccountActions from '@actions/AccountActions';
+import ContestsCreatePageActions from '../actions';
 import InputWrapper from '@components/InputWrapper';
-import { participantSearchSelectOptionRenderer } from './utils';
+import {
+    participantSearchSelectOptionRenderer,
+    participantSearchSelectTagRenderer,
+} from './utils';
 import CONSTANTS from '@locale/en-CA';
 
 const FORM = CONSTANTS.PAGES.CONTESTS_CREATE.FORM;
@@ -41,11 +44,12 @@ export const fieldSchema = [
         },
         options: {
             ref: React.createRef<any>(),
-            onSearch: (value: string) => AccountActions.searchAccounts(value),
+            onSearch: (value: string) =>
+                ContestsCreatePageActions.searchParticipants(value),
             multiple: true,
             debounce: 500,
-            optionRenderer: (participants: any[]) =>
-                participantSearchSelectOptionRenderer(participants),
+            optionRenderer: participantSearchSelectOptionRenderer,
+            tagRenderer: participantSearchSelectTagRenderer,
         },
     },
 ];

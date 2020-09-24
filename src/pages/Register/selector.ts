@@ -1,8 +1,8 @@
 import { createSelector } from 'reselect';
-import _ from 'lodash';
+import {get as _get} from 'lodash';
 
 const getRegisterPage = (state: any) => state.registerPage;
 
 export const selectData = createSelector([getRegisterPage], (registerPage) =>
-    _.get(registerPage, ['data'], false)
+    _get(registerPage, ['data'], false)
 );

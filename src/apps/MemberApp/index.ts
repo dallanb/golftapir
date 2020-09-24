@@ -1,3 +1,5 @@
+import NotificationSaga from '@sagas/NotificationSaga';
+
 export { default } from './MemberApp';
 
 // Reducer
@@ -55,6 +57,7 @@ export function* memberAppSaga() {
         fork(ContestsCreatePageSaga),
         fork(LoginPageSaga),
         fork(LogoutPageSaga),
+        fork(NotificationSaga),
         fork(RegisterPageSaga),
     ]);
 }

@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import { pick as _pick, toUpper as _toUpper, get as _get } from 'lodash';
 import constants from '@constants';
 
 export const normalizeContestParticipants = (
@@ -8,11 +8,12 @@ export const normalizeContestParticipants = (
     participants.map((participant: any) =>
         Object.assign(
             {},
-            { ..._.pick(participant, ['status']) },
+            { ..._pick(participant, ['status']) },
             {
-                ..._.pick(
+                ..._pick(
                     accounts.find(
-                        (account: any) => account.uuid === participant.user_uuid
+                        (account: any) =>
+                            account.membership_uuid === participant.user_uuid
                     ),
                     ['first_name', 'last_name', 'avatar']
                 ),
@@ -21,4 +22,4 @@ export const normalizeContestParticipants = (
     );
 
 export const mapStatusColour = (status: string) =>
-    _.get(constants, ['STATUS', _.toUpper(status), 'COLOUR'], 'grey');
+    _get(constants, ['STATUS', _toUpper(status), 'COLOUR'], 'grey');

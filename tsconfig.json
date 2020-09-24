@@ -24,6 +24,8 @@
             "@constants": ["constants/index.ts"],
             "@layouts/*": ["layouts/*"],
             "@layouts": ["layouts/index.ts"],
+            "@libs/*": ["libs/*"],
+            "@libs": ["libs/index.ts"],
             "@locale/*": ["locale/*"],
             "@locale": ["locale/index.ts"],
             "@pages/*": ["pages/*"],

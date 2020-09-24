@@ -12,7 +12,8 @@ const INITIAL_STATE: ContestsCreatePageInterface = {
     err: undefined,
     title: CONSTANTS.PAGES.CONTESTS_CREATE.TITLE,
     description: CONSTANTS.PAGES.CONTESTS_CREATE.DESCRIPTION,
-    createFormInitialValues: undefined
+    createFormInitialValues: undefined,
+    createFormSearchParticipants: [],
 };
 
 /* ------------- Reducers ------------- */
@@ -50,12 +51,38 @@ function set(state: any, { data }: any) {
     });
 }
 
+function searchParticipants(state = INITIAL_STATE) {
+    return Immutable.merge(state, {
+        isFetching: true,
+    });
+}
+
+function searchParticipantsSuccess(
+    state = INITIAL_STATE,
+    { data: createFormSearchParticipants }: any
+) {
+    return Immutable.merge(state, {
+        isFetching: false,
+        createFormSearchParticipants,
+    });
+}
+
+function searchParticipantsFailure(state = INITIAL_STATE, { err }: any) {
+    return Immutable.merge(state, {
+        isFetching: false,
+        err,
+    });
+}
+
 const HANDLERS = {
     [ContestsCreatePageTypes.INIT]: init,
     [ContestsCreatePageTypes.INIT_SUCCESS]: initSuccess,
     [ContestsCreatePageTypes.INIT_FAILURE]: initFailure,
     [ContestsCreatePageTypes.TERMINATE]: terminate,
     [ContestsCreatePageTypes.SET]: set,
+    [ContestsCreatePageTypes.SEARCH_PARTICIPANTS]: searchParticipants,
+    [ContestsCreatePageTypes.SEARCH_PARTICIPANTS_SUCCESS]: searchParticipantsSuccess,
+    [ContestsCreatePageTypes.SEARCH_PARTICIPANTS_FAILURE]: searchParticipantsFailure,
 };
 
 export const reducer = createReducer(INITIAL_STATE, HANDLERS);

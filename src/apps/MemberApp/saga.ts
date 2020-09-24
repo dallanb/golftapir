@@ -9,8 +9,15 @@ import {
     takeLatest,
 } from 'redux-saga/effects';
 import BaseActions, { BaseTypes } from './actions';
-import { AccountActions, AccountTypes, AuthActions, AuthTypes } from '@actions';
+import {
+    AccountActions,
+    AccountTypes,
+    AuthActions,
+    AuthTypes,
+    NotificationActions,
+} from '@actions';
 import { selectIsLoggedIn } from '@selectors/AuthSelectors';
+import { FirebaseClient } from '@libs';
 
 // Action Handlers
 function* init() {
@@ -20,6 +27,10 @@ function* init() {
 
         const { data: me } = yield call(fetchAccount);
         yield put(BaseActions.set({ me }));
+
+        // prepare notifications
+        const token = yield call(requestToken);
+        yield put(NotificationActions.setToken(me.membership_uuid, token));
 
         yield put(BaseActions.initSuccess());
     } catch (err) {
@@ -61,6 +72,12 @@ function* fetchAccount() {
     }
 
     return success;
+}
+
+function* requestToken() {
+    const token = yield FirebaseClient.requestNotificationPermissions();
+    console.log(token);
+    return token;
 }
 
 export default function* BaseSaga() {

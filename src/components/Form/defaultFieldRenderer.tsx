@@ -1,11 +1,10 @@
 import React from 'react';
 import { Input, Upload, Button, Select } from 'antd';
 import { UploadOutlined } from '@ant-design/icons/lib';
-import { useDispatch, useSelector } from 'react-redux';
-import _ from 'lodash';
+import { useDispatch } from 'react-redux';
+import {get as _get, debounce as _debounce } from 'lodash';
 import { antdFormatName, mapCountryOptions } from './utils';
 import { FieldRendererProps } from './types';
-import { selectData } from '@selectors/AccountSelectors';
 
 let defaultFieldRenderer: FieldRendererProps;
 
@@ -24,9 +23,8 @@ defaultFieldRenderer = (schema, formik) => {
         wrapperOptions = {},
     }: any) => {
         let field;
-        const fieldRef = _.get(options, ['ref'], undefined);
+        const fieldRef = _get(options, ['ref'], undefined);
         const dispatch = useDispatch();
-        const accountData = useSelector(selectData) || []; // fix this because we should not be pulling from the redux store here
         switch (type) {
             case 'input':
                 field = (
@@ -35,11 +33,11 @@ defaultFieldRenderer = (schema, formik) => {
                         name={name}
                         ref={fieldRef}
                         onChange={formik.handleChange}
-                        readOnly={_.get(options, ['readonly'], false)}
-                        bordered={!_.get(options, ['readonly'], false)}
-                        placeholder={_.get(options, ['placeholder'], undefined)}
+                        readOnly={_get(options, ['readonly'], false)}
+                        bordered={!_get(options, ['readonly'], false)}
+                        placeholder={_get(options, ['placeholder'], undefined)}
                         prefix={
-                            _.get(options, ['prefixRenderer'], undefined) &&
+                            _get(options, ['prefixRenderer'], undefined) &&
                             options.prefixRenderer()
                         }
                     />
@@ -53,11 +51,11 @@ defaultFieldRenderer = (schema, formik) => {
                         ref={fieldRef}
                         type="password"
                         onChange={formik.handleChange}
-                        readOnly={_.get(options, ['readonly'], false)}
-                        bordered={!_.get(options, ['readonly'], false)}
-                        placeholder={_.get(options, ['placeholder'], undefined)}
+                        readOnly={_get(options, ['readonly'], false)}
+                        bordered={!_get(options, ['readonly'], false)}
+                        placeholder={_get(options, ['placeholder'], undefined)}
                         prefix={
-                            _.get(options, ['prefixRenderer'], undefined) &&
+                            _get(options, ['prefixRenderer'], undefined) &&
                             options.prefixRenderer()
                         }
                     />
@@ -72,12 +70,13 @@ defaultFieldRenderer = (schema, formik) => {
                         mode="multiple"
                         onChange={(value) => formik.setFieldValue(name, value)}
                         showSearch
-                        onSearch={_.debounce((value) => {
+                        onSearch={_debounce((value) => {
                             dispatch(options.onSearch(value));
-                        }, _.get(options, ['debounce']))}
+                        }, _get(options, ['debounce']))}
                         filterOption={false}
+                        tagRender={_get(options, ['tagRenderer'], undefined)}
                     >
-                        {options.optionRenderer(accountData)}
+                        {options.optionRenderer()}
                     </Select>
                 );
                 break;
@@ -102,7 +101,7 @@ defaultFieldRenderer = (schema, formik) => {
                         ref={fieldRef}
                         onChange={(value) => {
                             formik.setFieldValue(name, value);
-                            if (_.get(options, ['dependants'])) {
+                            if (_get(options, ['dependants'])) {
                                 options.dependants.forEach(
                                     (dependant: string) =>
                                         formik.setFieldValue(dependant, value)

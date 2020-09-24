@@ -2,7 +2,7 @@ import React from 'react';
 import { Layout, Menu } from 'antd';
 import { withRouter } from 'react-router-dom';
 import memoize from 'memoize-one';
-import _ from 'lodash';
+import {get as _get} from 'lodash';
 import { MemberAppLayoutProps, MemberAppLayoutState } from './types';
 import { UserTile } from '@components';
 import './MemberAppLayout.scss';
@@ -23,8 +23,8 @@ class MemberAppLayout extends React.Component<
         prevState: React.ComponentState
     ) {
         const nextState = { ...prevState };
-        const prevPath = _.get(prevState, ['currentPath']);
-        const nextPath = _.get(nextProps, ['location', 'pathname']);
+        const prevPath = _get(prevState, ['currentPath']);
+        const nextPath = _get(nextProps, ['location', 'pathname']);
 
         if (prevPath !== nextPath || !prevState.selectedKeys.length) {
             nextState.currentPath = nextPath;

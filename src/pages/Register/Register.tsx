@@ -14,9 +14,9 @@ class Register extends React.PureComponent<RegisterProps> {
     }
 
     componentDidUpdate(prevProps: Readonly<RegisterProps>) {
-        const { isLoggedIn, history } = this.props;
-        if (isLoggedIn) {
-            history.push('/app/home');
+        const { isRegistered, history } = this.props;
+        if (isRegistered) {
+            history.push('/auth/login');
         }
     }
 
@@ -29,10 +29,10 @@ class Register extends React.PureComponent<RegisterProps> {
     }
 }
 
-const mapStateToProps = ({ auth }: StateProps) => {
-    const { isLoggedIn } = auth;
+const mapStateToProps = ({ registerPage }: StateProps) => {
+    const { isRegistered } = registerPage;
     return {
-        isLoggedIn,
+        isRegistered,
     };
 };
 

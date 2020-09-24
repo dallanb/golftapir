@@ -4,6 +4,7 @@ import { message } from 'antd';
 import AuthActions, { AuthTypes } from '@actions/AuthActions';
 import { ClientProxy, AuthService } from '@services';
 import CONSTANTS from '@locale/en-CA';
+import { FirebaseClient } from '@libs';
 
 function* ping() {
     yield call(AuthService.ping);

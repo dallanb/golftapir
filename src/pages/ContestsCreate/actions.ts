@@ -7,6 +7,9 @@ const { Types, Creators } = createActions(
         initFailure: ['err'],
         terminate: null,
         set: ['data'],
+        searchParticipants: ['key'],
+        searchParticipantsSuccess: ['data'],
+        searchParticipantsFailure: ['err'],
     },
     {
         prefix: 'CONTESTS_CREATE_PAGE_',
