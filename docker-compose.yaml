@@ -1,0 +1,22 @@
+version: "3.2"
+
+services:
+  golftapir:
+    container_name: golftapir
+    build:
+      context: ${HUNCHO_DIR}/services/golftapir/proxy
+      dockerfile: ${HUNCHO_DIR}/services/golftapir/proxy/build/Dockerfile
+    restart: unless-stopped
+    volumes:
+      - ${HUNCHO_DIR}/services/golftapir/dist/.:/usr/share/nginx/dist
+      - ${HUNCHO_DIR}/services/golftapir/public/.:/usr/share/nginx/public
+    networks:
+      - kong-net
+
+networks:
+  default:
+    external:
+      name: build_app-net
+  kong-net:
+    external:
+      name: build_kong-net
