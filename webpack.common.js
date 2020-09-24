@@ -2,6 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 
+
 module.exports = {
     entry: path.resolve(__dirname, 'src', 'index.tsx'),
     output: {
@@ -9,7 +10,6 @@ module.exports = {
         path: path.resolve(__dirname, 'dist'),
         publicPath: '/',
     },
-    mode: 'development',
     resolve: {
         extensions: ['.js', '.ts', '.tsx'],
         alias: {
@@ -28,13 +28,6 @@ module.exports = {
             '@services': path.resolve(__dirname, 'src/services'),
             '@utils': path.resolve(__dirname, 'src/utils'),
         },
-    },
-    devServer: {
-        contentBase: path.resolve(__dirname, 'dist'),
-        port: 3000,
-        public: 'local.techtapir.com:3000',
-        historyApiFallback: true,
-        https: true,
     },
     module: {
         rules: [
@@ -84,6 +77,6 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, 'public', 'index.html'),
         }),
-        new Dotenv(),
+        new Dotenv()
     ],
 };

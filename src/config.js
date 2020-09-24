@@ -1,4 +1,3 @@
-console.log(process.env);
 const config = {
     ENV: process.env.ENV,
     NODE_ENV: process.env.NODE_ENV,

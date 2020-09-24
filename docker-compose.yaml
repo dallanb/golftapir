@@ -10,13 +10,15 @@ services:
     volumes:
       - ${HUNCHO_DIR}/services/golftapir/dist/.:/usr/share/nginx/dist
       - ${HUNCHO_DIR}/services/golftapir/public/.:/usr/share/nginx/public
-    networks:
-      - kong-net
-
-networks:
-  default:
-    external:
-      name: build_app-net
-  kong-net:
-    external:
-      name: build_kong-net
+    ports:
+      - 80:80
+#    networks:
+#      - kong-net
+#
+#networks:
+#  default:
+#    external:
+#      name: build_app-net
+#  kong-net:
+#    external:
+#      name: build_kong-net
