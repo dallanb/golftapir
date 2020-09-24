@@ -1,8 +1,8 @@
 import { createSelector } from 'reselect';
-import _ from 'lodash';
+import {get as _get} from 'lodash';
 
 const getBase = (state: any) => state.base;
 
 export const selectMe = createSelector([getBase], (base) =>
-    _.get(base, ['me'], [])
+    _get(base, ['me'], [])
 );

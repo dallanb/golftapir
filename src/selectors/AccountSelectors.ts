@@ -1,8 +1,8 @@
 import { createSelector } from 'reselect';
-import _ from 'lodash';
+import {get as _get} from 'lodash';
 
 const getAccount = (state: any) => state.account;
 
 export const selectData = createSelector([getAccount], (account) =>
-    _.get(account, ['data'], false)
+    _get(account, ['data'], false)
 );

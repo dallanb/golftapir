@@ -1,5 +1,5 @@
 import { Select, Tag } from 'antd';
-import _ from 'lodash';
+import { keyBy as _keyBy } from 'lodash';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { selectCreateFormSearchParticipants } from '@pages/ContestsCreate/selector';
@@ -16,7 +16,7 @@ export const participantSearchSelectTagRenderer = (props: any) => {
 
 export const participantSearchSelectOptionRenderer = () => {
     const me = useSelector(selectMe);
-    const participants = _.keyBy(
+    const participants = _keyBy(
         [...useSelector(selectCreateFormSearchParticipants), me],
         'membership_uuid'
     );
