@@ -10,9 +10,6 @@
 yarn.lock
 package-lock.json
 
-# public
-/public
-
 # testing
 /coverage
 
