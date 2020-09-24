@@ -1,16 +1,16 @@
 import { createSelector } from 'reselect';
-import _ from 'lodash';
+import {get as _get} from 'lodash';
 
 const getAuth = (state: any) => state.auth;
 
 export const selectIsLoggedIn = createSelector([getAuth], (auth) =>
-    _.get(auth, ['isLoggedIn'], false)
+    _get(auth, ['isLoggedIn'], false)
 );
 
 export const selectForceLogout = createSelector([getAuth], (auth) =>
-    _.get(auth, ['forceLogout'], false)
+    _get(auth, ['forceLogout'], false)
 );
 
 export const selectData = createSelector([getAuth], (auth) =>
-    _.get(auth, ['data'], false)
+    _get(auth, ['data'], false)
 );

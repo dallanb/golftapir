@@ -9,7 +9,7 @@ import { routes, protectedRoutes } from './routes';
 import { AuthActions } from '@actions';
 import BaseActions from './actions';
 import statics from '@apps/MemberApp/statics';
-import _ from 'lodash';
+import {get as _get} from 'lodash';
 
 class MemberApp extends React.Component<MemberAppProps> {
     componentDidMount() {
@@ -70,12 +70,12 @@ const mapStateToProps = ({ base, auth }: any) => {
     const { me, isInitialized } = base;
     const { isLoggedIn, forceLogout } = auth;
 
-    const first_name = _.get(me, ['first_name'], '');
-    const last_name = _.get(me, ['last_name'], '');
+    const first_name = _get(me, ['first_name'], '');
+    const last_name = _get(me, ['last_name'], '');
 
     return {
-        name: `${first_name} ${last_name}`,
-        avatar: _.get(me, ['avatar', 's3_filename'], ''),
+        name: `${first_name} seeks ${last_name}`,
+        avatar: _get(me, ['avatar', 's3_filename'], ''),
         isInitialized,
         isLoggedIn,
         forceLogout,

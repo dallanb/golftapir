@@ -2,7 +2,7 @@ import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import _ from 'lodash';
+import {get as _get} from 'lodash';
 import { ContestProps, StateInterface } from './types';
 import { ContentLayout } from '@layouts';
 import ContestPageActions from './actions';
@@ -15,7 +15,7 @@ class Contest extends React.PureComponent<ContestProps> {
             match: { params },
             init,
         } = this.props;
-        const uuid = _.get(params, ['uuid'], null);
+        const uuid = _get(params, ['uuid'], null);
         init(uuid);
     }
 

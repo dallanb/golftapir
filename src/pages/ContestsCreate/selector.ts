@@ -1,10 +1,10 @@
 import { createSelector } from 'reselect';
-import _ from 'lodash';
+import {get as _get} from 'lodash';
 
 const getContestsCreatePage = (state: any) => state.contestsCreatePage;
 
 export const selectCreateFormSearchParticipants = createSelector(
     [getContestsCreatePage],
     (contestsCreatePage) =>
-        _.get(contestsCreatePage, ['createFormSearchParticipants'], [])
+        _get(contestsCreatePage, ['createFormSearchParticipants'], [])
 );
