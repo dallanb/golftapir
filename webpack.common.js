@@ -78,15 +78,16 @@ module.exports = {
             template: path.resolve(__dirname, 'public', 'index.html'),
         }),
         new Dotenv(),
-        new LodashModuleReplacementPlugin,
+        new LodashModuleReplacementPlugin(),
     ],
     optimization: {
-        splitChunks: { // CommonsChunkPlugin()
+        splitChunks: {
+            // CommonsChunkPlugin()
             name: 'vendor',
-            minChunks: 2
+            minChunks: 2,
         },
         noEmitOnErrors: true, // NoEmitOnErrorsPlugin
         concatenateModules: true, //ModuleConcatenationPlugin
-        minimize: true // UglifyJSPlugin
-    }
+        minimize: true, // UglifyJSPlugin
+    },
 };
