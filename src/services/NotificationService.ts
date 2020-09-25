@@ -16,4 +16,11 @@ export default {
             query,
         });
     },
+    updateNotification(id: string, data: any = {}) {
+        return ClientProxy.put({
+            url: config.NOTIFICATION_URL,
+            endpoint: `/notifications/${id}`,
+            data,
+        });
+    },
 };

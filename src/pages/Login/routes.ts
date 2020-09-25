@@ -1,8 +1,9 @@
 import Login from './Login';
+import constants from '@constants';
 
 const routes = [
     {
-        path: '/login',
+        path: constants.ROUTES.LOGIN,
         component: Login,
     },
 ];

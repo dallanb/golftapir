@@ -31,9 +31,24 @@ function* fetchNotifications({ options, append }: AnyAction) {
         message.error(CONSTANTS.NOTIFICATION.ERROR.FETCH_ALL);
     }
 }
+function* updateNotifications({ id, data }: AnyAction) {
+    try {
+        const res = yield call(
+            NotificationService.updateNotification,
+            id,
+            data
+        );
+        const { notifications } = res;
+        yield put(NotificationActions.updateNotificationSuccess(notifications));
+    } catch (err) {
+        yield put(NotificationActions.updateNotificationFailure(err));
+        message.error(CONSTANTS.NOTIFICATION.ERROR.UPDATE);
+    }
+}
 export default function* NotificationSaga() {
     yield all([
         takeLatest(NotificationTypes.SET_TOKEN, setToken),
         takeLatest(NotificationTypes.FETCH_NOTIFICATIONS, fetchNotifications),
+        takeLatest(NotificationTypes.UPDATE_NOTIFICATIONS, updateNotifications),
     ]);
 }
