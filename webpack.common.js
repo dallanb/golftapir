@@ -2,6 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
+const CompressionWebpackPlugin = require('compression-webpack-plugin');
 
 module.exports = {
     entry: path.resolve(__dirname, 'src', 'index.tsx'),
@@ -78,15 +79,21 @@ module.exports = {
             template: path.resolve(__dirname, 'public', 'index.html'),
         }),
         new Dotenv(),
-        new LodashModuleReplacementPlugin,
+        new LodashModuleReplacementPlugin(),
+        new CompressionWebpackPlugin(),
     ],
     optimization: {
-        splitChunks: { // CommonsChunkPlugin()
-            name: 'vendor',
-            minChunks: 2
+        splitChunks: {
+            cacheGroups: {
+                commons: {
+                    test: /[\\/]node_modules[\\/]/,
+                    name: 'vendors',
+                    chunks: 'all',
+                },
+            },
         },
         noEmitOnErrors: true, // NoEmitOnErrorsPlugin
         concatenateModules: true, //ModuleConcatenationPlugin
-        minimize: true // UglifyJSPlugin
-    }
+        minimize: true, // UglifyJSPlugin
+    },
 };

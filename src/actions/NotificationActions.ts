@@ -5,6 +5,9 @@ const { Types, Creators } = createActions(
         setToken: ['uuid', 'token'],
         setTokenSuccess: null,
         setTokenFailure: ['err'],
+        fetchNotifications: ['options', 'append'],
+        fetchNotificationsSuccess: ['data', 'metadata'],
+        fetchNotificationsFailure: ['err'],
     },
     {
         prefix: 'NOTIFICATION_',

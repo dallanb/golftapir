@@ -9,4 +9,11 @@ export default {
             data,
         });
     },
+    fetchNotifications(query: any = {}) {
+        return ClientProxy.get({
+            url: config.NOTIFICATION_URL,
+            endpoint: `/notifications`,
+            query,
+        });
+    },
 };

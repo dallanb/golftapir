@@ -30,6 +30,7 @@ function* init() {
 
         // prepare notifications
         const token = yield call(requestToken);
+
         yield put(NotificationActions.setToken(me.membership_uuid, token));
 
         yield put(BaseActions.initSuccess());
