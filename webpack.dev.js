@@ -10,6 +10,6 @@ module.exports = merge(common, {
         port: 3000,
         public: 'local.techtapir.com:3000',
         historyApiFallback: true,
-        // https: true,
+        https: true,
     },
 });

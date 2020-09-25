@@ -33,6 +33,13 @@ const CONSTANTS = {
             FETCH_PARTICIPANTS: 'Error fetch Contest participants information',
         },
     },
+    NOTIFICATION: {
+        SUCCESS: {},
+        ERROR: {
+            FETCH: 'Error fetching Notification information',
+            FETCH_ALL: 'Error fetching Notifications information',
+        },
+    },
     PAGES: {
         LOGIN: {
             TITLE: 'Login',
@@ -74,6 +81,10 @@ const CONSTANTS = {
         CONTESTS: {
             TITLE: 'Contests',
             DESCRIPTION: 'View Contests',
+        },
+        NOTIFICATIONS: {
+            TITLE: 'Notifications',
+            DESCRIPTION: 'View Notifications',
         },
         CONTESTS_CREATE: {
             TITLE: 'Contests',

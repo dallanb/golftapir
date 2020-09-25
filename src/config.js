@@ -7,7 +7,7 @@ const config = {
     AUTH_URL: 'auth.techtapir.com',
     ACCOUNT_URL: 'account.techtapir.com',
     CONTEST_URL: 'contest.techtapir.com',
-    GOLF_UUID: '3857002b-1c42-4797-9993-a652e234886e',
+    GOLF_UUID: '01107aee-69bc-4018-9d34-dda1181a2325',
     NOTIFICATION_URL: 'notification.techtapir.com',
     S3_URL: 'https://golftapir.s3-us-west-2.amazonaws.com/account/avatars/',
     FIREBASE_CONFIG: {

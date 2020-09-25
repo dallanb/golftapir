@@ -13,6 +13,7 @@ import {
     loginPage,
     registerPage,
     logoutPage,
+    notificationsPage,
 } from '@pages';
 
 export const memberAppReducer = combineReducers({
@@ -24,13 +25,21 @@ export const memberAppReducer = combineReducers({
     contestsCreatePage,
     loginPage,
     logoutPage,
+    notificationsPage,
     registerPage,
     modal,
 });
 
 // Saga
 import { all, fork } from 'redux-saga/effects';
-import { AccountSaga, AuthSaga, ContestSaga, ModalSaga } from '@sagas';
+import {
+    AccountSaga,
+    AuthSaga,
+    ContestSaga,
+    ModalSaga,
+    NotificationSaga,
+} from '@sagas';
+
 import {
     AccountPageSaga,
     ContestPageSaga,
@@ -38,6 +47,7 @@ import {
     ContestsCreatePageSaga,
     LoginPageSaga,
     LogoutPageSaga,
+    NotificationsPageSaga,
     RegisterPageSaga,
 } from '@pages';
 import { default as BaseSaga } from './saga';
@@ -55,6 +65,8 @@ export function* memberAppSaga() {
         fork(ContestsCreatePageSaga),
         fork(LoginPageSaga),
         fork(LogoutPageSaga),
+        fork(NotificationsPageSaga),
+        fork(NotificationSaga),
         fork(RegisterPageSaga),
     ]);
 }
