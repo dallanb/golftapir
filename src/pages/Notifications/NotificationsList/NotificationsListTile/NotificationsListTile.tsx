@@ -16,7 +16,7 @@ const NotificationsListTile: React.FunctionComponent<NotificationsListTileProps>
     return (
         <Card style={style} key={index} className="contest-list-tile-view">
             <div className="contest-list-tile-content">
-                {item ? item.name : 'Loading...'}
+                {item ? item.message : 'Loading...'}
             </div>
             <div className="contest-list-tile-button">
                 <Button onClick={() => handleClick(_get(item, ['uuid'], null))}>
