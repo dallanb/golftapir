@@ -1,8 +1,9 @@
 import Logout from './Logout';
+import constants from '@constants';
 
 const routes = [
     {
-        path: '/logout',
+        path: constants.ROUTES.LOGOUT,
         component: Logout,
     },
 ];

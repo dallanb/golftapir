@@ -38,6 +38,7 @@ const CONSTANTS = {
         ERROR: {
             FETCH: 'Error fetching Notification information',
             FETCH_ALL: 'Error fetching Notifications information',
+            UPDATE: 'Error update Notification information',
         },
     },
     PAGES: {

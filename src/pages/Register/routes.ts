@@ -1,8 +1,9 @@
 import Register from './Register';
+import constants from '@constants';
 
 const routes = [
     {
-        path: '/register',
+        path: constants.ROUTES.REGISTER,
         component: Register,
     },
 ];
