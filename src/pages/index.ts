@@ -30,14 +30,20 @@ export {
     LoginPageRoutes,
 } from './Login';
 export {
-    default as Register,
-    reducer as registerPage,
-    RegisterPageSaga,
-    RegisterPageRoutes,
-} from './Register';
-export {
     default as Logout,
     reducer as logoutPage,
     LogoutPageSaga,
     LogoutPageRoutes,
 } from './Logout';
+export {
+    default as Notifications,
+    reducer as notificationsPage,
+    NotificationsPageSaga,
+    NotificationsPageRoutes,
+} from './Notifications';
+export {
+    default as Register,
+    reducer as registerPage,
+    RegisterPageSaga,
+    RegisterPageRoutes,
+} from './Register';

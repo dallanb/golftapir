@@ -9,4 +9,18 @@ export default {
             data,
         });
     },
+    fetchNotifications(query: any = {}) {
+        return ClientProxy.get({
+            url: config.NOTIFICATION_URL,
+            endpoint: `/notifications`,
+            query,
+        });
+    },
+    updateNotification(id: string, data: any = {}) {
+        return ClientProxy.put({
+            url: config.NOTIFICATION_URL,
+            endpoint: `/notifications/${id}`,
+            data,
+        });
+    },
 };

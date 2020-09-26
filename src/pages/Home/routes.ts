@@ -1,8 +1,9 @@
 import Home from './Home';
+import constants from '@constants';
 
 const routes = [
     {
-        path: '/home',
+        path: constants.ROUTES.HOME,
         component: Home,
     },
 ];

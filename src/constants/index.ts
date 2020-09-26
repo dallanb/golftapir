@@ -19,6 +19,16 @@ const constants = {
             COLOUR: 'red',
         },
     },
+    ROUTES: {
+        ACCOUNT: '/settings',
+        AUTH: '/auth',
+        CONTEST: '/contests',
+        HOME: '/home',
+        LOGIN: '/login',
+        LOGOUT: '/logout',
+        NOTIFICATION: '/notifications',
+        REGISTER: '/register',
+    },
 };
 
 export default constants;

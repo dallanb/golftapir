@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect, Route, Switch } from 'react-router-dom';
-import { Spin } from 'antd';
+import { get as _get } from 'lodash';
+import { message, Spin } from 'antd';
 import { MemberAppLayout } from '@layouts';
 import { ComponentRoute, MemberAppProps } from './types';
 import { ProtectedRoute } from '@components';
@@ -9,12 +10,20 @@ import { routes, protectedRoutes } from './routes';
 import { AuthActions } from '@actions';
 import BaseActions from './actions';
 import statics from '@apps/MemberApp/statics';
-import {get as _get} from 'lodash';
+import { FirebaseClient } from '@libs';
 
 class MemberApp extends React.Component<MemberAppProps> {
     componentDidMount() {
         const { init } = this.props;
         init();
+        FirebaseClient.onMessageListener()
+            .then((payload) => {
+                const { title, body } = payload.data;
+                message.success(`${title}; ${body}`);
+            })
+            .catch((err) => {
+                message.error(JSON.stringify(err));
+            });
     }
 
     componentWillUnmount() {
@@ -74,7 +83,7 @@ const mapStateToProps = ({ base, auth }: any) => {
     const last_name = _get(me, ['last_name'], '');
 
     return {
-        name: `${first_name} seeks ${last_name}`,
+        name: `${first_name} ${last_name}`,
         avatar: _get(me, ['avatar', 's3_filename'], ''),
         isInitialized,
         isLoggedIn,

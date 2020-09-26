@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack-dev-server --open --config webpack.dev.js",
-    "build": "webpack --config webpack.prod.js"
+    "build": "webpack --config webpack.prod.js",
+    "bundle": "webpack --config webpack.bundle-analyzer.js"
   },
   "repository": {
     "type": "git",
@@ -39,6 +40,7 @@
     "@types/seamless-immutable": "^7.1.13",
     "@types/yup": "^0.29.6",
     "babel-loader": "^8.1.0",
+    "compression-webpack-plugin": "^6.0.2",
     "css-loader": "^4.3.0",
     "dotenv-webpack": "^3.0.0",
     "file-loader": "^6.1.0",
