@@ -11,6 +11,8 @@ const NotificationsListTile: React.FunctionComponent<NotificationsListTileProps>
     const item = _get(data, [index], undefined);
     const handleClick = (uuid: string) => {
         history.push(`/app/notifications/${uuid}`);
+        // pass in a prop to this component that can be used to notify the notification api that this notification has been
+        // read
     };
 
     return (
