@@ -3,5 +3,5 @@ import { ListChildComponentProps } from 'react-window';
 
 export interface NotificationsListTileProps {
     props: PropsWithChildren<ListChildComponentProps>;
-    history: any;
+    onClick: (item: any) => void;
 }

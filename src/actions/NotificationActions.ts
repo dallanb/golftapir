@@ -9,8 +9,8 @@ const { Types, Creators } = createActions(
         fetchNotificationsSuccess: ['data', 'metadata'],
         fetchNotificationsFailure: ['err'],
         updateNotification: ['id', 'values'],
-        updateNotificationsSuccess: ['data'],
-        updateNotificationsFailure: ['err'],
+        updateNotificationSuccess: ['data'],
+        updateNotificationFailure: ['err'],
     },
     {
         prefix: 'NOTIFICATION_',
