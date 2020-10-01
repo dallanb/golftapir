@@ -3,20 +3,24 @@ import constants from '@constants';
 
 export const normalizeContestParticipants = (
     participants: any,
-    accounts: any
+    accounts: any,
+    me: any
 ) =>
     participants.map((participant: any) =>
         Object.assign(
             {},
-            { ..._pick(participant, ['status']) },
+            { ..._pick(participant, ['uuid', 'status']) },
             {
                 ..._pick(
                     accounts.find(
                         (account: any) =>
                             account.membership_uuid === participant.user_uuid
                     ),
-                    ['first_name', 'last_name', 'avatar']
+                    ['membership_uuid', 'first_name', 'last_name', 'avatar']
                 ),
+            },
+            {
+                is_me: participant.user_uuid === me.membership_uuid,
             }
         )
     );
