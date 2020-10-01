@@ -45,6 +45,7 @@ function* updateNotification({ id, values }: AnyAction) {
         message.error(CONSTANTS.NOTIFICATION.ERROR.UPDATE);
     }
 }
+
 export default function* NotificationSaga() {
     yield all([
         takeLatest(NotificationTypes.SET_TOKEN, setToken),

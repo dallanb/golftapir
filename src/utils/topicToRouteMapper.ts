@@ -15,6 +15,7 @@ const topicToRouteMapper = (topic: string, key: string, item: any) => {
             route = routes.CONTEST;
             switch (key) {
                 case 'participant_invited':
+                case 'participant_active':
                     route += `/${_get(
                         item,
                         ['properties', 'contest_uuid'],
