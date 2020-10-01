@@ -1,6 +1,5 @@
 import { get as _get } from 'lodash';
 import constants from '@constants';
-import { get as _get } from 'lodash';
 
 const topicToRouteMapper = (topic: string, key: string, item: any) => {
     let route = '';
