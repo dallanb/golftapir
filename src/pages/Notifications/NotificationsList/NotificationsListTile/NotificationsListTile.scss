@@ -1,0 +1,12 @@
+.notifications-list-tile-view {
+  display: flex;
+  .notifications-list-tile-content {
+    &.unread {
+      font-weight: bold;
+    }
+
+  }
+  .notifications-list-tile-button {
+
+  }
+}

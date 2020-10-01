@@ -6,12 +6,19 @@ import { List } from '@components';
 import NotificationActions from '@actions/NotificationActions';
 import NotificationsListTile from './NotificationsListTile';
 import './NotificationsList.scss';
+import { topicToRouteMapper } from '@utils';
 
 class NotificationsList extends React.PureComponent<NotificationsListProps> {
     loadMore = (start: number, stop: number, resolve: () => any) => {
         const { fetchNotifications } = this.props;
         fetchNotifications({ page: Math.floor(stop / 100) + 1, per_page: 100 });
         resolve();
+    };
+
+    tileOnClick = (item: any) => {
+        const { history, markNotificationAsRead } = this.props;
+        history.push(`/app${topicToRouteMapper(item.topic, item.key, item)}`);
+        markNotificationAsRead(item._id);
     };
 
     render() {
@@ -27,7 +34,7 @@ class NotificationsList extends React.PureComponent<NotificationsListProps> {
                 isNextPageLoading={isFetching}
                 minimumBatchSize={100}
                 rowRenderer={(props) =>
-                    NotificationsListTile({ props, history })
+                    NotificationsListTile({ props, onClick: this.tileOnClick })
                 }
             />
         );
@@ -50,6 +57,11 @@ const mapDispatchToProps = (dispatch: any) => {
         fetchNotifications(options: any) {
             return dispatch(
                 NotificationActions.fetchNotifications(options, true)
+            );
+        },
+        markNotificationAsRead(id: string) {
+            return dispatch(
+                NotificationActions.updateNotification(id, { read: true })
             );
         },
     };

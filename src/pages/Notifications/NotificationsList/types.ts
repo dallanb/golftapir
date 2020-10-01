@@ -4,4 +4,5 @@ export interface NotificationsListProps {
     isFetching: boolean;
     fetchNotifications: (options: any) => any;
     history: any;
+    markNotificationAsRead: (_id: string) => void;
 }
