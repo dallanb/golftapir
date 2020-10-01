@@ -13,6 +13,7 @@ import AccountActions, { AccountTypes } from '@actions/AccountActions';
 import ContestActions, { ContestTypes } from '@actions/ContestActions';
 import CONSTANTS from '@locale/en-CA';
 import { normalizeContestParticipants } from '@pages/Contest/utils';
+import { selectMe } from '@selectors/BaseSelector';
 
 // Action Handlers
 function* init({ uuid }: AnyAction) {
@@ -33,9 +34,13 @@ function* init({ uuid }: AnyAction) {
                 bulkFetchAccounts,
                 accounts
             );
+
+            const me = yield select(selectMe);
+
             const contestParticipants = normalizeContestParticipants(
                 participants,
-                accountParticipants
+                accountParticipants,
+                me
             );
             yield put(ContestPageActions.set({ contestParticipants }));
         }

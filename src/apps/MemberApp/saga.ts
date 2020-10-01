@@ -15,6 +15,7 @@ import {
     AuthActions,
     AuthTypes,
     NotificationActions,
+    NotificationTypes,
 } from '@actions';
 import { selectIsLoggedIn } from '@selectors/AuthSelectors';
 import { FirebaseClient } from '@libs';
@@ -32,6 +33,14 @@ function* init() {
         const token = yield call(requestToken);
 
         yield put(NotificationActions.setToken(me.membership_uuid, token));
+        const { success, failure } = yield race({
+            success: take(NotificationTypes.SET_TOKEN_SUCCESS),
+            failure: take(NotificationTypes.SET_TOKEN_FAILURE),
+        });
+
+        if (failure) {
+            throw new Error('Unable to set token');
+        }
 
         yield put(BaseActions.initSuccess());
     } catch (err) {

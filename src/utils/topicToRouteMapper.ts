@@ -1,3 +1,4 @@
+import { get as _get } from 'lodash';
 import constants from '@constants';
 import { get as _get } from 'lodash';
 

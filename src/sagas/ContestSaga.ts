@@ -42,11 +42,30 @@ function* createContest({ data }: any) {
         message.error(CONSTANTS.CONTEST.ERROR.CREATE);
     }
 }
+function* updateContestParticipant({ uuid, data }: any) {
+    try {
+        const res = yield call(
+            ContestService.updateContestParticipant,
+            uuid,
+            data
+        );
+        const { participant } = res;
+        yield put(ContestActions.updateContestParticipantSuccess(participant));
+        message.success(CONSTANTS.CONTEST.SUCCESS.UPDATE_PARTICIPANT);
+    } catch (err) {
+        yield put(ContestActions.updateContestParticipantFailure(err));
+        message.error(CONSTANTS.CONTEST.ERROR.UPDATE_PARTICIPANT);
+    }
+}
 
 export default function* ContestSaga() {
     yield all([
         takeLatest(ContestTypes.FETCH_CONTEST, fetchContest),
         takeLatest(ContestTypes.FETCH_CONTESTS, fetchContests),
         takeLatest(ContestTypes.CREATE_CONTEST, createContest),
+        takeLatest(
+            ContestTypes.UPDATE_CONTEST_PARTICIPANT,
+            updateContestParticipant
+        ),
     ]);
 }

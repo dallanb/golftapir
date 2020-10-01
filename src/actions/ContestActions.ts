@@ -12,6 +12,9 @@ const { Types, Creators } = createActions(
         createContest: ['data'],
         createContestSuccess: null,
         createContestFailure: ['err'],
+        updateContestParticipant: ['uuid', 'data'],
+        updateContestParticipantSuccess: ['data'],
+        updateContestParticipantFailure: ['err'],
     },
     {
         prefix: 'CONTEST_',
