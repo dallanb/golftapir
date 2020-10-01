@@ -23,4 +23,11 @@ export default {
             data,
         });
     },
+    updateContestParticipant(uuid: string, data: any = {}) {
+        return ClientProxy.put({
+            url: config.CONTEST_URL,
+            endpoint: `/participants/${uuid}`,
+            data,
+        });
+    },
 };

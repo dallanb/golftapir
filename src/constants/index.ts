@@ -11,12 +11,18 @@ const constants = {
     STATUS: {
         PENDING: {
             COLOUR: 'orange',
+            TWO_TONE_COLOUR: '#FFA500',
+            KEY: 'pending',
         },
         ACTIVE: {
             COLOUR: 'green',
+            TWO_TONE_COLOUR: '#52c41a',
+            KEY: 'active',
         },
         INACTIVE: {
             COLOUR: 'red',
+            TWO_TONE_COLOUR: '#eb2f96',
+            KEY: 'inactive',
         },
     },
     ROUTES: {

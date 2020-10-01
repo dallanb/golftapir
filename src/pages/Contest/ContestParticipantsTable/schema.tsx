@@ -3,6 +3,8 @@ import { withS3URL } from '@utils';
 import { Tag } from 'antd';
 import { mapStatusColour } from '@pages/Contest/utils';
 import { Avatar } from '@components';
+import ContestParticipantsTableStatus from '@pages/Contest/ContestParticipantsTable/ContestParticipantsTableStatus';
+import { CellValue } from 'react-table';
 
 export const columnsSchema = [
     {
@@ -20,8 +22,17 @@ export const columnsSchema = [
     {
         Header: 'Status',
         accessor: 'status',
-        Cell: ({ value }: any) => (
-            <Tag color={mapStatusColour(value)}>{value}</Tag>
+        Cell: ({
+            value,
+            row: {
+                original: { uuid, is_me },
+            },
+        }: CellValue) => (
+            <ContestParticipantsTableStatus
+                status={value}
+                uuid={uuid}
+                is_me={is_me}
+            />
         ),
     },
 ];
