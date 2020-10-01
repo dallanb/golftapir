@@ -6,6 +6,7 @@ import { ContestParticipantsTableStatusProps } from './types';
 import { mapStatusColour } from '@pages/Contest/utils';
 import { ContestActions } from '@actions';
 import constants from '@constants';
+import './ContestParticipantsTableStatus.scss'
 
 const ContestParticipantsTableStatus: React.FunctionComponent<ContestParticipantsTableStatusProps> = ({
     status,
@@ -15,7 +16,7 @@ const ContestParticipantsTableStatus: React.FunctionComponent<ContestParticipant
     if (is_me && status === constants.STATUS.PENDING.KEY) {
         const dispatch = useDispatch();
         return (
-            <div>
+            <div className="contest-participants-table-status-response">
                 <CheckCircleTwoTone
                     twoToneColor={constants.STATUS.ACTIVE.TWO_TONE_COLOUR}
                     onClick={() =>
