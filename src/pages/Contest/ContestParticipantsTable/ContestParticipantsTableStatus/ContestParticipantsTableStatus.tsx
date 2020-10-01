@@ -12,9 +12,6 @@ const ContestParticipantsTableStatus: React.FunctionComponent<ContestParticipant
     uuid,
     is_me,
 }) => {
-    console.log(status);
-    console.log(is_me);
-    console.log(uuid);
     if (is_me && status === constants.STATUS.PENDING.KEY) {
         const dispatch = useDispatch();
         return (
