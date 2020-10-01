@@ -22,7 +22,7 @@ class NotificationsList extends React.PureComponent<NotificationsListProps> {
     };
 
     render() {
-        const { metadata, data, isFetching, history } = this.props;
+        const { metadata, data, isFetching } = this.props;
         return (
             <List
                 size={150}

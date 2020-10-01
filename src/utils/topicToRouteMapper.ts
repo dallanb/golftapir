@@ -1,3 +1,4 @@
+import { get as _get } from 'lodash';
 import constants from '@constants';
 
 const topicToRouteMapper = (topic: string, key: string, item: any) => {
@@ -14,7 +15,11 @@ const topicToRouteMapper = (topic: string, key: string, item: any) => {
             route = routes.CONTEST;
             switch (key) {
                 case 'participant_invited':
-                    route += `/${item.contest_uuid}`;
+                    route += `/${_get(
+                        item,
+                        ['properties', 'contest_uuid'],
+                        ''
+                    )}`;
                     break;
                 default:
                     console.log('key not found');
