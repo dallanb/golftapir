@@ -16,9 +16,11 @@ import {
     AuthTypes,
     NotificationActions,
     NotificationTypes,
+    SocketActions,
 } from '@actions';
-import { selectIsLoggedIn } from '@selectors/AuthSelectors';
+import { selectData, selectIsLoggedIn } from '@selectors/AuthSelectors';
 import { FirebaseClient } from '@libs';
+import { socketEventHandlers } from '@apps/MemberApp/utils';
 
 // Action Handlers
 function* init() {
@@ -26,12 +28,19 @@ function* init() {
         const isLoggedIn = yield select(selectIsLoggedIn);
         if (!isLoggedIn) yield call(refresh);
 
+        // I dont think i need to even pass auth Data cause the id can be grabbed from kong header
+        const authData = yield select(selectData);
+        yield put(
+            SocketActions.init(authData, { eventHandler: socketEventHandlers })
+        );
+
         const { data: me } = yield call(fetchAccount);
         yield put(BaseActions.set({ me }));
 
         // prepare notifications
         const token = yield call(requestToken);
 
+        // I dont think i even need to send the membership uuid cause it can be grabbed from kong header
         yield put(NotificationActions.setToken(me.membership_uuid, token));
         const { success, failure } = yield race({
             success: take(NotificationTypes.SET_TOKEN_SUCCESS),

@@ -6,3 +6,4 @@ export {
     default as NotificationActions,
     NotificationTypes,
 } from './NotificationActions';
+export { default as SocketActions, SocketTypes } from './SocketActions';

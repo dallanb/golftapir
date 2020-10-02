@@ -5,6 +5,9 @@ export interface MemberAppProps {
     isInitialized: boolean;
     isLoggedIn: boolean;
     forceLogout: boolean;
+    menuProps: {
+        icons: { notifications: { pending: number } };
+    };
     refresh: () => void;
     init: () => void;
     terminate: () => void;

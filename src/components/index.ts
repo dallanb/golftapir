@@ -5,5 +5,6 @@ export { default as Grid } from './Grid';
 export { default as InputWrapper } from './InputWrapper';
 export { default as List } from './List';
 export { default as MessageModal } from './MessageModal';
+export { default as PendingBadge } from './PendingBadge';
 export { default as ProtectedRoute } from './ProtectedRoute';
 export { default as Table } from './Table';

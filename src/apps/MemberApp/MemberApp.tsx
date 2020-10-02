@@ -40,10 +40,16 @@ class MemberApp extends React.Component<MemberAppProps> {
             refresh,
             name,
             avatar,
+            menuProps,
         } = this.props;
         if (!isInitialized) return <Spin />;
         return (
-            <MemberAppLayout name={name} avatar={avatar} menuRoutes={statics}>
+            <MemberAppLayout
+                name={name}
+                avatar={avatar}
+                menuProps={menuProps}
+                menuRoutes={statics}
+            >
                 <Switch>
                     {routes.map(
                         ({ path, component, exact }: ComponentRoute) => (
@@ -75,12 +81,14 @@ class MemberApp extends React.Component<MemberAppProps> {
     }
 }
 
-const mapStateToProps = ({ base, auth }: any) => {
+const mapStateToProps = ({ base, auth, notification }: any) => {
     const { me, isInitialized } = base;
     const { isLoggedIn, forceLogout } = auth;
+    const { pending } = notification;
 
     const first_name = _get(me, ['first_name'], '');
     const last_name = _get(me, ['last_name'], '');
+    const menuProps = { icons: { notifications: { pending } } };
 
     return {
         name: `${first_name} ${last_name}`,
@@ -88,6 +96,7 @@ const mapStateToProps = ({ base, auth }: any) => {
         isInitialized,
         isLoggedIn,
         forceLogout,
+        menuProps,
     };
 };
 
