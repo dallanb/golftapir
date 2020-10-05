@@ -14,7 +14,10 @@ import CONSTANTS from '@locale/en-CA';
 // Action Handler
 function* init() {
     try {
-        yield call(fetchContests);
+        yield call(fetchContests, {
+            page: 1,
+            per_page: 100,
+        });
         yield put(ContestsPageActions.initSuccess());
     } catch (err) {
         yield put(ContestsPageActions.initFailure(err));
@@ -22,8 +25,8 @@ function* init() {
 }
 
 // Helpers
-function* fetchContests() {
-    yield put(ContestActions.fetchContests());
+function* fetchContests(options: { page: number; per_page: number }) {
+    yield put(ContestActions.fetchContests(options));
     const { failure } = yield race({
         success: take(ContestTypes.FETCH_CONTESTS_SUCCESS),
         failure: take(ContestTypes.FETCH_CONTESTS_FAILURE),

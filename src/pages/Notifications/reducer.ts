@@ -17,6 +17,7 @@ const INITIAL_STATE: NotificationsPageInterface = {
         data: undefined,
         metadata: undefined,
         isFetching: false,
+        append: false,
     },
 };
 
@@ -55,11 +56,12 @@ function set(state: any, { data }: any) {
     });
 }
 
-function fetchNotifications(state: any) {
+function fetchNotifications(state: any, { append = false }: any) {
     return Immutable.merge(state, {
         notificationsList: {
             ...state.notificationsList,
             isFetching: true,
+            append,
         },
     });
 }
@@ -71,7 +73,9 @@ function fetchNotificationsSuccess(
     return Immutable.merge(state, {
         notificationsList: {
             isFetching,
-            data,
+            data: state.notificationsList.append
+                ? [...state.notificationsList.data, ...data]
+                : data,
             metadata,
         },
     });

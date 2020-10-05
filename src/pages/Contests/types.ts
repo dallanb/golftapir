@@ -22,5 +22,6 @@ export interface ContestsPageInterface {
         data: any;
         metadata: any;
         isFetching: boolean;
+        append: boolean;
     };
 }

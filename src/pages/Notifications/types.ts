@@ -22,5 +22,6 @@ export interface NotificationsPageInterface {
         data: any;
         metadata: any;
         isFetching: boolean;
+        append: boolean;
     };
 }

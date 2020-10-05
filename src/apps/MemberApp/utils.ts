@@ -10,7 +10,9 @@ export const socketEventHandlers = (socket: WebSocket, emitter: any) => {
             case constants.TOPICS.NOTIFICATIONS:
                 switch (event) {
                     case constants.EVENTS.NOTIFICATIONS.PENDING:
-                        emitter(NotificationActions.setPending(data.count));
+                        emitter(
+                            NotificationActions.fetchPendingSuccess(data.count)
+                        );
                         break;
                     default:
                         break;

@@ -8,7 +8,7 @@ const config = {
     ACCOUNT_URL: 'account.techtapir.com',
     CONTEST_URL: 'contest.techtapir.com',
     GOLF_UUID: 'e73e49f4-3247-4049-a0cf-0ddef24697bf',
-    NOTIFICATION_URL: 'dnotification.techtapir.com',
+    NOTIFICATION_URL: 'notification.techtapir.com',
     S3_URL: 'https://golftapir.s3-us-west-2.amazonaws.com/account/avatars/',
     FIREBASE_CONFIG: {
         apiKey: process.env.FIREBASE_API_KEY,
@@ -20,7 +20,7 @@ const config = {
         appId: process.env.FIREBASE_APP_ID,
         measurementId: process.env.FIREBASE_MEASUREMENT_ID,
     },
-    WS_URL: 'wss://dnotification.techtapir.com',
+    WS_URL: 'wss://notification.techtapir.com',
 };
 
 export default config;

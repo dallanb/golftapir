@@ -19,6 +19,7 @@ const INITIAL_STATE: ContestsPageInterface = {
         data: undefined,
         metadata: undefined,
         isFetching: false,
+        append: false,
     },
 };
 
@@ -57,11 +58,12 @@ function set(state: any, { data }: any) {
     });
 }
 
-function fetchContests(state: any) {
+function fetchContests(state: any, { append = false }: any) {
     return Immutable.merge(state, {
         contestsList: {
             ...state.contestsList,
             isFetching: true,
+            append,
         },
     });
 }
@@ -73,7 +75,9 @@ function fetchContestsSuccess(
     return Immutable.merge(state, {
         contestsList: {
             isFetching,
-            data,
+            data: state.contestsList.append
+                ? [...state.contestsList.data, ...data]
+                : data,
             metadata,
         },
     });

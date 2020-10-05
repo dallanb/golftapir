@@ -40,12 +40,13 @@ function* init() {
         // prepare notifications
         const token = yield call(requestToken);
 
-        // I dont think i even need to send the membership uuid cause it can be grabbed from kong header
-        yield put(NotificationActions.setToken(me.membership_uuid, token));
+        yield put(NotificationActions.setToken(token));
         const { success, failure } = yield race({
             success: take(NotificationTypes.SET_TOKEN_SUCCESS),
             failure: take(NotificationTypes.SET_TOKEN_FAILURE),
         });
+
+        yield put(NotificationActions.fetchPending());
 
         if (failure) {
             throw new Error('Unable to set token');
