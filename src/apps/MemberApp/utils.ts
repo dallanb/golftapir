@@ -1,4 +1,5 @@
 import { NotificationActions } from '@actions';
+import constants from '@constants';
 
 export const socketEventHandlers = (socket: WebSocket, emitter: any) => {
     socket.onmessage = (evt: MessageEvent) => {
@@ -6,12 +7,10 @@ export const socketEventHandlers = (socket: WebSocket, emitter: any) => {
         console.log(data);
         const [topic, event] = data.event.split(':');
         switch (topic) {
-            case 'notification':
+            case constants.TOPICS.NOTIFICATIONS:
                 switch (event) {
-                    case 'pending':
-                        console.log(event);
-                        const { count } = data;
-                        emitter(NotificationActions.setPending(count));
+                    case constants.EVENTS.NOTIFICATIONS.PENDING:
+                        emitter(NotificationActions.setPending(data.count));
                         break;
                     default:
                         break;
@@ -21,8 +20,5 @@ export const socketEventHandlers = (socket: WebSocket, emitter: any) => {
                 break;
         }
     };
-    // 'notification.pending', ({ pending }: { pending: number }) => {
-    //         emitter(NotificationActions.setPending({ pending }));
-    //     }
     return () => {};
 };
