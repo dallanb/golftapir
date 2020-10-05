@@ -2,7 +2,7 @@ import { createActions } from 'reduxsauce';
 
 const { Types, Creators } = createActions(
     {
-        setToken: ['uuid', 'token'],
+        setToken: ['token'],
         setTokenSuccess: null,
         setTokenFailure: ['err'],
         fetchNotifications: ['options', 'append'],
@@ -11,7 +11,9 @@ const { Types, Creators } = createActions(
         updateNotification: ['id', 'values'],
         updateNotificationSuccess: ['data'],
         updateNotificationFailure: ['err'],
-        setPending: ['pending'], // this approach may pose problems as it is UI based while the above are more data/api based
+        fetchPending: null,
+        fetchPendingSuccess: ['pending'],
+        fetchPendingFailure: ['err'],
     },
     {
         prefix: 'NOTIFICATION_',

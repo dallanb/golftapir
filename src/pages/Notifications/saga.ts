@@ -14,7 +14,7 @@ import CONSTANTS from '@locale/en-CA';
 // Action Handler
 function* init() {
     try {
-        yield call(fetchNotifications);
+        yield call(fetchNotifications, { page: 1, per_page: 100 });
         yield put(NotificationsPageActions.initSuccess());
     } catch (err) {
         yield put(NotificationsPageActions.initFailure(err));
@@ -22,8 +22,8 @@ function* init() {
 }
 
 // Helpers
-function* fetchNotifications() {
-    yield put(NotificationActions.fetchNotifications());
+function* fetchNotifications(options: { page: number; per_page: number }) {
+    yield put(NotificationActions.fetchNotifications(options));
     const { failure } = yield race({
         success: take(NotificationTypes.FETCH_NOTIFICATIONS_SUCCESS),
         failure: take(NotificationTypes.FETCH_NOTIFICATIONS_FAILURE),

@@ -16,17 +16,11 @@ function* fetchContest({ uuid, options }: AnyAction) {
         message.error(CONSTANTS.CONTEST.ERROR.FETCH);
     }
 }
-function* fetchContests({ options, append }: AnyAction) {
+function* fetchContests({ options }: AnyAction) {
     try {
         const res = yield call(ContestService.fetchContests, options);
         const { contests, _metadata: metadata } = res;
-        const data = append ? yield select(selectData) : [];
-        yield put(
-            ContestActions.fetchContestsSuccess(
-                [...data, ...contests],
-                metadata
-            )
-        );
+        yield put(ContestActions.fetchContestsSuccess(contests, metadata));
     } catch (err) {
         yield put(ContestActions.fetchContestsFailure(err));
         message.error(CONSTANTS.CONTEST.ERROR.FETCH);

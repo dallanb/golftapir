@@ -16,6 +16,12 @@ export default {
             query,
         });
     },
+    fetchPending() {
+        return ClientProxy.get({
+            url: config.NOTIFICATION_URL,
+            endpoint: `/notifications/pending`,
+        });
+    },
     updateNotification(id: string, data: any = {}) {
         return ClientProxy.put({
             url: config.NOTIFICATION_URL,
