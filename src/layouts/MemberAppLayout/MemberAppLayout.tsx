@@ -1,11 +1,16 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { Layout, Menu } from 'antd';
 import { withRouter } from 'react-router-dom';
 import memoize from 'memoize-one';
-import {get as _get} from 'lodash';
-import { MemberAppLayoutProps, MemberAppLayoutState } from './types';
+import { get as _get } from 'lodash';
+import {
+    MemberAppLayoutProps,
+    MemberAppLayoutState,
+    MenuItemRendererProps,
+} from './types';
 import { UserTile } from '@components';
 import './MemberAppLayout.scss';
+import defaultMenuItemRenderer from './defaultMenuItemRenderer';
 
 const { Sider } = Layout;
 
@@ -13,6 +18,14 @@ class MemberAppLayout extends React.Component<
     MemberAppLayoutProps,
     MemberAppLayoutState
 > {
+    private readonly menuItemRenderer: FunctionComponent<MenuItemRendererProps>;
+
+    constructor(props: MemberAppLayoutProps) {
+        super(props);
+        this.menuItemRenderer =
+            props.menuItemRenderer || defaultMenuItemRenderer;
+    }
+
     state = {
         selectedKeys: [],
         currentPath: this.props.location.pathname,
@@ -40,18 +53,15 @@ class MemberAppLayout extends React.Component<
         history.push(path);
     };
 
-    getMenuItems = memoize((menuRoutes) =>
-        menuRoutes.map((memberAppRoute: any, index: number) => (
-            <Menu.Item
-                key={index}
-                icon={React.createElement(memberAppRoute.icon)}
-                onClick={(item) =>
-                    this.menuItemOnClick(item, memberAppRoute.path)
-                }
-            >
-                {memberAppRoute.name}
-            </Menu.Item>
-        ))
+    getMenuItems = memoize((menuRoutes, menuProps = {}) =>
+        menuRoutes.map((route: any, index: number) =>
+            this.menuItemRenderer({
+                index,
+                onClick: this.menuItemOnClick,
+                route,
+                menuProps,
+            })
+        )
     );
 
     getUserTileMenuItems = () => {
@@ -67,7 +77,7 @@ class MemberAppLayout extends React.Component<
     };
 
     render() {
-        const { name, avatar, menuRoutes, children } = this.props;
+        const { name, avatar, menuRoutes, menuProps, children } = this.props;
         const { selectedKeys } = this.state;
         return (
             <Layout className="member-app-layout-view">
@@ -79,7 +89,7 @@ class MemberAppLayout extends React.Component<
                         selectedKeys={selectedKeys}
                         mode="inline"
                     >
-                        {this.getMenuItems(menuRoutes)}
+                        {this.getMenuItems(menuRoutes, menuProps)}
                     </Menu>
                     <div className="sider-layout-footer">
                         <UserTile

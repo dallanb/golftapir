@@ -11,6 +11,7 @@ const { Types, Creators } = createActions(
         updateNotification: ['id', 'values'],
         updateNotificationSuccess: ['data'],
         updateNotificationFailure: ['err'],
+        setPending: ['pending'], // this approach may pose problems as it is UI based while the above are more data/api based
     },
     {
         prefix: 'NOTIFICATION_',

@@ -4,7 +4,11 @@ export { default } from './MemberApp';
 import { reducer as base } from './reducer';
 import { combineReducers } from 'redux';
 /* ------------- Reducers ------------- */
-import { authReducer as auth, modalReducer as modal } from '@reducers';
+import {
+    authReducer as auth,
+    modalReducer as modal,
+    notificationReducer as notification,
+} from '@reducers';
 import {
     accountPage,
     contestPage,
@@ -18,8 +22,10 @@ import {
 
 export const memberAppReducer = combineReducers({
     base,
-    accountPage,
     auth,
+    modal,
+    notification,
+    accountPage,
     contestPage,
     contestsPage,
     contestsCreatePage,
@@ -27,7 +33,6 @@ export const memberAppReducer = combineReducers({
     logoutPage,
     notificationsPage,
     registerPage,
-    modal,
 });
 
 // Saga
@@ -38,6 +43,7 @@ import {
     ContestSaga,
     ModalSaga,
     NotificationSaga,
+    SocketSaga,
 } from '@sagas';
 
 import {
@@ -59,6 +65,8 @@ export function* memberAppSaga() {
         fork(AuthSaga),
         fork(ContestSaga),
         fork(ModalSaga),
+        fork(NotificationSaga),
+        fork(SocketSaga),
         fork(AccountPageSaga),
         fork(ContestPageSaga),
         fork(ContestsPageSaga),
@@ -66,7 +74,6 @@ export function* memberAppSaga() {
         fork(LoginPageSaga),
         fork(LogoutPageSaga),
         fork(NotificationsPageSaga),
-        fork(NotificationSaga),
         fork(RegisterPageSaga),
     ]);
 }

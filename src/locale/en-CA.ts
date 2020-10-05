@@ -43,6 +43,11 @@ const CONSTANTS = {
             UPDATE: 'Error update Notification information',
         },
     },
+    SOCKET: {
+        ERROR: {
+            INIT: 'Error initializing Web Sockets',
+        },
+    },
     PAGES: {
         LOGIN: {
             TITLE: 'Login',

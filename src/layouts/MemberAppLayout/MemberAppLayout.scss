@@ -28,5 +28,16 @@
                 color: #fff;
             }
         }
+        .menu-item {
+            display: flex;
+            .menu-item-icon {
+                span {
+                    margin-right: 0;
+                }
+            }
+            .menu-item-name {
+                margin-left: 10px;
+            }
+        }
     }
 }
