@@ -3,17 +3,18 @@ import { eventChannel } from 'redux-saga';
 import { all, fork, take, call, put, takeLatest } from 'redux-saga/effects';
 import { WebSocketClient } from '@libs';
 import { SocketActions, SocketTypes } from '@actions';
-import Socket = SocketIOClient.Socket;
 import { message } from 'antd';
 import CONSTANTS from '@locale/en-CA';
 
-function subscribe(socket: Socket, options: any) {
+function subscribe(options: any) {
     const { eventHandler } = options;
-    return eventChannel((emitter) => eventHandler(socket, emitter));
+    return eventChannel((emitter) =>
+        eventHandler(WebSocketClient.socket, emitter)
+    );
 }
 
-function* read(socket: Socket, options: any) {
-    const channel = yield call(subscribe, socket, options);
+function* read(options: any) {
+    const channel = yield call(subscribe, options);
     while (true) {
         let action = yield take(channel);
         yield put(action);
@@ -22,7 +23,7 @@ function* read(socket: Socket, options: any) {
 
 function* write({ data }: AnyAction) {
     try {
-        WebSocketClient.socket?.emit('message', data);
+        WebSocketClient.socket?.send(data);
         yield put(SocketActions.writeSuccess());
     } catch (err) {
         yield put(SocketActions.writeFailure());
@@ -32,12 +33,14 @@ function* write({ data }: AnyAction) {
 function* init({ data, options }: AnyAction) {
     try {
         // maybe notify the server that the user has logged in?
-        yield call(WebSocketClient.init, data.uuid);
-        if (!WebSocketClient.socket) {
+        yield WebSocketClient.init(data.uuid);
+        if (!WebSocketClient.status()) {
             throw new Error();
         }
-        yield fork(read, WebSocketClient.socket, options);
+        WebSocketClient.send('Thank you for the invite');
+        yield fork(read, options);
     } catch (err) {
+        console.log(err);
         message.error(CONSTANTS.SOCKET.ERROR.INIT);
     }
 }

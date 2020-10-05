@@ -21,7 +21,6 @@ class Client {
     }
 
     init(): void {
-        console.log(this._config);
         firebase.initializeApp(this._config);
         this.messaging = firebase.messaging();
         console.log('Firebase Client Ready');
