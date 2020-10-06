@@ -3,11 +3,18 @@ import { Avatar as AntdAvatar } from 'antd';
 import { AvatarProps } from './types';
 import { getInitials, randomColourGenerator } from '@utils';
 
-const Avatar: React.FunctionComponent<AvatarProps> = ({ src, name = '' }) => {
+const Avatar: React.FunctionComponent<AvatarProps> = ({
+    src,
+    name = '',
+    className,
+}) => {
     const props: {
         src?: string;
         style?: { backgroundColor: string; verticalAlign: string };
-    } = {};
+        className?: string;
+    } = {
+        className,
+    };
     let child = '';
     if (src) {
         props['src'] = src;

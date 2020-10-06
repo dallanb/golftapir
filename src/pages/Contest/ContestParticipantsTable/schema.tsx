@@ -4,11 +4,13 @@ import { Avatar } from '@components';
 import ContestParticipantsTableStatus from './ContestParticipantsTableStatus';
 import ContestParticipantsTableWagerButton from './ContestParticipantsTableWagerButton';
 import { CellValue } from 'react-table';
+import ContestParticipantsTableParticipant from '@pages/Contest/ContestParticipantsTable/ContestParticipantsTableParticipant';
 
 export const columnsSchema = [
     {
         Header: 'Participant',
         accessor: 'participant',
+        width: 200,
         Cell: ({
             row: {
                 original: {
@@ -18,19 +20,17 @@ export const columnsSchema = [
                 },
             },
         }: any) => (
-            <>
-                <Avatar
-                    src={s3_filename && withS3URL(s3_filename)}
-                    name={`${first_name} ${last_name}`}
-                />
-                {first_name}
-                {last_name}
-            </>
+            <ContestParticipantsTableParticipant
+                first_name={first_name}
+                last_name={last_name}
+                s3_filename={s3_filename}
+            />
         ),
     },
     {
         Header: 'Status',
         accessor: 'status',
+        width: 125,
         Cell: ({
             value,
             row: {
@@ -47,6 +47,7 @@ export const columnsSchema = [
     {
         Header: 'Wager',
         accessor: 'wager',
+        width: 125,
         Cell: ({
             value,
             row: {
