@@ -7,6 +7,7 @@ const constants = {
         HOME_PAGE: 'HOME_PAGE',
         LOGIN_PAGE: 'LOGIN_PAGE',
         REGISTER_PAGE: 'REGISTER_PAGE',
+        WAGERS_PAGE: 'WAGERS_PAGE',
     },
     STATUS: {
         PENDING: {
@@ -34,6 +35,7 @@ const constants = {
         LOGOUT: '/logout',
         NOTIFICATION: '/notifications',
         REGISTER: '/register',
+        WAGER: '/wagers',
     },
     TOPICS: {
         AUTH: 'auth',

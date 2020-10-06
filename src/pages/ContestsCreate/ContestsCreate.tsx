@@ -1,5 +1,7 @@
 import React from 'react';
+import { compose } from 'redux';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import CreateContestForm from './ContestsCreateForm';
 import { ContestsCreateProps, StateProps } from './types';
 import ContestsCreateActions from './actions';
@@ -10,6 +12,13 @@ class ContestsCreate extends React.PureComponent<ContestsCreateProps> {
     componentDidMount() {
         const { init } = this.props;
         init();
+    }
+
+    componentDidUpdate() {
+        const { uuid, isSubmitted, history } = this.props;
+        if (isSubmitted && uuid) {
+            history.push(`/app/contests/${uuid}`);
+        }
     }
 
     componentWillUnmount() {
@@ -32,11 +41,19 @@ class ContestsCreate extends React.PureComponent<ContestsCreateProps> {
 }
 
 const mapStateToProps = ({ contestsCreatePage }: StateProps) => {
-    const { title, description, isInitialized } = contestsCreatePage;
+    const {
+        title,
+        description,
+        isInitialized,
+        isSubmitted,
+        uuid,
+    } = contestsCreatePage;
     return {
         title,
         description,
         isInitialized,
+        isSubmitted,
+        uuid,
     };
 };
 
@@ -51,4 +68,7 @@ const mapDispatchToProps = (dispatch: any) => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ContestsCreate);
+export default compose(
+    withRouter,
+    connect(mapStateToProps, mapDispatchToProps)
+)(ContestsCreate);

@@ -7,3 +7,4 @@ export {
     NotificationTypes,
 } from './NotificationActions';
 export { default as SocketActions, SocketTypes } from './SocketActions';
+export { default as WagerActions, WagerTypes } from './WagerActions';

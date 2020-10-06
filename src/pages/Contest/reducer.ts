@@ -4,6 +4,8 @@ import { createReducer } from 'reduxsauce';
 import CONSTANTS from '@locale/en-CA';
 import { ContestPageTypes } from './actions';
 import { ContestPageInterface } from './types';
+import { ContestTypes } from '@actions';
+import { mergeContestParticipant } from '@pages/Contest/utils';
 
 /* ------------- Initial State ------------- */
 const INITIAL_STATE: ContestPageInterface = {
@@ -13,6 +15,7 @@ const INITIAL_STATE: ContestPageInterface = {
     title: '',
     description: CONSTANTS.PAGES.CONTEST.DESCRIPTION,
     contestParticipants: [],
+    contestWagers: [],
 };
 
 /* ------------- Reducers ------------- */
@@ -50,12 +53,23 @@ function set(state: any, { data }: any) {
     });
 }
 
+function updateContestParticipantSuccess(state = INITIAL_STATE, { data }: any) {
+    const contestParticipants = mergeContestParticipant(
+        state.contestParticipants,
+        data
+    );
+    return Immutable.merge(state, {
+        contestParticipants,
+    });
+}
+
 const HANDLERS = {
     [ContestPageTypes.INIT]: init,
     [ContestPageTypes.INIT_SUCCESS]: initSuccess,
     [ContestPageTypes.INIT_FAILURE]: initFailure,
     [ContestPageTypes.TERMINATE]: terminate,
     [ContestPageTypes.SET]: set,
+    [ContestTypes.UPDATE_CONTEST_PARTICIPANT_SUCCESS]: updateContestParticipantSuccess,
 };
 
 export const reducer = createReducer(INITIAL_STATE, HANDLERS);

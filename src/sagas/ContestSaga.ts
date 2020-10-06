@@ -28,8 +28,9 @@ function* fetchContests({ options }: AnyAction) {
 }
 function* createContest({ data }: any) {
     try {
-        yield call(ContestService.createContest, data);
-        yield put(ContestActions.createContestSuccess());
+        const res = yield call(ContestService.createContest, data);
+        const { contests } = res;
+        yield put(ContestActions.createContestSuccess(contests));
         message.success(CONSTANTS.CONTEST.SUCCESS.CREATE);
     } catch (err) {
         yield put(ContestActions.createContestFailure(err));

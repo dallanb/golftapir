@@ -2,12 +2,14 @@ import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import {get as _get} from 'lodash';
+import { get as _get } from 'lodash';
 import { ContestProps, StateInterface } from './types';
 import { ContentLayout } from '@layouts';
 import ContestPageActions from './actions';
 import ContestParticipantsTable from './ContestParticipantsTable';
+import ContestWagersTable from './ContestWagersTable';
 import './Contest.scss';
+import { Typography } from 'antd';
 
 class Contest extends React.PureComponent<ContestProps> {
     componentDidMount() {
@@ -32,6 +34,7 @@ class Contest extends React.PureComponent<ContestProps> {
                 subTitle={description}
                 showSpinner={!isInitialized}
             >
+                <Typography.Title level={5}>Participants</Typography.Title>
                 <ContestParticipantsTable />
             </ContentLayout>
         );

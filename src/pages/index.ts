@@ -47,3 +47,9 @@ export {
     RegisterPageSaga,
     RegisterPageRoutes,
 } from './Register';
+export {
+    default as Wagers,
+    reducer as wagersPage,
+    WagersPageSaga,
+    WagersPageRoutes,
+} from './Wagers';

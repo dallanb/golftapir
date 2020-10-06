@@ -48,6 +48,13 @@ const CONSTANTS = {
             INIT: 'Error initializing Web Sockets',
         },
     },
+    WAGER: {
+        SUCCESS: {},
+        ERROR: {
+            FETCH: 'Error fetching Wager information',
+            FETCH_ALL: 'Error fetching Wagers information',
+        },
+    },
     PAGES: {
         LOGIN: {
             TITLE: 'Login',
@@ -143,6 +150,10 @@ const CONSTANTS = {
                     PHONE_NUMBER_MATCHES: 'Phone Number is invalid',
                 },
             },
+        },
+        WAGERS: {
+            TITLE: 'Wagers',
+            DESCRIPTION: 'View Wagers',
         },
     },
 };

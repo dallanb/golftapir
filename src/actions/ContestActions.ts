@@ -10,7 +10,7 @@ const { Types, Creators } = createActions(
         fetchContestsSuccess: ['data', 'metadata'],
         fetchContestsFailure: ['err'],
         createContest: ['data'],
-        createContestSuccess: null,
+        createContestSuccess: ['data'],
         createContestFailure: ['err'],
         updateContestParticipant: ['uuid', 'data'],
         updateContestParticipantSuccess: ['data'],

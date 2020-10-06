@@ -2,13 +2,13 @@ import React from 'react';
 import { Tag } from 'antd';
 import { useDispatch } from 'react-redux';
 import { CheckCircleTwoTone, StopTwoTone } from '@ant-design/icons/lib';
-import { ContestParticipantsTableStatusProps } from './types';
+import { ContestWagersTableStatusProps } from './types';
 import { mapStatusColour } from '@pages/Contest/utils';
 import { ContestActions } from '@actions';
 import constants from '@constants';
-import './ContestParticipantsTableStatus.scss';
+import './ContestWagersTableStatus.scss';
 
-const ContestParticipantsTableStatus: React.FunctionComponent<ContestParticipantsTableStatusProps> = ({
+const ContestWagersTableStatus: React.FunctionComponent<ContestWagersTableStatusProps> = ({
     status,
     uuid,
     is_me,
@@ -16,12 +16,12 @@ const ContestParticipantsTableStatus: React.FunctionComponent<ContestParticipant
     if (is_me && status === constants.STATUS.PENDING.KEY) {
         const dispatch = useDispatch();
         return (
-            <div className="contest-participants-table-status-response">
+            <div className="contest-wagers-table-status-response">
                 <CheckCircleTwoTone
                     twoToneColor={constants.STATUS.ACTIVE.TWO_TONE_COLOUR}
                     onClick={() =>
                         dispatch(
-                            ContestActions.updateContestParticipant(uuid, {
+                            ContestActions.updateContestWager(uuid, {
                                 status: constants.STATUS.ACTIVE.KEY,
                             })
                         )
@@ -31,7 +31,7 @@ const ContestParticipantsTableStatus: React.FunctionComponent<ContestParticipant
                     twoToneColor={constants.STATUS.INACTIVE.TWO_TONE_COLOUR}
                     onClick={() =>
                         dispatch(
-                            ContestActions.updateContestParticipant(uuid, {
+                            ContestActions.updateContestWager(uuid, {
                                 status: constants.STATUS.INACTIVE.KEY,
                             })
                         )
@@ -43,4 +43,4 @@ const ContestParticipantsTableStatus: React.FunctionComponent<ContestParticipant
     return <Tag color={mapStatusColour(status)}>{status}</Tag>;
 };
 
-export default ContestParticipantsTableStatus;
+export default ContestWagersTableStatus;

@@ -15,6 +15,7 @@ export interface ContestPageInterface {
     readonly title: string;
     readonly description: string;
     readonly contestParticipants: any[];
+    readonly contestWagers: any[];
 }
 
 export interface StateInterface {
