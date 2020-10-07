@@ -1,6 +1,4 @@
 import React from 'react';
-import { withS3URL } from '@utils';
-import { Avatar } from '@components';
 import ContestParticipantsTableStatus from './ContestParticipantsTableStatus';
 import ContestParticipantsTableWagerButton from './ContestParticipantsTableWagerButton';
 import { CellValue } from 'react-table';

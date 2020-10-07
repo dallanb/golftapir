@@ -90,6 +90,10 @@ const CONSTANTS = {
                 },
             },
         },
+        HOME: {
+            TITLE: 'Home',
+            DESCRIPTION: 'Home Page',
+        },
         CONTEST: {
             DESCRIPTION: 'Contest Info',
         },

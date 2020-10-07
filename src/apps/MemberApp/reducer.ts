@@ -5,7 +5,7 @@ import { BaseTypes } from './actions';
 import { AccountTypes } from '@actions';
 
 /* ------------- Interface ------------- */
-export interface AccountPageInterface {
+export interface MemberAppInterface {
     readonly isFetching: boolean;
     readonly isInitialized: boolean;
     readonly err?: Error;
@@ -13,7 +13,7 @@ export interface AccountPageInterface {
 }
 
 /* ------------- Initial State ------------- */
-const INITIAL_STATE: AccountPageInterface = {
+const INITIAL_STATE: MemberAppInterface = {
     isFetching: false,
     isInitialized: false,
     err: undefined,
