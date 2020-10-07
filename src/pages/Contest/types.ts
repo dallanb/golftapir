@@ -6,6 +6,7 @@ export interface ContestProps extends RouteComponentProps {
     title: string;
     description: string;
     isInitialized: boolean;
+    status: string;
 }
 
 export interface ContestPageInterface {
@@ -14,6 +15,7 @@ export interface ContestPageInterface {
     readonly err?: Error;
     readonly title: string;
     readonly description: string;
+    readonly status: string;
     readonly contestParticipants: any[];
     readonly contestWagers: any[];
 }

@@ -15,6 +15,11 @@ const constants = {
             TWO_TONE_COLOUR: '#FFA500',
             KEY: 'pending',
         },
+        READY: {
+            COLOUR: 'blue',
+            TWO_TONE_COLOUR: '#1890ff',
+            KEY: 'ready',
+        },
         ACTIVE: {
             COLOUR: 'green',
             TWO_TONE_COLOUR: '#52c41a',

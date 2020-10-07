@@ -40,5 +40,5 @@ export const mergeContestParticipant = (
             : existingParticipant
     );
 
-export const mapStatusColour = (status: string) =>
+export const mapStatusColour = (status: string): string =>
     _get(constants, ['STATUS', _toUpper(status), 'COLOUR'], 'grey');

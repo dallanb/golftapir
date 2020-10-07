@@ -14,6 +14,7 @@ const INITIAL_STATE: ContestPageInterface = {
     err: undefined,
     title: '',
     description: CONSTANTS.PAGES.CONTEST.DESCRIPTION,
+    status: '',
     contestParticipants: [],
     contestWagers: [],
 };
