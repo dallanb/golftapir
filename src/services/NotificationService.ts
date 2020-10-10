@@ -29,4 +29,25 @@ export default {
             data,
         });
     },
+    subscriptionExists(query: any = {}) {
+        return ClientProxy.get({
+            url: config.NOTIFICATION_URL,
+            endpoint: `/subscriptions`,
+            query,
+        });
+    },
+    subscribe(data: any = {}) {
+        return ClientProxy.post({
+            url: config.NOTIFICATION_URL,
+            endpoint: `/subscriptions/subscribe`,
+            data,
+        });
+    },
+    unsubscribe(data: any = {}) {
+        return ClientProxy.del({
+            url: config.NOTIFICATION_URL,
+            endpoint: `/subscriptions/unsubscribe`,
+            data,
+        });
+    },
 };

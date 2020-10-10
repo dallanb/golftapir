@@ -3,16 +3,15 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { get as _get } from 'lodash';
-import { Typography } from 'antd';
 import { ContestProps, ContestState, StateInterface } from './types';
 import { ContentLayout } from '@layouts';
 import { ContestActions as ContestReduxActions } from '@actions';
+import constants from '@constants';
 import ContestPageActions from './actions';
 import ContestParticipantsTable from './ContestParticipantsTable';
 import ContestStatus from './ContestStatus';
 import ContestActions from './ContestActions';
 import './Contest.scss';
-import constants from '@constants';
 
 class Contest extends React.PureComponent<ContestProps, ContestState> {
     constructor(props: ContestProps) {
@@ -66,7 +65,6 @@ class Contest extends React.PureComponent<ContestProps, ContestState> {
                     status={status}
                     actions={this.generateActions()}
                 />
-                <Typography.Title level={5}>Participants</Typography.Title>
                 <ContestParticipantsTable />
             </ContentLayout>
         );

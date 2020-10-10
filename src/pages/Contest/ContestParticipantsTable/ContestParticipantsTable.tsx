@@ -5,6 +5,8 @@ import { columnsSchema } from './schema';
 import { StateInterface } from '../types';
 import { Table } from '@components';
 import './ContestParticipantsTable.scss';
+import { Typography } from 'antd';
+import { ContentLayout } from '@layouts';
 
 class ContestParticipantsTable extends React.PureComponent<
     ContestParticipantsTableProps
@@ -15,6 +17,7 @@ class ContestParticipantsTable extends React.PureComponent<
         const { items, isFetching } = this.props;
         return (
             <div>
+                <Typography.Title level={5}>Participants</Typography.Title>
                 <Table
                     size={150}
                     items={items}

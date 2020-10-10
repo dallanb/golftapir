@@ -38,11 +38,17 @@ const CONSTANTS = {
         },
     },
     NOTIFICATION: {
-        SUCCESS: {},
+        SUCCESS: {
+            SUBSCRIBE: 'Subscription successful!',
+            UNSUBSCRIBE: 'Unsubscription successful!',
+        },
         ERROR: {
             FETCH: 'Error fetching Notification information',
             FETCH_ALL: 'Error fetching Notifications information',
             UPDATE: 'Error update Notification information',
+            SUBSCRIPTION_EXISTS: 'Error retrieving subscription status',
+            SUBSCRIBE: 'Error subscribing to entity',
+            UNSUBSCRIBE: 'Error unsubscribing from entity',
         },
     },
     SOCKET: {
