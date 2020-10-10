@@ -31,6 +31,20 @@ const constants = {
             KEY: 'inactive',
         },
     },
+    ACTION: {
+        ACTIVATE: {
+            COLOUR: 'blue',
+            TWO_TONE_COLOUR: '#1890ff',
+            KEY: 'activate',
+            LABEL: 'Activate',
+        },
+        UPDATE: {
+            COLOUR: 'orange',
+            TWO_TONE_COLOUR: '#FFA500',
+            KEY: 'update',
+            LABEL: 'Update',
+        },
+    },
     ROUTES: {
         ACCOUNT: '/settings',
         AUTH: '/auth',

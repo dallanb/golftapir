@@ -15,6 +15,7 @@ const INITIAL_STATE: ContestPageInterface = {
     title: '',
     description: CONSTANTS.PAGES.CONTEST.DESCRIPTION,
     status: '',
+    owner_uuid: '',
     contestParticipants: [],
     contestWagers: [],
 };
@@ -54,6 +55,14 @@ function set(state: any, { data }: any) {
     });
 }
 
+function updateContestSuccess(state = INITIAL_STATE, { data }: any) {
+    const { name: title, status } = data;
+    return Immutable.merge(state, {
+        title,
+        status,
+    });
+}
+
 function updateContestParticipantSuccess(state = INITIAL_STATE, { data }: any) {
     const contestParticipants = mergeContestParticipant(
         state.contestParticipants,
@@ -70,6 +79,7 @@ const HANDLERS = {
     [ContestPageTypes.INIT_FAILURE]: initFailure,
     [ContestPageTypes.TERMINATE]: terminate,
     [ContestPageTypes.SET]: set,
+    [ContestTypes.UPDATE_CONTEST_SUCCESS]: updateContestSuccess,
     [ContestTypes.UPDATE_CONTEST_PARTICIPANT_SUCCESS]: updateContestParticipantSuccess,
 };
 

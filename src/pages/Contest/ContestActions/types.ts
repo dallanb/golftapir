@@ -1,3 +1,6 @@
 export interface ContestActionsProps {
-    actions: any[];
+    actions: any;
+    isOwner: boolean;
+    participants: any[];
+    status: string;
 }
