@@ -7,12 +7,18 @@ const constants = {
         HOME_PAGE: 'HOME_PAGE',
         LOGIN_PAGE: 'LOGIN_PAGE',
         REGISTER_PAGE: 'REGISTER_PAGE',
+        WAGERS_PAGE: 'WAGERS_PAGE',
     },
     STATUS: {
         PENDING: {
             COLOUR: 'orange',
             TWO_TONE_COLOUR: '#FFA500',
             KEY: 'pending',
+        },
+        READY: {
+            COLOUR: 'blue',
+            TWO_TONE_COLOUR: '#1890ff',
+            KEY: 'ready',
         },
         ACTIVE: {
             COLOUR: 'green',
@@ -25,6 +31,20 @@ const constants = {
             KEY: 'inactive',
         },
     },
+    ACTION: {
+        ACTIVATE: {
+            COLOUR: 'blue',
+            TWO_TONE_COLOUR: '#1890ff',
+            KEY: 'activate',
+            LABEL: 'Activate',
+        },
+        UPDATE: {
+            COLOUR: 'orange',
+            TWO_TONE_COLOUR: '#FFA500',
+            KEY: 'update',
+            LABEL: 'Update',
+        },
+    },
     ROUTES: {
         ACCOUNT: '/settings',
         AUTH: '/auth',
@@ -34,6 +54,7 @@ const constants = {
         LOGOUT: '/logout',
         NOTIFICATION: '/notifications',
         REGISTER: '/register',
+        WAGER: '/wagers',
     },
     TOPICS: {
         AUTH: 'auth',

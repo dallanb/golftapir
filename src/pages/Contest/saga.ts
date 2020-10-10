@@ -19,10 +19,12 @@ import { selectMe } from '@selectors/BaseSelector';
 function* init({ uuid }: AnyAction) {
     try {
         const {
-            data: { participants, name: title },
+            data: { participants, name: title, status, owner_uuid },
         } = yield call(fetchContest, uuid);
 
         yield put(ContestPageActions.set({ title }));
+        yield put(ContestPageActions.set({ status }));
+        yield put(ContestPageActions.set({ owner_uuid }));
 
         const accounts = participants.map(
             ({ user_uuid }: { user_uuid: string }) => user_uuid

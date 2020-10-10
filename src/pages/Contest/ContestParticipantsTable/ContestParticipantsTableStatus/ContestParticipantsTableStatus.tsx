@@ -6,7 +6,7 @@ import { ContestParticipantsTableStatusProps } from './types';
 import { mapStatusColour } from '@pages/Contest/utils';
 import { ContestActions } from '@actions';
 import constants from '@constants';
-import './ContestParticipantsTableStatus.scss'
+import './ContestParticipantsTableStatus.scss';
 
 const ContestParticipantsTableStatus: React.FunctionComponent<ContestParticipantsTableStatusProps> = ({
     status,

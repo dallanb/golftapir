@@ -22,7 +22,12 @@ export {
     ContestsCreatePageSaga,
     ContestsCreatePageRoutes,
 } from './ContestsCreate';
-export { default as Home, HomePageRoutes } from './Home';
+export {
+    default as Home,
+    reducer as homePage,
+    HomePageSaga,
+    HomePageRoutes,
+} from './Home';
 export {
     default as Login,
     reducer as loginPage,
@@ -47,3 +52,9 @@ export {
     RegisterPageSaga,
     RegisterPageRoutes,
 } from './Register';
+export {
+    default as Wagers,
+    reducer as wagersPage,
+    WagersPageSaga,
+    WagersPageRoutes,
+} from './Wagers';

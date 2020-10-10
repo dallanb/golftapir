@@ -18,7 +18,7 @@ class ContentLayout extends React.Component<
     };
 
     render() {
-        const { title, subTitle } = this.props;
+        const { title, subTitle, className } = this.props;
         return (
             <Layout className="content-layout">
                 <Content className="content-layout-content">
@@ -26,7 +26,7 @@ class ContentLayout extends React.Component<
                         {title && (
                             <PageHeader title={title} subTitle={subTitle} />
                         )}
-                        <div className="content-layout-children">
+                        <div className={`content-layout-children ${className}`}>
                             {this.renderContent()}
                         </div>
                     </div>

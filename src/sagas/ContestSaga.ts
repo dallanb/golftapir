@@ -26,14 +26,26 @@ function* fetchContests({ options }: AnyAction) {
         message.error(CONSTANTS.CONTEST.ERROR.FETCH);
     }
 }
-function* createContest({ data }: any) {
+function* createContest({ data }: AnyAction) {
     try {
-        yield call(ContestService.createContest, data);
-        yield put(ContestActions.createContestSuccess());
+        const res = yield call(ContestService.createContest, data);
+        const { contests } = res;
+        yield put(ContestActions.createContestSuccess(contests));
         message.success(CONSTANTS.CONTEST.SUCCESS.CREATE);
     } catch (err) {
         yield put(ContestActions.createContestFailure(err));
         message.error(CONSTANTS.CONTEST.ERROR.CREATE);
+    }
+}
+function* updateContest({ uuid, data }: AnyAction) {
+    try {
+        const res = yield call(ContestService.updateContest, uuid, data);
+        const { contests } = res;
+        yield put(ContestActions.updateContestSuccess(contests));
+        message.success(CONSTANTS.CONTEST.SUCCESS.UPDATE);
+    } catch (err) {
+        yield put(ContestActions.updateContestFailure(err));
+        message.error(CONSTANTS.CONTEST.ERROR.UPDATE);
     }
 }
 function* updateContestParticipant({ uuid, data }: any) {
@@ -43,8 +55,8 @@ function* updateContestParticipant({ uuid, data }: any) {
             uuid,
             data
         );
-        const { participant } = res;
-        yield put(ContestActions.updateContestParticipantSuccess(participant));
+        const { participants } = res;
+        yield put(ContestActions.updateContestParticipantSuccess(participants));
         message.success(CONSTANTS.CONTEST.SUCCESS.UPDATE_PARTICIPANT);
     } catch (err) {
         yield put(ContestActions.updateContestParticipantFailure(err));
@@ -57,6 +69,7 @@ export default function* ContestSaga() {
         takeLatest(ContestTypes.FETCH_CONTEST, fetchContest),
         takeLatest(ContestTypes.FETCH_CONTESTS, fetchContests),
         takeLatest(ContestTypes.CREATE_CONTEST, createContest),
+        takeLatest(ContestTypes.UPDATE_CONTEST, updateContest),
         takeLatest(
             ContestTypes.UPDATE_CONTEST_PARTICIPANT,
             updateContestParticipant

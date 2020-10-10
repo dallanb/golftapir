@@ -25,12 +25,14 @@ const CONSTANTS = {
     CONTEST: {
         SUCCESS: {
             CREATE: 'Contest creation successful!',
+            UPDATE: 'Contest update successful!',
             UPDATE_PARTICIPANT: 'Successfully updated!',
         },
         ERROR: {
             FETCH: 'Error fetching Contest information',
             FETCH_ALL: 'Error fetching Contests information',
             CREATE: 'Contest creation unsuccessful',
+            UPDATE: 'Contest update unsuccessful!',
             FETCH_PARTICIPANTS: 'Error fetch Contest participants information',
             UPDATE_PARTICIPANT: 'Error updating participant',
         },
@@ -46,6 +48,13 @@ const CONSTANTS = {
     SOCKET: {
         ERROR: {
             INIT: 'Error initializing Web Sockets',
+        },
+    },
+    WAGER: {
+        SUCCESS: {},
+        ERROR: {
+            FETCH: 'Error fetching Wager information',
+            FETCH_ALL: 'Error fetching Wagers information',
         },
     },
     PAGES: {
@@ -82,6 +91,10 @@ const CONSTANTS = {
                     PASSWORD_REQUIRED: 'Please input your password!',
                 },
             },
+        },
+        HOME: {
+            TITLE: 'Home',
+            DESCRIPTION: 'Home Page',
         },
         CONTEST: {
             DESCRIPTION: 'Contest Info',
@@ -143,6 +156,10 @@ const CONSTANTS = {
                     PHONE_NUMBER_MATCHES: 'Phone Number is invalid',
                 },
             },
+        },
+        WAGERS: {
+            TITLE: 'Wagers',
+            DESCRIPTION: 'View Wagers',
         },
     },
 };

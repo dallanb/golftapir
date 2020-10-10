@@ -1,0 +1,20 @@
+.contest-view {
+    //.contest-status-status { only applicable for tag
+    //  margin-bottom: 40px;
+    //  width: auto;
+    //  height: 33px;
+    //  font-size: 18px;
+    //  line-height: unset;
+    //  padding: 0 10.5px;
+    //}
+    .contest-status {
+        display: flex;
+        margin-bottom: 40px;
+      .contest-status-status {
+        font-size: 16px;
+      }
+    }
+    .contest-actions {
+      margin-bottom: 40px;
+    }
+}

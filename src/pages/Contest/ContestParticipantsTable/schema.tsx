@@ -1,27 +1,34 @@
 import React from 'react';
-import { withS3URL } from '@utils';
-import { Tag } from 'antd';
-import { mapStatusColour } from '@pages/Contest/utils';
-import { Avatar } from '@components';
-import ContestParticipantsTableStatus from '@pages/Contest/ContestParticipantsTable/ContestParticipantsTableStatus';
+import ContestParticipantsTableStatus from './ContestParticipantsTableStatus';
+import ContestParticipantsTableWagerButton from './ContestParticipantsTableWagerButton';
 import { CellValue } from 'react-table';
+import ContestParticipantsTableParticipant from '@pages/Contest/ContestParticipantsTable/ContestParticipantsTableParticipant';
 
 export const columnsSchema = [
     {
-        Header: 'Avatar',
-        accessor: 'avatar.s3_filename',
-        Cell: ({ value, row: { values } }: any) => (
-            <Avatar
-                src={value && withS3URL(value)}
-                name={`${values.first_name} ${values.last_name}`}
+        Header: 'Participant',
+        accessor: 'participant',
+        width: 200,
+        Cell: ({
+            row: {
+                original: {
+                    avatar: { s3_filename },
+                    first_name,
+                    last_name,
+                },
+            },
+        }: any) => (
+            <ContestParticipantsTableParticipant
+                first_name={first_name}
+                last_name={last_name}
+                s3_filename={s3_filename}
             />
         ),
     },
-    { Header: 'First Name', accessor: 'first_name' },
-    { Header: 'Last Name', accessor: 'last_name' },
     {
         Header: 'Status',
         accessor: 'status',
+        width: 125,
         Cell: ({
             value,
             row: {
@@ -29,6 +36,23 @@ export const columnsSchema = [
             },
         }: CellValue) => (
             <ContestParticipantsTableStatus
+                status={value}
+                uuid={uuid}
+                is_me={is_me}
+            />
+        ),
+    },
+    {
+        Header: 'Wager',
+        accessor: 'wager',
+        width: 125,
+        Cell: ({
+            value,
+            row: {
+                original: { uuid, is_me },
+            },
+        }: CellValue) => (
+            <ContestParticipantsTableWagerButton
                 status={value}
                 uuid={uuid}
                 is_me={is_me}

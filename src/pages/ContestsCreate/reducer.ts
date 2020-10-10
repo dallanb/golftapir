@@ -4,16 +4,20 @@ import { createReducer } from 'reduxsauce';
 import CONSTANTS from '@locale/en-CA';
 import { ContestsCreatePageInterface } from './types';
 import { ContestsCreatePageTypes } from './actions';
+import { ContestTypes } from '@actions';
+import { get as _get } from 'lodash';
 
 /* ------------- Initial State ------------- */
 const INITIAL_STATE: ContestsCreatePageInterface = {
     isFetching: false,
     isInitialized: false,
+    isSubmitted: false,
     err: undefined,
     title: CONSTANTS.PAGES.CONTESTS_CREATE.TITLE,
     description: CONSTANTS.PAGES.CONTESTS_CREATE.DESCRIPTION,
     createFormInitialValues: undefined,
     createFormSearchParticipants: [],
+    uuid: undefined,
 };
 
 /* ------------- Reducers ------------- */
@@ -73,6 +77,25 @@ function searchParticipantsFailure(state = INITIAL_STATE, { err }: any) {
         err,
     });
 }
+function createContest(state = INITIAL_STATE) {
+    return Immutable.merge(state, {
+        isSubmitted: true,
+    });
+}
+
+function createContestSuccess(state = INITIAL_STATE, { data }: any) {
+    const uuid = _get(data, ['uuid']);
+    return Immutable.merge(state, {
+        uuid,
+    });
+}
+
+function createContestFailure(state = INITIAL_STATE, { err }: any) {
+    return Immutable.merge(state, {
+        isSubmitted: false,
+        err,
+    });
+}
 
 const HANDLERS = {
     [ContestsCreatePageTypes.INIT]: init,
@@ -83,6 +106,9 @@ const HANDLERS = {
     [ContestsCreatePageTypes.SEARCH_PARTICIPANTS]: searchParticipants,
     [ContestsCreatePageTypes.SEARCH_PARTICIPANTS_SUCCESS]: searchParticipantsSuccess,
     [ContestsCreatePageTypes.SEARCH_PARTICIPANTS_FAILURE]: searchParticipantsFailure,
+    [ContestTypes.CREATE_CONTEST]: createContest,
+    [ContestTypes.CREATE_CONTEST_SUCCESS]: createContestSuccess,
+    [ContestTypes.CREATE_CONTEST_FAILURE]: createContestFailure,
 };
 
 export const reducer = createReducer(INITIAL_STATE, HANDLERS);
