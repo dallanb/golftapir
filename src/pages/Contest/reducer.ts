@@ -4,7 +4,7 @@ import { createReducer } from 'reduxsauce';
 import CONSTANTS from '@locale/en-CA';
 import { ContestPageTypes } from './actions';
 import { ContestPageInterface } from './types';
-import { ContestTypes } from '@actions';
+import { ContestTypes, NotificationTypes } from '@actions';
 import { mergeContestParticipant } from '@pages/Contest/utils';
 
 /* ------------- Initial State ------------- */
@@ -16,6 +16,7 @@ const INITIAL_STATE: ContestPageInterface = {
     description: CONSTANTS.PAGES.CONTEST.DESCRIPTION,
     status: '',
     owner_uuid: '',
+    subscribed: false,
     contestParticipants: [],
     contestWagers: [],
 };
@@ -73,6 +74,18 @@ function updateContestParticipantSuccess(state = INITIAL_STATE, { data }: any) {
     });
 }
 
+function subscribeSuccess(state = INITIAL_STATE) {
+    return Immutable.merge(state, {
+        subscribed: true,
+    });
+}
+
+function unsubscribeSuccess(state = INITIAL_STATE) {
+    return Immutable.merge(state, {
+        subscribed: false,
+    });
+}
+
 const HANDLERS = {
     [ContestPageTypes.INIT]: init,
     [ContestPageTypes.INIT_SUCCESS]: initSuccess,
@@ -81,6 +94,8 @@ const HANDLERS = {
     [ContestPageTypes.SET]: set,
     [ContestTypes.UPDATE_CONTEST_SUCCESS]: updateContestSuccess,
     [ContestTypes.UPDATE_CONTEST_PARTICIPANT_SUCCESS]: updateContestParticipantSuccess,
+    [NotificationTypes.SUBSCRIBE_SUCCESS]: subscribeSuccess,
+    [NotificationTypes.UNSUBSCRIBE_SUCCESS]: unsubscribeSuccess,
 };
 
 export const reducer = createReducer(INITIAL_STATE, HANDLERS);

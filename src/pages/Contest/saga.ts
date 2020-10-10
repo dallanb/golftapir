@@ -9,8 +9,14 @@ import {
     takeLatest,
 } from 'redux-saga/effects';
 import ContestPageActions, { ContestPageTypes } from './actions';
-import AccountActions, { AccountTypes } from '@actions/AccountActions';
-import ContestActions, { ContestTypes } from '@actions/ContestActions';
+import {
+    NotificationActions,
+    NotificationTypes,
+    AccountActions,
+    AccountTypes,
+    ContestActions,
+    ContestTypes,
+} from '@actions';
 import CONSTANTS from '@locale/en-CA';
 import { normalizeContestParticipants } from '@pages/Contest/utils';
 import { selectMe } from '@selectors/BaseSelector';
@@ -25,6 +31,9 @@ function* init({ uuid }: AnyAction) {
         yield put(ContestPageActions.set({ title }));
         yield put(ContestPageActions.set({ status }));
         yield put(ContestPageActions.set({ owner_uuid }));
+
+        const { subscribed } = yield call(subscriptionExists, uuid);
+        yield put(ContestPageActions.set({ subscribed }));
 
         const accounts = participants.map(
             ({ user_uuid }: { user_uuid: string }) => user_uuid
@@ -84,6 +93,20 @@ function* bulkFetchAccounts(accounts: string[]) {
     const { success, failure } = yield race({
         success: take(AccountTypes.BULK_FETCH_ACCOUNTS_SUCCESS),
         failure: take(AccountTypes.BULK_FETCH_ACCOUNTS_FAILURE),
+    });
+    if (failure) {
+        throw new Error(CONSTANTS.CONTEST.ERROR.FETCH);
+    }
+
+    return success;
+}
+
+function* subscriptionExists(uuid: string) {
+    yield put(NotificationActions.subscriptionExists({ uuid }));
+
+    const { success, failure } = yield race({
+        success: take(NotificationTypes.SUBSCRIPTION_EXISTS_SUCCESS),
+        failure: take(NotificationTypes.SUBSCRIPTION_EXISTS_FAILURE),
     });
     if (failure) {
         throw new Error(CONSTANTS.CONTEST.ERROR.FETCH);
