@@ -5,17 +5,18 @@ const topicToRouteMapper = (topic: string, key: string, item: any) => {
     let route = '';
     const routes = constants.ROUTES;
     switch (topic) {
-        case 'auth':
+        case constants.TOPICS.AUTH:
             route = routes.AUTH;
             break;
-        case 'accounts':
+        case constants.TOPICS.ACCOUNTS:
             route = routes.ACCOUNT;
             break;
-        case 'contests':
+        case constants.TOPICS.CONTESTS:
             route = routes.CONTEST;
             switch (key) {
-                case 'participant_invited':
-                case 'participant_active':
+                case constants.EVENTS.CONTESTS.PARTICIPANT_INVITED:
+                case constants.EVENTS.CONTESTS.PARTICIPANT_ACTIVE:
+                case constants.EVENTS.CONTESTS.CONTEST_READY:
                     route += `/${_get(
                         item,
                         ['properties', 'contest_uuid'],
