@@ -11,6 +11,7 @@ import ContestPageActions from './actions';
 import ContestParticipantsTable from './ContestParticipantsTable';
 import ContestStatus from './ContestStatus';
 import ContestActions from './ContestActions';
+import ContestSubscription from './ContestSubscription';
 import './Contest.scss';
 
 class Contest extends React.PureComponent<ContestProps, ContestState> {
@@ -51,6 +52,7 @@ class Contest extends React.PureComponent<ContestProps, ContestState> {
             isOwner,
             contestParticipants,
         } = this.props;
+        const { uuid } = this.state;
         return (
             <ContentLayout
                 title={title}
@@ -58,6 +60,7 @@ class Contest extends React.PureComponent<ContestProps, ContestState> {
                 showSpinner={!isInitialized}
                 className="contest-view"
             >
+                <ContestSubscription uuid={uuid} />
                 <ContestStatus status={status} />
                 <ContestActions
                     isOwner={isOwner}
