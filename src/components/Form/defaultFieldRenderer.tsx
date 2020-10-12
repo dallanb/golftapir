@@ -2,7 +2,7 @@ import React from 'react';
 import { Input, Upload, Button, Select } from 'antd';
 import { UploadOutlined } from '@ant-design/icons/lib';
 import { useDispatch } from 'react-redux';
-import {get as _get, debounce as _debounce } from 'lodash';
+import { get as _get, debounce as _debounce } from 'lodash';
 import { antdFormatName, mapCountryOptions } from './utils';
 import { FieldRendererProps } from './types';
 
@@ -76,7 +76,7 @@ defaultFieldRenderer = (schema, formik) => {
                         filterOption={false}
                         tagRender={_get(options, ['tagRenderer'], undefined)}
                     >
-                        {options.optionRenderer()}
+                        {options.optionRenderer(formik)}
                     </Select>
                 );
                 break;

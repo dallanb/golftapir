@@ -58,15 +58,6 @@ export const renderAction = (key: string, options: any): boolean => {
                         (participant: any) =>
                             participant.status !== constants.STATUS.ACTIVE.KEY
                     ) === -1;
-                console.log('participants active: ', participantActive);
-                console.log(
-                    'contest status active: ',
-                    options.status !== constants.STATUS.ACTIVE.KEY
-                );
-                console.log(
-                    'contest status ready: ',
-                    options.status !== constants.STATUS.READY.KEY
-                );
                 return (
                     participantActive &&
                     options.status !== constants.STATUS.ACTIVE.KEY &&
@@ -75,6 +66,10 @@ export const renderAction = (key: string, options: any): boolean => {
             }
             break;
         case 'update':
+            return (
+                options.status !== constants.STATUS.ACTIVE.KEY &&
+                options.status !== constants.STATUS.READY.KEY
+            );
             break;
         default:
             console.error('Invalid key: ', key);

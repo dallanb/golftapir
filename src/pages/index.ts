@@ -23,6 +23,12 @@ export {
     ContestsCreatePageRoutes,
 } from './ContestsCreate';
 export {
+    default as ContestsUpdate,
+    reducer as contestsUpdatePage,
+    ContestsUpdatePageSaga,
+    ContestsUpdatePageRoutes,
+} from './ContestsUpdate';
+export {
     default as Home,
     reducer as homePage,
     HomePageSaga,

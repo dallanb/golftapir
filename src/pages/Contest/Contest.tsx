@@ -32,13 +32,17 @@ class Contest extends React.PureComponent<ContestProps, ContestState> {
     }
 
     generateActions = () => {
-        const { onActivate } = this.props;
+        const { onActivate, history } = this.props;
         const { uuid } = this.state;
         return [
             {
                 key: constants.ACTION.ACTIVATE.KEY,
                 onClick: () =>
                     onActivate(uuid, { status: constants.STATUS.READY.KEY }),
+            },
+            {
+                key: constants.ACTION.UPDATE.KEY,
+                onClick: () => history.push(`/app/contests/${uuid}/update`),
             },
         ];
     };

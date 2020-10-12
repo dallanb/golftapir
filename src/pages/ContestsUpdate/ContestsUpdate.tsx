@@ -2,16 +2,26 @@ import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import ContestsCreateForm from './ContestsCreateForm';
-import { ContestsCreateProps, StateProps } from './types';
-import ContestsCreateActions from './actions';
+import ContestsUpdateForm from './ContestsUpdateForm';
+import { ContestsUpdateProps, ContestUpdateState, StateProps } from './types';
+import ContestsUpdateActions from './actions';
 import { ContentLayout } from '@layouts';
-import './ContestsCreate.scss';
+import './ContestsUpdate.scss';
+import { get as _get } from 'lodash';
 
-class ContestsCreate extends React.PureComponent<ContestsCreateProps> {
+class ContestsUpdate extends React.PureComponent<
+    ContestsUpdateProps,
+    ContestUpdateState
+> {
+    constructor(props: ContestsUpdateProps) {
+        super(props);
+        this.state = { uuid: _get(props, ['match', 'params', 'uuid'], null) };
+    }
+
     componentDidMount() {
         const { init } = this.props;
-        init();
+        const { uuid } = this.state;
+        init(uuid);
     }
 
     componentDidUpdate() {
@@ -28,26 +38,27 @@ class ContestsCreate extends React.PureComponent<ContestsCreateProps> {
 
     render() {
         const { title, description, isInitialized } = this.props;
+        const { uuid } = this.state;
         return (
             <ContentLayout
                 title={title}
                 subTitle={description}
                 showSpinner={!isInitialized}
             >
-                <ContestsCreateForm />
+                <ContestsUpdateForm uuid={uuid} />
             </ContentLayout>
         );
     }
 }
 
-const mapStateToProps = ({ contestsCreatePage }: StateProps) => {
+const mapStateToProps = ({ contestsUpdatePage }: StateProps) => {
     const {
         title,
         description,
         isInitialized,
         isSubmitted,
         uuid,
-    } = contestsCreatePage;
+    } = contestsUpdatePage;
     return {
         title,
         description,
@@ -59,11 +70,11 @@ const mapStateToProps = ({ contestsCreatePage }: StateProps) => {
 
 const mapDispatchToProps = (dispatch: any) => {
     return {
-        init() {
-            return dispatch(ContestsCreateActions.init());
+        init(uuid: string) {
+            return dispatch(ContestsUpdateActions.init(uuid));
         },
         terminate() {
-            return dispatch(ContestsCreateActions.terminate());
+            return dispatch(ContestsUpdateActions.terminate());
         },
     };
 };
@@ -71,4 +82,4 @@ const mapDispatchToProps = (dispatch: any) => {
 export default compose(
     withRouter,
     connect(mapStateToProps, mapDispatchToProps)
-)(ContestsCreate);
+)(ContestsUpdate);
