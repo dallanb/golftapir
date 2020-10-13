@@ -21,6 +21,7 @@ const ContestActions: React.FunctionComponent<ContestActionsProps> = ({
                     key={key}
                     onClick={onClick}
                     disabled={!renderAction(key, { status, participants })}
+                    className="contest-actions-button"
                 >
                     {mapActionLabel(key)}
                 </Button>

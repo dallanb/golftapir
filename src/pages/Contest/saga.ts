@@ -1,25 +1,10 @@
 import { AnyAction } from 'redux';
-import {
-    all,
-    call,
-    put,
-    race,
-    select,
-    take,
-    takeLatest,
-} from 'redux-saga/effects';
+import { all, call, put, select, takeLatest } from 'redux-saga/effects';
 import ContestPageActions, { ContestPageTypes } from './actions';
-import {
-    NotificationActions,
-    NotificationTypes,
-    AccountActions,
-    AccountTypes,
-    ContestActions,
-    ContestTypes,
-} from '@actions';
-import CONSTANTS from '@locale/en-CA';
+import { AccountActions } from '@actions';
 import { normalizeContestParticipants } from '@pages/Contest/utils';
 import { selectMe } from '@selectors/BaseSelector';
+import { bulkFetchAccounts, fetchContest, subscriptionExists } from '@helpers';
 
 // Action Handlers
 function* init({ uuid }: AnyAction) {
@@ -60,59 +45,6 @@ function* init({ uuid }: AnyAction) {
     } catch (err) {
         yield put(ContestPageActions.initFailure(err));
     }
-}
-
-// Helpers
-function* fetchContest(uuid: string) {
-    yield put(
-        ContestActions.fetchContest(uuid, {
-            include: 'participants',
-        })
-    );
-    const { success, failure } = yield race({
-        success: take(ContestTypes.FETCH_CONTEST_SUCCESS),
-        failure: take(ContestTypes.FETCH_CONTEST_FAILURE),
-    });
-
-    if (failure) {
-        throw new Error(CONSTANTS.CONTEST.ERROR.FETCH);
-    }
-
-    return success;
-}
-
-function* bulkFetchAccounts(accounts: string[]) {
-    yield put(
-        AccountActions.bulkFetchAccounts(
-            { key: 'membership_uuid', value: accounts },
-            {
-                include: 'avatar',
-            }
-        )
-    );
-    const { success, failure } = yield race({
-        success: take(AccountTypes.BULK_FETCH_ACCOUNTS_SUCCESS),
-        failure: take(AccountTypes.BULK_FETCH_ACCOUNTS_FAILURE),
-    });
-    if (failure) {
-        throw new Error(CONSTANTS.CONTEST.ERROR.FETCH);
-    }
-
-    return success;
-}
-
-function* subscriptionExists(uuid: string) {
-    yield put(NotificationActions.subscriptionExists({ uuid }));
-
-    const { success, failure } = yield race({
-        success: take(NotificationTypes.SUBSCRIPTION_EXISTS_SUCCESS),
-        failure: take(NotificationTypes.SUBSCRIPTION_EXISTS_FAILURE),
-    });
-    if (failure) {
-        throw new Error(CONSTANTS.CONTEST.ERROR.FETCH);
-    }
-
-    return success;
 }
 
 export default function* ContestPageSaga() {

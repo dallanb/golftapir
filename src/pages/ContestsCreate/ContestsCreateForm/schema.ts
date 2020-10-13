@@ -3,10 +3,8 @@ import * as Yup from 'yup';
 import 'yup-phone';
 import ContestsCreatePageActions from '../actions';
 import InputWrapper from '@components/InputWrapper';
-import {
-    participantSearchSelectOptionRenderer,
-    participantSearchSelectTagRenderer,
-} from './utils';
+import { participantSearchSelectOptionRenderer } from './utils';
+import { searchSelectTagRenderer } from '@utils';
 import CONSTANTS from '@locale/en-CA';
 
 const FORM = CONSTANTS.PAGES.CONTESTS_CREATE.FORM;
@@ -49,7 +47,7 @@ export const fieldSchema = [
             multiple: true,
             debounce: 500,
             optionRenderer: participantSearchSelectOptionRenderer,
-            tagRenderer: participantSearchSelectTagRenderer,
+            tagRenderer: searchSelectTagRenderer,
         },
     },
 ];

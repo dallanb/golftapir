@@ -126,6 +126,19 @@ const CONSTANTS = {
                 },
             },
         },
+        CONTESTS_UPDATE: {
+            TITLE: '',
+            DESCRIPTION: 'Update Contest',
+            FORM: {
+                LABELS: {
+                    NAME: 'Name',
+                    PARTICIPANTS: 'Participants',
+                },
+                VALIDATION: {
+                    NAME_REQUIRED: 'Name is a required field',
+                },
+            },
+        },
         ACCOUNT: {
             TITLE: 'Account',
             DESCRIPTION: 'Update Account Settings',

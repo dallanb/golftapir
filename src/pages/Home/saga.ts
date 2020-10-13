@@ -9,8 +9,6 @@ function* init() {
     }
 }
 
-// Helpers
-
 export default function* HomePageSaga() {
     yield all([takeLatest(HomePageTypes.INIT, init)]);
 }

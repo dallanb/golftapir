@@ -1,19 +1,10 @@
 import { AnyAction } from 'redux';
-import {
-    all,
-    call,
-    put,
-    race,
-    select,
-    take,
-    takeLatest,
-} from 'redux-saga/effects';
+import { all, call, put, select, takeLatest } from 'redux-saga/effects';
 import config from 'config';
 import ContestsCreatePageActions, { ContestsCreatePageTypes } from './actions';
 import { selectMe } from '@selectors/BaseSelector';
-import { AccountActions, AccountTypes } from '@actions';
+import { searchAccounts } from '@helpers';
 
-// Action Handlers
 function* init() {
     try {
         const me = yield select(selectMe);
@@ -35,21 +26,6 @@ function* searchParticipants({ key }: AnyAction) {
     } catch (err) {
         yield put(ContestsCreatePageActions.searchParticipantsFailure(err));
     }
-}
-
-// Helpers
-function* searchAccounts(key: string): any {
-    yield put(AccountActions.searchAccounts(key));
-    const { success, failure } = yield race({
-        success: take(AccountTypes.SEARCH_ACCOUNTS_SUCCESS),
-        failure: take(AccountTypes.SEARCH_ACCOUNTS_FAILURE),
-    });
-
-    if (failure) {
-        throw new Error('Unable to fetch accounts');
-    }
-
-    return success;
 }
 
 export default function* ContestsCreatePageSaga() {

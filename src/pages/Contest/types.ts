@@ -15,6 +15,7 @@ export interface ContestProps extends RouteComponentProps {
     contestParticipants: any[];
     isOwner: boolean;
 }
+
 export interface ContestState {
     uuid: string;
 }

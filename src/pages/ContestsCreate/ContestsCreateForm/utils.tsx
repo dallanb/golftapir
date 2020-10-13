@@ -4,17 +4,11 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { selectCreateFormSearchParticipants } from '@pages/ContestsCreate/selector';
 import { selectMe } from '@selectors/BaseSelector';
+import { FormikProps, FormikValues } from 'formik';
 
-export const participantSearchSelectTagRenderer = (props: any) => {
-    const { label, closable, onClose } = props;
-    return (
-        <Tag closable={closable} onClose={onClose} style={{ marginRight: 3 }}>
-            {label}
-        </Tag>
-    );
-};
-
-export const participantSearchSelectOptionRenderer = () => {
+export const participantSearchSelectOptionRenderer = (
+    formik: FormikProps<FormikValues>
+) => {
     const me = useSelector(selectMe);
     const participants = _keyBy(
         [...useSelector(selectCreateFormSearchParticipants), me],
