@@ -9,7 +9,7 @@ const { Types, Creators } = createActions(
         fetchContests: ['options', 'append'],
         fetchContestsSuccess: ['data', 'metadata'],
         fetchContestsFailure: ['err'],
-        createContest: ['data', 'avatar'],
+        createContest: ['data'],
         createContestSuccess: ['data'],
         createContestFailure: ['err'],
         updateContest: ['uuid', 'data'],

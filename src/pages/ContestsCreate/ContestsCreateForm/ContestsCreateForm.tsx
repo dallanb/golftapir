@@ -5,16 +5,14 @@ import { omit as _omit } from 'lodash';
 import { ContestsCreateFormProps } from './types';
 import { StateProps } from '../types';
 import { Form } from '@components';
-import ContestActions from '@actions/ContestActions';
+import ContestCreatePageActions from '../actions';
 import { fieldSchema, validationSchema } from './schema';
 import './ContestsCreateForm.scss';
 
 class ContestsCreateForm extends React.PureComponent<ContestsCreateFormProps> {
     handleSubmit = (values: FormikValues) => {
         const { createContest } = this.props;
-        const contest = _omit(values, ['avatar']);
-        const avatar = values.avatar;
-        createContest(contest, avatar);
+        createContest(values);
     };
     render() {
         const { initialValues } = this.props;
@@ -38,8 +36,8 @@ const mapStateToProps = ({ contestsCreatePage }: StateProps) => {
 
 const mapDispatchToProps = (dispatch: any) => {
     return {
-        createContest(values: FormikValues, avatar: File) {
-            return dispatch(ContestActions.createContest(values, avatar));
+        createContest(values: FormikValues) {
+            return dispatch(ContestCreatePageActions.createContest(values));
         },
     };
 };

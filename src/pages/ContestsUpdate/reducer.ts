@@ -81,9 +81,9 @@ const HANDLERS = {
     [ContestsUpdatePageTypes.INIT_FAILURE]: initFailure,
     [ContestsUpdatePageTypes.TERMINATE]: terminate,
     [ContestsUpdatePageTypes.SET]: set,
-    [ContestTypes.UPDATE_CONTEST]: updateContest,
-    [ContestTypes.UPDATE_CONTEST_SUCCESS]: updateContestSuccess,
-    [ContestTypes.UPDATE_CONTEST_FAILURE]: updateContestFailure,
+    [ContestsUpdatePageTypes.UPDATE_CONTEST]: updateContest,
+    [ContestsUpdatePageTypes.UPDATE_CONTEST_SUCCESS]: updateContestSuccess,
+    [ContestsUpdatePageTypes.UPDATE_CONTEST_FAILURE]: updateContestFailure,
 };
 
 export const reducer = createReducer(INITIAL_STATE, HANDLERS);

@@ -1,6 +1,7 @@
 import { Moment } from 'moment';
 
 export interface DateTimePickerProps {
+    value?: Moment | string;
     format: string;
     disabledDate?: (currentDate: Moment) => boolean;
     disabledTime?: any;

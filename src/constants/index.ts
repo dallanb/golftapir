@@ -75,6 +75,14 @@ const constants = {
             CONTEST_READY: 'contest_ready',
         },
     },
+    S3_FOLDERS: {
+        ACCOUNT: {
+            AVATAR: '/account/avatars/',
+        },
+        CONTEST: {
+            AVATAR: '/contest/avatars/',
+        },
+    },
 };
 
 export default constants;

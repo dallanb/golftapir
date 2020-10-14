@@ -1,7 +1,12 @@
 import { AnyAction } from 'redux';
 import { all, call, put, takeLatest } from 'redux-saga/effects';
+import { pick as _pick, omit as _omit, isEmpty as _isEmpty } from 'lodash';
 import ContestsUpdatePageActions, { ContestsUpdatePageTypes } from './actions';
-import { fetchContest } from '@helpers';
+import {
+    assignContestAvatar,
+    fetchContest,
+    updateContest as updateContestHelper,
+} from '@helpers';
 
 function* init({ uuid }: AnyAction) {
     try {
@@ -13,7 +18,9 @@ function* init({ uuid }: AnyAction) {
         yield put(
             ContestsUpdatePageActions.set({
                 updateFormInitialValues: {
-                    name,
+                    name: data.name,
+                    avatar: data.avatar,
+                    start_time: data.start_time,
                 },
             })
         );
@@ -24,6 +31,25 @@ function* init({ uuid }: AnyAction) {
     }
 }
 
+function* updateContest({ uuid, data }: AnyAction) {
+    try {
+        const contestData = _omit(data, ['avatar']);
+        if (!_isEmpty(contestData)) {
+            yield call(updateContestHelper, uuid, contestData);
+        }
+        const avatarData = _pick(data, ['avatar']);
+        if (!_isEmpty(avatarData)) {
+            yield call(assignContestAvatar, uuid, avatarData.avatar);
+        }
+        yield put(ContestsUpdatePageActions.updateContestSuccess({ uuid }));
+    } catch (err) {
+        yield put(ContestsUpdatePageActions.updateContestFailure(err));
+    }
+}
+
 export default function* ContestsCreatePageSaga() {
-    yield all([takeLatest(ContestsUpdatePageTypes.INIT, init)]);
+    yield all([
+        takeLatest(ContestsUpdatePageTypes.INIT, init),
+        takeLatest(ContestsUpdatePageTypes.UPDATE_CONTEST, updateContest),
+    ]);
 }

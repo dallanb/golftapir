@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect';
-import {get as _get} from 'lodash';
+import { get as _get } from 'lodash';
 
 const getContestPage = (state: any) => state.contestPage;
 
@@ -10,4 +10,8 @@ export const selectData = createSelector([getContestPage], (contestPage) =>
 export const selectContestParticipants = createSelector(
     [getContestPage],
     (contestPage) => _get(contestPage, ['contestParticipants'], [])
+);
+
+export const selectContest = createSelector([getContestPage], (contestPage) =>
+    _get(contestPage, ['contest'], {})
 );

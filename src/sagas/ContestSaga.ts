@@ -1,11 +1,11 @@
 import { AnyAction } from 'redux';
 import { all, call, put, takeLatest } from 'redux-saga/effects';
 import { message } from 'antd';
-import { pick as _pick } from 'lodash';
 import ContestActions, { ContestTypes } from '@actions/ContestActions';
 import { ContestService } from '@services';
 import CONSTANTS from '@locale/en-CA';
 import AccountActions from '@actions/AccountActions';
+import { assignContestAvatar } from '@helpers';
 
 function* fetchContest({ uuid, options }: AnyAction) {
     try {
@@ -29,14 +29,10 @@ function* fetchContests({ options }: AnyAction) {
     }
 }
 
-function* createContest({ data, avatar }: AnyAction) {
+function* createContest({ data }: AnyAction) {
     try {
         const res = yield call(ContestService.createContest, data);
         const { contests } = res;
-
-        if (avatar) {
-            yield put(ContestActions.assignAvatar(contests.uuid, avatar));
-        }
 
         yield put(ContestActions.createContestSuccess(contests));
         message.success(CONSTANTS.CONTEST.SUCCESS.CREATE);
@@ -63,9 +59,9 @@ function* assignAvatar({ uuid, avatar }: AnyAction) {
         const res = yield call(ContestService.assignAvatar, uuid, avatar);
         // const { accounts } = res;
         console.log(res);
-        yield put(AccountActions.assignAvatarSuccess());
+        yield put(ContestActions.assignAvatarSuccess());
     } catch (err) {
-        yield put(AccountActions.assignAvatarFailure(err));
+        yield put(ContestActions.assignAvatarFailure(err));
         message.error(CONSTANTS.ACCOUNT.ERROR.ASSIGN_AVATAR);
     }
 }

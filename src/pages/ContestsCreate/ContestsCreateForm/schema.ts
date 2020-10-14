@@ -50,10 +50,9 @@ export const fieldSchema = [
         wrapper: InputWrapper,
         wrapperOptions: {
             label: FORM.LABELS.START_TIME,
-            valuePropName: 'file',
         },
         options: {
-            format: 'YYYY-MM-DD HH:mm a',
+            format: 'YYYY-MM-DD HH:mm A',
             disabledDate: (current: Moment) =>
                 current && current < moment().endOf('day'),
             valueTransform: (value: Moment) => +value,

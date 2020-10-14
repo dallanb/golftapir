@@ -6,7 +6,7 @@ import { get as _get, debounce as _debounce } from 'lodash';
 import { antdFormatName, mapCountryOptions } from './utils';
 import { FieldRendererProps } from './types';
 import { DateTimePicker } from '@components';
-import { Moment } from 'moment';
+import moment, { Moment } from 'moment';
 
 let defaultFieldRenderer: FieldRendererProps;
 

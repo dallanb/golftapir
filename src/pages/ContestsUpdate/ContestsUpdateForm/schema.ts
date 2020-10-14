@@ -2,7 +2,9 @@ import * as Yup from 'yup';
 import 'yup-phone';
 import InputWrapper from '@components/InputWrapper';
 import CONSTANTS from '@locale/en-CA';
-const FORM = CONSTANTS.PAGES.CONTESTS_CREATE.FORM;
+import moment, { Moment } from 'moment';
+
+const FORM = CONSTANTS.PAGES.CONTESTS_UPDATE.FORM;
 
 export const fieldSchema = [
     {
@@ -12,11 +14,33 @@ export const fieldSchema = [
             label: FORM.LABELS.NAME,
         },
     },
+    {
+        name: 'avatar',
+        type: 'avatar',
+        wrapper: InputWrapper,
+        wrapperOptions: {
+            label: FORM.LABELS.AVATAR,
+            valuePropName: 'file',
+        },
+    },
+    {
+        name: 'start_time',
+        type: 'date-time-picker',
+        wrapper: InputWrapper,
+        wrapperOptions: {
+            label: FORM.LABELS.START_TIME,
+        },
+        options: {
+            format: 'YYYY-MM-DD HH:mm A',
+            disabledDate: (current: Moment) =>
+                current && current < moment().endOf('day'),
+            valueTransform: (value: Moment) => +value,
+        },
+    },
 ];
 
 export const validationSchema = Yup.object({
-    owner_uuid: Yup.string(),
-    sport_uuid: Yup.string(),
     name: Yup.string().required(FORM.VALIDATION.NAME_REQUIRED),
-    participants: Yup.array(),
+    avatar: Yup.string(),
+    start_time: Yup.string().required(FORM.VALIDATION.START_TIME_REQUIRED),
 });

@@ -135,10 +135,13 @@ const CONSTANTS = {
             FORM: {
                 LABELS: {
                     NAME: 'Name',
+                    AVATAR: 'Avatar',
+                    START_TIME: 'Start Time',
                     PARTICIPANTS: 'Participants',
                 },
                 VALIDATION: {
                     NAME_REQUIRED: 'Name is a required field',
+                    START_TIME_REQUIRED: 'Start Time is a required field',
                 },
             },
         },
