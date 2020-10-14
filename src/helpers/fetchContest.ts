@@ -5,7 +5,7 @@ import CONSTANTS from '@locale/en-CA';
 function* fetchContest(uuid: string) {
     yield put(
         ContestActions.fetchContest(uuid, {
-            include: 'participants',
+            include: 'participants,avatar',
         })
     );
     const { success, failure } = yield race({

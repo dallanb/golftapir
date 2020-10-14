@@ -1,5 +1,6 @@
 import ClientProxy from './ClientProxy';
 import config from 'config';
+import { getFormData } from '@services/utils';
 
 export default {
     fetchContest(uuid: string, query: any = {}) {
@@ -28,6 +29,18 @@ export default {
             url: config.CONTEST_URL,
             endpoint: `/contests/${uuid}`,
             data,
+        });
+    },
+    assignAvatar(uuid: string, avatar: any = {}) {
+        const formData = getFormData({ avatar });
+
+        return ClientProxy.post({
+            url: config.CONTEST_URL,
+            endpoint: `/contests/${uuid}/avatars`,
+            data: formData,
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
         });
     },
     updateContestParticipant(uuid: string, data: any = {}) {

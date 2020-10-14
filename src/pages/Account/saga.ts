@@ -1,18 +1,8 @@
-import {
-    all,
-    call,
-    put,
-    race,
-    select,
-    take,
-    takeLatest,
-} from 'redux-saga/effects';
-import { AccountActions, AccountTypes } from '@actions';
-import CONSTANTS from '@locale/en-CA';
+import { all, call, put, takeLatest } from 'redux-saga/effects';
 import AccountPageActions, { AccountPageTypes } from './actions';
 import { prepareInitialValues } from '@pages/Account/utils';
+import { fetchMyAccount } from '@helpers';
 
-// Action Handler
 function* init() {
     try {
         const { data } = yield call(fetchMyAccount);
@@ -23,25 +13,6 @@ function* init() {
     } catch (err) {
         yield put(AccountPageActions.initFailure(err));
     }
-}
-
-// Helper
-function* fetchMyAccount() {
-    yield put(
-        AccountActions.fetchAccount('me', {
-            include: 'phone,address,avatar',
-        })
-    );
-    const { success, failure } = yield race({
-        success: take(AccountTypes.FETCH_ACCOUNT_SUCCESS),
-        failure: take(AccountTypes.FETCH_ACCOUNT_FAILURE),
-    });
-
-    if (failure) {
-        throw new Error(CONSTANTS.CONTEST.ERROR.FETCH);
-    }
-
-    return success;
 }
 
 export default function* AccountPageSaga() {

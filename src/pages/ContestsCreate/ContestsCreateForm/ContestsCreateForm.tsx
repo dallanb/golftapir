@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { FormikValues } from 'formik';
+import { omit as _omit } from 'lodash';
 import { ContestsCreateFormProps } from './types';
 import { StateProps } from '../types';
 import { Form } from '@components';
@@ -11,7 +12,9 @@ import './ContestsCreateForm.scss';
 class ContestsCreateForm extends React.PureComponent<ContestsCreateFormProps> {
     handleSubmit = (values: FormikValues) => {
         const { createContest } = this.props;
-        createContest(values);
+        const contest = _omit(values, ['avatar']);
+        const avatar = values.avatar;
+        createContest(contest, avatar);
     };
     render() {
         const { initialValues } = this.props;
@@ -35,8 +38,8 @@ const mapStateToProps = ({ contestsCreatePage }: StateProps) => {
 
 const mapDispatchToProps = (dispatch: any) => {
     return {
-        createContest(values: FormikValues) {
-            return dispatch(ContestActions.createContest(values));
+        createContest(values: FormikValues, avatar: File) {
+            return dispatch(ContestActions.createContest(values, avatar));
         },
     };
 };

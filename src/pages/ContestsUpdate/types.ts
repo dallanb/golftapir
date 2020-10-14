@@ -6,6 +6,7 @@ export interface ContestsUpdateProps extends RouteComponentProps<any> {
     uuid: string;
     title: string;
     description: string;
+    contest: any;
     history: any;
     init: (uuid: string) => void;
     terminate: () => void;
@@ -28,4 +29,5 @@ export interface ContestsUpdatePageInterface {
     readonly description: string;
     readonly updateFormInitialValues: any;
     readonly uuid?: string;
+    readonly contest: any;
 }

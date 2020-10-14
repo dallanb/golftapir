@@ -5,11 +5,10 @@ import { fetchContest } from '@helpers';
 
 function* init({ uuid }: AnyAction) {
     try {
-        const {
-            data: { name },
-        } = yield call(fetchContest, uuid);
+        const { data } = yield call(fetchContest, uuid);
 
-        yield put(ContestsUpdatePageActions.set({ title: name }));
+        yield put(ContestsUpdatePageActions.set({ title: data.name }));
+        yield put(ContestsUpdatePageActions.set({ contest: data }));
 
         yield put(
             ContestsUpdatePageActions.set({

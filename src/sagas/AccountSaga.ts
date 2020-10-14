@@ -38,15 +38,15 @@ function* updateAccount({ uuid, values }: AnyAction) {
     }
 }
 
-function* updateAvatar({ uuid, avatar }: AnyAction) {
+function* assignAvatar({ uuid, avatar }: AnyAction) {
     try {
-        const res = yield call(AccountService.updateAvatar, uuid, avatar);
+        const res = yield call(AccountService.assignAvatar, uuid, avatar);
         // const { accounts } = res;
         console.log(res);
-        yield put(AccountActions.updateAvatarSuccess());
+        yield put(AccountActions.assignAvatarSuccess());
     } catch (err) {
-        yield put(AccountActions.updateAvatarFailure(err));
-        message.error(CONSTANTS.ACCOUNT.ERROR.UPDATE_AVATAR);
+        yield put(AccountActions.assignAvatarFailure(err));
+        message.error(CONSTANTS.ACCOUNT.ERROR.ASSIGN_AVATAR);
     }
 }
 
@@ -84,7 +84,7 @@ export default function* AccountSaga() {
         takeLatest(AccountTypes.FETCH_ACCOUNT, fetchAccount),
         takeLatest(AccountTypes.FETCH_ACCOUNTS, fetchAccounts),
         takeLatest(AccountTypes.UPDATE_ACCOUNT, updateAccount),
-        takeLatest(AccountTypes.UPDATE_AVATAR, updateAvatar),
+        takeLatest(AccountTypes.ASSIGN_AVATAR, assignAvatar),
         takeLatest(AccountTypes.SEARCH_ACCOUNTS, searchAccounts),
         takeLatest(AccountTypes.BULK_FETCH_ACCOUNTS, bulkFetchAccounts),
     ]);

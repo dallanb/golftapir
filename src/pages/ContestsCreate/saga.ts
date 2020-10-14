@@ -19,6 +19,7 @@ function* init() {
         yield put(ContestsCreatePageActions.initFailure(err));
     }
 }
+
 function* searchParticipants({ key }: AnyAction) {
     try {
         const { data } = yield call(searchAccounts, key);

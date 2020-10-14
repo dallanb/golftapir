@@ -17,6 +17,7 @@ const INITIAL_STATE: ContestsUpdatePageInterface = {
     description: CONSTANTS.PAGES.CONTESTS_UPDATE.DESCRIPTION,
     updateFormInitialValues: undefined,
     uuid: undefined,
+    contest: undefined,
 };
 
 /* ------------- Reducers ------------- */

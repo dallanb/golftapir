@@ -5,6 +5,8 @@ import { useDispatch } from 'react-redux';
 import { get as _get, debounce as _debounce } from 'lodash';
 import { antdFormatName, mapCountryOptions } from './utils';
 import { FieldRendererProps } from './types';
+import { DateTimePicker } from '@components';
+import { Moment } from 'moment';
 
 let defaultFieldRenderer: FieldRendererProps;
 
@@ -86,12 +88,43 @@ defaultFieldRenderer = (schema, formik) => {
                         key={name}
                         name={name}
                         ref={fieldRef}
-                        onChange={(info) => {
-                            formik.setFieldValue(name, info.file.originFileObj);
-                        }}
+                        onChange={(info) =>
+                            formik.setFieldValue(name, info.file.originFileObj)
+                        }
                     >
                         <Button icon={<UploadOutlined />}>Upload</Button>
                     </Upload>
+                );
+                break;
+            case 'date-time-picker':
+                field = (
+                    <DateTimePicker
+                        onChange={(date: Moment | null) =>
+                            formik.setFieldValue(
+                                name,
+                                _get(
+                                    options,
+                                    ['valueTransform'],
+                                    (value: Moment) => value
+                                )(date)
+                            )
+                        }
+                        format={_get(
+                            options,
+                            ['format'],
+                            'YYYY-MM-DD HH:mm:ss'
+                        )}
+                        disabledDate={_get(
+                            options,
+                            ['disabledDate'],
+                            () => false
+                        )}
+                        disabledTime={_get(
+                            options,
+                            ['disabledTime'],
+                            () => false
+                        )}
+                    />
                 );
                 break;
             case 'country-select':
