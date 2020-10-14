@@ -1,7 +1,11 @@
+export { default as assignContestAvatar } from './assignContestAvatar';
 export { default as bulkFetchAccounts } from './bulkFetchAccounts';
+export { default as createContest } from './createContest';
 export { default as fetchContest } from './fetchContest';
 export { default as fetchContests } from './fetchContests';
+export { default as fetchMyAccount } from './fetchMyAccount';
 export { default as fetchNotifications } from './fetchNotifications';
 export { default as fetchWagers } from './fetchWagers';
 export { default as searchAccounts } from './searchAccounts';
 export { default as subscriptionExists } from './subscriptionExists';
+export { default as updateContest } from './updateContest';

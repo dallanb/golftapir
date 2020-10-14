@@ -4,4 +4,3 @@ export interface ContestsCreateFormProps {
     initialValues: any;
     createContest: (values: FormikValues) => void;
 }
-

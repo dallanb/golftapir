@@ -24,7 +24,7 @@ export default {
             data,
         });
     },
-    updateAvatar(uuid: string, avatar: any = {}) {
+    assignAvatar(uuid: string, avatar: any = {}) {
         const formData = getFormData({ avatar });
 
         return ClientProxy.post({

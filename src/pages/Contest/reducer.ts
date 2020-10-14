@@ -19,6 +19,7 @@ const INITIAL_STATE: ContestPageInterface = {
     subscribed: false,
     contestParticipants: [],
     contestWagers: [],
+    contest: undefined,
 };
 
 /* ------------- Reducers ------------- */

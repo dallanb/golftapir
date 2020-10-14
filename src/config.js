@@ -10,7 +10,7 @@ const config = {
     WAGER_URL: 'wager.techtapir.com',
     GOLF_UUID: 'ede9c78f-025f-44e1-8a75-78c9a6772929',
     NOTIFICATION_URL: 'notification.techtapir.com',
-    S3_URL: 'https://golftapir.s3-us-west-2.amazonaws.com/account/avatars/',
+    S3_URL: 'https://golftapir.s3-us-west-2.amazonaws.com',
     FIREBASE_CONFIG: {
         apiKey: process.env.FIREBASE_API_KEY,
         authDomain: process.env.FIREBASE_AUTH_DOMAIN,

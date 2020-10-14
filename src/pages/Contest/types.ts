@@ -31,6 +31,7 @@ export interface ContestPageInterface {
     readonly owner_uuid: string;
     readonly contestParticipants: any[];
     readonly contestWagers: any[];
+    readonly contest: any;
 }
 
 export interface StateInterface {

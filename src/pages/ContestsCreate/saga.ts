@@ -1,9 +1,14 @@
 import { AnyAction } from 'redux';
 import { all, call, put, select, takeLatest } from 'redux-saga/effects';
+import { pick as _pick, omit as _omit, isEmpty as _isEmpty } from 'lodash';
 import config from 'config';
 import ContestsCreatePageActions, { ContestsCreatePageTypes } from './actions';
 import { selectMe } from '@selectors/BaseSelector';
-import { searchAccounts } from '@helpers';
+import {
+    searchAccounts,
+    createContest as createContestHelper,
+    assignContestAvatar,
+} from '@helpers';
 
 function* init() {
     try {
@@ -19,12 +24,29 @@ function* init() {
         yield put(ContestsCreatePageActions.initFailure(err));
     }
 }
+
 function* searchParticipants({ key }: AnyAction) {
     try {
         const { data } = yield call(searchAccounts, key);
         yield put(ContestsCreatePageActions.searchParticipantsSuccess(data));
     } catch (err) {
         yield put(ContestsCreatePageActions.searchParticipantsFailure(err));
+    }
+}
+
+function* createContest({ data }: AnyAction) {
+    try {
+        const contestData = _omit(data, ['avatar']);
+        const {
+            data: { uuid },
+        } = yield call(createContestHelper, contestData);
+        const avatarData = _pick(data, ['avatar']);
+        if (!_isEmpty(avatarData)) {
+            yield call(assignContestAvatar, uuid, avatarData.avatar);
+        }
+        yield put(ContestsCreatePageActions.createContestSuccess({ uuid }));
+    } catch (err) {
+        yield put(ContestsCreatePageActions.createContestFailure(err));
     }
 }
 
@@ -35,5 +57,6 @@ export default function* ContestsCreatePageSaga() {
             ContestsCreatePageTypes.SEARCH_PARTICIPANTS,
             searchParticipants
         ),
+        takeLatest(ContestsCreatePageTypes.CREATE_CONTEST, createContest),
     ]);
 }

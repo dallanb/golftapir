@@ -11,8 +11,10 @@ function* init({ uuid }: AnyAction) {
     try {
         const {
             data: { participants, name: title, status, owner_uuid },
+            data: contest,
         } = yield call(fetchContest, uuid);
 
+        yield put(ContestPageActions.set({ contest }));
         yield put(ContestPageActions.set({ title }));
         yield put(ContestPageActions.set({ status }));
         yield put(ContestPageActions.set({ owner_uuid }));

@@ -106,9 +106,9 @@ const HANDLERS = {
     [ContestsCreatePageTypes.SEARCH_PARTICIPANTS]: searchParticipants,
     [ContestsCreatePageTypes.SEARCH_PARTICIPANTS_SUCCESS]: searchParticipantsSuccess,
     [ContestsCreatePageTypes.SEARCH_PARTICIPANTS_FAILURE]: searchParticipantsFailure,
-    [ContestTypes.CREATE_CONTEST]: createContest,
-    [ContestTypes.CREATE_CONTEST_SUCCESS]: createContestSuccess,
-    [ContestTypes.CREATE_CONTEST_FAILURE]: createContestFailure,
+    [ContestsCreatePageTypes.CREATE_CONTEST]: createContest,
+    [ContestsCreatePageTypes.CREATE_CONTEST_SUCCESS]: createContestSuccess,
+    [ContestsCreatePageTypes.CREATE_CONTEST_FAILURE]: createContestFailure,
 };
 
 export const reducer = createReducer(INITIAL_STATE, HANDLERS);

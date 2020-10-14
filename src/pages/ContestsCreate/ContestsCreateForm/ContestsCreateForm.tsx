@@ -1,10 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { FormikValues } from 'formik';
+import { omit as _omit } from 'lodash';
 import { ContestsCreateFormProps } from './types';
 import { StateProps } from '../types';
 import { Form } from '@components';
-import ContestActions from '@actions/ContestActions';
+import ContestCreatePageActions from '../actions';
 import { fieldSchema, validationSchema } from './schema';
 import './ContestsCreateForm.scss';
 
@@ -36,7 +37,7 @@ const mapStateToProps = ({ contestsCreatePage }: StateProps) => {
 const mapDispatchToProps = (dispatch: any) => {
     return {
         createContest(values: FormikValues) {
-            return dispatch(ContestActions.createContest(values));
+            return dispatch(ContestCreatePageActions.createContest(values));
         },
     };
 };

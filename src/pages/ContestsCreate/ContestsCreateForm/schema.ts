@@ -1,6 +1,8 @@
 import React from 'react';
 import * as Yup from 'yup';
 import 'yup-phone';
+import moment, { Moment } from 'moment';
+import { range as _range } from 'lodash';
 import ContestsCreatePageActions from '../actions';
 import InputWrapper from '@components/InputWrapper';
 import { participantSearchSelectOptionRenderer } from './utils';
@@ -34,6 +36,29 @@ export const fieldSchema = [
         },
     },
     {
+        name: 'avatar',
+        type: 'avatar',
+        wrapper: InputWrapper,
+        wrapperOptions: {
+            label: FORM.LABELS.AVATAR,
+            valuePropName: 'file',
+        },
+    },
+    {
+        name: 'start_time',
+        type: 'date-time-picker',
+        wrapper: InputWrapper,
+        wrapperOptions: {
+            label: FORM.LABELS.START_TIME,
+        },
+        options: {
+            format: 'YYYY-MM-DD HH:mm A',
+            disabledDate: (current: Moment) =>
+                current && current < moment().endOf('day'),
+            valueTransform: (value: Moment) => +value,
+        },
+    },
+    {
         name: 'participants',
         type: 'search-select',
         wrapper: InputWrapper,
@@ -56,5 +81,7 @@ export const validationSchema = Yup.object({
     owner_uuid: Yup.string(),
     sport_uuid: Yup.string(),
     name: Yup.string().required(FORM.VALIDATION.NAME_REQUIRED),
+    avatar: Yup.string(),
+    start_time: Yup.string().required(FORM.VALIDATION.START_TIME_REQUIRED),
     participants: Yup.array(),
 });

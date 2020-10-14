@@ -2,15 +2,11 @@ import { put, race, take } from 'redux-saga/effects';
 import { ContestActions, ContestTypes } from '@actions';
 import CONSTANTS from '@locale/en-CA';
 
-function* fetchContest(uuid: string) {
-    yield put(
-        ContestActions.fetchContest(uuid, {
-            include: 'participants,avatar',
-        })
-    );
+function* assignContestAvatar(uuid: string, avatar: File) {
+    yield put(ContestActions.assignAvatar(uuid, avatar));
     const { success, failure } = yield race({
-        success: take(ContestTypes.FETCH_CONTEST_SUCCESS),
-        failure: take(ContestTypes.FETCH_CONTEST_FAILURE),
+        success: take(ContestTypes.ASSIGN_AVATAR_SUCCESS),
+        failure: take(ContestTypes.ASSIGN_AVATAR_FAILURE),
     });
 
     if (failure) {
@@ -20,4 +16,4 @@ function* fetchContest(uuid: string) {
     return success;
 }
 
-export default fetchContest;
+export default assignContestAvatar;
