@@ -6,7 +6,7 @@ const config = {
     PORT: 3000,
     AUTH_URL: 'auth.techtapir.com',
     ACCOUNT_URL: 'account.techtapir.com',
-    CONTEST_URL: 'dcontest.techtapir.com',
+    CONTEST_URL: 'contest.techtapir.com',
     WAGER_URL: 'wager.techtapir.com',
     GOLF_UUID: 'ede9c78f-025f-44e1-8a75-78c9a6772929',
     NOTIFICATION_URL: 'notification.techtapir.com',
