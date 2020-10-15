@@ -73,6 +73,7 @@ const constants = {
             PARTICIPANT_INVITED: 'participant_invited',
             PARTICIPANT_ACTIVE: 'participant_active',
             CONTEST_READY: 'contest_ready',
+            CONTEST_TIMEOUT: 'contest_timeout',
         },
     },
     S3_FOLDERS: {

@@ -17,6 +17,7 @@ const topicToRouteMapper = (topic: string, key: string, item: any) => {
                 case constants.EVENTS.CONTESTS.PARTICIPANT_INVITED:
                 case constants.EVENTS.CONTESTS.PARTICIPANT_ACTIVE:
                 case constants.EVENTS.CONTESTS.CONTEST_READY:
+                case constants.EVENTS.CONTESTS.CONTEST_TIMEOUT:
                     route += `/${_get(
                         item,
                         ['properties', 'contest_uuid'],
