@@ -72,6 +72,9 @@ export const renderAction = (key: string, options: any): boolean => {
                 options.status !== constants.STATUS.READY.KEY
             );
             break;
+        case 'play':
+            return options.status === constants.STATUS.READY.KEY;
+            break;
         default:
             console.error('Invalid key: ', key);
     }

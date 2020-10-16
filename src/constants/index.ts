@@ -33,16 +33,19 @@ const constants = {
     },
     ACTION: {
         ACTIVATE: {
-            COLOUR: 'blue',
             TWO_TONE_COLOUR: '#1890ff',
             KEY: 'activate',
             LABEL: 'Activate',
         },
         UPDATE: {
-            COLOUR: 'orange',
             TWO_TONE_COLOUR: '#FFA500',
             KEY: 'update',
             LABEL: 'Update',
+        },
+        PLAY: {
+            TWO_TONE_COLOUR: '#00e64d',
+            KEY: 'play',
+            LABEL: 'Play',
         },
     },
     ROUTES: {

@@ -46,6 +46,10 @@ class Contest extends React.PureComponent<ContestProps, ContestState> {
                 key: constants.ACTION.UPDATE.KEY,
                 onClick: () => history.push(`/app/contests/${uuid}/update`),
             },
+            {
+                key: constants.ACTION.PLAY.KEY,
+                onClick: () => history.push(`/app/contests/${uuid}/play`),
+            },
         ];
     };
 
