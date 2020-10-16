@@ -3,7 +3,8 @@ import { RouteComponentProps } from 'react-router-dom';
 export interface ContestProps extends RouteComponentProps {
     init: (uuid: string) => void;
     terminate: () => void;
-    onActivate: (uuid: string, data: { status: string }) => void;
+    readyContest: (uuid: string) => void;
+    activateContest: (uuid: string) => void;
     subscribe: (uuid: string) => void;
     unsubscribe: (uuid: string) => void;
     title: string;
@@ -22,9 +23,7 @@ export interface ContestPageInterface {
     readonly err?: Error;
     readonly title: string;
     readonly description: string;
-    readonly status: string;
     readonly subscribed: boolean;
-    readonly owner_uuid: string;
     readonly contestParticipants: any[];
     readonly contestWagers: any[];
     readonly contest: any;

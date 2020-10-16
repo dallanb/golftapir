@@ -6,7 +6,13 @@ const { Types, Creators } = createActions(
         initSuccess: null,
         initFailure: ['err'],
         terminate: null,
-        set: ['data']
+        set: ['data'],
+        updateContestStatus: ['uuid', 'status'],
+        updateContestStatusSuccess: ['status'],
+        updateContestStatusFailure: ['err'],
+        updateContestParticipantStatus: ['uuid', 'status'],
+        updateContestParticipantStatusSuccess: ['uuid', 'status'],
+        updateContestParticipantStatusFailure: ['err'],
     },
     {
         prefix: 'CONTEST_PAGE_',

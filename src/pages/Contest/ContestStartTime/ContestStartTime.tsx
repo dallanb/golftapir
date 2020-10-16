@@ -8,7 +8,6 @@ import { Typography } from 'antd';
 
 const ContestStartTime: React.FunctionComponent<ContestStartTimeProps> = () => {
     const startTime = formatTimeStamp(useSelector(selectContestStartTime));
-    console.log(startTime);
     return (
         <div className="contest-start-time">
             <Typography.Title level={5}>Start Time: </Typography.Title>

@@ -42,10 +42,10 @@ const constants = {
             KEY: 'update',
             LABEL: 'Update',
         },
-        PLAY: {
+        READY: {
             TWO_TONE_COLOUR: '#00e64d',
-            KEY: 'play',
-            LABEL: 'Play',
+            KEY: 'ready',
+            LABEL: 'Ready',
         },
     },
     ROUTES: {

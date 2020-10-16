@@ -9,3 +9,4 @@ export { default as fetchWagers } from './fetchWagers';
 export { default as searchAccounts } from './searchAccounts';
 export { default as subscriptionExists } from './subscriptionExists';
 export { default as updateContest } from './updateContest';
+export { default as updateContestParticipant } from './updateContestParticipant';

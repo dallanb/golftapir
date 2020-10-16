@@ -21,8 +21,9 @@ const ContestActions: React.FunctionComponent<ContestActionsProps> = ({
         actions,
         status,
         participants,
+        isOwner,
     });
-    if (!isOwner || !Actions) return null;
+    if (!Actions) return null;
     return (
         <div className="contest-actions">
             <Typography.Title level={5}>Actions</Typography.Title>

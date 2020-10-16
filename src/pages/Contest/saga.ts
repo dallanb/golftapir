@@ -4,20 +4,24 @@ import ContestPageActions, { ContestPageTypes } from './actions';
 import { AccountActions } from '@actions';
 import { normalizeContestParticipants } from '@pages/Contest/utils';
 import { selectMe } from '@selectors/BaseSelector';
-import { bulkFetchAccounts, fetchContest, subscriptionExists } from '@helpers';
+import {
+    bulkFetchAccounts,
+    fetchContest,
+    subscriptionExists,
+    updateContest,
+    updateContestParticipant,
+} from '@helpers';
 
 // Action Handlers
 function* init({ uuid }: AnyAction) {
     try {
         const {
-            data: { participants, name: title, status, owner_uuid },
+            data: { participants, name: title },
             data: contest,
         } = yield call(fetchContest, uuid);
 
         yield put(ContestPageActions.set({ contest }));
         yield put(ContestPageActions.set({ title }));
-        yield put(ContestPageActions.set({ status }));
-        yield put(ContestPageActions.set({ owner_uuid }));
 
         const { subscribed } = yield call(subscriptionExists, uuid);
         yield put(ContestPageActions.set({ subscribed }));
@@ -49,6 +53,42 @@ function* init({ uuid }: AnyAction) {
     }
 }
 
+function* updateContestStatus({ uuid, status }: AnyAction) {
+    try {
+        yield call(updateContest, uuid, {
+            status,
+        });
+        yield put(ContestPageActions.updateContestStatusSuccess(status));
+    } catch (err) {
+        yield put(ContestPageActions.updateContestStatusFailure());
+    }
+}
+
+function* updateContestParticipantStatus({ uuid, status }: AnyAction) {
+    try {
+        yield call(updateContestParticipant, uuid, {
+            status,
+        });
+        yield put(
+            ContestPageActions.updateContestParticipantStatusSuccess(
+                uuid,
+                status
+            )
+        );
+    } catch (err) {
+        yield put(
+            ContestPageActions.updateContestParticipantStatusFailure(err)
+        );
+    }
+}
+
 export default function* ContestPageSaga() {
-    yield all([takeLatest(ContestPageTypes.INIT, init)]);
+    yield all([
+        takeLatest(ContestPageTypes.INIT, init),
+        takeLatest(ContestPageTypes.UPDATE_CONTEST_STATUS, updateContestStatus),
+        takeLatest(
+            ContestPageTypes.UPDATE_CONTEST_PARTICIPANT_STATUS,
+            updateContestParticipantStatus
+        ),
+    ]);
 }

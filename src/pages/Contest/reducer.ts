@@ -6,6 +6,7 @@ import { ContestPageTypes } from './actions';
 import { ContestPageInterface } from './types';
 import { ContestTypes, NotificationTypes } from '@actions';
 import { mergeContestParticipant } from '@pages/Contest/utils';
+import constants from '@constants';
 
 /* ------------- Initial State ------------- */
 const INITIAL_STATE: ContestPageInterface = {
@@ -14,8 +15,6 @@ const INITIAL_STATE: ContestPageInterface = {
     err: undefined,
     title: '',
     description: CONSTANTS.PAGES.CONTEST.DESCRIPTION,
-    status: '',
-    owner_uuid: '',
     subscribed: false,
     contestParticipants: [],
     contestWagers: [],
@@ -57,18 +56,22 @@ function set(state: any, { data }: any) {
     });
 }
 
-function updateContestSuccess(state = INITIAL_STATE, { data }: any) {
-    const { name: title, status } = data;
+function updateContestStatusSuccess(state = INITIAL_STATE, { status }: any) {
     return Immutable.merge(state, {
-        title,
-        status,
+        contest: {
+            ...state.contest,
+            status,
+        },
     });
 }
 
-function updateContestParticipantSuccess(state = INITIAL_STATE, { data }: any) {
+function updateContestParticipantStatusSuccess(
+    state = INITIAL_STATE,
+    { uuid, status }: any
+) {
     const contestParticipants = mergeContestParticipant(
         state.contestParticipants,
-        data
+        { uuid, status }
     );
     return Immutable.merge(state, {
         contestParticipants,
@@ -93,8 +96,8 @@ const HANDLERS = {
     [ContestPageTypes.INIT_FAILURE]: initFailure,
     [ContestPageTypes.TERMINATE]: terminate,
     [ContestPageTypes.SET]: set,
-    [ContestTypes.UPDATE_CONTEST_SUCCESS]: updateContestSuccess,
-    [ContestTypes.UPDATE_CONTEST_PARTICIPANT_SUCCESS]: updateContestParticipantSuccess,
+    [ContestPageTypes.UPDATE_CONTEST_STATUS_SUCCESS]: updateContestStatusSuccess,
+    [ContestPageTypes.UPDATE_CONTEST_PARTICIPANT_STATUS_SUCCESS]: updateContestParticipantStatusSuccess,
     [NotificationTypes.SUBSCRIBE_SUCCESS]: subscribeSuccess,
     [NotificationTypes.UNSUBSCRIBE_SUCCESS]: unsubscribeSuccess,
 };
