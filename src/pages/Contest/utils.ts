@@ -5,6 +5,7 @@ import {
     set as _set,
 } from 'lodash';
 import constants from '@constants';
+import moment from 'moment';
 
 export const normalizeContestParticipants = (
     participants: any,
@@ -76,3 +77,6 @@ export const renderAction = (key: string, options: any): boolean => {
     }
     return false;
 };
+
+export const formatTimeStamp = (timestamp: number) =>
+    timestamp ? moment(timestamp).format('MMM D, H:M A') : 'NA';

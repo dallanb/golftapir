@@ -1,5 +1,4 @@
 import { RouteComponentProps } from 'react-router-dom';
-import { MemberAppInterface } from '@apps/MemberApp/reducer';
 
 export interface ContestProps extends RouteComponentProps {
     init: (uuid: string) => void;
@@ -10,10 +9,7 @@ export interface ContestProps extends RouteComponentProps {
     title: string;
     description: string;
     isInitialized: boolean;
-    status: string;
     subscribed: boolean;
-    contestParticipants: any[];
-    isOwner: boolean;
 }
 
 export interface ContestState {
@@ -36,5 +32,4 @@ export interface ContestPageInterface {
 
 export interface StateInterface {
     contestPage: ContestPageInterface;
-    base: MemberAppInterface;
 }
