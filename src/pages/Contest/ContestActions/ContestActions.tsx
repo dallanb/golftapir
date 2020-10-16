@@ -1,36 +1,28 @@
 import React from 'react';
-import { Button, Typography } from 'antd';
+import { Typography } from 'antd';
+import { useSelector } from 'react-redux';
 import { ContestActionsProps } from './types';
-import './ContestActions.scss';
 import {
-    mapActionColour,
-    mapActionLabel,
-    renderAction,
-} from '@pages/Contest/utils';
+    selectContestParticipants,
+    selectContestStatus,
+    selectIsOwner,
+} from '../selector';
+import { memoizedContestActionRenderer } from './contestActionRenderer';
+import './ContestActions.scss';
 
 const ContestActions: React.FunctionComponent<ContestActionsProps> = ({
-    isOwner,
-    status,
-    participants,
     actions,
 }) => {
-    const renderActions = () =>
-        actions.reduce((accumulatedActions: any[], { key, onClick }: any) => {
-            accumulatedActions.push(
-                <Button
-                    key={key}
-                    onClick={onClick}
-                    disabled={!renderAction(key, { status, participants })}
-                    className="contest-actions-button"
-                >
-                    {mapActionLabel(key)}
-                </Button>
-            );
-            return accumulatedActions;
-        }, []);
+    const participants = useSelector(selectContestParticipants);
+    const isOwner = useSelector(selectIsOwner);
+    const status = useSelector(selectContestStatus);
 
-    const Actions = renderActions();
-    if (!isOwner || !Actions.length) return null;
+    const Actions = memoizedContestActionRenderer({
+        actions,
+        status,
+        participants,
+    });
+    if (!isOwner || !Actions) return null;
     return (
         <div className="contest-actions">
             <Typography.Title level={5}>Actions</Typography.Title>

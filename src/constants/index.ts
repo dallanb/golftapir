@@ -33,16 +33,19 @@ const constants = {
     },
     ACTION: {
         ACTIVATE: {
-            COLOUR: 'blue',
             TWO_TONE_COLOUR: '#1890ff',
             KEY: 'activate',
             LABEL: 'Activate',
         },
         UPDATE: {
-            COLOUR: 'orange',
             TWO_TONE_COLOUR: '#FFA500',
             KEY: 'update',
             LABEL: 'Update',
+        },
+        PLAY: {
+            TWO_TONE_COLOUR: '#00e64d',
+            KEY: 'play',
+            LABEL: 'Play',
         },
     },
     ROUTES: {
@@ -73,6 +76,7 @@ const constants = {
             PARTICIPANT_INVITED: 'participant_invited',
             PARTICIPANT_ACTIVE: 'participant_active',
             CONTEST_READY: 'contest_ready',
+            CONTEST_TIMEOUT: 'contest_timeout',
         },
     },
     S3_FOLDERS: {

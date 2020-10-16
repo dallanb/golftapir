@@ -5,6 +5,7 @@ import {
     set as _set,
 } from 'lodash';
 import constants from '@constants';
+import moment from 'moment';
 
 export const normalizeContestParticipants = (
     participants: any,
@@ -71,8 +72,14 @@ export const renderAction = (key: string, options: any): boolean => {
                 options.status !== constants.STATUS.READY.KEY
             );
             break;
+        case 'play':
+            return options.status === constants.STATUS.READY.KEY;
+            break;
         default:
             console.error('Invalid key: ', key);
     }
     return false;
 };
+
+export const formatTimeStamp = (timestamp: number) =>
+    timestamp ? moment(timestamp).format('MMM D, H:M A') : 'NA';

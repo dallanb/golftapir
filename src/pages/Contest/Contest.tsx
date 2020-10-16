@@ -13,6 +13,7 @@ import ContestStatus from './ContestStatus';
 import ContestActions from './ContestActions';
 import ContestSubscription from './ContestSubscription';
 import ContestAvatar from './ContestAvatar';
+import ContestStartTime from './ContestStartTime';
 import './Contest.scss';
 
 class Contest extends React.PureComponent<ContestProps, ContestState> {
@@ -45,18 +46,15 @@ class Contest extends React.PureComponent<ContestProps, ContestState> {
                 key: constants.ACTION.UPDATE.KEY,
                 onClick: () => history.push(`/app/contests/${uuid}/update`),
             },
+            {
+                key: constants.ACTION.PLAY.KEY,
+                onClick: () => history.push(`/app/contests/${uuid}/play`),
+            },
         ];
     };
 
     render() {
-        const {
-            title,
-            description,
-            status,
-            isInitialized,
-            isOwner,
-            contestParticipants,
-        } = this.props;
+        const { title, description, isInitialized } = this.props;
         const { uuid } = this.state;
         return (
             <ContentLayout
@@ -67,39 +65,22 @@ class Contest extends React.PureComponent<ContestProps, ContestState> {
             >
                 <ContestAvatar />
                 <ContestSubscription uuid={uuid} />
-                <ContestStatus status={status} />
-                <ContestActions
-                    isOwner={isOwner}
-                    participants={contestParticipants}
-                    status={status}
-                    actions={this.generateActions()}
-                />
+                <ContestStatus />
+                <ContestStartTime />
+                <ContestActions actions={this.generateActions()} />
                 <ContestParticipantsTable />
             </ContentLayout>
         );
     }
 }
 
-const mapStateToProps = ({ base, contestPage }: StateInterface) => {
-    const {
-        title,
-        description,
-        isInitialized,
-        status,
-        contestParticipants,
-        owner_uuid,
-    } = contestPage;
-    const { me } = base;
-
-    const isOwner = me.membership_uuid === owner_uuid;
+const mapStateToProps = ({ contestPage }: StateInterface) => {
+    const { title, description, isInitialized } = contestPage;
 
     return {
         title,
         description,
         isInitialized,
-        status,
-        contestParticipants,
-        isOwner,
     };
 };
 

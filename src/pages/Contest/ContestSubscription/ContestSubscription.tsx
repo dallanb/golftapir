@@ -13,16 +13,20 @@ class ContestSubscription extends React.PureComponent<
     render() {
         const { subscribed, uuid, subscribe, unsubscribe } = this.props;
         return (
-            <SubscriptionToggle
-                checked={subscribed}
-                icon={
-                    <BellTwoTone twoToneColor={subscribed ? 'red' : 'green'} />
-                }
-                onClick={() =>
-                    subscribed ? unsubscribe(uuid) : subscribe(uuid)
-                }
-                className="subscription-toggle"
-            />
+            <div className="contest-subscription">
+                <SubscriptionToggle
+                    checked={subscribed}
+                    icon={
+                        <BellTwoTone
+                            twoToneColor={subscribed ? 'red' : 'green'}
+                        />
+                    }
+                    onClick={() =>
+                        subscribed ? unsubscribe(uuid) : subscribe(uuid)
+                    }
+                    className="subscription-toggle"
+                />
+            </div>
         );
     }
 }
