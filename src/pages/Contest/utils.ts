@@ -6,6 +6,7 @@ import {
 } from 'lodash';
 import constants from '@constants';
 import moment from 'moment';
+import { render } from 'react-dom';
 
 export const normalizeContestParticipants = (
     participants: any,
@@ -56,7 +57,7 @@ export const renderAction = (
 ): { show: boolean; enabled: boolean } => {
     const renderAction = { show: false, enabled: true };
     switch (key) {
-        case 'ready':
+        case constants.ACTION.READY.KEY:
             const participantActive =
                 options.participants.findIndex(
                     (participant: any) =>
@@ -69,17 +70,22 @@ export const renderAction = (
                 options.status !== constants.STATUS.ACTIVE.KEY &&
                 options.status !== constants.STATUS.READY.KEY;
             break;
-        case 'update':
+        case constants.ACTION.UPDATE.KEY:
             renderAction.show = options.isOwner;
             renderAction.enabled =
                 options.isOwner &&
                 options.status !== constants.STATUS.ACTIVE.KEY &&
                 options.status !== constants.STATUS.READY.KEY;
             break;
-        case 'activate':
-            renderAction.show = true;
+        case constants.ACTION.ACTIVATE.KEY:
+            renderAction.show = options.isOwner;
             renderAction.enabled =
+                options.startTime <= +new Date() &&
                 options.status === constants.STATUS.READY.KEY;
+            break;
+        case constants.ACTION.MATCHUP.KEY:
+            renderAction.show = true;
+            renderAction.enabled = true;
             break;
         default:
             console.error('Invalid key: ', key);

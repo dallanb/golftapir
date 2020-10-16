@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { ContestActionsProps } from './types';
 import {
     selectContestParticipants,
+    selectContestStartTime,
     selectContestStatus,
     selectIsOwner,
 } from '../selector';
@@ -16,12 +17,14 @@ const ContestActions: React.FunctionComponent<ContestActionsProps> = ({
     const participants = useSelector(selectContestParticipants);
     const isOwner = useSelector(selectIsOwner);
     const status = useSelector(selectContestStatus);
+    const startTime = useSelector(selectContestStartTime);
 
     const Actions = memoizedContestActionRenderer({
         actions,
         status,
         participants,
         isOwner,
+        startTime,
     });
     if (!Actions) return null;
     return (

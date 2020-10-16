@@ -13,6 +13,12 @@ const { Types, Creators } = createActions(
         updateContestParticipantStatus: ['uuid', 'status'],
         updateContestParticipantStatusSuccess: ['uuid', 'status'],
         updateContestParticipantStatusFailure: ['err'],
+        subscribe: ['uuid'],
+        subscribeSuccess: null,
+        subscribeFailure: ['err'],
+        unsubscribe: ['uuid'],
+        unsubscribeSuccess: null,
+        unsubscribeFailure: ['err'],
     },
     {
         prefix: 'CONTEST_PAGE_',

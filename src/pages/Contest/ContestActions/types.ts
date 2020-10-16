@@ -7,4 +7,5 @@ export interface contestActionRendererProps {
     status: string;
     participants: any[];
     isOwner: boolean;
+    startTime: number;
 }

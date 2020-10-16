@@ -10,6 +10,8 @@ import {
     subscriptionExists,
     updateContest,
     updateContestParticipant,
+    subscribe as subscribeHelper,
+    unsubscribe as unsubscribeHelper,
 } from '@helpers';
 
 // Action Handlers
@@ -82,6 +84,23 @@ function* updateContestParticipantStatus({ uuid, status }: AnyAction) {
     }
 }
 
+function* subscribe({ uuid }: AnyAction) {
+    try {
+        yield call(subscribeHelper, uuid);
+        yield put(ContestPageActions.subscribeSuccess());
+    } catch (err) {
+        yield put(ContestPageActions.subscribeFailure());
+    }
+}
+function* unsubscribe({ uuid }: AnyAction) {
+    try {
+        yield call(unsubscribeHelper, uuid);
+        yield put(ContestPageActions.unsubscribeSuccess());
+    } catch (err) {
+        yield put(ContestPageActions.unsubscribeFailure());
+    }
+}
+
 export default function* ContestPageSaga() {
     yield all([
         takeLatest(ContestPageTypes.INIT, init),
@@ -90,5 +109,7 @@ export default function* ContestPageSaga() {
             ContestPageTypes.UPDATE_CONTEST_PARTICIPANT_STATUS,
             updateContestParticipantStatus
         ),
+        takeLatest(ContestPageTypes.SUBSCRIBE, subscribe),
+        takeLatest(ContestPageTypes.UNSUBSCRIBE, unsubscribe),
     ]);
 }

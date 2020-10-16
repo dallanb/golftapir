@@ -10,12 +10,14 @@ export const contestActionRenderer: React.FunctionComponent<contestActionRendere
     status,
     participants,
     isOwner,
+    startTime,
 }) =>
     actions.reduce((accumulatedActions: any[], { key, onClick }: any) => {
         const { show, enabled } = renderAction(key, {
             status,
             participants,
             isOwner,
+            startTime
         });
         if (!show) return accumulatedActions;
 

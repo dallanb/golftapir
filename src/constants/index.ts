@@ -47,6 +47,11 @@ const constants = {
             KEY: 'ready',
             LABEL: 'Ready',
         },
+        MATCHUP: {
+            TWO_TONE_COLOUR: '#604',
+            KEY: 'matchup',
+            LABEL: 'Matchup',
+        },
     },
     ROUTES: {
         ACCOUNT: '/settings',

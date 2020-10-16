@@ -98,8 +98,8 @@ const HANDLERS = {
     [ContestPageTypes.SET]: set,
     [ContestPageTypes.UPDATE_CONTEST_STATUS_SUCCESS]: updateContestStatusSuccess,
     [ContestPageTypes.UPDATE_CONTEST_PARTICIPANT_STATUS_SUCCESS]: updateContestParticipantStatusSuccess,
-    [NotificationTypes.SUBSCRIBE_SUCCESS]: subscribeSuccess,
-    [NotificationTypes.UNSUBSCRIBE_SUCCESS]: unsubscribeSuccess,
+    [ContestPageTypes.SUBSCRIBE_SUCCESS]: subscribeSuccess,
+    [ContestPageTypes.UNSUBSCRIBE_SUCCESS]: unsubscribeSuccess,
 };
 
 export const reducer = createReducer(INITIAL_STATE, HANDLERS);

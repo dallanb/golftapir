@@ -48,6 +48,10 @@ class Contest extends React.PureComponent<ContestProps, ContestState> {
                 key: constants.ACTION.ACTIVATE.KEY,
                 onClick: () => activateContest(uuid),
             },
+            {
+                key: constants.ACTION.MATCHUP.KEY,
+                onClick: () => console.log('YOU FUCK WAD'),
+            },
         ];
     };
 
