@@ -6,7 +6,6 @@ import {
 } from 'lodash';
 import constants from '@constants';
 import moment from 'moment';
-import { render } from 'react-dom';
 
 export const normalizeContestParticipants = (
     participants: any,

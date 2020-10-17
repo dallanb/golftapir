@@ -3,6 +3,8 @@ export { default as bulkFetchAccounts } from './bulkFetchAccounts';
 export { default as createContest } from './createContest';
 export { default as fetchContest } from './fetchContest';
 export { default as fetchContests } from './fetchContests';
+export { default as fetchAccount } from './fetchAccount';
+export { default as fetchAccountMembership } from './fetchAccountMembership';
 export { default as fetchMyAccount } from './fetchMyAccount';
 export { default as fetchNotifications } from './fetchNotifications';
 export { default as fetchWagers } from './fetchWagers';

@@ -10,6 +10,13 @@ export default {
             query,
         });
     },
+    fetchAccountMembership(uuid: string, query: any = {}) {
+        return ClientProxy.get({
+            url: config.ACCOUNT_URL,
+            endpoint: `/accounts/membership/${uuid}`,
+            query,
+        });
+    },
     fetchAccounts(query: any = {}) {
         return ClientProxy.get({
             url: config.ACCOUNT_URL,

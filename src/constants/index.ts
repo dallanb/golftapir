@@ -4,6 +4,8 @@ const constants = {
         CONTEST_PAGE: 'CONTEST_PAGE',
         CONTESTS_PAGE: 'CONTESTS_PAGE',
         CONTESTS_CREATE_PAGE: 'CONTESTS_CREATE_PAGE',
+        COMPETITOR_PAGE: 'COMPETITOR_PAGE',
+        COMPETITORS_PAGE: 'COMPETITORS_PAGE',
         HOME_PAGE: 'HOME_PAGE',
         LOGIN_PAGE: 'LOGIN_PAGE',
         REGISTER_PAGE: 'REGISTER_PAGE',
@@ -56,7 +58,7 @@ const constants = {
     ROUTES: {
         ACCOUNT: '/settings',
         AUTH: '/auth',
-        COMPETITORS: '/competitors',
+        COMPETITOR: '/competitors',
         CONTEST: '/contests',
         HOME: '/home',
         LOGIN: '/login',

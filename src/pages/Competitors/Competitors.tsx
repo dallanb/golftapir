@@ -47,8 +47,8 @@ const mapStateToProps = ({ base, competitorsPage }: StateInterface) => {
 
 const mapDispatchToProps = (dispatch: any) => {
     return {
-        init(uuid: string) {
-            return dispatch(CompetitorsPageActions.init(uuid));
+        init() {
+            return dispatch(CompetitorsPageActions.init());
         },
         terminate() {
             return dispatch(CompetitorsPageActions.terminate());
