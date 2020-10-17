@@ -15,6 +15,7 @@ export const columnsSchema = [
                     avatar: { s3_filename },
                     first_name,
                     last_name,
+                    membership_uuid,
                 },
             },
         }: any) => (
@@ -22,6 +23,7 @@ export const columnsSchema = [
                 first_name={first_name}
                 last_name={last_name}
                 s3_filename={s3_filename}
+                uuid={membership_uuid}
             />
         ),
     },

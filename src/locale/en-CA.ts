@@ -113,6 +113,10 @@ const CONSTANTS = {
             TITLE: 'Notifications',
             DESCRIPTION: 'View Notifications',
         },
+        COMPETITORS: {
+            TITLE: 'Competitors',
+            DESCRIPTION: 'View Competitors',
+        },
         CONTESTS_CREATE: {
             TITLE: 'Contests',
             DESCRIPTION: 'Create Contest',

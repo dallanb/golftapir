@@ -11,6 +11,7 @@ import {
 } from '@reducers';
 import {
     accountPage,
+    competitorsPage,
     contestPage,
     contestsPage,
     contestsCreatePage,
@@ -29,6 +30,7 @@ export const memberAppReducer = combineReducers({
     modal,
     notification,
     accountPage,
+    competitorsPage,
     contestPage,
     contestsPage,
     contestsCreatePage,
@@ -55,6 +57,7 @@ import {
 
 import {
     AccountPageSaga,
+    CompetitorsPageSaga,
     ContestPageSaga,
     ContestsPageSaga,
     ContestsCreatePageSaga,
@@ -79,6 +82,7 @@ export function* memberAppSaga() {
         fork(SocketSaga),
         fork(WagerSaga),
         fork(AccountPageSaga),
+        fork(CompetitorsPageSaga),
         fork(ContestPageSaga),
         fork(ContestsPageSaga),
         fork(ContestsCreatePageSaga),

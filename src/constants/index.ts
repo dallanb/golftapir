@@ -56,6 +56,7 @@ const constants = {
     ROUTES: {
         ACCOUNT: '/settings',
         AUTH: '/auth',
+        COMPETITORS: '/competitors',
         CONTEST: '/contests',
         HOME: '/home',
         LOGIN: '/login',

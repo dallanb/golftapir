@@ -5,6 +5,12 @@ export {
     AccountPageRoutes,
 } from './Account';
 export {
+    default as Competitors,
+    reducer as competitorsPage,
+    CompetitorsPageSaga,
+    CompetitorsPageRoutes,
+} from './Competitors';
+export {
     default as Contest,
     reducer as contestPage,
     ContestPageSaga,

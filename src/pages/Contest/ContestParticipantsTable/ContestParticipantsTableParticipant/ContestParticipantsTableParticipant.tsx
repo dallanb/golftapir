@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { Avatar } from '@components';
 import { withS3URL } from '@utils';
 import { ContestParticipantsTableParticipantProps } from './types';
@@ -8,9 +9,14 @@ const ContestParticipantsTableParticipant: React.FunctionComponent<ContestPartic
     s3_filename,
     first_name,
     last_name,
+    uuid,
 }) => {
+    const history = useHistory();
     return (
-        <div className="contest-participants-table-participant">
+        <div
+            className="contest-participants-table-participant"
+            onClick={() => history.push(`/app/competitors/${uuid}`)}
+        >
             <Avatar
                 src={s3_filename && withS3URL(s3_filename)}
                 name={`${first_name} ${last_name}`}

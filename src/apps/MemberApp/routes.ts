@@ -1,5 +1,6 @@
 import {
     AccountPageRoutes,
+    CompetitorsPageRoutes,
     ContestPageRoutes,
     ContestsCreatePageRoutes,
     ContestsUpdatePageRoutes,
@@ -13,6 +14,7 @@ export const routes: any = [];
 
 export const protectedRoutes: any = [
     ...(AccountPageRoutes || []),
+    ...CompetitorsPageRoutes,
     ...ContestsPageRoutes,
     ...ContestsCreatePageRoutes,
     ...ContestsUpdatePageRoutes,
