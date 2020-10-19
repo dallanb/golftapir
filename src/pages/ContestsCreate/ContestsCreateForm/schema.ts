@@ -2,7 +2,6 @@ import React from 'react';
 import * as Yup from 'yup';
 import 'yup-phone';
 import moment, { Moment } from 'moment';
-import { range as _range } from 'lodash';
 import ContestsCreatePageActions from '../actions';
 import InputWrapper from '@components/InputWrapper';
 import { participantSearchSelectOptionRenderer } from './utils';

@@ -9,6 +9,7 @@ import { CompetitorProps, CompetitorState, StateInterface } from './types';
 import CompetitorPageActions from './actions';
 import CompetitorPlate from './CompetitorPlate';
 import CompetitorActions from './CompetitorActions';
+import CompetitorResults from './CompetitorResults';
 import './Competitor.scss';
 
 class Competitor extends React.PureComponent<CompetitorProps, CompetitorState> {
@@ -53,6 +54,7 @@ class Competitor extends React.PureComponent<CompetitorProps, CompetitorState> {
                 <div className="competitor-page-view">
                     <CompetitorPlate />
                     <CompetitorActions actions={this.generateActions()} />
+                    <CompetitorResults />
                 </div>
             </ContentLayout>
         );
