@@ -1,0 +1,10 @@
+.competitor-plate {
+    display: flex;
+    .competitor-plate-info {
+        display: flex;
+        flex-direction: column;
+        margin-left: 10px;
+        .competitor-plate-user-name {
+        }
+    }
+}

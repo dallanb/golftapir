@@ -8,16 +8,27 @@ import {
     searchAccounts,
     createContest as createContestHelper,
     assignContestAvatar,
+    fetchAccountMembership,
 } from '@helpers';
 
-function* init() {
+function* init({ options }: AnyAction) {
     try {
         const me = yield select(selectMe);
         const createFormInitialValues = {
             owner_uuid: me.membership_uuid,
             sport_uuid: config.GOLF_UUID,
             participants: [me.membership_uuid],
+            permanent_participants: [me],
         };
+        if (options && options.participant_uuid) {
+            const { data: membershipData } = yield call(
+                fetchAccountMembership,
+                options.participant_uuid,
+                {}
+            );
+            createFormInitialValues.participants.push(options.participant_uuid);
+            createFormInitialValues.permanent_participants.push(membershipData);
+        }
         yield put(ContestsCreatePageActions.set({ createFormInitialValues }));
         yield put(ContestsCreatePageActions.initSuccess());
     } catch (err) {

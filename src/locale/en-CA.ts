@@ -4,6 +4,7 @@ const CONSTANTS = {
             UPDATE: 'Error updating Account information',
             ASSIGN_AVATAR: 'Error updating Account avatar',
             FETCH: 'Error fetching Account information',
+            FETCH_MEMBERSHIP: 'Error fetching Account Membership information',
             FETCH_ALL: 'Error fetching Accounts information',
             SEARCH_ALL: 'Error searching Accounts information',
             BULK_FETCH_ALL: 'Error fetch Accounts information',
@@ -112,6 +113,14 @@ const CONSTANTS = {
         NOTIFICATIONS: {
             TITLE: 'Notifications',
             DESCRIPTION: 'View Notifications',
+        },
+        COMPETITOR: {
+            TITLE: 'Competitor',
+            DESCRIPTION: 'View Competitor',
+        },
+        COMPETITORS: {
+            TITLE: 'Competitors',
+            DESCRIPTION: 'View Competitors',
         },
         CONTESTS_CREATE: {
             TITLE: 'Contests',

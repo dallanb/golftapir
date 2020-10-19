@@ -5,7 +5,6 @@ import { withRouter } from 'react-router-dom';
 import { get as _get } from 'lodash';
 import { ContestProps, ContestState, StateInterface } from './types';
 import { ContentLayout } from '@layouts';
-import { ContestActions as ContestReduxActions } from '@actions';
 import constants from '@constants';
 import ContestPageActions from './actions';
 import ContestParticipantsTable from './ContestParticipantsTable';
@@ -34,21 +33,24 @@ class Contest extends React.PureComponent<ContestProps, ContestState> {
     }
 
     generateActions = () => {
-        const { onActivate, history } = this.props;
+        const { activateContest, readyContest, history } = this.props;
         const { uuid } = this.state;
         return [
-            {
-                key: constants.ACTION.ACTIVATE.KEY,
-                onClick: () =>
-                    onActivate(uuid, { status: constants.STATUS.READY.KEY }),
-            },
             {
                 key: constants.ACTION.UPDATE.KEY,
                 onClick: () => history.push(`/app/contests/${uuid}/update`),
             },
             {
-                key: constants.ACTION.PLAY.KEY,
-                onClick: () => history.push(`/app/contests/${uuid}/play`),
+                key: constants.ACTION.READY.KEY,
+                onClick: () => readyContest(uuid),
+            },
+            {
+                key: constants.ACTION.ACTIVATE.KEY,
+                onClick: () => activateContest(uuid),
+            },
+            {
+                key: constants.ACTION.MATCHUP.KEY,
+                onClick: () => console.log('YOU FUCK WAD'),
             },
         ];
     };
@@ -92,8 +94,21 @@ const mapDispatchToProps = (dispatch: any) => {
         terminate() {
             return dispatch(ContestPageActions.terminate());
         },
-        onActivate(uuid: string, data: { status: string }) {
-            return dispatch(ContestReduxActions.updateContest(uuid, data));
+        readyContest(uuid: string) {
+            return dispatch(
+                ContestPageActions.updateContestStatus(
+                    uuid,
+                    constants.STATUS.READY.KEY
+                )
+            );
+        },
+        activateContest(uuid: string) {
+            return dispatch(
+                ContestPageActions.updateContestStatus(
+                    uuid,
+                    constants.STATUS.ACTIVE.KEY
+                )
+            );
         },
     };
 };

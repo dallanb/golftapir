@@ -4,7 +4,7 @@ import { BellTwoTone } from '@ant-design/icons';
 import { SubscriptionToggle } from '@components';
 import { ContestSubscriptionProps } from './types';
 import { StateInterface } from '../types';
-import { NotificationActions } from '@actions';
+import ContestPageActions from '../actions';
 import './ContestSubscription.scss';
 
 class ContestSubscription extends React.PureComponent<
@@ -41,10 +41,10 @@ const mapStateToProps = ({ contestPage }: StateInterface) => {
 const mapDispatchToProps = (dispatch: any) => {
     return {
         subscribe(uuid: string) {
-            dispatch(NotificationActions.subscribe({ uuid }));
+            dispatch(ContestPageActions.subscribe({ uuid }));
         },
         unsubscribe(uuid: string) {
-            dispatch(NotificationActions.unsubscribe({ uuid }));
+            dispatch(ContestPageActions.unsubscribe({ uuid }));
         },
     };
 };

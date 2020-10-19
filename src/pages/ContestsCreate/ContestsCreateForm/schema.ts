@@ -2,12 +2,12 @@ import React from 'react';
 import * as Yup from 'yup';
 import 'yup-phone';
 import moment, { Moment } from 'moment';
-import { range as _range } from 'lodash';
 import ContestsCreatePageActions from '../actions';
 import InputWrapper from '@components/InputWrapper';
 import { participantSearchSelectOptionRenderer } from './utils';
 import { searchSelectTagRenderer } from '@utils';
 import CONSTANTS from '@locale/en-CA';
+import { FormikProps, FormikValues } from 'formik';
 
 const FORM = CONSTANTS.PAGES.CONTESTS_CREATE.FORM;
 
@@ -67,6 +67,8 @@ export const fieldSchema = [
         },
         options: {
             ref: React.createRef<any>(),
+            onChange: (value: any, formik: FormikProps<FormikValues>) =>
+                formik.setFieldValue(name, value),
             onSearch: (value: string) =>
                 ContestsCreatePageActions.searchParticipants(value),
             multiple: true,

@@ -4,6 +4,8 @@ const constants = {
         CONTEST_PAGE: 'CONTEST_PAGE',
         CONTESTS_PAGE: 'CONTESTS_PAGE',
         CONTESTS_CREATE_PAGE: 'CONTESTS_CREATE_PAGE',
+        COMPETITOR_PAGE: 'COMPETITOR_PAGE',
+        COMPETITORS_PAGE: 'COMPETITORS_PAGE',
         HOME_PAGE: 'HOME_PAGE',
         LOGIN_PAGE: 'LOGIN_PAGE',
         REGISTER_PAGE: 'REGISTER_PAGE',
@@ -42,15 +44,26 @@ const constants = {
             KEY: 'update',
             LABEL: 'Update',
         },
-        PLAY: {
+        READY: {
             TWO_TONE_COLOUR: '#00e64d',
-            KEY: 'play',
-            LABEL: 'Play',
+            KEY: 'ready',
+            LABEL: 'Ready',
+        },
+        MATCHUP: {
+            TWO_TONE_COLOUR: '#604',
+            KEY: 'matchup',
+            LABEL: 'Matchup',
+        },
+        CHALLENGE: {
+            TWO_TONE_COLOUR: '#1E8793',
+            KEY: 'challenge',
+            LABEL: 'Challenge',
         },
     },
     ROUTES: {
         ACCOUNT: '/settings',
         AUTH: '/auth',
+        COMPETITOR: '/competitors',
         CONTEST: '/contests',
         HOME: '/home',
         LOGIN: '/login',

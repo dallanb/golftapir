@@ -1,17 +1,23 @@
-import { Select, Tag } from 'antd';
-import { keyBy as _keyBy } from 'lodash';
+import { Select } from 'antd';
+import { keyBy as _keyBy, get as _get } from 'lodash';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { selectCreateFormSearchParticipants } from '@pages/ContestsCreate/selector';
-import { selectMe } from '@selectors/BaseSelector';
 import { FormikProps, FormikValues } from 'formik';
 
 export const participantSearchSelectOptionRenderer = (
     formik: FormikProps<FormikValues>
 ) => {
-    const me = useSelector(selectMe);
+    const permanentParticipants = _get(
+        formik,
+        ['values', 'permanent_participants'],
+        {}
+    );
     const participants = _keyBy(
-        [...useSelector(selectCreateFormSearchParticipants), me],
+        [
+            ...useSelector(selectCreateFormSearchParticipants),
+            ...permanentParticipants,
+        ],
         'membership_uuid'
     );
     return Object.values(
@@ -25,7 +31,12 @@ export const participantSearchSelectOptionRenderer = (
             <Select.Option
                 key={participant.membership_uuid}
                 value={participant.membership_uuid}
-                disabled={participant.membership_uuid === me.membership_uuid}
+                disabled={
+                    permanentParticipants.findIndex(
+                        ({ membership_uuid }: { membership_uuid: string }) =>
+                            membership_uuid === participant.membership_uuid
+                    ) > -1
+                }
             >{`${participant.first_name} ${participant.last_name}`}</Select.Option>
         )
     );

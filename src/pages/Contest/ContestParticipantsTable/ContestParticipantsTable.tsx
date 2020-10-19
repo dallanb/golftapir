@@ -6,7 +6,6 @@ import { StateInterface } from '../types';
 import { Table } from '@components';
 import './ContestParticipantsTable.scss';
 import { Typography } from 'antd';
-import { ContentLayout } from '@layouts';
 
 class ContestParticipantsTable extends React.PureComponent<
     ContestParticipantsTableProps

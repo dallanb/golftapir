@@ -3,8 +3,8 @@ import { Tag } from 'antd';
 import { useDispatch } from 'react-redux';
 import { CheckCircleTwoTone, StopTwoTone } from '@ant-design/icons/lib';
 import { ContestParticipantsTableStatusProps } from './types';
-import { mapStatusColour } from '@pages/Contest/utils';
-import { ContestActions } from '@actions';
+import ContestPageActions from '@pages/Contest/actions';
+import { mapStatusColour } from '@utils';
 import constants from '@constants';
 import './ContestParticipantsTableStatus.scss';
 
@@ -21,9 +21,10 @@ const ContestParticipantsTableStatus: React.FunctionComponent<ContestParticipant
                     twoToneColor={constants.STATUS.ACTIVE.TWO_TONE_COLOUR}
                     onClick={() =>
                         dispatch(
-                            ContestActions.updateContestParticipant(uuid, {
-                                status: constants.STATUS.ACTIVE.KEY,
-                            })
+                            ContestPageActions.updateContestParticipantStatus(
+                                uuid,
+                                constants.STATUS.ACTIVE.KEY
+                            )
                         )
                     }
                 />
@@ -31,9 +32,10 @@ const ContestParticipantsTableStatus: React.FunctionComponent<ContestParticipant
                     twoToneColor={constants.STATUS.INACTIVE.TWO_TONE_COLOUR}
                     onClick={() =>
                         dispatch(
-                            ContestActions.updateContestParticipant(uuid, {
-                                status: constants.STATUS.INACTIVE.KEY,
-                            })
+                            ContestPageActions.updateContestParticipantStatus(
+                                uuid,
+                                constants.STATUS.INACTIVE.KEY
+                            )
                         )
                     }
                 />

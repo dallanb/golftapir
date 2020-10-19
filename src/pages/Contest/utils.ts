@@ -41,44 +41,46 @@ export const mergeContestParticipant = (
             : existingParticipant
     );
 
-export const mapStatusColour = (status: string): string =>
-    _get(constants, ['STATUS', _toUpper(status), 'COLOUR'], 'grey');
-
-export const mapActionColour = (action: string): string =>
-    _get(constants, ['ACTION', _toUpper(action), 'COLOUR'], 'grey');
-
-export const mapActionLabel = (action: string): string =>
-    _get(constants, ['ACTION', _toUpper(action), 'LABEL'], null);
-
-export const renderAction = (key: string, options: any): boolean => {
+export const renderAction = (
+    key: string,
+    options: any
+): { show: boolean; enabled: boolean } => {
+    const renderAction = { show: false, enabled: true };
     switch (key) {
-        case 'activate':
-            if (options.participants) {
-                const participantActive =
-                    options.participants.findIndex(
-                        (participant: any) =>
-                            participant.status !== constants.STATUS.ACTIVE.KEY
-                    ) === -1;
-                return (
-                    participantActive &&
-                    options.status !== constants.STATUS.ACTIVE.KEY &&
-                    options.status !== constants.STATUS.READY.KEY
-                );
-            }
-            break;
-        case 'update':
-            return (
+        case constants.ACTION.READY.KEY:
+            const participantActive =
+                options.participants.findIndex(
+                    (participant: any) =>
+                        participant.status !== constants.STATUS.ACTIVE.KEY
+                ) === -1;
+            renderAction.show = options.isOwner;
+            renderAction.enabled =
+                participantActive &&
+                options.isOwner &&
                 options.status !== constants.STATUS.ACTIVE.KEY &&
-                options.status !== constants.STATUS.READY.KEY
-            );
+                options.status !== constants.STATUS.READY.KEY;
             break;
-        case 'play':
-            return options.status === constants.STATUS.READY.KEY;
+        case constants.ACTION.UPDATE.KEY:
+            renderAction.show = options.isOwner;
+            renderAction.enabled =
+                options.isOwner &&
+                options.status !== constants.STATUS.ACTIVE.KEY &&
+                options.status !== constants.STATUS.READY.KEY;
+            break;
+        case constants.ACTION.ACTIVATE.KEY:
+            renderAction.show = options.isOwner;
+            renderAction.enabled =
+                options.startTime <= +new Date() &&
+                options.status === constants.STATUS.READY.KEY;
+            break;
+        case constants.ACTION.MATCHUP.KEY:
+            renderAction.show = true;
+            renderAction.enabled = true;
             break;
         default:
             console.error('Invalid key: ', key);
     }
-    return false;
+    return renderAction;
 };
 
 export const formatTimeStamp = (timestamp: number) =>

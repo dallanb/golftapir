@@ -1,5 +1,8 @@
 export { default as getInitials } from './getInitials';
 export { default as getRandomInt } from './getRandomInt';
+export { default as mapActionColour } from './mapActionColour';
+export { default as mapActionLabel } from './mapActionLabel';
+export { default as mapStatusColour } from './mapStatusColour';
 export { default as randomColourGenerator } from './randomColourGenerator';
 export { default as searchSelectTagRenderer } from './searchSelectTagRenderer';
 export { default as topicToRouteMapper } from './topicToRouteMapper';

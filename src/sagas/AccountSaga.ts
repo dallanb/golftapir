@@ -16,6 +16,21 @@ function* fetchAccount({ uuid, options }: AnyAction) {
     }
 }
 
+function* fetchAccountMembership({ uuid, options }: AnyAction) {
+    try {
+        const res = yield call(
+            AccountService.fetchAccountMembership,
+            uuid,
+            options
+        );
+        const { membership } = res;
+        yield put(AccountActions.fetchAccountMembershipSuccess(membership));
+    } catch (err) {
+        yield put(AccountActions.fetchAccountMembershipFailure(err));
+        message.error(CONSTANTS.ACCOUNT.ERROR.FETCH_MEMBERSHIP);
+    }
+}
+
 function* fetchAccounts({ options }: AnyAction) {
     try {
         const res = yield call(AccountService.fetchAccounts, options);
@@ -82,6 +97,10 @@ function* bulkFetchAccounts({ within, options }: AnyAction) {
 export default function* AccountSaga() {
     yield all([
         takeLatest(AccountTypes.FETCH_ACCOUNT, fetchAccount),
+        takeLatest(
+            AccountTypes.FETCH_ACCOUNT_MEMBERSHIP,
+            fetchAccountMembership
+        ),
         takeLatest(AccountTypes.FETCH_ACCOUNTS, fetchAccounts),
         takeLatest(AccountTypes.UPDATE_ACCOUNT, updateAccount),
         takeLatest(AccountTypes.ASSIGN_AVATAR, assignAvatar),

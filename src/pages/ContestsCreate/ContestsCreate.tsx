@@ -10,8 +10,14 @@ import './ContestsCreate.scss';
 
 class ContestsCreate extends React.PureComponent<ContestsCreateProps> {
     componentDidMount() {
-        const { init } = this.props;
-        init();
+        const {
+            init,
+            history: {
+                location: { state },
+            },
+        } = this.props;
+
+        init(state);
     }
 
     componentDidUpdate() {
@@ -59,8 +65,8 @@ const mapStateToProps = ({ contestsCreatePage }: StateProps) => {
 
 const mapDispatchToProps = (dispatch: any) => {
     return {
-        init() {
-            return dispatch(ContestsCreateActions.init());
+        init(options: any) {
+            return dispatch(ContestsCreateActions.init(options));
         },
         terminate() {
             return dispatch(ContestsCreateActions.terminate());
