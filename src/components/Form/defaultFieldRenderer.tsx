@@ -70,7 +70,7 @@ defaultFieldRenderer = (schema, formik) => {
                         key={name}
                         ref={fieldRef}
                         mode="multiple"
-                        onChange={(value) => formik.setFieldValue(name, value)}
+                        onChange={(value) => options.onChange(value, formik)}
                         showSearch
                         onSearch={_debounce((value) => {
                             dispatch(options.onSearch(value));

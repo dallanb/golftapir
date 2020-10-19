@@ -3,8 +3,8 @@ import { Tag } from 'antd';
 import { useDispatch } from 'react-redux';
 import { CheckCircleTwoTone, StopTwoTone } from '@ant-design/icons/lib';
 import { ContestParticipantsTableStatusProps } from './types';
-import { mapStatusColour } from '@pages/Contest/utils';
 import ContestPageActions from '@pages/Contest/actions';
+import { mapStatusColour } from '@utils';
 import constants from '@constants';
 import './ContestParticipantsTableStatus.scss';
 

@@ -1,9 +1,9 @@
 import React from 'react';
-import { Tag, Typography } from 'antd';
+import { Typography } from 'antd';
 import { toUpper as _toUpper } from 'lodash';
 import { useSelector } from 'react-redux';
 import { ContestStatusProps } from './types';
-import { mapStatusColour } from '../utils';
+import { mapStatusColour } from '@utils';
 import { selectContestStatus } from '../selector';
 import './ContestStatus.scss';
 

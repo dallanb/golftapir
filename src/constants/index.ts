@@ -54,6 +54,11 @@ const constants = {
             KEY: 'matchup',
             LABEL: 'Matchup',
         },
+        CHALLENGE: {
+            TWO_TONE_COLOUR: '#1E8793',
+            KEY: 'challenge',
+            LABEL: 'Challenge',
+        },
     },
     ROUTES: {
         ACCOUNT: '/settings',

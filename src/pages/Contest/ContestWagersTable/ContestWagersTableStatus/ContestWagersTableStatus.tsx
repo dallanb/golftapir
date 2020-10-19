@@ -3,7 +3,7 @@ import { Tag } from 'antd';
 import { useDispatch } from 'react-redux';
 import { CheckCircleTwoTone, StopTwoTone } from '@ant-design/icons/lib';
 import { ContestWagersTableStatusProps } from './types';
-import { mapStatusColour } from '@pages/Contest/utils';
+import { mapStatusColour } from '@utils';
 import { ContestActions } from '@actions';
 import constants from '@constants';
 import './ContestWagersTableStatus.scss';

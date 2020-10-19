@@ -4,12 +4,12 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { get as _get } from 'lodash';
 import { ContentLayout } from '@layouts';
+import constants from '@constants';
 import { CompetitorProps, CompetitorState, StateInterface } from './types';
 import CompetitorPageActions from './actions';
+import CompetitorPlate from './CompetitorPlate';
+import CompetitorActions from './CompetitorActions';
 import './Competitor.scss';
-import { Avatar } from '@components';
-import { withS3URL } from '@utils';
-import { Typography } from 'antd';
 
 class Competitor extends React.PureComponent<CompetitorProps, CompetitorState> {
     constructor(props: CompetitorProps) {
@@ -28,14 +28,22 @@ class Competitor extends React.PureComponent<CompetitorProps, CompetitorState> {
         terminate();
     }
 
+    generateActions = () => {
+        const { history } = this.props;
+        const { uuid } = this.state;
+        return [
+            {
+                key: constants.ACTION.CHALLENGE.KEY,
+                onClick: () =>
+                    history.push(`/app/contests/create`, {
+                        participant_uuid: uuid,
+                    }),
+            },
+        ];
+    };
+
     render() {
-        const {
-            title,
-            description,
-            isInitialized,
-            name,
-            s3_filename,
-        } = this.props;
+        const { title, description, isInitialized } = this.props;
         return (
             <ContentLayout
                 title={title}
@@ -43,21 +51,8 @@ class Competitor extends React.PureComponent<CompetitorProps, CompetitorState> {
                 showSpinner={!isInitialized}
             >
                 <div className="competitor-page-view">
-                    <div className="competitor-page-user">
-                        <Avatar
-                            src={s3_filename && withS3URL(s3_filename)}
-                            name={name}
-                            size={96}
-                        />
-                        <div className="home-page-user-info">
-                            <div className="home-page-user-name">
-                                <Typography.Title level={2}>
-                                    {name}
-                                </Typography.Title>
-                            </div>
-                            <div>placeholder</div>
-                        </div>
-                    </div>
+                    <CompetitorPlate />
+                    <CompetitorActions actions={this.generateActions()} />
                 </div>
             </ContentLayout>
         );
@@ -65,19 +60,12 @@ class Competitor extends React.PureComponent<CompetitorProps, CompetitorState> {
 }
 
 const mapStateToProps = ({ competitorPage }: StateInterface) => {
-    const { title, description, isInitialized, account } = competitorPage;
-
-    const first_name = _get(account, ['first_name'], '');
-    const last_name = _get(account, ['last_name'], '');
-    const s3_filename = _get(account, ['avatar', 's3_filename'], '');
-    const name = `${first_name} ${last_name}`;
+    const { title, description, isInitialized } = competitorPage;
 
     return {
         title,
         description,
         isInitialized,
-        name,
-        s3_filename,
     };
 };
 

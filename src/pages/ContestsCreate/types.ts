@@ -7,7 +7,7 @@ export interface ContestsCreateProps extends RouteComponentProps<any> {
     title: string;
     description: string;
     history: any;
-    init: () => void;
+    init: (options: any) => void;
     terminate: () => void;
 }
 

@@ -7,8 +7,6 @@ export interface CompetitorProps extends RouteComponentProps {
     title: string;
     description: string;
     isInitialized: boolean;
-    name: string;
-    s3_filename: string;
 }
 
 export interface CompetitorState {

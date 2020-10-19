@@ -3,22 +3,16 @@ import memoize from 'memoize-one';
 import { Button } from 'antd';
 import { renderAction } from '../utils';
 import { mapActionLabel } from '@utils';
-import { contestActionRendererProps } from './types';
-import { render } from 'react-dom';
+import { competitorActionRendererProps } from './types';
 
-export const contestActionRenderer: React.FunctionComponent<contestActionRendererProps> = ({
+export const competitorActionRenderer: React.FunctionComponent<competitorActionRendererProps> = ({
     actions,
-    status,
-    participants,
-    isOwner,
-    startTime,
+    isMe,
 }) =>
     actions.reduce((accumulatedActions: any[], { key, onClick }: any) => {
         const { show, enabled } = renderAction(key, {
             status,
-            participants,
-            isOwner,
-            startTime,
+            isMe,
         });
         if (!show) return accumulatedActions;
 
@@ -27,7 +21,7 @@ export const contestActionRenderer: React.FunctionComponent<contestActionRendere
                 key={key}
                 onClick={onClick}
                 disabled={!enabled}
-                className="contest-actions-button"
+                className="competitor-actions-button"
             >
                 {mapActionLabel(key)}
             </Button>
@@ -35,4 +29,6 @@ export const contestActionRenderer: React.FunctionComponent<contestActionRendere
         return accumulatedActions;
     }, []);
 
-export const memoizedContestActionRenderer = memoize(contestActionRenderer);
+export const memoizedCompetitorActionRenderer = memoize(
+    competitorActionRenderer
+);

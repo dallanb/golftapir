@@ -1,6 +1,5 @@
 import { createSelector } from 'reselect';
 import { get as _get } from 'lodash';
-import { contestPage } from '@pages';
 
 const getContestPage = (state: any) => state.contestPage;
 const getBase = (state: any) => state.base;
