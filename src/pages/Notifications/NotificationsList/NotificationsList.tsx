@@ -17,7 +17,8 @@ class NotificationsList extends React.PureComponent<NotificationsListProps> {
 
     tileOnClick = (item: any) => {
         const { history, markNotificationAsRead } = this.props;
-        history.push(`/app${topicToRouteMapper(item.topic, item.key, item)}`);
+        const { route, state } = topicToRouteMapper(item.topic, item.key, item);
+        history.push(route, state);
         markNotificationAsRead(item._id);
     };
 

@@ -1,28 +1,33 @@
 import { get as _get } from 'lodash';
 import constants from '@constants';
 
-const topicToRouteMapper = (topic: string, key: string, item: any) => {
-    let route = '';
+const topicToRouteMapper = (
+    topic: string,
+    key: string,
+    item: any
+): { route: string; state: any } => {
+    const mapping = {
+        route: '/app',
+        state: {},
+    };
     const routes = constants.ROUTES;
     switch (topic) {
         case constants.TOPICS.AUTH:
-            route = routes.AUTH;
+            mapping.route += routes.AUTH;
             break;
         case constants.TOPICS.ACCOUNTS:
-            route = routes.ACCOUNT;
+            mapping.route += routes.ACCOUNT;
             break;
         case constants.TOPICS.CONTESTS:
-            route = routes.CONTEST;
+            mapping.route += routes.CONTEST;
             switch (key) {
                 case constants.EVENTS.CONTESTS.PARTICIPANT_INVITED:
                 case constants.EVENTS.CONTESTS.PARTICIPANT_ACTIVE:
                 case constants.EVENTS.CONTESTS.CONTEST_READY:
                 case constants.EVENTS.CONTESTS.CONTEST_TIMEOUT:
-                    route += `/${_get(
-                        item,
-                        ['properties', 'contest_uuid'],
-                        ''
-                    )}`;
+                    mapping.state = {
+                        uuid: _get(item, ['properties', 'contest_uuid'], ''),
+                    };
                     break;
                 default:
                     console.log('key not found');
@@ -32,7 +37,7 @@ const topicToRouteMapper = (topic: string, key: string, item: any) => {
         default:
             throw new Error(`Invalid topic: ${topic}`);
     }
-    return route;
+    return mapping;
 };
 
 export default topicToRouteMapper;

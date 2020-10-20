@@ -19,7 +19,11 @@ class ContestMatchup extends React.PureComponent<
     constructor(props: ContestMatchupProps) {
         super(props);
         this.state = {
-            contest: _get(props, ['match', 'params', 'contest'], null),
+            contest: _get(
+                props,
+                ['history', 'location', 'state', 'contest'],
+                null
+            ),
         };
     }
 
