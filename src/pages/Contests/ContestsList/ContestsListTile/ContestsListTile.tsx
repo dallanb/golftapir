@@ -1,8 +1,9 @@
 import React from 'react';
 import { Button, Card } from 'antd';
-import {get as _get} from 'lodash';
+import { get as _get } from 'lodash';
 import { ContestsListTileProps } from './types';
 import './ContestsListTile.scss';
+import constants from '@constants';
 
 const ContestsListTile: React.FunctionComponent<ContestsListTileProps> = ({
     props: { index, style, data },
@@ -10,7 +11,7 @@ const ContestsListTile: React.FunctionComponent<ContestsListTileProps> = ({
 }) => {
     const item = _get(data, [index], undefined);
     const handleClick = (uuid: string) => {
-        history.push(`/app/contests/${uuid}`);
+        history.push(`/app${constants.ROUTES.CONTEST}`, { uuid });
     };
 
     return (
@@ -19,9 +20,7 @@ const ContestsListTile: React.FunctionComponent<ContestsListTileProps> = ({
                 {item ? item.name : 'Loading...'}
             </div>
             <div className="contest-list-tile-button">
-                <Button
-                    onClick={() => handleClick(_get(item, ['uuid'], null))}
-                >
+                <Button onClick={() => handleClick(_get(item, ['uuid'], null))}>
                     View
                 </Button>
             </div>

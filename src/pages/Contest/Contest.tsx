@@ -18,7 +18,9 @@ import './Contest.scss';
 class Contest extends React.PureComponent<ContestProps, ContestState> {
     constructor(props: ContestProps) {
         super(props);
-        this.state = { uuid: _get(props, ['match', 'params', 'uuid'], null) };
+        this.state = {
+            uuid: _get(props, ['history', 'location', 'state', 'uuid'], null),
+        };
     }
 
     componentDidMount() {
@@ -33,12 +35,15 @@ class Contest extends React.PureComponent<ContestProps, ContestState> {
     }
 
     generateActions = () => {
-        const { activateContest, readyContest, history } = this.props;
+        const { activateContest, readyContest, history, contest } = this.props;
         const { uuid } = this.state;
         return [
             {
                 key: constants.ACTION.UPDATE.KEY,
-                onClick: () => history.push(`/app/contests/${uuid}/update`),
+                onClick: () =>
+                    history.push(`/app${constants.ROUTES.CONTEST_UPDATE}`, {
+                        contest,
+                    }),
             },
             {
                 key: constants.ACTION.READY.KEY,
@@ -50,7 +55,10 @@ class Contest extends React.PureComponent<ContestProps, ContestState> {
             },
             {
                 key: constants.ACTION.MATCHUP.KEY,
-                onClick: () => console.log('YOU FUCK WAD'),
+                onClick: () =>
+                    history.push(`/app${constants.ROUTES.CONTEST_MATCHUP}`, {
+                        contest,
+                    }),
             },
         ];
     };
@@ -77,12 +85,13 @@ class Contest extends React.PureComponent<ContestProps, ContestState> {
 }
 
 const mapStateToProps = ({ contestPage }: StateInterface) => {
-    const { title, description, isInitialized } = contestPage;
+    const { title, description, isInitialized, contest } = contestPage;
 
     return {
         title,
         description,
         isInitialized,
+        contest,
     };
 };
 

@@ -3,8 +3,9 @@ import constants from '@constants';
 
 const routes = [
     {
-        path: `${constants.ROUTES.CONTEST}/:uuid`,
+        path: constants.ROUTES.CONTEST,
         component: Contest,
+        exact: true,
     },
 ];
 

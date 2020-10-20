@@ -4,7 +4,7 @@ import InputWrapper from '@components/InputWrapper';
 import CONSTANTS from '@locale/en-CA';
 import moment, { Moment } from 'moment';
 
-const FORM = CONSTANTS.PAGES.CONTESTS_UPDATE.FORM;
+const FORM = CONSTANTS.PAGES.CONTEST_UPDATE.FORM;
 
 export const fieldSchema = [
     {

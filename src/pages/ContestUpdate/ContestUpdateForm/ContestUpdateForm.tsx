@@ -2,14 +2,14 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { FormikValues } from 'formik';
 import { isEqual as _isEqual, set as _set } from 'lodash';
-import { ContestsUpdateFormProps } from './types';
+import { ContestUpdateFormProps } from './types';
 import { StateProps } from '../types';
-import ContestsUpdatePageActions from '../actions';
+import ContestUpdatePageActions from '../actions';
 import { Form } from '@components';
 import { fieldSchema, validationSchema } from './schema';
-import './ContestsUpdateForm.scss';
+import './ContestUpdateForm.scss';
 
-class ContestsUpdateForm extends React.PureComponent<ContestsUpdateFormProps> {
+class ContestUpdateForm extends React.PureComponent<ContestUpdateFormProps> {
     handleSubmit = (values: FormikValues) => {
         const { updateContest, uuid, initialValues } = this.props;
         const contest = Object.entries(values).reduce(
@@ -34,8 +34,8 @@ class ContestsUpdateForm extends React.PureComponent<ContestsUpdateFormProps> {
     }
 }
 
-const mapStateToProps = ({ contestsUpdatePage }: StateProps) => {
-    const { updateFormInitialValues: initialValues } = contestsUpdatePage;
+const mapStateToProps = ({ contestUpdatePage }: StateProps) => {
+    const { updateFormInitialValues: initialValues } = contestUpdatePage;
     return {
         initialValues,
     };
@@ -45,10 +45,10 @@ const mapDispatchToProps = (dispatch: any) => {
     return {
         updateContest(uuid: string, values: FormikValues) {
             return dispatch(
-                ContestsUpdatePageActions.updateContest(uuid, values)
+                ContestUpdatePageActions.updateContest(uuid, values)
             );
         },
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ContestsUpdateForm);
+export default connect(mapStateToProps, mapDispatchToProps)(ContestUpdateForm);

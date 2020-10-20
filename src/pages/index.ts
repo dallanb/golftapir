@@ -23,6 +23,12 @@ export {
     ContestPageRoutes,
 } from './Contest';
 export {
+    default as ContestMatchup,
+    reducer as contestMatchupPage,
+    ContestMatchupPageSaga,
+    ContestMatchupPageRoutes,
+} from './ContestMatchup';
+export {
     default as Contests,
     reducer as contestsPage,
     ContestsPageSaga,
@@ -35,11 +41,11 @@ export {
     ContestsCreatePageRoutes,
 } from './ContestsCreate';
 export {
-    default as ContestsUpdate,
-    reducer as contestsUpdatePage,
-    ContestsUpdatePageSaga,
-    ContestsUpdatePageRoutes,
-} from './ContestsUpdate';
+    default as ContestUpdate,
+    reducer as contestUpdatePage,
+    ContestUpdatePageSaga,
+    ContestUpdatePageRoutes,
+} from './ContestUpdate';
 export {
     default as Home,
     reducer as homePage,

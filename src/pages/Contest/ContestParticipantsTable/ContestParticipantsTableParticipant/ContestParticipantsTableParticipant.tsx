@@ -4,6 +4,7 @@ import { Avatar } from '@components';
 import { withS3URL } from '@utils';
 import { ContestParticipantsTableParticipantProps } from './types';
 import './ContestParticipantsTableParticipant.scss';
+import constants from '@constants';
 
 const ContestParticipantsTableParticipant: React.FunctionComponent<ContestParticipantsTableParticipantProps> = ({
     s3_filename,
@@ -15,7 +16,11 @@ const ContestParticipantsTableParticipant: React.FunctionComponent<ContestPartic
     return (
         <div
             className="contest-participants-table-participant"
-            onClick={() => history.push(`/app/competitors/${uuid}`)}
+            onClick={() =>
+                history.push(`/app${constants.ROUTES.COMPETITOR}`, {
+                    competitor_uuid: uuid,
+                })
+            }
         >
             <Avatar
                 src={s3_filename && withS3URL(s3_filename)}

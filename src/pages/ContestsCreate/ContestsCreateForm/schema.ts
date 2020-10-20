@@ -67,8 +67,6 @@ export const fieldSchema = [
         },
         options: {
             ref: React.createRef<any>(),
-            onChange: (value: any, formik: FormikProps<FormikValues>) =>
-                formik.setFieldValue(name, value),
             onSearch: (value: string) =>
                 ContestsCreatePageActions.searchParticipants(value),
             multiple: true,

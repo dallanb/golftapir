@@ -2,7 +2,7 @@ import { createActions } from 'reduxsauce';
 
 const { Types, Creators } = createActions(
     {
-        init: ['uuid'],
+        init: ['contest'],
         initSuccess: null,
         initFailure: ['err'],
         terminate: null,
@@ -12,8 +12,8 @@ const { Types, Creators } = createActions(
         updateContestFailure: ['err'],
     },
     {
-        prefix: 'CONTESTS_UPDATE_PAGE_',
+        prefix: 'CONTEST_UPDATE_PAGE_',
     }
 );
-export const ContestsUpdatePageTypes = Types;
+export const ContestUpdatePageTypes = Types;
 export default Creators;

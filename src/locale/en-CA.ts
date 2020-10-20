@@ -138,7 +138,11 @@ const CONSTANTS = {
                 },
             },
         },
-        CONTESTS_UPDATE: {
+        CONTEST_MATCHUP: {
+            TITLE: '',
+            DESCRIPTION: 'Contest Matchup',
+        },
+        CONTEST_UPDATE: {
             TITLE: '',
             DESCRIPTION: 'Update Contest',
             FORM: {

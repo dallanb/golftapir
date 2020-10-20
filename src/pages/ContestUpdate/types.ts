@@ -1,6 +1,6 @@
 import { RouteComponentProps } from 'react-router';
 
-export interface ContestsUpdateProps extends RouteComponentProps<any> {
+export interface ContestUpdateProps extends RouteComponentProps<any> {
     isInitialized: boolean;
     isSubmitted: boolean;
     uuid: string;
@@ -8,19 +8,19 @@ export interface ContestsUpdateProps extends RouteComponentProps<any> {
     description: string;
     contest: any;
     history: any;
-    init: (uuid: string) => void;
+    init: (contest: any) => void;
     terminate: () => void;
 }
 
 export interface ContestUpdateState {
-    uuid: string;
+    contest: any;
 }
 
 export interface StateProps {
-    contestsUpdatePage: ContestsUpdatePageInterface;
+    contestUpdatePage: ContestUpdatePageInterface;
 }
 
-export interface ContestsUpdatePageInterface {
+export interface ContestUpdatePageInterface {
     readonly isFetching: boolean;
     readonly isInitialized: boolean;
     readonly isSubmitted: boolean;
