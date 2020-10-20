@@ -3,6 +3,7 @@ import { Button, Card } from 'antd';
 import { get as _get } from 'lodash';
 import { WagersListTileProps } from './types';
 import './WagersListTile.scss';
+import constants from '@constants';
 
 const WagersListTile: React.FunctionComponent<WagersListTileProps> = ({
     props: { index, style, data },
@@ -10,7 +11,7 @@ const WagersListTile: React.FunctionComponent<WagersListTileProps> = ({
 }) => {
     const item = _get(data, [index], undefined);
     const handleClick = (uuid: string) => {
-        history.push(`/app/wagers/${uuid}`);
+        history.push(`/app${constants.ROUTES.WAGER}`, { wager_uuid: uuid });
     };
 
     return (

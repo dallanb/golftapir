@@ -7,6 +7,7 @@ import { ContestsCreateProps, StateProps } from './types';
 import ContestsCreateActions from './actions';
 import { ContentLayout } from '@layouts';
 import './ContestsCreate.scss';
+import constants from '@constants';
 
 class ContestsCreate extends React.PureComponent<ContestsCreateProps> {
     componentDidMount() {
@@ -23,7 +24,9 @@ class ContestsCreate extends React.PureComponent<ContestsCreateProps> {
     componentDidUpdate() {
         const { uuid, isSubmitted, history } = this.props;
         if (isSubmitted && uuid) {
-            history.push(`/app/contests/${uuid}`);
+            history.push(`/app${constants.ROUTES.CONTEST}`, {
+                contest_uuid: uuid,
+            });
         }
     }
 

@@ -2,32 +2,41 @@ import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import ContestsUpdateForm from './ContestsUpdateForm';
-import { ContestsUpdateProps, ContestUpdateState, StateProps } from './types';
-import ContestsUpdateActions from './actions';
+import ContestUpdateForm from './ContestUpdateForm';
+import { ContestUpdateProps, ContestUpdateState, StateProps } from './types';
+import ContestUpdateActions from './actions';
 import { ContentLayout } from '@layouts';
-import './ContestsUpdate.scss';
+import './ContestUpdate.scss';
 import { get as _get } from 'lodash';
+import constants from '@constants';
 
-class ContestsUpdate extends React.PureComponent<
-    ContestsUpdateProps,
+class ContestUpdate extends React.PureComponent<
+    ContestUpdateProps,
     ContestUpdateState
 > {
-    constructor(props: ContestsUpdateProps) {
+    constructor(props: ContestUpdateProps) {
         super(props);
-        this.state = { uuid: _get(props, ['match', 'params', 'uuid'], null) };
+        this.state = {
+            contest: _get(
+                props,
+                ['history', 'location', 'state', 'contest'],
+                null
+            ),
+        };
     }
 
     componentDidMount() {
         const { init } = this.props;
-        const { uuid } = this.state;
-        init(uuid);
+        const { contest } = this.state;
+        init(contest);
     }
 
     componentDidUpdate() {
         const { uuid, isSubmitted, history } = this.props;
         if (isSubmitted && uuid) {
-            history.push(`/app/contests/${uuid}`);
+            history.push(`/app${constants.ROUTES.CONTEST}`, {
+                uuid,
+            });
         }
     }
 
@@ -38,27 +47,29 @@ class ContestsUpdate extends React.PureComponent<
 
     render() {
         const { title, description, isInitialized } = this.props;
-        const { uuid } = this.state;
+        const {
+            contest: { uuid },
+        } = this.state;
         return (
             <ContentLayout
                 title={title}
                 subTitle={description}
                 showSpinner={!isInitialized}
             >
-                <ContestsUpdateForm uuid={uuid} />
+                <ContestUpdateForm uuid={uuid} />
             </ContentLayout>
         );
     }
 }
 
-const mapStateToProps = ({ contestsUpdatePage }: StateProps) => {
+const mapStateToProps = ({ contestUpdatePage }: StateProps) => {
     const {
         title,
         description,
         isInitialized,
         isSubmitted,
         uuid,
-    } = contestsUpdatePage;
+    } = contestUpdatePage;
     return {
         title,
         description,
@@ -70,11 +81,11 @@ const mapStateToProps = ({ contestsUpdatePage }: StateProps) => {
 
 const mapDispatchToProps = (dispatch: any) => {
     return {
-        init(uuid: string) {
-            return dispatch(ContestsUpdateActions.init(uuid));
+        init(contest: string) {
+            return dispatch(ContestUpdateActions.init(contest));
         },
         terminate() {
-            return dispatch(ContestsUpdateActions.terminate());
+            return dispatch(ContestUpdateActions.terminate());
         },
     };
 };
@@ -82,4 +93,4 @@ const mapDispatchToProps = (dispatch: any) => {
 export default compose(
     withRouter,
     connect(mapStateToProps, mapDispatchToProps)
-)(ContestsUpdate);
+)(ContestUpdate);

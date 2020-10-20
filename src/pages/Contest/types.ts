@@ -11,6 +11,7 @@ export interface ContestProps extends RouteComponentProps {
     description: string;
     isInitialized: boolean;
     subscribed: boolean;
+    contest: any;
 }
 
 export interface ContestState {

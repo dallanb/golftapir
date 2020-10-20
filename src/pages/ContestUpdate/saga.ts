@@ -1,33 +1,29 @@
 import { AnyAction } from 'redux';
 import { all, call, put, takeLatest } from 'redux-saga/effects';
 import { pick as _pick, omit as _omit, isEmpty as _isEmpty } from 'lodash';
-import ContestsUpdatePageActions, { ContestsUpdatePageTypes } from './actions';
+import ContestUpdatePageActions, { ContestUpdatePageTypes } from './actions';
 import {
     assignContestAvatar,
-    fetchContest,
     updateContest as updateContestHelper,
 } from '@helpers';
 
-function* init({ uuid }: AnyAction) {
+function* init({ contest }: AnyAction) {
     try {
-        const { data } = yield call(fetchContest, uuid);
-
-        yield put(ContestsUpdatePageActions.set({ title: data.name }));
-        yield put(ContestsUpdatePageActions.set({ contest: data }));
+        yield put(ContestUpdatePageActions.set({ title: contest.name }));
 
         yield put(
-            ContestsUpdatePageActions.set({
+            ContestUpdatePageActions.set({
                 updateFormInitialValues: {
-                    name: data.name,
-                    avatar: data.avatar,
-                    start_time: data.start_time,
+                    name: contest.name,
+                    avatar: contest.avatar,
+                    start_time: contest.start_time,
                 },
             })
         );
 
-        yield put(ContestsUpdatePageActions.initSuccess());
+        yield put(ContestUpdatePageActions.initSuccess());
     } catch (err) {
-        yield put(ContestsUpdatePageActions.initFailure(err));
+        yield put(ContestUpdatePageActions.initFailure(err));
     }
 }
 
@@ -41,15 +37,15 @@ function* updateContest({ uuid, data }: AnyAction) {
         if (!_isEmpty(avatarData)) {
             yield call(assignContestAvatar, uuid, avatarData.avatar);
         }
-        yield put(ContestsUpdatePageActions.updateContestSuccess({ uuid }));
+        yield put(ContestUpdatePageActions.updateContestSuccess({ uuid }));
     } catch (err) {
-        yield put(ContestsUpdatePageActions.updateContestFailure(err));
+        yield put(ContestUpdatePageActions.updateContestFailure(err));
     }
 }
 
 export default function* ContestsCreatePageSaga() {
     yield all([
-        takeLatest(ContestsUpdatePageTypes.INIT, init),
-        takeLatest(ContestsUpdatePageTypes.UPDATE_CONTEST, updateContest),
+        takeLatest(ContestUpdatePageTypes.INIT, init),
+        takeLatest(ContestUpdatePageTypes.UPDATE_CONTEST, updateContest),
     ]);
 }

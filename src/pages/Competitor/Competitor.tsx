@@ -36,7 +36,7 @@ class Competitor extends React.PureComponent<CompetitorProps, CompetitorState> {
             {
                 key: constants.ACTION.CHALLENGE.KEY,
                 onClick: () =>
-                    history.push(`/app/contests/create`, {
+                    history.push(`/app${constants.ROUTES.CONTESTS_CREATE}`, {
                         participant_uuid: uuid,
                     }),
             },

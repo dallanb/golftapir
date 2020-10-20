@@ -3,7 +3,7 @@ import constants from '@constants';
 
 const routes = [
     {
-        path: constants.ROUTES.WAGER,
+        path: constants.ROUTES.WAGERS,
         component: Wagers,
         exact: true,
     },

@@ -3,7 +3,7 @@ import constants from '@constants';
 
 const routes = [
     {
-        path: `${constants.ROUTES.COMPETITOR}/:uuid`,
+        path: constants.ROUTES.COMPETITOR,
         component: Competitor,
     },
 ];

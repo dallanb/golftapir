@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { FormikValues } from 'formik';
-import { omit as _omit } from 'lodash';
+import { pick as _pick } from 'lodash';
 import { ContestsCreateFormProps } from './types';
 import { StateProps } from '../types';
 import { Form } from '@components';
@@ -12,7 +12,15 @@ import './ContestsCreateForm.scss';
 class ContestsCreateForm extends React.PureComponent<ContestsCreateFormProps> {
     handleSubmit = (values: FormikValues) => {
         const { createContest } = this.props;
-        createContest(values);
+        const contest = _pick(values, [
+            'owner_uuid',
+            'sport_uuid',
+            'name',
+            'avatar',
+            'start_time',
+            'participants',
+        ]);
+        createContest(contest);
     };
     render() {
         const { initialValues } = this.props;

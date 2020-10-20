@@ -2,19 +2,19 @@
 import { static as Immutable } from 'seamless-immutable';
 import { createReducer } from 'reduxsauce';
 import CONSTANTS from '@locale/en-CA';
-import { ContestsUpdatePageInterface } from './types';
-import { ContestsUpdatePageTypes } from './actions';
+import { ContestUpdatePageInterface } from './types';
+import { ContestUpdatePageTypes } from './actions';
 import { ContestTypes } from '@actions';
 import { get as _get } from 'lodash';
 
 /* ------------- Initial State ------------- */
-const INITIAL_STATE: ContestsUpdatePageInterface = {
+const INITIAL_STATE: ContestUpdatePageInterface = {
     isFetching: false,
     isInitialized: false,
     isSubmitted: false,
     err: undefined,
-    title: CONSTANTS.PAGES.CONTESTS_UPDATE.TITLE,
-    description: CONSTANTS.PAGES.CONTESTS_UPDATE.DESCRIPTION,
+    title: CONSTANTS.PAGES.CONTEST_UPDATE.TITLE,
+    description: CONSTANTS.PAGES.CONTEST_UPDATE.DESCRIPTION,
     updateFormInitialValues: undefined,
     uuid: undefined,
     contest: undefined,
@@ -76,14 +76,14 @@ function updateContestFailure(state = INITIAL_STATE, { err }: any) {
 }
 
 const HANDLERS = {
-    [ContestsUpdatePageTypes.INIT]: init,
-    [ContestsUpdatePageTypes.INIT_SUCCESS]: initSuccess,
-    [ContestsUpdatePageTypes.INIT_FAILURE]: initFailure,
-    [ContestsUpdatePageTypes.TERMINATE]: terminate,
-    [ContestsUpdatePageTypes.SET]: set,
-    [ContestsUpdatePageTypes.UPDATE_CONTEST]: updateContest,
-    [ContestsUpdatePageTypes.UPDATE_CONTEST_SUCCESS]: updateContestSuccess,
-    [ContestsUpdatePageTypes.UPDATE_CONTEST_FAILURE]: updateContestFailure,
+    [ContestUpdatePageTypes.INIT]: init,
+    [ContestUpdatePageTypes.INIT_SUCCESS]: initSuccess,
+    [ContestUpdatePageTypes.INIT_FAILURE]: initFailure,
+    [ContestUpdatePageTypes.TERMINATE]: terminate,
+    [ContestUpdatePageTypes.SET]: set,
+    [ContestUpdatePageTypes.UPDATE_CONTEST]: updateContest,
+    [ContestUpdatePageTypes.UPDATE_CONTEST_SUCCESS]: updateContestSuccess,
+    [ContestUpdatePageTypes.UPDATE_CONTEST_FAILURE]: updateContestFailure,
 };
 
 export const reducer = createReducer(INITIAL_STATE, HANDLERS);
