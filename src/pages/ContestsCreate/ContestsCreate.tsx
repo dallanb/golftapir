@@ -25,7 +25,7 @@ class ContestsCreate extends React.PureComponent<ContestsCreateProps> {
         const { uuid, isSubmitted, history } = this.props;
         if (isSubmitted && uuid) {
             history.push(`/app${constants.ROUTES.CONTEST}`, {
-                contest_uuid: uuid,
+                uuid,
             });
         }
     }

@@ -18,6 +18,8 @@ export interface ContestMatchupPageInterface {
     readonly err?: Error;
     readonly title: string;
     readonly description: string;
+    readonly score: any;
+    readonly participants: any;
 }
 
 export interface StateInterface {

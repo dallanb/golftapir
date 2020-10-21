@@ -7,6 +7,8 @@ export { default as fetchAccount } from './fetchAccount';
 export { default as fetchAccountMembership } from './fetchAccountMembership';
 export { default as fetchMyAccount } from './fetchMyAccount';
 export { default as fetchNotifications } from './fetchNotifications';
+export { default as fetchScore } from './fetchScore';
+export { default as fetchScoreContest } from './fetchScoreContest';
 export { default as fetchWagers } from './fetchWagers';
 export { default as searchAccounts } from './searchAccounts';
 export { default as subscribe } from './subscribe';

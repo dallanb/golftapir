@@ -10,6 +10,7 @@ import {
     StateInterface,
 } from './types';
 import ContestMatchupPageActions from './actions';
+import ContestMatchupScorecard from './ContestMatchupScorecard';
 import './ContestMatchup.scss';
 
 class ContestMatchup extends React.PureComponent<
@@ -47,7 +48,9 @@ class ContestMatchup extends React.PureComponent<
                 title={title}
                 subTitle={description}
                 showSpinner={!isInitialized}
-            />
+            >
+                <ContestMatchupScorecard />
+            </ContentLayout>
         );
     }
 }

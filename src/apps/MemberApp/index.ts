@@ -55,6 +55,7 @@ import {
     ContestSaga,
     ModalSaga,
     NotificationSaga,
+    ScoreSaga,
     SocketSaga,
     WagerSaga,
 } from '@sagas';
@@ -85,6 +86,7 @@ export function* memberAppSaga() {
         fork(ContestSaga),
         fork(ModalSaga),
         fork(NotificationSaga),
+        fork(ScoreSaga),
         fork(SocketSaga),
         fork(WagerSaga),
         fork(AccountPageSaga),

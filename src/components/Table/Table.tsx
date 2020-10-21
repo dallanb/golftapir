@@ -25,7 +25,6 @@ const Table: React.FunctionComponent<TableProps> = ({
         },
         useBlockLayout
     );
-
     return (
         <div {...getTableProps()} className="table">
             <div>
@@ -43,8 +42,6 @@ const Table: React.FunctionComponent<TableProps> = ({
                 <List
                     items={rows}
                     rowRenderer={(props) => rowRenderer({ props, prepareRow })}
-                    width={restProps.size * headers.length}
-                    height={restProps.size * rows.length}
                     {...restProps}
                 />
             </div>
