@@ -11,7 +11,9 @@ import {
 } from './types';
 import ContestMatchupPageActions from './actions';
 import ContestMatchupScorecard from './ContestMatchupScorecard';
+import ContestMatchupCarousel from './ContestMatchupCarousel';
 import './ContestMatchup.scss';
+import { Tabs } from 'antd';
 
 class ContestMatchup extends React.PureComponent<
     ContestMatchupProps,
@@ -39,26 +41,60 @@ class ContestMatchup extends React.PureComponent<
         terminate();
     }
 
+    getTabs = (sheet: any[], participants: any[]) =>
+        sheet.map((sheetUser: any, index) => {
+            const participant = participants.find(
+                ({ membership_uuid }: any) =>
+                    membership_uuid === sheetUser.participant
+            );
+            const tab = participant ? participant.last_name : '';
+            return (
+                <Tabs.TabPane tab={tab} key={index}>
+                    <ContestMatchupCarousel sheetUser={sheetUser} />
+                </Tabs.TabPane>
+            );
+        });
+
     render() {
-        const { title, description, isInitialized } = this.props;
+        const {
+            title,
+            description,
+            isInitialized,
+            sheet,
+            participants,
+        } = this.props;
         return (
             <ContentLayout
                 title={title}
                 subTitle={description}
                 showSpinner={!isInitialized}
             >
-                <ContestMatchupScorecard />
+                <div className="contest-matchup-page-view">
+                    <ContestMatchupScorecard />
+                    <Tabs type="card" animated={false}>
+                        {this.getTabs(sheet, participants)}
+                    </Tabs>
+                </div>
             </ContentLayout>
         );
     }
 }
 
 const mapStateToProps = ({ contestMatchupPage }: StateInterface) => {
-    const { title, description, isInitialized } = contestMatchupPage;
+    const {
+        title,
+        description,
+        isInitialized,
+        score,
+        participants = [],
+    } = contestMatchupPage;
+    const sheet = _get(score, ['log', 'sheet'], []);
     return {
         title,
         description,
         isInitialized,
+        sheet,
+        participants,
     };
 };
 

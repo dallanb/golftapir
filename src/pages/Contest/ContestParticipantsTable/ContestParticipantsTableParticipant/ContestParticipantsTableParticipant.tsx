@@ -18,7 +18,7 @@ const ContestParticipantsTableParticipant: React.FunctionComponent<ContestPartic
             className="contest-participants-table-participant"
             onClick={() =>
                 history.push(`/app${constants.ROUTES.COMPETITOR}`, {
-                    competitor_uuid: uuid,
+                    uuid,
                 })
             }
         >

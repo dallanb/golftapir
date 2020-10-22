@@ -1,8 +1,8 @@
 import React from 'react';
 import { range as _range } from 'lodash';
-import { CellValue } from 'react-table';
-import ContestParticipantsTableParticipant from '@pages/Contest/ContestParticipantsTable/ContestParticipantsTableParticipant';
 import { EditableCell } from '@components';
+import { totalStrokeCalculator } from '@pages/ContestMatchup/utils';
+import ContestMatchupScorecardParticipant from './ContestMatchupScorecardParticipant';
 
 const infoSchema: any[] = [
     {
@@ -16,7 +16,7 @@ const infoSchema: any[] = [
                 membership_uuid,
             },
         }: any) => (
-            <ContestParticipantsTableParticipant
+            <ContestMatchupScorecardParticipant
                 first_name={first_name}
                 last_name={last_name}
                 s3_filename={s3_filename}
@@ -31,31 +31,46 @@ const holeSchema: any[] = _range(1, 19).map((ix: number) => {
         Header: ix,
         accessor: `holes.${ix}.strokes`,
         width: 50,
-        // Cell: ({ value }: any) => {
-        //     return <EditableCell/>
-        // },
         Cell: ({
             value,
             row: {
                 original: { uuid },
             },
         }: {
-            value: number;
+            value: string;
             row: {
                 original: {
                     uuid: string;
                 };
             };
-        }) => (
-            <EditableCell
-                key={ix}
-                initialValue={value || ''}
-                onBlur={(value: string) => console.log(value, uuid)}
-            />
-        ),
+        }) => value,
+        // || (
+        //     <EditableCell
+        //         key={ix}
+        //         initialValue={value || ''}
+        //         onBlur={(value: string) => console.log(value, uuid)}
+        //     />
+        // ),
     };
 });
 
-const totalSchema: any[] = [];
+const totalSchema: any[] = [
+    {
+        Header: 'Total',
+        accessor: 'total',
+        width: 75,
+        Cell: ({
+            row: {
+                original: { holes },
+            },
+        }: any) => {
+            return (
+                <div>
+                    <b>{totalStrokeCalculator(holes)}</b>
+                </div>
+            );
+        },
+    },
+];
 
 export const columnsSchema = [...infoSchema, ...holeSchema, ...totalSchema];

@@ -5,6 +5,8 @@ export interface ContestMatchupProps extends RouteComponentProps {
     terminate: () => void;
     title: string;
     description: string;
+    sheet: any[];
+    participants: any[];
     isInitialized: boolean;
 }
 

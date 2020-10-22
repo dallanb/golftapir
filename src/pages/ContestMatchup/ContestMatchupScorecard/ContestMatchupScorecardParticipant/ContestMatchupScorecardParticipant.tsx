@@ -18,7 +18,7 @@ const ContestMatchupScorecardParticipant: React.FunctionComponent<ContestMatchup
             className="contest-matchup-scorecard-participant"
             onClick={() =>
                 history.push(`/app${constants.ROUTES.COMPETITOR}`, {
-                    competitor_uuid: uuid,
+                    uuid,
                 })
             }
         >
