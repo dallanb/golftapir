@@ -30,10 +30,8 @@ class ContestMatchup extends React.PureComponent<
 
     componentDidMount() {
         const { init } = this.props;
-        const {
-            contest: { uuid },
-        } = this.state;
-        init(uuid);
+        const { contest } = this.state;
+        init(contest);
     }
 
     componentWillUnmount() {
@@ -66,8 +64,8 @@ const mapStateToProps = ({ contestMatchupPage }: StateInterface) => {
 
 const mapDispatchToProps = (dispatch: any) => {
     return {
-        init(uuid: string) {
-            return dispatch(ContestMatchupPageActions.init(uuid));
+        init(contest: any) {
+            return dispatch(ContestMatchupPageActions.init(contest));
         },
         terminate() {
             return dispatch(ContestMatchupPageActions.terminate());

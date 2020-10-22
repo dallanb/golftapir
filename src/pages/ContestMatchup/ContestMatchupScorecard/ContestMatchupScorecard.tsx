@@ -23,7 +23,7 @@ class ContestMatchupScorecard extends React.PureComponent<
                     columnsSchema={columnsSchema}
                     size={50} // row height
                     height={100}
-                    width={740}
+                    width={1100}
                     hasNextPage={false}
                     isNextPageLoading={isFetching}
                     items={items}

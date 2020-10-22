@@ -1,6 +1,7 @@
 export { default as UserTile } from './UserTile';
 export { default as Avatar } from './Avatar';
 export { default as DateTimePicker } from './DateTimePicker';
+export { default as EditableCell } from './EditableCell';
 export { default as Form } from './Form';
 export { default as Grid } from './Grid';
 export { default as InputWrapper } from './InputWrapper';

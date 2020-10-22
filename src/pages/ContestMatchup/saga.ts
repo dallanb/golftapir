@@ -3,8 +3,12 @@ import { all, call, put, race, take, takeLatest } from 'redux-saga/effects';
 import ContestMatchupPageActions, { ContestMatchupPageTypes } from './actions';
 import { bulkFetchAccounts, fetchScoreContest } from '@helpers';
 
-function* init({ uuid }: AnyAction) {
+function* init({ contest }: AnyAction) {
     try {
+        const { uuid, name: title } = contest;
+
+        yield put(ContestMatchupPageActions.set({ title }));
+
         const { data: score } = yield call(fetchScoreContest, uuid, {
             include: 'log',
         });

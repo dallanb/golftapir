@@ -2,6 +2,7 @@ import React from 'react';
 import { range as _range } from 'lodash';
 import { CellValue } from 'react-table';
 import ContestParticipantsTableParticipant from '@pages/Contest/ContestParticipantsTable/ContestParticipantsTableParticipant';
+import { EditableCell } from '@components';
 
 const infoSchema: any[] = [
     {
@@ -28,9 +29,30 @@ const infoSchema: any[] = [
 const holeSchema: any[] = _range(1, 19).map((ix: number) => {
     return {
         Header: ix,
-        accessor: `holes.${ix}`,
-        width: 30,
-        Cell: ({ value }: any) => <div />,
+        accessor: `holes.${ix}.strokes`,
+        width: 50,
+        // Cell: ({ value }: any) => {
+        //     return <EditableCell/>
+        // },
+        Cell: ({
+            value,
+            row: {
+                original: { uuid },
+            },
+        }: {
+            value: number;
+            row: {
+                original: {
+                    uuid: string;
+                };
+            };
+        }) => (
+            <EditableCell
+                key={ix}
+                initialValue={value || ''}
+                onBlur={(value: string) => console.log(value, uuid)}
+            />
+        ),
     };
 });
 

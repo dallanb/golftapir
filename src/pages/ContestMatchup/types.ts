@@ -1,7 +1,7 @@
 import { RouteComponentProps } from 'react-router';
 
 export interface ContestMatchupProps extends RouteComponentProps {
-    init: (uuid: string) => void;
+    init: (contest: any) => void;
     terminate: () => void;
     title: string;
     description: string;
