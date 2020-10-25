@@ -52,6 +52,13 @@ const CONSTANTS = {
             UNSUBSCRIBE: 'Error unsubscribing from entity',
         },
     },
+    SCORE: {
+        SUCCESS: {},
+        ERROR: {
+            FETCH: 'Error fetching Score information',
+            FETCH_CONTEST: 'Error fetching Score information',
+        },
+    },
     SOCKET: {
         ERROR: {
             INIT: 'Error initializing Web Sockets',

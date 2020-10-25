@@ -1,13 +1,24 @@
-.contestMatchup-page-view {
-  .contestMatchup-page-user {
-    display: flex;
-    .contestMatchup-page-user-info {
-      display:flex;
-      flex-direction: column;
-      margin-left: 10px;
-      .contestMatchup-page-user-name {
-
+.contest-matchup-page-view {
+    .contest-matchup-carousel {
+        .contest-matchup-carousel-hole {
+            height: 350px;
+        }
+        .slick-dots li button {
+          background: black;
+        }
+        .slick-dots li.slick-active button {
+          background: black;
+          opacity: 1;
       }
     }
-  }
+    .contest-matchup-page-user {
+        display: flex;
+        .contest-matchup-page-user-info {
+            display: flex;
+            flex-direction: column;
+            margin-left: 10px;
+            .contest-matchup-page-user-name {
+            }
+        }
+    }
 }

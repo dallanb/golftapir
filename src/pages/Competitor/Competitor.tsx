@@ -15,7 +15,9 @@ import './Competitor.scss';
 class Competitor extends React.PureComponent<CompetitorProps, CompetitorState> {
     constructor(props: CompetitorProps) {
         super(props);
-        this.state = { uuid: _get(props, ['match', 'params', 'uuid'], null) };
+        this.state = {
+            uuid: _get(props, ['history', 'location', 'state', 'uuid'], null),
+        };
     }
 
     componentDidMount() {

@@ -2,7 +2,7 @@ import { createActions } from 'reduxsauce';
 
 const { Types, Creators } = createActions(
     {
-        init: ['uuid'],
+        init: ['contest'],
         initSuccess: null,
         initFailure: ['err'],
         terminate: null,

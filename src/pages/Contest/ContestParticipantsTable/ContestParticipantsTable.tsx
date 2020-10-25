@@ -18,7 +18,9 @@ class ContestParticipantsTable extends React.PureComponent<
             <div>
                 <Typography.Title level={5}>Participants</Typography.Title>
                 <Table
-                    size={150}
+                    size={75}
+                    height={150}
+                    width={450}
                     items={items}
                     hasNextPage={false}
                     loadNextPage={this.loadMore}

@@ -5,6 +5,8 @@ export interface TableProps {
     rowRenderer?: React.FunctionComponent<RowRendererProps>;
     columnsSchema: any;
     size: number;
+    height?: number;
+    width?: number;
     hasNextPage: boolean;
     isNextPageLoading: boolean;
     items: any;

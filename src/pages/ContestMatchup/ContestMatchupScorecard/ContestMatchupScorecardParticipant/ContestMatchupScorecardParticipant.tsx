@@ -2,11 +2,11 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { Avatar } from '@components';
 import { withS3URL } from '@utils';
-import { ContestParticipantsTableParticipantProps } from './types';
-import './ContestParticipantsTableParticipant.scss';
 import constants from '@constants';
+import { ContestMatchupScorecardParticipantProps } from './types';
+import './ContestMatchupScorecardParticipant.scss';
 
-const ContestParticipantsTableParticipant: React.FunctionComponent<ContestParticipantsTableParticipantProps> = ({
+const ContestMatchupScorecardParticipant: React.FunctionComponent<ContestMatchupScorecardParticipantProps> = ({
     s3_filename,
     first_name,
     last_name,
@@ -15,7 +15,7 @@ const ContestParticipantsTableParticipant: React.FunctionComponent<ContestPartic
     const history = useHistory();
     return (
         <div
-            className="contest-participants-table-participant"
+            className="contest-matchup-scorecard-participant"
             onClick={() =>
                 history.push(`/app${constants.ROUTES.COMPETITOR}`, {
                     uuid,
@@ -25,11 +25,11 @@ const ContestParticipantsTableParticipant: React.FunctionComponent<ContestPartic
             <Avatar
                 src={s3_filename && withS3URL(s3_filename)}
                 name={`${first_name} ${last_name}`}
-                className="contest-participants-table-participant-avatar"
+                className="contest-matchup-scorecard-participant-avatar"
             />
-            <div className="contest-participants-table-participant-name">{`${first_name} ${last_name}`}</div>
+            <div className="contest-matchup-scorecard-participant-name">{`${first_name} ${last_name}`}</div>
         </div>
     );
 };
 
-export default ContestParticipantsTableParticipant;
+export default ContestMatchupScorecardParticipant;
