@@ -16,9 +16,10 @@ const INITIAL_STATE: ContestPageInterface = {
     title: '',
     description: CONSTANTS.PAGES.CONTEST.DESCRIPTION,
     subscribed: false,
-    contestParticipants: [],
     contestWagers: [],
     contest: undefined,
+    score: undefined,
+    accountsHash: undefined,
 };
 
 /* ------------- Reducers ------------- */

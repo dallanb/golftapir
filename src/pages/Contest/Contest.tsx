@@ -20,6 +20,7 @@ class Contest extends React.PureComponent<ContestProps, ContestState> {
         super(props);
         this.state = {
             uuid: _get(props, ['history', 'location', 'state', 'uuid'], null),
+            name: _get(props, ['history', 'location', 'state', 'name'], null),
         };
     }
 
@@ -65,10 +66,10 @@ class Contest extends React.PureComponent<ContestProps, ContestState> {
 
     render() {
         const { title, description, isInitialized } = this.props;
-        const { uuid } = this.state;
+        const { uuid, name } = this.state;
         return (
             <ContentLayout
-                title={title}
+                title={title || name}
                 subTitle={description}
                 showSpinner={!isInitialized}
                 className="contest-view"

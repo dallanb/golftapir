@@ -1,13 +1,8 @@
 import { AnyAction } from 'redux';
-import { all, call, put, select, takeLatest } from 'redux-saga/effects';
+import { all, call, fork, put, select, takeLatest } from 'redux-saga/effects';
 import ContestPageActions, { ContestPageTypes } from './actions';
-import { AccountActions } from '@actions';
-import { normalizeContestParticipants } from '@pages/Contest/utils';
-import { selectMe } from '@selectors/BaseSelector';
+import { initContest, initScore, initSubscribed } from './helpers';
 import {
-    bulkFetchAccounts,
-    fetchContest,
-    subscriptionExists,
     updateContest,
     updateContestParticipant,
     subscribe as subscribeHelper,
@@ -17,38 +12,9 @@ import {
 // Action Handlers
 function* init({ uuid }: AnyAction) {
     try {
-        const {
-            data: { participants, name: title },
-            data: contest,
-        } = yield call(fetchContest, uuid);
-
-        yield put(ContestPageActions.set({ contest }));
-        yield put(ContestPageActions.set({ title }));
-
-        const { subscribed } = yield call(subscriptionExists, uuid);
-        yield put(ContestPageActions.set({ subscribed }));
-
-        const accounts = participants.map(
-            ({ user_uuid }: { user_uuid: string }) => user_uuid
-        );
-        if (!accounts.length) {
-            yield put(AccountActions.bulkFetchAccountsSuccess([]));
-        } else {
-            const { data: accountParticipants } = yield call(
-                bulkFetchAccounts,
-                accounts
-            );
-
-            const me = yield select(selectMe);
-
-            const contestParticipants = normalizeContestParticipants(
-                participants,
-                accountParticipants,
-                me
-            );
-            yield put(ContestPageActions.set({ contestParticipants }));
-        }
-
+        yield fork(initContest, uuid);
+        yield fork(initScore, uuid);
+        yield fork(initSubscribed, uuid);
         yield put(ContestPageActions.initSuccess());
     } catch (err) {
         yield put(ContestPageActions.initFailure(err));

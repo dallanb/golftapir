@@ -13,6 +13,7 @@ const INITIAL_STATE: ContestMatchupPageInterface = {
     title: CONSTANTS.PAGES.CONTEST_MATCHUP.TITLE,
     description: CONSTANTS.PAGES.CONTEST_MATCHUP.DESCRIPTION,
     score: undefined,
+    contest: undefined,
     participants: undefined,
 };
 

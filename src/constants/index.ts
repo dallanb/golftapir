@@ -32,6 +32,16 @@ const constants = {
             TWO_TONE_COLOUR: '#eb2f96',
             KEY: 'inactive',
         },
+        COMPLETED: {
+            COLOUR: 'turquoise',
+            TWO_TONE_COLOUR: '#00E4FF',
+            KEY: 'completed',
+        },
+        APPROVED: {
+            COLOUR: 'purple',
+            TWO_TONE_COLOUR: '#7800FF',
+            KEY: 'approved',
+        },
     },
     ACTION: {
         ACTIVATE: {
@@ -58,6 +68,16 @@ const constants = {
             TWO_TONE_COLOUR: '#1E8793',
             KEY: 'challenge',
             LABEL: 'Challenge',
+        },
+        COMPLETE: {
+            TWO_TONE_COLOUR: '#6E7115',
+            KEY: 'complete',
+            LABEL: 'Complete',
+        },
+        APPROVE: {
+            TWO_TONE_COLOUR: '#00E4FF',
+            KEY: 'approve',
+            LABEL: 'Approve',
         },
     },
     ROUTES: {

@@ -14,6 +14,8 @@ import ContestMatchupScorecard from './ContestMatchupScorecard';
 import ContestMatchupCarousel from './ContestMatchupCarousel';
 import './ContestMatchup.scss';
 import { Tabs } from 'antd';
+import constants from '@constants';
+import ContestMatchupActions from '@pages/ContestMatchup/ContestMatchupActions';
 
 class ContestMatchup extends React.PureComponent<
     ContestMatchupProps,
@@ -40,6 +42,27 @@ class ContestMatchup extends React.PureComponent<
         const { terminate } = this.props;
         terminate();
     }
+
+    generateActions = () => {
+        const { history } = this.props;
+        const { contest } = this.state;
+        return [
+            {
+                key: constants.ACTION.APPROVE.KEY,
+                onClick: () =>
+                    history.push(`/app${constants.ROUTES.CONTEST_UPDATE}`, {
+                        contest,
+                    }),
+            },
+            {
+                key: constants.ACTION.COMPLETE.KEY,
+                onClick: () =>
+                    history.push(`/app${constants.ROUTES.CONTEST_UPDATE}`, {
+                        contest,
+                    }),
+            },
+        ];
+    };
 
     getTabs = (sheet: any[], participants: any[]) =>
         sheet.map((sheetUser: any, index) => {
@@ -70,6 +93,7 @@ class ContestMatchup extends React.PureComponent<
                 showSpinner={!isInitialized}
             >
                 <div className="contest-matchup-page-view">
+                    <ContestMatchupActions actions={this.generateActions()} />
                     <ContestMatchupScorecard />
                     <Tabs type="card" animated={false}>
                         {this.getTabs(sheet, participants)}
@@ -88,7 +112,7 @@ const mapStateToProps = ({ contestMatchupPage }: StateInterface) => {
         score,
         participants = [],
     } = contestMatchupPage;
-    const sheet = _get(score, ['log', 'sheet'], []);
+    const sheet = _get(score, ['sheet'], []);
     return {
         title,
         description,

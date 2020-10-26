@@ -8,14 +8,14 @@ function* init({ contest }: AnyAction) {
         const { uuid, name: title } = contest;
 
         yield put(ContestMatchupPageActions.set({ title }));
+        yield put(ContestMatchupPageActions.set({ contest }));
 
-        const { data: score } = yield call(fetchScoreContest, uuid, {
-            include: 'log',
-        });
+        // for now we will be fetching score back to back
+        const { data: score } = yield call(fetchScoreContest, uuid);
 
         yield put(ContestMatchupPageActions.set({ score }));
 
-        const accounts = score.log.sheet.map(
+        const accounts = score.sheet.map(
             ({ participant }: { participant: string }) => participant
         );
         const { data: participants } = yield call(bulkFetchAccounts, accounts);

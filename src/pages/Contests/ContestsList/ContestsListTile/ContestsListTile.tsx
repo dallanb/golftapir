@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Card } from 'antd';
-import { get as _get } from 'lodash';
+import { get as _get, pick as _pick } from 'lodash';
 import { ContestsListTileProps } from './types';
 import './ContestsListTile.scss';
 import constants from '@constants';
@@ -10,8 +10,8 @@ const ContestsListTile: React.FunctionComponent<ContestsListTileProps> = ({
     history,
 }) => {
     const item = _get(data, [index], undefined);
-    const handleClick = (uuid: string) => {
-        history.push(`/app${constants.ROUTES.CONTEST}`, { uuid });
+    const handleClick = (options: { uuid: string; name: string }) => {
+        history.push(`/app${constants.ROUTES.CONTEST}`, options);
     };
 
     return (
@@ -20,7 +20,9 @@ const ContestsListTile: React.FunctionComponent<ContestsListTileProps> = ({
                 {item ? item.name : 'Loading...'}
             </div>
             <div className="contest-list-tile-button">
-                <Button onClick={() => handleClick(_get(item, ['uuid'], null))}>
+                <Button
+                    onClick={() => handleClick(_pick(item, ['uuid', 'name']))}
+                >
                     View
                 </Button>
             </div>

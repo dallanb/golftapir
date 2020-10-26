@@ -8,7 +8,7 @@ const config = {
     ACCOUNT_URL: 'account.techtapir.com',
     CONTEST_URL: 'dcontest.techtapir.com',
     WAGER_URL: 'wager.techtapir.com',
-    // GOLF_UUID: 'ede9c78f-025f-44e1-8a75-78c9a6772929',
+    // GOLF_UUID: 'c3e436a0-0ea9-48a2-b64b-8e80cc12b743',
     GOLF_UUID: '64580b95-7c99-41e9-921e-fa08c786f6ef',
     NOTIFICATION_URL: 'notification.techtapir.com',
     SCORE_URL: 'dscore.techtapir.com',

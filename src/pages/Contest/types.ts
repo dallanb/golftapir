@@ -16,6 +16,7 @@ export interface ContestProps extends RouteComponentProps {
 
 export interface ContestState {
     uuid: string;
+    name: string;
 }
 
 export interface ContestPageInterface {
@@ -25,9 +26,10 @@ export interface ContestPageInterface {
     readonly title: string;
     readonly description: string;
     readonly subscribed: boolean;
-    readonly contestParticipants: any[];
     readonly contestWagers: any[];
     readonly contest: any;
+    readonly score: any;
+    readonly accountsHash: any;
 }
 
 export interface StateInterface {
