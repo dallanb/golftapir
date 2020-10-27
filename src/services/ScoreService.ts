@@ -16,4 +16,18 @@ export default {
             query,
         });
     },
+    updateScore(uuid: string, data: any = {}) {
+        return ClientProxy.put({
+            url: config.SCORE_URL,
+            endpoint: `/scores/${uuid}`,
+            data,
+        });
+    },
+    updateSheet(uuid: string, data: any = {}) {
+        return ClientProxy.put({
+            url: config.SCORE_URL,
+            endpoint: `/scores/sheets/${uuid}`,
+            data,
+        });
+    },
 };

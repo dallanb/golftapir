@@ -20,6 +20,7 @@ function* init({ uuid }: AnyAction) {
 
         const { data: contest } = yield call(fetchContest, uuid);
 
+        yield put(ContestPageActions.set({ title: contest.name }));
         yield put(ContestPageActions.set({ contest }));
 
         const { participants } = contest;

@@ -1,13 +1,17 @@
 import { RouteComponentProps } from 'react-router';
+import { MemberAppInterface } from '@apps/MemberApp/reducer';
 
 export interface ContestMatchupProps extends RouteComponentProps {
     init: (contest: any) => void;
     terminate: () => void;
+    approveScoreSheet: (uuid: string) => void;
+    completeScore: (uuid: string) => void;
     title: string;
     description: string;
     sheet: any[];
     participants: any[];
     isInitialized: boolean;
+    score_uuid: string;
 }
 
 export interface ContestMatchupState {

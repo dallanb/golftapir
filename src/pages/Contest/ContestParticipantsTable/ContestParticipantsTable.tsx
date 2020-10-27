@@ -16,7 +16,7 @@ class ContestParticipantsTable extends React.PureComponent<
     render() {
         const { items, isFetching } = this.props;
         return (
-            <div>
+            <div className="contest-participants-table">
                 <Typography.Title level={5}>Participants</Typography.Title>
                 <Table
                     size={50}

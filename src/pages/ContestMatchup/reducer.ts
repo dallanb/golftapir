@@ -52,12 +52,22 @@ function set(state: any, { data }: any) {
     });
 }
 
+function updateScoreStatusSuccess(state: any, { status }: any) {
+    return Immutable.merge(state, {
+        score: {
+            ...state.score,
+            status,
+        },
+    });
+}
+
 const HANDLERS = {
     [ContestMatchupPageTypes.INIT]: init,
     [ContestMatchupPageTypes.INIT_SUCCESS]: initSuccess,
     [ContestMatchupPageTypes.INIT_FAILURE]: initFailure,
     [ContestMatchupPageTypes.TERMINATE]: terminate,
     [ContestMatchupPageTypes.SET]: set,
+    [ContestMatchupPageTypes.UPDATE_SCORE_STATUS_SUCCESS]: updateScoreStatusSuccess,
 };
 
 export const reducer = createReducer(INITIAL_STATE, HANDLERS);
