@@ -45,7 +45,10 @@ function* updateScoreSheetStatus({ uuid, status }: AnyAction) {
     try {
         yield call(updateScoreSheet, uuid, { status });
         yield put(
-            ContestMatchupPageActions.updateScoreSheetStatusSuccess(status)
+            ContestMatchupPageActions.updateScoreSheetStatusSuccess(
+                uuid,
+                status
+            )
         );
     } catch (err) {
         yield put(ContestMatchupPageActions.updateScoreSheetStatusFailure(err));
