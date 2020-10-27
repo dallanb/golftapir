@@ -8,9 +8,9 @@ export const selectData = createSelector([getContestPage], (contestPage) =>
     _get(contestPage, ['data'], false)
 );
 
-export const selectContestParticipants = createSelector(
+export const selectAccountsHash = createSelector(
     [getContestPage],
-    (contestPage) => _get(contestPage, ['contestParticipants'], [])
+    (contestPage) => _get(contestPage, ['accountsHash'], undefined)
 );
 
 export const selectContest = createSelector([getContestPage], (contestPage) =>
@@ -25,6 +25,11 @@ export const selectContestStartTime = createSelector(
 export const selectContestStatus = createSelector(
     [getContestPage],
     (contestPage) => _get(contestPage, ['contest', 'status'], undefined)
+);
+
+export const selectContestParticipants = createSelector(
+    [getContestPage],
+    (contestPage) => _get(contestPage, ['contest', 'participants'], [])
 );
 
 export const selectIsOwner = createSelector(

@@ -1,35 +1,25 @@
-import {
-    pick as _pick,
-    toUpper as _toUpper,
-    get as _get,
-    set as _set,
-} from 'lodash';
+import { get as _get } from 'lodash';
 import constants from '@constants';
 import moment from 'moment';
 
-export const normalizeContestParticipants = (
-    participants: any,
-    accounts: any,
-    me: any
-) =>
-    participants.map((participant: any) =>
-        Object.assign(
-            {},
-            { ..._pick(participant, ['uuid', 'status']) },
-            {
-                ..._pick(
-                    accounts.find(
-                        (account: any) =>
-                            account.membership_uuid === participant.user_uuid
-                    ),
-                    ['membership_uuid', 'first_name', 'last_name', 'avatar']
-                ),
-            },
-            {
-                is_me: participant.user_uuid === me.membership_uuid,
-            }
-        )
-    );
+export const prepareParticipant = (
+    uuid: string,
+    accountHash: any
+): { name: string; s3_filename: string } => {
+    const participant = { name: '', s3_filename: '' };
+    const {
+        first_name,
+        last_name,
+        avatar: { s3_filename },
+    } = _get(accountHash, [uuid], {
+        first_name: '',
+        last_name: '',
+        avatar: { s3_filename: '' },
+    });
+    participant.name = `${first_name} ${last_name}`;
+    participant.s3_filename = s3_filename;
+    return participant;
+};
 
 export const mergeContestParticipant = (
     existingParticipants: any,

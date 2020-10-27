@@ -1,6 +1,5 @@
-
 export interface ContestParticipantsTableStatusProps {
     status: string;
     uuid: string;
-    is_me: boolean
+    user_uuid: string;
 }

@@ -36,7 +36,7 @@ class ContestMatchupScorecard extends React.PureComponent<
 }
 
 const mapStateToProps = ({ contestMatchupPage }: StateInterface) => {
-    const sheet = _get(contestMatchupPage, ['score', 'log', 'sheet'], []);
+    const sheet = _get(contestMatchupPage, ['score', 'sheet'], []);
     const participants = _get(contestMatchupPage, ['participants'], []);
     const items = mapSheetItems(sheet, { participants });
     return {

@@ -1,15 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Typography } from 'antd';
 import { get as _get } from 'lodash';
-import { ContestParticipantsTableProps } from './types';
+import { ContestLeadersTableProps } from './types';
 import { columnsSchema } from './schema';
 import { StateInterface } from '../types';
 import { Table } from '@components';
-import './ContestParticipantsTable.scss';
-import { Typography } from 'antd';
+import './ContestLeadersTable.scss';
 
-class ContestParticipantsTable extends React.PureComponent<
-    ContestParticipantsTableProps
+class ContestLeadersTable extends React.PureComponent<
+    ContestLeadersTableProps
 > {
     loadMore = (start: number, stop: number, resolve: () => void) => resolve();
 
@@ -17,11 +17,11 @@ class ContestParticipantsTable extends React.PureComponent<
         const { items, isFetching } = this.props;
         return (
             <div>
-                <Typography.Title level={5}>Participants</Typography.Title>
+                <Typography.Title level={5}>Leaders</Typography.Title>
                 <Table
-                    size={50}
-                    height={100}
-                    width={300}
+                    size={75}
+                    height={150}
+                    width={450}
                     items={items}
                     hasNextPage={false}
                     loadNextPage={this.loadMore}
@@ -35,11 +35,11 @@ class ContestParticipantsTable extends React.PureComponent<
 }
 
 const mapStateToProps = ({ contestPage }: StateInterface) => {
-    const items = _get(contestPage, ['contest', 'participants'], []);
+    const items = _get(contestPage, ['score', 'sheet'], []);
     return {
         items,
         isFetching: false,
     };
 };
 
-export default connect(mapStateToProps)(ContestParticipantsTable);
+export default connect(mapStateToProps)(ContestLeadersTable);

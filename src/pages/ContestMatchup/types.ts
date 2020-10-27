@@ -21,6 +21,7 @@ export interface ContestMatchupPageInterface {
     readonly title: string;
     readonly description: string;
     readonly score: any;
+    readonly contest: any;
     readonly participants: any;
 }
 

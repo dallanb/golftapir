@@ -14,12 +14,14 @@ import ContestSubscription from './ContestSubscription';
 import ContestAvatar from './ContestAvatar';
 import ContestStartTime from './ContestStartTime';
 import './Contest.scss';
+import ContestLeadersTable from '@pages/Contest/ContestLeadersTable/ContestLeadersTable';
 
 class Contest extends React.PureComponent<ContestProps, ContestState> {
     constructor(props: ContestProps) {
         super(props);
         this.state = {
             uuid: _get(props, ['history', 'location', 'state', 'uuid'], null),
+            name: _get(props, ['history', 'location', 'state', 'name'], null),
         };
     }
 
@@ -65,10 +67,10 @@ class Contest extends React.PureComponent<ContestProps, ContestState> {
 
     render() {
         const { title, description, isInitialized } = this.props;
-        const { uuid } = this.state;
+        const { uuid, name } = this.state;
         return (
             <ContentLayout
-                title={title}
+                title={title || name}
                 subTitle={description}
                 showSpinner={!isInitialized}
                 className="contest-view"
@@ -79,6 +81,7 @@ class Contest extends React.PureComponent<ContestProps, ContestState> {
                 <ContestStartTime />
                 <ContestActions actions={this.generateActions()} />
                 <ContestParticipantsTable />
+                <ContestLeadersTable />
             </ContentLayout>
         );
     }
