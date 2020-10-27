@@ -44,22 +44,18 @@ class ContestMatchup extends React.PureComponent<
     }
 
     generateActions = () => {
-        const { history } = this.props;
-        const { contest } = this.state;
+        const { approveScoreSheet, completeScore } = this.props;
         return [
             {
                 key: constants.ACTION.APPROVE.KEY,
-                onClick: () =>
-                    history.push(`/app${constants.ROUTES.CONTEST_UPDATE}`, {
-                        contest,
-                    }),
+                onClick: (uuid: string) => approveScoreSheet(uuid),
             },
             {
                 key: constants.ACTION.COMPLETE.KEY,
-                onClick: () =>
-                    history.push(`/app${constants.ROUTES.CONTEST_UPDATE}`, {
-                        contest,
-                    }),
+                onClick: (uuid: string) => {
+                    console.log(uuid);
+                    return completeScore(uuid);
+                },
             },
         ];
     };
@@ -129,6 +125,22 @@ const mapDispatchToProps = (dispatch: any) => {
         },
         terminate() {
             return dispatch(ContestMatchupPageActions.terminate());
+        },
+        approveScoreSheet(uuid: string) {
+            return dispatch(
+                ContestMatchupPageActions.updateScoreSheetStatus(
+                    uuid,
+                    constants.STATUS.APPROVED.KEY
+                )
+            );
+        },
+        completeScore(uuid: string) {
+            return dispatch(
+                ContestMatchupPageActions.updateScoreStatus(
+                    uuid,
+                    constants.STATUS.COMPLETED.KEY
+                )
+            );
         },
     };
 };

@@ -7,6 +7,12 @@ const { Types, Creators } = createActions(
         initFailure: ['err'],
         terminate: null,
         set: ['data'],
+        updateScoreStatus: ['uuid', 'status'],
+        updateScoreStatusSuccess: ['status'],
+        updateScoreStatusFailure: ['err'],
+        updateScoreSheetStatus: ['uuid', 'status'],
+        updateScoreSheetStatusSuccess: ['uuid', 'status'],
+        updateScoreSheetStatusFailure: ['err'],
     },
     {
         prefix: 'CONTEST_MATCHUP_PAGE_',

@@ -1,7 +1,12 @@
 import { AnyAction } from 'redux';
 import { all, call, put, race, take, takeLatest } from 'redux-saga/effects';
 import ContestMatchupPageActions, { ContestMatchupPageTypes } from './actions';
-import { bulkFetchAccounts, fetchScoreContest } from '@helpers';
+import {
+    bulkFetchAccounts,
+    fetchScoreContest,
+    updateScore,
+    updateScoreSheet,
+} from '@helpers';
 
 function* init({ contest }: AnyAction) {
     try {
@@ -27,6 +32,39 @@ function* init({ contest }: AnyAction) {
     }
 }
 
+function* updateScoreStatus({ uuid, status }: AnyAction) {
+    try {
+        yield call(updateScore, uuid, { status });
+        yield put(ContestMatchupPageActions.updateScoreStatusSuccess(status));
+    } catch (err) {
+        yield put(ContestMatchupPageActions.updateScoreStatusFailure(err));
+    }
+}
+
+function* updateScoreSheetStatus({ uuid, status }: AnyAction) {
+    try {
+        yield call(updateScoreSheet, uuid, { status });
+        yield put(
+            ContestMatchupPageActions.updateScoreSheetStatusSuccess(
+                uuid,
+                status
+            )
+        );
+    } catch (err) {
+        yield put(ContestMatchupPageActions.updateScoreSheetStatusFailure(err));
+    }
+}
+
 export default function* ContestMatchupPageSaga() {
-    yield all([takeLatest(ContestMatchupPageTypes.INIT, init)]);
+    yield all([
+        takeLatest(ContestMatchupPageTypes.INIT, init),
+        takeLatest(
+            ContestMatchupPageTypes.UPDATE_SCORE_STATUS,
+            updateScoreStatus
+        ),
+        takeLatest(
+            ContestMatchupPageTypes.UPDATE_SCORE_SHEET_STATUS,
+            updateScoreSheetStatus
+        ),
+    ]);
 }

@@ -9,6 +9,12 @@ export const selectScore = createSelector(
     (contestMatchupPage) => _get(contestMatchupPage, ['score'], undefined)
 );
 
+export const selectScoreUUID = createSelector(
+    [getContestMatchupPage],
+    (contestMatchupPage) =>
+        _get(contestMatchupPage, ['score', 'uuid'], undefined)
+);
+
 export const selectSheet = createSelector(
     [getContestMatchupPage],
     (contestMatchupPage) => _get(contestMatchupPage, ['score', 'sheet'], [])

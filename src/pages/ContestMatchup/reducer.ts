@@ -52,12 +52,38 @@ function set(state: any, { data }: any) {
     });
 }
 
+function updateScoreStatusSuccess(state: any, { status }: any) {
+    return Immutable.merge(state, {
+        score: {
+            ...state.score,
+            status,
+        },
+    });
+}
+
+function updateScoreSheetStatusSuccess(state: any, { uuid, status }: any) {
+    const sheetIndex = state.score.sheet.findIndex(
+        ({ uuid: sheet_uuid }: { uuid: string }) => sheet_uuid == uuid
+    );
+    const sheet = Object.assign([], state.score.sheet, {
+        [sheetIndex]: { ...state.score.sheet[sheetIndex], status },
+    });
+    return Immutable.merge(state, {
+        score: {
+            ...state.score,
+            sheet,
+        },
+    });
+}
+
 const HANDLERS = {
     [ContestMatchupPageTypes.INIT]: init,
     [ContestMatchupPageTypes.INIT_SUCCESS]: initSuccess,
     [ContestMatchupPageTypes.INIT_FAILURE]: initFailure,
     [ContestMatchupPageTypes.TERMINATE]: terminate,
     [ContestMatchupPageTypes.SET]: set,
+    [ContestMatchupPageTypes.UPDATE_SCORE_STATUS_SUCCESS]: updateScoreStatusSuccess,
+    [ContestMatchupPageTypes.UPDATE_SCORE_SHEET_STATUS_SUCCESS]: updateScoreSheetStatusSuccess,
 };
 
 export const reducer = createReducer(INITIAL_STATE, HANDLERS);

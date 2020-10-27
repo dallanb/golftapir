@@ -16,3 +16,5 @@ export { default as subscriptionExists } from './subscriptionExists';
 export { default as unsubscribe } from './unsubscribe';
 export { default as updateContest } from './updateContest';
 export { default as updateContestParticipant } from './updateContestParticipant';
+export { default as updateScore } from './updateScore';
+export { default as updateScoreSheet } from './updateScoreSheet';

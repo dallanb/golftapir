@@ -16,12 +16,12 @@ class ContestLeadersTable extends React.PureComponent<
     render() {
         const { items, isFetching } = this.props;
         return (
-            <div>
+            <div className="contest-leaders-table">
                 <Typography.Title level={5}>Leaders</Typography.Title>
                 <Table
                     size={75}
                     height={150}
-                    width={450}
+                    width={300}
                     items={items}
                     hasNextPage={false}
                     loadNextPage={this.loadMore}

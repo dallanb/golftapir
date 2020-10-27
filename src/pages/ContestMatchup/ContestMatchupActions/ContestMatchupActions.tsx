@@ -6,6 +6,7 @@ import {
     selectMyParticipantSheet,
     selectStatus,
     selectIsOwner,
+    selectScoreUUID,
 } from '../selector';
 import { memoizedContestMatchupActionRenderer } from './contestMatchupActionRenderer';
 import './ContestMatchupActions.scss';
@@ -14,11 +15,13 @@ const ContestMatchupActions: React.FunctionComponent<ContestActionsProps> = ({
     actions,
 }) => {
     const participantSheet = useSelector(selectMyParticipantSheet);
+    const uuid = useSelector(selectScoreUUID);
     const isOwner = useSelector(selectIsOwner);
     const status = useSelector(selectStatus);
 
     const Actions = memoizedContestMatchupActionRenderer({
         actions,
+        uuid,
         participantSheet,
         isOwner,
         status,

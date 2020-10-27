@@ -1,7 +1,7 @@
 import React from 'react';
 import { range as _range } from 'lodash';
 import { EditableCell } from '@components';
-import { totalStrokeCalculator } from '@pages/ContestMatchup/utils';
+import { totalStrokeCalculator } from '@utils';
 import ContestMatchupScorecardParticipant from './ContestMatchupScorecardParticipant';
 
 const infoSchema: any[] = [
@@ -57,16 +57,12 @@ const holeSchema: any[] = _range(1, 19).map((ix: number) => {
 const totalSchema: any[] = [
     {
         Header: 'Total',
-        accessor: 'total',
+        accessor: 'holes',
         width: 75,
-        Cell: ({
-            row: {
-                original: { holes },
-            },
-        }: any) => {
+        Cell: ({ value }: any) => {
             return (
                 <div>
-                    <b>{totalStrokeCalculator(holes)}</b>
+                    <b>{totalStrokeCalculator(value)}</b>
                 </div>
             );
         },

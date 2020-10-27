@@ -1,5 +1,6 @@
 import { cloneDeep as _cloneDeep, set as _set } from 'lodash';
 import constants from '@constants';
+import { renderActionResponse } from '@pages/ContestMatchup/ContestMatchupActions/types';
 export const mapSheetItems = (sheet: any, data: { participants: any }) => {
     let items = _cloneDeep(sheet);
     const { participants } = data;
@@ -16,25 +17,23 @@ export const mapSheetItems = (sheet: any, data: { participants: any }) => {
     }, []);
 };
 
-export const totalStrokeCalculator = (holes: any) =>
-    Object.values(holes).reduce(
-        (total: number, { strokes }: any) => total + strokes,
-        0
-    );
-
-export const renderAction = (
-    key: string,
-    options: any
-): { show: boolean; enabled: boolean } => {
-    const renderAction = { show: false, enabled: true };
+export function renderAction(key: string, options: any): renderActionResponse {
+    const renderAction = {
+        show: false,
+        enabled: true,
+        onClick: () => options.onClick(),
+    };
     switch (key) {
         case constants.ACTION.COMPLETE.KEY:
+            renderAction.onClick = () => options.onClickFunc(options.uuid);
             renderAction.show = options.isOwner;
             renderAction.enabled =
                 options.isOwner &&
                 options.status !== constants.STATUS.COMPLETED.KEY;
             break;
         case constants.ACTION.APPROVE.KEY:
+            renderAction.onClick = () =>
+                options.onClickFunc(options.participantSheet.uuid);
             renderAction.show = options.participantSheet;
             renderAction.enabled =
                 options.status === constants.STATUS.COMPLETED.KEY &&
@@ -45,4 +44,4 @@ export const renderAction = (
             console.error('Invalid key: ', key);
     }
     return renderAction;
-};
+}
