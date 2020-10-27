@@ -66,18 +66,19 @@ function updateContestStatusSuccess(state = INITIAL_STATE, { status }: any) {
     });
 }
 
-function updateContestParticipantStatusSuccess(
-    state = INITIAL_STATE,
-    { uuid, status }: any
-) {
-    const contestParticipants = mergeContestParticipant(
-        state.contestParticipants,
-        { uuid, status }
-    );
-    return Immutable.merge(state, {
-        contestParticipants,
-    });
-}
+// TODO
+// function updateContestParticipantStatusSuccess(
+//     state = INITIAL_STATE,
+//     { uuid, status }: any
+// ) {
+//     const contestParticipants = mergeContestParticipant(
+//         state.contestParticipants,
+//         { uuid, status }
+//     );
+//     return Immutable.merge(state, {
+//         contestParticipants,
+//     });
+// }
 
 function subscribeSuccess(state = INITIAL_STATE) {
     return Immutable.merge(state, {
@@ -98,7 +99,7 @@ const HANDLERS = {
     [ContestPageTypes.TERMINATE]: terminate,
     [ContestPageTypes.SET]: set,
     [ContestPageTypes.UPDATE_CONTEST_STATUS_SUCCESS]: updateContestStatusSuccess,
-    [ContestPageTypes.UPDATE_CONTEST_PARTICIPANT_STATUS_SUCCESS]: updateContestParticipantStatusSuccess,
+    // [ContestPageTypes.UPDATE_CONTEST_PARTICIPANT_STATUS_SUCCESS]: updateContestParticipantStatusSuccess,
     [ContestPageTypes.SUBSCRIBE_SUCCESS]: subscribeSuccess,
     [ContestPageTypes.UNSUBSCRIBE_SUCCESS]: unsubscribeSuccess,
 };

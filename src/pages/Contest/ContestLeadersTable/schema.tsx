@@ -6,10 +6,8 @@ export const columnsSchema = [
     {
         accessor: 'participant',
         width: 200,
-        Cell: ({
-            row: {
-                original: { participant },
-            },
-        }: any) => <ContestLeadersTableParticipant uuid={participant} />,
+        Cell: ({ value }: any) => (
+            <ContestLeadersTableParticipant uuid={value} />
+        ),
     },
 ];

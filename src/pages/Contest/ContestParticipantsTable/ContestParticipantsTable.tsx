@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { get as _get } from 'lodash';
 import { ContestParticipantsTableProps } from './types';
 import { columnsSchema } from './schema';
 import { StateInterface } from '../types';
@@ -18,9 +19,9 @@ class ContestParticipantsTable extends React.PureComponent<
             <div>
                 <Typography.Title level={5}>Participants</Typography.Title>
                 <Table
-                    size={75}
-                    height={150}
-                    width={450}
+                    size={50}
+                    height={100}
+                    width={300}
                     items={items}
                     hasNextPage={false}
                     loadNextPage={this.loadMore}
@@ -34,7 +35,7 @@ class ContestParticipantsTable extends React.PureComponent<
 }
 
 const mapStateToProps = ({ contestPage }: StateInterface) => {
-    const { contestParticipants: items } = contestPage;
+    const items = _get(contestPage, ['contest', 'participants'], []);
     return {
         items,
         isFetching: false,

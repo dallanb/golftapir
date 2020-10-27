@@ -14,6 +14,7 @@ import ContestSubscription from './ContestSubscription';
 import ContestAvatar from './ContestAvatar';
 import ContestStartTime from './ContestStartTime';
 import './Contest.scss';
+import ContestLeadersTable from '@pages/Contest/ContestLeadersTable/ContestLeadersTable';
 
 class Contest extends React.PureComponent<ContestProps, ContestState> {
     constructor(props: ContestProps) {
@@ -80,6 +81,7 @@ class Contest extends React.PureComponent<ContestProps, ContestState> {
                 <ContestStartTime />
                 <ContestActions actions={this.generateActions()} />
                 <ContestParticipantsTable />
+                <ContestLeadersTable />
             </ContentLayout>
         );
     }

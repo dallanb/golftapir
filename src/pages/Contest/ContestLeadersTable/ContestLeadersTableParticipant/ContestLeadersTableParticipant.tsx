@@ -2,14 +2,16 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import constants from '@constants';
+import { selectAccountsHash } from '@pages/Contest/selector';
 import { ContestParticipantsTableParticipantProps } from './types';
 import './ContestLeadersTableParticipant.scss';
+import { prepareParticipant } from '@pages/Contest/utils';
 
 const ContestLeadersTableParticipant: React.FunctionComponent<ContestParticipantsTableParticipantProps> = ({
     uuid,
 }) => {
     const history = useHistory();
-    const { last_name } = useSelector(selectAccountByUUID, uuid);
+    const { name } = prepareParticipant(uuid, useSelector(selectAccountsHash));
     return (
         <div
             className="contest-leaders-table-participant-participant"
@@ -19,7 +21,9 @@ const ContestLeadersTableParticipant: React.FunctionComponent<ContestParticipant
                 })
             }
         >
-            <div className="contest-participants-table-participant-name">{`${last_name}`}</div>
+            <div className="contest-participants-table-participant-name">
+                {name}
+            </div>
         </div>
     );
 };

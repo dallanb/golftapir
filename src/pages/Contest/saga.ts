@@ -1,20 +1,40 @@
 import { AnyAction } from 'redux';
 import { all, call, fork, put, select, takeLatest } from 'redux-saga/effects';
 import ContestPageActions, { ContestPageTypes } from './actions';
-import { initContest, initScore, initSubscribed } from './helpers';
+import { initScore, initSubscribed } from './helpers';
 import {
     updateContest,
     updateContestParticipant,
     subscribe as subscribeHelper,
     unsubscribe as unsubscribeHelper,
+    fetchContest,
+    bulkFetchAccounts,
 } from '@helpers';
+import { keyBy as _keyBy } from 'lodash';
 
 // Action Handlers
 function* init({ uuid }: AnyAction) {
     try {
-        yield fork(initContest, uuid);
         yield fork(initScore, uuid);
         yield fork(initSubscribed, uuid);
+
+        const { data: contest } = yield call(fetchContest, uuid);
+
+        yield put(ContestPageActions.set({ contest }));
+
+        const { participants } = contest;
+
+        const accounts = participants.map(
+            ({ user_uuid }: { user_uuid: string }) => user_uuid
+        );
+        if (accounts.length) {
+            const { data: accountParticipants } = yield call(
+                bulkFetchAccounts,
+                accounts
+            );
+            const accountsHash = _keyBy(accountParticipants, 'membership_uuid');
+            yield put(ContestPageActions.set({ accountsHash }));
+        }
         yield put(ContestPageActions.initSuccess());
     } catch (err) {
         yield put(ContestPageActions.initFailure(err));

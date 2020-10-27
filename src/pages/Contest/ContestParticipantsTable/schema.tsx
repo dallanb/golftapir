@@ -7,58 +7,44 @@ import ContestParticipantsTableParticipant from '@pages/Contest/ContestParticipa
 export const columnsSchema = [
     {
         Header: 'Participant',
-        accessor: 'participant',
+        accessor: 'user_uuid',
         width: 200,
-        Cell: ({
-            row: {
-                original: {
-                    avatar: { s3_filename },
-                    first_name,
-                    last_name,
-                    membership_uuid,
-                },
-            },
-        }: any) => (
-            <ContestParticipantsTableParticipant
-                first_name={first_name}
-                last_name={last_name}
-                s3_filename={s3_filename}
-                uuid={membership_uuid}
-            />
-        ),
+        Cell: ({ value }: { value: string }) => {
+            return <ContestParticipantsTableParticipant uuid={value} />;
+        },
     },
     {
         Header: 'Status',
         accessor: 'status',
-        width: 125,
+        width: 100,
         Cell: ({
             value,
             row: {
-                original: { uuid, is_me },
+                original: { uuid, user_uuid },
             },
         }: CellValue) => (
             <ContestParticipantsTableStatus
                 status={value}
                 uuid={uuid}
-                is_me={is_me}
+                user_uuid={user_uuid}
             />
         ),
     },
-    {
-        Header: 'Wager',
-        accessor: 'wager',
-        width: 125,
-        Cell: ({
-            value,
-            row: {
-                original: { uuid, is_me },
-            },
-        }: CellValue) => (
-            <ContestParticipantsTableWagerButton
-                status={value}
-                uuid={uuid}
-                is_me={is_me}
-            />
-        ),
-    },
+    // {
+    //     Header: 'Wager',
+    //     accessor: 'wager',
+    //     width: 125,
+    //     Cell: ({
+    //         value,
+    //         row: {
+    //             original: { uuid, is_me },
+    //         },
+    //     }: CellValue) => (
+    //         <ContestParticipantsTableWagerButton
+    //             status={value}
+    //             uuid={uuid}
+    //             is_me={is_me}
+    //         />
+    //     ),
+    // },
 ];

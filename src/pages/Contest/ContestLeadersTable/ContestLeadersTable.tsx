@@ -1,11 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Typography } from 'antd';
+import { get as _get } from 'lodash';
 import { ContestLeadersTableProps } from './types';
 import { columnsSchema } from './schema';
 import { StateInterface } from '../types';
 import { Table } from '@components';
-import './ContestParticipantsTable.scss';
+import './ContestLeadersTable.scss';
 
 class ContestLeadersTable extends React.PureComponent<
     ContestLeadersTableProps
@@ -34,7 +35,7 @@ class ContestLeadersTable extends React.PureComponent<
 }
 
 const mapStateToProps = ({ contestPage }: StateInterface) => {
-    const { contestParticipants: items } = contestPage;
+    const items = _get(contestPage, ['score', 'sheet'], []);
     return {
         items,
         isFetching: false,

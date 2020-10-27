@@ -1,19 +1,22 @@
 import React from 'react';
 import { Tag } from 'antd';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { CheckCircleTwoTone, StopTwoTone } from '@ant-design/icons/lib';
 import { ContestParticipantsTableStatusProps } from './types';
 import ContestPageActions from '@pages/Contest/actions';
 import { mapStatusColour } from '@utils';
 import constants from '@constants';
 import './ContestParticipantsTableStatus.scss';
+import { selectMe } from '@selectors/BaseSelector';
 
 const ContestParticipantsTableStatus: React.FunctionComponent<ContestParticipantsTableStatusProps> = ({
     status,
     uuid,
-    is_me,
+    user_uuid,
 }) => {
-    if (is_me && status === constants.STATUS.PENDING.KEY) {
+    const me = useSelector(selectMe);
+    const isMe = me.membership_uuid === user_uuid;
+    if (isMe && status === constants.STATUS.PENDING.KEY) {
         const dispatch = useDispatch();
         return (
             <div className="contest-participants-table-status-response">
