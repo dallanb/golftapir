@@ -32,6 +32,7 @@ const CONSTANTS = {
         ERROR: {
             FETCH: 'Error fetching Contest information',
             FETCH_ALL: 'Error fetching Contests information',
+            FETCH_ALL_MATERIALIZED: 'Error fetch Contests information',
             CREATE: 'Contest creation unsuccessful',
             UPDATE: 'Contest update unsuccessful!',
             FETCH_PARTICIPANTS: 'Error fetch Contest participants information',

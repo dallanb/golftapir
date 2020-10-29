@@ -1,12 +1,10 @@
 // @ts-ignore
 import { static as Immutable } from 'seamless-immutable';
 import { createReducer } from 'reduxsauce';
-import { filterActions } from 'redux-ignore';
 import CONSTANTS from '@locale/en-CA';
 import { ContestTypes } from '@actions';
 import { ContestsPageTypes } from './actions';
 import { ContestsPageInterface } from './types';
-import constants from '@constants';
 
 /* ------------- Initial State ------------- */
 const INITIAL_STATE: ContestsPageInterface = {
@@ -58,7 +56,7 @@ function set(state: any, { data }: any) {
     });
 }
 
-function fetchContests(state: any, { append = false }: any) {
+function fetchContestsMaterialized(state: any, { append = false }: any) {
     return Immutable.merge(state, {
         contestsList: {
             ...state.contestsList,
@@ -68,7 +66,7 @@ function fetchContests(state: any, { append = false }: any) {
     });
 }
 
-function fetchContestsSuccess(
+function fetchContestsMaterializedSuccess(
     state: any,
     { data, metadata, isFetching = false }: any
 ) {
@@ -83,7 +81,7 @@ function fetchContestsSuccess(
     });
 }
 
-function fetchContestsFailure(state: any) {
+function fetchContestsMaterializedFailure(state: any) {
     return Immutable.merge(state, {
         contestsList: {
             ...state.contestsList,
@@ -98,9 +96,9 @@ const HANDLERS = {
     [ContestsPageTypes.INIT_FAILURE]: initFailure,
     [ContestsPageTypes.TERMINATE]: terminate,
     [ContestsPageTypes.SET]: set,
-    [ContestTypes.FETCH_CONTESTS]: fetchContests,
-    [ContestTypes.FETCH_CONTESTS_SUCCESS]: fetchContestsSuccess,
-    [ContestTypes.FETCH_CONTESTS_FAILURE]: fetchContestsFailure,
+    [ContestTypes.FETCH_CONTESTS_MATERIALIZED]: fetchContestsMaterialized,
+    [ContestTypes.FETCH_CONTESTS_MATERIALIZED_SUCCESS]: fetchContestsMaterializedSuccess,
+    [ContestTypes.FETCH_CONTESTS_MATERIALIZED_FAILURE]: fetchContestsMaterializedFailure,
 };
 
 export const reducer = createReducer(INITIAL_STATE, HANDLERS);

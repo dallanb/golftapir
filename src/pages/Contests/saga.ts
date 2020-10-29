@@ -1,10 +1,10 @@
 import { all, call, put, takeLatest } from 'redux-saga/effects';
 import ContestsPageActions, { ContestsPageTypes } from './actions';
-import { fetchContests } from '@helpers';
+import { fetchContestsMaterialized } from '@helpers';
 
 function* init() {
     try {
-        yield call(fetchContests, {
+        yield call(fetchContestsMaterialized, {
             page: 1,
             per_page: 100,
         });

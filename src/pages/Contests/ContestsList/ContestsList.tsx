@@ -9,8 +9,11 @@ import './ContestsList.scss';
 
 class ContestsList extends React.PureComponent<ContestsListProps> {
     loadMore = (start: number, stop: number, resolve: () => any) => {
-        const { fetchContests } = this.props;
-        fetchContests({ page: Math.floor(stop / 100) + 1, per_page: 100 });
+        const { fetchContestsMaterialized } = this.props;
+        fetchContestsMaterialized({
+            page: Math.floor(stop / 100) + 1,
+            per_page: 100,
+        });
         resolve();
     };
 
@@ -45,8 +48,10 @@ const mapStateToProps = ({ contestsPage }: StateInterface) => {
 
 const mapDispatchToProps = (dispatch: any) => {
     return {
-        fetchContests(options: any) {
-            return dispatch(ContestActions.fetchContests(options, true));
+        fetchContestsMaterialized(options: any) {
+            return dispatch(
+                ContestActions.fetchContestsMaterialized(options, true)
+            );
         },
     };
 };
