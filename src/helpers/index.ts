@@ -3,6 +3,7 @@ export { default as bulkFetchAccounts } from './bulkFetchAccounts';
 export { default as createContest } from './createContest';
 export { default as fetchContest } from './fetchContest';
 export { default as fetchContests } from './fetchContests';
+export { default as fetchContestsMaterialized } from './fetchContestsMaterialized';
 export { default as fetchAccount } from './fetchAccount';
 export { default as fetchAccountMembership } from './fetchAccountMembership';
 export { default as fetchMyAccount } from './fetchMyAccount';

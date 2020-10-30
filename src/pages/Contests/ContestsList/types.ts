@@ -2,6 +2,6 @@ export interface ContestsListProps {
     data: any;
     metadata: any;
     isFetching: boolean;
-    fetchContests: (options: any) => any;
+    fetchContestsMaterialized: (options: any) => any;
     history: any;
 }

@@ -17,6 +17,13 @@ export default {
             query,
         });
     },
+    fetchContestsMaterialized(query: any = {}) {
+        return ClientProxy.get({
+            url: config.CONTEST_URL,
+            endpoint: `/contests/materialized`,
+            query,
+        });
+    },
     createContest(data: any = {}) {
         return ClientProxy.post({
             url: config.CONTEST_URL,

@@ -29,6 +29,22 @@ function* fetchContests({ options }: AnyAction) {
     }
 }
 
+function* fetchContestsMaterialized({ options }: AnyAction) {
+    try {
+        const res = yield call(
+            ContestService.fetchContestsMaterialized,
+            options
+        );
+        const { contests, _metadata: metadata } = res;
+        yield put(
+            ContestActions.fetchContestsMaterializedSuccess(contests, metadata)
+        );
+    } catch (err) {
+        yield put(ContestActions.fetchContestsMaterializedFailure(err));
+        message.error(CONSTANTS.CONTEST.ERROR.FETCH);
+    }
+}
+
 function* createContest({ data }: AnyAction) {
     try {
         const res = yield call(ContestService.createContest, data);
@@ -86,6 +102,10 @@ export default function* ContestSaga() {
     yield all([
         takeLatest(ContestTypes.FETCH_CONTEST, fetchContest),
         takeLatest(ContestTypes.FETCH_CONTESTS, fetchContests),
+        takeLatest(
+            ContestTypes.FETCH_CONTESTS_MATERIALIZED,
+            fetchContestsMaterialized
+        ),
         takeLatest(ContestTypes.CREATE_CONTEST, createContest),
         takeLatest(ContestTypes.UPDATE_CONTEST, updateContest),
         takeLatest(ContestTypes.ASSIGN_AVATAR, assignAvatar),
