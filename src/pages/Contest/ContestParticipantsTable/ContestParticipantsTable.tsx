@@ -21,7 +21,7 @@ class ContestParticipantsTable extends React.PureComponent<
                 <Table
                     size={50}
                     height={100}
-                    width={300}
+                    width={350}
                     items={items}
                     hasNextPage={false}
                     loadNextPage={this.loadMore}

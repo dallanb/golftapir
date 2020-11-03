@@ -3,7 +3,7 @@ import { compose } from 'redux';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import ContestsList from './ContestsList';
-import ContestsCreateButton from '../ContestsCreate/ContestsCreateButton';
+import ContestsCreateButton from './ContestsCreateButton';
 import { ContestsProps, StateInterface } from './types';
 import ContestsPageActions from './actions';
 import { ContentLayout } from '@layouts';
@@ -28,7 +28,7 @@ class Contests extends React.PureComponent<ContestsProps> {
                 subTitle={description}
                 showSpinner={!isInitialized}
             >
-                <ContestsCreateButton />
+                <ContestsCreateButton history={history} />
                 <ContestsList history={history} />
             </ContentLayout>
         );
