@@ -29,3 +29,8 @@ export const selectIsMe = createSelector(
         _get(competitorPage, ['account', 'membership_uuid'], undefined) ===
         _get(base, ['me', 'membership_uuid'], undefined)
 );
+
+export const selectContestsList = createSelector(
+    [getCompetitorPage],
+    (competitorPage) => _get(competitorPage, ['contestsList'], undefined)
+);

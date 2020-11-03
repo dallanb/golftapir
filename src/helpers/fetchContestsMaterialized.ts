@@ -6,6 +6,7 @@ function* fetchContestsMaterialized(options: {
     page?: number;
     per_page?: number;
     participants?: string;
+    sort_by?: string;
 }) {
     yield put(ContestActions.fetchContestsMaterialized(options));
     const { success, failure } = yield race({

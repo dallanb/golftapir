@@ -1,16 +1,18 @@
 import React from 'react';
 import { Typography } from 'antd';
+import { useHistory } from 'react-router-dom';
+import CompetitorResultsList from './CompetitorResultsList';
 import { CompetitorResultsProps } from './types';
 import './CompetitorResults.scss';
 
-class CompetitorResults extends React.PureComponent<CompetitorResultsProps> {
-    render() {
-        return (
-            <div className="competitor-results">
-                <Typography.Title level={5}>Results</Typography.Title>
-            </div>
-        );
-    }
-}
+const CompetitorResults: React.FunctionComponent<CompetitorResultsProps> = ({}) => {
+    const history = useHistory();
+    return (
+        <div className="competitor-results">
+            <Typography.Title level={5}>Recent Contests</Typography.Title>
+            <CompetitorResultsList history={history} />
+        </div>
+    );
+};
 
 export default CompetitorResults;
