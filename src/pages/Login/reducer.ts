@@ -18,6 +18,7 @@ const INITIAL_STATE: LoginPageInterface = {
 /* ------------- Reducers ------------- */
 function init(state = INITIAL_STATE) {
     return Immutable.merge(state, {
+        ...INITIAL_STATE,
         isFetching: true,
         isInitialized: false,
         err: null,

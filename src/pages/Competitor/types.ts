@@ -20,6 +20,13 @@ export interface CompetitorPageInterface {
     readonly title: string;
     readonly description: string;
     readonly account: any;
+    readonly contestsList: {
+        data: any;
+        metadata: any;
+        isFetching: boolean;
+        isInitialized: boolean;
+        append: boolean;
+    };
 }
 
 export interface StateInterface {
