@@ -17,6 +17,7 @@ const INITIAL_STATE: ContestsPageInterface = {
         data: undefined,
         metadata: undefined,
         isFetching: false,
+        isInitialized: false,
         append: false,
     },
 };
@@ -68,11 +69,12 @@ function fetchContestsMaterialized(state: any, { append = false }: any) {
 
 function fetchContestsMaterializedSuccess(
     state: any,
-    { data, metadata, isFetching = false }: any
+    { data, metadata, isFetching = false, isInitialized = true }: any
 ) {
     return Immutable.merge(state, {
         contestsList: {
             isFetching,
+            isInitialized,
             data: state.contestsList.append
                 ? [...state.contestsList.data, ...data]
                 : data,
@@ -86,6 +88,7 @@ function fetchContestsMaterializedFailure(state: any) {
         contestsList: {
             ...state.contestsList,
             isFetching: false,
+            isInitialized: true,
         },
     });
 }

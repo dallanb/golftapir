@@ -16,7 +16,7 @@ export const columnsSchema = [
     {
         Header: 'Status',
         accessor: 'status',
-        width: 100,
+        width: 150,
         Cell: ({
             value,
             row: {

@@ -4,7 +4,7 @@ import { get as _get, pick as _pick } from 'lodash';
 import { ContestsListTileProps } from './types';
 import ContestsListTileLeaderboard from './ContestsListTileLeaderboard';
 import constants from '@constants';
-import { mapActionLabel, mapStatusColour, withS3URL } from '@utils';
+import { mapStatusColour, withS3URL } from '@utils';
 import { Avatar } from '@components';
 import './ContestsListTile.scss';
 

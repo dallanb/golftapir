@@ -1,7 +1,6 @@
 import React from 'react';
 import { Button } from 'antd';
 import { PlusCircleOutlined } from '@ant-design/icons';
-import { withRouter } from 'react-router-dom';
 import { CreateContestButtonProps } from './types';
 import './CreateContestButton.scss';
 
@@ -22,4 +21,4 @@ class CreateContestButton extends React.PureComponent<
     }
 }
 
-export default withRouter(CreateContestButton);
+export default CreateContestButton;

@@ -18,18 +18,20 @@ function* fetchContest({ uuid, options }: AnyAction) {
     }
 }
 
-function* fetchContests({ options }: AnyAction) {
+function* fetchContests({ options, append }: AnyAction) {
     try {
         const res = yield call(ContestService.fetchContests, options);
         const { contests, _metadata: metadata } = res;
-        yield put(ContestActions.fetchContestsSuccess(contests, metadata));
+        yield put(
+            ContestActions.fetchContestsSuccess(contests, metadata, append)
+        );
     } catch (err) {
         yield put(ContestActions.fetchContestsFailure(err));
         message.error(CONSTANTS.CONTEST.ERROR.FETCH);
     }
 }
 
-function* fetchContestsMaterialized({ options }: AnyAction) {
+function* fetchContestsMaterialized({ options, append }: AnyAction) {
     try {
         const res = yield call(
             ContestService.fetchContestsMaterialized,
@@ -37,7 +39,11 @@ function* fetchContestsMaterialized({ options }: AnyAction) {
         );
         const { contests, _metadata: metadata } = res;
         yield put(
-            ContestActions.fetchContestsMaterializedSuccess(contests, metadata)
+            ContestActions.fetchContestsMaterializedSuccess(
+                contests,
+                metadata,
+                append
+            )
         );
     } catch (err) {
         yield put(ContestActions.fetchContestsMaterializedFailure(err));
