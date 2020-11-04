@@ -2,7 +2,7 @@ import React from 'react';
 import { Carousel } from 'antd';
 import { ContestMatchupCarouselProps } from './types';
 import ContestMatchupCarouselContext from './ContestMatchupCarouselContext';
-import ContestMatchupCarouselHoles from './contestMatchupCarouseHolesRenderer';
+import contestMatchupCarouselHolesRenderer from './contestMatchupCarouseHolesRenderer';
 import './ContestMatchupCarousel.scss';
 
 const ContestMatchupCarousel: React.FunctionComponent<ContestMatchupCarouselProps> = ({
@@ -10,10 +10,11 @@ const ContestMatchupCarousel: React.FunctionComponent<ContestMatchupCarouselProp
 }) => {
     const { uuid: sheetUUID, holes } = sheetUser;
     const holeData = Object.values(holes);
+    const Holes = contestMatchupCarouselHolesRenderer({ holeData });
     return (
         <ContestMatchupCarouselContext.Provider value={{ sheetUUID }}>
             <Carousel className="contest-matchup-carousel" effect="fade">
-                <ContestMatchupCarouselHoles holeData={holeData} />
+                {...Holes}
             </Carousel>
         </ContestMatchupCarouselContext.Provider>
     );

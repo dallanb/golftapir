@@ -4,6 +4,7 @@ import { createReducer } from 'reduxsauce';
 import CONSTANTS from '@locale/en-CA';
 import { ContestMatchupPageTypes } from './actions';
 import { ContestMatchupPageInterface } from './types';
+import { ScoreTypes } from '@actions';
 
 /* ------------- Initial State ------------- */
 const INITIAL_STATE: ContestMatchupPageInterface = {
@@ -77,6 +78,11 @@ function updateScoreSheetStatusSuccess(state: any, { uuid, status }: any) {
     });
 }
 
+function updateHoleSuccess(state: any, { data }: any) {
+    console.log(data);
+    return Immutable.merge(state, {});
+}
+
 const HANDLERS = {
     [ContestMatchupPageTypes.INIT]: init,
     [ContestMatchupPageTypes.INIT_SUCCESS]: initSuccess,
@@ -85,6 +91,7 @@ const HANDLERS = {
     [ContestMatchupPageTypes.SET]: set,
     [ContestMatchupPageTypes.UPDATE_SCORE_STATUS_SUCCESS]: updateScoreStatusSuccess,
     [ContestMatchupPageTypes.UPDATE_SCORE_SHEET_STATUS_SUCCESS]: updateScoreSheetStatusSuccess,
+    [ScoreTypes.UPDATE_HOLE_SUCCESS]: updateHoleSuccess,
 };
 
 export const reducer = createReducer(INITIAL_STATE, HANDLERS);
