@@ -1,6 +1,7 @@
 import { AnyAction } from 'redux';
 import { all, call, put, race, take, takeLatest } from 'redux-saga/effects';
 import ContestMatchupPageActions, { ContestMatchupPageTypes } from './actions';
+import { ModalActions } from '@actions';
 import {
     bulkFetchAccounts,
     fetchScoreContest,
@@ -54,6 +55,14 @@ function* updateScoreSheetStatus({ uuid, status }: AnyAction) {
         yield put(ContestMatchupPageActions.updateScoreSheetStatusFailure(err));
     }
 }
+// function* editHole({ initialValues }: AnyAction) {
+//     try {
+//         yield put(ModalActions.openModal(true, initialValues));
+//         yield put(ContestMatchupPageActions.editHoleSuccess(initialValues));
+//     } catch (err) {
+//         yield put(ContestMatchupPageActions.editHoleFailure(err));
+//     }
+// }
 
 export default function* ContestMatchupPageSaga() {
     yield all([
@@ -66,5 +75,6 @@ export default function* ContestMatchupPageSaga() {
             ContestMatchupPageTypes.UPDATE_SCORE_SHEET_STATUS,
             updateScoreSheetStatus
         ),
+        // takeLatest(ContestMatchupPageTypes.EDIT_HOLE, editHole),
     ]);
 }

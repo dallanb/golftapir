@@ -13,6 +13,9 @@ const { Types, Creators } = createActions(
         updateScoreSheetStatus: ['uuid', 'status'],
         updateScoreSheetStatusSuccess: ['uuid', 'status'],
         updateScoreSheetStatusFailure: ['err'],
+        editHole: ['initialValues'],
+        editHoleSuccess: ['hole'],
+        editHoleFailure: ['err'],
     },
     {
         prefix: 'CONTEST_MATCHUP_PAGE_',

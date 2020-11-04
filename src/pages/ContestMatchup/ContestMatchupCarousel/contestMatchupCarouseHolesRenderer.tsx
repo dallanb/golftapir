@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 import { ContestMatchupCarouselHolesProps } from './types';
 import ContestMatchupCarouselHole from './ContestMatchupCarouselHole';
 

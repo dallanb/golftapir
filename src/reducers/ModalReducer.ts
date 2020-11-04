@@ -6,28 +6,42 @@ import { ModalTypes } from '@actions';
 /* ------------- Interface ------------- */
 export interface ModalInterface {
     readonly isOpen: boolean;
-    readonly data: any;
+    readonly headerRenderer: () => any;
+    readonly bodyRenderer: () => any;
+    readonly footerRenderer: () => any;
+    readonly onCancel: () => any;
 }
 
 /* ------------- Initial State ------------- */
 const INITIAL_STATE: ModalInterface = {
     isOpen: false,
-    data: undefined,
+    headerRenderer: () => null,
+    bodyRenderer: () => null,
+    footerRenderer: () => null,
+    onCancel: () => null,
 };
 
 /* ------------- Reducers ------------- */
-function setMessageModal(
+function openModal(
     state = INITIAL_STATE,
-    { isOpen = false, data = null }
+    { headerRenderer, bodyRenderer, footerRenderer, onCancel } = INITIAL_STATE
 ) {
     return Immutable.merge(state, {
-        isOpen,
-        data,
+        isOpen: true,
+        headerRenderer,
+        bodyRenderer,
+        footerRenderer,
+        onCancel,
     });
 }
 
+function closeModal(state = INITIAL_STATE) {
+    return Immutable.merge(state, INITIAL_STATE);
+}
+
 const HANDLERS = {
-    [ModalTypes.SET_MESSAGE_MODAL]: setMessageModal,
+    [ModalTypes.OPEN_MODAL]: openModal,
+    [ModalTypes.CLOSE_MODAL]: closeModal,
 };
 
 export default createReducer(INITIAL_STATE, HANDLERS);

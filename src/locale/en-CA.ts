@@ -151,6 +151,15 @@ const CONSTANTS = {
         CONTEST_MATCHUP: {
             TITLE: '',
             DESCRIPTION: 'Contest Matchup',
+            EDIT_HOLE_FORM: {
+                LABELS: {
+                    HOLE_NUMBER: 'Hole Number',
+                    STROKES: 'Strokes',
+                },
+                VALIDATION: {
+                    STROKES_REQUIRED: 'Please input strokes!',
+                },
+            },
         },
         CONTEST_UPDATE: {
             TITLE: '',

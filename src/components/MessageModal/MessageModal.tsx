@@ -1,62 +1,39 @@
 import React from 'react';
-import { Button, Modal } from 'antd';
-import { connect } from 'react-redux';
+import { Modal } from 'antd';
+import { useSelector } from 'react-redux';
 import { MessageModalProps } from './types';
-import { ModalActions } from '@actions';
-import { ModalInterface } from '@reducers/ModalReducer';
+import { selectModalData } from '@selectors/ModalSelector';
 import './MessageModal.scss';
 
-class MessageModal extends React.PureComponent<MessageModalProps> {
-    acknowledgeModal = () => {
-        const { closeModal, confirmModal } = this.props;
-        closeModal();
-        confirmModal();
-    };
+const MessageModal: React.FunctionComponent<MessageModalProps> = () => {
+    const {
+        isOpen,
+        headerRenderer,
+        bodyRenderer,
+        footerRenderer,
+        onCancel,
+    } = useSelector(selectModalData);
 
-    render() {
-        const {
-            data = {
-                head: '',
-                body: '',
-            },
-            isOpen,
-        } = this.props;
+    const Title = headerRenderer();
+    const Body = bodyRenderer();
+    const Footer = footerRenderer();
 
-        return (
-            <Modal
-                visible={isOpen}
-                title={data.head}
-                footer={[
-                    <Button
-                        className="btn-colored btn-green fixed-height-btn admin-tool-font no-focus-outline"
-                        onClick={this.acknowledgeModal}
-                    >
-                        OK
-                    </Button>,
-                ]}
-            >
-                {data.body}
-            </Modal>
-        );
-    }
-}
+    // const dispatch = useDispatch();
+    // const acknowledgeModal = () => {
+    //     dispatch(ModalActions.closeModal());
+    //     dispatch(ModalActions.confirmModal());
+    // };
 
-const mapStateToProps = ({ modal }: { modal: ModalInterface }) => {
-    return {
-        isOpen: modal.isOpen,
-        data: modal.data,
-    };
+    return (
+        <Modal
+            visible={isOpen}
+            title={Title}
+            footer={Footer}
+            onCancel={onCancel}
+        >
+            {Body}
+        </Modal>
+    );
 };
 
-const mapDispatchToProps = (dispatch: any) => {
-    return {
-        closeModal() {
-            return dispatch(ModalActions.setMessageModal(false, {}));
-        },
-        confirmModal() {
-            return dispatch(ModalActions.confirmModal());
-        },
-    };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(MessageModal);
+export default MessageModal;
