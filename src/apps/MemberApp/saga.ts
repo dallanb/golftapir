@@ -96,7 +96,6 @@ function* fetchAccount() {
 
 function* requestToken() {
     const token = yield FirebaseClient.requestNotificationPermissions();
-    console.log(token);
     return token;
 }
 

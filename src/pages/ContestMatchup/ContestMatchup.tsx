@@ -52,10 +52,7 @@ class ContestMatchup extends React.PureComponent<
             },
             {
                 key: constants.ACTION.COMPLETE.KEY,
-                onClick: (uuid: string) => {
-                    console.log(uuid);
-                    return completeScore(uuid);
-                },
+                onClick: (uuid: string) => completeScore(uuid),
             },
         ];
     };

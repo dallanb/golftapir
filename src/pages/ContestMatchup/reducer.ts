@@ -78,9 +78,30 @@ function updateScoreSheetStatusSuccess(state: any, { uuid, status }: any) {
     });
 }
 
-function updateHoleSuccess(state: any, { data }: any) {
-    console.log(data);
-    return Immutable.merge(state, {});
+function updateScoreSheetHoleSuccess(state: any, { uuid, holeId, hole }: any) {
+    const sheetIndex = state.score.sheet.findIndex(
+        ({ uuid: sheet_uuid }: { uuid: string }) => sheet_uuid == uuid
+    );
+
+    const sheet = Object.assign([], state.score.sheet, {
+        [sheetIndex]: {
+            ...state.score.sheet[sheetIndex],
+            holes: {
+                ...state.score.sheet[sheetIndex].holes,
+                [holeId]: {
+                    ...state.score.sheet[sheetIndex].holes[holeId],
+                    ...hole,
+                },
+            },
+        },
+    });
+
+    return Immutable.merge(state, {
+        score: {
+            ...state.score,
+            sheet,
+        },
+    });
 }
 
 const HANDLERS = {
@@ -91,7 +112,7 @@ const HANDLERS = {
     [ContestMatchupPageTypes.SET]: set,
     [ContestMatchupPageTypes.UPDATE_SCORE_STATUS_SUCCESS]: updateScoreStatusSuccess,
     [ContestMatchupPageTypes.UPDATE_SCORE_SHEET_STATUS_SUCCESS]: updateScoreSheetStatusSuccess,
-    [ScoreTypes.UPDATE_HOLE_SUCCESS]: updateHoleSuccess,
+    [ContestMatchupPageTypes.UPDATE_SCORE_SHEET_HOLE_SUCCESS]: updateScoreSheetHoleSuccess,
 };
 
 export const reducer = createReducer(INITIAL_STATE, HANDLERS);

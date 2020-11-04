@@ -1,5 +1,5 @@
 import { AnyAction } from 'redux';
-import { all, call, put, takeLatest } from 'redux-saga/effects';
+import { all, call, fork, put, takeLatest } from 'redux-saga/effects';
 import { message } from 'antd';
 import ContestActions, { ContestTypes } from '@actions/ContestActions';
 import { ContestService } from '@services';
@@ -78,9 +78,7 @@ function* updateContest({ uuid, data }: AnyAction) {
 
 function* assignAvatar({ uuid, avatar }: AnyAction) {
     try {
-        const res = yield call(ContestService.assignAvatar, uuid, avatar);
-        // const { accounts } = res;
-        console.log(res);
+        yield fork(ContestService.assignAvatar, uuid, avatar);
         yield put(ContestActions.assignAvatarSuccess());
     } catch (err) {
         yield put(ContestActions.assignAvatarFailure(err));

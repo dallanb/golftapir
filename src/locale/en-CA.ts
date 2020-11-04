@@ -59,8 +59,9 @@ const CONSTANTS = {
             FETCH: 'Error fetching Score information',
             FETCH_CONTEST: 'Error fetching Score information',
             UPDATE: 'Score update unsuccessful!',
+            UPDATE_SCORE: 'Score update unsuccessful!',
             UPDATE_SHEET: 'Score sheet update unsuccessful!',
-            UPDATE_SCORE: 'Score hole update unsuccessful!',
+            UPDATE_HOLE: 'Score hole update unsuccessful!',
         },
     },
     SOCKET: {

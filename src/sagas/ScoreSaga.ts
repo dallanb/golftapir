@@ -52,7 +52,6 @@ function* updateHole({ uuid, holeId, data }: AnyAction) {
     try {
         const res = yield call(ScoreService.updateHole, uuid, holeId, data);
         const { scores } = res;
-        console.log(scores);
         yield put(ScoreActions.updateHoleSuccess(scores));
     } catch (err) {
         yield put(ScoreActions.updateHoleFailure(err));

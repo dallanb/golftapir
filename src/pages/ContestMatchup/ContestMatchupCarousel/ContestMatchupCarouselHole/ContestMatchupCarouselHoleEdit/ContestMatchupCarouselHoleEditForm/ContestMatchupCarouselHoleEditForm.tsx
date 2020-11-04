@@ -4,9 +4,8 @@ import { FormikValues } from 'formik';
 import { isEqual as _isEqual, get as _get, set as _set } from 'lodash';
 import { ContestMatchupCarouselHoleEditFormProps } from './types';
 import { Form } from '@components';
-import { ScoreActions } from '@actions';
+import ContestMatchupPageActions from '@pages/ContestMatchup/actions';
 import { fieldSchema, validationSchema } from './schema';
-import ContestMatchupCarouselContext from '../../../ContestMatchupCarouselContext';
 import './ContestMatchupCarouselHoleEditForm.scss';
 
 const ContestMatchupCarouselHoleEditForm: React.FunctionComponent<ContestMatchupCarouselHoleEditFormProps> = ({
@@ -24,10 +23,13 @@ const ContestMatchupCarouselHoleEditForm: React.FunctionComponent<ContestMatchup
                     : accum,
             {}
         );
-        console.log(uuid);
-        console.log(holeID);
-        console.log(holeData);
-        dispatch(ScoreActions.updateHole(uuid, holeID, holeData));
+        dispatch(
+            ContestMatchupPageActions.updateScoreSheetHole(
+                uuid,
+                holeID,
+                holeData
+            )
+        );
     };
     return (
         <Form

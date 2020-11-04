@@ -1,5 +1,13 @@
 import { AnyAction } from 'redux';
-import { all, call, put, race, take, takeLatest } from 'redux-saga/effects';
+import {
+    all,
+    call,
+    put,
+    fork,
+    race,
+    take,
+    takeLatest,
+} from 'redux-saga/effects';
 import ContestMatchupPageActions, { ContestMatchupPageTypes } from './actions';
 import { ModalActions } from '@actions';
 import {
@@ -7,6 +15,7 @@ import {
     fetchScoreContest,
     updateScore,
     updateScoreSheet,
+    updateScoreSheetHole as updateScoreSheetHoleHelper,
 } from '@helpers';
 
 function* init({ contest }: AnyAction) {
@@ -55,14 +64,20 @@ function* updateScoreSheetStatus({ uuid, status }: AnyAction) {
         yield put(ContestMatchupPageActions.updateScoreSheetStatusFailure(err));
     }
 }
-// function* editHole({ initialValues }: AnyAction) {
-//     try {
-//         yield put(ModalActions.openModal(true, initialValues));
-//         yield put(ContestMatchupPageActions.editHoleSuccess(initialValues));
-//     } catch (err) {
-//         yield put(ContestMatchupPageActions.editHoleFailure(err));
-//     }
-// }
+function* updateScoreSheetHole({ uuid, holeId, data }: AnyAction) {
+    try {
+        yield fork(updateScoreSheetHoleHelper, uuid, holeId, data);
+        yield put(
+            ContestMatchupPageActions.updateScoreSheetHoleSuccess(
+                uuid,
+                holeId,
+                data
+            )
+        );
+    } catch (err) {
+        yield put(ContestMatchupPageActions.updateScoreSheetHoleFailure(err));
+    }
+}
 
 export default function* ContestMatchupPageSaga() {
     yield all([
@@ -75,6 +90,9 @@ export default function* ContestMatchupPageSaga() {
             ContestMatchupPageTypes.UPDATE_SCORE_SHEET_STATUS,
             updateScoreSheetStatus
         ),
-        // takeLatest(ContestMatchupPageTypes.EDIT_HOLE, editHole),
+        takeLatest(
+            ContestMatchupPageTypes.UPDATE_SCORE_SHEET_HOLE,
+            updateScoreSheetHole
+        ),
     ]);
 }
