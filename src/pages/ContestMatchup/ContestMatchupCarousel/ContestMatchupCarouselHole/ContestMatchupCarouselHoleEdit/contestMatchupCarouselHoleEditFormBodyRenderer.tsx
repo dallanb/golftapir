@@ -3,7 +3,4 @@ import ContestMatchupCarouselHoleEditForm from './ContestMatchupCarouselHoleEdit
 
 export const contestMatchupCarouselHoleEditFormBodyRenderer: Function = (
     initialValues: any
-) => {
-    console.log(initialValues);
-    return <ContestMatchupCarouselHoleEditForm initialValues={initialValues} />;
-};
+) => <ContestMatchupCarouselHoleEditForm initialValues={initialValues} />;

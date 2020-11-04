@@ -15,6 +15,9 @@ const { Types, Creators } = createActions(
         updateSheet: ['uuid', 'data'],
         updateSheetSuccess: ['data'],
         updateSheetFailure: ['err'],
+        updateHole: ['uuid', 'holeId', 'data'],
+        updateHoleSuccess: ['data'],
+        updateHoleFailure: ['err'],
     },
     {
         prefix: 'SCORE_',

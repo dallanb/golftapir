@@ -48,11 +48,24 @@ function* updateSheet({ uuid, data }: AnyAction) {
     }
 }
 
+function* updateHole({ uuid, holeId, data }: AnyAction) {
+    try {
+        const res = yield call(ScoreService.updateHole, uuid, holeId, data);
+        const { scores } = res;
+        console.log(scores);
+        yield put(ScoreActions.updateHoleSuccess(scores));
+    } catch (err) {
+        yield put(ScoreActions.updateHoleFailure(err));
+        message.error(CONSTANTS.SCORE.ERROR.UPDATE_SCORE);
+    }
+}
+
 export default function* ScoreSaga() {
     yield all([
         takeLatest(ScoreTypes.FETCH_SCORE, fetchScore),
         takeLatest(ScoreTypes.FETCH_SCORE_CONTEST, fetchScoreContest),
         takeLatest(ScoreTypes.UPDATE_SCORE, updateScore),
         takeLatest(ScoreTypes.UPDATE_SHEET, updateSheet),
+        takeLatest(ScoreTypes.UPDATE_HOLE, updateHole),
     ]);
 }
