@@ -1,5 +1,5 @@
 import React from 'react';
-import { Input, Upload, Button, Select } from 'antd';
+import { Input, Upload, Button, Select, InputNumber } from 'antd';
 import { UploadOutlined } from '@ant-design/icons/lib';
 import { useDispatch } from 'react-redux';
 import { get as _get, debounce as _debounce } from 'lodash';
@@ -37,6 +37,22 @@ defaultFieldRenderer = (schema, formik) => {
                         onChange={formik.handleChange}
                         readOnly={_get(options, ['readonly'], false)}
                         bordered={!_get(options, ['readonly'], false)}
+                        placeholder={_get(options, ['placeholder'], undefined)}
+                        prefix={
+                            _get(options, ['prefixRenderer'], undefined) &&
+                            options.prefixRenderer()
+                        }
+                    />
+                );
+                break;
+            case 'number':
+                field = (
+                    <InputNumber
+                        key={name}
+                        name={name}
+                        ref={fieldRef}
+                        onChange={(value) => formik.setFieldValue(name, value)}
+                        readOnly={_get(options, ['readonly'], false)}
                         placeholder={_get(options, ['placeholder'], undefined)}
                         prefix={
                             _get(options, ['prefixRenderer'], undefined) &&

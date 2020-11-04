@@ -1,5 +1,5 @@
 import { AnyAction } from 'redux';
-import { all, call, put, takeLatest } from 'redux-saga/effects';
+import { all, call, fork, put, takeLatest } from 'redux-saga/effects';
 import { message } from 'antd';
 import AccountActions, { AccountTypes } from '@actions/AccountActions';
 import { AccountService } from '@services';
@@ -55,9 +55,7 @@ function* updateAccount({ uuid, values }: AnyAction) {
 
 function* assignAvatar({ uuid, avatar }: AnyAction) {
     try {
-        const res = yield call(AccountService.assignAvatar, uuid, avatar);
-        // const { accounts } = res;
-        console.log(res);
+        yield fork(AccountService.assignAvatar, uuid, avatar);
         yield put(AccountActions.assignAvatarSuccess());
     } catch (err) {
         yield put(AccountActions.assignAvatarFailure(err));

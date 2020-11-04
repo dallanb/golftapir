@@ -2,8 +2,13 @@ import { createActions } from 'reduxsauce';
 
 const { Types, Creators } = createActions(
     {
-        confirmModal: null,
-        setMessageModal: ['isOpen', 'data'],
+        closeModal: null,
+        openModal: [
+            'headerRenderer',
+            'bodyRenderer',
+            'footerRenderer',
+            'onCancel',
+        ],
     },
     {
         prefix: 'MODAL_',

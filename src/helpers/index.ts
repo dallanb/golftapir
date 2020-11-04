@@ -19,3 +19,4 @@ export { default as updateContest } from './updateContest';
 export { default as updateContestParticipant } from './updateContestParticipant';
 export { default as updateScore } from './updateScore';
 export { default as updateScoreSheet } from './updateScoreSheet';
+export { default as updateScoreSheetHole } from './updateScoreSheetHole';

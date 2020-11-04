@@ -30,4 +30,11 @@ export default {
             data,
         });
     },
+    updateHole(sheet_uuid: string, hole_id: string, data: any = {}) {
+        return ClientProxy.put({
+            url: config.SCORE_URL,
+            endpoint: `/scores/sheets/${sheet_uuid}/holes/${hole_id}`,
+            data,
+        });
+    },
 };

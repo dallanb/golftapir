@@ -4,6 +4,7 @@ import { createReducer } from 'reduxsauce';
 import CONSTANTS from '@locale/en-CA';
 import { ContestMatchupPageTypes } from './actions';
 import { ContestMatchupPageInterface } from './types';
+import { ScoreTypes } from '@actions';
 
 /* ------------- Initial State ------------- */
 const INITIAL_STATE: ContestMatchupPageInterface = {
@@ -77,6 +78,32 @@ function updateScoreSheetStatusSuccess(state: any, { uuid, status }: any) {
     });
 }
 
+function updateScoreSheetHoleSuccess(state: any, { uuid, holeId, hole }: any) {
+    const sheetIndex = state.score.sheet.findIndex(
+        ({ uuid: sheet_uuid }: { uuid: string }) => sheet_uuid == uuid
+    );
+
+    const sheet = Object.assign([], state.score.sheet, {
+        [sheetIndex]: {
+            ...state.score.sheet[sheetIndex],
+            holes: {
+                ...state.score.sheet[sheetIndex].holes,
+                [holeId]: {
+                    ...state.score.sheet[sheetIndex].holes[holeId],
+                    ...hole,
+                },
+            },
+        },
+    });
+
+    return Immutable.merge(state, {
+        score: {
+            ...state.score,
+            sheet,
+        },
+    });
+}
+
 const HANDLERS = {
     [ContestMatchupPageTypes.INIT]: init,
     [ContestMatchupPageTypes.INIT_SUCCESS]: initSuccess,
@@ -85,6 +112,7 @@ const HANDLERS = {
     [ContestMatchupPageTypes.SET]: set,
     [ContestMatchupPageTypes.UPDATE_SCORE_STATUS_SUCCESS]: updateScoreStatusSuccess,
     [ContestMatchupPageTypes.UPDATE_SCORE_SHEET_STATUS_SUCCESS]: updateScoreSheetStatusSuccess,
+    [ContestMatchupPageTypes.UPDATE_SCORE_SHEET_HOLE_SUCCESS]: updateScoreSheetHoleSuccess,
 };
 
 export const reducer = createReducer(INITIAL_STATE, HANDLERS);

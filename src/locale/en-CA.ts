@@ -59,7 +59,9 @@ const CONSTANTS = {
             FETCH: 'Error fetching Score information',
             FETCH_CONTEST: 'Error fetching Score information',
             UPDATE: 'Score update unsuccessful!',
+            UPDATE_SCORE: 'Score update unsuccessful!',
             UPDATE_SHEET: 'Score sheet update unsuccessful!',
+            UPDATE_HOLE: 'Score hole update unsuccessful!',
         },
     },
     SOCKET: {
@@ -151,6 +153,15 @@ const CONSTANTS = {
         CONTEST_MATCHUP: {
             TITLE: '',
             DESCRIPTION: 'Contest Matchup',
+            EDIT_HOLE_FORM: {
+                LABELS: {
+                    HOLE_NUMBER: 'Hole Number',
+                    STROKES: 'Strokes',
+                },
+                VALIDATION: {
+                    STROKES_REQUIRED: 'Please input strokes!',
+                },
+            },
         },
         CONTEST_UPDATE: {
             TITLE: '',
