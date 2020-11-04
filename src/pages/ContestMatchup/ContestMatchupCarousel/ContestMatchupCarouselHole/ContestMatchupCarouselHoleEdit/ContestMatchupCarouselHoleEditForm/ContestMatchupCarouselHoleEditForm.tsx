@@ -1,9 +1,10 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
 import { FormikValues } from 'formik';
 import { isEqual as _isEqual, get as _get, set as _set } from 'lodash';
 import { ContestMatchupCarouselHoleEditFormProps } from './types';
 import { Form } from '@components';
+import { ModalActions } from '@actions';
 import ContestMatchupPageActions from '@pages/ContestMatchup/actions';
 import { fieldSchema, validationSchema } from './schema';
 import './ContestMatchupCarouselHoleEditForm.scss';
@@ -30,6 +31,7 @@ const ContestMatchupCarouselHoleEditForm: React.FunctionComponent<ContestMatchup
                 holeData
             )
         );
+        dispatch(ModalActions.closeModal());
     };
     return (
         <Form

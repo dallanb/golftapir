@@ -26,6 +26,7 @@ export const fieldSchema = [
     },
     {
         name: 'strokes',
+        type: 'number',
         wrapper: InputWrapper,
         wrapperOptions: {
             label: FORM.LABELS.STROKES,
