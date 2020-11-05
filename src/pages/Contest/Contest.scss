@@ -4,18 +4,21 @@
         opacity: 0.4;
     }
 }
-.contest-subscription {
-    .subscription-toggle {
+.contest-sub-title {
+    .contest-sub-title-subscription {
+        .subscription-toggle {
+        }
     }
 }
 .contest-actions {
     margin-bottom: 40px;
 }
 .contest-view {
+    display: flex;
     .contest-participants-table {
-        margin-bottom: 40px;
+        margin: 0 20px;
     }
     .contest-leaders-table {
-        margin-bottom: 40px;
+        margin: 0 20px;
     }
 }

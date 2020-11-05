@@ -117,6 +117,24 @@ const CONSTANTS = {
         },
         CONTEST: {
             DESCRIPTION: 'Contest Info',
+            STEPS: {
+                PENDING: {
+                    TITLE: 'Pending',
+                    DESCRIPTION: 'Awaiting responses.',
+                },
+                READY: {
+                    TITLE: 'Ready',
+                    DESCRIPTION: 'Awaiting start time.',
+                },
+                ACTIVE: {
+                    TITLE: 'Active',
+                    DESCRIPTION: 'Awaiting contest result.',
+                },
+                COMPLETE: {
+                    TITLE: 'Complete',
+                    DESCRIPTION: 'Contest complete.',
+                },
+            },
         },
         CONTESTS: {
             TITLE: 'Contests',

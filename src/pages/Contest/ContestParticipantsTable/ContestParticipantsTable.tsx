@@ -1,45 +1,47 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { get as _get } from 'lodash';
+import { useSelector } from 'react-redux';
 import { ContestParticipantsTableProps } from './types';
 import { columnsSchema } from './schema';
-import { StateInterface } from '../types';
 import { Table } from '@components';
 import './ContestParticipantsTable.scss';
 import { Typography } from 'antd';
+import {
+    selectContestParticipants,
+    selectIsFetching,
+} from '@pages/Contest/selector';
 
-class ContestParticipantsTable extends React.PureComponent<
-    ContestParticipantsTableProps
-> {
-    loadMore = (start: number, stop: number, resolve: () => void) => resolve();
+const ContestParticipantsTable: React.FunctionComponent<ContestParticipantsTableProps> = () => {
+    const loadMore = (start: number, stop: number, resolve: () => void) =>
+        resolve();
 
-    render() {
-        const { items, isFetching } = this.props;
-        return (
-            <div className="contest-participants-table">
-                <Typography.Title level={5}>Participants</Typography.Title>
-                <Table
-                    size={50}
-                    height={100}
-                    width={350}
-                    items={items}
-                    hasNextPage={false}
-                    loadNextPage={this.loadMore}
-                    isNextPageLoading={isFetching}
-                    minimumBatchSize={100}
-                    columnsSchema={columnsSchema}
-                />
-            </div>
-        );
-    }
-}
+    const loadTableDimensions = (
+        items: any[]
+    ): { size: number; height: number; width: number } => {
+        const size = 50;
+        const width = 350;
+        const height = items.length * size;
 
-const mapStateToProps = ({ contestPage }: StateInterface) => {
-    const items = _get(contestPage, ['contest', 'participants'], []);
-    return {
-        items,
-        isFetching: false,
+        return { size, width, height };
     };
-};
 
-export default connect(mapStateToProps)(ContestParticipantsTable);
+    const items = useSelector(selectContestParticipants);
+    const isFetching = useSelector(selectIsFetching);
+
+    return (
+        <div className="contest-participants-table">
+            <Typography.Title level={5} type="secondary">
+                PARTICIPANTS
+            </Typography.Title>
+            <Table
+                {...loadTableDimensions(items)}
+                items={items}
+                hasNextPage={false}
+                loadNextPage={loadMore}
+                isNextPageLoading={isFetching}
+                minimumBatchSize={100}
+                columnsSchema={columnsSchema}
+            />
+        </div>
+    );
+};
+export default ContestParticipantsTable;

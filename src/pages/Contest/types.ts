@@ -7,8 +7,6 @@ export interface ContestProps extends RouteComponentProps {
     activateContest: (uuid: string) => void;
     subscribe: (uuid: string) => void;
     unsubscribe: (uuid: string) => void;
-    title: string;
-    description: string;
     isInitialized: boolean;
     subscribed: boolean;
     contest: any;

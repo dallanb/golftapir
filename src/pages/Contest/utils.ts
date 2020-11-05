@@ -32,37 +32,10 @@ export const mergeContestParticipant = (
     );
 
 export const renderAction = (
-    key: string,
-    options: any
+    key: string
 ): { show: boolean; enabled: boolean } => {
     const renderAction = { show: false, enabled: true };
     switch (key) {
-        case constants.ACTION.READY.KEY:
-            const participantActive =
-                options.participants.findIndex(
-                    (participant: any) =>
-                        participant.status !== constants.STATUS.ACTIVE.KEY
-                ) === -1;
-            renderAction.show = options.isOwner;
-            renderAction.enabled =
-                participantActive &&
-                options.isOwner &&
-                options.status !== constants.STATUS.ACTIVE.KEY &&
-                options.status !== constants.STATUS.READY.KEY;
-            break;
-        case constants.ACTION.UPDATE.KEY:
-            renderAction.show = options.isOwner;
-            renderAction.enabled =
-                options.isOwner &&
-                options.status !== constants.STATUS.ACTIVE.KEY &&
-                options.status !== constants.STATUS.READY.KEY;
-            break;
-        case constants.ACTION.ACTIVATE.KEY:
-            renderAction.show = options.isOwner;
-            renderAction.enabled =
-                options.startTime <= +new Date() &&
-                options.status === constants.STATUS.READY.KEY;
-            break;
         case constants.ACTION.MATCHUP.KEY:
             renderAction.show = true;
             renderAction.enabled = true;

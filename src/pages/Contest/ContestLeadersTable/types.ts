@@ -1,4 +1,1 @@
-export interface ContestLeadersTableProps {
-    items: any;
-    isFetching: boolean;
-}
+export interface ContestLeadersTableProps {}

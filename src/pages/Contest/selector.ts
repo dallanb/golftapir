@@ -39,3 +39,17 @@ export const selectIsOwner = createSelector(
         _get(contestPage, ['contest', 'owner_uuid'], undefined) ===
         _get(base, ['me', 'membership_uuid'], undefined)
 );
+
+export const selectIsFetching = createSelector(
+    [getContestPage],
+    (contestPage) => _get(contestPage, ['isFetching'], true)
+);
+
+export const selectSubscribed = createSelector(
+    [getContestPage],
+    (contestPage) => _get(contestPage, ['subscribed'], false)
+);
+
+export const selectSheet = createSelector([getContestPage], (contestPage) =>
+    _get(contestPage, ['score', 'sheet'], [])
+);

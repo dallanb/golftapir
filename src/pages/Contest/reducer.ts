@@ -1,12 +1,9 @@
 // @ts-ignore
 import { static as Immutable } from 'seamless-immutable';
 import { createReducer } from 'reduxsauce';
-import CONSTANTS from '@locale/en-CA';
 import { ContestPageTypes } from './actions';
 import { ContestPageInterface } from './types';
-import { ContestTypes, NotificationTypes } from '@actions';
 import { mergeContestParticipant } from '@pages/Contest/utils';
-import constants from '@constants';
 
 /* ------------- Initial State ------------- */
 const INITIAL_STATE: ContestPageInterface = {
