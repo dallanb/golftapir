@@ -3,7 +3,7 @@ import { AvatarProps } from '@components/Avatar/types';
 import { Tag } from 'antd';
 
 export interface ContentLayoutProps {
-    title?: string;
+    title?: ReactNode;
     subTitle?: ReactNode;
     showSpinner?: boolean;
     className?: string;

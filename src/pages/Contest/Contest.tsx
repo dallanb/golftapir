@@ -8,14 +8,12 @@ import { ContentLayout } from '@layouts';
 import constants from '@constants';
 import ContestPageActions from './actions';
 import ContestParticipantsTable from './ContestParticipantsTable';
-import ContestStatus from './ContestStatus';
 import ContestActions from './ContestActions';
 import ContestSubscription from './ContestSubscription';
-import ContestAvatar from './ContestAvatar';
-import ContestStartTime from './ContestStartTime';
 import ContestLeadersTable from './ContestLeadersTable';
+import ContestTitle from './ContestTitle';
 import './Contest.scss';
-import { mapStatusColour, withS3URL } from '@utils';
+import { mapStatusColour } from '@utils';
 import { Tag } from 'antd';
 
 const Contest: React.FunctionComponent<ContestProps> = () => {
@@ -23,12 +21,9 @@ const Contest: React.FunctionComponent<ContestProps> = () => {
 
     const history = useHistory();
 
-    const [uuid] = useState(_get(history, ['location', 'state', 'uuid'], null));
-    const [name] = useState(_get(history, ['location', 'state', 'name'], null));
-    const [status] = useState(
-        _get(history, ['location', 'state', 'status'], null)
+    const [{ uuid, name, status, src, start_time }] = useState(
+        _get(history, ['location', 'state'], null)
     );
-    const [src] = useState(_get(history, ['location', 'state', 'src'], null));
 
     useEffect(() => {
         dispatch(ContestPageActions.init(uuid));
@@ -37,7 +32,7 @@ const Contest: React.FunctionComponent<ContestProps> = () => {
         };
     }, []);
 
-    const { description, isInitialized, contest } = useSelector(selectData);
+    const { isInitialized, contest } = useSelector(selectData);
 
     const generateActions = () => {
         return [
@@ -68,7 +63,7 @@ const Contest: React.FunctionComponent<ContestProps> = () => {
 
     return (
         <ContentLayout
-            title={name}
+            title={<ContestTitle title={name} time={start_time} />}
             subTitle={<ContestSubscription uuid={uuid} />}
             showSpinner={!isInitialized}
             avatar={{
@@ -80,7 +75,6 @@ const Contest: React.FunctionComponent<ContestProps> = () => {
             extra={<ContestActions actions={generateActions()} />}
             className="contest-view"
         >
-            <ContestStartTime />
             <ContestParticipantsTable />
             <ContestLeadersTable />
         </ContentLayout>
