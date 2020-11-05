@@ -4,11 +4,11 @@ import { Tag } from 'antd';
 
 export interface ContentLayoutProps {
     title?: string;
-    subTitle?: string;
+    subTitle?: ReactNode;
     showSpinner?: boolean;
     className?: string;
     tags?: ReactElement<typeof Tag> | ReactElement<typeof Tag>[];
-    extra?: ReactNode[];
+    extra?: ReactNode | ReactNode[];
     avatar?: AvatarProps;
 }
 

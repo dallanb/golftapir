@@ -13,10 +13,16 @@ const ContestsListTile: React.FunctionComponent<ContestsListTileProps> = ({
     history,
 }) => {
     const item = _get(data, [index], undefined);
-    const handleClick = (options: { uuid: string; name: string }) => {
+    const handleClick = (options: {
+        uuid: string;
+        name: string;
+        status: string;
+        src: string;
+    }) => {
         history.push(`/app${constants.ROUTES.CONTEST}`, options);
     };
 
+    const uuid = _get(item, ['uuid'], undefined);
     const name = _get(item, ['name'], 'Loading...');
     const avatar = _get(item, ['avatar'], undefined);
     const src =
@@ -45,7 +51,8 @@ const ContestsListTile: React.FunctionComponent<ContestsListTileProps> = ({
             </div>
             <div className="contest-list-tile-button">
                 <Button
-                    onClick={() => handleClick(_pick(item, ['uuid', 'name']))}
+                    onClick={() => handleClick({ uuid, name, status, src })}
+                    disabled={!uuid}
                 >
                     View
                 </Button>
