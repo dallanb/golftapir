@@ -1,33 +1,17 @@
+.contest-title {
+    .contest-title-time {
+        font-size: 16px;
+        opacity: 0.4;
+    }
+}
+.contest-subscription {
+    .subscription-toggle {
+    }
+}
+.contest-actions {
+    margin-bottom: 40px;
+}
 .contest-view {
-    //.contest-status-status { only applicable for tag
-    //  margin-bottom: 40px;
-    //  width: auto;
-    //  height: 33px;
-    //  font-size: 18px;
-    //  line-height: unset;
-    //  padding: 0 10.5px;
-    //}
-    .contest-subscription {
-        .subscription-toggle {
-        }
-    }
-    .contest-status {
-        display: flex;
-        margin-bottom: 40px;
-        .contest-status-status {
-            font-size: 16px;
-        }
-    }
-    .contest-start-time {
-        display: flex;
-        margin-bottom: 40px;
-        .contest-start-time-time {
-            font-size: 16px;
-        }
-    }
-    .contest-actions {
-        margin-bottom: 40px;
-    }
     .contest-participants-table {
         margin-bottom: 40px;
     }

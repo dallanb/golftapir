@@ -4,8 +4,9 @@ import { get as _get } from 'lodash';
 const getContestPage = (state: any) => state.contestPage;
 const getBase = (state: any) => state.base;
 
-export const selectData = createSelector([getContestPage], (contestPage) =>
-    _get(contestPage, ['data'], false)
+export const selectData = createSelector(
+    [getContestPage],
+    (contestPage) => contestPage
 );
 
 export const selectAccountsHash = createSelector(

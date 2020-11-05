@@ -13,8 +13,6 @@ const INITIAL_STATE: ContestPageInterface = {
     isFetching: false,
     isInitialized: false,
     err: undefined,
-    title: '',
-    description: CONSTANTS.PAGES.CONTEST.DESCRIPTION,
     subscribed: false,
     contestWagers: [],
     contest: undefined,

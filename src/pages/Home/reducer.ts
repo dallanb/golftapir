@@ -10,7 +10,7 @@ const INITIAL_STATE: HomePageInterface = {
     isFetching: false,
     isInitialized: false,
     err: undefined,
-    title: CONSTANTS.PAGES.HOME.TITLE,
+    title: undefined,
     description: CONSTANTS.PAGES.HOME.DESCRIPTION,
 };
 

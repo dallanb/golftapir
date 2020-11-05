@@ -13,15 +13,17 @@ const ContestsListTile: React.FunctionComponent<ContestsListTileProps> = ({
     history,
 }) => {
     const item = _get(data, [index], undefined);
-    const handleClick = (options: { uuid: string; name: string }) => {
+    const handleClick = (options: any) => {
         history.push(`/app${constants.ROUTES.CONTEST}`, options);
     };
 
+    const uuid = _get(item, ['uuid'], undefined);
     const name = _get(item, ['name'], 'Loading...');
     const avatar = _get(item, ['avatar'], undefined);
     const src =
         avatar && withS3URL(avatar, constants.S3_FOLDERS.CONTEST.AVATAR);
     const status = _get(item, ['status'], undefined);
+    const start_time = _get(item, ['start_time'], undefined);
     const participants = _get(item, ['participants'], {});
 
     return (
@@ -45,7 +47,10 @@ const ContestsListTile: React.FunctionComponent<ContestsListTileProps> = ({
             </div>
             <div className="contest-list-tile-button">
                 <Button
-                    onClick={() => handleClick(_pick(item, ['uuid', 'name']))}
+                    onClick={() =>
+                        handleClick({ uuid, name, status, src, start_time })
+                    }
+                    disabled={!uuid}
                 >
                     View
                 </Button>

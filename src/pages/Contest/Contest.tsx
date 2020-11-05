@@ -1,44 +1,40 @@
-import React from 'react';
-import { compose } from 'redux';
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { get as _get } from 'lodash';
-import { ContestProps, ContestState, StateInterface } from './types';
+import { ContestProps } from './types';
+import { selectData } from './selector';
 import { ContentLayout } from '@layouts';
 import constants from '@constants';
 import ContestPageActions from './actions';
 import ContestParticipantsTable from './ContestParticipantsTable';
-import ContestStatus from './ContestStatus';
 import ContestActions from './ContestActions';
 import ContestSubscription from './ContestSubscription';
-import ContestAvatar from './ContestAvatar';
-import ContestStartTime from './ContestStartTime';
 import ContestLeadersTable from './ContestLeadersTable';
+import ContestTitle from './ContestTitle';
 import './Contest.scss';
+import { mapStatusColour } from '@utils';
+import { Tag } from 'antd';
 
-class Contest extends React.PureComponent<ContestProps, ContestState> {
-    constructor(props: ContestProps) {
-        super(props);
-        this.state = {
-            uuid: _get(props, ['history', 'location', 'state', 'uuid'], null),
-            name: _get(props, ['history', 'location', 'state', 'name'], null),
+const Contest: React.FunctionComponent<ContestProps> = () => {
+    const dispatch = useDispatch();
+
+    const history = useHistory();
+
+    const [{ uuid, name, status, src, start_time }] = useState(
+        _get(history, ['location', 'state'], null)
+    );
+
+    useEffect(() => {
+        dispatch(ContestPageActions.init(uuid));
+        return () => {
+            dispatch(ContestPageActions.terminate());
         };
-    }
+    }, []);
 
-    componentDidMount() {
-        const { init } = this.props;
-        const { uuid } = this.state;
-        init(uuid);
-    }
+    const { isInitialized, contest } = useSelector(selectData);
 
-    componentWillUnmount() {
-        const { terminate } = this.props;
-        terminate();
-    }
-
-    generateActions = () => {
-        const { activateContest, readyContest, history, contest } = this.props;
-        const { uuid } = this.state;
+    const generateActions = () => {
         return [
             {
                 key: constants.ACTION.UPDATE.KEY,
@@ -49,11 +45,11 @@ class Contest extends React.PureComponent<ContestProps, ContestState> {
             },
             {
                 key: constants.ACTION.READY.KEY,
-                onClick: () => readyContest(uuid),
+                onClick: () => dispatch(ContestPageActions.readyContest(uuid)),
             },
             {
                 key: constants.ACTION.ACTIVATE.KEY,
-                onClick: () => activateContest(uuid),
+                onClick: () => ContestPageActions.activateContest(uuid),
             },
             {
                 key: constants.ACTION.MATCHUP.KEY,
@@ -65,67 +61,24 @@ class Contest extends React.PureComponent<ContestProps, ContestState> {
         ];
     };
 
-    render() {
-        const { title, description, isInitialized } = this.props;
-        const { uuid, name } = this.state;
-        return (
-            <ContentLayout
-                title={title || name}
-                subTitle={description}
-                showSpinner={!isInitialized}
-                className="contest-view"
-            >
-                <ContestAvatar />
-                <ContestSubscription uuid={uuid} />
-                <ContestStatus />
-                <ContestStartTime />
-                <ContestActions actions={this.generateActions()} />
-                <ContestParticipantsTable />
-                <ContestLeadersTable />
-            </ContentLayout>
-        );
-    }
-}
-
-const mapStateToProps = ({ contestPage }: StateInterface) => {
-    const { title, description, isInitialized, contest } = contestPage;
-
-    return {
-        title,
-        description,
-        isInitialized,
-        contest,
-    };
+    return (
+        <ContentLayout
+            title={<ContestTitle title={name} time={start_time} />}
+            subTitle={<ContestSubscription uuid={uuid} />}
+            showSpinner={!isInitialized}
+            avatar={{
+                src,
+                name,
+                size: 72,
+            }}
+            tags={<Tag color={mapStatusColour(status)}>{status}</Tag>}
+            extra={<ContestActions actions={generateActions()} />}
+            className="contest-view"
+        >
+            <ContestParticipantsTable />
+            <ContestLeadersTable />
+        </ContentLayout>
+    );
 };
 
-const mapDispatchToProps = (dispatch: any) => {
-    return {
-        init(uuid: string) {
-            return dispatch(ContestPageActions.init(uuid));
-        },
-        terminate() {
-            return dispatch(ContestPageActions.terminate());
-        },
-        readyContest(uuid: string) {
-            return dispatch(
-                ContestPageActions.updateContestStatus(
-                    uuid,
-                    constants.STATUS.READY.KEY
-                )
-            );
-        },
-        activateContest(uuid: string) {
-            return dispatch(
-                ContestPageActions.updateContestStatus(
-                    uuid,
-                    constants.STATUS.ACTIVE.KEY
-                )
-            );
-        },
-    };
-};
-
-export default compose(
-    withRouter,
-    connect(mapStateToProps, mapDispatchToProps)
-)(Contest);
+export default Contest;

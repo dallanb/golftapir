@@ -29,7 +29,6 @@ const ContestActions: React.FunctionComponent<ContestActionsProps> = ({
     if (!Actions) return null;
     return (
         <div className="contest-actions">
-            <Typography.Title level={5}>Actions</Typography.Title>
             <div>{Actions}</div>
         </div>
     );

@@ -15,7 +15,7 @@ export interface HomePageInterface {
     readonly isFetching: boolean;
     readonly isInitialized: boolean;
     readonly err?: Error;
-    readonly title: string;
+    readonly title?: string;
     readonly description: string;
 }
 
