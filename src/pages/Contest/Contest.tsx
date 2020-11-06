@@ -2,31 +2,29 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { get as _get } from 'lodash';
+import { Tag } from 'antd';
 import { ContestProps } from './types';
 import { selectData } from './selector';
 import { ContentLayout } from '@layouts';
+import { ContentLayoutProps } from '@layouts/ContentLayout/types';
 import constants from '@constants';
+import { mapStatusColour, withS3URL } from '@utils';
 import ContestPageActions from './actions';
 import ContestParticipantsTable from './ContestParticipantsTable';
-import ContestActions from './ContestActions';
-import ContestSubscription from './ContestSubscription';
-import ContestLeadersTable from './ContestLeadersTable';
+import ContestSider from './ContestSider';
+import ContestSubTitle from './ContestSubTitle';
 import ContestTitle from './ContestTitle';
 import './Contest.scss';
-import { mapStatusColour } from '@utils';
-import { Tag } from 'antd';
 
 const Contest: React.FunctionComponent<ContestProps> = () => {
     const dispatch = useDispatch();
 
     const history = useHistory();
 
-    const [{ uuid, name, status, src, start_time }] = useState(
-        _get(history, ['location', 'state'], null)
-    );
+    const [prevContest] = useState(_get(history, ['location', 'state'], null));
 
     useEffect(() => {
-        dispatch(ContestPageActions.init(uuid));
+        dispatch(ContestPageActions.init(prevContest.uuid));
         return () => {
             dispatch(ContestPageActions.terminate());
         };
@@ -34,49 +32,71 @@ const Contest: React.FunctionComponent<ContestProps> = () => {
 
     const { isInitialized, contest } = useSelector(selectData);
 
-    const generateActions = () => {
-        return [
-            {
-                key: constants.ACTION.UPDATE.KEY,
-                onClick: () =>
-                    history.push(`/app${constants.ROUTES.CONTEST_UPDATE}`, {
-                        contest,
-                    }),
-            },
-            {
-                key: constants.ACTION.READY.KEY,
-                onClick: () => dispatch(ContestPageActions.readyContest(uuid)),
-            },
-            {
-                key: constants.ACTION.ACTIVATE.KEY,
-                onClick: () => ContestPageActions.activateContest(uuid),
-            },
-            {
-                key: constants.ACTION.MATCHUP.KEY,
-                onClick: () =>
-                    history.push(`/app${constants.ROUTES.CONTEST_MATCHUP}`, {
-                        contest,
-                    }),
-            },
-        ];
+    const renderTitle = (title: string) => {
+        const time = _get(
+            contest,
+            ['start_time'],
+            _get(prevContest, ['start_time'], null)
+        );
+
+        return <ContestTitle title={title} time={time} />;
+    };
+
+    const renderSubTitle = (uuid: string) => {
+        return <ContestSubTitle uuid={uuid} />;
+    };
+
+    const renderAvatar = (name: string) => {
+        const avatarProps: ContentLayoutProps['avatar'] = {
+            name,
+            size: 72,
+            src: undefined,
+            className: undefined,
+        };
+        const src = _get(contest, ['avatar', 's3_filename'], null);
+        const prevSrc = _get(prevContest, ['src'], null);
+
+        if (src) {
+            avatarProps['src'] =
+                src && withS3URL(src, constants.S3_FOLDERS.CONTEST.AVATAR);
+        } else if (prevSrc) {
+            avatarProps['src'] = prevSrc;
+        }
+        return avatarProps;
+    };
+
+    const renderSider = () => {
+        return <ContestSider />;
+    };
+
+    const renderContentLayoutProps = () => {
+        const contentLayoutProps: ContentLayoutProps = {
+            title: undefined,
+            subTitle: undefined,
+            avatar: undefined,
+            tags: undefined,
+            extra: undefined,
+            sider: undefined,
+        };
+
+        const uuid = _get(contest, ['uuid'], _get(prevContest, ['uuid'], null));
+        const name = _get(contest, ['name'], _get(prevContest, ['name'], ''));
+        if (name) {
+            contentLayoutProps['title'] = renderTitle(name);
+            contentLayoutProps['subTitle'] = renderSubTitle(uuid);
+            contentLayoutProps['avatar'] = renderAvatar(name);
+            contentLayoutProps['sider'] = renderSider();
+        }
+        return contentLayoutProps;
     };
 
     return (
         <ContentLayout
-            title={<ContestTitle title={name} time={start_time} />}
-            subTitle={<ContestSubscription uuid={uuid} />}
+            {...renderContentLayoutProps()}
             showSpinner={!isInitialized}
-            avatar={{
-                src,
-                name,
-                size: 72,
-            }}
-            tags={<Tag color={mapStatusColour(status)}>{status}</Tag>}
-            extra={<ContestActions actions={generateActions()} />}
             className="contest-view"
         >
             <ContestParticipantsTable />
-            <ContestLeadersTable />
         </ContentLayout>
     );
 };

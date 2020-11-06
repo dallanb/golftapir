@@ -13,22 +13,27 @@ export const columnsSchema = [
             return <ContestParticipantsTableParticipant uuid={value} />;
         },
     },
+    // {
+    //     Header: 'Status',
+    //     accessor: 'status',
+    //     width: 150,
+    //     Cell: ({
+    //         value,
+    //         row: {
+    //             original: { uuid, user_uuid },
+    //         },
+    //     }: CellValue) => (
+    //         <ContestParticipantsTableStatus
+    //             status={value}
+    //             uuid={uuid}
+    //             user_uuid={user_uuid}
+    //         />
+    //     ),
+    // },
     {
-        Header: 'Status',
-        accessor: 'status',
-        width: 150,
-        Cell: ({
-            value,
-            row: {
-                original: { uuid, user_uuid },
-            },
-        }: CellValue) => (
-            <ContestParticipantsTableStatus
-                status={value}
-                uuid={uuid}
-                user_uuid={user_uuid}
-            />
-        ),
+        Header: 'Score',
+        accessor: 'score',
+        width: 125,
     },
     // {
     //     Header: 'Wager',

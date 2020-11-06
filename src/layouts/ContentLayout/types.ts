@@ -10,6 +10,7 @@ export interface ContentLayoutProps {
     tags?: ReactElement<typeof Tag> | ReactElement<typeof Tag>[];
     extra?: ReactNode | ReactNode[];
     avatar?: AvatarProps;
+    sider?: ReactNode;
 }
 
 export interface ContentLayoutState {}

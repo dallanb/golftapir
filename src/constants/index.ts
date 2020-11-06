@@ -1,3 +1,5 @@
+import CONSTANTS from '@locale/en-CA';
+
 const constants = {
     TARGETS: {
         ACCOUNT_PAGE: 'ACCOUNT_PAGE',

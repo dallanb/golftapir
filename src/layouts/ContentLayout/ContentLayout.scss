@@ -8,6 +8,9 @@
     .content-layout-content {
         margin: 16px;
         overflow: scroll;
+        &.secondary {
+            overflow: hidden;
+        }
         .content-layout-children {
             padding: 24px;
         }
