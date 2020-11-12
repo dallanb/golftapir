@@ -18,7 +18,7 @@ const ContestParticipantsTable: React.FunctionComponent<ContestParticipantsTable
         items: any[]
     ): { size: number; height: number; width: number } => {
         const size = 50;
-        const width = 350;
+        const width = 650;
         const height = items.length * size;
 
         return { size, width, height };
@@ -29,9 +29,6 @@ const ContestParticipantsTable: React.FunctionComponent<ContestParticipantsTable
 
     return (
         <div className="contest-participants-table">
-            <Typography.Title level={5} type="secondary">
-                PARTICIPANTS
-            </Typography.Title>
             <Table
                 {...loadTableDimensions(items)}
                 items={items}

@@ -24,6 +24,13 @@ export default {
             query,
         });
     },
+    fetchContestMaterialized(uuid: string, query: any = {}) {
+        return ClientProxy.get({
+            url: config.CONTEST_URL,
+            endpoint: `/contests/materialized/${uuid}`,
+            query,
+        });
+    },
     createContest(data: any = {}) {
         return ClientProxy.post({
             url: config.CONTEST_URL,
@@ -48,6 +55,12 @@ export default {
             headers: {
                 'Content-Type': 'multipart/form-data',
             },
+        });
+    },
+    fetchContestParticipantUser(contest_uuid: string, user_uuid: string) {
+        return ClientProxy.get({
+            url: config.CONTEST_URL,
+            endpoint: `/contests/${contest_uuid}/participants/user/${user_uuid}`,
         });
     },
     updateContestParticipant(uuid: string, data: any = {}) {

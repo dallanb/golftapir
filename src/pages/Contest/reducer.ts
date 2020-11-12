@@ -13,6 +13,7 @@ const INITIAL_STATE: ContestPageInterface = {
     subscribed: false,
     contestWagers: [],
     contest: undefined,
+    participant: undefined,
     score: undefined,
     accountsHash: undefined,
 };

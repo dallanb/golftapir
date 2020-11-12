@@ -81,8 +81,8 @@ class MemberAppLayout extends React.Component<
         const { selectedKeys } = this.state;
         return (
             <Layout className="member-app-layout-view">
-                <Sider className="sider-layout">
-                    <div className="sider-layout-title" />
+                <Sider className="member-app-sider-layout">
+                    <div className="member-app-sider-layout-title" />
                     <Menu
                         theme="dark"
                         defaultSelectedKeys={['0']}
@@ -91,7 +91,7 @@ class MemberAppLayout extends React.Component<
                     >
                         {this.getMenuItems(menuRoutes, menuProps)}
                     </Menu>
-                    <div className="sider-layout-footer">
+                    <div className="member-app-sider-layout-footer">
                         <UserTile
                             name={name}
                             avatar={avatar}
