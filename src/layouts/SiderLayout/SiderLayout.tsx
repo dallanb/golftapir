@@ -5,14 +5,14 @@ import { getInitials, randomColourGenerator } from '@utils';
 import { SiderLayoutProps } from './types';
 import './SiderLayout.scss';
 
-const { Content, Sider } = Layout;
+const { Sider } = Layout;
 
 const SiderLayout: React.FunctionComponent<SiderLayoutProps> = ({
     showSpinner,
     children,
     title,
-    className,
     avatar,
+    className,
 }) => {
     const renderHeader = () => {
         return (
@@ -51,12 +51,10 @@ const SiderLayout: React.FunctionComponent<SiderLayoutProps> = ({
         return avatarProps;
     };
     return (
-        <Sider width={300} className="sider-layout">
+        <Sider width={300} className={`sider-layout ${className}`}>
             <div className="sider-layout-background">
                 {renderHeader()}
-                <div className={`sider-layout-children ${className}`}>
-                    {renderContent()}
-                </div>
+                {renderContent()}
             </div>
         </Sider>
     );

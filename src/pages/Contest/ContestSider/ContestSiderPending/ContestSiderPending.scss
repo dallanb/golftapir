@@ -1,9 +1,16 @@
 .contest-sider-pending {
+    padding: 16px;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+
     .contest-sider-pending-buttons {
         .contest-sider-pending-buttons-button {
             margin: 5px 0;
+
             &.accept {
             }
+
             &.decline {
             }
         }
