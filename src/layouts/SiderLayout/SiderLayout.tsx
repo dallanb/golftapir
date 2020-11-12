@@ -5,7 +5,7 @@ import { getInitials, randomColourGenerator } from '@utils';
 import { SiderLayoutProps } from './types';
 import './SiderLayout.scss';
 
-const { Sider } = Layout;
+const { Content, Sider } = Layout;
 
 const SiderLayout: React.FunctionComponent<SiderLayoutProps> = ({
     showSpinner,
@@ -52,10 +52,12 @@ const SiderLayout: React.FunctionComponent<SiderLayoutProps> = ({
     };
     return (
         <Sider width={300} className={`sider-layout ${className}`}>
-            <div className="sider-layout-background">
+            <Layout className="sider-layout-background">
                 {renderHeader()}
-                {renderContent()}
-            </div>
+                <Content className="sider-layout-content">
+                    {renderContent()}
+                </Content>
+            </Layout>
         </Sider>
     );
 };

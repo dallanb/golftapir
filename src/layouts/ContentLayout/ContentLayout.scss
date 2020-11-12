@@ -2,31 +2,48 @@
     max-height: 100vh;
     overflow: hidden;
     .content-layout-background {
-        background: white;
-        min-height: 100%;
+        .content-layout-header > div {
+            background: white;
+        }
+        .content-layout-content > div {
+            background: white;
+        }
+    }
+    .sider-layout-background {
+        .sider-layout-header > div {
+            background: white;
+        }
+        .sider-layout-content > div {
+            background: white;
+        }
+    }
+
+    .content-layout-header {
     }
     .content-layout-content {
-        margin: 16px;
-        overflow: scroll;
-        &.secondary {
-            overflow: hidden;
+        margin: 0 24px 16px 24px;
+    }
+
+    .sider-layout {
+        background: none;
+        margin: 16px 24px 16px 0;
+        .sider-layout-header {
+            padding: 0;
         }
-        .content-layout-children {
-            padding: 24px;
+        .sider-layout-content {
+            margin-top: 16px;
         }
     }
-    .ant-layout-sider {
-        background: none;
-        margin: 16px 16px 16px 0;
-        .sider-layout-background {
-            background: white;
-            min-height: 100%;
-        }
-        .sider-layout-header {
+
+    // nice soft shadow boxies
+    .content-layout-header,
+    .content-layout-content,
+    .sider-layout-header,
+    .sider-layout-content {
+        > div {
             padding: 16px;
-        }
-        .sider-layout-children {
-            padding: 24px;
+            border-radius: 4px;
+            box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.1);
         }
     }
 }
