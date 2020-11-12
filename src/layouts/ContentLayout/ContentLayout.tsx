@@ -27,6 +27,7 @@ const ContentLayout: React.FunctionComponent<ContentLayoutProps> = ({
                 avatar={avatar && renderAvatar(avatar)}
                 tags={tags}
                 extra={extra}
+                className="content-layout-header"
             />
         );
     };
@@ -66,17 +67,16 @@ const ContentLayout: React.FunctionComponent<ContentLayoutProps> = ({
     };
     return (
         <Layout className="content-layout">
-            <Layout className="content-layout">
-                <Content className="content-layout-content">
-                    <div className="content-layout-background">
-                        {renderHeader()}
-                        <div className={`content-layout-children ${className}`}>
-                            {renderContent()}
-                        </div>
-                    </div>
-                </Content>
+            <Layout className="content-layout-body content-layout-background">
+                <Layout className="content-layout-main">
+                    {renderHeader()}
+                    <Content className="content-layout-content">
+                        {renderContent()}
+                    </Content>
+                </Layout>
                 {renderSider()}
             </Layout>
+
             <Footer className="footer">
                 Tech Tapir ©2020 Created by Dallan Bhatti
             </Footer>

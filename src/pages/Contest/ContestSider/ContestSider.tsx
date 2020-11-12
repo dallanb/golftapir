@@ -65,7 +65,7 @@ const ContestSider: React.FunctionComponent<ContestSiderProps> = () => {
         <SiderLayout
             {...renderContentLayoutProps()}
             showSpinner={false}
-            className="contest-sider"
+            // className="contest-sider"
         >
             {renderContent()}
         </SiderLayout>

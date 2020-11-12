@@ -11,8 +11,8 @@ const SiderLayout: React.FunctionComponent<SiderLayoutProps> = ({
     showSpinner,
     children,
     title,
-    className,
     avatar,
+    className,
 }) => {
     const renderHeader = () => {
         return (
@@ -51,13 +51,13 @@ const SiderLayout: React.FunctionComponent<SiderLayoutProps> = ({
         return avatarProps;
     };
     return (
-        <Sider width={300} className="sider-layout">
-            <div className="sider-layout-background">
+        <Sider width={300} className={`sider-layout ${className}`}>
+            <Layout className="sider-layout-background">
                 {renderHeader()}
-                <div className={`sider-layout-children ${className}`}>
+                <Content className="sider-layout-content">
                     {renderContent()}
-                </div>
-            </div>
+                </Content>
+            </Layout>
         </Sider>
     );
 };
