@@ -30,7 +30,7 @@ export const selectContestStatus = createSelector(
 
 export const selectContestParticipants = createSelector(
     [getContestPage],
-    (contestPage) => _get(contestPage, ['contest', 'participants'], [])
+    (contestPage) => _get(contestPage, ['contest', 'participants'], undefined)
 );
 
 export const selectIsOwner = createSelector(
@@ -52,4 +52,9 @@ export const selectSubscribed = createSelector(
 
 export const selectSheet = createSelector([getContestPage], (contestPage) =>
     _get(contestPage, ['score', 'sheet'], [])
+);
+
+export const selectParticipant = createSelector(
+    [getContestPage],
+    (contestPage) => _get(contestPage, ['participant'], undefined)
 );

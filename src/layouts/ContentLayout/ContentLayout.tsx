@@ -42,11 +42,7 @@ const ContentLayout: React.FunctionComponent<ContentLayoutProps> = ({
         if (!sider) {
             return null;
         }
-        return (
-            <Sider className="content-layout-content secondary">
-                <div className="content-layout-background">{sider}</div>
-            </Sider>
-        );
+        return sider;
     };
 
     const renderAvatar = (avatar: ContentLayoutProps['avatar']) => {

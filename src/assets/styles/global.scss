@@ -2,12 +2,12 @@
 .ant-layout {
     background: #dadde2 !important;
 }
-.ant-layout-sider {
-    background: #333333 !important;
-    .ant-layout-sider-trigger {
-        background: #3f3f3f;
-    }
-}
+//.ant-layout-sider {
+//    background: #333333 !important;
+//    .ant-layout-sider-trigger {
+//        background: #3f3f3f;
+//    }
+//}
 .ant-menu {
     &.ant-menu-dark,
     &.ant-menu-dark:not(.ant-menu-horizontal) {
@@ -21,5 +21,5 @@
 }
 
 .ant-layout-footer {
-  background: #dadde2 !important;
+    background: #dadde2 !important;
 }

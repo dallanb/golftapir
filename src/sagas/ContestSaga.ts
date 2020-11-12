@@ -31,6 +31,23 @@ function* fetchContests({ options, append }: AnyAction) {
     }
 }
 
+function* fetchContestMaterialized({ uuid, options }: AnyAction) {
+    try {
+        const res = yield call(
+            ContestService.fetchContestMaterialized,
+            uuid,
+            options
+        );
+        const { contests, _metadata: metadata } = res;
+        yield put(
+            ContestActions.fetchContestMaterializedSuccess(contests, metadata)
+        );
+    } catch (err) {
+        yield put(ContestActions.fetchContestMaterializedFailure(err));
+        message.error(CONSTANTS.CONTEST.ERROR.FETCH);
+    }
+}
+
 function* fetchContestsMaterialized({ options, append }: AnyAction) {
     try {
         const res = yield call(
@@ -86,6 +103,23 @@ function* assignAvatar({ uuid, avatar }: AnyAction) {
     }
 }
 
+function* fetchContestParticipantUser({ contest_uuid, user_uuid }: any) {
+    try {
+        const res = yield call(
+            ContestService.fetchContestParticipantUser,
+            contest_uuid,
+            user_uuid
+        );
+        const { participants } = res;
+        yield put(
+            ContestActions.fetchContestParticipantUserSuccess(participants)
+        );
+    } catch (err) {
+        yield put(ContestActions.fetchContestParticipantUserFailure(err));
+        message.error(CONSTANTS.CONTEST.ERROR.FETCH_PARTICIPANT);
+    }
+}
+
 function* updateContestParticipant({ uuid, data }: any) {
     try {
         const res = yield call(
@@ -107,12 +141,20 @@ export default function* ContestSaga() {
         takeLatest(ContestTypes.FETCH_CONTEST, fetchContest),
         takeLatest(ContestTypes.FETCH_CONTESTS, fetchContests),
         takeLatest(
+            ContestTypes.FETCH_CONTEST_MATERIALIZED,
+            fetchContestMaterialized
+        ),
+        takeLatest(
             ContestTypes.FETCH_CONTESTS_MATERIALIZED,
             fetchContestsMaterialized
         ),
         takeLatest(ContestTypes.CREATE_CONTEST, createContest),
         takeLatest(ContestTypes.UPDATE_CONTEST, updateContest),
         takeLatest(ContestTypes.ASSIGN_AVATAR, assignAvatar),
+        takeLatest(
+            ContestTypes.FETCH_CONTEST_PARTICIPANT_USER,
+            fetchContestParticipantUser
+        ),
         takeLatest(
             ContestTypes.UPDATE_CONTEST_PARTICIPANT,
             updateContestParticipant

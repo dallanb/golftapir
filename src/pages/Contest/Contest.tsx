@@ -2,18 +2,18 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { get as _get } from 'lodash';
-import { Tag } from 'antd';
 import { ContestProps } from './types';
 import { selectData } from './selector';
 import { ContentLayout } from '@layouts';
 import { ContentLayoutProps } from '@layouts/ContentLayout/types';
 import constants from '@constants';
-import { mapStatusColour, withS3URL } from '@utils';
+import { withS3URL } from '@utils';
 import ContestPageActions from './actions';
-import ContestParticipantsTable from './ContestParticipantsTable';
 import ContestSider from './ContestSider';
 import ContestSubTitle from './ContestSubTitle';
 import ContestTitle from './ContestTitle';
+import ContestSiderSteps from './ContestSteps';
+import ContestLeadersTable from './ContestLeadersTable';
 import './Contest.scss';
 
 const Contest: React.FunctionComponent<ContestProps> = () => {
@@ -53,7 +53,7 @@ const Contest: React.FunctionComponent<ContestProps> = () => {
             src: undefined,
             className: undefined,
         };
-        const src = _get(contest, ['avatar', 's3_filename'], null);
+        const src = _get(contest, ['avatar'], null);
         const prevSrc = _get(prevContest, ['src'], null);
 
         if (src) {
@@ -63,6 +63,10 @@ const Contest: React.FunctionComponent<ContestProps> = () => {
             avatarProps['src'] = prevSrc;
         }
         return avatarProps;
+    };
+
+    const renderExtra = () => {
+        return <ContestSiderSteps />;
     };
 
     const renderSider = () => {
@@ -85,9 +89,15 @@ const Contest: React.FunctionComponent<ContestProps> = () => {
             contentLayoutProps['title'] = renderTitle(name);
             contentLayoutProps['subTitle'] = renderSubTitle(uuid);
             contentLayoutProps['avatar'] = renderAvatar(name);
+            contentLayoutProps['extra'] = renderExtra();
             contentLayoutProps['sider'] = renderSider();
         }
         return contentLayoutProps;
+    };
+
+    const renderContent = () => {
+        const status = _get(contest, ['status'], undefined);
+        return <ContestLeadersTable />;
     };
 
     return (
@@ -96,7 +106,7 @@ const Contest: React.FunctionComponent<ContestProps> = () => {
             showSpinner={!isInitialized}
             className="contest-view"
         >
-            <ContestParticipantsTable />
+            {renderContent()}
         </ContentLayout>
     );
 };

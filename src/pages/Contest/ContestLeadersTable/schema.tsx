@@ -5,18 +5,41 @@ import { totalStrokeCalculator } from '@utils';
 
 export const columnsSchema = [
     {
-        accessor: 'participant',
-        width: 200,
+        Header: 'Pos',
+        accessor: null,
+        width: 50,
+        Cell: () => <div>1</div>,
+    },
+    {
+        Header: 'Participant',
+        accessor: 'uuid',
+        width: 500,
         Cell: ({ value }: any) => (
             <ContestLeadersTableParticipant uuid={value} />
         ),
     },
     {
         Header: 'Score',
-        accessor: 'holes',
+        accessor: null,
         width: 100,
         Cell: ({ value }: any) => {
-            return <div>{totalStrokeCalculator(value)}</div>;
+            return <div>0</div>;
         },
     },
+    {
+        Header: 'Thru',
+        accessor: null,
+        width: 100,
+        Cell: ({ value }: any) => {
+            return <div>1</div>;
+        },
+    },
+    // {
+    //     Header: 'Strokes',
+    //     accessor: 'holes',
+    //     width: 100,
+    //     Cell: ({ value }: any) => {
+    //         return <div>{totalStrokeCalculator(value)}</div>;
+    //     },
+    // },
 ];

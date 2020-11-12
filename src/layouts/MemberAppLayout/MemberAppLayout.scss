@@ -5,8 +5,9 @@
         color: white;
     }
 
-    .sider-layout {
-        .sider-layout-title {
+    .member-app-sider-layout {
+        background: #333333 !important;
+        .member-app-sider-layout-title {
             height: 32px;
             background: url(../../assets/images/tapir_white.png);
             background-size: cover;
@@ -15,11 +16,11 @@
             color: white;
             filter: invert(1);
 
-            .sider-layout-title-text {
+            .member-app-sider-layout-title-text {
                 align-content: end;
             }
         }
-        .sider-layout-footer {
+        .member-app-sider-layout-footer {
             width: 100%;
             position: absolute;
             bottom: 0;

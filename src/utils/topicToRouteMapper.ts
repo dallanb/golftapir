@@ -24,7 +24,7 @@ const topicToRouteMapper = (
                 case constants.EVENTS.CONTESTS.PARTICIPANT_INVITED:
                 case constants.EVENTS.CONTESTS.PARTICIPANT_ACTIVE:
                 case constants.EVENTS.CONTESTS.CONTEST_READY:
-                case constants.EVENTS.CONTESTS.CONTEST_TIMEOUT:
+                case constants.EVENTS.CONTESTS.CONTEST_ACTIVE:
                     mapping.state = {
                         uuid: _get(item, ['properties', 'contest_uuid'], ''),
                     };

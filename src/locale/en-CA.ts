@@ -27,14 +27,17 @@ const CONSTANTS = {
         SUCCESS: {
             CREATE: 'Contest creation successful!',
             UPDATE: 'Contest update successful!',
+            FETCH_PARTICIPANT: 'Successfully fetched participant!',
             UPDATE_PARTICIPANT: 'Successfully updated!',
         },
         ERROR: {
             FETCH: 'Error fetching Contest information',
             FETCH_ALL: 'Error fetching Contests information',
-            FETCH_ALL_MATERIALIZED: 'Error fetch Contests information',
+            FETCH_MATERIALIZED: 'Error fetching Contest information',
+            FETCH_ALL_MATERIALIZED: 'Error fetching Contests information',
             CREATE: 'Contest creation unsuccessful',
             UPDATE: 'Contest update unsuccessful!',
+            FETCH_PARTICIPANT: 'Error fetch Contest participant information',
             FETCH_PARTICIPANTS: 'Error fetch Contest participants information',
             UPDATE_PARTICIPANT: 'Error updating participant',
         },

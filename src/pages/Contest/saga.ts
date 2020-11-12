@@ -9,25 +9,32 @@ import {
     unsubscribe as unsubscribeHelper,
     fetchContest,
     bulkFetchAccounts,
+    fetchContestMaterialized,
+    fetchContestParticipantUser,
 } from '@helpers';
 import { keyBy as _keyBy } from 'lodash';
+import { selectMe } from '@selectors/BaseSelector';
 
 // Action Handlers
 function* init({ uuid }: AnyAction) {
     try {
-        yield fork(initScore, uuid);
         yield fork(initSubscribed, uuid);
 
-        const { data: contest } = yield call(fetchContest, uuid);
+        const { data: contest } = yield call(fetchContestMaterialized, uuid);
+        const { data: participant } = yield call(
+            fetchContestParticipantUser,
+            uuid,
+            'me'
+        );
 
         yield put(ContestPageActions.set({ title: contest.name }));
         yield put(ContestPageActions.set({ contest }));
+        yield put(ContestPageActions.set({ participant }));
 
         const { participants } = contest;
 
-        const accounts = participants.map(
-            ({ user_uuid }: { user_uuid: string }) => user_uuid
-        );
+        const accounts = Object.keys(participants);
+
         if (accounts.length) {
             const { data: accountParticipants } = yield call(
                 bulkFetchAccounts,
@@ -79,6 +86,7 @@ function* subscribe({ uuid }: AnyAction) {
         yield put(ContestPageActions.subscribeFailure());
     }
 }
+
 function* unsubscribe({ uuid }: AnyAction) {
     try {
         yield call(unsubscribeHelper, uuid);
