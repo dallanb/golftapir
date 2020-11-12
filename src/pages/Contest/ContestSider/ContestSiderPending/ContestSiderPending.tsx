@@ -30,7 +30,6 @@ const ContestSiderPending: React.FunctionComponent<ContestSiderPendingProps> = (
 
     return (
         <div className="contest-sider-pending">
-            PLEASE RESPOND TO CONTEST REQUEST BELOW
             <div className="contest-sider-pending-buttons">
                 <div className="contest-sider-pending-buttons-button active">
                     <Button block type="primary" onClick={handleAcceptClick}>
