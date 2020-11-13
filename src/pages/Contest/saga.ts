@@ -1,7 +1,7 @@
 import { AnyAction } from 'redux';
 import { all, call, fork, put, select, takeLatest } from 'redux-saga/effects';
 import ContestPageActions, { ContestPageTypes } from './actions';
-import { initScore, initSubscribed } from './helpers';
+import { initScore, initSocket, initSubscribed } from './helpers';
 import {
     updateContest,
     updateContestParticipant,
@@ -13,13 +13,12 @@ import {
     fetchContestParticipantUser,
 } from '@helpers';
 import { keyBy as _keyBy } from 'lodash';
-import { selectMe } from '@selectors/BaseSelector';
 
 // Action Handlers
 function* init({ uuid }: AnyAction) {
     try {
+        yield fork(initSocket, uuid);
         yield fork(initSubscribed, uuid);
-
         const { data: contest } = yield call(fetchContestMaterialized, uuid);
         const { data: participant } = yield call(
             fetchContestParticipantUser,

@@ -8,4 +8,8 @@ export {
 } from './NotificationActions';
 export { default as ScoreActions, ScoreTypes } from './ScoreActions';
 export { default as SocketActions, SocketTypes } from './SocketActions';
+export {
+    default as TopicSocketActions,
+    TopicSocketTypes,
+} from './TopicSocketActions';
 export { default as WagerActions, WagerTypes } from './WagerActions';

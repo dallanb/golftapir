@@ -5,4 +5,5 @@ export { default as ModalSaga } from './ModalSaga';
 export { default as NotificationSaga } from './NotificationSaga';
 export { default as ScoreSaga } from './ScoreSaga';
 export { default as SocketSaga } from './SocketSaga';
+export { default as TopicSocketSaga } from './TopicSocketSaga';
 export { default as WagerSaga } from './WagerSaga';
