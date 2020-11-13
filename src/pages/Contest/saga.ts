@@ -1,5 +1,13 @@
 import { AnyAction } from 'redux';
-import { all, call, fork, put, select, takeLatest } from 'redux-saga/effects';
+import {
+    all,
+    call,
+    fork,
+    put,
+    select,
+    takeLatest,
+    takeLeading,
+} from 'redux-saga/effects';
 import ContestPageActions, { ContestPageTypes } from './actions';
 import { selectContest } from './selector';
 import {

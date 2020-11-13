@@ -41,19 +41,13 @@ export const socketEventHandlers = (socket: WebSocket, emitter: any) => {
             case constants.TOPICS.CONTESTS:
                 switch (event) {
                     case constants.EVENTS.CONTESTS.PARTICIPANT_ACTIVE:
-                        // emitter(
-                        //     NotificationActions.fetchPendingSuccess(data.count)
-                        // );
-                        console.log('THE PARTICIPANT IS ACTIVE');
+                        emitter(ContestPageActions.refresh());
                         break;
                     case constants.EVENTS.CONTESTS.CONTEST_READY:
                         emitter(ContestPageActions.refresh());
                         break;
                     case constants.EVENTS.CONTESTS.CONTEST_ACTIVE:
-                        // emitter(
-                        //     NotificationActions.fetchPendingSuccess(data.count)
-                        // );
-                        console.log('THE CONTEST IS ACTIVE');
+                        emitter(ContestPageActions.refresh());
                         break;
                     default:
                         break;
