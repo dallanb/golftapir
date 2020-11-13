@@ -2,18 +2,22 @@
     max-height: 100vh;
     overflow: hidden;
     .content-layout-background {
-        .content-layout-header > div {
+        .content-layout-header > div,
+        section {
             background: white;
         }
-        .content-layout-content > div {
+        .content-layout-content > div,
+        section {
             background: white;
         }
     }
     .sider-layout-background {
-        .sider-layout-header > div {
+        .sider-layout-header > div,
+        section {
             background: white;
         }
-        .sider-layout-content > div {
+        .sider-layout-content > div,
+        section {
             background: white;
         }
     }
@@ -22,6 +26,7 @@
     }
     .content-layout-content {
         margin: 0 24px 16px 24px;
+        overflow: auto;
     }
 
     .sider-layout {
@@ -40,7 +45,8 @@
     .content-layout-content,
     .sider-layout-header,
     .sider-layout-content {
-        > div {
+        > div,
+        section {
             padding: 16px;
             border-radius: 4px;
             box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.1);

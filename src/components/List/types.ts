@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactText } from 'react';
 import { ListChildComponentProps } from 'react-window';
 
 export interface ListProps {
@@ -9,6 +9,6 @@ export interface ListProps {
     items: any;
     loadNextPage: (start: number, stop: number, resolve: () => void) => void;
     minimumBatchSize: number;
-    height?: number;
-    width?: number;
+    height?: ReactText;
+    width?: ReactText;
 }

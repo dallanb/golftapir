@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactText } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ContestsListProps } from './types';
 import { List } from '@components';
@@ -7,6 +7,7 @@ import { selectContestsList } from '../selector';
 import ContestsListTile from './ContestsListTile';
 import ComponentContent from '@layouts/ComponentContent';
 import './ContestsList.scss';
+import { Spin } from 'antd';
 
 const ContestsList: React.FunctionComponent<ContestsListProps> = ({
     history,
@@ -35,18 +36,29 @@ const ContestsList: React.FunctionComponent<ContestsListProps> = ({
         );
     };
 
+    const loadTableDimensions = (
+        items: any[] = []
+    ): { size: number; height: ReactText; width: ReactText } => {
+        // move this info to schema.ts
+        const size = 150;
+        const width = '100%';
+        const height = items.length * size;
+
+        return { size, width, height };
+    };
+    if (!isInitialized) return <Spin />;
     return (
-        <ComponentContent showSpinner={!isInitialized}>
-            <List
-                size={150}
-                items={data}
-                hasNextPage={hasNextPage()}
-                loadNextPage={loadMore}
-                isNextPageLoading={isFetching}
-                minimumBatchSize={100}
-                rowRenderer={(props) => ContestsListTile({ props, history })}
-            />
-        </ComponentContent>
+        // <ComponentContent showSpinner={!isInitialized}>
+        <List
+            {...loadTableDimensions(data)}
+            items={data}
+            hasNextPage={hasNextPage()}
+            loadNextPage={loadMore}
+            isNextPageLoading={isFetching}
+            minimumBatchSize={100}
+            rowRenderer={(props) => ContestsListTile({ props, history })}
+        />
+        // </ComponentContent>
     );
 };
 
