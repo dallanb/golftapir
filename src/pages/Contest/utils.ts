@@ -1,7 +1,7 @@
 import { get as _get } from 'lodash';
 import constants from '@constants';
 import moment from 'moment';
-import { NotificationActions } from '@actions';
+import ContestPageActions from './actions';
 
 export const prepareParticipant = (
     uuid: string,
@@ -35,15 +35,19 @@ export const mergeContestParticipant = (
 export const socketEventHandlers = (socket: WebSocket, emitter: any) => {
     socket.onmessage = (evt: MessageEvent) => {
         const data = JSON.parse(evt.data);
-        console.log(data);
+        // console.log(data);
         const [topic, event] = data.event.split(':');
         switch (topic) {
-            case constants.TOPICS.NOTIFICATIONS:
+            case constants.TOPICS.CONTESTS:
                 switch (event) {
-                    case constants.EVENTS.NOTIFICATIONS.PENDING:
-                        emitter(
-                            NotificationActions.fetchPendingSuccess(data.count)
-                        );
+                    case constants.EVENTS.CONTESTS.PARTICIPANT_ACTIVE:
+                        emitter(ContestPageActions.refresh());
+                        break;
+                    case constants.EVENTS.CONTESTS.CONTEST_READY:
+                        emitter(ContestPageActions.refresh());
+                        break;
+                    case constants.EVENTS.CONTESTS.CONTEST_ACTIVE:
+                        emitter(ContestPageActions.refresh());
                         break;
                     default:
                         break;

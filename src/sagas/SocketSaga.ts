@@ -45,9 +45,20 @@ function* init({ data, options }: AnyAction) {
     }
 }
 
+function* terminate({}: AnyAction) {
+    try {
+        yield WebSocketNotificationClient.terminate();
+        yield put(SocketActions.terminateSuccess());
+    } catch (err) {
+        message.error(CONSTANTS.SOCKET.ERROR.TERMINATE);
+        yield put(SocketActions.terminateFailure(err));
+    }
+}
+
 export default function* SocketSaga() {
     yield all([
         takeLatest(SocketTypes.INIT, init),
+        takeLatest(SocketTypes.TERMINATE, terminate),
         takeLatest(SocketTypes.WRITE, write),
     ]);
 }

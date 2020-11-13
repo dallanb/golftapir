@@ -46,7 +46,6 @@ function* init({ data, options }: AnyAction) {
     }
 }
 
-// work on terminating web socket connection and adding some handling in client.ts
 function* terminate({}: AnyAction) {
     try {
         yield WebSocketTopicClient.terminate();

@@ -58,6 +58,14 @@ function* init() {
     }
 }
 
+function* terminate() {
+    try {
+        yield put(SocketActions.terminate());
+    } catch (err) {
+        console.error(err);
+    }
+}
+
 // Helpers
 function* refresh() {
     yield put(AuthActions.refresh());
@@ -100,5 +108,8 @@ function* requestToken() {
 }
 
 export default function* BaseSaga() {
-    yield all([takeLatest(BaseTypes.INIT, init)]);
+    yield all([
+        takeLatest(BaseTypes.INIT, init),
+        takeLatest(BaseTypes.TERMINATE, terminate),
+    ]);
 }
