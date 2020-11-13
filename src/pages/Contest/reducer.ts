@@ -48,6 +48,27 @@ function terminate() {
     return INITIAL_STATE;
 }
 
+function refresh(state = INITIAL_STATE) {
+    return Immutable.merge(state, {
+        isFetching: true,
+        err: null,
+    });
+}
+
+function refreshSuccess(state = INITIAL_STATE) {
+    return Immutable.merge(state, {
+        isFetching: false,
+        err: null,
+    });
+}
+
+function refreshFailure(state: any, { err }: any) {
+    return Immutable.merge(state, {
+        isFetching: false,
+        err,
+    });
+}
+
 function set(state: any, { data }: any) {
     return Immutable.merge(state, {
         ...data,
@@ -96,6 +117,9 @@ const HANDLERS = {
     [ContestPageTypes.INIT_SUCCESS]: initSuccess,
     [ContestPageTypes.INIT_FAILURE]: initFailure,
     [ContestPageTypes.TERMINATE]: terminate,
+    [ContestPageTypes.REFRESH]: refresh,
+    [ContestPageTypes.REFRESH_SUCCESS]: refreshSuccess,
+    [ContestPageTypes.REFRESH_FAILURE]: refreshFailure,
     [ContestPageTypes.SET]: set,
     [ContestPageTypes.UPDATE_CONTEST_STATUS_SUCCESS]: updateContestStatusSuccess,
     [ContestPageTypes.UPDATE_CONTEST_PARTICIPANT_STATUS_SUCCESS]: updateContestParticipantStatusSuccess,

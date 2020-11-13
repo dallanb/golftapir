@@ -1,8 +1,9 @@
 import { AnyAction } from 'redux';
 import { all, call, fork, put, select, takeLatest } from 'redux-saga/effects';
 import ContestPageActions, { ContestPageTypes } from './actions';
+import { selectContest } from './selector';
 import {
-    initScore,
+    initContest,
     initSocket,
     initSubscribed,
     terminateSocket,
@@ -12,41 +13,14 @@ import {
     updateContestParticipant,
     subscribe as subscribeHelper,
     unsubscribe as unsubscribeHelper,
-    fetchContest,
-    bulkFetchAccounts,
-    fetchContestMaterialized,
-    fetchContestParticipantUser,
 } from '@helpers';
-import { keyBy as _keyBy } from 'lodash';
 
 // Action Handlers
 function* init({ uuid }: AnyAction) {
     try {
         yield fork(initSocket, uuid);
         yield fork(initSubscribed, uuid);
-        const { data: contest } = yield call(fetchContestMaterialized, uuid);
-        const { data: participant } = yield call(
-            fetchContestParticipantUser,
-            uuid,
-            'me'
-        );
-
-        yield put(ContestPageActions.set({ title: contest.name }));
-        yield put(ContestPageActions.set({ contest }));
-        yield put(ContestPageActions.set({ participant }));
-
-        const { participants } = contest;
-
-        const accounts = Object.keys(participants);
-
-        if (accounts.length) {
-            const { data: accountParticipants } = yield call(
-                bulkFetchAccounts,
-                accounts
-            );
-            const accountsHash = _keyBy(accountParticipants, 'membership_uuid');
-            yield put(ContestPageActions.set({ accountsHash }));
-        }
+        yield call(initContest, uuid);
         yield put(ContestPageActions.initSuccess());
     } catch (err) {
         yield put(ContestPageActions.initFailure(err));
@@ -58,6 +32,16 @@ function* terminate() {
         yield call(terminateSocket);
     } catch (err) {
         console.error(err);
+    }
+}
+
+function* refresh() {
+    try {
+        const { uuid } = yield select(selectContest);
+        yield call(initContest, uuid);
+        yield put(ContestPageActions.refreshSuccess());
+    } catch (err) {
+        yield put(ContestPageActions.refreshFailure(err));
     }
 }
 
@@ -112,6 +96,7 @@ export default function* ContestPageSaga() {
     yield all([
         takeLatest(ContestPageTypes.INIT, init),
         takeLatest(ContestPageTypes.TERMINATE, terminate),
+        takeLatest(ContestPageTypes.REFRESH, refresh),
         takeLatest(ContestPageTypes.UPDATE_CONTEST_STATUS, updateContestStatus),
         takeLatest(
             ContestPageTypes.UPDATE_CONTEST_PARTICIPANT_STATUS,
