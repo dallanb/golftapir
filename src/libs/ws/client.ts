@@ -8,7 +8,7 @@ class Client {
     constructor() {
         this._socket = undefined;
         this._socketOptions = {
-            endpoint: config.WS_URL,
+            endpoint: config.WS_NOTIFICATION_URL,
         };
     }
 
@@ -21,7 +21,7 @@ class Client {
     }
     init(user_uuid: string): Promise<void> {
         this.socket = new WebSocket(
-            `${config.WS_URL}?uuid=${user_uuid}&jwt=${ClientProxy.accessToken}`
+            `${config.WS_NOTIFICATION_URL}?uuid=${user_uuid}&jwt=${ClientProxy.accessToken}`
         );
 
         this.socket.onclose = () => {
