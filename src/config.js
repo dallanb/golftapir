@@ -23,7 +23,8 @@ const config = {
         appId: process.env.FIREBASE_APP_ID,
         measurementId: process.env.FIREBASE_MEASUREMENT_ID,
     },
-    WS_URL: 'wss://notification.techtapir.com',
+    WS_NOTIFICATION_URL: 'wss://notification.techtapir.com/notification',
+    WS_TOPIC_URL: 'wss://notification.techtapir.com/topic',
 };
 
 export default config;

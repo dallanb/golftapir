@@ -1,14 +1,15 @@
-import config from 'config';
 import { ClientProxy } from '@services';
 
 class Client {
+    private _url: string;
     private _socket?: WebSocket;
     private readonly _socketOptions: { endpoint: string };
 
-    constructor() {
+    constructor(url: string) {
+        this._url = url;
         this._socket = undefined;
         this._socketOptions = {
-            endpoint: config.WS_URL,
+            endpoint: url,
         };
     }
 
@@ -19,15 +20,15 @@ class Client {
     set socket(socket: WebSocket | undefined) {
         this._socket = socket;
     }
-    init(user_uuid: string): Promise<void> {
+    init(uuid: string): Promise<void> {
         this.socket = new WebSocket(
-            `${config.WS_URL}?uuid=${user_uuid}&jwt=${ClientProxy.accessToken}`
+            `${this._url}?uuid=${uuid}&jwt=${ClientProxy.accessToken}`
         );
 
         this.socket.onclose = () => {
             console.log('reconnecting');
-            // this.socket = new WebSocket(`${config.WS_URL}?uuid=${user_uuid}`);
-            this.init(user_uuid);
+            // this.socket = new WebSocket(`${config.WS_URL}?uuid=${uuid}`);
+            this.init(uuid);
         };
 
         return new Promise((resolve, reject) => {
@@ -66,4 +67,4 @@ class Client {
     }
 }
 
-export default new Client();
+export default Client;

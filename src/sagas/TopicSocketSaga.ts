@@ -1,15 +1,15 @@
 import { AnyAction } from 'redux';
 import { eventChannel } from 'redux-saga';
 import { all, fork, take, call, put, takeLatest } from 'redux-saga/effects';
-import { WebSocketNotificationClient } from '@libs';
-import { SocketActions, SocketTypes } from '@actions';
+import { WebSocketTopicClient } from '@libs';
+import { TopicSocketActions, TopicSocketTypes } from '@actions';
 import { message } from 'antd';
 import CONSTANTS from '@locale/en-CA';
 
 function subscribe(options: any) {
     const { eventHandler } = options;
     return eventChannel((emitter) =>
-        eventHandler(WebSocketNotificationClient.socket, emitter)
+        eventHandler(WebSocketTopicClient.socket, emitter)
     );
 }
 
@@ -23,21 +23,21 @@ function* read(options: any) {
 
 function* write({ data }: AnyAction) {
     try {
-        WebSocketNotificationClient.socket?.send(data);
-        yield put(SocketActions.writeSuccess());
+        WebSocketTopicClient.socket?.send(data);
+        yield put(TopicSocketActions.writeSuccess());
     } catch (err) {
-        yield put(SocketActions.writeFailure());
+        yield put(TopicSocketActions.writeFailure());
     }
 }
 
 function* init({ data, options }: AnyAction) {
     try {
         // maybe notify the server that the user has logged in?
-        yield WebSocketNotificationClient.init(data.uuid);
-        if (!WebSocketNotificationClient.status()) {
+        yield WebSocketTopicClient.init(data.uuid);
+        if (!WebSocketTopicClient.status()) {
             throw new Error();
         }
-        WebSocketNotificationClient.send('Thank you for the invite');
+        WebSocketTopicClient.send('Thank you for the invite');
         yield fork(read, options);
     } catch (err) {
         console.log(err);
@@ -45,9 +45,17 @@ function* init({ data, options }: AnyAction) {
     }
 }
 
-export default function* SocketSaga() {
+// work on terminating web socket connection and adding some handling in client.ts
+function* terminate({ data }: AnyAction) {
+    try {
+    } catch (err) {
+        message.error(CONSTANTS.SOCKET.ERROR.TERMINATE);
+    }
+}
+
+export default function* TopicSocketSaga() {
     yield all([
-        takeLatest(SocketTypes.INIT, init),
-        takeLatest(SocketTypes.WRITE, write),
+        takeLatest(TopicSocketTypes.INIT, init),
+        takeLatest(TopicSocketTypes.WRITE, write),
     ]);
 }
