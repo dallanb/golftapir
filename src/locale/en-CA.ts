@@ -70,6 +70,7 @@ const CONSTANTS = {
     SOCKET: {
         ERROR: {
             INIT: 'Error initializing Web Sockets',
+            TERMINATE: 'Error terminating Web Sockets',
         },
     },
     WAGER: {
