@@ -19,3 +19,6 @@ export function* initSocket(uuid: string) {
         TopicSocketActions.init({ uuid }, { eventHandler: socketEventHandlers })
     );
 }
+export function* terminateSocket() {
+    yield put(TopicSocketActions.terminate());
+}

@@ -25,16 +25,27 @@ class Client {
             `${this._url}?uuid=${uuid}&jwt=${ClientProxy.accessToken}`
         );
 
-        this.socket.onclose = () => {
-            console.log('reconnecting');
-            // this.socket = new WebSocket(`${config.WS_URL}?uuid=${uuid}`);
-            this.init(uuid);
+        this.socket.onclose = (event) => {
+            console.log('socket close event code, ', event.code);
+            switch (event.code) {
+                case 1000:
+                    console.log('normal closure');
+                    break;
+                default:
+                    console.log('reconnecting');
+                    this.init(uuid);
+            }
         };
 
         return new Promise((resolve, reject) => {
             this._connect(resolve, reject);
         });
     }
+
+    terminate(code: number = 1000): void {
+        this.socket?.close(code);
+    }
+
     _connect(resolve: () => void, reject: () => void): void {
         if (!this.socket) {
             return reject();

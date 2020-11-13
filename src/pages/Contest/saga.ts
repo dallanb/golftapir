@@ -1,7 +1,12 @@
 import { AnyAction } from 'redux';
 import { all, call, fork, put, select, takeLatest } from 'redux-saga/effects';
 import ContestPageActions, { ContestPageTypes } from './actions';
-import { initScore, initSocket, initSubscribed } from './helpers';
+import {
+    initScore,
+    initSocket,
+    initSubscribed,
+    terminateSocket,
+} from './helpers';
 import {
     updateContest,
     updateContestParticipant,
@@ -45,6 +50,14 @@ function* init({ uuid }: AnyAction) {
         yield put(ContestPageActions.initSuccess());
     } catch (err) {
         yield put(ContestPageActions.initFailure(err));
+    }
+}
+
+function* terminate() {
+    try {
+        yield call(terminateSocket);
+    } catch (err) {
+        console.error(err);
     }
 }
 
@@ -98,6 +111,7 @@ function* unsubscribe({ uuid }: AnyAction) {
 export default function* ContestPageSaga() {
     yield all([
         takeLatest(ContestPageTypes.INIT, init),
+        takeLatest(ContestPageTypes.TERMINATE, terminate),
         takeLatest(ContestPageTypes.UPDATE_CONTEST_STATUS, updateContestStatus),
         takeLatest(
             ContestPageTypes.UPDATE_CONTEST_PARTICIPANT_STATUS,

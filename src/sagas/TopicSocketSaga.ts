@@ -39,6 +39,7 @@ function* init({ data, options }: AnyAction) {
         }
         WebSocketTopicClient.send('Thank you for the invite');
         yield fork(read, options);
+        yield put(TopicSocketActions.initSuccess());
     } catch (err) {
         console.log(err);
         message.error(CONSTANTS.SOCKET.ERROR.INIT);
@@ -46,16 +47,20 @@ function* init({ data, options }: AnyAction) {
 }
 
 // work on terminating web socket connection and adding some handling in client.ts
-function* terminate({ data }: AnyAction) {
+function* terminate({}: AnyAction) {
     try {
+        yield WebSocketTopicClient.terminate();
+        yield put(TopicSocketActions.terminateSuccess());
     } catch (err) {
         message.error(CONSTANTS.SOCKET.ERROR.TERMINATE);
+        yield put(TopicSocketActions.terminateFailure(err));
     }
 }
 
 export default function* TopicSocketSaga() {
     yield all([
         takeLatest(TopicSocketTypes.INIT, init),
+        takeLatest(TopicSocketTypes.TERMINATE, terminate),
         takeLatest(TopicSocketTypes.WRITE, write),
     ]);
 }
