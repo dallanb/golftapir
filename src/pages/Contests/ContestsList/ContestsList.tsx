@@ -48,17 +48,17 @@ const ContestsList: React.FunctionComponent<ContestsListProps> = ({
     };
     if (!isInitialized) return <Spin />;
     return (
-        // <ComponentContent showSpinner={!isInitialized}>
-        <List
-            {...loadTableDimensions(data)}
-            items={data}
-            hasNextPage={hasNextPage()}
-            loadNextPage={loadMore}
-            isNextPageLoading={isFetching}
-            minimumBatchSize={100}
-            rowRenderer={(props) => ContestsListTile({ props, history })}
-        />
-        // </ComponentContent>
+        <div className="contests-list">
+            <List
+                {...loadTableDimensions(data)}
+                items={data}
+                hasNextPage={hasNextPage()}
+                loadNextPage={loadMore}
+                isNextPageLoading={isFetching}
+                minimumBatchSize={100}
+                rowRenderer={(props) => ContestsListTile({ props, history })}
+            />
+        </div>
     );
 };
 

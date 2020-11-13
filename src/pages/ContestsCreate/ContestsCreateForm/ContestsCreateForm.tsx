@@ -25,12 +25,14 @@ class ContestsCreateForm extends React.PureComponent<ContestsCreateFormProps> {
     render() {
         const { initialValues } = this.props;
         return (
-            <Form
-                fieldSchema={fieldSchema}
-                validationSchema={validationSchema}
-                initialValues={initialValues}
-                onSubmit={this.handleSubmit}
-            />
+            <div className="contests-create-form">
+                <Form
+                    fieldSchema={fieldSchema}
+                    validationSchema={validationSchema}
+                    initialValues={initialValues}
+                    onSubmit={this.handleSubmit}
+                />
+            </div>
         );
     }
 }
