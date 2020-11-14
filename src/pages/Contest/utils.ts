@@ -53,6 +53,18 @@ export const socketEventHandlers = (socket: WebSocket, emitter: any) => {
                         break;
                 }
                 break;
+            case constants.TOPICS.SCORES:
+                switch (event) {
+                    case constants.EVENTS.SCORES.STROKE_UPDATE:
+                        emitter(
+                            ContestPageActions.updateContestParticipantScore(
+                                data.participant_uuid,
+                                data.strokes
+                            )
+                        );
+                        break;
+                }
+                break;
             default:
                 break;
         }

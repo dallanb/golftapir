@@ -1,19 +1,24 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { get as _get } from 'lodash';
 import { Button, Pagination, Statistic } from 'antd';
 import { MinusCircleTwoTone, PlusCircleTwoTone } from '@ant-design/icons/lib';
 import { selectSheet } from '@pages/Contest/selector';
+import ContestPageActions from '@pages/Contest/actions';
 import { ContestScorecardProps } from './types';
 import './ContestScorecard.scss';
 
 const ContestScorecard: React.FunctionComponent<ContestScorecardProps> = () => {
-    const [current, setCurrent] = useState(1);
-    const [strokes, setStrokes] = useState('NA');
-
+    const dispatch = useDispatch();
     const sheet = useSelector(selectSheet);
     const uuid = _get(sheet, ['uuid'], null);
     const holes = _get(sheet, ['holes'], []);
+
+    const initialCurrent = 1;
+    const initialStrokes = _get(holes, [initialCurrent, 'strokes'], 0) || 0;
+
+    const [current, setCurrent] = useState(initialCurrent);
+    const [strokes, setStrokes] = useState(initialStrokes);
 
     const onChange = (page: number) => {
         console.log(page);
@@ -22,25 +27,44 @@ const ContestScorecard: React.FunctionComponent<ContestScorecardProps> = () => {
         setStrokes(prevStrokes);
     };
 
+    const updateScore = (page: number, newStrokes: number) => {
+        setStrokes(newStrokes);
+        dispatch(
+            ContestPageActions.debouncedHoleStrokeUpdate(page, newStrokes)
+        );
+    };
+
     const renderHole = (hole: number) => {
-        return <Statistic title="Hole" value={hole} />;
+        return (
+            <div className="contest-scorecard-hole">
+                <div className="contest-scorecard-hole-label">Hole</div>
+                <div className="contest-scorecard-hole-value">{hole}</div>
+            </div>
+        );
     };
 
     const renderStrokes = (hole: number) => {
         return (
-            <div>
-                <div>Strokes</div>
-                <div>
+            <div className="contest-scorecard-strokes">
+                <div className="contest-scorecard-strokes-label">Strokes</div>
+                <div className="contest-scorecard-strokes-input">
                     <Button
+                        type="text"
                         icon={
                             <MinusCircleTwoTone className="contest-scorecard-strokes-minus" />
                         }
+                        disabled={!strokes}
+                        onClick={() => updateScore(hole, strokes - 1)}
                     />
-                    {strokes}
+                    <div className="contest-scorecard-strokes-value">
+                        {strokes}
+                    </div>
                     <Button
+                        type="text"
                         icon={
                             <PlusCircleTwoTone className="contest-scorecard-strokes-plus" />
                         }
+                        onClick={() => updateScore(hole, strokes + 1)}
                     />
                 </div>
             </div>

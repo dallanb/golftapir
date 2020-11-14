@@ -22,6 +22,10 @@ const { Types, Creators } = createActions(
         unsubscribe: ['uuid'],
         unsubscribeSuccess: null,
         unsubscribeFailure: ['err'],
+        debouncedHoleStrokeUpdate: ['holeId', 'strokes'],
+        debouncedHoleStrokeUpdateSuccess: ['hole'],
+        debouncedHoleStrokeUpdateFailure: ['err'],
+        updateContestParticipantScore: ['participant', 'score'],
     },
     {
         prefix: 'CONTEST_PAGE_',

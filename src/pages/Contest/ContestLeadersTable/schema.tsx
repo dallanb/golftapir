@@ -20,10 +20,10 @@ export const columnsSchema = [
     },
     {
         Header: 'Score',
-        accessor: null,
+        accessor: 'score',
         width: 100,
         Cell: ({ value }: any) => {
-            return <div>0</div>;
+            return <div>{value}</div>;
         },
     },
     {

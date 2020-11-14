@@ -2,6 +2,7 @@ import { AnyAction } from 'redux';
 import {
     all,
     call,
+    debounce,
     fork,
     put,
     select,
@@ -9,7 +10,7 @@ import {
     takeLeading,
 } from 'redux-saga/effects';
 import ContestPageActions, { ContestPageTypes } from './actions';
-import { selectContest } from './selector';
+import { selectContest, selectSheet } from './selector';
 import {
     initContest,
     initSocket,
@@ -21,6 +22,7 @@ import {
     updateContestParticipant,
     subscribe as subscribeHelper,
     unsubscribe as unsubscribeHelper,
+    updateScoreSheetHole,
 } from '@helpers';
 
 // Action Handlers
@@ -100,6 +102,20 @@ function* unsubscribe({ uuid }: AnyAction) {
     }
 }
 
+function* debouncedHoleStrokeUpdate({ holeId, strokes }: AnyAction) {
+    try {
+        const { uuid } = yield select(selectSheet);
+        yield fork(updateScoreSheetHole, uuid, holeId, { strokes });
+        yield put(
+            ContestPageActions.debouncedHoleStrokeUpdateSuccess({
+                [holeId]: { strokes },
+            })
+        );
+    } catch (err) {
+        yield put(ContestPageActions.debouncedHoleStrokeUpdateFailure(err));
+    }
+}
+
 export default function* ContestPageSaga() {
     yield all([
         takeLatest(ContestPageTypes.INIT, init),
@@ -112,5 +128,10 @@ export default function* ContestPageSaga() {
         ),
         takeLatest(ContestPageTypes.SUBSCRIBE, subscribe),
         takeLatest(ContestPageTypes.UNSUBSCRIBE, unsubscribe),
+        debounce(
+            1000,
+            ContestPageTypes.DEBOUNCED_HOLE_STROKE_UPDATE,
+            debouncedHoleStrokeUpdate
+        ),
     ]);
 }
