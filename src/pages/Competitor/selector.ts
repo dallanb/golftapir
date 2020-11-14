@@ -4,6 +4,11 @@ import { get as _get } from 'lodash';
 const getCompetitorPage = (state: any) => state.competitorPage;
 const getBase = (state: any) => state.base;
 
+export const selectData = createSelector(
+    [getCompetitorPage],
+    (competitorPage) => competitorPage
+);
+
 export const selectAccount = createSelector(
     [getCompetitorPage],
     (competitorPage) => _get(competitorPage, ['account'], undefined)

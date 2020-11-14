@@ -1,90 +1,92 @@
-import React from 'react';
-import { compose } from 'redux';
-import { withRouter } from 'react-router-dom';
-import { connect } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { get as _get } from 'lodash';
 import { ContentLayout } from '@layouts';
 import constants from '@constants';
-import { CompetitorProps, CompetitorState, StateInterface } from './types';
+import { withS3URL } from '@utils';
+import { ContentLayoutProps } from '@layouts/ContentLayout/types';
+import { CompetitorProps } from './types';
 import CompetitorPageActions from './actions';
-import CompetitorPlate from './CompetitorPlate';
-import CompetitorActions from './CompetitorActions';
+import { selectData } from './selector';
+import CompetitorSider from './CompetitorSider';
 import CompetitorResults from './CompetitorResults';
 import './Competitor.scss';
 
-class Competitor extends React.PureComponent<CompetitorProps, CompetitorState> {
-    constructor(props: CompetitorProps) {
-        super(props);
-        this.state = {
-            uuid: _get(props, ['history', 'location', 'state', 'uuid'], null),
+const Competitor: React.FunctionComponent<CompetitorProps> = () => {
+    const dispatch = useDispatch();
+
+    const history = useHistory();
+
+    const [prevCompetitor] = useState(
+        _get(history, ['location', 'state'], null)
+    );
+
+    useEffect(() => {
+        dispatch(CompetitorPageActions.init(prevCompetitor.uuid));
+        return () => {
+            dispatch(CompetitorPageActions.terminate());
         };
-    }
+    }, []);
 
-    componentDidMount() {
-        const { init } = this.props;
-        const { uuid } = this.state;
-        init(uuid);
-    }
+    const { title, description, isInitialized, account } = useSelector(
+        selectData
+    );
 
-    componentWillUnmount() {
-        const { terminate } = this.props;
-        terminate();
-    }
+    const renderAvatar = (name: string) => {
+        const avatarProps: ContentLayoutProps['avatar'] = {
+            name,
+            size: 72,
+            src: undefined,
+            className: undefined,
+        };
+        const src = _get(account, ['avatar', 's3_filename'], null);
+        const prevSrc = _get(prevCompetitor, ['src'], null);
 
-    generateActions = () => {
-        const { history } = this.props;
-        const { uuid } = this.state;
-        return [
-            {
-                key: constants.ACTION.CHALLENGE.KEY,
-                onClick: () =>
-                    history.push(`/app${constants.ROUTES.CONTESTS_CREATE}`, {
-                        participant_uuid: uuid,
-                    }),
-            },
-        ];
+        if (src) {
+            avatarProps['src'] =
+                src && withS3URL(src, constants.S3_FOLDERS.ACCOUNT.AVATAR);
+        } else if (prevSrc) {
+            avatarProps['src'] = prevSrc;
+        }
+        return avatarProps;
     };
 
-    render() {
-        const { title, description, isInitialized } = this.props;
-        return (
-            <ContentLayout
-                title={title}
-                subTitle={description}
-                showSpinner={!isInitialized}
-            >
-                <div className="competitor-page-view">
-                    <CompetitorPlate />
-                    <CompetitorActions actions={this.generateActions()} />
-                    <CompetitorResults />
-                </div>
-            </ContentLayout>
-        );
-    }
-}
-
-const mapStateToProps = ({ competitorPage }: StateInterface) => {
-    const { title, description, isInitialized } = competitorPage;
-
-    return {
-        title,
-        description,
-        isInitialized,
+    const renderSider = () => {
+        return <CompetitorSider />;
     };
+
+    const renderContentLayoutProps = () => {
+        const contentLayoutProps: ContentLayoutProps = {
+            title: undefined,
+            subTitle: undefined,
+            avatar: undefined,
+            tags: undefined,
+            extra: undefined,
+            sider: undefined,
+        };
+
+        const first_name = _get(account, ['first_name'], '');
+        const last_name = _get(account, ['last_name'], '');
+        const name = `${first_name} ${last_name}`;
+        if (name) {
+            contentLayoutProps['title'] = name;
+            contentLayoutProps['subTitle'] = description;
+            contentLayoutProps['avatar'] = renderAvatar(name);
+            contentLayoutProps['sider'] = renderSider();
+        }
+        return contentLayoutProps;
+    };
+
+    return (
+        <ContentLayout
+            {...renderContentLayoutProps()}
+            showSpinner={!isInitialized}
+            className="competitor-view"
+        >
+            <CompetitorResults />
+        </ContentLayout>
+    );
 };
 
-const mapDispatchToProps = (dispatch: any) => {
-    return {
-        init(uuid: string) {
-            return dispatch(CompetitorPageActions.init(uuid));
-        },
-        terminate() {
-            return dispatch(CompetitorPageActions.terminate());
-        },
-    };
-};
-
-export default compose(
-    withRouter,
-    connect(mapStateToProps, mapDispatchToProps)
-)(Competitor);
+export default Competitor;

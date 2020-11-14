@@ -9,7 +9,6 @@ const CompetitorResults: React.FunctionComponent<CompetitorResultsProps> = ({}) 
     const history = useHistory();
     return (
         <div className="competitor-results">
-            <Typography.Title level={5}>Recent Contests</Typography.Title>
             <CompetitorResultsList history={history} />
         </div>
     );

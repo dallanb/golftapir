@@ -20,12 +20,14 @@ class AccountForm extends React.PureComponent<AccountFormProps> {
     render() {
         const { initialValues } = this.props;
         return (
-            <Form
-                fieldSchema={fieldSchema}
-                validationSchema={validationSchema}
-                initialValues={initialValues}
-                onSubmit={this.handleSubmit}
-            />
+            <div className="account-form">
+                <Form
+                    fieldSchema={fieldSchema}
+                    validationSchema={validationSchema}
+                    initialValues={initialValues}
+                    onSubmit={this.handleSubmit}
+                />
+            </div>
         );
     }
 }
