@@ -82,6 +82,7 @@ const ContestScorecard: React.FunctionComponent<ContestScorecardProps> = () => {
                 total={18}
                 defaultPageSize={1}
                 current={current}
+                className="contest-scorecard-pagination"
             />
         </div>
     );
