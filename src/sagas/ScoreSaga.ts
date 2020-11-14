@@ -25,6 +25,30 @@ function* fetchScoreContest({ uuid, options }: AnyAction) {
         message.error(CONSTANTS.SCORE.ERROR.FETCH_CONTEST);
     }
 }
+function* fetchScoreContestParticipantSheet({
+    uuid,
+    user_uuid,
+    options,
+}: AnyAction) {
+    try {
+        const res = yield call(
+            ScoreService.fetchScoreContestParticipantSheet,
+            uuid,
+            user_uuid,
+            options
+        );
+        const { sheets, _metadata: metadata } = res;
+        yield put(
+            ScoreActions.fetchScoreContestParticipantSheetSuccess(
+                sheets,
+                metadata
+            )
+        );
+    } catch (err) {
+        yield put(ScoreActions.fetchScoreContestParticipantSheetFailure(err));
+        message.error(CONSTANTS.SCORE.ERROR.FETCH_CONTEST);
+    }
+}
 
 function* updateScore({ uuid, data }: AnyAction) {
     try {
@@ -63,6 +87,10 @@ export default function* ScoreSaga() {
     yield all([
         takeLatest(ScoreTypes.FETCH_SCORE, fetchScore),
         takeLatest(ScoreTypes.FETCH_SCORE_CONTEST, fetchScoreContest),
+        takeLatest(
+            ScoreTypes.FETCH_SCORE_CONTEST_PARTICIPANT_SHEET,
+            fetchScoreContestParticipantSheet
+        ),
         takeLatest(ScoreTypes.UPDATE_SCORE, updateScore),
         takeLatest(ScoreTypes.UPDATE_SHEET, updateSheet),
         takeLatest(ScoreTypes.UPDATE_HOLE, updateHole),

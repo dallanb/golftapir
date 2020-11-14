@@ -25,7 +25,7 @@ export interface ContestPageInterface {
     readonly contestWagers: any[];
     readonly contest: any;
     readonly participant: any;
-    readonly score: any;
+    readonly sheet: any;
     readonly accountsHash: any;
 }
 

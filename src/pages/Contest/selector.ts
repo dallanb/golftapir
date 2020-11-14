@@ -51,7 +51,7 @@ export const selectSubscribed = createSelector(
 );
 
 export const selectSheet = createSelector([getContestPage], (contestPage) =>
-    _get(contestPage, ['score', 'sheet'], [])
+    _get(contestPage, ['sheet'], undefined)
 );
 
 export const selectParticipant = createSelector(

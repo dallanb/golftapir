@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
-import { Pagination, Statistic } from 'antd';
+import { useSelector } from 'react-redux';
+import { get as _get } from 'lodash';
+import { Button, Pagination, Statistic } from 'antd';
 import { MinusCircleTwoTone, PlusCircleTwoTone } from '@ant-design/icons/lib';
+import { selectSheet } from '@pages/Contest/selector';
 import { ContestScorecardProps } from './types';
 import './ContestScorecard.scss';
 
@@ -8,9 +11,15 @@ const ContestScorecard: React.FunctionComponent<ContestScorecardProps> = () => {
     const [current, setCurrent] = useState(1);
     const [strokes, setStrokes] = useState('NA');
 
+    const sheet = useSelector(selectSheet);
+    const uuid = _get(sheet, ['uuid'], null);
+    const holes = _get(sheet, ['holes'], []);
+
     const onChange = (page: number) => {
         console.log(page);
         setCurrent(page);
+        const prevStrokes = _get(holes, [page, 'strokes'], 0) || 0;
+        setStrokes(prevStrokes);
     };
 
     const renderHole = (hole: number) => {
@@ -22,9 +31,17 @@ const ContestScorecard: React.FunctionComponent<ContestScorecardProps> = () => {
             <div>
                 <div>Strokes</div>
                 <div>
-                    <MinusCircleTwoTone className="contest-scorecard-strokes-minus" />
+                    <Button
+                        icon={
+                            <MinusCircleTwoTone className="contest-scorecard-strokes-minus" />
+                        }
+                    />
                     {strokes}
-                    <PlusCircleTwoTone className="contest-scorecard-strokes-plus" />
+                    <Button
+                        icon={
+                            <PlusCircleTwoTone className="contest-scorecard-strokes-plus" />
+                        }
+                    />
                 </div>
             </div>
         );

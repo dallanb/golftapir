@@ -5,6 +5,7 @@ import {
     bulkFetchAccounts,
     fetchContestMaterialized,
     fetchContestParticipantUser,
+    fetchMyScoreContestParticipantSheet,
     fetchScoreContest,
     subscriptionExists,
 } from '@helpers';
@@ -27,7 +28,7 @@ export function* initContest(uuid: string) {
     const { participants, status } = contest;
 
     if (status === constants.STATUS.ACTIVE.KEY) {
-        yield fork(initScore, uuid);
+        yield fork(initSheet, uuid);
     }
 
     const accounts = Object.keys(participants);
@@ -42,9 +43,13 @@ export function* initContest(uuid: string) {
     }
 }
 
-export function* initScore(uuid: string) {
-    const { data: score } = yield call(fetchScoreContest, uuid);
-    yield put(ContestPageActions.set({ score }));
+export function* initSheet(uuid: string) {
+    const { data: sheet } = yield call(
+        fetchMyScoreContestParticipantSheet,
+        uuid,
+        'me'
+    );
+    yield put(ContestPageActions.set({ sheet }));
 }
 
 export function* initSubscribed(uuid: string) {

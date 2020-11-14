@@ -14,7 +14,7 @@ const INITIAL_STATE: ContestPageInterface = {
     contestWagers: [],
     contest: undefined,
     participant: undefined,
-    score: undefined,
+    sheet: undefined,
     accountsHash: undefined,
 };
 
