@@ -1,4 +1,4 @@
-import { call, put } from 'redux-saga/effects';
+import { call, fork, put } from 'redux-saga/effects';
 import { keyBy as _keyBy } from 'lodash';
 import { TopicSocketActions } from '@actions';
 import {
@@ -10,6 +10,7 @@ import {
 } from '@helpers';
 import ContestPageActions from './actions';
 import { socketEventHandlers } from './utils';
+import constants from '@constants';
 
 export function* initContest(uuid: string) {
     const { data: contest } = yield call(fetchContestMaterialized, uuid);
@@ -23,7 +24,11 @@ export function* initContest(uuid: string) {
     yield put(ContestPageActions.set({ contest }));
     yield put(ContestPageActions.set({ participant }));
 
-    const { participants } = contest;
+    const { participants, status } = contest;
+
+    if (status === constants.STATUS.ACTIVE.KEY) {
+        yield fork(initScore, uuid);
+    }
 
     const accounts = Object.keys(participants);
 
