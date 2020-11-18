@@ -1,7 +1,7 @@
 import React from 'react';
 import memoize from 'memoize-one';
 import { Button } from 'antd';
-import { renderAction } from '../utils';
+import { renderAction } from '../../utils';
 import { mapActionLabel } from '@utils';
 import { competitorActionRendererProps } from './types';
 
@@ -18,6 +18,8 @@ export const competitorActionRenderer: React.FunctionComponent<competitorActionR
 
         accumulatedActions.push(
             <Button
+                block
+                type="primary"
                 key={key}
                 onClick={onClick}
                 disabled={!enabled}

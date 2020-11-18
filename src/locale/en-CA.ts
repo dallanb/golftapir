@@ -42,6 +42,14 @@ const CONSTANTS = {
             UPDATE_PARTICIPANT: 'Error updating participant',
         },
     },
+    COURSE: {
+        SUCCESS: {},
+        ERROR: {
+            FETCH: 'Error fetching Course information',
+            FETCH_ALL: 'Error fetching Courses information',
+            SEARCH_ALL: 'Error searching Courses information',
+        },
+    },
     NOTIFICATION: {
         SUCCESS: {
             SUBSCRIBE: 'Subscription successful!',
@@ -61,6 +69,7 @@ const CONSTANTS = {
         ERROR: {
             FETCH: 'Error fetching Score information',
             FETCH_CONTEST: 'Error fetching Score information',
+            FETCH_CONTEST_SHEET: 'Error fetching Score information',
             UPDATE: 'Score update unsuccessful!',
             UPDATE_SCORE: 'Score update unsuccessful!',
             UPDATE_SHEET: 'Score sheet update unsuccessful!',
@@ -164,11 +173,13 @@ const CONSTANTS = {
                     NAME: 'Name',
                     AVATAR: 'Avatar',
                     START_TIME: 'Start Time',
+                    COURSE: 'Course',
                     PARTICIPANTS: 'Participants',
                 },
                 VALIDATION: {
                     NAME_REQUIRED: 'Name is a required field',
                     START_TIME_REQUIRED: 'Start Time is a required field',
+                    COURSE_REQUIRED: 'Course is a required field',
                 },
             },
         },

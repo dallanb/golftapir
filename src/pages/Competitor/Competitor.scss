@@ -1,8 +1,7 @@
-.competitor-page-view {
-  .competitor-actions {
-    margin-top: 40px;
-  }
-  .competitor-results {
-    margin-top: 40px;
-  }
+.competitor-view {
+    .competitor-view-actions {
+    }
+    .competitor-results {
+        overflow: auto;
+    }
 }

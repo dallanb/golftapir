@@ -16,6 +16,17 @@ export default {
             query,
         });
     },
+    fetchScoreContestParticipantSheet(
+        uuid: string,
+        user_uuid: string,
+        query: any = {}
+    ) {
+        return ClientProxy.get({
+            url: config.SCORE_URL,
+            endpoint: `/scores/contest/${uuid}/sheets/${user_uuid}`,
+            query,
+        });
+    },
     updateScore(uuid: string, data: any = {}) {
         return ClientProxy.put({
             url: config.SCORE_URL,

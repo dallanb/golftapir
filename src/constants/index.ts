@@ -124,6 +124,9 @@ const constants = {
             CONTEST_READY: 'contest_ready',
             CONTEST_ACTIVE: 'contest_active',
         },
+        SCORES: {
+            STROKE_UPDATE: 'stroke_update',
+        },
     },
     S3_FOLDERS: {
         ACCOUNT: {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactText } from 'react';
 import { useSelector } from 'react-redux';
 import { CompetitorResultsListProps } from './types';
 import { List } from '@components';
@@ -15,10 +15,21 @@ const CompetitorResultsList: React.FunctionComponent<CompetitorResultsListProps>
     const loadMore = (start: number, stop: number, resolve: () => void) =>
         resolve();
 
+    const loadTableDimensions = (
+        items: any[] = []
+    ): { size: number; height: number; width: ReactText } => {
+        // move this info to schema.ts
+        const size = 150;
+        const width = '100%';
+        const height = items.length * size;
+
+        return { size, width, height };
+    };
+
     return (
         <ComponentContent showSpinner={!isInitialized}>
             <List
-                size={150}
+                {...loadTableDimensions(data)}
                 items={data}
                 hasNextPage={false}
                 loadNextPage={loadMore}

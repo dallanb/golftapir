@@ -1,61 +1,39 @@
-import React from 'react';
-import { compose } from 'redux';
-import { withRouter } from 'react-router-dom';
-import { connect } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import ContestsList from './ContestsList';
-import ContestsCreateButton from './ContestsCreateButton';
-import { ContestsProps, StateInterface } from './types';
+import ContestsSider from './ContestsSider';
+import { ContestsProps } from './types';
 import ContestsPageActions from './actions';
+import { selectData } from './selector';
 import { ContentLayout } from '@layouts';
 import './Contests.scss';
 
-class Contests extends React.PureComponent<ContestsProps> {
-    componentDidMount() {
-        const { init } = this.props;
-        init();
-    }
+const Contests: React.FunctionComponent<ContestsProps> = () => {
+    const dispatch = useDispatch();
 
-    componentWillUnmount() {
-        const { terminate } = this.props;
-        terminate();
-    }
+    const history = useHistory();
+    useEffect(() => {
+        dispatch(ContestsPageActions.init());
+        return () => {
+            dispatch(ContestsPageActions.terminate());
+        };
+    }, []);
 
-    render() {
-        const { title, description, isInitialized, history } = this.props;
-        return (
-            <ContentLayout
-                title={title}
-                subTitle={description}
-                showSpinner={!isInitialized}
-            >
-                <ContestsCreateButton history={history} />
-                <ContestsList history={history} />
-            </ContentLayout>
-        );
-    }
-}
+    const { title, description, isInitialized } = useSelector(selectData);
 
-const mapStateToProps = ({ contestsPage }: StateInterface) => {
-    const { isInitialized, title, description } = contestsPage;
-    return {
-        isInitialized,
-        title,
-        description,
-    };
+    return (
+        <ContentLayout
+            title={title}
+            subTitle={description}
+            sider={<ContestsSider />}
+            showSpinner={!isInitialized}
+            className="contests-view"
+        >
+            {/*<ContestsCreateButton history={history} />*/}
+            <ContestsList history={history} />
+        </ContentLayout>
+    );
 };
 
-const mapDispatchToProps = (dispatch: any) => {
-    return {
-        init() {
-            return dispatch(ContestsPageActions.init());
-        },
-        terminate() {
-            return dispatch(ContestsPageActions.terminate());
-        },
-    };
-};
-
-export default compose(
-    withRouter,
-    connect(mapStateToProps, mapDispatchToProps)
-)(Contests);
+export default Contests;

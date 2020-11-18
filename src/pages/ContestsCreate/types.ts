@@ -24,5 +24,6 @@ export interface ContestsCreatePageInterface {
     readonly description: string;
     readonly createFormInitialValues: any;
     readonly createFormSearchParticipants: any[];
+    readonly createFormSearchCourses: any[];
     readonly uuid?: string;
 }

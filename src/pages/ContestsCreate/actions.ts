@@ -13,6 +13,9 @@ const { Types, Creators } = createActions(
         searchParticipants: ['key'],
         searchParticipantsSuccess: ['data'],
         searchParticipantsFailure: ['err'],
+        searchCourses: ['key'],
+        searchCoursesSuccess: ['data'],
+        searchCoursesFailure: ['err'],
     },
     {
         prefix: 'CONTESTS_CREATE_PAGE_',

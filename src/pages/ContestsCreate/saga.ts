@@ -1,11 +1,12 @@
 import { AnyAction } from 'redux';
-import { all, call, put, select, takeLatest } from 'redux-saga/effects';
+import { all, call, delay, put, select, takeLatest } from 'redux-saga/effects';
 import { pick as _pick, omit as _omit, isEmpty as _isEmpty } from 'lodash';
 import config from 'config';
 import ContestsCreatePageActions, { ContestsCreatePageTypes } from './actions';
 import { selectMe } from '@selectors/BaseSelector';
 import {
     searchAccounts,
+    searchCourses as searchCoursesHelper,
     createContest as createContestHelper,
     assignContestAvatar,
     fetchAccountMembership,
@@ -45,6 +46,15 @@ function* searchParticipants({ key }: AnyAction) {
     }
 }
 
+function* searchCourses({ key }: AnyAction) {
+    try {
+        const { data } = yield call(searchCoursesHelper, key);
+        yield put(ContestsCreatePageActions.searchCoursesSuccess(data));
+    } catch (err) {
+        yield put(ContestsCreatePageActions.searchCoursesFailure(err));
+    }
+}
+
 function* createContest({ data }: AnyAction) {
     try {
         const contestData = _omit(data, ['avatar']);
@@ -55,6 +65,7 @@ function* createContest({ data }: AnyAction) {
         if (!_isEmpty(avatarData)) {
             yield call(assignContestAvatar, uuid, avatarData.avatar);
         }
+        yield delay(1); // I hate this shit. Find a better way to do this!
         yield put(ContestsCreatePageActions.createContestSuccess({ uuid }));
     } catch (err) {
         yield put(ContestsCreatePageActions.createContestFailure(err));
@@ -68,6 +79,7 @@ export default function* ContestsCreatePageSaga() {
             ContestsCreatePageTypes.SEARCH_PARTICIPANTS,
             searchParticipants
         ),
+        takeLatest(ContestsCreatePageTypes.SEARCH_COURSES, searchCourses),
         takeLatest(ContestsCreatePageTypes.CREATE_CONTEST, createContest),
     ]);
 }

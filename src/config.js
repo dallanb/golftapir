@@ -7,10 +7,11 @@ const config = {
     AUTH_URL: 'auth.techtapir.com',
     ACCOUNT_URL: 'account.techtapir.com',
     CONTEST_URL: 'contest.techtapir.com',
+    COURSE_URL: 'course.techtapir.com',
     WAGER_URL: 'wager.techtapir.com',
     GOLF_UUID: 'cbfa8bbc-075c-49b1-9f6a-e04b72f41d95',
     // GOLF_UUID: '64580b95-7c99-41e9-921e-fa08c786f6ef',
-    NOTIFICATION_URL: 'dnotification.techtapir.com',
+    NOTIFICATION_URL: 'notification.techtapir.com',
     SCORE_URL: 'score.techtapir.com',
     S3_URL: 'https://golftapir.s3-us-west-2.amazonaws.com',
     FIREBASE_CONFIG: {
@@ -23,8 +24,8 @@ const config = {
         appId: process.env.FIREBASE_APP_ID,
         measurementId: process.env.FIREBASE_MEASUREMENT_ID,
     },
-    WS_NOTIFICATION_URL: 'wss://dnotification.techtapir.com/notification',
-    WS_TOPIC_URL: 'wss://dnotification.techtapir.com/topic',
+    WS_NOTIFICATION_URL: 'wss://notification.techtapir.com/notification',
+    WS_TOPIC_URL: 'wss://notification.techtapir.com/topic',
 };
 
 export default config;

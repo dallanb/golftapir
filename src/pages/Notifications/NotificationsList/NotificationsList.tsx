@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactText } from 'react';
 import { connect } from 'react-redux';
 import { NotificationsListProps } from './types';
 import { StateInterface } from '../types';
@@ -22,22 +22,38 @@ class NotificationsList extends React.PureComponent<NotificationsListProps> {
         markNotificationAsRead(item._id);
     };
 
+    loadTableDimensions = (
+        items: any[]
+    ): { size: number; height: number; width: ReactText } => {
+        // move this info to schema.ts
+        const size = 150;
+        const width = '100%';
+        const height = items.length * size;
+
+        return { size, width, height };
+    };
+
     render() {
         const { metadata, data, isFetching } = this.props;
         return (
-            <List
-                size={150}
-                items={data}
-                hasNextPage={
-                    metadata.page * metadata.per_page < metadata.total_count
-                }
-                loadNextPage={this.loadMore}
-                isNextPageLoading={isFetching}
-                minimumBatchSize={100}
-                rowRenderer={(props) =>
-                    NotificationsListTile({ props, onClick: this.tileOnClick })
-                }
-            />
+            <div className="notifications-list">
+                <List
+                    {...this.loadTableDimensions(data)}
+                    items={data}
+                    hasNextPage={
+                        metadata.page * metadata.per_page < metadata.total_count
+                    }
+                    loadNextPage={this.loadMore}
+                    isNextPageLoading={isFetching}
+                    minimumBatchSize={100}
+                    rowRenderer={(props) =>
+                        NotificationsListTile({
+                            props,
+                            onClick: this.tileOnClick,
+                        })
+                    }
+                />
+            </div>
         );
     }
 }

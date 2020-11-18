@@ -14,11 +14,7 @@
     margin-bottom: 40px;
 }
 .contest-view {
-    display: flex;
-    .contest-participants-table {
-        margin: 0 20px;
-    }
     .contest-leaders-table {
-        margin: 0 20px;
+        overflow: auto;
     }
 }

@@ -70,7 +70,7 @@ const ContentLayout: React.FunctionComponent<ContentLayoutProps> = ({
             <Layout className="content-layout-body content-layout-background">
                 <Layout className="content-layout-main">
                     {renderHeader()}
-                    <Content className="content-layout-content">
+                    <Content className={`content-layout-content ${className}`}>
                         {renderContent()}
                     </Content>
                 </Layout>
