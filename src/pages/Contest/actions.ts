@@ -25,7 +25,7 @@ const { Types, Creators } = createActions(
         debouncedHoleStrokeUpdate: ['holeId', 'strokes'],
         debouncedHoleStrokeUpdateSuccess: ['hole'],
         debouncedHoleStrokeUpdateFailure: ['err'],
-        updateContestParticipantScore: ['participant', 'score'],
+        updateContestParticipantScore: ['participant', 'strokes', 'score'],
     },
     {
         prefix: 'CONTEST_PAGE_',

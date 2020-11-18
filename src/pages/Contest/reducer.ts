@@ -125,10 +125,14 @@ function debouncedHoleStrokeUpdateSuccess(
 
 function updateContestParticipantScore(
     state = INITIAL_STATE,
-    { participant, score }: any
+    { participant, strokes, score }: any
 ) {
     const participants = Object.assign({}, state.contest.participants, {
-        [participant]: { ...state.contest.participants[participant], score },
+        [participant]: {
+            ...state.contest.participants[participant],
+            score,
+            strokes,
+        },
     });
     return Immutable.merge(state, {
         contest: { ...state.contest, participants },

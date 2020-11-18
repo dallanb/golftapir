@@ -17,6 +17,7 @@ const INITIAL_STATE: ContestsCreatePageInterface = {
     description: CONSTANTS.PAGES.CONTESTS_CREATE.DESCRIPTION,
     createFormInitialValues: undefined,
     createFormSearchParticipants: [],
+    createFormSearchCourses: [],
     uuid: undefined,
 };
 
@@ -78,6 +79,28 @@ function searchParticipantsFailure(state = INITIAL_STATE, { err }: any) {
         err,
     });
 }
+function searchCourses(state = INITIAL_STATE) {
+    return Immutable.merge(state, {
+        isFetching: true,
+    });
+}
+
+function searchCoursesSuccess(
+    state = INITIAL_STATE,
+    { data: createFormSearchCourses }: any
+) {
+    return Immutable.merge(state, {
+        isFetching: false,
+        createFormSearchCourses,
+    });
+}
+
+function searchCoursesFailure(state = INITIAL_STATE, { err }: any) {
+    return Immutable.merge(state, {
+        isFetching: false,
+        err,
+    });
+}
 function createContest(state = INITIAL_STATE) {
     return Immutable.merge(state, {
         isSubmitted: true,
@@ -107,6 +130,9 @@ const HANDLERS = {
     [ContestsCreatePageTypes.SEARCH_PARTICIPANTS]: searchParticipants,
     [ContestsCreatePageTypes.SEARCH_PARTICIPANTS_SUCCESS]: searchParticipantsSuccess,
     [ContestsCreatePageTypes.SEARCH_PARTICIPANTS_FAILURE]: searchParticipantsFailure,
+    [ContestsCreatePageTypes.SEARCH_COURSES]: searchCourses,
+    [ContestsCreatePageTypes.SEARCH_COURSES_SUCCESS]: searchCoursesSuccess,
+    [ContestsCreatePageTypes.SEARCH_COURSES_FAILURE]: searchCoursesFailure,
     [ContestsCreatePageTypes.CREATE_CONTEST]: createContest,
     [ContestsCreatePageTypes.CREATE_CONTEST_SUCCESS]: createContestSuccess,
     [ContestsCreatePageTypes.CREATE_CONTEST_FAILURE]: createContestFailure,

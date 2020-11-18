@@ -2,8 +2,22 @@ import { Select } from 'antd';
 import { keyBy as _keyBy, get as _get } from 'lodash';
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { selectCreateFormSearchParticipants } from '@pages/ContestsCreate/selector';
+import {
+    selectCreateFormSearchCourses,
+    selectCreateFormSearchParticipants,
+} from '@pages/ContestsCreate/selector';
 import { FormikProps, FormikValues } from 'formik';
+
+export const courseSearchSelectOptionRenderer = (
+    formik: FormikProps<FormikValues>
+) => {
+    const courses = useSelector(selectCreateFormSearchCourses);
+    return courses.map((course: { uuid: string; name: string }) => (
+        <Select.Option key={course.uuid} value={course.uuid}>
+            {course.name}
+        </Select.Option>
+    ));
+};
 
 export const participantSearchSelectOptionRenderer = (
     formik: FormikProps<FormikValues>

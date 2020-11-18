@@ -6,6 +6,7 @@ import ContestsCreatePageActions, { ContestsCreatePageTypes } from './actions';
 import { selectMe } from '@selectors/BaseSelector';
 import {
     searchAccounts,
+    searchCourses as searchCoursesHelper,
     createContest as createContestHelper,
     assignContestAvatar,
     fetchAccountMembership,
@@ -45,6 +46,15 @@ function* searchParticipants({ key }: AnyAction) {
     }
 }
 
+function* searchCourses({ key }: AnyAction) {
+    try {
+        const { data } = yield call(searchCoursesHelper, key);
+        yield put(ContestsCreatePageActions.searchCoursesSuccess(data));
+    } catch (err) {
+        yield put(ContestsCreatePageActions.searchCoursesFailure(err));
+    }
+}
+
 function* createContest({ data }: AnyAction) {
     try {
         const contestData = _omit(data, ['avatar']);
@@ -69,6 +79,7 @@ export default function* ContestsCreatePageSaga() {
             ContestsCreatePageTypes.SEARCH_PARTICIPANTS,
             searchParticipants
         ),
+        takeLatest(ContestsCreatePageTypes.SEARCH_COURSES, searchCourses),
         takeLatest(ContestsCreatePageTypes.CREATE_CONTEST, createContest),
     ]);
 }

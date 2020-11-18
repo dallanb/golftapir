@@ -7,6 +7,7 @@ const config = {
     AUTH_URL: 'auth.techtapir.com',
     ACCOUNT_URL: 'account.techtapir.com',
     CONTEST_URL: 'contest.techtapir.com',
+    COURSE_URL: 'course.techtapir.com',
     WAGER_URL: 'wager.techtapir.com',
     GOLF_UUID: 'cbfa8bbc-075c-49b1-9f6a-e04b72f41d95',
     // GOLF_UUID: '64580b95-7c99-41e9-921e-fa08c786f6ef',

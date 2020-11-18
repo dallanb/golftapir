@@ -59,7 +59,8 @@ export const socketEventHandlers = (socket: WebSocket, emitter: any) => {
                         emitter(
                             ContestPageActions.updateContestParticipantScore(
                                 data.participant_uuid,
-                                data.strokes
+                                data.strokes,
+                                data.score
                             )
                         );
                         break;

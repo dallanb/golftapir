@@ -12,9 +12,11 @@ import './ContestsCreateForm.scss';
 class ContestsCreateForm extends React.PureComponent<ContestsCreateFormProps> {
     handleSubmit = (values: FormikValues) => {
         const { createContest } = this.props;
+        console.log(values);
         const contest = _pick(values, [
             'owner_uuid',
             'sport_uuid',
+            'location_uuid',
             'name',
             'avatar',
             'start_time',

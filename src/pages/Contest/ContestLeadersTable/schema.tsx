@@ -26,20 +26,20 @@ export const columnsSchema = [
             return <div>{value}</div>;
         },
     },
-    {
-        Header: 'Thru',
-        accessor: null,
-        width: 100,
-        Cell: ({ value }: any) => {
-            return <div>1</div>;
-        },
-    },
     // {
-    //     Header: 'Strokes',
-    //     accessor: 'holes',
+    //     Header: 'Thru',
+    //     accessor: null,
     //     width: 100,
     //     Cell: ({ value }: any) => {
-    //         return <div>{totalStrokeCalculator(value)}</div>;
+    //         return <div>1</div>;
     //     },
     // },
+    {
+        Header: 'Strokes',
+        accessor: 'strokes',
+        width: 100,
+        Cell: ({ value }: any) => {
+            return <div>{value}</div>;
+        },
+    },
 ];
