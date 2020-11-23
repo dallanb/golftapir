@@ -16,7 +16,6 @@ function* init({ options }: AnyAction) {
     try {
         const me = yield select(selectMe);
         const createFormInitialValues = {
-            owner_uuid: me.membership_uuid,
             sport_uuid: config.GOLF_UUID,
             participants: [me.membership_uuid],
             permanent_participants: [me],

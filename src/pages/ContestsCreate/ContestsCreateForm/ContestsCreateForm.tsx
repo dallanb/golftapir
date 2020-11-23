@@ -14,7 +14,6 @@ class ContestsCreateForm extends React.PureComponent<ContestsCreateFormProps> {
         const { createContest } = this.props;
         console.log(values);
         const contest = _pick(values, [
-            'owner_uuid',
             'sport_uuid',
             'location_uuid',
             'name',

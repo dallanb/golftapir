@@ -21,7 +21,7 @@ const ContestLeadersTable: React.FunctionComponent<ContestLeadersTableProps> = (
     ): { size: number; height: number; width: number } => {
         // move this info to schema.ts
         const size = 50;
-        const width = 850;
+        const width = 750;
         const height = items.length * size;
 
         return { size, width, height };

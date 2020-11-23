@@ -15,14 +15,6 @@ const FORM = CONSTANTS.PAGES.CONTESTS_CREATE.FORM;
 
 export const fieldSchema = [
     {
-        name: 'owner_uuid',
-        wrapper: InputWrapper,
-        wrapperOptions: {
-            hidden: true,
-        },
-        options: {},
-    },
-    {
         name: 'sport_uuid',
         wrapper: InputWrapper,
         wrapperOptions: {
@@ -97,7 +89,6 @@ export const fieldSchema = [
 ];
 
 export const validationSchema = Yup.object({
-    owner_uuid: Yup.string(),
     sport_uuid: Yup.string(),
     name: Yup.string().required(FORM.VALIDATION.NAME_REQUIRED),
     avatar: Yup.string(),

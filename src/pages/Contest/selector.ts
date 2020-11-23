@@ -36,7 +36,7 @@ export const selectContestParticipants = createSelector(
 export const selectIsOwner = createSelector(
     [getContestPage, getBase],
     (contestPage, base) =>
-        _get(contestPage, ['contest', 'owner_uuid'], undefined) ===
+        _get(contestPage, ['contest', 'owner'], undefined) ===
         _get(base, ['me', 'membership_uuid'], undefined)
 );
 
