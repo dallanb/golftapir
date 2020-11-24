@@ -19,7 +19,7 @@ const ContestLeadersTable: React.FunctionComponent<ContestLeadersTableProps> = (
     const loadTableDimensions = (
         items: any[]
     ): { size: number; height: number; width: number } => {
-        // move this info to schema.ts
+        // move this info to schema.tsx
         const size = 50;
         const width = 750;
         const height = items.length * size;

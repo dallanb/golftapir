@@ -39,7 +39,7 @@ const ContestsList: React.FunctionComponent<ContestsListProps> = ({
     const loadTableDimensions = (
         items: any[] = []
     ): { size: number; height: ReactText; width: ReactText } => {
-        // move this info to schema.ts
+        // move this info to schema.tsx
         const size = 150;
         const width = '100%';
         const height = items.length * size;

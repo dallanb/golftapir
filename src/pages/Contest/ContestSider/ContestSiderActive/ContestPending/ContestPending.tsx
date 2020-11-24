@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { ContestPendingProps } from './types';
 import { selectIsOwner } from '@pages/Contest/selector';
-import PendingParticipantsTable from './PendingParticipantsTable';
+import PendingParticipantsTable from './PendingParticipantsList';
 import './ContestPending.scss';
 
 const ContestPending: React.FunctionComponent<ContestPendingProps> = () => {

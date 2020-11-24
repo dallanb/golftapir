@@ -18,7 +18,7 @@ const CompetitorResultsList: React.FunctionComponent<CompetitorResultsListProps>
     const loadTableDimensions = (
         items: any[] = []
     ): { size: number; height: number; width: ReactText } => {
-        // move this info to schema.ts
+        // move this info to schema.tsx
         const size = 150;
         const width = '100%';
         const height = items.length * size;

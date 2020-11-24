@@ -4,10 +4,10 @@ import { useHistory } from 'react-router-dom';
 import constants from '@constants';
 import { selectAccountsHash } from '@pages/Contest/selector';
 import { ContestParticipantsTableParticipantProps } from './types';
-import './ContestLeadersTableParticipant.scss';
 import { prepareParticipant } from '@pages/Contest/utils';
 import { Avatar } from '@components';
 import { withS3URL } from '@utils';
+import './ContestLeadersTableParticipant.scss';
 
 const ContestLeadersTableParticipant: React.FunctionComponent<ContestParticipantsTableParticipantProps> = ({
     uuid,
