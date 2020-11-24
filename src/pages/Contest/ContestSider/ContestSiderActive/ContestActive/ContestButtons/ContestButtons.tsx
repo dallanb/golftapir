@@ -2,14 +2,14 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button } from 'antd';
 import { ContestButtonsProps } from './types';
-import { selectParticipant } from '@pages/Contest/selector';
+import { selectMyParticipant } from '@pages/Contest/selector';
 import ContestPageActions from '@pages/Contest/actions';
 import constants from '@constants';
 import './ContestButtons.scss';
 
 const ContestButtons: React.FunctionComponent<ContestButtonsProps> = () => {
     const dispatch = useDispatch();
-    const participant = useSelector(selectParticipant);
+    const participant = useSelector(selectMyParticipant);
 
     const handleApproveClick = () => {
         dispatch(

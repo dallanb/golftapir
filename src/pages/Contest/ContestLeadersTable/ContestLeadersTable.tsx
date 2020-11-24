@@ -5,7 +5,7 @@ import { ContestLeadersTableProps } from './types';
 import { columnsSchema } from './schema';
 import {
     selectContest,
-    selectContestParticipants,
+    selectContestMaterializedParticipants,
     selectIsFetching,
     selectSheet,
 } from '../selector';
@@ -44,7 +44,7 @@ const ContestLeadersTable: React.FunctionComponent<ContestLeadersTableProps> = (
         );
     };
 
-    const participants = useSelector(selectContestParticipants);
+    const participants = useSelector(selectContestMaterializedParticipants);
     const items = Object.entries(participants).map(
         ([uuid, val]: [uuid: string, val: any]) => {
             return { uuid, ...val };

@@ -1,5 +1,5 @@
 import { AnyAction } from 'redux';
-import { all, call, delay, put, select, takeLatest } from 'redux-saga/effects';
+import { all, call, put, select, takeLatest } from 'redux-saga/effects';
 import { pick as _pick, omit as _omit, isEmpty as _isEmpty } from 'lodash';
 import config from 'config';
 import ContestsCreatePageActions, { ContestsCreatePageTypes } from './actions';
@@ -64,7 +64,6 @@ function* createContest({ data }: AnyAction) {
         if (!_isEmpty(avatarData)) {
             yield call(assignContestAvatar, uuid, avatarData.avatar);
         }
-        yield delay(1); // I hate this shit. Find a better way to do this!
         yield put(ContestsCreatePageActions.createContestSuccess({ uuid }));
     } catch (err) {
         yield put(ContestsCreatePageActions.createContestFailure(err));

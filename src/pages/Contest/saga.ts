@@ -12,6 +12,7 @@ import {
 import ContestPageActions, { ContestPageTypes } from './actions';
 import { selectContest, selectSheet } from './selector';
 import {
+    fetchAccountsHash,
     initContest,
     initSocket,
     initSubscribed,
@@ -23,6 +24,7 @@ import {
     subscribe as subscribeHelper,
     unsubscribe as unsubscribeHelper,
     updateScoreSheetHole,
+    fetchContestParticipants,
 } from '@helpers';
 
 // Action Handlers

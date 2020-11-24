@@ -5,6 +5,7 @@ export { default as fetchContest } from './fetchContest';
 export { default as fetchContests } from './fetchContests';
 export { default as fetchContestMaterialized } from './fetchContestMaterialized';
 export { default as fetchContestsMaterialized } from './fetchContestsMaterialized';
+export { default as fetchContestParticipants } from './fetchContestParticipants';
 export { default as fetchContestParticipantUser } from './fetchContestParticipantUser';
 export { default as fetchAccount } from './fetchAccount';
 export { default as fetchAccountMembership } from './fetchAccountMembership';

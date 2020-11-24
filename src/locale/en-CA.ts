@@ -28,6 +28,7 @@ const CONSTANTS = {
             CREATE: 'Contest creation successful!',
             UPDATE: 'Contest update successful!',
             FETCH_PARTICIPANT: 'Successfully fetched participant!',
+            FETCH_PARTICIPANTS: 'Successfully fetched participants!',
             UPDATE_PARTICIPANT: 'Successfully updated!',
         },
         ERROR: {

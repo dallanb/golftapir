@@ -3,13 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Button } from 'antd';
 import { ContestSiderPendingProps } from './types';
 import ContestPageActions from '@pages/Contest/actions';
-import { selectParticipant } from '@pages/Contest/selector';
+import { selectMyParticipant } from '@pages/Contest/selector';
 import constants from '@constants';
 import './ContestSiderPending.scss';
 
 const ContestSiderPending: React.FunctionComponent<ContestSiderPendingProps> = () => {
     const dispatch = useDispatch();
-    const participant = useSelector(selectParticipant);
+    const participant = useSelector(selectMyParticipant);
     const handleAcceptClick = () => {
         dispatch(
             ContestPageActions.updateContestParticipantStatus(

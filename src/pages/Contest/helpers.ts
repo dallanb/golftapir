@@ -1,45 +1,32 @@
-import { call, fork, put } from 'redux-saga/effects';
+import { call, fork, put, select } from 'redux-saga/effects';
 import { keyBy as _keyBy } from 'lodash';
 import { TopicSocketActions } from '@actions';
 import {
     bulkFetchAccounts,
     fetchContestMaterialized,
+    fetchContestParticipants,
     fetchContestParticipantUser,
     fetchMyScoreContestParticipantSheet,
-    fetchScoreContest,
     subscriptionExists,
 } from '@helpers';
 import ContestPageActions from './actions';
 import { socketEventHandlers } from './utils';
 import constants from '@constants';
+import { selectAccountsHash } from '@pages/Contest/selector';
 
 export function* initContest(uuid: string) {
     const { data: contest } = yield call(fetchContestMaterialized, uuid);
-    const { data: participant } = yield call(
-        fetchContestParticipantUser,
-        uuid,
-        'me'
-    );
+    const { data: participants } = yield call(fetchContestParticipants, uuid);
 
     yield put(ContestPageActions.set({ title: contest.name }));
     yield put(ContestPageActions.set({ contest }));
-    yield put(ContestPageActions.set({ participant }));
+    yield put(ContestPageActions.set({ participants }));
 
-    const { participants, status } = contest;
+    yield fork(fetchAccountsHash, participants);
 
+    const { status } = contest;
     if (status === constants.STATUS.ACTIVE.KEY) {
         yield fork(initSheet, uuid);
-    }
-
-    const accounts = Object.keys(participants);
-
-    if (accounts.length) {
-        const { data: accountParticipants } = yield call(
-            bulkFetchAccounts,
-            accounts
-        );
-        const accountsHash = _keyBy(accountParticipants, 'membership_uuid');
-        yield put(ContestPageActions.set({ accountsHash }));
     }
 }
 
@@ -61,6 +48,27 @@ export function* initSocket(uuid: string) {
     yield put(
         TopicSocketActions.init({ uuid }, { eventHandler: socketEventHandlers })
     );
+}
+
+export function* fetchAccountsHash(participants: any[]) {
+    const accounts = participants.map(
+        ({ user_uuid }: { user_uuid: string }) => user_uuid
+    );
+    if (accounts.length) {
+        const { data: accountParticipants } = yield call(
+            bulkFetchAccounts,
+            accounts
+        );
+        const newAccountsHash = _keyBy(accountParticipants, 'membership_uuid');
+        const prevAccountsHash = yield select(selectAccountsHash);
+
+        const accountsHash = Object.assign(
+            {},
+            prevAccountsHash,
+            newAccountsHash
+        );
+        yield put(ContestPageActions.set({ accountsHash }));
+    }
 }
 
 export function* terminateSocket() {

@@ -11,7 +11,7 @@ export const selectData = createSelector(
 
 export const selectAccountsHash = createSelector(
     [getContestPage],
-    (contestPage) => _get(contestPage, ['accountsHash'], undefined)
+    (contestPage) => _get(contestPage, ['accountsHash'], {})
 );
 
 export const selectContest = createSelector([getContestPage], (contestPage) =>
@@ -28,9 +28,14 @@ export const selectContestStatus = createSelector(
     (contestPage) => _get(contestPage, ['contest', 'status'], undefined)
 );
 
-export const selectContestParticipants = createSelector(
+export const selectContestMaterializedParticipants = createSelector(
     [getContestPage],
     (contestPage) => _get(contestPage, ['contest', 'participants'], undefined)
+);
+
+export const selectContestParticipants = createSelector(
+    [getContestPage],
+    (contestPage) => _get(contestPage, ['participants'], undefined)
 );
 
 export const selectIsOwner = createSelector(
@@ -54,7 +59,13 @@ export const selectSheet = createSelector([getContestPage], (contestPage) =>
     _get(contestPage, ['sheet'], undefined)
 );
 
-export const selectParticipant = createSelector(
-    [getContestPage],
-    (contestPage) => _get(contestPage, ['participant'], undefined)
+export const selectMyParticipant = createSelector(
+    [getContestPage, getBase],
+    (contestPage, base) => {
+        const participants = _get(contestPage, ['participants'], []);
+        const uuid = _get(base, ['me', 'membership_uuid'], undefined);
+        return participants.find(
+            ({ user_uuid }: { user_uuid: string }) => uuid === user_uuid
+        );
+    }
 );

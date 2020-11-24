@@ -57,6 +57,13 @@ export default {
             },
         });
     },
+    fetchContestParticipants(uuid: string, query: any = {}) {
+        return ClientProxy.get({
+            url: config.CONTEST_URL,
+            endpoint: `/contests/${uuid}/participants`,
+            query,
+        });
+    },
     fetchContestParticipantUser(contest_uuid: string, user_uuid: string) {
         return ClientProxy.get({
             url: config.CONTEST_URL,

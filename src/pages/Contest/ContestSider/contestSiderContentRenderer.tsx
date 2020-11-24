@@ -11,7 +11,6 @@ const contestSiderContentRenderer = (status: string) => {
             siderContent = <ContestSiderPending />;
             console.log('we got a pender over here');
             break;
-        case constants.STATUS.READY.KEY:
         case constants.STATUS.ACTIVE.KEY:
             siderContent = <ContestSiderActive />;
             console.log('we got a guy ready to roll over here');
