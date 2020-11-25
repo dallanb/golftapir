@@ -1,23 +1,33 @@
 import React from 'react';
-import { ContestSiderActiveProps } from './types';
-import ContestScorecard from './ContestScorecard';
-import ContestButtons from './ContestButtons';
 import { useSelector } from 'react-redux';
-import { Spin } from 'antd';
-import { selectSheet } from '@pages/Contest/selector';
+import { ContestSiderActiveProps } from './types';
+import { selectContestStatus } from '@pages/Contest/selector';
+import constants from '@constants';
+import ContestActive from './ContestActive';
+import ContestPending from './ContestPending';
+import ContestReady from './ContestReady';
 import './ContestSiderActive.scss';
 
 const ContestSiderActive: React.FunctionComponent<ContestSiderActiveProps> = () => {
-    const sheet = useSelector(selectSheet);
-    if (!sheet) {
-        return <Spin />;
-    }
-    return (
-        <>
-            <ContestScorecard />
-            <ContestButtons />
-        </>
-    );
+    const status = useSelector(selectContestStatus);
+
+    const contentRenderer = (status: string) => {
+        let content = <div />;
+        switch (status) {
+            case constants.STATUS.PENDING.KEY:
+                content = <ContestPending />;
+                break;
+            case constants.STATUS.READY.KEY:
+                break;
+            case constants.STATUS.ACTIVE.KEY:
+            case constants.STATUS.COMPLETED.KEY:
+                content = <ContestActive />;
+                break;
+        }
+        return content;
+    };
+
+    return contentRenderer(status);
 };
 
 export default ContestSiderActive;

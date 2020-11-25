@@ -135,6 +135,20 @@ function* updateContestParticipant({ uuid, data }: any) {
         message.error(CONSTANTS.CONTEST.ERROR.UPDATE_PARTICIPANT);
     }
 }
+function* fetchContestParticipants({ uuid, options }: any) {
+    try {
+        const res = yield call(
+            ContestService.fetchContestParticipants,
+            uuid,
+            options
+        );
+        const { participants } = res;
+        yield put(ContestActions.fetchContestParticipantsSuccess(participants));
+    } catch (err) {
+        yield put(ContestActions.updateContestParticipantFailure(err));
+        message.error(CONSTANTS.CONTEST.ERROR.FETCH_PARTICIPANTS);
+    }
+}
 
 export default function* ContestSaga() {
     yield all([
@@ -158,6 +172,10 @@ export default function* ContestSaga() {
         takeLatest(
             ContestTypes.UPDATE_CONTEST_PARTICIPANT,
             updateContestParticipant
+        ),
+        takeLatest(
+            ContestTypes.FETCH_CONTEST_PARTICIPANTS,
+            fetchContestParticipants
         ),
     ]);
 }

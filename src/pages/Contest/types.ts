@@ -24,7 +24,7 @@ export interface ContestPageInterface {
     readonly subscribed: boolean;
     readonly contestWagers: any[];
     readonly contest: any;
-    readonly participant: any;
+    readonly participants: any[];
     readonly sheet: any;
     readonly accountsHash: any;
 }

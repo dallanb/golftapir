@@ -18,11 +18,11 @@ const ComponentContent: React.FunctionComponent<ComponentContentProps> = ({
     };
 
     return (
-        <Content className="component-content-content">
-            <div className={`component-content-children ${className}`}>
-                {renderComponent()}
-            </div>
-        </Content>
+        // <Content className={`component-content-content`}>
+        <div className={`component-content-content ${className}`}>
+            {renderComponent()}
+        </div>
+        //</Content>
     );
 };
 

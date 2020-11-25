@@ -8,15 +8,15 @@ import { SiderLayoutProps } from '@layouts/SiderLayout/types';
 import { ContentLayoutProps } from '@layouts/ContentLayout/types';
 import constants from '@constants';
 import ContestSiderTitle from './ContestSiderTitle';
-import { selectParticipant } from '../selector';
+import { selectMyParticipant } from '../selector';
 import { ContestSiderProps } from './types';
 import contestSiderContentRenderer from './contestSiderContentRenderer';
 import './ContestSider.scss';
 
 const ContestSider: React.FunctionComponent<ContestSiderProps> = () => {
     const me = useSelector(selectMe);
-    const participant = useSelector(selectParticipant);
-
+    const participant = useSelector(selectMyParticipant);
+    console.log(participant);
     const renderTitle = (titleProps: { name: string; status: string }) => (
         <ContestSiderTitle {...titleProps} />
     );
@@ -64,7 +64,7 @@ const ContestSider: React.FunctionComponent<ContestSiderProps> = () => {
     return (
         <SiderLayout
             {...renderContentLayoutProps()}
-            showSpinner={false}
+            showSpinner={!participant}
             className="contest-sider"
         >
             {renderContent()}

@@ -6,7 +6,7 @@ import { Table } from '@components';
 import './ContestParticipantsTable.scss';
 import { Typography } from 'antd';
 import {
-    selectContestParticipants,
+    selectContestMaterializedParticipants,
     selectIsFetching,
 } from '@pages/Contest/selector';
 
@@ -24,7 +24,7 @@ const ContestParticipantsTable: React.FunctionComponent<ContestParticipantsTable
         return { size, width, height };
     };
 
-    const items = useSelector(selectContestParticipants);
+    const items = useSelector(selectContestMaterializedParticipants);
     const isFetching = useSelector(selectIsFetching);
 
     return (
