@@ -5,9 +5,9 @@ import { get as _get } from 'lodash';
 import { ContentLayout } from '@layouts';
 import { CompetitorProps } from './types';
 import CompetitorPageActions from './actions';
-import CompetitorHeader from './header';
-import CompetitorContent from './content';
-import CompetitorSider from './sider';
+import CompetitorHeader from './CompetitorHeader';
+import CompetitorContent from './CompetitorContent';
+import CompetitorSider from './CompetitorSider';
 import { selectData } from './selector';
 import './Competitor.scss';
 

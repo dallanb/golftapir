@@ -13,7 +13,7 @@ const NotificationsListTile: React.FunctionComponent<NotificationsListTileProps>
 
     const renderMessage = memoize((item) => {
         let content = 'Loading...';
-        let className = 'notifications-list-tile-content';
+        let className = 'notifications-list-tile-CompetitorContent';
 
         if (item.message) {
             content = item.message;

@@ -3,9 +3,9 @@ import { combineReducers } from 'redux';
 
 // Reducer
 import { reducer as dataReducer } from './reducer';
-import { reducer as headerReducer } from './header';
-import { competitorResultsReducer as contentCompetitorResultsReducer } from './content';
-import { headerReducer as siderHeaderReducer } from './sider';
+import { reducer as headerReducer } from './CompetitorHeader';
+import { competitorResultsReducer as contentCompetitorResultsReducer } from './CompetitorContent';
+import { headerReducer as siderHeaderReducer } from './CompetitorSider';
 export const reducer = combineReducers({
     ui: combineReducers({
         header: headerReducer,
@@ -21,9 +21,9 @@ export const reducer = combineReducers({
 
 // Saga
 export { default as CompetitorPageSaga } from './saga';
-export { CompetitorPageHeaderSaga } from './header';
-export { CompetitorPageContentCompetitorResultsSaga } from './content';
-export { CompetitorPageSiderHeaderSaga } from './sider';
+export { CompetitorPageHeaderSaga } from './CompetitorHeader';
+export { CompetitorPageContentCompetitorResultsSaga } from './CompetitorContent';
+export { CompetitorPageSiderHeaderSaga } from './CompetitorSider';
 
 // Routes
 export { default as CompetitorPageRoutes } from './routes';
