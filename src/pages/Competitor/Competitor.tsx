@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { get as _get } from 'lodash';
 import { ContentLayout } from '@layouts';
 import { CompetitorProps } from './types';
@@ -8,6 +8,7 @@ import CompetitorPageActions from './actions';
 import CompetitorHeader from './header';
 import CompetitorContent from './content';
 import CompetitorSider from './sider';
+import { selectData } from './selector';
 import './Competitor.scss';
 
 const Competitor: React.FunctionComponent<CompetitorProps> = () => {
@@ -15,6 +16,7 @@ const Competitor: React.FunctionComponent<CompetitorProps> = () => {
 
     const history = useHistory();
     const competitor = _get(history, ['location', 'state'], null);
+    const { isInitialized } = useSelector(selectData);
 
     useEffect(() => {
         dispatch(CompetitorPageActions.preInit(competitor));
@@ -29,6 +31,7 @@ const Competitor: React.FunctionComponent<CompetitorProps> = () => {
             header={<CompetitorHeader />}
             content={<CompetitorContent />}
             sider={<CompetitorSider />}
+            // showSpinner={!isInitialized}
         />
     );
 };

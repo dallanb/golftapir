@@ -7,8 +7,8 @@ const { Types, Creators } = createActions(
         initFailure: ['err'],
         terminate: null,
         set: ['data'],
-        setHeader: ['data'],
-        setAvatar: ['data'],
+        setTitle: ['title'],
+        setAvatar: ['src', 'name'],
     },
     {
         prefix: 'COMPETITOR_PAGE_HEADER_',

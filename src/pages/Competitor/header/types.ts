@@ -1,6 +1,5 @@
 export interface CompetitorHeaderProps {}
 export interface CompetitorPageHeaderInterface {
-    readonly isFetching: boolean;
     readonly isInitialized: boolean;
     readonly err?: Error;
     readonly title: string;

@@ -1,14 +1,18 @@
-import { all, call, fork, put, select, takeLatest } from 'redux-saga/effects';
-import { selectAccount } from '@pages/Competitor/selector';
+import { all, put, select, takeLatest } from 'redux-saga/effects';
+import {
+    selectAccountAvatarSrc,
+    selectAccountName,
+} from '@pages/Competitor/selector';
 import CompetitorPageHeaderActions, {
     CompetitorPageHeaderTypes,
 } from './actions';
 
 function* init() {
     try {
-        const account = yield select(selectAccount);
-        yield put(CompetitorPageHeaderActions.setTitle(account));
-        yield put(CompetitorPageHeaderActions.setAvatar(account));
+        const name = yield select(selectAccountName);
+        const src = yield select(selectAccountAvatarSrc);
+        yield put(CompetitorPageHeaderActions.setTitle(name));
+        yield put(CompetitorPageHeaderActions.setAvatar(src, name));
         yield put(CompetitorPageHeaderActions.initSuccess());
     } catch (err) {
         yield put(CompetitorPageHeaderActions.initFailure());

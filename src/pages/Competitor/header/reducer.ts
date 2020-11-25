@@ -10,7 +10,6 @@ import constants from '@constants';
 
 /* ------------- Initial State ------------- */
 const INITIAL_STATE: CompetitorPageHeaderInterface = {
-    isFetching: false,
     isInitialized: false,
     err: undefined,
     title: CONSTANTS.PAGES.COMPETITOR.TITLE,
@@ -34,7 +33,6 @@ function init(state = INITIAL_STATE) {
 
 function initSuccess(state = INITIAL_STATE) {
     return Immutable.merge(state, {
-        isFetching: false,
         isInitialized: true,
         err: null,
     });
@@ -42,7 +40,6 @@ function initSuccess(state = INITIAL_STATE) {
 
 function initFailure(state: any, { err }: any) {
     return Immutable.merge(state, {
-        isFetching: false,
         isInitialized: false,
         err,
     });
@@ -58,22 +55,13 @@ function set(state: any, { data }: any) {
     });
 }
 
-function setTitle(state: any, { data }: any) {
-    const first_name = _get(data, ['first_name'], '');
-    const last_name = _get(data, ['last_name'], '');
-    const title = `${first_name} ${last_name}`;
+function setTitle(state: any, { title }: any) {
     return Immutable.merge(state, {
         title,
     });
 }
 
-function setAvatar(state: any, { data }: any) {
-    const first_name = _get(data, ['first_name'], '');
-    const last_name = _get(data, ['last_name'], '');
-    const filename = _get(data, ['avatar', 's3_filename'], null);
-    const name = `${first_name} ${last_name}`;
-    const src =
-        filename && withS3URL(filename, constants.S3_FOLDERS.ACCOUNT.AVATAR);
+function setAvatar(state: any, { src, name }: any) {
     return Immutable.merge(state, {
         avatar: {
             ...state.avatar,

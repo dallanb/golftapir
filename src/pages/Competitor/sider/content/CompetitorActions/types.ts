@@ -1,6 +1,4 @@
-export interface CompetitorActionsProps {
-    actions: any;
-}
+export interface CompetitorActionsProps {}
 
 export interface competitorActionRendererProps {
     actions: any;

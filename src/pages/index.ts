@@ -4,12 +4,17 @@ export {
     AccountPageSaga,
     AccountPageRoutes,
 } from './Account';
+
 export {
     default as Competitor,
     reducer as competitorPage,
     CompetitorPageSaga,
+    CompetitorPageHeaderSaga,
+    CompetitorPageContentCompetitorResultsSaga,
+    CompetitorPageSiderHeaderSaga,
     CompetitorPageRoutes,
 } from './Competitor';
+
 export {
     default as Competitors,
     reducer as competitorsPage,

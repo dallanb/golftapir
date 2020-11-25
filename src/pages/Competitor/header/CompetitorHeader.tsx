@@ -7,7 +7,6 @@ import { ContentLayoutHeader } from '@layouts';
 
 const CompetitorHeader: React.FunctionComponent<CompetitorHeaderProps> = () => {
     const headerProps = _pick(useSelector(selectData), [
-        'isFetching',
         'title',
         'subTitle',
         'avatar',

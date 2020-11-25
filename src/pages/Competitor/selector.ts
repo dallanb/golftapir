@@ -1,7 +1,9 @@
 import { createSelector } from 'reselect';
 import { get as _get } from 'lodash';
+import { withS3URL } from '@utils';
+import constants from '@constants';
 
-const getCompetitorPage = (state: any) => state.competitorPage;
+const getCompetitorPage = (state: any) => state.competitorPage.data;
 const getBase = (state: any) => state.base;
 
 export const selectData = createSelector(
@@ -28,14 +30,19 @@ export const selectAccountAvatar = createSelector(
     (competitorPage) => _get(competitorPage, ['account', 'avatar'], undefined)
 );
 
+export const selectAccountAvatarSrc = createSelector(
+    [getCompetitorPage],
+    (competitorPage) => {
+        const filename = _get(competitorPage, ['account', 'avatar'], undefined);
+        return (
+            filename && withS3URL(filename, constants.S3_FOLDERS.ACCOUNT.AVATAR)
+        );
+    }
+);
+
 export const selectIsMe = createSelector(
     [getCompetitorPage, getBase],
     (competitorPage, base) =>
         _get(competitorPage, ['account', 'membership_uuid'], undefined) ===
         _get(base, ['me', 'membership_uuid'], undefined)
-);
-
-export const selectContestsList = createSelector(
-    [getCompetitorPage],
-    (competitorPage) => _get(competitorPage, ['contestsList'], undefined)
 );

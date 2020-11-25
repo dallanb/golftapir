@@ -1,7 +1,7 @@
 import React from 'react';
 import memoize from 'memoize-one';
 import { Button } from 'antd';
-import { renderAction } from '../../utils';
+import { renderAction } from '../../../utils';
 import { mapActionLabel } from '@utils';
 import { competitorActionRendererProps } from './types';
 
