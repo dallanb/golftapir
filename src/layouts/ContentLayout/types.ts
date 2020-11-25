@@ -1,16 +1,7 @@
-import { ReactElement, ReactNode } from 'react';
-import { AvatarProps } from '@components/Avatar/types';
-import { Tag } from 'antd';
+import { ReactNode } from 'react';
 
 export interface ContentLayoutProps {
-    title?: ReactNode;
-    subTitle?: ReactNode;
-    showSpinner?: boolean;
-    className?: string;
-    tags?: ReactElement<typeof Tag> | ReactElement<typeof Tag>[];
-    extra?: ReactNode | ReactNode[];
-    avatar?: AvatarProps;
+    header?: ReactNode;
+    content?: ReactNode;
     sider?: ReactNode;
 }
-
-export interface ContentLayoutState {}

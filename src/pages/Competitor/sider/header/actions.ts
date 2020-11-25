@@ -2,16 +2,17 @@ import { createActions } from 'reduxsauce';
 
 const { Types, Creators } = createActions(
     {
-        preInit: ['data'],
         init: ['uuid'],
         initSuccess: null,
         initFailure: ['err'],
         terminate: null,
         set: ['data'],
+        setHeader: ['data'],
+        setAvatar: ['data'],
     },
     {
-        prefix: 'COMPETITOR_PAGE_',
+        prefix: 'COMPETITOR_PAGE_SIDER_HEADER_',
     }
 );
-export const CompetitorPageTypes = Types;
+export const CompetitorPageSiderHeaderTypes = Types;
 export default Creators;

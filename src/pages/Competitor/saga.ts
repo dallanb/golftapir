@@ -3,6 +3,10 @@ import { all, call, fork, put, takeLatest } from 'redux-saga/effects';
 import { fetchAccountMembership, fetchContestsMaterialized } from '@helpers';
 import CompetitorPageActions, { CompetitorPageTypes } from './actions';
 
+function* preInit({ data }: AnyAction) {
+    console.log(data);
+}
+
 function* init({ uuid }: AnyAction) {
     try {
         const { data: account } = yield call(fetchAccountMembership, uuid);
@@ -21,5 +25,8 @@ function* init({ uuid }: AnyAction) {
 }
 
 export default function* CompetitorPageSaga() {
-    yield all([takeLatest(CompetitorPageTypes.INIT, init)]);
+    yield all([
+        takeLatest(CompetitorPageTypes.PRE_INIT, preInit),
+        takeLatest(CompetitorPageTypes.INIT, init),
+    ]);
 }
