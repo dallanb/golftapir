@@ -7,9 +7,9 @@ import { ContestParticipantsTableParticipantProps } from './types';
 import { prepareParticipant } from '@pages/Contest/utils';
 import { Avatar } from '@components';
 import { withS3URL } from '@utils';
-import './ContestLeadersTableParticipant.scss';
+import './ContestLeaderboardTableParticipant.scss';
 
-const ContestLeadersTableParticipant: React.FunctionComponent<ContestParticipantsTableParticipantProps> = ({
+const ContestLeaderboardTableParticipant: React.FunctionComponent<ContestParticipantsTableParticipantProps> = ({
     uuid,
 }) => {
     const history = useHistory();
@@ -19,7 +19,7 @@ const ContestLeadersTableParticipant: React.FunctionComponent<ContestParticipant
     );
     return (
         <div
-            className="contest-leaders-table-participant"
+            className="contest-leaderboard-table-participant"
             onClick={() =>
                 history.push(`/app${constants.ROUTES.COMPETITOR}`, {
                     uuid,
@@ -38,4 +38,4 @@ const ContestLeadersTableParticipant: React.FunctionComponent<ContestParticipant
     );
 };
 
-export default ContestLeadersTableParticipant;
+export default ContestLeaderboardTableParticipant;

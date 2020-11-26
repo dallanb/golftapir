@@ -1,18 +1,14 @@
-import { call, fork, put, select } from 'redux-saga/effects';
+import { call, put } from 'redux-saga/effects';
 import { keyBy as _keyBy } from 'lodash';
 import { TopicSocketActions } from '@actions';
 import {
     bulkFetchAccounts,
     fetchContestMaterialized,
-    fetchContestParticipants,
     fetchContestParticipantUser,
-    fetchMyScoreContestParticipantSheet,
     subscriptionExists,
 } from '@helpers';
 import ContestPageActions from './actions';
 import { socketEventHandlers } from './utils';
-import constants from '@constants';
-import { selectAccountsHash } from '@pages/Contest/selector';
 
 export function* initContest(uuid: string) {
     const { data: contest } = yield call(fetchContestMaterialized, uuid);
@@ -21,7 +17,6 @@ export function* initContest(uuid: string) {
         uuid,
         'me'
     );
-    yield put(ContestPageActions.set({ title: contest.name }));
     yield put(ContestPageActions.set({ contest }));
     yield put(ContestPageActions.set({ participant }));
 
@@ -37,15 +32,6 @@ export function* initContest(uuid: string) {
         const accountsHash = _keyBy(accountParticipants, 'membership_uuid');
         yield put(ContestPageActions.set({ accountsHash }));
     }
-}
-
-export function* initSheet(uuid: string) {
-    const { data: sheet } = yield call(
-        fetchMyScoreContestParticipantSheet,
-        uuid,
-        'me'
-    );
-    yield put(ContestPageActions.set({ sheet }));
 }
 
 export function* initSubscribed(uuid: string) {

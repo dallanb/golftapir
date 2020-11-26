@@ -12,23 +12,11 @@ export interface ContestProps extends RouteComponentProps {
     contest: any;
 }
 
-export interface ContestState {
-    uuid: string;
-    name: string;
-}
-
 export interface ContestPageInterface {
     readonly isFetching: boolean;
     readonly isInitialized: boolean;
     readonly err?: Error;
     readonly subscribed: boolean;
-    readonly contestWagers: any[];
     readonly contest: any;
-    readonly participants: any[];
-    readonly sheet: any;
     readonly accountsHash: any;
-}
-
-export interface StateInterface {
-    contestPage: ContestPageInterface;
 }

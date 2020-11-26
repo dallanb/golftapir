@@ -20,7 +20,7 @@ const { Types, Creators } = createActions(
         updateContestParticipantStatus: ['uuid', 'status'],
         updateContestParticipantStatusSuccess: ['uuid', 'status'],
         updateContestParticipantStatusFailure: ['err'],
-        // updateContestParticipantScore: ['participant', 'strokes', 'score'],
+        updateContestParticipantScore: ['participant', 'strokes', 'score'],
     },
     {
         prefix: 'CONTEST_PAGE_',

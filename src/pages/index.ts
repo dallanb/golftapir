@@ -9,9 +9,7 @@ export {
     default as Competitor,
     reducer as competitorPage,
     CompetitorPageSaga,
-    CompetitorPageHeaderSaga,
     CompetitorPageContentCompetitorResultsSaga,
-    CompetitorPageSiderHeaderSaga,
     CompetitorPageRoutes,
 } from './Competitor';
 
@@ -25,6 +23,8 @@ export {
     default as Contest,
     reducer as contestPage,
     ContestPageSaga,
+    ContestPageSiderContentParticipantActiveContestActiveSaga,
+    ContestPageSiderContentParticipantActiveContestPendingSaga,
     ContestPageRoutes,
 } from './Contest';
 export {

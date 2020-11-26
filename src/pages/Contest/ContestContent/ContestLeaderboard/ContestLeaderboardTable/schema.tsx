@@ -1,5 +1,5 @@
 import React from 'react';
-import ContestLeadersTableParticipant from './ContestLeadersTableParticipant';
+import ContestLeaderboardTableParticipant from './ContestLeaderboardTableParticipant';
 import { CellValue } from 'react-table';
 import { totalStrokeCalculator } from '@utils';
 
@@ -15,7 +15,7 @@ export const columnsSchema = [
         accessor: 'uuid',
         width: 500,
         Cell: ({ value }: any) => (
-            <ContestLeadersTableParticipant uuid={value} />
+            <ContestLeaderboardTableParticipant uuid={value} />
         ),
     },
     {

@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect';
 
 const getCompetitorPageContentCompetitorResults = (state: any) =>
-    state.competitorPage.ui.sider.header;
+    state.competitorPage.ui.contest.competitorResults;
 
 export const selectData = createSelector(
     [getCompetitorPageContentCompetitorResults],

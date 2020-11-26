@@ -1,14 +1,14 @@
-export { default } from './Competitor';
 import { combineReducers } from 'redux';
+
+// Component
+export { default } from './Competitor';
 
 // Reducer
 import { reducer as dataReducer } from './reducer';
-import { competitorResultsReducer as contentCompetitorResultsReducer } from './CompetitorContent';
+import { reducer as contentReducer } from './CompetitorContent';
 export const reducer = combineReducers({
     ui: combineReducers({
-        content: combineReducers({
-            competitorResults: contentCompetitorResultsReducer,
-        }),
+        content: contentReducer,
     }),
     data: dataReducer,
 });

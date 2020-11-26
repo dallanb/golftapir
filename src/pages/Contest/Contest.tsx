@@ -26,11 +26,6 @@ const Contest: React.FunctionComponent<ContestProps> = () => {
         };
     }, []);
 
-    // const renderContent = () => {
-    //     const status = _get(contest, ['status'], undefined);
-    //     return <ContestLeadersTable />;
-    // };
-
     return (
         <ContentLayout
             header={<ContestHeader />}
