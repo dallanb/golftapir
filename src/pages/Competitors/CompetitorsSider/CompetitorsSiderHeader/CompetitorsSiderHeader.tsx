@@ -2,11 +2,10 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import SiderLayoutHeader from '@layouts/SiderLayout/SiderLayoutHeader';
 import { selectMyAvatarSrc, selectMyName } from '@selectors/BaseSelector';
-import HeaderTitle from './HeaderTitle';
-import { ContestsSiderHeaderProps } from './types';
+import { CompetitorsSiderHeaderProps } from './types';
 
-const ContestsSiderHeader: React.FunctionComponent<ContestsSiderHeaderProps> = () => {
-    const title = <HeaderTitle />;
+const CompetitorsSiderHeader: React.FunctionComponent<CompetitorsSiderHeaderProps> = () => {
+    const title = useSelector(selectMyName);
     const avatar = {
         name: useSelector(selectMyName),
         src: useSelector(selectMyAvatarSrc),
@@ -15,4 +14,4 @@ const ContestsSiderHeader: React.FunctionComponent<ContestsSiderHeaderProps> = (
     return <SiderLayoutHeader title={title} avatar={avatar} />;
 };
 
-export default ContestsSiderHeader;
+export default CompetitorsSiderHeader;

@@ -1,4 +1,4 @@
-import { all, call, put, race, take, takeLatest } from 'redux-saga/effects';
+import { all, put, takeLatest } from 'redux-saga/effects';
 import CompetitorsPageActions, { CompetitorsPageTypes } from './actions';
 
 function* init() {

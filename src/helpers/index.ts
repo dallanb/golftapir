@@ -8,6 +8,7 @@ export { default as fetchContestsMaterialized } from './fetchContestsMaterialize
 export { default as fetchContestParticipants } from './fetchContestParticipants';
 export { default as fetchContestParticipantUser } from './fetchContestParticipantUser';
 export { default as fetchAccount } from './fetchAccount';
+export { default as fetchAccounts } from './fetchAccounts';
 export { default as fetchAccountMembership } from './fetchAccountMembership';
 export { default as fetchMyAccount } from './fetchMyAccount';
 export { default as fetchNotifications } from './fetchNotifications';

@@ -17,6 +17,7 @@ export {
     default as Competitors,
     reducer as competitorsPage,
     CompetitorsPageSaga,
+    CompetitorsPageContentCompetitorsSaga,
     CompetitorsPageRoutes,
 } from './Competitors';
 export {
