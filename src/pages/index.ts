@@ -37,6 +37,7 @@ export {
     default as Contests,
     reducer as contestsPage,
     ContestsPageSaga,
+    ContestsPageContentContestsSaga,
     ContestsPageRoutes,
 } from './Contests';
 export {

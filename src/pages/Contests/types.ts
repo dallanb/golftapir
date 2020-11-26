@@ -13,16 +13,6 @@ export interface StateInterface {
 }
 
 export interface ContestsPageInterface {
-    readonly isFetching: boolean;
     readonly isInitialized: boolean;
     readonly err?: Error;
-    readonly title: string;
-    readonly description: string;
-    readonly contestsList: {
-        data: any;
-        metadata: any;
-        isFetching: boolean;
-        isInitialized: boolean;
-        append: boolean;
-    };
 }

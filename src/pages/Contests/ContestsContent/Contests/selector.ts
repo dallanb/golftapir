@@ -1,10 +1,10 @@
 import { createSelector } from 'reselect';
 
-const getCompetitorPageContentCompetitorResults = (state: any) =>
-    state.competitorPage.ui.content.competitorResults;
+const getContestsPageContentContests = (state: any) =>
+    state.contestsPage.ui.content.contests;
 
 export const selectData = createSelector(
-    [getCompetitorPageContentCompetitorResults],
+    [getContestsPageContentContests],
     (competitorPageContentCompetitorResults) =>
         competitorPageContentCompetitorResults
 );

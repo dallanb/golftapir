@@ -1,25 +1,21 @@
 import React, { ReactText } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { ContestsListProps } from './types';
 import { List } from '@components';
-import { ContestActions } from '@actions';
-import { selectContestsList } from '../selector';
+import ContestsPageContentContestsActions from '../actions';
+import { selectData } from '../selector';
 import ContestsListTile from './ContestsListTile';
-import ComponentContent from '@layouts/ComponentContent';
 import './ContestsList.scss';
-import { Spin } from 'antd';
 
-const ContestsList: React.FunctionComponent<ContestsListProps> = ({
-    history,
-}) => {
-    const { data, metadata, isFetching, isInitialized } = useSelector(
-        selectContestsList
-    );
+const ContestsList: React.FunctionComponent<ContestsListProps> = ({}) => {
+    const history = useHistory();
+    const { data, metadata, isFetching } = useSelector(selectData);
 
     const dispatch = useDispatch();
     const loadMore = (start: number, stop: number, resolve: () => any) => {
         dispatch(
-            ContestActions.fetchContestsMaterialized(
+            ContestsPageContentContestsActions.fetchData(
                 {
                     page: Math.floor(stop / 100) + 1,
                     per_page: 100,
@@ -46,19 +42,16 @@ const ContestsList: React.FunctionComponent<ContestsListProps> = ({
 
         return { size, width, height };
     };
-    if (!isInitialized) return <Spin />;
     return (
-        <div className="contests-list">
-            <List
-                {...loadTableDimensions(data)}
-                items={data}
-                hasNextPage={hasNextPage()}
-                loadNextPage={loadMore}
-                isNextPageLoading={isFetching}
-                minimumBatchSize={100}
-                rowRenderer={(props) => ContestsListTile({ props, history })}
-            />
-        </div>
+        <List
+            {...loadTableDimensions(data)}
+            items={data}
+            hasNextPage={hasNextPage()}
+            loadNextPage={loadMore}
+            isNextPageLoading={isFetching}
+            minimumBatchSize={100}
+            rowRenderer={(props) => ContestsListTile({ props, history })}
+        />
     );
 };
 

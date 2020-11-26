@@ -2,18 +2,19 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { Button } from 'antd';
 import { PlusCircleOutlined } from '@ant-design/icons';
-import { CreateContestButtonProps } from './types';
-import './CreateContestButton.scss';
+import constants from '@constants';
+import { CreateButtonProps } from './types';
+import './CreateButton.scss';
 
-const CreateContestButton: React.FunctionComponent<CreateContestButtonProps> = () => {
+const CreateButton: React.FunctionComponent<CreateButtonProps> = () => {
     const history = useHistory();
 
     const handleClick = () => {
-        history.push('/app/contests/create');
+        history.push(`/app${constants.ROUTES.CONTESTS_CREATE}`);
     };
 
     return (
-        <div className="contest-create-button">
+        <div className="create-button">
             <Button block type="primary" onClick={handleClick}>
                 Create Contest <PlusCircleOutlined />
             </Button>
@@ -21,4 +22,4 @@ const CreateContestButton: React.FunctionComponent<CreateContestButtonProps> = (
     );
 };
 
-export default CreateContestButton;
+export default CreateButton;
