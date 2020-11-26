@@ -1,13 +1,13 @@
 import React from 'react';
-import { ContentLayoutContent } from '@layouts';
+import SiderLayoutContent from '@layouts/SiderLayout/SiderLayoutContent';
 import CompetitorActions from './CompetitorActions';
 import { CompetitorSiderContentProps } from './types';
 
 const CompetitorSiderContent: React.FunctionComponent<CompetitorSiderContentProps> = ({}) => {
     return (
-        <ContentLayoutContent>
+        <SiderLayoutContent>
             <CompetitorActions />
-        </ContentLayoutContent>
+        </SiderLayoutContent>
     );
 };
 

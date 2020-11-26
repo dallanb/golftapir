@@ -75,31 +75,6 @@ function set(state: any, { data }: any) {
     });
 }
 
-function updateContestStatusSuccess(state = INITIAL_STATE, { status }: any) {
-    return Immutable.merge(state, {
-        contest: {
-            ...state.contest,
-            status,
-        },
-    });
-}
-
-function updateContestParticipantStatusSuccess(
-    state = INITIAL_STATE,
-    { uuid, status }: any
-) {
-    const participants = mergeContestParticipant(state.contest.participants, {
-        uuid,
-        status,
-    });
-    return Immutable.merge(state, {
-        contest: {
-            ...state.contest,
-            participants,
-        },
-    });
-}
-
 function subscribeSuccess(state = INITIAL_STATE) {
     return Immutable.merge(state, {
         subscribed: true,
@@ -112,32 +87,21 @@ function unsubscribeSuccess(state = INITIAL_STATE) {
     });
 }
 
-function debouncedHoleStrokeUpdateSuccess(
-    state = INITIAL_STATE,
-    { hole }: any
-) {
-    const holes = Object.assign({}, state.sheet.holes, hole);
-    console.log(holes);
-    return Immutable.merge(state, {
-        sheet: { ...state.sheet, holes },
-    });
-}
-
-function updateContestParticipantScore(
-    state = INITIAL_STATE,
-    { participant, strokes, score }: any
-) {
-    const participants = Object.assign({}, state.contest.participants, {
-        [participant]: {
-            ...state.contest.participants[participant],
-            score,
-            strokes,
-        },
-    });
-    return Immutable.merge(state, {
-        contest: { ...state.contest, participants },
-    });
-}
+// function updateContestParticipantScore(
+//     state = INITIAL_STATE,
+//     { participant, strokes, score }: any
+// ) {
+//     const participants = Object.assign({}, state.contest.participants, {
+//         [participant]: {
+//             ...state.contest.participants[participant],
+//             score,
+//             strokes,
+//         },
+//     });
+//     return Immutable.merge(state, {
+//         contest: { ...state.contest, participants },
+//     });
+// }
 
 const HANDLERS = {
     [ContestPageTypes.INIT]: init,
@@ -148,12 +112,9 @@ const HANDLERS = {
     [ContestPageTypes.REFRESH_SUCCESS]: refreshSuccess,
     [ContestPageTypes.REFRESH_FAILURE]: refreshFailure,
     [ContestPageTypes.SET]: set,
-    [ContestPageTypes.UPDATE_CONTEST_STATUS_SUCCESS]: updateContestStatusSuccess,
-    [ContestPageTypes.UPDATE_CONTEST_PARTICIPANT_STATUS_SUCCESS]: updateContestParticipantStatusSuccess,
     [ContestPageTypes.SUBSCRIBE_SUCCESS]: subscribeSuccess,
     [ContestPageTypes.UNSUBSCRIBE_SUCCESS]: unsubscribeSuccess,
-    [ContestPageTypes.DEBOUNCED_HOLE_STROKE_UPDATE_SUCCESS]: debouncedHoleStrokeUpdateSuccess,
-    [ContestPageTypes.UPDATE_CONTEST_PARTICIPANT_SCORE]: updateContestParticipantScore,
+    // [ContestPageTypes.UPDATE_CONTEST_PARTICIPANT_SCORE]: updateContestParticipantScore,
 };
 
 export const reducer = createReducer(INITIAL_STATE, HANDLERS);

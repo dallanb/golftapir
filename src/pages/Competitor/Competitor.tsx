@@ -32,6 +32,7 @@ const Competitor: React.FunctionComponent<CompetitorProps> = () => {
             content={<CompetitorContent />}
             sider={<CompetitorSider />}
             // showSpinner={!isInitialized}
+            className="competitor-view"
         />
     );
 };

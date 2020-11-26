@@ -10,7 +10,7 @@ import './CompetitorResultsList.scss';
 
 const CompetitorResultsList: React.FunctionComponent<CompetitorResultsListProps> = () => {
     const history = useHistory();
-    const { data, isFetching } = useSelector(selectData);
+    const { data, isFetching, isInitialized } = useSelector(selectData);
 
     const loadMore = (start: number, stop: number, resolve: () => void) =>
         resolve();
@@ -27,17 +27,22 @@ const CompetitorResultsList: React.FunctionComponent<CompetitorResultsListProps>
     };
 
     return (
-        <List
-            {...loadTableDimensions(data)}
-            items={data}
-            hasNextPage={false}
-            loadNextPage={loadMore}
-            isNextPageLoading={isFetching}
-            minimumBatchSize={100}
-            rowRenderer={(props) =>
-                CompetitorResultsListTile({ props, history })
-            }
-        />
+        <ComponentContent
+            showSpinner={!isInitialized}
+            className="competitor-results-list"
+        >
+            <List
+                {...loadTableDimensions(data)}
+                items={data}
+                hasNextPage={false}
+                loadNextPage={loadMore}
+                isNextPageLoading={isFetching}
+                minimumBatchSize={100}
+                rowRenderer={(props) =>
+                    CompetitorResultsListTile({ props, history })
+                }
+            />
+        </ComponentContent>
     );
 };
 

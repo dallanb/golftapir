@@ -7,7 +7,7 @@ const { Types, Creators } = createActions(
         initFailure: ['err'],
         terminate: null,
         set: ['data'],
-        fetchData: ['append'], // at the moment the passed in parameters are being ignored
+        fetchData: ['options', 'append'], // at the moment the passed in parameters are being ignored
         fetchDataSuccess: ['data', 'metadata'],
         fetchDataFailure: ['err'],
     },

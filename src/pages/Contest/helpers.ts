@@ -16,17 +16,26 @@ import { selectAccountsHash } from '@pages/Contest/selector';
 
 export function* initContest(uuid: string) {
     const { data: contest } = yield call(fetchContestMaterialized, uuid);
-    const { data: participants } = yield call(fetchContestParticipants, uuid);
-
+    const { data: participant } = yield call(
+        fetchContestParticipantUser,
+        uuid,
+        'me'
+    );
     yield put(ContestPageActions.set({ title: contest.name }));
     yield put(ContestPageActions.set({ contest }));
-    yield put(ContestPageActions.set({ participants }));
+    yield put(ContestPageActions.set({ participant }));
 
-    yield fork(fetchAccountsHash, participants);
+    const { participants } = contest;
 
-    const { status } = contest;
-    if (status === constants.STATUS.ACTIVE.KEY) {
-        yield fork(initSheet, uuid);
+    const accounts = Object.keys(participants);
+
+    if (accounts.length) {
+        const { data: accountParticipants } = yield call(
+            bulkFetchAccounts,
+            accounts
+        );
+        const accountsHash = _keyBy(accountParticipants, 'membership_uuid');
+        yield put(ContestPageActions.set({ accountsHash }));
     }
 }
 
@@ -48,27 +57,6 @@ export function* initSocket(uuid: string) {
     yield put(
         TopicSocketActions.init({ uuid }, { eventHandler: socketEventHandlers })
     );
-}
-
-export function* fetchAccountsHash(participants: any[]) {
-    const accounts = participants.map(
-        ({ user_uuid }: { user_uuid: string }) => user_uuid
-    );
-    if (accounts.length) {
-        const { data: accountParticipants } = yield call(
-            bulkFetchAccounts,
-            accounts
-        );
-        const newAccountsHash = _keyBy(accountParticipants, 'membership_uuid');
-        const prevAccountsHash = yield select(selectAccountsHash);
-
-        const accountsHash = Object.assign(
-            {},
-            prevAccountsHash,
-            newAccountsHash
-        );
-        yield put(ContestPageActions.set({ accountsHash }));
-    }
 }
 
 export function* terminateSocket() {

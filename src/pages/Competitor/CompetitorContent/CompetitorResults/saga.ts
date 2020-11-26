@@ -1,3 +1,4 @@
+import { AnyAction } from 'redux';
 import { all, call, put, select, takeLatest } from 'redux-saga/effects';
 import CompetitorPageContentCompetitorResultsActions, {
     CompetitorPageContentCompetitorResultsTypes,
@@ -7,21 +8,25 @@ import { selectData } from '@pages/Competitor/selector';
 
 function* init() {
     try {
-        yield call(fetchData);
+        yield put(CompetitorPageContentCompetitorResultsActions.fetchData());
         yield put(CompetitorPageContentCompetitorResultsActions.initSuccess());
     } catch (err) {
         yield put(CompetitorPageContentCompetitorResultsActions.initFailure());
     }
 }
 
-function* fetchData() {
+function* fetchData({
+    options = {
+        page: 1,
+        per_page: 3,
+        sort_by: 'mtime.desc',
+    },
+}: AnyAction) {
     try {
         const { uuid } = yield select(selectData);
         const { data, metadata } = yield call(fetchContestsMaterialized, {
-            page: 1,
-            per_page: 3,
+            ...options,
             participants: uuid,
-            sort_by: 'mtime.desc',
         });
         yield put(
             CompetitorPageContentCompetitorResultsActions.fetchDataSuccess(
