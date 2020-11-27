@@ -1,1 +1,1 @@
-export interface AccountHeaderProps {}
+export interface ContestsCreateHeaderProps {}

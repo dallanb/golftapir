@@ -1,8 +1,8 @@
 import React from 'react';
 import SiderLayoutContent from '@layouts/SiderLayout/SiderLayoutContent';
-import { AccountSiderContentProps } from './types';
+import { ContestsCreateSiderContentProps } from './types';
 
-const AccountSiderContent: React.FunctionComponent<AccountSiderContentProps> = ({}) => {
+const ContestsCreateSiderContent: React.FunctionComponent<ContestsCreateSiderContentProps> = ({}) => {
     return (
         <SiderLayoutContent>
             <div />
@@ -10,4 +10,4 @@ const AccountSiderContent: React.FunctionComponent<AccountSiderContentProps> = (
     );
 };
 
-export default AccountSiderContent;
+export default ContestsCreateSiderContent;

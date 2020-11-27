@@ -1,1 +1,1 @@
-export interface AccountSiderProps {}
+export interface ContestsCreateSiderProps {}

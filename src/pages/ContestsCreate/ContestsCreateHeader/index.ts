@@ -1,1 +1,1 @@
-export { default } from './AccountHeader';
+export { default } from './ContestsCreateHeader';

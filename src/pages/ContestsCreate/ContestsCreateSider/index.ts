@@ -1,1 +1,1 @@
-export { default } from './AccountSider';
+export { default } from './ContestsCreateSider';
