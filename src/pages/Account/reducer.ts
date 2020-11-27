@@ -6,31 +6,22 @@ import { AccountPageTypes } from './actions';
 
 /* ------------- Interface ------------- */
 export interface AccountPageInterface {
-    readonly isFetching: boolean;
     readonly isInitialized: boolean;
     readonly err?: Error;
-    readonly title: string;
-    readonly description: string;
-    readonly data: any;
-    readonly updateFormInitialValues: any;
+    readonly account: any;
 }
 
 /* ------------- Initial State ------------- */
 const INITIAL_STATE: AccountPageInterface = {
-    isFetching: false,
     isInitialized: false,
     err: undefined,
-    title: CONSTANTS.PAGES.ACCOUNT.TITLE,
-    description: CONSTANTS.PAGES.ACCOUNT.DESCRIPTION,
-    updateFormInitialValues: undefined,
-    data: undefined,
+    account: undefined,
 };
 
 /* ------------- Reducers ------------- */
 function init(state = INITIAL_STATE) {
     return Immutable.merge(state, {
         ...INITIAL_STATE,
-        isFetching: true,
         isInitialized: false,
         err: null,
     });
@@ -38,7 +29,6 @@ function init(state = INITIAL_STATE) {
 
 function initSuccess(state = INITIAL_STATE) {
     return Immutable.merge(state, {
-        isFetching: false,
         isInitialized: true,
         err: null,
     });
@@ -46,7 +36,6 @@ function initSuccess(state = INITIAL_STATE) {
 
 function initFailure(state: any, { err }: any) {
     return Immutable.merge(state, {
-        isFetching: false,
         isInitialized: false,
         err,
     });

@@ -11,10 +11,7 @@ const INITIAL_STATE: ContestPageInterface = {
     isInitialized: false,
     err: undefined,
     subscribed: false,
-    contestWagers: [],
     contest: undefined,
-    participants: [],
-    sheet: undefined,
     accountsHash: undefined,
 };
 
@@ -75,31 +72,6 @@ function set(state: any, { data }: any) {
     });
 }
 
-function updateContestStatusSuccess(state = INITIAL_STATE, { status }: any) {
-    return Immutable.merge(state, {
-        contest: {
-            ...state.contest,
-            status,
-        },
-    });
-}
-
-function updateContestParticipantStatusSuccess(
-    state = INITIAL_STATE,
-    { uuid, status }: any
-) {
-    const participants = mergeContestParticipant(state.contest.participants, {
-        uuid,
-        status,
-    });
-    return Immutable.merge(state, {
-        contest: {
-            ...state.contest,
-            participants,
-        },
-    });
-}
-
 function subscribeSuccess(state = INITIAL_STATE) {
     return Immutable.merge(state, {
         subscribed: true,
@@ -109,17 +81,6 @@ function subscribeSuccess(state = INITIAL_STATE) {
 function unsubscribeSuccess(state = INITIAL_STATE) {
     return Immutable.merge(state, {
         subscribed: false,
-    });
-}
-
-function debouncedHoleStrokeUpdateSuccess(
-    state = INITIAL_STATE,
-    { hole }: any
-) {
-    const holes = Object.assign({}, state.sheet.holes, hole);
-    console.log(holes);
-    return Immutable.merge(state, {
-        sheet: { ...state.sheet, holes },
     });
 }
 
@@ -148,11 +109,8 @@ const HANDLERS = {
     [ContestPageTypes.REFRESH_SUCCESS]: refreshSuccess,
     [ContestPageTypes.REFRESH_FAILURE]: refreshFailure,
     [ContestPageTypes.SET]: set,
-    [ContestPageTypes.UPDATE_CONTEST_STATUS_SUCCESS]: updateContestStatusSuccess,
-    [ContestPageTypes.UPDATE_CONTEST_PARTICIPANT_STATUS_SUCCESS]: updateContestParticipantStatusSuccess,
     [ContestPageTypes.SUBSCRIBE_SUCCESS]: subscribeSuccess,
     [ContestPageTypes.UNSUBSCRIBE_SUCCESS]: unsubscribeSuccess,
-    [ContestPageTypes.DEBOUNCED_HOLE_STROKE_UPDATE_SUCCESS]: debouncedHoleStrokeUpdateSuccess,
     [ContestPageTypes.UPDATE_CONTEST_PARTICIPANT_SCORE]: updateContestParticipantScore,
 };
 

@@ -18,7 +18,7 @@ const ComponentContent: React.FunctionComponent<ComponentContentProps> = ({
     };
 
     return (
-        // <Content className={`component-content-content`}>
+        // <Content className={`component-CompetitorContent-CompetitorContent`}>
         <div className={`component-content-content ${className}`}>
             {renderComponent()}
         </div>

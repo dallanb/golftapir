@@ -1,0 +1,31 @@
+.competitors-list-tile-view {
+    display: flex;
+
+    .ant-card-body {
+        width: 100%;
+    }
+
+    .competitors-list-tile-content {
+        display: flex;
+        padding-bottom: 10px;
+
+        .competitors-list-tile-content-avatar {
+            margin-right: 10px;
+        }
+
+        .competitors-list-tile-content-info {
+            .competitors-list-tile-content-name {
+            }
+
+            .competitors-list-tile-content-status {
+            }
+        }
+
+        .competitors-list-tile-content-leaderboard {
+            margin-left: auto;
+        }
+    }
+
+    .competitors-list-tile-button {
+    }
+}

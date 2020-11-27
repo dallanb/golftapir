@@ -1,55 +1,36 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { AccountProps, StateInterface } from './types';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { get as _get } from 'lodash';
 import { ContentLayout } from '@layouts';
-import AccountForm from './AccountForm';
+import { AccountProps } from './types';
 import AccountPageActions from './actions';
+import AccountHeader from './AccountHeader';
+import AccountContent from './AccountContent';
+import AccountSider from './AccountSider';
+import { selectData } from './selector';
 import './Account.scss';
 
-class Account extends React.PureComponent<AccountProps> {
-    componentDidMount() {
-        const { init } = this.props;
-        init();
-    }
+const Account: React.FunctionComponent<AccountProps> = () => {
+    const dispatch = useDispatch();
 
-    componentWillUnmount() {
-        const { terminate } = this.props;
-        terminate();
-    }
+    const { isInitialized } = useSelector(selectData);
 
-    render() {
-        const { title, description, isInitialized } = this.props;
+    useEffect(() => {
+        dispatch(AccountPageActions.init());
+        return () => {
+            dispatch(AccountPageActions.terminate());
+        };
+    }, []);
 
-        return (
-            <ContentLayout
-                title={title}
-                subTitle={description}
-                showSpinner={!isInitialized}
-            >
-                <AccountForm />
-            </ContentLayout>
-        );
-    }
-}
-
-const mapStateToProps = ({ accountPage }: StateInterface) => {
-    const { title, description, isInitialized } = accountPage;
-    return {
-        title,
-        description,
-        isInitialized,
-    };
+    return (
+        <ContentLayout
+            header={<AccountHeader />}
+            content={<AccountContent />}
+            sider={<AccountSider />}
+            // showSpinner={!isInitialized}
+            className="competitor-view"
+        />
+    );
 };
 
-const mapDispatchToProps = (dispatch: any) => {
-    return {
-        init() {
-            return dispatch(AccountPageActions.init());
-        },
-        terminate() {
-            return dispatch(AccountPageActions.terminate());
-        },
-    };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Account);
+export default Account;

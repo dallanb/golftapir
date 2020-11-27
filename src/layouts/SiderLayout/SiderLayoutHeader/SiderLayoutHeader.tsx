@@ -1,5 +1,5 @@
 import React from 'react';
-import { PageHeader } from 'antd';
+import { PageHeader, Spin } from 'antd';
 import { SiderLayoutHeaderProps } from './types';
 import { AvatarProps } from 'antd/lib/avatar';
 import { getInitials, randomColourGenerator } from '@utils';
@@ -7,6 +7,7 @@ import { getInitials, randomColourGenerator } from '@utils';
 const SiderLayoutHeader: React.FunctionComponent<SiderLayoutHeaderProps> = ({
     title,
     avatar,
+    showSpinner,
 }) => {
     const renderAvatar = (avatar: SiderLayoutHeaderProps['avatar']) => {
         if (!avatar) {
@@ -27,6 +28,10 @@ const SiderLayoutHeader: React.FunctionComponent<SiderLayoutHeaderProps> = ({
         }
         return avatarProps;
     };
+
+    if (showSpinner) {
+        return <Spin />;
+    }
 
     return (
         <PageHeader

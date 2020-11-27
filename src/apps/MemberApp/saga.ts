@@ -28,7 +28,7 @@ function* init() {
         const isLoggedIn = yield select(selectIsLoggedIn);
         if (!isLoggedIn) yield call(refresh);
 
-        // I dont think i need to even pass auth Data cause the id can be grabbed from kong header
+        // I dont think i need to even pass auth Data cause the id can be grabbed from kong CompetitorHeader
         const authData = yield select(selectData);
         yield put(
             SocketActions.init(authData, { eventHandler: socketEventHandlers })

@@ -1,62 +1,34 @@
-import React from 'react';
-import { compose } from 'redux';
-import { withRouter } from 'react-router-dom';
-import { connect } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { CompetitorsProps } from './types';
 import { ContentLayout } from '@layouts';
-import { CompetitorsProps, StateInterface } from './types';
+import { selectData } from './selector';
 import CompetitorsPageActions from './actions';
+import CompetitorsSider from './CompetitorsSider';
+import CompetitorsHeader from './CompetitorsHeader';
+import CompetitorsContent from './CompetitorsContent';
 import './Competitors.scss';
 
-class Competitors extends React.PureComponent<CompetitorsProps> {
-    componentDidMount() {
-        const { init } = this.props;
-        init();
-    }
+const Competitors: React.FunctionComponent<CompetitorsProps> = () => {
+    const dispatch = useDispatch();
+    const { isInitialized } = useSelector(selectData);
 
-    componentWillUnmount() {
-        const { terminate } = this.props;
-        terminate();
-    }
+    useEffect(() => {
+        dispatch(CompetitorsPageActions.init());
+        return () => {
+            dispatch(CompetitorsPageActions.terminate());
+        };
+    }, []);
 
-    render() {
-        const { title, description, isInitialized } = this.props;
-        return (
-            <ContentLayout
-                title={title}
-                subTitle={description}
-                showSpinner={!isInitialized}
-            >
-                <div className="competitors-page-view">
-                    <div className="competitors-page-user"></div>
-                </div>
-            </ContentLayout>
-        );
-    }
-}
-
-const mapStateToProps = ({ base, competitorsPage }: StateInterface) => {
-    const { me } = base;
-    const { title, description, isInitialized } = competitorsPage;
-
-    return {
-        title,
-        description,
-        isInitialized,
-    };
+    return (
+        <ContentLayout
+            header={<CompetitorsHeader />}
+            sider={<CompetitorsSider />}
+            content={<CompetitorsContent />}
+            // showSpinner={!isInitialized}
+            className="competitors-view"
+        />
+    );
 };
 
-const mapDispatchToProps = (dispatch: any) => {
-    return {
-        init() {
-            return dispatch(CompetitorsPageActions.init());
-        },
-        terminate() {
-            return dispatch(CompetitorsPageActions.terminate());
-        },
-    };
-};
-
-export default compose(
-    withRouter,
-    connect(mapStateToProps, mapDispatchToProps)
-)(Competitors);
+export default Competitors;

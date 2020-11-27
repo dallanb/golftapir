@@ -1,30 +1,17 @@
 import { AnyAction } from 'redux';
-import {
-    all,
-    call,
-    debounce,
-    fork,
-    put,
-    select,
-    takeLatest,
-    takeLeading,
-} from 'redux-saga/effects';
+import { all, call, fork, put, select, takeLatest } from 'redux-saga/effects';
 import ContestPageActions, { ContestPageTypes } from './actions';
-import { selectContest, selectSheet } from './selector';
+import { selectContest } from './selector';
 import {
-    fetchAccountsHash,
     initContest,
     initSocket,
     initSubscribed,
     terminateSocket,
 } from './helpers';
 import {
-    updateContest,
     updateContestParticipant,
     subscribe as subscribeHelper,
     unsubscribe as unsubscribeHelper,
-    updateScoreSheetHole,
-    fetchContestParticipants,
 } from '@helpers';
 
 // Action Handlers
@@ -57,14 +44,21 @@ function* refresh() {
     }
 }
 
-function* updateContestStatus({ uuid, status }: AnyAction) {
+function* subscribe({ uuid }: AnyAction) {
     try {
-        yield call(updateContest, uuid, {
-            status,
-        });
-        yield put(ContestPageActions.updateContestStatusSuccess(status));
+        yield call(subscribeHelper, uuid);
+        yield put(ContestPageActions.subscribeSuccess());
     } catch (err) {
-        yield put(ContestPageActions.updateContestStatusFailure());
+        yield put(ContestPageActions.subscribeFailure());
+    }
+}
+
+function* unsubscribe({ uuid }: AnyAction) {
+    try {
+        yield call(unsubscribeHelper, uuid);
+        yield put(ContestPageActions.unsubscribeSuccess());
+    } catch (err) {
+        yield put(ContestPageActions.unsubscribeFailure());
     }
 }
 
@@ -86,54 +80,16 @@ function* updateContestParticipantStatus({ uuid, status }: AnyAction) {
     }
 }
 
-function* subscribe({ uuid }: AnyAction) {
-    try {
-        yield call(subscribeHelper, uuid);
-        yield put(ContestPageActions.subscribeSuccess());
-    } catch (err) {
-        yield put(ContestPageActions.subscribeFailure());
-    }
-}
-
-function* unsubscribe({ uuid }: AnyAction) {
-    try {
-        yield call(unsubscribeHelper, uuid);
-        yield put(ContestPageActions.unsubscribeSuccess());
-    } catch (err) {
-        yield put(ContestPageActions.unsubscribeFailure());
-    }
-}
-
-function* debouncedHoleStrokeUpdate({ holeId, strokes }: AnyAction) {
-    try {
-        const { uuid } = yield select(selectSheet);
-        yield fork(updateScoreSheetHole, uuid, holeId, { strokes });
-        yield put(
-            ContestPageActions.debouncedHoleStrokeUpdateSuccess({
-                [holeId]: { strokes },
-            })
-        );
-    } catch (err) {
-        yield put(ContestPageActions.debouncedHoleStrokeUpdateFailure(err));
-    }
-}
-
 export default function* ContestPageSaga() {
     yield all([
         takeLatest(ContestPageTypes.INIT, init),
         takeLatest(ContestPageTypes.TERMINATE, terminate),
         takeLatest(ContestPageTypes.REFRESH, refresh),
-        takeLatest(ContestPageTypes.UPDATE_CONTEST_STATUS, updateContestStatus),
+        takeLatest(ContestPageTypes.SUBSCRIBE, subscribe),
+        takeLatest(ContestPageTypes.UNSUBSCRIBE, unsubscribe),
         takeLatest(
             ContestPageTypes.UPDATE_CONTEST_PARTICIPANT_STATUS,
             updateContestParticipantStatus
-        ),
-        takeLatest(ContestPageTypes.SUBSCRIBE, subscribe),
-        takeLatest(ContestPageTypes.UNSUBSCRIBE, unsubscribe),
-        debounce(
-            1000,
-            ContestPageTypes.DEBOUNCED_HOLE_STROKE_UPDATE,
-            debouncedHoleStrokeUpdate
         ),
     ]);
 }

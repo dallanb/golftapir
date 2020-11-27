@@ -8,6 +8,7 @@ export { default as fetchContestsMaterialized } from './fetchContestsMaterialize
 export { default as fetchContestParticipants } from './fetchContestParticipants';
 export { default as fetchContestParticipantUser } from './fetchContestParticipantUser';
 export { default as fetchAccount } from './fetchAccount';
+export { default as fetchAccounts } from './fetchAccounts';
 export { default as fetchAccountMembership } from './fetchAccountMembership';
 export { default as fetchMyAccount } from './fetchMyAccount';
 export { default as fetchNotifications } from './fetchNotifications';
@@ -20,6 +21,7 @@ export { default as searchCourses } from './searchCourses';
 export { default as subscribe } from './subscribe';
 export { default as subscriptionExists } from './subscriptionExists';
 export { default as unsubscribe } from './unsubscribe';
+export { default as updateAccount } from './updateAccount';
 export { default as updateContest } from './updateContest';
 export { default as updateContestParticipant } from './updateContestParticipant';
 export { default as updateScore } from './updateScore';

@@ -80,11 +80,11 @@ function registerValidSW(swUrl: string, config?: Config) {
                 installingWorker.onstatechange = () => {
                     if (installingWorker.state === 'installed') {
                         if (navigator.serviceWorker.controller) {
-                            // At this point, the updated precached content has been fetched,
+                            // At this point, the updated precached CompetitorContent has been fetched,
                             // but the previous service worker will still serve the older
-                            // content until all client tabs are closed.
+                            // CompetitorContent until all client tabs are closed.
                             console.log(
-                                'New content is available and will be used when all ' +
+                                'New CompetitorContent is available and will be used when all ' +
                                     'tabs for this page are closed. See https://bit.ly/CRA-PWA.'
                             );
 

@@ -1,7 +1,9 @@
 import { createSelector } from 'reselect';
 import { get as _get } from 'lodash';
+import { withS3URL } from '@utils';
+import constants from '@constants';
 
-const getContestPage = (state: any) => state.contestPage;
+const getContestPage = (state: any) => state.contestPage.data;
 const getBase = (state: any) => state.base;
 
 export const selectData = createSelector(
@@ -18,6 +20,26 @@ export const selectContest = createSelector([getContestPage], (contestPage) =>
     _get(contestPage, ['contest'], {})
 );
 
+export const selectContestUUID = createSelector(
+    [getContestPage],
+    (contestPage) => _get(contestPage, ['contest', 'uuid'], null)
+);
+
+export const selectContestName = createSelector(
+    [getContestPage],
+    (contestPage) => _get(contestPage, ['contest', 'name'], undefined)
+);
+
+export const selectContestAvatarSrc = createSelector(
+    [getContestPage],
+    (contestPage) => {
+        const filename = _get(contestPage, ['contest', 'avatar'], undefined);
+        return (
+            filename && withS3URL(filename, constants.S3_FOLDERS.CONTEST.AVATAR)
+        );
+    }
+);
+
 export const selectContestStartTime = createSelector(
     [getContestPage],
     (contestPage) => _get(contestPage, ['contest', 'start_time'], undefined)
@@ -28,14 +50,9 @@ export const selectContestStatus = createSelector(
     (contestPage) => _get(contestPage, ['contest', 'status'], undefined)
 );
 
-export const selectContestMaterializedParticipants = createSelector(
-    [getContestPage],
-    (contestPage) => _get(contestPage, ['contest', 'participants'], undefined)
-);
-
 export const selectContestParticipants = createSelector(
     [getContestPage],
-    (contestPage) => _get(contestPage, ['participants'], undefined)
+    (contestPage) => _get(contestPage, ['contest', 'participants'], undefined)
 );
 
 export const selectIsOwner = createSelector(
@@ -60,12 +77,11 @@ export const selectSheet = createSelector([getContestPage], (contestPage) =>
 );
 
 export const selectMyParticipant = createSelector(
-    [getContestPage, getBase],
-    (contestPage, base) => {
-        const participants = _get(contestPage, ['participants'], []);
-        const uuid = _get(base, ['me', 'membership_uuid'], undefined);
-        return participants.find(
-            ({ user_uuid }: { user_uuid: string }) => uuid === user_uuid
-        );
-    }
+    [getContestPage],
+    (contestPage) => _get(contestPage, ['participant'], undefined)
+);
+
+export const selectMyParticipantStatus = createSelector(
+    [getContestPage],
+    (contestPage) => _get(contestPage, ['participant', 'status'], undefined)
 );

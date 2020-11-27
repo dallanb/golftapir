@@ -1,13 +1,11 @@
 import { all, call, put, takeLatest } from 'redux-saga/effects';
 import AccountPageActions, { AccountPageTypes } from './actions';
-import { prepareInitialValues } from '@pages/Account/utils';
 import { fetchMyAccount } from '@helpers';
 
 function* init() {
     try {
-        const { data } = yield call(fetchMyAccount);
-        const updateFormInitialValues = prepareInitialValues(data);
-        yield put(AccountPageActions.set({ data, updateFormInitialValues }));
+        const { account } = yield call(fetchMyAccount);
+        yield put(AccountPageActions.set({ account }));
 
         yield put(AccountPageActions.initSuccess());
     } catch (err) {
