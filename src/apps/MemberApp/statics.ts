@@ -49,13 +49,13 @@ export default [
         icon: FlagFilled,
         key: 'contests',
     },
-    {
-        path: '/app/wagers',
-        // component: Home,
-        name: 'Wagers',
-        icon: DollarCircleFilled,
-        key: 'wagers',
-    },
+    // {
+    //     path: '/app/wagers',
+    //     // component: Home,
+    //     name: 'Wagers',
+    //     icon: DollarCircleFilled,
+    //     key: 'wagers',
+    // },
     {
         path: '/app/settings',
         // component: Contest,

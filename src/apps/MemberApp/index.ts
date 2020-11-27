@@ -22,7 +22,6 @@ import {
     registerPage,
     logoutPage,
     notificationsPage,
-    wagersPage,
 } from '@pages';
 
 export const memberAppReducer = combineReducers({
@@ -42,7 +41,6 @@ export const memberAppReducer = combineReducers({
     logoutPage,
     notificationsPage,
     registerPage,
-    wagersPage,
 });
 
 // Saga
@@ -57,7 +55,6 @@ import {
     ScoreSaga,
     SocketSaga,
     TopicSocketSaga,
-    WagerSaga,
 } from '@sagas';
 
 import {
@@ -83,7 +80,6 @@ import {
     NotificationsPageSaga,
     NotificationsPageContentNotificationsSaga,
     RegisterPageSaga,
-    WagersPageSaga,
 } from '@pages';
 import { default as BaseSaga } from './saga';
 
@@ -99,7 +95,6 @@ export function* memberAppSaga() {
         fork(ScoreSaga),
         fork(SocketSaga),
         fork(TopicSocketSaga),
-        fork(WagerSaga),
         fork(AccountPageSaga),
         fork(AccountPageContentAccountSaga),
         fork(CompetitorPageSaga),
@@ -122,6 +117,5 @@ export function* memberAppSaga() {
         fork(NotificationsPageSaga),
         fork(NotificationsPageContentNotificationsSaga),
         fork(RegisterPageSaga),
-        fork(WagersPageSaga),
     ]);
 }

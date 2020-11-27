@@ -14,8 +14,8 @@ const { Types, Creators } = createActions(
         submitFailure: ['err'],
     },
     {
-        prefix: 'CONTESTS_CREATE_PAGE_CONTENT_CONTEST_',
+        prefix: 'CONTEST_UPDATE_PAGE_CONTENT_CONTEST_',
     }
 );
-export const ContestsCreatePageContentContestTypes = Types;
+export const ContestUpdatePageContentContestTypes = Types;
 export default Creators;

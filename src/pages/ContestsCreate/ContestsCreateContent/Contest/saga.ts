@@ -46,6 +46,7 @@ function* submit({ data }: AnyAction) {
         if (!_isEmpty(avatarData)) {
             yield call(assignContestAvatar, uuid, avatarData.avatar);
         }
+        yield put(ContestsCreatePageContentContestActions.setUUID(uuid));
         yield put(ContestsCreatePageContentContestActions.submitSuccess(uuid));
     } catch (err) {
         yield put(ContestsCreatePageContentContestActions.submitFailure());

@@ -1,6 +1,6 @@
 export interface ContestProps {}
 
-export interface ContestsCreatePageContentContestInterface {
+export interface ContestUpdatePageContentContestInterface {
     isSubmitting: boolean;
     isSubmitted: boolean;
     isInitialized: boolean;

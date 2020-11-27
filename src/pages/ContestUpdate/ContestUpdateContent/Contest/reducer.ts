@@ -1,11 +1,11 @@
 // @ts-ignore
 import { static as Immutable } from 'seamless-immutable';
 import { createReducer } from 'reduxsauce';
-import { ContestsCreatePageContentContestTypes } from './actions';
-import { ContestsCreatePageContentContestInterface } from './types';
+import { ContestUpdatePageContentContestTypes } from './actions';
+import { ContestUpdatePageContentContestInterface } from './types';
 
 /* ------------- Initial State ------------- */
-const INITIAL_STATE: ContestsCreatePageContentContestInterface = {
+const INITIAL_STATE: ContestUpdatePageContentContestInterface = {
     isSubmitting: false,
     isSubmitted: false,
     isInitialized: false,
@@ -46,7 +46,6 @@ function set(state: any, { data }: any) {
         ...data,
     });
 }
-
 function setInitialValues(state: any, { initialValues }: any) {
     return Immutable.merge(state, {
         initialValues,
@@ -68,7 +67,6 @@ function submit(state: any) {
 function submitSuccess(state: any) {
     return Immutable.merge(state, {
         isSubmitting: false,
-        isSubmitted: true,
     });
 }
 
@@ -80,16 +78,16 @@ function submitFailure(state: any, { err }: any) {
 }
 
 const HANDLERS = {
-    [ContestsCreatePageContentContestTypes.INIT]: init,
-    [ContestsCreatePageContentContestTypes.INIT_SUCCESS]: initSuccess,
-    [ContestsCreatePageContentContestTypes.INIT_FAILURE]: initFailure,
-    [ContestsCreatePageContentContestTypes.TERMINATE]: terminate,
-    [ContestsCreatePageContentContestTypes.SET]: set,
-    [ContestsCreatePageContentContestTypes.SET_INITIAL_VALUES]: setInitialValues,
-    [ContestsCreatePageContentContestTypes.SET_UUID]: setUUID,
-    [ContestsCreatePageContentContestTypes.SUBMIT]: submit,
-    [ContestsCreatePageContentContestTypes.SUBMIT_SUCCESS]: submitSuccess,
-    [ContestsCreatePageContentContestTypes.SUBMIT_FAILURE]: submitFailure,
+    [ContestUpdatePageContentContestTypes.INIT]: init,
+    [ContestUpdatePageContentContestTypes.INIT_SUCCESS]: initSuccess,
+    [ContestUpdatePageContentContestTypes.INIT_FAILURE]: initFailure,
+    [ContestUpdatePageContentContestTypes.TERMINATE]: terminate,
+    [ContestUpdatePageContentContestTypes.SET]: set,
+    [ContestUpdatePageContentContestTypes.SET_INITIAL_VALUES]: setInitialValues,
+    [ContestUpdatePageContentContestTypes.SET_UUID]: setUUID,
+    [ContestUpdatePageContentContestTypes.SUBMIT]: submit,
+    [ContestUpdatePageContentContestTypes.SUBMIT_SUCCESS]: submitSuccess,
+    [ContestUpdatePageContentContestTypes.SUBMIT_FAILURE]: submitFailure,
 };
 
 export const reducer = createReducer(INITIAL_STATE, HANDLERS);

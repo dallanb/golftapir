@@ -3,14 +3,18 @@ import { get as _get } from 'lodash';
 
 const getContestUpdatePage = (state: any) => state.contestUpdatePage;
 
-export const selectUpdateFormSearchParticipants = createSelector(
+export const selectData = createSelector(
     [getContestUpdatePage],
-    (contestUpdatePage) =>
-        _get(contestUpdatePage, ['updateFormSearchParticipants'], [])
+    (contestUpdatePage) => contestUpdatePage
 );
 
-export const selectUpdateFormInitialValues = createSelector(
+export const selectContest = createSelector(
+    [getContestUpdatePage],
+    (contestUpdatePage) => _get(contestUpdatePage, ['contest'], undefined)
+);
+
+export const selectContestName = createSelector(
     [getContestUpdatePage],
     (contestUpdatePage) =>
-        _get(contestUpdatePage, ['updateFormInitialValues'], {})
+        _get(contestUpdatePage, ['contest', 'name'], undefined)
 );
