@@ -1,10 +1,10 @@
 const CONSTANTS = {
     ACCOUNT: {
         ERROR: {
-            UPDATE: 'Error updating Account information',
-            ASSIGN_AVATAR: 'Error updating Account avatar',
-            FETCH: 'Error fetching Account information',
-            FETCH_MEMBERSHIP: 'Error fetching Account Membership information',
+            UPDATE: 'Error updating Contest information',
+            ASSIGN_AVATAR: 'Error updating Contest avatar',
+            FETCH: 'Error fetching Contest information',
+            FETCH_MEMBERSHIP: 'Error fetching Contest Membership information',
             FETCH_ALL: 'Error fetching Accounts information',
             SEARCH_ALL: 'Error searching Accounts information',
             BULK_FETCH_ALL: 'Error fetch Accounts information',
@@ -184,19 +184,6 @@ const CONSTANTS = {
                 },
             },
         },
-        CONTEST_MATCHUP: {
-            TITLE: '',
-            DESCRIPTION: 'Contest Matchup',
-            EDIT_HOLE_FORM: {
-                LABELS: {
-                    HOLE_NUMBER: 'Hole Number',
-                    STROKES: 'Strokes',
-                },
-                VALIDATION: {
-                    STROKES_REQUIRED: 'Please input strokes!',
-                },
-            },
-        },
         CONTEST_UPDATE: {
             TITLE: '',
             DESCRIPTION: 'Update Contest',
@@ -215,7 +202,7 @@ const CONSTANTS = {
         },
         ACCOUNT: {
             TITLE: 'Account',
-            DESCRIPTION: 'Update Account Settings',
+            DESCRIPTION: 'Update Contest Settings',
             FORM: {
                 LABELS: {
                     AVATAR: 'Avatar',

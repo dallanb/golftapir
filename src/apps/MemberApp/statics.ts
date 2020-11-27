@@ -58,7 +58,7 @@ export default [
     },
     {
         path: '/app/settings',
-        // component: Account,
+        // component: Contest,
         name: 'Settings',
         icon: SettingFilled,
         key: 'settings',

@@ -2,19 +2,19 @@ import { createActions } from 'reduxsauce';
 
 const { Types, Creators } = createActions(
     {
-        init: null,
+        init: ['options'],
         initSuccess: null,
         initFailure: ['err'],
         terminate: null,
         set: ['data'],
         setInitialValues: ['initialValues'],
         submit: ['data'],
-        submitSuccess: null,
+        submitSuccess: ['uuid'],
         submitFailure: ['err'],
     },
     {
-        prefix: 'ACCOUNT_PAGE_CONTENT_ACCOUNT_',
+        prefix: 'CONTESTS_CREATE_PAGE_CONTENT_CONTEST_',
     }
 );
-export const AccountPageContentAccountTypes = Types;
+export const ContestsCreatePageContentContestTypes = Types;
 export default Creators;

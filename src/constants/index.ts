@@ -66,11 +66,6 @@ const constants = {
             KEY: 'ready',
             LABEL: 'Ready',
         },
-        MATCHUP: {
-            TWO_TONE_COLOUR: '#604',
-            KEY: 'matchup',
-            LABEL: 'Matchup',
-        },
         CHALLENGE: {
             TWO_TONE_COLOUR: '#1E8793',
             KEY: 'challenge',
@@ -96,7 +91,6 @@ const constants = {
         CONTESTS: '/contests',
         CONTESTS_CREATE: '/contests/create',
         CONTEST_UPDATE: '/contest/update',
-        CONTEST_MATCHUP: '/contest/matchup',
         HOME: '/home',
         LOGIN: '/login',
         LOGOUT: '/logout',
