@@ -1,4 +1,4 @@
-import {pick as _pick} from 'lodash';
+import { pick as _pick } from 'lodash';
 
 export const prepareInitialValues = (accountData: any) => {
     return {

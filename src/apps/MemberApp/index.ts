@@ -64,6 +64,7 @@ import {
 
 import {
     AccountPageSaga,
+    AccountPageContentAccountSaga,
     CompetitorPageSaga,
     CompetitorPageContentCompetitorResultsSaga,
     CompetitorsPageSaga,
@@ -80,6 +81,7 @@ import {
     LoginPageSaga,
     LogoutPageSaga,
     NotificationsPageSaga,
+    NotificationsPageContentNotificationsSaga,
     RegisterPageSaga,
     WagersPageSaga,
 } from '@pages';
@@ -99,6 +101,7 @@ export function* memberAppSaga() {
         fork(TopicSocketSaga),
         fork(WagerSaga),
         fork(AccountPageSaga),
+        fork(AccountPageContentAccountSaga),
         fork(CompetitorPageSaga),
         fork(CompetitorPageContentCompetitorResultsSaga),
         fork(CompetitorsPageSaga),
@@ -115,6 +118,7 @@ export function* memberAppSaga() {
         fork(LoginPageSaga),
         fork(LogoutPageSaga),
         fork(NotificationsPageSaga),
+        fork(NotificationsPageContentNotificationsSaga),
         fork(RegisterPageSaga),
         fork(WagersPageSaga),
     ]);

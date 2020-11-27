@@ -5,6 +5,5 @@ const getContestsPageContentContests = (state: any) =>
 
 export const selectData = createSelector(
     [getContestsPageContentContests],
-    (competitorPageContentCompetitorResults) =>
-        competitorPageContentCompetitorResults
+    (contestsPageContentContestsResults) => contestsPageContentContestsResults
 );

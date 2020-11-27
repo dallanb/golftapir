@@ -3,7 +3,7 @@ import { get as _get } from 'lodash';
 
 const getContestPageSiderContentParticipantActiveContestPending = (
     state: any
-) => state.competitorPage.ui.sider.content.participantActive.contestActive;
+) => state.contestPage.ui.sider.content.participantActive.contestActive;
 
 export const selectData = createSelector(
     [getContestPageSiderContentParticipantActiveContestPending],

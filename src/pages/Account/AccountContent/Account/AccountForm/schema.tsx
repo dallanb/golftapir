@@ -1,7 +1,7 @@
 import * as Yup from 'yup';
 import 'yup-phone';
-import InputWrapper from '../../../components/InputWrapper';
-import CONSTANTS from '../../../locale/en-CA';
+import InputWrapper from '@components/InputWrapper';
+import CONSTANTS from '@locale/en-CA';
 
 const FORM = CONSTANTS.PAGES.ACCOUNT.FORM;
 

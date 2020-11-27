@@ -21,6 +21,7 @@ export { default as searchCourses } from './searchCourses';
 export { default as subscribe } from './subscribe';
 export { default as subscriptionExists } from './subscriptionExists';
 export { default as unsubscribe } from './unsubscribe';
+export { default as updateAccount } from './updateAccount';
 export { default as updateContest } from './updateContest';
 export { default as updateContestParticipant } from './updateContestParticipant';
 export { default as updateScore } from './updateScore';

@@ -2,6 +2,7 @@ export {
     default as Account,
     reducer as accountPage,
     AccountPageSaga,
+    AccountPageContentAccountSaga,
     AccountPageRoutes,
 } from './Account';
 
@@ -75,6 +76,7 @@ export {
     default as Notifications,
     reducer as notificationsPage,
     NotificationsPageSaga,
+    NotificationsPageContentNotificationsSaga,
     NotificationsPageRoutes,
 } from './Notifications';
 export {

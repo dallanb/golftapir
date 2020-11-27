@@ -2,7 +2,7 @@ import { createSelector } from 'reselect';
 import { get as _get } from 'lodash';
 
 const getContestPageSiderContentParticipantActiveContestActive = (state: any) =>
-    state.competitorPage.ui.sider.content.participantActive.contestActive;
+    state.contestPage.ui.sider.content.participantActive.contestActive;
 
 export const selectData = createSelector(
     [getContestPageSiderContentParticipantActiveContestActive],

@@ -1,59 +1,34 @@
-import React from 'react';
-import { compose } from 'redux';
-import { withRouter } from 'react-router-dom';
-import { connect } from 'react-redux';
-import NotificationsList from './NotificationsList';
-import { NotificationsProps, StateInterface } from './types';
-import NotificationsPageActions from './actions';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { NotificationsProps } from './types';
 import { ContentLayout } from '@layouts';
+import { selectData } from './selector';
+import NotificationsPageActions from './actions';
+import NotificationsSider from './NotificationsSider';
+import NotificationsHeader from './NotificationsHeader';
+import NotificationsContent from './NotificationsContent';
 import './Notifications.scss';
 
-class Notifications extends React.PureComponent<NotificationsProps> {
-    componentDidMount() {
-        const { init } = this.props;
-        init();
-    }
+const Notifications: React.FunctionComponent<NotificationsProps> = () => {
+    const dispatch = useDispatch();
+    const { isInitialized } = useSelector(selectData);
 
-    componentWillUnmount() {
-        const { terminate } = this.props;
-        terminate();
-    }
+    useEffect(() => {
+        dispatch(NotificationsPageActions.init());
+        return () => {
+            dispatch(NotificationsPageActions.terminate());
+        };
+    }, []);
 
-    render() {
-        const { title, description, isInitialized, history } = this.props;
-        return (
-            <ContentLayout
-                title={title}
-                subTitle={description}
-                showSpinner={!isInitialized}
-            >
-                <NotificationsList history={history} />
-            </ContentLayout>
-        );
-    }
-}
-
-const mapStateToProps = ({ notificationsPage }: StateInterface) => {
-    const { isInitialized, title, description } = notificationsPage;
-    return {
-        isInitialized,
-        title,
-        description,
-    };
+    return (
+        <ContentLayout
+            header={<NotificationsHeader />}
+            sider={<NotificationsSider />}
+            content={<NotificationsContent />}
+            // showSpinner={!isInitialized}
+            className="notifications-view"
+        />
+    );
 };
 
-const mapDispatchToProps = (dispatch: any) => {
-    return {
-        init() {
-            return dispatch(NotificationsPageActions.init());
-        },
-        terminate() {
-            return dispatch(NotificationsPageActions.terminate());
-        },
-    };
-};
-
-export default compose(
-    withRouter,
-    connect(mapStateToProps, mapDispatchToProps)
-)(Notifications);
+export default Notifications;

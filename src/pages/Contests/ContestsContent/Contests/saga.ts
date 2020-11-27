@@ -14,12 +14,7 @@ function* init() {
     }
 }
 
-function* fetchData({
-    options = {
-        page: 1,
-        per_page: 10,
-    },
-}: AnyAction) {
+function* fetchData({ options = { page: 1, per_page: 10 } }: AnyAction) {
     try {
         const { data, metadata } = yield call(
             fetchContestsMaterialized,
