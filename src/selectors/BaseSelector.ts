@@ -16,6 +16,6 @@ export const selectMyName = createSelector([getBase], (base) => {
 });
 
 export const selectMyAvatarSrc = createSelector([getBase], (base) => {
-    const filename = _get(base, ['me', 'avatar'], undefined);
+    const filename = _get(base, ['me', 'avatar', 's3_filename'], undefined);
     return filename && withS3URL(filename, constants.S3_FOLDERS.ACCOUNT.AVATAR);
 });
