@@ -7,18 +7,14 @@ import { HomePageInterface } from './types';
 
 /* ------------- Initial State ------------- */
 const INITIAL_STATE: HomePageInterface = {
-    isFetching: false,
     isInitialized: false,
     err: undefined,
-    title: undefined,
-    description: CONSTANTS.PAGES.HOME.DESCRIPTION,
 };
 
 /* ------------- Reducers ------------- */
 function init(state = INITIAL_STATE) {
     return Immutable.merge(state, {
         ...INITIAL_STATE,
-        isFetching: true,
         isInitialized: false,
         err: null,
     });
@@ -26,7 +22,6 @@ function init(state = INITIAL_STATE) {
 
 function initSuccess(state = INITIAL_STATE) {
     return Immutable.merge(state, {
-        isFetching: false,
         isInitialized: true,
         err: null,
     });
@@ -34,7 +29,6 @@ function initSuccess(state = INITIAL_STATE) {
 
 function initFailure(state: any, { err }: any) {
     return Immutable.merge(state, {
-        isFetching: false,
         isInitialized: false,
         err,
     });
