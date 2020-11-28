@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect';
 import { get as _get } from 'lodash';
-import {withS3URL} from "@utils";
-import constants from "@constants";
+import { withS3URL } from '@utils';
+import constants from '@constants';
 
 const getBase = (state: any) => state.base;
 
@@ -17,7 +17,5 @@ export const selectMyName = createSelector([getBase], (base) => {
 
 export const selectMyAvatarSrc = createSelector([getBase], (base) => {
     const filename = _get(base, ['me', 'avatar'], undefined);
-    return (
-        filename && withS3URL(filename, constants.S3_FOLDERS.ACCOUNT.AVATAR)
-    );
-}
+    return filename && withS3URL(filename, constants.S3_FOLDERS.ACCOUNT.AVATAR);
+});
