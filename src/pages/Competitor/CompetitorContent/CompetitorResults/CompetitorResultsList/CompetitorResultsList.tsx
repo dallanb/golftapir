@@ -32,7 +32,7 @@ const CompetitorResultsList: React.FunctionComponent<CompetitorResultsListProps>
             hasNextPage={false}
             loadNextPage={loadMore}
             isNextPageLoading={isFetching}
-            minimumBatchSize={100}
+            minimumBatchSize={10}
             rowRenderer={(props) =>
                 CompetitorResultsListTile({ props, history })
             }

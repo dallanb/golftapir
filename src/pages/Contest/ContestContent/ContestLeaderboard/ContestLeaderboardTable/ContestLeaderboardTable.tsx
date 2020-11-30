@@ -35,7 +35,7 @@ const ContestLeaderboardTable: React.FunctionComponent<ContestLeaderboardTablePr
             hasNextPage={false}
             loadNextPage={loadMore}
             isNextPageLoading={false}
-            minimumBatchSize={100}
+            minimumBatchSize={10}
             columnsSchema={columnsSchema}
         />
     );

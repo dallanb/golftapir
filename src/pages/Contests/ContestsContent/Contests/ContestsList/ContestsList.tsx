@@ -17,8 +17,8 @@ const ContestsList: React.FunctionComponent<ContestsListProps> = ({}) => {
         dispatch(
             ContestsPageContentContestsActions.fetchData(
                 {
-                    page: Math.floor(stop / 100) + 1,
-                    per_page: 100,
+                    page: Math.floor(stop / 10) + 1,
+                    per_page: 10,
                 },
                 true
             )
@@ -49,7 +49,7 @@ const ContestsList: React.FunctionComponent<ContestsListProps> = ({}) => {
             hasNextPage={hasNextPage()}
             loadNextPage={loadMore}
             isNextPageLoading={isFetching}
-            minimumBatchSize={100}
+            minimumBatchSize={10}
             rowRenderer={(props) => ContestsListTile({ props, history })}
         />
     );
