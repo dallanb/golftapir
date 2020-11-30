@@ -30,12 +30,6 @@ export {
     ContestPageRoutes,
 } from './Contest';
 export {
-    default as ContestMatchup,
-    reducer as contestMatchupPage,
-    ContestMatchupPageSaga,
-    ContestMatchupPageRoutes,
-} from './ContestMatchup';
-export {
     default as Contests,
     reducer as contestsPage,
     ContestsPageSaga,
@@ -46,6 +40,9 @@ export {
     default as ContestsCreate,
     reducer as contestsCreatePage,
     ContestsCreatePageSaga,
+    ContestsCreatePageContentContestSaga,
+    ContestsCreatePageContentContestSearchCourseSaga,
+    ContestsCreatePageContentContestSearchParticipantSaga,
     ContestsCreatePageRoutes,
 } from './ContestsCreate';
 export {
@@ -85,9 +82,3 @@ export {
     RegisterPageSaga,
     RegisterPageRoutes,
 } from './Register';
-export {
-    default as Wagers,
-    reducer as wagersPage,
-    WagersPageSaga,
-    WagersPageRoutes,
-} from './Wagers';

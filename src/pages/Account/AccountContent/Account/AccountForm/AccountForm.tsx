@@ -5,7 +5,7 @@ import { isEqual as _isEqual } from 'lodash';
 import { AccountFormProps } from './types';
 import { Form } from '@components';
 import { AccountActions } from '@actions';
-import AccountPageContentAccountActions from '@actions/AccountActions';
+import AccountPageContentAccountActions from '../actions';
 import { fieldSchema, validationSchema } from './schema';
 import { selectAccount } from '@pages/Account/selector';
 import { selectData as selectAccountFormData } from '../selector';
@@ -22,7 +22,7 @@ const AccountForm: React.FunctionComponent<AccountFormProps> = () => {
             dispatch(AccountActions.assignAvatar('me', avatar)); // TODO: Should this be moved to a local call?
         }
         dispatch(
-            AccountPageContentAccountActions.updateAccount({
+            AccountPageContentAccountActions.submit({
                 first_name,
                 last_name,
                 address,

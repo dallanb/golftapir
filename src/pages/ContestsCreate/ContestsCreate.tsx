@@ -1,83 +1,35 @@
-import React from 'react';
-import { compose } from 'redux';
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
-import ContestsCreateForm from './ContestsCreateForm';
-import { ContestsCreateProps, StateProps } from './types';
-import ContestsCreateActions from './actions';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { ContentLayout } from '@layouts';
+import { ContestsCreateProps } from './types';
+import ContestsCreatePageActions from './actions';
+import ContestsCreateHeader from './ContestsCreateHeader';
+import ContestsCreateContent from './ContestsCreateContent';
+import ContestsCreateSider from './ContestsCreateSider';
+import { selectData } from './selector';
 import './ContestsCreate.scss';
-import constants from '@constants';
 
-class ContestsCreate extends React.PureComponent<ContestsCreateProps> {
-    componentDidMount() {
-        const {
-            init,
-            history: {
-                location: { state },
-            },
-        } = this.props;
+const ContestsCreate: React.FunctionComponent<ContestsCreateProps> = () => {
+    const dispatch = useDispatch();
 
-        init(state);
-    }
+    const { isInitialized } = useSelector(selectData);
 
-    componentDidUpdate() {
-        const { uuid, isSubmitted, history } = this.props;
-        if (isSubmitted && uuid) {
-            history.push(`/app${constants.ROUTES.CONTEST}`, {
-                uuid,
-            });
-        }
-    }
+    useEffect(() => {
+        dispatch(ContestsCreatePageActions.init());
+        return () => {
+            dispatch(ContestsCreatePageActions.terminate());
+        };
+    }, []);
 
-    componentWillUnmount() {
-        const { terminate } = this.props;
-        terminate();
-    }
-
-    render() {
-        const { title, description, isInitialized } = this.props;
-        return (
-            <ContentLayout
-                title={title}
-                subTitle={description}
-                showSpinner={!isInitialized}
-            >
-                <ContestsCreateForm />
-            </ContentLayout>
-        );
-    }
-}
-
-const mapStateToProps = ({ contestsCreatePage }: StateProps) => {
-    const {
-        title,
-        description,
-        isInitialized,
-        isSubmitted,
-        uuid,
-    } = contestsCreatePage;
-    return {
-        title,
-        description,
-        isInitialized,
-        isSubmitted,
-        uuid,
-    };
+    return (
+        <ContentLayout
+            header={<ContestsCreateHeader />}
+            content={<ContestsCreateContent />}
+            sider={<ContestsCreateSider />}
+            // showSpinner={!isInitialized}
+            className="contests-create-view"
+        />
+    );
 };
 
-const mapDispatchToProps = (dispatch: any) => {
-    return {
-        init(options: any) {
-            return dispatch(ContestsCreateActions.init(options));
-        },
-        terminate() {
-            return dispatch(ContestsCreateActions.terminate());
-        },
-    };
-};
-
-export default compose(
-    withRouter,
-    connect(mapStateToProps, mapDispatchToProps)
-)(ContestsCreate);
+export default ContestsCreate;

@@ -3,13 +3,11 @@ import {
     CompetitorPageRoutes,
     CompetitorsPageRoutes,
     ContestPageRoutes,
-    ContestMatchupPageRoutes,
     ContestsCreatePageRoutes,
     ContestUpdatePageRoutes,
     ContestsPageRoutes,
     HomePageRoutes,
     NotificationsPageRoutes,
-    WagersPageRoutes,
 } from '@pages';
 
 export const routes: any = [];
@@ -21,9 +19,7 @@ export const protectedRoutes: any = [
     ...ContestsPageRoutes,
     ...ContestsCreatePageRoutes,
     ...ContestUpdatePageRoutes,
-    ...ContestMatchupPageRoutes,
     ...ContestPageRoutes,
     ...HomePageRoutes,
     ...NotificationsPageRoutes,
-    ...WagersPageRoutes,
 ];

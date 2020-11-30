@@ -8,6 +8,9 @@ const { Types, Creators } = createActions(
         terminate: null,
         set: ['data'],
         setInitialValues: ['initialValues'],
+        submit: ['data'],
+        submitSuccess: null,
+        submitFailure: ['err'],
     },
     {
         prefix: 'ACCOUNT_PAGE_CONTENT_ACCOUNT_',

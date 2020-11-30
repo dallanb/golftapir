@@ -73,20 +73,5 @@ export const socketEventHandlers = (socket: WebSocket, emitter: any) => {
     return () => {};
 };
 
-export const renderAction = (
-    key: string
-): { show: boolean; enabled: boolean } => {
-    const renderAction = { show: false, enabled: true };
-    switch (key) {
-        case constants.ACTION.MATCHUP.KEY:
-            renderAction.show = true;
-            renderAction.enabled = true;
-            break;
-        default:
-            console.error('Invalid key: ', key);
-    }
-    return renderAction;
-};
-
 export const formatTimeStamp = (timestamp: number) =>
     timestamp ? moment(timestamp).format('MMM DD H:M A') : 'NA';

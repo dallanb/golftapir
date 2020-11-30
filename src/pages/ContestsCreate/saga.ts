@@ -1,83 +1,15 @@
-import { AnyAction } from 'redux';
-import { all, call, put, select, takeLatest } from 'redux-saga/effects';
-import { pick as _pick, omit as _omit, isEmpty as _isEmpty } from 'lodash';
-import config from 'config';
-import ContestsCreatePageActions, { ContestsCreatePageTypes } from './actions';
-import { selectMe } from '@selectors/BaseSelector';
-import {
-    searchAccounts,
-    searchCourses as searchCoursesHelper,
-    createContest as createContestHelper,
-    assignContestAvatar,
-    fetchAccountMembership,
-} from '@helpers';
+import { all, put, takeLatest } from 'redux-saga/effects';
 
-function* init({ options }: AnyAction) {
+import ContestsCreatePageActions, { ContestsCreatePageTypes } from './actions';
+
+function* init() {
     try {
-        const me = yield select(selectMe);
-        const createFormInitialValues = {
-            sport_uuid: config.GOLF_UUID,
-            participants: [me.membership_uuid],
-            permanent_participants: [me],
-        };
-        if (options && options.participant_uuid) {
-            const { data: membershipData } = yield call(
-                fetchAccountMembership,
-                options.participant_uuid,
-                {}
-            );
-            createFormInitialValues.participants.push(options.participant_uuid);
-            createFormInitialValues.permanent_participants.push(membershipData);
-        }
-        yield put(ContestsCreatePageActions.set({ createFormInitialValues }));
         yield put(ContestsCreatePageActions.initSuccess());
     } catch (err) {
         yield put(ContestsCreatePageActions.initFailure(err));
     }
 }
 
-function* searchParticipants({ key }: AnyAction) {
-    try {
-        const { data } = yield call(searchAccounts, key);
-        yield put(ContestsCreatePageActions.searchParticipantsSuccess(data));
-    } catch (err) {
-        yield put(ContestsCreatePageActions.searchParticipantsFailure(err));
-    }
-}
-
-function* searchCourses({ key }: AnyAction) {
-    try {
-        const { data } = yield call(searchCoursesHelper, key);
-        yield put(ContestsCreatePageActions.searchCoursesSuccess(data));
-    } catch (err) {
-        yield put(ContestsCreatePageActions.searchCoursesFailure(err));
-    }
-}
-
-function* createContest({ data }: AnyAction) {
-    try {
-        const contestData = _omit(data, ['avatar']);
-        const {
-            data: { uuid },
-        } = yield call(createContestHelper, contestData);
-        const avatarData = _pick(data, ['avatar']);
-        if (!_isEmpty(avatarData)) {
-            yield call(assignContestAvatar, uuid, avatarData.avatar);
-        }
-        yield put(ContestsCreatePageActions.createContestSuccess({ uuid }));
-    } catch (err) {
-        yield put(ContestsCreatePageActions.createContestFailure(err));
-    }
-}
-
 export default function* ContestsCreatePageSaga() {
-    yield all([
-        takeLatest(ContestsCreatePageTypes.INIT, init),
-        takeLatest(
-            ContestsCreatePageTypes.SEARCH_PARTICIPANTS,
-            searchParticipants
-        ),
-        takeLatest(ContestsCreatePageTypes.SEARCH_COURSES, searchCourses),
-        takeLatest(ContestsCreatePageTypes.CREATE_CONTEST, createContest),
-    ]);
+    yield all([takeLatest(ContestsCreatePageTypes.INIT, init)]);
 }

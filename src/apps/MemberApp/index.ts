@@ -14,7 +14,6 @@ import {
     competitorPage,
     competitorsPage,
     contestPage,
-    contestMatchupPage,
     contestsPage,
     contestsCreatePage,
     contestUpdatePage,
@@ -23,7 +22,6 @@ import {
     registerPage,
     logoutPage,
     notificationsPage,
-    wagersPage,
 } from '@pages';
 
 export const memberAppReducer = combineReducers({
@@ -35,7 +33,6 @@ export const memberAppReducer = combineReducers({
     competitorPage,
     competitorsPage,
     contestPage,
-    contestMatchupPage,
     contestsPage,
     contestsCreatePage,
     contestUpdatePage,
@@ -44,7 +41,6 @@ export const memberAppReducer = combineReducers({
     logoutPage,
     notificationsPage,
     registerPage,
-    wagersPage,
 });
 
 // Saga
@@ -59,7 +55,6 @@ import {
     ScoreSaga,
     SocketSaga,
     TopicSocketSaga,
-    WagerSaga,
 } from '@sagas';
 
 import {
@@ -69,13 +64,15 @@ import {
     CompetitorPageContentCompetitorResultsSaga,
     CompetitorsPageSaga,
     CompetitorsPageContentCompetitorsSaga,
-    ContestMatchupPageSaga,
     ContestPageSaga,
     ContestPageSiderContentParticipantActiveContestActiveSaga,
     ContestPageSiderContentParticipantActiveContestPendingSaga,
     ContestsPageSaga,
     ContestsPageContentContestsSaga,
     ContestsCreatePageSaga,
+    ContestsCreatePageContentContestSaga,
+    ContestsCreatePageContentContestSearchCourseSaga,
+    ContestsCreatePageContentContestSearchParticipantSaga,
     ContestUpdatePageSaga,
     HomePageSaga,
     LoginPageSaga,
@@ -83,7 +80,6 @@ import {
     NotificationsPageSaga,
     NotificationsPageContentNotificationsSaga,
     RegisterPageSaga,
-    WagersPageSaga,
 } from '@pages';
 import { default as BaseSaga } from './saga';
 
@@ -99,20 +95,21 @@ export function* memberAppSaga() {
         fork(ScoreSaga),
         fork(SocketSaga),
         fork(TopicSocketSaga),
-        fork(WagerSaga),
         fork(AccountPageSaga),
         fork(AccountPageContentAccountSaga),
         fork(CompetitorPageSaga),
         fork(CompetitorPageContentCompetitorResultsSaga),
         fork(CompetitorsPageSaga),
         fork(CompetitorsPageContentCompetitorsSaga),
-        fork(ContestMatchupPageSaga),
         fork(ContestPageSaga),
         fork(ContestPageSiderContentParticipantActiveContestActiveSaga),
         fork(ContestPageSiderContentParticipantActiveContestPendingSaga),
         fork(ContestsPageSaga),
         fork(ContestsPageContentContestsSaga),
         fork(ContestsCreatePageSaga),
+        fork(ContestsCreatePageContentContestSaga),
+        fork(ContestsCreatePageContentContestSearchCourseSaga),
+        fork(ContestsCreatePageContentContestSearchParticipantSaga),
         fork(ContestUpdatePageSaga),
         fork(HomePageSaga),
         fork(LoginPageSaga),
@@ -120,6 +117,5 @@ export function* memberAppSaga() {
         fork(NotificationsPageSaga),
         fork(NotificationsPageContentNotificationsSaga),
         fork(RegisterPageSaga),
-        fork(WagersPageSaga),
     ]);
 }
