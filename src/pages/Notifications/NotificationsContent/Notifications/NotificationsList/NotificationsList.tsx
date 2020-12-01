@@ -21,7 +21,7 @@ const NotificationsList: React.FunctionComponent<NotificationsListProps> = ({}) 
     const isFetching = useSelector(selectListIsFetching);
 
     const dispatch = useDispatch();
-    const loadMore = (start: number, stop: number, resolve: () => any) => {
+    const loadMore = (start: number, stop: number) => {
         dispatch(
             NotificationsPageContentNotificationsActions.fetchData(
                 {
@@ -31,7 +31,6 @@ const NotificationsList: React.FunctionComponent<NotificationsListProps> = ({}) 
                 true
             )
         );
-        resolve();
     };
 
     const hasNextPage = () => {

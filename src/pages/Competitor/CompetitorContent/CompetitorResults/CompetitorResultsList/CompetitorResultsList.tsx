@@ -12,9 +12,6 @@ const CompetitorResultsList: React.FunctionComponent<CompetitorResultsListProps>
     const data = useSelector(selectListData);
     const isFetching = useSelector(selectListIsFetching);
 
-    const loadMore = (start: number, stop: number, resolve: () => void) =>
-        resolve();
-
     const loadTableDimensions = (
         items: any[] = []
     ): { size: number; height: number; width: ReactText } => {
@@ -31,7 +28,6 @@ const CompetitorResultsList: React.FunctionComponent<CompetitorResultsListProps>
             {...loadTableDimensions(data)}
             items={data}
             hasNextPage={false}
-            loadNextPage={loadMore}
             isNextPageLoading={isFetching}
             minimumBatchSize={10}
             rowRenderer={(props) =>

@@ -12,8 +12,11 @@ import {
 import CompetitorsListTile from './CompetitorsListTile';
 import './CompetitorsList.scss';
 import {} from '@pages/Contests/ContestsContent/Contests/selector';
+import { getRefHeight } from '@utils';
 
-const CompetitorsList: React.FunctionComponent<CompetitorsListProps> = ({}) => {
+const CompetitorsList: React.FunctionComponent<CompetitorsListProps> = ({
+    containerRef,
+}) => {
     const history = useHistory();
 
     const data = useSelector(selectListData);
@@ -21,7 +24,7 @@ const CompetitorsList: React.FunctionComponent<CompetitorsListProps> = ({}) => {
     const isFetching = useSelector(selectListIsFetching);
 
     const dispatch = useDispatch();
-    const loadMore = (start: number, stop: number, resolve: () => any) => {
+    const loadMore = (start: number, stop: number) => {
         dispatch(
             CompetitorsPageContentCompetitorsActions.fetchData(
                 {
@@ -31,7 +34,6 @@ const CompetitorsList: React.FunctionComponent<CompetitorsListProps> = ({}) => {
                 true
             )
         );
-        resolve();
     };
 
     const hasNextPage = () => {
@@ -46,7 +48,7 @@ const CompetitorsList: React.FunctionComponent<CompetitorsListProps> = ({}) => {
         // move this info to schema.tsx
         const size = 150;
         const width = '100%';
-        const height = items.length * size;
+        const height = getRefHeight(containerRef, 200) - 32;
 
         return { size, width, height };
     };

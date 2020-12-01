@@ -7,7 +7,7 @@ export interface ListProps {
     hasNextPage: boolean;
     isNextPageLoading: boolean;
     items: any;
-    loadNextPage: (start: number, stop: number, resolve: () => void) => void;
+    loadNextPage?: (start: number, stop: number) => void | null;
     minimumBatchSize: number;
     height?: ReactText;
     width?: ReactText;

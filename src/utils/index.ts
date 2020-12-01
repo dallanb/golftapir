@@ -1,6 +1,7 @@
 export { default as getInitials } from './getInitials';
 export { default as getRandomInt } from './getRandomInt';
 export { default as getName } from './getName';
+export { default as getRefHeight } from './getRefHeight';
 export { default as mapActionColour } from './mapActionColour';
 export { default as mapActionLabel } from './mapActionLabel';
 export { default as mapStatusColour } from './mapStatusColour';

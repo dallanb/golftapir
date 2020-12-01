@@ -14,9 +14,6 @@ const ContestLeaderboardTable: React.FunctionComponent<ContestLeaderboardTablePr
         Object.assign({}, participant, { uuid })
     );
 
-    const loadMore = (start: number, stop: number, resolve: () => void) =>
-        resolve();
-
     const loadTableDimensions = (
         items: any[]
     ): { size: number; height: number } => {
@@ -34,7 +31,6 @@ const ContestLeaderboardTable: React.FunctionComponent<ContestLeaderboardTablePr
                     {...loadTableDimensions(items)}
                     items={items}
                     hasNextPage={false}
-                    loadNextPage={loadMore}
                     isNextPageLoading={false}
                     minimumBatchSize={10}
                     columnsSchema={columnsSchema}

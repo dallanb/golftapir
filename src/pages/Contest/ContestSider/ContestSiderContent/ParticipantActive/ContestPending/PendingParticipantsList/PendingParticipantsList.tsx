@@ -13,7 +13,7 @@ const PendingParticipantsList: React.FunctionComponent<PendingParticipantsListPr
     const { isInitialized } = useSelector(selectData);
     const data = useSelector(selectListData);
     const isFetching = useSelector(selectListIsFetching);
-    const loadMore = (start: number, stop: number, resolve: () => any) => {
+    const loadMore = (start: number, stop: number) => {
         dispatch(
             ContestPageSiderContentParticipantActiveContestPendingActions.fetchData(
                 {
@@ -23,7 +23,6 @@ const PendingParticipantsList: React.FunctionComponent<PendingParticipantsListPr
                 true
             )
         );
-        resolve();
     };
 
     const loadTableDimensions = (

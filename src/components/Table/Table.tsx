@@ -4,7 +4,6 @@ import { TableProps } from './types';
 import { List } from '@components';
 import defaultRowRenderer from './defaultRowRenderer';
 import './Table.scss';
-import { scrollbarWidth } from '@utils';
 
 const Table: React.FunctionComponent<TableProps> = ({
     items,
@@ -17,13 +16,11 @@ const Table: React.FunctionComponent<TableProps> = ({
         getTableBodyProps,
         headerGroups,
         rows,
-        totalColumnsWidth,
         prepareRow,
     } = useTable(
         {
             data: items,
             columns: columnsSchema,
-            // defaultColumn,
         },
         useBlockLayout
     );

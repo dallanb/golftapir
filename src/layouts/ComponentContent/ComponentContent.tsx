@@ -8,6 +8,7 @@ const { Content } = Layout;
 const ComponentContent: React.FunctionComponent<ComponentContentProps> = ({
     showSpinner,
     children,
+    componentRef,
     className,
 }) => {
     const renderComponent = () => {
@@ -19,7 +20,10 @@ const ComponentContent: React.FunctionComponent<ComponentContentProps> = ({
 
     return (
         // <Content className={`component-CompetitorContent-CompetitorContent`}>
-        <div className={`component-content-content ${className}`}>
+        <div
+            ref={componentRef}
+            className={`component-content-content ${className}`}
+        >
             {renderComponent()}
         </div>
         //</Content>

@@ -9,7 +9,7 @@ export interface TableProps {
     hasNextPage: boolean;
     isNextPageLoading: boolean;
     items: any;
-    loadNextPage: (start: number, stop: number, resolve: () => void) => void;
+    loadNextPage?: (start: number, stop: number) => null;
     minimumBatchSize: number;
 }
 

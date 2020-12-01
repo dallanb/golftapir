@@ -1,5 +1,5 @@
 import { AnyAction } from 'redux';
-import { all, call, put, takeLatest } from 'redux-saga/effects';
+import { all, call, delay, put, takeLatest } from 'redux-saga/effects';
 import ContestsPageContentContestsActions, {
     ContestsPageContentContestsTypes,
 } from './actions';
@@ -15,7 +15,7 @@ function* init() {
     }
 }
 
-function* fetchData({ options = { page: 1, per_page: 10 } }: AnyAction) {
+function* fetchData({ options = { page: 1, per_page: 20 } }: AnyAction) {
     try {
         const { data, metadata } = yield call(
             fetchContestsMaterialized,
