@@ -1,15 +1,16 @@
 import React, { ReactText } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import ComponentContent from '@layouts/ComponentContent';
 import { List } from '@components';
 import { PendingParticipantsListProps } from './types';
 import PendingParticipantsListTile from './PendingParticipantsListTile';
-import { selectListData, selectListIsFetching } from '../selector';
+import { selectData, selectListData, selectListIsFetching } from '../selector';
 import ContestPageSiderContentParticipantActiveContestPendingActions from '../actions';
 import './PendingParticipantsList.scss';
 
 const PendingParticipantsList: React.FunctionComponent<PendingParticipantsListProps> = () => {
     const dispatch = useDispatch();
-
+    const { isInitialized } = useSelector(selectData);
     const data = useSelector(selectListData);
     const isFetching = useSelector(selectListIsFetching);
     const loadMore = (start: number, stop: number, resolve: () => any) => {
@@ -37,15 +38,17 @@ const PendingParticipantsList: React.FunctionComponent<PendingParticipantsListPr
     };
 
     return (
-        <List
-            {...loadTableDimensions(data)}
-            hasNextPage={false}
-            isNextPageLoading={isFetching}
-            items={data}
-            loadNextPage={loadMore}
-            minimumBatchSize={10}
-            rowRenderer={(props) => PendingParticipantsListTile({ props })}
-        />
+        <ComponentContent showSpinner={!isInitialized}>
+            <List
+                {...loadTableDimensions(data)}
+                hasNextPage={false}
+                isNextPageLoading={isFetching}
+                items={data}
+                loadNextPage={loadMore}
+                minimumBatchSize={10}
+                rowRenderer={(props) => PendingParticipantsListTile({ props })}
+            />
+        </ComponentContent>
     );
 };
 
