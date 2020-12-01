@@ -7,15 +7,11 @@ import { bulkFetchAccounts, fetchContestParticipants } from '@helpers';
 import { selectContestUUID } from '@pages/Contest/selector';
 import constants from '@constants';
 import { keyBy as _keyBy } from 'lodash';
+import { fetchPendingParticipants } from './helpers';
 
 function* init() {
     try {
-        yield put(
-            ContestPageSiderContentParticipantActiveContestPendingActions.fetchData(
-                { page: 1, per_page: 10 },
-                false
-            )
-        );
+        yield call(fetchPendingParticipants);
         yield put(
             ContestPageSiderContentParticipantActiveContestPendingActions.initSuccess()
         );

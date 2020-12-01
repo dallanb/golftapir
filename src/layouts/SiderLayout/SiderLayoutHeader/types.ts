@@ -4,5 +4,4 @@ import { AvatarProps } from '@components/Avatar/types';
 export interface SiderLayoutHeaderProps {
     title?: ReactNode;
     avatar?: AvatarProps;
-    showSpinner?: boolean;
 }

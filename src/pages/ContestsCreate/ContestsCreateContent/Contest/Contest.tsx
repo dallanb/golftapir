@@ -16,13 +16,11 @@ const Contest: React.FunctionComponent<ContestProps> = ({}) => {
 
     const options = _get(history, ['location', 'state'], undefined);
 
-    const { isSubmitted, uuid } = useSelector(selectData);
+    const { isSubmitted, result } = useSelector(selectData);
 
     useEffect(() => {
-        if (isSubmitted && uuid) {
-            history.push(`/app${constants.ROUTES.CONTEST}`, {
-                uuid,
-            });
+        if (isSubmitted && result) {
+            history.push(`/app${constants.ROUTES.CONTEST}`, result);
         }
     });
 

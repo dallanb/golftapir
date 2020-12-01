@@ -20,7 +20,9 @@ const PendingParticipantsListTile: React.FunctionComponent<PendingParticipantsLi
     return (
         <div style={style} className="pending-participants-list-tile">
             <div className="pending-participants-list-tile-name">{name}</div>
-            <RemindButton uuid={uuid} />
+            <div className="pending-participants-list-tile-remind-button">
+                <RemindButton uuid={uuid} />
+            </div>
         </div>
     );
 };

@@ -41,13 +41,14 @@ function* submit({ data }: AnyAction) {
         const contestData = _omit(data, ['avatar']);
         const {
             data: { uuid },
+            data: result,
         } = yield call(createContest, contestData);
         const avatarData = _pick(data, ['avatar']);
         if (!_isEmpty(avatarData)) {
             yield call(assignContestAvatar, uuid, avatarData.avatar);
         }
-        yield put(ContestsCreatePageContentContestActions.setUUID(uuid));
-        yield put(ContestsCreatePageContentContestActions.submitSuccess(uuid));
+        yield put(ContestsCreatePageContentContestActions.setResult(result));
+        yield put(ContestsCreatePageContentContestActions.submitSuccess());
     } catch (err) {
         yield put(ContestsCreatePageContentContestActions.submitFailure());
     }

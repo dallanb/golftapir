@@ -7,20 +7,13 @@ import HeaderTitle from './HeaderTitle';
 import { ContestSiderHeaderProps } from './types';
 
 const ContestSiderHeader: React.FunctionComponent<ContestSiderHeaderProps> = () => {
-    const { isInitialized } = useSelector(selectData);
     const title = <HeaderTitle />;
     const avatar = {
         name: useSelector(selectMyName),
         src: useSelector(selectMyAvatarSrc),
         size: 48,
     };
-    return (
-        <SiderLayoutHeader
-            title={title}
-            avatar={avatar}
-            showSpinner={!isInitialized}
-        />
-    );
+    return <SiderLayoutHeader title={title} avatar={avatar} />;
 };
 
 export default ContestSiderHeader;
