@@ -5,7 +5,6 @@ import { PendingParticipantsListProps } from './types';
 import PendingParticipantsListTile from './PendingParticipantsListTile';
 import { selectListData, selectListIsFetching } from '../selector';
 import ContestPageSiderContentParticipantActiveContestPendingActions from '../actions';
-import ComponentContent from '@layouts/ComponentContent';
 import './PendingParticipantsList.scss';
 
 const PendingParticipantsList: React.FunctionComponent<PendingParticipantsListProps> = () => {
