@@ -8,7 +8,6 @@ import './ContestLeaderboard.scss';
 
 const ContestLeaderboard: React.FunctionComponent<ContestLeaderboardProps> = ({}) => {
     const { isInitialized } = useSelector(selectData);
-
     return (
         <ComponentContent
             showSpinner={!isInitialized}

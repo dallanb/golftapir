@@ -1,11 +1,11 @@
 .table {
-  display: inline-block;
+  width: 100%;
   border-spacing: 0;
   border: 1px solid #f0f0f0;
 
   .tr {
     :last-child {
-      .td {
+      td {
         border-bottom: 0;
       }
     }
@@ -16,5 +16,13 @@
     margin: 0;
     padding: 0.5rem;
     border-bottom: 1px solid #f0f0f0;
+
+
+    :last-child {
+      border-right: 0;
+    }
   }
 }
+
+
+

@@ -7,24 +7,27 @@ export const columnsSchema = [
     {
         Header: 'Pos',
         accessor: null,
-        width: 50,
+        // width: 50,
         Cell: () => <div>1</div>,
+        className: 'pos',
     },
     {
         Header: 'Participant',
         accessor: 'uuid',
-        width: 500,
+        // width: 500,
         Cell: ({ value }: any) => (
             <ContestLeaderboardTableParticipant uuid={value} />
         ),
+        className: 'participant',
     },
     {
         Header: 'Score',
         accessor: 'score',
-        width: 100,
+        // width: 100,
         Cell: ({ value }: any) => {
             return <div>{value}</div>;
         },
+        className: 'score',
     },
     // {
     //     Header: 'Thru',
@@ -37,9 +40,10 @@ export const columnsSchema = [
     {
         Header: 'Strokes',
         accessor: 'strokes',
-        width: 100,
+        // width: 100,
         Cell: ({ value }: any) => {
             return <div>{value}</div>;
         },
+        className: 'strokes',
     },
 ];

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement, ReactText } from 'react';
 import { useSelector } from 'react-redux';
 import { ContestLeaderboardTableProps } from './types';
 import { Table } from '@components';
@@ -19,25 +19,28 @@ const ContestLeaderboardTable: React.FunctionComponent<ContestLeaderboardTablePr
 
     const loadTableDimensions = (
         items: any[]
-    ): { size: number; height: number; width: number } => {
+    ): { size: number; height: number } => {
         // move this info to schema.tsx
         const size = 50;
-        const width = 750;
         const height = items.length * size;
 
-        return { size, width, height };
+        return { size, height };
     };
 
     return (
-        <Table
-            {...loadTableDimensions(items)}
-            items={items}
-            hasNextPage={false}
-            loadNextPage={loadMore}
-            isNextPageLoading={false}
-            minimumBatchSize={10}
-            columnsSchema={columnsSchema}
-        />
+        <div className="contest-leaderboard-table">
+            <div className="table-wrap">
+                <Table
+                    {...loadTableDimensions(items)}
+                    items={items}
+                    hasNextPage={false}
+                    loadNextPage={loadMore}
+                    isNextPageLoading={false}
+                    minimumBatchSize={10}
+                    columnsSchema={columnsSchema}
+                />
+            </div>
+        </div>
     );
 };
 

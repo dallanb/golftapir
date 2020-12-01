@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from 'react';
+import React, { PropsWithChildren, ReactText } from 'react';
 import { ListChildComponentProps } from 'react-window';
 
 export interface TableProps {
@@ -6,7 +6,6 @@ export interface TableProps {
     columnsSchema: any;
     size: number;
     height?: number;
-    width?: number;
     hasNextPage: boolean;
     isNextPageLoading: boolean;
     items: any;

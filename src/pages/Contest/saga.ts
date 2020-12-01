@@ -16,7 +16,6 @@ import {
 
 // Action Handlers
 function* preInit({ data: contest }: AnyAction) {
-    console.log(contest);
     yield put(ContestPageActions.set({ contest }));
 }
 

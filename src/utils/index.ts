@@ -6,6 +6,7 @@ export { default as mapActionLabel } from './mapActionLabel';
 export { default as mapStatusColour } from './mapStatusColour';
 export { default as randomColourGenerator } from './randomColourGenerator';
 export { default as searchSelectTagRenderer } from './searchSelectTagRenderer';
+export { default as scrollbarWidth } from './scrollbarWidth';
 export { default as topicToRouteMapper } from './topicToRouteMapper';
 export { default as totalStrokeCalculator } from './totalStrokeCalculator';
 export { default as withS3URL } from './withS3URL';

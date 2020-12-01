@@ -1,0 +1,16 @@
+.contest-leaderboard {
+    display: block;
+    max-width: 100%;
+    .pos {
+        width: 5% !important;
+    }
+    .participant {
+        width: 75% !important;
+    }
+    .score {
+        width: 10% !important;
+    }
+    .strokes {
+        width: 10% !important;;
+    }
+}
