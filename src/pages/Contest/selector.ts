@@ -33,11 +33,7 @@ export const selectContestName = createSelector(
 export const selectContestAvatarSrc = createSelector(
     [getContestPage],
     (contestPage) => {
-        const filename = _get(
-            contestPage,
-            ['contest', 'avatar', 's3_filename'],
-            undefined
-        );
+        const filename = _get(contestPage, ['contest', 'avatar'], undefined);
         return (
             filename && withS3URL(filename, constants.S3_FOLDERS.CONTEST.AVATAR)
         );

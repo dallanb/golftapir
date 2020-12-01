@@ -15,6 +15,11 @@ import {
 } from '@helpers';
 
 // Action Handlers
+function* preInit({ data: contest }: AnyAction) {
+    console.log(contest);
+    yield put(ContestPageActions.set({ contest }));
+}
+
 function* init({ uuid }: AnyAction) {
     try {
         yield fork(initSocket, uuid);
@@ -82,6 +87,7 @@ function* updateContestParticipantStatus({ uuid, status }: AnyAction) {
 
 export default function* ContestPageSaga() {
     yield all([
+        takeLatest(ContestPageTypes.PRE_INIT, preInit),
         takeLatest(ContestPageTypes.INIT, init),
         takeLatest(ContestPageTypes.TERMINATE, terminate),
         takeLatest(ContestPageTypes.REFRESH, refresh),

@@ -11,7 +11,7 @@ const ContestLeaderboardTable: React.FunctionComponent<ContestLeaderboardTablePr
         contest: { participants },
     } = useSelector(selectData);
     const items = Object.entries(participants).map(([uuid, participant]: any) =>
-        Object.assign(participant, { uuid })
+        Object.assign({}, participant, { uuid })
     );
 
     const loadMore = (start: number, stop: number, resolve: () => void) =>
