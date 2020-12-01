@@ -4,10 +4,11 @@ import CompetitorsPageContentCompetitorsActions, {
     CompetitorsPageContentCompetitorsTypes,
 } from './actions';
 import { fetchAccounts } from '@helpers';
+import { fetchCompetitorsList } from './helpers';
 
 function* init() {
     try {
-        yield put(CompetitorsPageContentCompetitorsActions.fetchData());
+        yield call(fetchCompetitorsList);
         yield put(CompetitorsPageContentCompetitorsActions.initSuccess());
     } catch (err) {
         yield put(CompetitorsPageContentCompetitorsActions.initFailure(err));

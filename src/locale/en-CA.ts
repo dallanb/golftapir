@@ -47,6 +47,7 @@ const CONSTANTS = {
         SUCCESS: {},
         ERROR: {
             FETCH_CONTEST_RESULTS: 'Error fetching Contest results',
+            FETCH_ALL: 'Error fetching Competitors information',
         },
     },
     COURSE: {
