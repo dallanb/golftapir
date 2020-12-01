@@ -22,6 +22,11 @@ const CompetitorsList: React.FunctionComponent<CompetitorsListProps> = ({
     const data = useSelector(selectListData);
     const metadata = useSelector(selectListMetadata);
     const isFetching = useSelector(selectListIsFetching);
+    const tableDimensions = {
+        size: 150,
+        width: '100%',
+        height: getRefHeight(containerRef, 200) - 32,
+    };
 
     const dispatch = useDispatch();
     const loadMore = (start: number, stop: number) => {
@@ -42,19 +47,9 @@ const CompetitorsList: React.FunctionComponent<CompetitorsListProps> = ({
         );
     };
 
-    const loadTableDimensions = (
-        items: any[] = []
-    ): { size: number; height: ReactText; width: ReactText } => {
-        // move this info to schema.tsx
-        const size = 150;
-        const width = '100%';
-        const height = getRefHeight(containerRef, 200) - 32;
-
-        return { size, width, height };
-    };
     return (
         <List
-            {...loadTableDimensions(data)}
+            {...tableDimensions}
             items={data}
             hasNextPage={hasNextPage()}
             loadNextPage={loadMore}
