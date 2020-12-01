@@ -4,10 +4,11 @@ import ContestsPageContentContestsActions, {
     ContestsPageContentContestsTypes,
 } from './actions';
 import { fetchContestsMaterialized } from '@helpers';
+import { fetchContestsList } from './helpers';
 
 function* init() {
     try {
-        yield put(ContestsPageContentContestsActions.fetchData());
+        yield call(fetchContestsList);
         yield put(ContestsPageContentContestsActions.initSuccess());
     } catch (err) {
         yield put(ContestsPageContentContestsActions.initFailure());
