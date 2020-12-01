@@ -25,5 +25,5 @@ export const selectListMetadata = createSelector(
 export const selectListIsFetching = createSelector(
     [getCompetitorPageContentCompetitorResults],
     (competitorPageContentCompetitorResults) =>
-        _get(competitorPageContentCompetitorResults, ['isFetching'], [])
+        _get(competitorPageContentCompetitorResults, ['isFetching'], false)
 );

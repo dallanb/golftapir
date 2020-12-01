@@ -28,7 +28,7 @@ function* init() {
 
 function* fetchData({ options = { page: 1, per_page: 10 } }: AnyAction) {
     try {
-        const { uuid } = yield select(selectContestUUID);
+        const uuid = yield select(selectContestUUID);
         const { data, metadata } = yield call(fetchContestParticipants, uuid, {
             ...options,
             status: constants.STATUS.PENDING.KEY,

@@ -64,7 +64,7 @@ export const selectIsOwner = createSelector(
 
 export const selectIsFetching = createSelector(
     [getContestPage],
-    (contestPage) => _get(contestPage, ['isFetching'], true)
+    (contestPage) => _get(contestPage, ['isFetching'], false)
 );
 
 export const selectSubscribed = createSelector(
