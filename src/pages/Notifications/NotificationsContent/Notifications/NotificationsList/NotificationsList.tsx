@@ -4,7 +4,11 @@ import { useHistory } from 'react-router-dom';
 import { NotificationsListProps } from './types';
 import { List } from '@components';
 import NotificationsPageContentNotificationsActions from '../actions';
-import { selectData } from '../selector';
+import {
+    selectListData,
+    selectListMetadata,
+    selectListIsFetching,
+} from '../selector';
 import NotificationsListTile from './NotificationsListTile';
 import { topicToRouteMapper } from '@utils';
 import { NotificationActions } from '@actions';
@@ -12,7 +16,9 @@ import './NotificationsList.scss';
 
 const NotificationsList: React.FunctionComponent<NotificationsListProps> = ({}) => {
     const history = useHistory();
-    const { data, metadata, isFetching } = useSelector(selectData);
+    const data = useSelector(selectListData);
+    const metadata = useSelector(selectListMetadata);
+    const isFetching = useSelector(selectListIsFetching);
 
     const dispatch = useDispatch();
     const loadMore = (start: number, stop: number, resolve: () => any) => {

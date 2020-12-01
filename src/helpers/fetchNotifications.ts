@@ -4,7 +4,7 @@ import CONSTANTS from '@locale/en-CA';
 
 function* fetchNotifications(options: { page: number; per_page: number }) {
     yield put(NotificationActions.fetchNotifications(options));
-    const { failure } = yield race({
+    const { success, failure } = yield race({
         success: take(NotificationTypes.FETCH_NOTIFICATIONS_SUCCESS),
         failure: take(NotificationTypes.FETCH_NOTIFICATIONS_FAILURE),
     });
@@ -12,6 +12,7 @@ function* fetchNotifications(options: { page: number; per_page: number }) {
     if (failure) {
         throw new Error(CONSTANTS.CONTEST.ERROR.FETCH);
     }
+    return success;
 }
 
 export default fetchNotifications;

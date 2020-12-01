@@ -3,11 +3,12 @@ import { all, call, put, takeLatest } from 'redux-saga/effects';
 import NotificationsPageContentNotificationsActions, {
     NotificationsPageContentNotificationsTypes,
 } from './actions';
+import { fetchNotificationsList } from './helpers';
 import { fetchNotifications } from '@helpers';
 
 function* init() {
     try {
-        yield put(NotificationsPageContentNotificationsActions.fetchData());
+        yield call(fetchNotificationsList);
         yield put(NotificationsPageContentNotificationsActions.initSuccess());
     } catch (err) {
         yield put(NotificationsPageContentNotificationsActions.initFailure());
