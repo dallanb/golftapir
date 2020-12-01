@@ -21,7 +21,9 @@ function* init() {
         );
     } catch (err) {
         yield put(
-            ContestPageSiderContentParticipantActiveContestPendingActions.initFailure()
+            ContestPageSiderContentParticipantActiveContestPendingActions.initFailure(
+                err
+            )
         );
     }
 }

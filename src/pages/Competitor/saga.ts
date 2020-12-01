@@ -14,7 +14,7 @@ function* init({ uuid }: AnyAction) {
         yield put(CompetitorPageActions.set({ account }));
         yield put(CompetitorPageActions.initSuccess());
     } catch (err) {
-        yield put(CompetitorPageActions.initFailure());
+        yield put(CompetitorPageActions.initFailure(err));
     }
 }
 

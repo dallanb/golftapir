@@ -9,13 +9,14 @@ import { updateAccount } from '@helpers';
 function* init() {
     try {
         const account = yield select(selectAccount);
+        console.log(account);
         const initialValues = prepareInitialValues(account);
         yield put(
             AccountPageContentAccountActions.setInitialValues(initialValues)
         );
         yield put(AccountPageContentAccountActions.initSuccess());
     } catch (err) {
-        yield put(AccountPageContentAccountActions.initFailure());
+        yield put(AccountPageContentAccountActions.initFailure(err));
     }
 }
 

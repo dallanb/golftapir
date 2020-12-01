@@ -5,7 +5,7 @@ function* init() {
     try {
         yield put(CompetitorsPageActions.initSuccess());
     } catch (err) {
-        yield put(CompetitorsPageActions.initFailure());
+        yield put(CompetitorsPageActions.initFailure(err));
     }
 }
 

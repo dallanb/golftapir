@@ -11,7 +11,9 @@ function* init() {
         yield call(fetchNotificationsList);
         yield put(NotificationsPageContentNotificationsActions.initSuccess());
     } catch (err) {
-        yield put(NotificationsPageContentNotificationsActions.initFailure());
+        yield put(
+            NotificationsPageContentNotificationsActions.initFailure(err)
+        );
     }
 }
 

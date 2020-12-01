@@ -13,7 +13,9 @@ function* init() {
         yield call(fetchCompetitorResults);
         yield put(CompetitorPageContentCompetitorResultsActions.initSuccess());
     } catch (err) {
-        yield put(CompetitorPageContentCompetitorResultsActions.initFailure());
+        yield put(
+            CompetitorPageContentCompetitorResultsActions.initFailure(err)
+        );
     }
 }
 

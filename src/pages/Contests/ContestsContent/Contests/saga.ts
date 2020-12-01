@@ -11,7 +11,7 @@ function* init() {
         yield call(fetchContestsList);
         yield put(ContestsPageContentContestsActions.initSuccess());
     } catch (err) {
-        yield put(ContestsPageContentContestsActions.initFailure());
+        yield put(ContestsPageContentContestsActions.initFailure(err));
     }
 }
 

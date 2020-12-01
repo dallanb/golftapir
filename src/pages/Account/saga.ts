@@ -4,7 +4,7 @@ import { fetchMyAccount } from '@helpers';
 
 function* init() {
     try {
-        const { account } = yield call(fetchMyAccount);
+        const { data: account } = yield call(fetchMyAccount);
         yield put(AccountPageActions.set({ account }));
 
         yield put(AccountPageActions.initSuccess());

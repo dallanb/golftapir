@@ -10,7 +10,7 @@ function* init() {
         yield put(CompetitorsPageContentCompetitorsActions.fetchData());
         yield put(CompetitorsPageContentCompetitorsActions.initSuccess());
     } catch (err) {
-        yield put(CompetitorsPageContentCompetitorsActions.initFailure());
+        yield put(CompetitorsPageContentCompetitorsActions.initFailure(err));
     }
 }
 
