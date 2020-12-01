@@ -13,7 +13,6 @@ import './Contest.scss';
 
 const Contest: React.FunctionComponent<ContestProps> = () => {
     const dispatch = useDispatch();
-
     const history = useHistory();
     const contest = _get(history, ['location', 'state'], null);
     const { isInitialized } = useSelector(selectData);
