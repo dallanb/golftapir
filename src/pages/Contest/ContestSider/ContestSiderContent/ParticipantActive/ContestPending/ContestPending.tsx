@@ -1,15 +1,30 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { ContestPendingProps } from './types';
 import { selectIsOwner } from '@pages/Contest/selector';
 import { selectData } from './selector';
 import PendingParticipantsTable from './PendingParticipantsList';
-import './ContestPending.scss';
 import ComponentContent from '@layouts/ComponentContent';
+import ContestPageSiderContentParticipantActiveContestPendingActions from './actions';
+import './ContestPending.scss';
 
 const ContestPending: React.FunctionComponent<ContestPendingProps> = () => {
+    const dispatch = useDispatch();
+    // Possibly move this out to participant active
+    useEffect(() => {
+        dispatch(
+            ContestPageSiderContentParticipantActiveContestPendingActions.init()
+        );
+        return () => {
+            dispatch(
+                ContestPageSiderContentParticipantActiveContestPendingActions.terminate()
+            );
+        };
+    }, []);
+
     const isOwner = useSelector(selectIsOwner);
     const { isInitialized } = useSelector(selectData);
+
     let content = (
         <div>Please wait for all invited participants to respond</div>
     );

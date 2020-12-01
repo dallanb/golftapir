@@ -14,7 +14,7 @@ const Contest: React.FunctionComponent<ContestProps> = ({}) => {
     const dispatch = useDispatch();
     const history = useHistory();
 
-    const options = _get(history, ['location', 'state'], null);
+    const options = _get(history, ['location', 'state'], undefined);
 
     const { isSubmitted, uuid } = useSelector(selectData);
 

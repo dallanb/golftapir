@@ -3,13 +3,14 @@ import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { CompetitorResultsListProps } from './types';
 import { List } from '@components';
-import { selectData } from '../selector';
+import { selectListData, selectListIsFetching } from '../selector';
 import CompetitorResultsListTile from './CompetitorResultsListTile';
 import './CompetitorResultsList.scss';
 
 const CompetitorResultsList: React.FunctionComponent<CompetitorResultsListProps> = () => {
     const history = useHistory();
-    const { data, isFetching } = useSelector(selectData);
+    const data = useSelector(selectListData);
+    const isFetching = useSelector(selectListIsFetching);
 
     const loadMore = (start: number, stop: number, resolve: () => void) =>
         resolve();
@@ -32,7 +33,7 @@ const CompetitorResultsList: React.FunctionComponent<CompetitorResultsListProps>
             hasNextPage={false}
             loadNextPage={loadMore}
             isNextPageLoading={isFetching}
-            minimumBatchSize={100}
+            minimumBatchSize={10}
             rowRenderer={(props) =>
                 CompetitorResultsListTile({ props, history })
             }

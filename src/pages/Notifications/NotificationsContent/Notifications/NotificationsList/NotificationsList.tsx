@@ -19,8 +19,8 @@ const NotificationsList: React.FunctionComponent<NotificationsListProps> = ({}) 
         dispatch(
             NotificationsPageContentNotificationsActions.fetchData(
                 {
-                    page: Math.floor(stop / 100) + 1,
-                    per_page: 100,
+                    page: Math.floor(stop / 10) + 1,
+                    per_page: 10,
                 },
                 true
             )
@@ -60,7 +60,7 @@ const NotificationsList: React.FunctionComponent<NotificationsListProps> = ({}) 
             hasNextPage={hasNextPage()}
             loadNextPage={loadMore}
             isNextPageLoading={isFetching}
-            minimumBatchSize={100}
+            minimumBatchSize={10}
             rowRenderer={(props) =>
                 NotificationsListTile({ props, onClick: tileOnClick })
             }

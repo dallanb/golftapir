@@ -12,7 +12,7 @@ const ContentLayoutHeader: React.FunctionComponent<ContentLayoutHeaderProps> = (
     extra,
 }) => {
     const renderAvatar = (avatar: ContentLayoutHeaderProps['avatar']) => {
-        if (!avatar) {
+        if (!avatar || !avatar.name) {
             return undefined;
         }
         const avatarProps: AvatarProps = {

@@ -11,7 +11,7 @@ const ContestLeaderboardTable: React.FunctionComponent<ContestLeaderboardTablePr
         contest: { participants },
     } = useSelector(selectData);
     const items = Object.entries(participants).map(([uuid, participant]: any) =>
-        Object.assign(participant, { uuid })
+        Object.assign({}, participant, { uuid })
     );
 
     const loadMore = (start: number, stop: number, resolve: () => void) =>
@@ -35,7 +35,7 @@ const ContestLeaderboardTable: React.FunctionComponent<ContestLeaderboardTablePr
             hasNextPage={false}
             loadNextPage={loadMore}
             isNextPageLoading={false}
-            minimumBatchSize={100}
+            minimumBatchSize={10}
             columnsSchema={columnsSchema}
         />
     );

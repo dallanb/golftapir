@@ -3,15 +3,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { List } from '@components';
 import { PendingParticipantsListProps } from './types';
 import PendingParticipantsListTile from './PendingParticipantsListTile';
-import { selectData } from '../selector';
+import { selectListData, selectListIsFetching } from '../selector';
 import ContestPageSiderContentParticipantActiveContestPendingActions from '../actions';
-import ComponentContent from '@layouts/ComponentContent';
 import './PendingParticipantsList.scss';
 
 const PendingParticipantsList: React.FunctionComponent<PendingParticipantsListProps> = () => {
     const dispatch = useDispatch();
 
-    const { data, isFetching } = useSelector(selectData);
+    const data = useSelector(selectListData);
+    const isFetching = useSelector(selectListIsFetching);
     const loadMore = (start: number, stop: number, resolve: () => any) => {
         dispatch(
             ContestPageSiderContentParticipantActiveContestPendingActions.fetchData(

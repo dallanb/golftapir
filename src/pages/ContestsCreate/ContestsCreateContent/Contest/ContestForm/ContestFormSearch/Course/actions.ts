@@ -7,7 +7,7 @@ const { Types, Creators } = createActions(
         searchFailure: ['err'],
     },
     {
-        prefix: 'CONTESTS_CREATE_PAGE_CONTENT_CONTEST_SEARCH_COURSE',
+        prefix: 'CONTESTS_CREATE_PAGE_CONTENT_CONTEST_SEARCH_COURSE_',
     }
 );
 export const ContestsCreatePageContentContestSearchCourseTypes = Types;

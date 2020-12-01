@@ -4,21 +4,27 @@ import { useHistory } from 'react-router-dom';
 import { ContestsListProps } from './types';
 import { List } from '@components';
 import ContestsPageContentContestsActions from '../actions';
-import { selectData } from '../selector';
+import {
+    selectListData,
+    selectListMetadata,
+    selectListIsFetching,
+} from '../selector';
 import ContestsListTile from './ContestsListTile';
 import './ContestsList.scss';
 
 const ContestsList: React.FunctionComponent<ContestsListProps> = ({}) => {
     const history = useHistory();
-    const { data, metadata, isFetching } = useSelector(selectData);
+    const data = useSelector(selectListData);
+    const metadata = useSelector(selectListMetadata);
+    const isFetching = useSelector(selectListIsFetching);
 
     const dispatch = useDispatch();
     const loadMore = (start: number, stop: number, resolve: () => any) => {
         dispatch(
             ContestsPageContentContestsActions.fetchData(
                 {
-                    page: Math.floor(stop / 100) + 1,
-                    per_page: 100,
+                    page: Math.floor(stop / 10) + 1,
+                    per_page: 10,
                 },
                 true
             )
@@ -49,7 +55,7 @@ const ContestsList: React.FunctionComponent<ContestsListProps> = ({}) => {
             hasNextPage={hasNextPage()}
             loadNextPage={loadMore}
             isNextPageLoading={isFetching}
-            minimumBatchSize={100}
+            minimumBatchSize={10}
             rowRenderer={(props) => ContestsListTile({ props, history })}
         />
     );

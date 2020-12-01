@@ -33,11 +33,7 @@ export const selectContestName = createSelector(
 export const selectContestAvatarSrc = createSelector(
     [getContestPage],
     (contestPage) => {
-        const filename = _get(
-            contestPage,
-            ['contest', 'avatar', 's3_filename'],
-            undefined
-        );
+        const filename = _get(contestPage, ['contest', 'avatar'], undefined);
         return (
             filename && withS3URL(filename, constants.S3_FOLDERS.CONTEST.AVATAR)
         );
@@ -68,7 +64,7 @@ export const selectIsOwner = createSelector(
 
 export const selectIsFetching = createSelector(
     [getContestPage],
-    (contestPage) => _get(contestPage, ['isFetching'], true)
+    (contestPage) => _get(contestPage, ['isFetching'], false)
 );
 
 export const selectSubscribed = createSelector(

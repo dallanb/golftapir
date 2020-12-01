@@ -49,6 +49,7 @@ export {
     default as ContestUpdate,
     reducer as contestUpdatePage,
     ContestUpdatePageSaga,
+    ContestUpdatePageContentContestSaga,
     ContestUpdatePageRoutes,
 } from './ContestUpdate';
 export {

@@ -23,7 +23,6 @@ const ContestsListTile: React.FunctionComponent<ContestsListTileProps> = ({
     const src =
         avatar && withS3URL(avatar, constants.S3_FOLDERS.CONTEST.AVATAR);
     const status = _get(item, ['status'], undefined);
-    const start_time = _get(item, ['start_time'], undefined);
     const participants = _get(item, ['participants'], {});
 
     return (
@@ -46,12 +45,7 @@ const ContestsListTile: React.FunctionComponent<ContestsListTileProps> = ({
                 </div>
             </div>
             <div className="contest-list-tile-button">
-                <Button
-                    onClick={() =>
-                        handleClick({ uuid, name, status, src, start_time })
-                    }
-                    disabled={!uuid}
-                >
+                <Button onClick={() => handleClick(item)} disabled={!uuid}>
                     View
                 </Button>
             </div>

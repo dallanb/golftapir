@@ -12,21 +12,16 @@ import { ContentLayoutHeader } from '@layouts';
 import './ContestHeader.scss';
 
 const ContestHeader: React.FunctionComponent<ContestHeaderProps> = () => {
-    const title = <HeaderTitle />;
-    const subTitle = <HeaderSubTitle />;
-    const extra = <HeaderExtra />;
-    const avatar = {
-        name: useSelector(selectContestName),
-        src: useSelector(selectContestAvatarSrc),
-        size: 72,
-    };
-
     return (
         <ContentLayoutHeader
-            title={title}
-            subTitle={subTitle}
-            extra={extra}
-            avatar={avatar}
+            title={<HeaderTitle />}
+            subTitle={<HeaderSubTitle />}
+            extra={<HeaderExtra />}
+            avatar={{
+                name: useSelector(selectContestName),
+                src: useSelector(selectContestAvatarSrc),
+                size: 72,
+            }}
         />
     );
 };

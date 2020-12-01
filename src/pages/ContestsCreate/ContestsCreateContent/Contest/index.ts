@@ -3,12 +3,11 @@ import { combineReducers } from 'redux';
 export { default } from './Contest';
 
 // Reducer
-// TODO: THIS MAY CAUSE ISSUES
-import { reducer as formReducer } from './reducer';
-import { reducer as searchReducer } from './ContestForm';
+import { reducer as dataReducer } from './reducer';
+import { reducer as formReducer } from './ContestForm';
 export const reducer = combineReducers({
-    ...formReducer,
-    ...searchReducer,
+    data: dataReducer,
+    form: formReducer,
 });
 
 // Saga
