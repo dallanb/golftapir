@@ -43,6 +43,12 @@ const CONSTANTS = {
             UPDATE_PARTICIPANT: 'Error updating participant',
         },
     },
+    COMPETITOR: {
+        SUCCESS: {},
+        ERROR: {
+            FETCH_CONTEST_RESULTS: 'Error fetching Contest results',
+        },
+    },
     COURSE: {
         SUCCESS: {},
         ERROR: {

@@ -9,7 +9,7 @@ import { selectSearchData as selectCourseSearchData } from './ContestFormSearch/
 export const courseSearchSelectOptionRenderer = (
     formik: FormikProps<FormikValues>
 ) => {
-    const courses = useSelector(selectCourseSearchData);
+    const courses = useSelector(selectCourseSearchData) || [];
     return courses.map((course: { uuid: string; name: string }) => (
         <Select.Option key={course.uuid} value={course.uuid}>
             {course.name}

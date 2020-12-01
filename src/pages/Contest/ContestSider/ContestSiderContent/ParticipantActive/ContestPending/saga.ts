@@ -33,7 +33,6 @@ function* fetchData({ options = { page: 1, per_page: 10 } }: AnyAction) {
             ...options,
             status: constants.STATUS.PENDING.KEY,
         });
-        console.log(data);
 
         // fetch account mappings from the account api
         const accounts = data.map(

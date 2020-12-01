@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layout } from 'antd';
+import { Layout, Spin } from 'antd';
 import { ContentLayoutProps } from './types';
 import './ContentLayout.scss';
 
@@ -9,6 +9,7 @@ const ContentLayout: React.FunctionComponent<ContentLayoutProps> = ({
     header,
     content,
     sider,
+    showSpinner,
     className,
 }) => {
     const renderHeader = () => {
@@ -31,6 +32,10 @@ const ContentLayout: React.FunctionComponent<ContentLayoutProps> = ({
         }
         return sider;
     };
+
+    if (showSpinner) {
+        return <Spin />;
+    }
 
     return (
         <Layout className="content-layout">

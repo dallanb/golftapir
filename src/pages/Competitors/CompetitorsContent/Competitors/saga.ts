@@ -18,6 +18,7 @@ function* fetchData({
     options = {
         page: 1,
         per_page: 10,
+        include: 'avatar',
     },
 }: AnyAction) {
     try {

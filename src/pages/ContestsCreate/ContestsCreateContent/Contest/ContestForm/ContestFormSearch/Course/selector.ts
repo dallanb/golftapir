@@ -2,7 +2,7 @@ import { createSelector } from 'reselect';
 import { get as _get } from 'lodash';
 
 const getContestsCreatePageContentContestSearchCourse = (state: any) =>
-    state.contestsCreatePage.ui.content.contest.search.course;
+    state.contestsCreatePage.ui.content.contest.form.search.course;
 
 export const selectData = createSelector(
     [getContestsCreatePageContentContestSearchCourse],

@@ -4,13 +4,19 @@ import { useHistory } from 'react-router-dom';
 import { ContestsListProps } from './types';
 import { List } from '@components';
 import ContestsPageContentContestsActions from '../actions';
-import { selectData } from '../selector';
+import {
+    selectListData,
+    selectListMetadata,
+    selectListIsFetching,
+} from '../selector';
 import ContestsListTile from './ContestsListTile';
 import './ContestsList.scss';
 
 const ContestsList: React.FunctionComponent<ContestsListProps> = ({}) => {
     const history = useHistory();
-    const { data, metadata, isFetching } = useSelector(selectData);
+    const data = useSelector(selectListData);
+    const metadata = useSelector(selectListMetadata);
+    const isFetching = useSelector(selectListIsFetching);
 
     const dispatch = useDispatch();
     const loadMore = (start: number, stop: number, resolve: () => any) => {

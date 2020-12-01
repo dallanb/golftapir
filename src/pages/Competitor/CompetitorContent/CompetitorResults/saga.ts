@@ -1,14 +1,16 @@
 import { AnyAction } from 'redux';
 import { all, call, put, select, takeLatest } from 'redux-saga/effects';
+import { get as _get } from 'lodash';
 import CompetitorPageContentCompetitorResultsActions, {
     CompetitorPageContentCompetitorResultsTypes,
 } from './actions';
 import { fetchContestsMaterialized } from '@helpers';
+import { fetchCompetitorResults } from './helpers';
 import { selectData } from '@pages/Competitor/selector';
 
 function* init() {
     try {
-        yield put(CompetitorPageContentCompetitorResultsActions.fetchData());
+        yield call(fetchCompetitorResults);
         yield put(CompetitorPageContentCompetitorResultsActions.initSuccess());
     } catch (err) {
         yield put(CompetitorPageContentCompetitorResultsActions.initFailure());
@@ -23,10 +25,15 @@ function* fetchData({
     },
 }: AnyAction) {
     try {
-        const { uuid } = yield select(selectData);
+        const competitorData = yield select(selectData);
+        const membership_uuid = _get(
+            competitorData,
+            ['account', 'membership_uuid'],
+            null
+        );
         const { data, metadata } = yield call(fetchContestsMaterialized, {
             ...options,
-            participants: uuid,
+            participants: membership_uuid,
         });
         yield put(
             CompetitorPageContentCompetitorResultsActions.fetchDataSuccess(

@@ -4,8 +4,7 @@ import { pick as _pick } from 'lodash';
 import { fetchAccountMembership } from '@helpers';
 import CompetitorPageActions, { CompetitorPageTypes } from './actions';
 
-function* preInit({ data }: AnyAction) {
-    const account = _pick(data, ['uuid']);
+function* preInit({ data: account }: AnyAction) {
     yield put(CompetitorPageActions.set({ account }));
 }
 
