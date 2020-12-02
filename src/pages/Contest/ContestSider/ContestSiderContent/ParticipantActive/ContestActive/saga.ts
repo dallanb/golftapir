@@ -11,8 +11,9 @@ import {
 import ContestPageSiderContentParticipantActiveContestActiveActions, {
     ContestPageSiderContentParticipantActiveContestActiveTypes,
 } from './actions';
-import { updateContestParticipant, updateScoreSheetHole } from '@helpers';
-import { selectContestUUID, selectSheet } from '@pages/Contest/selector';
+import { updateScoreSheetHole } from '@helpers';
+import { selectContestUUID } from '@pages/Contest/selector';
+import { selectSheet } from './selector';
 import { initSheet } from './helpers';
 
 function* init() {

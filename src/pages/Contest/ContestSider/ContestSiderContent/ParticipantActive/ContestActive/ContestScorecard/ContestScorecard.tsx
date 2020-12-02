@@ -1,21 +1,18 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { get as _get } from 'lodash';
-import { Button, Pagination, Statistic } from 'antd';
+import { Button, Pagination } from 'antd';
 import { MinusCircleTwoTone, PlusCircleTwoTone } from '@ant-design/icons/lib';
-import { selectData, selectSheet } from '../selector';
-import ContestPageSiderContentParticipantActiveContestActiveActions from '../actions';
 import { ContestScorecardProps } from './types';
+import { selectSheet } from '../selector';
+import ContestPageSiderContentParticipantActiveContestActiveActions from '../actions';
 import './ContestScorecard.scss';
-import ComponentContent from '@layouts/ComponentContent';
 
 const ContestScorecard: React.FunctionComponent<ContestScorecardProps> = () => {
     const dispatch = useDispatch();
-    const { isInitialized } = useSelector(selectData);
     const sheet = useSelector(selectSheet);
     const uuid = _get(sheet, ['uuid'], null);
     const holes = _get(sheet, ['holes'], []);
-
     const initialCurrent = 1;
     const initialStrokes = _get(holes, [initialCurrent, 'strokes'], 0) || 0;
 
@@ -76,10 +73,7 @@ const ContestScorecard: React.FunctionComponent<ContestScorecardProps> = () => {
     };
 
     return (
-        <ComponentContent
-            showSpinner={!isInitialized}
-            className="contest-scorecard"
-        >
+        <div>
             {renderHole(current)}
             {renderStrokes(current)}
             <Pagination
@@ -91,7 +85,7 @@ const ContestScorecard: React.FunctionComponent<ContestScorecardProps> = () => {
                 current={current}
                 className="contest-scorecard-pagination"
             />
-        </ComponentContent>
+        </div>
     );
 };
 
