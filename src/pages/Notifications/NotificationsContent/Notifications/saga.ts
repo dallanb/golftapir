@@ -1,10 +1,10 @@
 import { AnyAction } from 'redux';
 import { all, call, put, takeLatest } from 'redux-saga/effects';
+import { NotificationService } from '@services';
 import NotificationsPageContentNotificationsActions, {
     NotificationsPageContentNotificationsTypes,
 } from './actions';
 import { fetchNotificationsList } from './helpers';
-import { fetchNotifications } from '@helpers';
 
 function* init() {
     try {
@@ -19,10 +19,13 @@ function* init() {
 
 function* fetchData({ options = { page: 1, per_page: 10 } }: AnyAction) {
     try {
-        const { data, metadata } = yield call(fetchNotifications, options);
+        const { notifications, _metadata: metadata } = yield call(
+            NotificationService.fetchNotifications,
+            options
+        );
         yield put(
             NotificationsPageContentNotificationsActions.fetchDataSuccess(
-                data,
+                notifications,
                 metadata
             )
         );

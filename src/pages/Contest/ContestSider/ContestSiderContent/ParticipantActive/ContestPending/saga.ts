@@ -8,11 +8,11 @@ import {
     select,
     takeLatest,
 } from 'redux-saga/effects';
+import { AccountService, ContestService } from '@services';
 import ContestPageActions, { ContestPageTypes } from '@pages/Contest/actions';
 import ContestPageSiderContentParticipantActiveContestPendingActions, {
     ContestPageSiderContentParticipantActiveContestPendingTypes,
 } from './actions';
-import { fetchContestParticipants } from '@helpers';
 import {
     selectContestStatus,
     selectContestUUID,
@@ -20,7 +20,6 @@ import {
 import constants from '@constants';
 import { keyBy as _keyBy } from 'lodash';
 import { fetchPendingParticipants } from './helpers';
-import { AccountService } from '@services';
 
 function* init() {
     try {
@@ -55,13 +54,17 @@ function* refresh() {
 function* fetchData({ options = { page: 1, per_page: 10 } }: AnyAction) {
     try {
         const uuid = yield select(selectContestUUID);
-        const { data, metadata } = yield call(fetchContestParticipants, uuid, {
-            ...options,
-            status: constants.STATUS.PENDING.KEY,
-        });
+        const { participants, metadata } = yield call(
+            ContestService.fetchContestParticipants,
+            uuid,
+            {
+                ...options,
+                status: constants.STATUS.PENDING.KEY,
+            }
+        );
 
         // fetch account mappings from the account api
-        const accounts = data.map(
+        const accounts = participants.map(
             ({ user_uuid }: { user_uuid: string }) => user_uuid
         );
         if (accounts.length) {
@@ -79,7 +82,7 @@ function* fetchData({ options = { page: 1, per_page: 10 } }: AnyAction) {
         }
         yield put(
             ContestPageSiderContentParticipantActiveContestPendingActions.fetchDataSuccess(
-                data,
+                participants,
                 metadata
             )
         );

@@ -1,9 +1,9 @@
 import { AnyAction } from 'redux';
 import { all, call, delay, put, takeLatest } from 'redux-saga/effects';
+import { ContestService } from '@services';
 import ContestsPageContentContestsActions, {
     ContestsPageContentContestsTypes,
 } from './actions';
-import { fetchContestsMaterialized } from '@helpers';
 import { fetchContestsList } from './helpers';
 
 function* init() {
@@ -15,14 +15,17 @@ function* init() {
     }
 }
 
-function* fetchData({ options = { page: 1, per_page: 20 } }: AnyAction) {
+function* fetchData({ options = { page: 1, per_page: 10 } }: AnyAction) {
     try {
-        const { data, metadata } = yield call(
-            fetchContestsMaterialized,
+        const { contests, _metadata: metadata } = yield call(
+            ContestService.fetchContestsMaterialized,
             options
         );
         yield put(
-            ContestsPageContentContestsActions.fetchDataSuccess(data, metadata)
+            ContestsPageContentContestsActions.fetchDataSuccess(
+                contests,
+                metadata
+            )
         );
     } catch (err) {
         yield put(ContestsPageContentContestsActions.fetchDataFailure(err));

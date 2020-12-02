@@ -11,7 +11,7 @@ import {
 import ContestPageSiderContentParticipantActiveContestActiveActions, {
     ContestPageSiderContentParticipantActiveContestActiveTypes,
 } from './actions';
-import { updateScoreSheetHole } from '@helpers';
+import { ScoreService } from '@services';
 import { selectContestUUID } from '@pages/Contest/selector';
 import { selectSheet } from './selector';
 import { initSheet } from './helpers';
@@ -35,7 +35,7 @@ function* init() {
 function* debouncedHoleStrokeUpdate({ holeId, strokes }: AnyAction) {
     try {
         const { uuid } = yield select(selectSheet);
-        yield fork(updateScoreSheetHole, uuid, holeId, { strokes });
+        yield fork(ScoreService.updateHole, uuid, holeId, { strokes });
         yield put(
             ContestPageSiderContentParticipantActiveContestActiveActions.debouncedHoleStrokeUpdateSuccess(
                 {

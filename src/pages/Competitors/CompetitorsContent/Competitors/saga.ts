@@ -1,9 +1,9 @@
 import { AnyAction } from 'redux';
 import { all, call, put, takeLatest } from 'redux-saga/effects';
+import { AccountService } from '@services';
 import CompetitorsPageContentCompetitorsActions, {
     CompetitorsPageContentCompetitorsTypes,
 } from './actions';
-import { fetchAccounts } from '@helpers';
 import { fetchCompetitorsList } from './helpers';
 
 function* init() {
@@ -23,10 +23,13 @@ function* fetchData({
     },
 }: AnyAction) {
     try {
-        const { data, metadata } = yield call(fetchAccounts, options);
+        const { accounts, metadata } = yield call(
+            AccountService.fetchAccounts,
+            options
+        );
         yield put(
             CompetitorsPageContentCompetitorsActions.fetchDataSuccess(
-                data,
+                accounts,
                 metadata
             )
         );

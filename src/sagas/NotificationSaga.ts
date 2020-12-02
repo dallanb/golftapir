@@ -4,8 +4,6 @@ import { all, call, put, select, takeLatest } from 'redux-saga/effects';
 import { NotificationActions, NotificationTypes } from '@actions';
 import { NotificationService } from '@services';
 import CONSTANTS from '@locale/en-CA';
-import { selectData } from '@selectors/NotificationSelector';
-import Any = jasmine.Any;
 
 function* setToken({ token }: AnyAction) {
     try {
