@@ -14,6 +14,7 @@ const ContestLeaderboardTable: React.FunctionComponent<ContestLeaderboardTablePr
         Object.assign({}, participant, { uuid })
     );
 
+    // TODO: MAKE THIS REFACTORED LIKE THE REST OF THE LIST COMPONENTS
     const loadTableDimensions = (
         items: any[]
     ): { size: number; height: number } => {
