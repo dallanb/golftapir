@@ -1,4 +1,5 @@
 import { getRandomInt } from '@utils';
+import memoize from 'memoize-one';
 
 const colourList = [
     'red',
@@ -10,7 +11,7 @@ const colourList = [
     'violet',
 ];
 
-const randomColourGenerator = (): string =>
+const randomColourGenerator = (keyword?: string): string =>
     colourList[getRandomInt(colourList.length)];
 
-export default randomColourGenerator;
+export default memoize(randomColourGenerator);
