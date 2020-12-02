@@ -10,6 +10,7 @@ const ComponentContent: React.FunctionComponent<ComponentContentProps> = ({
     children,
     componentRef,
     className,
+    style,
 }) => {
     const renderComponent = () => {
         if (showSpinner) {
@@ -23,6 +24,7 @@ const ComponentContent: React.FunctionComponent<ComponentContentProps> = ({
         <div
             ref={componentRef}
             className={`component-content-content ${className}`}
+            style={style}
         >
             {renderComponent()}
         </div>

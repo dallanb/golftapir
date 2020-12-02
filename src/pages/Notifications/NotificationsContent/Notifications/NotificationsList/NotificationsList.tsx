@@ -10,15 +10,22 @@ import {
     selectListIsFetching,
 } from '../selector';
 import NotificationsListTile from './NotificationsListTile';
-import { topicToRouteMapper } from '@utils';
+import { getRefHeight, topicToRouteMapper } from '@utils';
 import { NotificationActions } from '@actions';
 import './NotificationsList.scss';
 
-const NotificationsList: React.FunctionComponent<NotificationsListProps> = ({}) => {
+const NotificationsList: React.FunctionComponent<NotificationsListProps> = ({
+    containerRef,
+}) => {
     const history = useHistory();
     const data = useSelector(selectListData);
     const metadata = useSelector(selectListMetadata);
     const isFetching = useSelector(selectListIsFetching);
+    const tableDimensions = {
+        size: 150,
+        width: '100%',
+        height: getRefHeight(containerRef, 200) - 32,
+    };
 
     const dispatch = useDispatch();
     const loadMore = (start: number, stop: number) => {
@@ -39,17 +46,6 @@ const NotificationsList: React.FunctionComponent<NotificationsListProps> = ({}) 
         );
     };
 
-    const loadTableDimensions = (
-        items: any[] = []
-    ): { size: number; height: ReactText; width: ReactText } => {
-        // move this info to schema.tsx
-        const size = 150;
-        const width = '100%';
-        const height = items.length * size;
-
-        return { size, width, height };
-    };
-
     const tileOnClick = (item: any) => {
         const { route, state } = topicToRouteMapper(item.topic, item.key, item);
         history.push(route, state);
@@ -60,7 +56,7 @@ const NotificationsList: React.FunctionComponent<NotificationsListProps> = ({}) 
 
     return (
         <List
-            {...loadTableDimensions(data)}
+            {...tableDimensions}
             items={data}
             hasNextPage={hasNextPage()}
             loadNextPage={loadMore}
