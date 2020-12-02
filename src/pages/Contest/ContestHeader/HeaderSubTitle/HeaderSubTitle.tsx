@@ -28,9 +28,10 @@ const HeaderSubTitle: React.FunctionComponent<HeaderSubTitleProps> = () => {
             <Button
                 icon={<EditOutlined />}
                 onClick={() =>
-                    history.push(`/app${constants.ROUTES.CONTEST_UPDATE}`, {
-                        contest,
-                    })
+                    history.push(
+                        `/app${constants.ROUTES.CONTEST_UPDATE}`,
+                        contest
+                    )
                 }
                 className="update-button"
                 type="text"

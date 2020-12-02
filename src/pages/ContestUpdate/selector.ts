@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect';
 import { get as _get } from 'lodash';
 
-const getContestUpdatePage = (state: any) => state.contestUpdatePage;
+const getContestUpdatePage = (state: any) => state.contestUpdatePage.data;
 
 export const selectData = createSelector(
     [getContestUpdatePage],

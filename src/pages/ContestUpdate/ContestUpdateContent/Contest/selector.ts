@@ -2,7 +2,7 @@ import { get as _get } from 'lodash';
 import { createSelector } from 'reselect';
 
 const getContestUpdatePageContentContest = (state: any) =>
-    state.contestUpdate.ui.content.contest;
+    state.contestUpdatePage.ui.content.contest;
 
 export const selectData = createSelector(
     [getContestUpdatePageContentContest],
