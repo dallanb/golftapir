@@ -6,32 +6,26 @@ import { List } from '@components';
 import { selectListData, selectListIsFetching } from '../selector';
 import CompetitorResultsListTile from './CompetitorResultsListTile';
 import './CompetitorResultsList.scss';
+import { getRefHeight } from '@utils';
 
-const CompetitorResultsList: React.FunctionComponent<CompetitorResultsListProps> = () => {
+const CompetitorResultsList: React.FunctionComponent<CompetitorResultsListProps> = ({
+    containerRef,
+}) => {
     const history = useHistory();
     const data = useSelector(selectListData);
     const isFetching = useSelector(selectListIsFetching);
 
-    const loadMore = (start: number, stop: number, resolve: () => void) =>
-        resolve();
-
-    const loadTableDimensions = (
-        items: any[] = []
-    ): { size: number; height: number; width: ReactText } => {
-        // move this info to schema.tsx
-        const size = 150;
-        const width = '100%';
-        const height = items.length * size;
-
-        return { size, width, height };
+    const tableDimensions = {
+        size: 150,
+        width: '100%',
+        height: getRefHeight(containerRef, 200) - 32,
     };
 
     return (
         <List
-            {...loadTableDimensions(data)}
+            {...tableDimensions}
             items={data}
             hasNextPage={false}
-            loadNextPage={loadMore}
             isNextPageLoading={isFetching}
             minimumBatchSize={10}
             rowRenderer={(props) =>

@@ -1,18 +1,30 @@
-import React, { ReactText } from 'react';
+import React, { ReactText, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import ComponentContent from '@layouts/ComponentContent';
 import { List } from '@components';
 import { PendingParticipantsListProps } from './types';
 import PendingParticipantsListTile from './PendingParticipantsListTile';
-import { selectListData, selectListIsFetching } from '../selector';
+import { selectData, selectListData, selectListIsFetching } from '../selector';
 import ContestPageSiderContentParticipantActiveContestPendingActions from '../actions';
 import './PendingParticipantsList.scss';
+import { getRefHeight } from '@utils';
 
 const PendingParticipantsList: React.FunctionComponent<PendingParticipantsListProps> = () => {
     const dispatch = useDispatch();
-
+    const ref = useRef(null);
+    const { isInitialized } = useSelector(selectData);
     const data = useSelector(selectListData);
     const isFetching = useSelector(selectListIsFetching);
-    const loadMore = (start: number, stop: number, resolve: () => any) => {
+    const containerDimensions = {
+        height: Math.min(200, data.length * 50 + 32),
+    };
+    const tableDimensions = {
+        size: 50,
+        width: '100%',
+        height: Math.min(getRefHeight(ref, 200) - 32),
+    };
+
+    const loadMore = (start: number, stop: number) => {
         dispatch(
             ContestPageSiderContentParticipantActiveContestPendingActions.fetchData(
                 {
@@ -22,30 +34,25 @@ const PendingParticipantsList: React.FunctionComponent<PendingParticipantsListPr
                 true
             )
         );
-        resolve();
-    };
-
-    const loadTableDimensions = (
-        items: any[]
-    ): { size: number; height: ReactText; width: ReactText } => {
-        // move this info to schema.tsx
-        const size = 50;
-        const width = '100%';
-        const height = Math.min(items.length * size, 150);
-
-        return { size, width, height };
     };
 
     return (
-        <List
-            {...loadTableDimensions(data)}
-            hasNextPage={false}
-            isNextPageLoading={isFetching}
-            items={data}
-            loadNextPage={loadMore}
-            minimumBatchSize={10}
-            rowRenderer={(props) => PendingParticipantsListTile({ props })}
-        />
+        <ComponentContent
+            className="pending-participants"
+            style={{ ...containerDimensions }}
+            componentRef={ref}
+            showSpinner={!isInitialized}
+        >
+            <List
+                {...tableDimensions}
+                hasNextPage={false}
+                isNextPageLoading={isFetching}
+                items={data}
+                loadNextPage={loadMore}
+                minimumBatchSize={10}
+                rowRenderer={(props) => PendingParticipantsListTile({ props })}
+            />
+        </ComponentContent>
     );
 };
 

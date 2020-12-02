@@ -16,7 +16,13 @@ const defaultRowRenderer: React.FunctionComponent<RowRendererProps> = ({
         >
             {row.cells.map((cell: any) => {
                 return (
-                    <div {...cell.getCellProps()} className="td">
+                    <div
+                        {...cell.getCellProps({
+                            className: cell.column.className
+                                ? `td ${cell.column.className}`
+                                : 'td',
+                        })}
+                    >
                         {cell.render('Cell')}
                     </div>
                 );

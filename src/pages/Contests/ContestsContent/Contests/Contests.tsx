@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ContestsList from './ContestsList';
 import { ContestsProps } from './types';
@@ -9,6 +9,7 @@ import './Contests.scss';
 
 const Contests: React.FunctionComponent<ContestsProps> = ({}) => {
     const dispatch = useDispatch();
+    const ref = useRef(null);
 
     useEffect(() => {
         dispatch(ContestsPageContentContestsActions.init());
@@ -20,8 +21,12 @@ const Contests: React.FunctionComponent<ContestsProps> = ({}) => {
     const { isInitialized } = useSelector(selectData);
 
     return (
-        <ComponentContent showSpinner={!isInitialized} className="contests">
-            <ContestsList />
+        <ComponentContent
+            componentRef={ref}
+            showSpinner={!isInitialized}
+            className="contests"
+        >
+            <ContestsList containerRef={ref} />
         </ComponentContent>
     );
 };

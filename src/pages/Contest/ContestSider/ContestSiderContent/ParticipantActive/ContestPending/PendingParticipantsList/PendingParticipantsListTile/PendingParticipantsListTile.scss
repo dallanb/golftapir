@@ -1,4 +1,10 @@
 .pending-participants-list-tile {
     display: flex;
     cursor: pointer;
+    .pending-participants-list-tile-name {
+        padding-right: 12px;
+    }
+    .pending-participants-list-tile-remind-button {
+
+    }
 }

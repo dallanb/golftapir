@@ -1,20 +1,21 @@
 import { AnyAction } from 'redux';
-import { all, call, put, takeLatest } from 'redux-saga/effects';
+import { all, call, delay, put, takeLatest } from 'redux-saga/effects';
 import ContestsPageContentContestsActions, {
     ContestsPageContentContestsTypes,
 } from './actions';
 import { fetchContestsMaterialized } from '@helpers';
+import { fetchContestsList } from './helpers';
 
 function* init() {
     try {
-        yield put(ContestsPageContentContestsActions.fetchData());
+        yield call(fetchContestsList);
         yield put(ContestsPageContentContestsActions.initSuccess());
     } catch (err) {
-        yield put(ContestsPageContentContestsActions.initFailure());
+        yield put(ContestsPageContentContestsActions.initFailure(err));
     }
 }
 
-function* fetchData({ options = { page: 1, per_page: 10 } }: AnyAction) {
+function* fetchData({ options = { page: 1, per_page: 20 } }: AnyAction) {
     try {
         const { data, metadata } = yield call(
             fetchContestsMaterialized,

@@ -15,7 +15,7 @@ function* init() {
         );
         yield put(AccountPageContentAccountActions.initSuccess());
     } catch (err) {
-        yield put(AccountPageContentAccountActions.initFailure());
+        yield put(AccountPageContentAccountActions.initFailure(err));
     }
 }
 

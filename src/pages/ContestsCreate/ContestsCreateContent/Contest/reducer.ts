@@ -11,7 +11,7 @@ const INITIAL_STATE: ContestsCreatePageContentContestInterface = {
     isInitialized: false,
     err: undefined,
     initialValues: undefined,
-    uuid: undefined,
+    result: undefined,
 };
 
 /* ------------- Reducers ------------- */
@@ -53,9 +53,9 @@ function setInitialValues(state: any, { initialValues }: any) {
     });
 }
 
-function setUUID(state: any, { uuid }: any) {
+function setResult(state: any, { result }: any) {
     return Immutable.merge(state, {
-        uuid,
+        result,
     });
 }
 
@@ -86,7 +86,7 @@ const HANDLERS = {
     [ContestsCreatePageContentContestTypes.TERMINATE]: terminate,
     [ContestsCreatePageContentContestTypes.SET]: set,
     [ContestsCreatePageContentContestTypes.SET_INITIAL_VALUES]: setInitialValues,
-    [ContestsCreatePageContentContestTypes.SET_UUID]: setUUID,
+    [ContestsCreatePageContentContestTypes.SET_RESULT]: setResult,
     [ContestsCreatePageContentContestTypes.SUBMIT]: submit,
     [ContestsCreatePageContentContestTypes.SUBMIT_SUCCESS]: submitSuccess,
     [ContestsCreatePageContentContestTypes.SUBMIT_FAILURE]: submitFailure,

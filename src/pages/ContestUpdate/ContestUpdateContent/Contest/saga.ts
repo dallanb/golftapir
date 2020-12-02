@@ -21,7 +21,7 @@ function* init() {
         yield put(ContestUpdatePageContentContestActions.setUUID(contest.uuid));
         yield put(ContestUpdatePageContentContestActions.initSuccess());
     } catch (err) {
-        yield put(ContestUpdatePageContentContestActions.initFailure());
+        yield put(ContestUpdatePageContentContestActions.initFailure(err));
     }
 }
 

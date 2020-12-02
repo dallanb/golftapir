@@ -5,7 +5,7 @@ function* init() {
     try {
         yield put(RegisterPageActions.initSuccess());
     } catch (err) {
-        yield put(RegisterPageActions.initFailure());
+        yield put(RegisterPageActions.initFailure(err));
     }
 }
 

@@ -12,17 +12,19 @@ const List: React.FunctionComponent<ListProps> = ({
     hasNextPage,
     isNextPageLoading,
     items,
-    loadNextPage,
+    loadNextPage = () => null,
     minimumBatchSize,
     height = 500,
     width = 500,
 }) => {
-    const loadMoreItems = (startIndex: number, stopIndex: number): any =>
-        isNextPageLoading
-            ? new Promise((resolve) => resolve())
-            : new Promise((resolve) =>
-                  loadNextPage(startIndex, stopIndex, resolve)
-              );
+    const itemCount = hasNextPage ? items.length + 1 : items.length;
+
+    const loadMoreItems = (start: number, stop: number) => {
+        if (!isNextPageLoading) {
+            loadNextPage(start, stop);
+        }
+        return null;
+    };
 
     const isItemLoaded = (index: number) =>
         !hasNextPage || index < items.length;
@@ -31,16 +33,14 @@ const List: React.FunctionComponent<ListProps> = ({
         <InfiniteLoader
             isItemLoaded={isItemLoaded}
             loadMoreItems={loadMoreItems}
-            itemCount={hasNextPage ? items.length + 1 : items.length}
+            itemCount={itemCount}
             minimumBatchSize={minimumBatchSize}
         >
             {({ onItemsRendered, ref }) => (
                 <section>
                     <FixedSizeList
-                        className="List"
-                        itemCount={
-                            hasNextPage ? items.length + 1 : items.length
-                        }
+                        className="list"
+                        itemCount={itemCount}
                         itemData={items}
                         itemSize={size}
                         onItemsRendered={onItemsRendered}

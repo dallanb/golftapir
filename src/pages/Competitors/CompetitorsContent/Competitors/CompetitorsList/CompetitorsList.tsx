@@ -12,16 +12,24 @@ import {
 import CompetitorsListTile from './CompetitorsListTile';
 import './CompetitorsList.scss';
 import {} from '@pages/Contests/ContestsContent/Contests/selector';
+import { getRefHeight } from '@utils';
 
-const CompetitorsList: React.FunctionComponent<CompetitorsListProps> = ({}) => {
+const CompetitorsList: React.FunctionComponent<CompetitorsListProps> = ({
+    containerRef,
+}) => {
     const history = useHistory();
 
     const data = useSelector(selectListData);
     const metadata = useSelector(selectListMetadata);
     const isFetching = useSelector(selectListIsFetching);
+    const tableDimensions = {
+        size: 150,
+        width: '100%',
+        height: getRefHeight(containerRef, 200) - 32,
+    };
 
     const dispatch = useDispatch();
-    const loadMore = (start: number, stop: number, resolve: () => any) => {
+    const loadMore = (start: number, stop: number) => {
         dispatch(
             CompetitorsPageContentCompetitorsActions.fetchData(
                 {
@@ -31,7 +39,6 @@ const CompetitorsList: React.FunctionComponent<CompetitorsListProps> = ({}) => {
                 true
             )
         );
-        resolve();
     };
 
     const hasNextPage = () => {
@@ -40,19 +47,9 @@ const CompetitorsList: React.FunctionComponent<CompetitorsListProps> = ({}) => {
         );
     };
 
-    const loadTableDimensions = (
-        items: any[] = []
-    ): { size: number; height: ReactText; width: ReactText } => {
-        // move this info to schema.tsx
-        const size = 150;
-        const width = '100%';
-        const height = items.length * size;
-
-        return { size, width, height };
-    };
     return (
         <List
-            {...loadTableDimensions(data)}
+            {...tableDimensions}
             items={data}
             hasNextPage={hasNextPage()}
             loadNextPage={loadMore}

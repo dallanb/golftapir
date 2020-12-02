@@ -6,5 +6,5 @@ export interface ContestsCreatePageContentContestInterface {
     isInitialized: boolean;
     err: any;
     initialValues: any;
-    uuid?: string;
+    result: any;
 }

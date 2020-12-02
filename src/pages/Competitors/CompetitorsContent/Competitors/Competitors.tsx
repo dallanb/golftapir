@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import CompetitorsList from './CompetitorsList';
 import { CompetitorsProps } from './types';
@@ -9,6 +9,7 @@ import './Competitors.scss';
 
 const Competitors: React.FunctionComponent<CompetitorsProps> = ({}) => {
     const dispatch = useDispatch();
+    const ref = useRef(null);
 
     useEffect(() => {
         dispatch(CompetitorsPageContentCompetitorsActions.init());
@@ -20,8 +21,12 @@ const Competitors: React.FunctionComponent<CompetitorsProps> = ({}) => {
     const { isInitialized } = useSelector(selectData);
 
     return (
-        <ComponentContent showSpinner={!isInitialized} className="competitors">
-            <CompetitorsList />
+        <ComponentContent
+            componentRef={ref}
+            showSpinner={!isInitialized}
+            className="competitors"
+        >
+            <CompetitorsList containerRef={ref} />
         </ComponentContent>
     );
 };

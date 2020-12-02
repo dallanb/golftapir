@@ -23,7 +23,6 @@ const ContestPending: React.FunctionComponent<ContestPendingProps> = () => {
     }, []);
 
     const isOwner = useSelector(selectIsOwner);
-    const { isInitialized } = useSelector(selectData);
 
     let content = (
         <div>Please wait for all invited participants to respond</div>
@@ -33,11 +32,7 @@ const ContestPending: React.FunctionComponent<ContestPendingProps> = () => {
         content = <PendingParticipantsTable />;
     }
 
-    return (
-        <ComponentContent showSpinner={!isInitialized}>
-            {content}
-        </ComponentContent>
-    );
+    return <>{content}</>;
 };
 
 export default ContestPending;

@@ -15,7 +15,6 @@ const Table: React.FunctionComponent<TableProps> = ({
         getTableProps,
         getTableBodyProps,
         headerGroups,
-        headers,
         rows,
         prepareRow,
     } = useTable(
@@ -29,9 +28,20 @@ const Table: React.FunctionComponent<TableProps> = ({
         <div {...getTableProps()} className="table">
             <div>
                 {headerGroups.map((headerGroup) => (
-                    <div {...headerGroup.getHeaderGroupProps()} className="tr">
-                        {headerGroup.headers.map((column) => (
-                            <div {...column.getHeaderProps()} className="th">
+                    <div
+                        {...headerGroup.getHeaderGroupProps({
+                            style: { width: '100%' },
+                        })}
+                        className="tr"
+                    >
+                        {headerGroup.headers.map((column: any) => (
+                            <div
+                                {...column.getHeaderProps({
+                                    className: column.className
+                                        ? `th ${column.className}`
+                                        : 'th',
+                                })}
+                            >
                                 {column.render('Header')}
                             </div>
                         ))}
@@ -42,6 +52,7 @@ const Table: React.FunctionComponent<TableProps> = ({
                 <List
                     items={rows}
                     rowRenderer={(props) => rowRenderer({ props, prepareRow })}
+                    width={'100%'}
                     {...restProps}
                 />
             </div>
