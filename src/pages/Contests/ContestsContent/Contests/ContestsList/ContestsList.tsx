@@ -17,12 +17,17 @@ import { getRefHeight } from '@utils';
 const ContestsList: React.FunctionComponent<ContestsListProps> = ({
     containerRef,
 }) => {
+    const dispatch = useDispatch();
     const history = useHistory();
     const data = useSelector(selectListData);
     const metadata = useSelector(selectListMetadata);
     const isFetching = useSelector(selectListIsFetching);
+    const tableDimensions = {
+        size: 150,
+        width: '100%',
+        height: getRefHeight(containerRef, 200) - 32,
+    };
 
-    const dispatch = useDispatch();
     const loadMore = (start: number, stop: number) => {
         dispatch(
             ContestsPageContentContestsActions.fetchData(
@@ -38,21 +43,9 @@ const ContestsList: React.FunctionComponent<ContestsListProps> = ({
     const hasNextPage =
         metadata && metadata.page * metadata.per_page < metadata.total_count;
 
-    const loadTableDimensions = (): {
-        size: number;
-        height: ReactText;
-        width: ReactText;
-    } => {
-        // move this info to schema.tsx
-        const size = 150;
-        const width = '100%';
-        const height = getRefHeight(containerRef, 200) - 32; // subtract the padding
-
-        return { size, width, height };
-    };
     return (
         <List
-            {...loadTableDimensions()}
+            {...tableDimensions}
             items={data}
             hasNextPage={hasNextPage}
             loadNextPage={loadMore}
