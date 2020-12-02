@@ -13,7 +13,7 @@ const ContestLeaderboardTableParticipant: React.FunctionComponent<ContestPartici
     uuid,
 }) => {
     const history = useHistory();
-    const { name, s3_filename } = prepareParticipant(
+    const { name, s3_filename, account } = prepareParticipant(
         uuid,
         useSelector(selectAccountsHash)
     );
@@ -22,9 +22,7 @@ const ContestLeaderboardTableParticipant: React.FunctionComponent<ContestPartici
         <div
             className="contest-leaderboard-table-participant"
             onClick={() =>
-                history.push(`/app${constants.ROUTES.COMPETITOR}`, {
-                    uuid,
-                })
+                history.push(`/app${constants.ROUTES.COMPETITOR}`, account)
             }
         >
             <Avatar
