@@ -13,7 +13,7 @@ const CompetitorResultsListTile: React.FunctionComponent<CompetitorResultsListTi
 }) => {
     const item = _get(data, [index], undefined);
     const handleClick = (options: any) => {
-        history.push(`/app${constants.ROUTES.CONTEST}`, options);
+        history.push(`/app${constants.ROUTES.CONTEST.ROUTE}`, options);
     };
 
     const name = _get(item, ['name'], 'Loading...');

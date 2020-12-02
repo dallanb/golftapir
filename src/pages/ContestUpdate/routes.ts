@@ -3,7 +3,7 @@ import constants from '@constants';
 
 const routes = [
     {
-        path: constants.ROUTES.CONTEST_UPDATE,
+        path: constants.ROUTES.CONTEST_UPDATE.ROUTE,
         component: ContestUpdate,
     },
 ];

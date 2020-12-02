@@ -22,7 +22,10 @@ const ContestLeaderboardTableParticipant: React.FunctionComponent<ContestPartici
         <div
             className="contest-leaderboard-table-participant"
             onClick={() =>
-                history.push(`/app${constants.ROUTES.COMPETITOR}`, account)
+                history.push(
+                    `/app${constants.ROUTES.COMPETITOR.ROUTE}`,
+                    account
+                )
             }
         >
             <Avatar

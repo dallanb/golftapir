@@ -29,7 +29,7 @@ const HeaderSubTitle: React.FunctionComponent<HeaderSubTitleProps> = () => {
                 icon={<EditOutlined />}
                 onClick={() =>
                     history.push(
-                        `/app${constants.ROUTES.CONTEST_UPDATE}`,
+                        `/app${constants.ROUTES.CONTEST_UPDATE.ROUTE}`,
                         contest
                     )
                 }

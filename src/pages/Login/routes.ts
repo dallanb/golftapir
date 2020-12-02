@@ -3,7 +3,7 @@ import constants from '@constants';
 
 const routes = [
     {
-        path: constants.ROUTES.LOGIN,
+        path: constants.ROUTES.LOGIN.ROUTE,
         component: Login,
     },
 ];

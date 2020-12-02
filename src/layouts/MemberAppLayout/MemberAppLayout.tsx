@@ -11,6 +11,7 @@ import {
 import { UserTile } from '@components';
 import './MemberAppLayout.scss';
 import defaultMenuItemRenderer from './defaultMenuItemRenderer';
+import { getRouteBase } from '@utils';
 
 const { Sider } = Layout;
 
@@ -40,9 +41,10 @@ class MemberAppLayout extends React.Component<
         const nextPath = _get(nextProps, ['location', 'pathname']);
 
         if (prevPath !== nextPath || !prevState.selectedKeys.length) {
+            const pagePath = getRouteBase(nextPath);
             nextState.currentPath = nextPath;
             nextState.selectedKeys[0] = nextProps.menuRoutes
-                .findIndex(({ path }: any) => path === nextPath)
+                .findIndex(({ path }: any) => path === pagePath)
                 .toString();
         }
         return nextState;

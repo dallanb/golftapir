@@ -13,7 +13,7 @@ const CompetitorsListTile: React.FunctionComponent<CompetitorsListTileProps> = (
 }) => {
     const item = _get(data, [index], undefined);
     const handleClick = (options: any) => {
-        history.push(`/app${constants.ROUTES.COMPETITOR}`, options);
+        history.push(`/app${constants.ROUTES.COMPETITOR.ROUTE}`, options);
     };
 
     const uuid = _get(item, ['uuid'], undefined);

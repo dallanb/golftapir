@@ -3,7 +3,7 @@ import constants from '@constants';
 
 const routes = [
     {
-        path: constants.ROUTES.REGISTER,
+        path: constants.ROUTES.REGISTER.ROUTE,
         component: Register,
     },
 ];
