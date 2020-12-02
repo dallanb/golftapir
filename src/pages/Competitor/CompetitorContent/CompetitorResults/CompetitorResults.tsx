@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import CompetitorResultsList from './CompetitorResultsList';
 import { CompetitorResultsProps } from './types';
@@ -9,6 +9,7 @@ import ComponentContent from '@layouts/ComponentContent';
 
 const CompetitorResults: React.FunctionComponent<CompetitorResultsProps> = ({}) => {
     const dispatch = useDispatch();
+    const ref = useRef(null);
 
     useEffect(() => {
         dispatch(CompetitorPageContentCompetitorResultsActions.init());
@@ -21,10 +22,11 @@ const CompetitorResults: React.FunctionComponent<CompetitorResultsProps> = ({}) 
 
     return (
         <ComponentContent
+            componentRef={ref}
             showSpinner={!isInitialized}
             className="competitor-results"
         >
-            <CompetitorResultsList />
+            <CompetitorResultsList containerRef={ref} />
         </ComponentContent>
     );
 };
