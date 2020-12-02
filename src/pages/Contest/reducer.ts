@@ -7,8 +7,8 @@ import { mergeContestParticipant } from '@pages/Contest/utils';
 
 /* ------------- Initial State ------------- */
 const INITIAL_STATE: ContestPageInterface = {
-    isFetching: false,
     isInitialized: false,
+    isRefreshing: false,
     err: undefined,
     subscribed: false,
     contest: undefined,
@@ -18,7 +18,6 @@ const INITIAL_STATE: ContestPageInterface = {
 /* ------------- Reducers ------------- */
 function init(state = INITIAL_STATE) {
     return Immutable.merge(state, {
-        isFetching: true,
         isInitialized: false,
         err: null,
     });
@@ -26,7 +25,6 @@ function init(state = INITIAL_STATE) {
 
 function initSuccess(state = INITIAL_STATE) {
     return Immutable.merge(state, {
-        isFetching: false,
         isInitialized: true,
         err: null,
     });
@@ -34,7 +32,6 @@ function initSuccess(state = INITIAL_STATE) {
 
 function initFailure(state: any, { err }: any) {
     return Immutable.merge(state, {
-        isFetching: false,
         isInitialized: false,
         err,
     });
@@ -46,21 +43,20 @@ function terminate() {
 
 function refresh(state = INITIAL_STATE) {
     return Immutable.merge(state, {
-        isFetching: true,
+        isRefreshing: true,
         err: null,
     });
 }
 
 function refreshSuccess(state = INITIAL_STATE) {
     return Immutable.merge(state, {
-        isFetching: false,
-        err: null,
+        isRefreshing: false,
     });
 }
 
 function refreshFailure(state: any, { err }: any) {
     return Immutable.merge(state, {
-        isFetching: false,
+        isRefreshing: false,
         err,
     });
 }

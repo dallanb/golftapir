@@ -20,7 +20,7 @@ const { Types, Creators } = createActions(
         searchAccounts: ['key'],
         searchAccountsSuccess: ['data'],
         searchAccountsFailure: ['err'],
-        bulkFetchAccounts: ['within', 'options'],
+        bulkFetchAccounts: ['accounts'],
         bulkFetchAccountsSuccess: ['data'],
         bulkFetchAccountsFailure: ['err'],
     },

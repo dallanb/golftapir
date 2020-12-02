@@ -1,10 +1,22 @@
 import { AnyAction } from 'redux';
-import { all, call, fork, put, select, takeLatest } from 'redux-saga/effects';
+import {
+    all,
+    call,
+    fork,
+    put,
+    race,
+    select,
+    takeLatest,
+} from 'redux-saga/effects';
+import ContestPageActions, { ContestPageTypes } from '@pages/Contest/actions';
 import ContestPageSiderContentParticipantActiveContestPendingActions, {
     ContestPageSiderContentParticipantActiveContestPendingTypes,
 } from './actions';
 import { bulkFetchAccounts, fetchContestParticipants } from '@helpers';
-import { selectContestUUID } from '@pages/Contest/selector';
+import {
+    selectContestStatus,
+    selectContestUUID,
+} from '@pages/Contest/selector';
 import constants from '@constants';
 import { keyBy as _keyBy } from 'lodash';
 import { fetchPendingParticipants } from './helpers';
@@ -24,6 +36,21 @@ function* init() {
     }
 }
 
+function* refresh() {
+    try {
+        yield call(fetchPendingParticipants);
+        yield put(
+            ContestPageSiderContentParticipantActiveContestPendingActions.refreshSuccess()
+        );
+    } catch (err) {
+        yield put(
+            ContestPageSiderContentParticipantActiveContestPendingActions.refreshFailure(
+                err
+            )
+        );
+    }
+}
+
 function* fetchData({ options = { page: 1, per_page: 10 } }: AnyAction) {
     try {
         const uuid = yield select(selectContestUUID);
@@ -37,10 +64,7 @@ function* fetchData({ options = { page: 1, per_page: 10 } }: AnyAction) {
             ({ user_uuid }: { user_uuid: string }) => user_uuid
         );
         if (accounts.length) {
-            const { data: accountParticipants } = yield call(
-                bulkFetchAccounts,
-                accounts
-            );
+            const accountParticipants = yield call(bulkFetchAccounts, accounts);
             const accountsHash = _keyBy(accountParticipants, 'membership_uuid');
             yield put(
                 ContestPageSiderContentParticipantActiveContestPendingActions.set(
@@ -63,6 +87,20 @@ function* fetchData({ options = { page: 1, per_page: 10 } }: AnyAction) {
     }
 }
 
+function* basePageRefresh() {
+    const { success } = yield race({
+        success: ContestPageTypes.REFRESH_SUCCESS,
+        failure: ContestPageTypes.REFRESH_FAILURE,
+    });
+    if (success) {
+        const status = yield select(selectContestStatus);
+        if (status === constants.STATUS.PENDING.KEY)
+            yield put(
+                ContestPageSiderContentParticipantActiveContestPendingActions.refresh()
+            );
+    }
+}
+
 export default function* ContestPageSiderContentParticipantActiveContestPendingSaga() {
     yield all([
         takeLatest(
@@ -70,8 +108,13 @@ export default function* ContestPageSiderContentParticipantActiveContestPendingS
             init
         ),
         takeLatest(
+            ContestPageSiderContentParticipantActiveContestPendingTypes.REFRESH,
+            refresh
+        ),
+        takeLatest(
             ContestPageSiderContentParticipantActiveContestPendingTypes.FETCH_DATA,
             fetchData
         ),
+        takeLatest(ContestPageTypes.REFRESH, basePageRefresh),
     ]);
 }

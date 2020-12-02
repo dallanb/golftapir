@@ -17,6 +17,7 @@ const ContestLeaderboardTableParticipant: React.FunctionComponent<ContestPartici
         uuid,
         useSelector(selectAccountsHash)
     );
+
     return (
         <div
             className="contest-leaderboard-table-participant"

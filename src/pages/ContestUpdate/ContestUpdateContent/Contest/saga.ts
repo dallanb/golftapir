@@ -12,7 +12,6 @@ import { assignContestAvatar, updateContest } from '@helpers';
 function* init() {
     try {
         const contest = yield select(selectContest);
-        console.log(contest);
         const initialValues = prepareInitialValues(contest);
         yield put(
             ContestUpdatePageContentContestActions.setInitialValues(

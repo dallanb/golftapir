@@ -13,8 +13,8 @@ export interface ContestProps extends RouteComponentProps {
 }
 
 export interface ContestPageInterface {
-    readonly isFetching: boolean;
     readonly isInitialized: boolean;
+    readonly isRefreshing: boolean;
     readonly err?: Error;
     readonly subscribed: boolean;
     readonly contest: any;
