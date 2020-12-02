@@ -33,6 +33,10 @@ const HeaderSubTitle: React.FunctionComponent<HeaderSubTitleProps> = () => {
                         contest
                     )
                 }
+                disabled={
+                    contest.status !== constants.STATUS.PENDING.KEY &&
+                    contest.status !== constants.STATUS.READY.KEY
+                }
                 className="update-button"
                 type="text"
             />
