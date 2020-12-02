@@ -12,7 +12,7 @@ import ContestPageActions, { ContestPageTypes } from '@pages/Contest/actions';
 import ContestPageSiderContentParticipantActiveContestPendingActions, {
     ContestPageSiderContentParticipantActiveContestPendingTypes,
 } from './actions';
-import { bulkFetchAccounts, fetchContestParticipants } from '@helpers';
+import { fetchContestParticipants } from '@helpers';
 import {
     selectContestStatus,
     selectContestUUID,
@@ -20,6 +20,7 @@ import {
 import constants from '@constants';
 import { keyBy as _keyBy } from 'lodash';
 import { fetchPendingParticipants } from './helpers';
+import { AccountService } from '@services';
 
 function* init() {
     try {
@@ -64,7 +65,11 @@ function* fetchData({ options = { page: 1, per_page: 10 } }: AnyAction) {
             ({ user_uuid }: { user_uuid: string }) => user_uuid
         );
         if (accounts.length) {
-            const accountParticipants = yield call(bulkFetchAccounts, accounts);
+            const { accounts: accountParticipants } = yield call(
+                AccountService.bulkFetchAccounts,
+                { within: { key: 'membership_uuid', value: accounts } },
+                { include: 'avatar' }
+            );
             const accountsHash = _keyBy(accountParticipants, 'membership_uuid');
             yield put(
                 ContestPageSiderContentParticipantActiveContestPendingActions.set(

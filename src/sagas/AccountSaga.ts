@@ -1,7 +1,6 @@
 import { AnyAction } from 'redux';
 import { all, call, fork, put, takeLatest } from 'redux-saga/effects';
 import { message } from 'antd';
-import { bulkFetchAccounts as bulkFetchAccountsHelper } from '@helpers';
 import AccountActions, { AccountTypes } from '@actions/AccountActions';
 import { AccountService } from '@services';
 import CONSTANTS from '@locale/en-CA';
@@ -78,9 +77,13 @@ function* searchAccounts({ key }: AnyAction) {
     }
 }
 
-function* bulkFetchAccounts({ accounts }: AnyAction) {
+function* bulkFetchAccounts({ within, options }: AnyAction) {
     try {
-        const bulkAccounts = yield call(bulkFetchAccountsHelper, accounts);
+        const bulkAccounts = yield call(
+            AccountService.bulkFetchAccounts,
+            { within },
+            options
+        );
         yield put(AccountActions.bulkFetchAccountsSuccess(bulkAccounts));
     } catch (err) {
         yield put(AccountActions.bulkFetchAccountsFailure(err));

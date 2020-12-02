@@ -4,7 +4,6 @@ import { message } from 'antd';
 import ContestActions, { ContestTypes } from '@actions/ContestActions';
 import { ContestService } from '@services';
 import CONSTANTS from '@locale/en-CA';
-import AccountActions from '@actions/AccountActions';
 import { assignContestAvatar } from '@helpers';
 
 function* fetchContest({ uuid, options }: AnyAction) {
@@ -95,7 +94,7 @@ function* updateContest({ uuid, data }: AnyAction) {
 
 function* assignAvatar({ uuid, avatar }: AnyAction) {
     try {
-        yield fork(ContestService.assignAvatar, uuid, avatar);
+        yield call(assignContestAvatar, uuid, avatar);
         yield put(ContestActions.assignAvatarSuccess());
     } catch (err) {
         yield put(ContestActions.assignAvatarFailure(err));

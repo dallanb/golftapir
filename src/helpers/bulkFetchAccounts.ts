@@ -1,16 +1,25 @@
-import { call } from 'redux-saga/effects';
-import { AccountService } from '@services';
+import { put, race, take } from 'redux-saga/effects';
+import { AccountActions, AccountTypes } from '@actions';
+import CONSTANTS from '@locale/en-CA';
 
 function* bulkFetchAccounts(accounts: string[]) {
-    const within = { key: 'membership_uuid', value: accounts };
-    const options = { include: 'avatar' };
-    const { accounts: bulkAccounts } = yield call(
-        AccountService.bulkFetchAccounts,
-        { within },
-        options
+    yield put(
+        AccountActions.bulkFetchAccounts(
+            { key: 'membership_uuid', value: accounts },
+            {
+                include: 'avatar',
+            }
+        )
     );
+    const { success, failure } = yield race({
+        success: take(AccountTypes.BULK_FETCH_ACCOUNTS_SUCCESS),
+        failure: take(AccountTypes.BULK_FETCH_ACCOUNTS_FAILURE),
+    });
+    if (failure) {
+        throw new Error(CONSTANTS.CONTEST.ERROR.FETCH);
+    }
 
-    return bulkAccounts;
+    return success;
 }
 
 export default bulkFetchAccounts;
