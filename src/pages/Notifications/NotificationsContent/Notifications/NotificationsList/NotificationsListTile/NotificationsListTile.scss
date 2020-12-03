@@ -1,12 +1,17 @@
 .notifications-list-tile-view {
-  display: flex;
-  .notifications-list-tile-content {
-    &.unread {
-      font-weight: bold;
+    display: flex;
+    .notifications-list-tile-content {
+        display: flex;
+        padding-bottom: 10px;
+        .notifications-list-tile-content-avatar {
+            margin-right: 10px;
+        }
+        .notifications-list-tile-content-message {
+            .unread {
+                font-weight: bold;
+            }
+        }
     }
-
-  }
-  .notifications-list-tile-button {
-
-  }
+    .notifications-list-tile-button {
+    }
 }
