@@ -37,7 +37,7 @@ function* submit({ data }: AnyAction) {
         const contestData = _omit(data, ['avatar']);
         const {
             contests: { uuid },
-            contest: result,
+            contests: result,
         } = yield call(ContestService.createContest, contestData);
         const avatarData = _pick(data, ['avatar']);
         if (!_isEmpty(avatarData)) {
