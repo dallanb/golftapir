@@ -1,10 +1,16 @@
 import { all, call, put, takeLatest } from 'redux-saga/effects';
 import AccountPageActions, { AccountPageTypes } from './actions';
-import { fetchMyAccount } from '@helpers';
+import { AccountService } from '@services';
 
 function* init() {
     try {
-        const { data: account } = yield call(fetchMyAccount);
+        const { accounts: account } = yield call(
+            AccountService.fetchAccount,
+            'me',
+            {
+                include: 'phone,address,avatar',
+            }
+        );
         yield put(AccountPageActions.set({ account }));
 
         yield put(AccountPageActions.initSuccess());

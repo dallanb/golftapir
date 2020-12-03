@@ -1,5 +1,6 @@
 import { AnyAction } from 'redux';
 import { all, call, fork, put, select, takeLatest } from 'redux-saga/effects';
+import { ContestService, NotificationService } from '@services';
 import ContestPageActions, { ContestPageTypes } from './actions';
 import { selectContest } from './selector';
 import {
@@ -8,11 +9,6 @@ import {
     initSubscribed,
     terminateSocket,
 } from './helpers';
-import {
-    updateContestParticipant,
-    subscribe as subscribeHelper,
-    unsubscribe as unsubscribeHelper,
-} from '@helpers';
 
 // Action Handlers
 function* preInit({ data: contest }: AnyAction) {
@@ -50,7 +46,7 @@ function* refresh() {
 
 function* subscribe({ uuid }: AnyAction) {
     try {
-        yield call(subscribeHelper, uuid);
+        yield call(NotificationService.subscribe, uuid);
         yield put(ContestPageActions.subscribeSuccess());
     } catch (err) {
         yield put(ContestPageActions.subscribeFailure());
@@ -59,7 +55,7 @@ function* subscribe({ uuid }: AnyAction) {
 
 function* unsubscribe({ uuid }: AnyAction) {
     try {
-        yield call(unsubscribeHelper, uuid);
+        yield call(NotificationService.unsubscribe, uuid);
         yield put(ContestPageActions.unsubscribeSuccess());
     } catch (err) {
         yield put(ContestPageActions.unsubscribeFailure());
@@ -68,7 +64,7 @@ function* unsubscribe({ uuid }: AnyAction) {
 
 function* updateContestParticipantStatus({ uuid, status }: AnyAction) {
     try {
-        yield call(updateContestParticipant, uuid, {
+        yield call(ContestService.updateContestParticipant, uuid, {
             status,
         });
         yield put(

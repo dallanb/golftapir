@@ -3,7 +3,7 @@ import constants from '@constants';
 
 const routes = [
     {
-        path: constants.ROUTES.COMPETITORS,
+        path: constants.ROUTES.COMPETITORS.ROUTE,
         component: Competitors,
         exact: true,
     },

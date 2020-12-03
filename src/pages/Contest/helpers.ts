@@ -1,19 +1,17 @@
 import { call, put } from 'redux-saga/effects';
 import { keyBy as _keyBy } from 'lodash';
 import { TopicSocketActions } from '@actions';
-import {
-    bulkFetchAccounts,
-    fetchContestMaterialized,
-    fetchContestParticipantUser,
-    subscriptionExists,
-} from '@helpers';
+import { AccountService, ContestService, NotificationService } from '@services';
 import ContestPageActions from './actions';
 import { socketEventHandlers } from './utils';
 
 export function* initContest(uuid: string) {
-    const { data: contest } = yield call(fetchContestMaterialized, uuid);
-    const { data: participant } = yield call(
-        fetchContestParticipantUser,
+    const { contests: contest } = yield call(
+        ContestService.fetchContestMaterialized,
+        uuid
+    );
+    const { participants: participant } = yield call(
+        ContestService.fetchContestParticipantUser,
         uuid,
         'me'
     );
@@ -25,9 +23,10 @@ export function* initContest(uuid: string) {
     const accounts = Object.keys(participants);
 
     if (accounts.length) {
-        const { data: accountParticipants } = yield call(
-            bulkFetchAccounts,
-            accounts
+        const { accounts: accountParticipants } = yield call(
+            AccountService.bulkFetchAccounts,
+            { within: { key: 'membership_uuid', value: accounts } },
+            { include: 'avatar' }
         );
         const accountsHash = _keyBy(accountParticipants, 'membership_uuid');
         yield put(ContestPageActions.set({ accountsHash }));
@@ -35,7 +34,9 @@ export function* initContest(uuid: string) {
 }
 
 export function* initSubscribed(uuid: string) {
-    const { subscribed } = yield call(subscriptionExists, uuid);
+    const { subscribed } = yield call(NotificationService.subscriptionExists, {
+        uuid,
+    });
     yield put(ContestPageActions.set({ subscribed }));
 }
 

@@ -23,7 +23,7 @@ const Avatar: React.FunctionComponent<AvatarProps> = ({
         props['src'] = src;
     } else {
         props['style'] = {
-            backgroundColor: randomColourGenerator(),
+            backgroundColor: randomColourGenerator(name),
             verticalAlign: 'middle',
         };
         child = getInitials(name);
@@ -31,4 +31,4 @@ const Avatar: React.FunctionComponent<AvatarProps> = ({
     return <AntdAvatar {...props}>{child}</AntdAvatar>;
 };
 
-export default Avatar;
+export default React.memo(Avatar);

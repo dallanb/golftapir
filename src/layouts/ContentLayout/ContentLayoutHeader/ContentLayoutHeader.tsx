@@ -23,7 +23,7 @@ const ContentLayoutHeader: React.FunctionComponent<ContentLayoutHeaderProps> = (
             avatarProps['src'] = avatar.src;
         } else {
             avatarProps['style'] = {
-                backgroundColor: randomColourGenerator(),
+                backgroundColor: randomColourGenerator(avatar.name),
                 verticalAlign: 'middle',
             };
             avatarProps['children'] = getInitials(avatar.name);
@@ -35,7 +35,7 @@ const ContentLayoutHeader: React.FunctionComponent<ContentLayoutHeaderProps> = (
         <PageHeader
             title={title}
             subTitle={subTitle}
-            avatar={avatar && renderAvatar(avatar)}
+            avatar={renderAvatar(avatar)}
             tags={tags}
             extra={extra}
             className="content-layout-header"
@@ -43,4 +43,4 @@ const ContentLayoutHeader: React.FunctionComponent<ContentLayoutHeaderProps> = (
     );
 };
 
-export default ContentLayoutHeader;
+export default React.memo(ContentLayoutHeader);

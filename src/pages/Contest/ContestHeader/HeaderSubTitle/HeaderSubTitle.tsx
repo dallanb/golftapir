@@ -28,9 +28,14 @@ const HeaderSubTitle: React.FunctionComponent<HeaderSubTitleProps> = () => {
             <Button
                 icon={<EditOutlined />}
                 onClick={() =>
-                    history.push(`/app${constants.ROUTES.CONTEST_UPDATE}`, {
-                        contest,
-                    })
+                    history.push(
+                        `/app${constants.ROUTES.CONTEST_UPDATE.ROUTE}`,
+                        contest
+                    )
+                }
+                disabled={
+                    contest.status !== constants.STATUS.PENDING.KEY &&
+                    contest.status !== constants.STATUS.READY.KEY
                 }
                 className="update-button"
                 type="text"

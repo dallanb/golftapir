@@ -3,7 +3,7 @@ import constants from '@constants';
 
 const routes = [
     {
-        path: constants.ROUTES.LOGOUT,
+        path: constants.ROUTES.LOGOUT.ROUTE,
         component: Logout,
     },
 ];

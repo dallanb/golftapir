@@ -1,13 +1,13 @@
 import { AnyAction } from 'redux';
 import { all, call, put, select, takeLatest } from 'redux-saga/effects';
 import { isEmpty as _isEmpty, omit as _omit, pick as _pick } from 'lodash';
+import { ContestService } from '@services';
 import ContestUpdatePageContentContestActions, {
     ContestUpdatePageContentContestTypes,
 } from './actions';
 import { prepareInitialValues } from './utils';
 import { selectUUID } from './selector';
 import { selectContest } from '@pages/ContestUpdate/selector';
-import { assignContestAvatar, updateContest } from '@helpers';
 
 function* init() {
     try {
@@ -30,11 +30,11 @@ function* submit({ data }: AnyAction) {
         const uuid = yield select(selectUUID);
         const contestData = _omit(data, ['avatar']);
         if (!_isEmpty(contestData)) {
-            yield call(updateContest, uuid, contestData);
+            yield call(ContestService.updateContest, uuid, contestData);
         }
         const avatarData = _pick(data, ['avatar']);
         if (!_isEmpty(avatarData)) {
-            yield call(assignContestAvatar, uuid, avatarData.avatar);
+            yield call(ContestService.assignAvatar, uuid, avatarData.avatar);
         }
         yield put(ContestUpdatePageContentContestActions.submitSuccess());
     } catch (err) {

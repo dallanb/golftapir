@@ -79,13 +79,12 @@ function* searchAccounts({ key }: AnyAction) {
 
 function* bulkFetchAccounts({ within, options }: AnyAction) {
     try {
-        const res = yield call(
+        const bulkAccounts = yield call(
             AccountService.bulkFetchAccounts,
             { within },
             options
         );
-        const { accounts } = res;
-        yield put(AccountActions.bulkFetchAccountsSuccess(accounts));
+        yield put(AccountActions.bulkFetchAccountsSuccess(bulkAccounts));
     } catch (err) {
         yield put(AccountActions.bulkFetchAccountsFailure(err));
         message.error(CONSTANTS.ACCOUNT.ERROR.BULK_FETCH_ALL);

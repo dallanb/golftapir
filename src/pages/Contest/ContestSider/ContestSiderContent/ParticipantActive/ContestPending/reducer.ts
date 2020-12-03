@@ -7,6 +7,7 @@ import { ContestPageSiderContentParticipantActiveContestPendingInterface } from 
 /* ------------- Initial State ------------- */
 const INITIAL_STATE: ContestPageSiderContentParticipantActiveContestPendingInterface = {
     isFetching: false,
+    isRefreshing: false,
     isInitialized: false,
     err: undefined,
     data: undefined,
@@ -40,6 +41,26 @@ function initFailure(state: any, { err }: any) {
 
 function terminate() {
     return INITIAL_STATE;
+}
+
+function refresh(state = INITIAL_STATE) {
+    return Immutable.merge(state, {
+        isRefreshing: true,
+        err: null,
+    });
+}
+
+function refreshSuccess(state = INITIAL_STATE) {
+    return Immutable.merge(state, {
+        isRefreshing: false,
+    });
+}
+
+function refreshFailure(state: any, { err }: any) {
+    return Immutable.merge(state, {
+        isRefreshing: false,
+        err,
+    });
 }
 
 function set(state: any, { data }: any) {
@@ -78,6 +99,9 @@ const HANDLERS = {
     [ContestPageSiderContentParticipantActiveContestPendingTypes.INIT_SUCCESS]: initSuccess,
     [ContestPageSiderContentParticipantActiveContestPendingTypes.INIT_FAILURE]: initFailure,
     [ContestPageSiderContentParticipantActiveContestPendingTypes.TERMINATE]: terminate,
+    [ContestPageSiderContentParticipantActiveContestPendingTypes.REFRESH]: refresh,
+    [ContestPageSiderContentParticipantActiveContestPendingTypes.REFRESH_SUCCESS]: refreshSuccess,
+    [ContestPageSiderContentParticipantActiveContestPendingTypes.REFRESH_FAILURE]: refreshFailure,
     [ContestPageSiderContentParticipantActiveContestPendingTypes.SET]: set,
     [ContestPageSiderContentParticipantActiveContestPendingTypes.FETCH_DATA]: fetchData,
     [ContestPageSiderContentParticipantActiveContestPendingTypes.FETCH_DATA_SUCCESS]: fetchDataSuccess,

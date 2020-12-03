@@ -14,7 +14,7 @@ const ContestsListTile: React.FunctionComponent<ContestsListTileProps> = ({
 }) => {
     const item = _get(data, [index], undefined);
     const handleClick = (options: any) => {
-        history.push(`/app${constants.ROUTES.CONTEST}`, options);
+        history.push(`/app${constants.ROUTES.CONTEST.ROUTE}`, options);
     };
 
     const uuid = _get(item, ['uuid'], undefined);

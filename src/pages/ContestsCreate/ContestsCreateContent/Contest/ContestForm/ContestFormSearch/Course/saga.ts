@@ -1,16 +1,19 @@
 import { AnyAction } from 'redux';
 import { all, call, put, takeLatest } from 'redux-saga/effects';
-import { searchCourses } from '@helpers';
+import { CourseService } from '@services';
 import ContestsCreatePageContentContestSearchCourseActions, {
     ContestsCreatePageContentContestSearchCourseTypes,
 } from './actions';
 
 function* search({ key }: AnyAction) {
     try {
-        const { data } = yield call(searchCourses, key);
+        const { courses } = yield call(CourseService.searchCourses, {
+            key,
+            fields: 'name',
+        });
         yield put(
             ContestsCreatePageContentContestSearchCourseActions.searchSuccess(
-                data
+                courses
             )
         );
     } catch (err) {

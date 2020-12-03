@@ -13,13 +13,13 @@ const topicToRouteMapper = (
     const routes = constants.ROUTES;
     switch (topic) {
         case constants.TOPICS.AUTH:
-            mapping.route += routes.AUTH;
+            mapping.route += routes.AUTH.ROUTE;
             break;
         case constants.TOPICS.ACCOUNTS:
-            mapping.route += routes.ACCOUNT;
+            mapping.route += routes.ACCOUNT.ROUTE;
             break;
         case constants.TOPICS.CONTESTS:
-            mapping.route += routes.CONTEST;
+            mapping.route += routes.CONTEST.ROUTE;
             switch (key) {
                 case constants.EVENTS.CONTESTS.PARTICIPANT_INVITED:
                 case constants.EVENTS.CONTESTS.PARTICIPANT_ACTIVE:

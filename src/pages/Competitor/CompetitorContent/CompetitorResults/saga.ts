@@ -1,10 +1,10 @@
 import { AnyAction } from 'redux';
 import { all, call, put, select, takeLatest } from 'redux-saga/effects';
 import { get as _get } from 'lodash';
+import { ContestService } from '@services';
 import CompetitorPageContentCompetitorResultsActions, {
     CompetitorPageContentCompetitorResultsTypes,
 } from './actions';
-import { fetchContestsMaterialized } from '@helpers';
 import { fetchCompetitorResults } from './helpers';
 import { selectData } from '@pages/Competitor/selector';
 
@@ -33,13 +33,16 @@ function* fetchData({
             ['account', 'membership_uuid'],
             null
         );
-        const { data, metadata } = yield call(fetchContestsMaterialized, {
-            ...options,
-            participants: membership_uuid,
-        });
+        const { contests, _metadata: metadata } = yield call(
+            ContestService.fetchContestsMaterialized,
+            {
+                ...options,
+                participants: membership_uuid,
+            }
+        );
         yield put(
             CompetitorPageContentCompetitorResultsActions.fetchDataSuccess(
-                data,
+                contests,
                 metadata
             )
         );

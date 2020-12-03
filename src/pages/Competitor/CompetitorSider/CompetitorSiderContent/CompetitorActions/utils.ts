@@ -9,7 +9,7 @@ export const generateActions = (uuid?: string) => {
         actions.push({
             key: constants.ACTION.CHALLENGE.KEY,
             onClick: () =>
-                history.push(`/app${constants.ROUTES.CONTESTS_CREATE}`, {
+                history.push(`/app${constants.ROUTES.CONTESTS_CREATE.ROUTE}`, {
                     participant_uuid: uuid,
                 }),
         });

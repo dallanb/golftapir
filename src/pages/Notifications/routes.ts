@@ -3,7 +3,7 @@ import constants from '@constants';
 
 const routes = [
     {
-        path: constants.ROUTES.NOTIFICATION,
+        path: constants.ROUTES.NOTIFICATION.ROUTE,
         component: Notifications,
         exact: true,
     },

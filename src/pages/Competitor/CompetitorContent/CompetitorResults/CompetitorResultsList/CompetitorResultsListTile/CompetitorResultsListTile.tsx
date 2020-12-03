@@ -12,8 +12,8 @@ const CompetitorResultsListTile: React.FunctionComponent<CompetitorResultsListTi
     history,
 }) => {
     const item = _get(data, [index], undefined);
-    const handleClick = (options: { uuid: string; name: string }) => {
-        history.push(`/app${constants.ROUTES.CONTEST}`, options);
+    const handleClick = (options: any) => {
+        history.push(`/app${constants.ROUTES.CONTEST.ROUTE}`, options);
     };
 
     const name = _get(item, ['name'], 'Loading...');
@@ -42,11 +42,7 @@ const CompetitorResultsListTile: React.FunctionComponent<CompetitorResultsListTi
                 </div>
             </div>
             <div className="competitor-results-list-tile-button">
-                <Button
-                    onClick={() => handleClick(_pick(item, ['uuid', 'name']))}
-                >
-                    View
-                </Button>
+                <Button onClick={() => handleClick(item)}>View</Button>
             </div>
         </Card>
     );
