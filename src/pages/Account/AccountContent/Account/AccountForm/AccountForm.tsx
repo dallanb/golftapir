@@ -14,10 +14,12 @@ import './AccountForm.scss';
 const AccountForm: React.FunctionComponent<AccountFormProps> = () => {
     const dispatch = useDispatch();
     const { initialValues } = useSelector(selectAccountFormData);
-    const { account } = useSelector(selectAccount);
+    const account = useSelector(selectAccount);
 
     const handleSubmit = (values: FormikValues) => {
         const { first_name, last_name, address, phone, avatar } = values;
+        console.log(avatar);
+        console.log(account);
         if (!_isEqual(avatar, account.avatar)) {
             dispatch(AccountActions.assignAvatar('me', avatar)); // TODO: Should this be moved to a local call?
         }
