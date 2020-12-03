@@ -28,7 +28,7 @@ const Account: React.FunctionComponent<AccountProps> = () => {
             content={<AccountContent />}
             sider={<AccountSider />}
             // showSpinner={!isInitialized}
-            className="competitor-view"
+            className="account-view"
         />
     );
 };
