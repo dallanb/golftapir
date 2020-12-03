@@ -1,31 +1,42 @@
 .contest-list-tile-view {
-    display: flex;
+    padding: 5px 0;
 
-    .ant-card-body {
-        width: 100%;
-    }
-
-    .contest-list-tile-content {
+    .contest-list-tile-card {
         display: flex;
-        padding-bottom: 10px;
+        cursor: pointer;
+        height: 100%;
 
-        .contest-list-tile-content-avatar {
-            margin-right: 10px;
+        &:hover {
+            background: #dadde2;
+            opacity: 0.3;
         }
 
-        .contest-list-tile-content-info {
-            .contest-list-tile-content-name {
+        .ant-card-body {
+            width: 100%;
+        }
+
+        .contest-list-tile-content {
+            display: flex;
+            padding-bottom: 10px;
+
+            .contest-list-tile-content-avatar {
+                margin-right: 10px;
             }
 
-            .contest-list-tile-content-status {
+            .contest-list-tile-content-info {
+                .contest-list-tile-content-name {
+                }
+
+                .contest-list-tile-content-status {
+                }
+            }
+
+            .contest-list-tile-content-leaderboard {
+                margin-left: auto;
             }
         }
 
-        .contest-list-tile-content-leaderboard {
-            margin-left: auto;
+        .contest-list-tile-button {
         }
-    }
-
-    .contest-list-tile-button {
     }
 }

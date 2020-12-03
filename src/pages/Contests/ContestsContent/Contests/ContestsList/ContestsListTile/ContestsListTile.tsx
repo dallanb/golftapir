@@ -26,30 +26,40 @@ const ContestsListTile: React.FunctionComponent<ContestsListTileProps> = ({
     const participants = _get(item, ['participants'], {});
 
     return (
-        <Card style={style} key={index} className="contest-list-tile-view">
-            <div className="contest-list-tile-content">
-                <div className="contest-list-tile-content-avatar">
-                    <Avatar src={src} name={name} size={48} />
-                </div>
-                <div className="contest-list-tile-content-info">
-                    <div className="contest-list-tile-content-name">{name}</div>
-                    <div className="contest-list-tile-content-status">
-                        <Badge color={mapStatusColour(status)} text={status} />
+        <div key={index} style={style} className="contest-list-tile-view">
+            <Card
+                className="contest-list-tile-card"
+                onClick={() => handleClick(item)}
+            >
+                <div className="contest-list-tile-content">
+                    <div className="contest-list-tile-content-avatar">
+                        <Avatar src={src} name={name} size={48} />
+                    </div>
+                    <div className="contest-list-tile-content-info">
+                        <div className="contest-list-tile-content-name">
+                            {name}
+                        </div>
+                        <div className="contest-list-tile-content-status">
+                            <Badge
+                                color={mapStatusColour(status)}
+                                text={status}
+                            />
+                        </div>
+                    </div>
+                    <div className="contest-list-tile-content-leaderboard">
+                        <ContestsListTileLeaderboard
+                            status={status}
+                            participants={Object.values(participants)}
+                        />
                     </div>
                 </div>
-                <div className="contest-list-tile-content-leaderboard">
-                    <ContestsListTileLeaderboard
-                        status={status}
-                        participants={Object.values(participants)}
-                    />
-                </div>
-            </div>
-            <div className="contest-list-tile-button">
-                <Button onClick={() => handleClick(item)} disabled={!uuid}>
-                    View
-                </Button>
-            </div>
-        </Card>
+                {/*<div className="contest-list-tile-button">*/}
+                {/*    <Button onClick={() => handleClick(item)} disabled={!uuid}>*/}
+                {/*        View*/}
+                {/*    </Button>*/}
+                {/*</div>*/}
+            </Card>
+        </div>
     );
 };
 
