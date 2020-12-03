@@ -130,6 +130,10 @@ const constants = {
             AVATAR: '/contest/avatars/',
         },
     },
+    AVATAR: {
+        WIDTH: 256,
+        HEIGHT: 256,
+    },
 };
 
 export default constants;
