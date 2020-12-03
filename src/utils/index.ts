@@ -6,6 +6,7 @@ export { default as getRouteBase } from './getRouteBase';
 export { default as mapActionColour } from './mapActionColour';
 export { default as mapActionLabel } from './mapActionLabel';
 export { default as mapStatusColour } from './mapStatusColour';
+export { default as normalizeImage } from './normalizeImage';
 export { default as randomColourGenerator } from './randomColourGenerator';
 export { default as searchSelectTagRenderer } from './searchSelectTagRenderer';
 export { default as scrollbarWidth } from './scrollbarWidth';

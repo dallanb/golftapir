@@ -7,6 +7,7 @@ import { antdFormatName, mapCountryOptions } from './utils';
 import { FieldRendererProps } from './types';
 import { DateTimePicker } from '@components';
 import moment, { Moment } from 'moment';
+import { normalizeImage } from '@utils';
 
 let defaultFieldRenderer: FieldRendererProps;
 
@@ -104,8 +105,11 @@ defaultFieldRenderer = (schema, formik) => {
                         key={name}
                         name={name}
                         ref={fieldRef}
+                        beforeUpload={() => false}
                         onChange={(info) =>
-                            formik.setFieldValue(name, info.file.originFileObj)
+                            normalizeImage(info.file).then((image) =>
+                                formik.setFieldValue(name, image)
+                            )
                         }
                     >
                         <Button icon={<UploadOutlined />}>Upload</Button>
