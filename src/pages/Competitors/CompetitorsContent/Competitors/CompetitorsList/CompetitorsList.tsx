@@ -1,4 +1,4 @@
-import React, { ReactText } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { CompetitorsListProps } from './types';
@@ -11,7 +11,6 @@ import {
 } from '../selector';
 import CompetitorsListTile from './CompetitorsListTile';
 import './CompetitorsList.scss';
-import {} from '@pages/Contests/ContestsContent/Contests/selector';
 import { getRefHeight } from '@utils';
 
 const CompetitorsList: React.FunctionComponent<CompetitorsListProps> = ({
@@ -23,7 +22,7 @@ const CompetitorsList: React.FunctionComponent<CompetitorsListProps> = ({
     const metadata = useSelector(selectListMetadata);
     const isFetching = useSelector(selectListIsFetching);
     const tableDimensions = {
-        size: 150,
+        size: 100,
         width: '100%',
         height: getRefHeight(containerRef, 200) - 32,
     };

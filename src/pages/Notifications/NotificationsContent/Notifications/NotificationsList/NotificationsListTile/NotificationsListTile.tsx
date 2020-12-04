@@ -28,23 +28,22 @@ const NotificationsListTile: React.FunctionComponent<NotificationsListTileProps>
     });
 
     return (
-        <Card
-            style={style}
-            key={index}
-            className="notifications-list-tile-view"
-        >
-            <div className="notifications-list-tile-content">
-                <div className="notifications-list-tile-content-avatar">
-                    <Avatar src={src} name="" size={48} />
+        <div style={style} key={index} className="notifications-list-tile-view">
+            <Card
+                bordered={false}
+                onClick={() => onClick(item)}
+                className="notifications-list-tile-card"
+            >
+                <div className="notifications-list-tile-content">
+                    <div className="notifications-list-tile-content-avatar">
+                        <Avatar src={src} name="" size={48} />
+                    </div>
+                    <div className="notifications-list-tile-content-message">
+                        {renderMessage(item)}
+                    </div>
                 </div>
-                <div className="notifications-list-tile-content-message">
-                    {renderMessage(item)}
-                </div>
-            </div>
-            <div className="notifications-list-tile-button">
-                <Button onClick={() => onClick(item)}>View</Button>
-            </div>
-        </Card>
+            </Card>
+        </div>
     );
 };
 

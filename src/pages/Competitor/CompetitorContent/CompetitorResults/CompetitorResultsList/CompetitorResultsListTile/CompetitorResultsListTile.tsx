@@ -23,28 +23,34 @@ const CompetitorResultsListTile: React.FunctionComponent<CompetitorResultsListTi
     const status = _get(item, ['status'], undefined);
 
     return (
-        <Card
-            style={style}
+        <div
             key={index}
+            style={style}
             className="competitor-results-list-tile-view"
         >
-            <div className="competitor-results-list-tile-content">
-                <div className="competitor-results-list-tile-content-avatar">
-                    <Avatar src={src} name={name} size={48} />
-                </div>
-                <div className="competitor-results-list-tile-content-info">
-                    <div className="competitor-results-list-tile-content-name">
-                        {name}
+            <Card
+                bordered={false}
+                className="competitor-results-list-tile-card"
+                onClick={() => handleClick(item)}
+            >
+                <div className="competitor-results-list-tile-content">
+                    <div className="competitor-results-list-tile-content-avatar">
+                        <Avatar src={src} name={name} size={48} />
                     </div>
-                    <div className="competitor-results-list-tile-content-status">
-                        <Badge color={mapStatusColour(status)} text={status} />
+                    <div className="competitor-results-list-tile-content-info">
+                        <div className="competitor-results-list-tile-content-name">
+                            {name}
+                        </div>
+                        <div className="competitor-results-list-tile-content-status">
+                            <Badge
+                                color={mapStatusColour(status)}
+                                text={status}
+                            />
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div className="competitor-results-list-tile-button">
-                <Button onClick={() => handleClick(item)}>View</Button>
-            </div>
-        </Card>
+            </Card>
+        </div>
     );
 };
 

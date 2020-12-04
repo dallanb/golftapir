@@ -22,7 +22,7 @@ const NotificationsList: React.FunctionComponent<NotificationsListProps> = ({
     const metadata = useSelector(selectListMetadata);
     const isFetching = useSelector(selectListIsFetching);
     const tableDimensions = {
-        size: 150,
+        size: 100,
         width: '100%',
         height: getRefHeight(containerRef, 200) - 32,
     };

@@ -1,4 +1,4 @@
-import React, { ReactText } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { CompetitorResultsListProps } from './types';
@@ -16,7 +16,7 @@ const CompetitorResultsList: React.FunctionComponent<CompetitorResultsListProps>
     const isFetching = useSelector(selectListIsFetching);
 
     const tableDimensions = {
-        size: 150,
+        size: 100,
         width: '100%',
         height: getRefHeight(containerRef, 200) - 32,
     };
