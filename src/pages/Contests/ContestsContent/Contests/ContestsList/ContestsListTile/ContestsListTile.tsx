@@ -28,6 +28,7 @@ const ContestsListTile: React.FunctionComponent<ContestsListTileProps> = ({
     return (
         <div key={index} style={style} className="contest-list-tile-view">
             <Card
+                bordered={false}
                 className="contest-list-tile-card"
                 onClick={() => handleClick(item)}
             >
