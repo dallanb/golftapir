@@ -13,6 +13,7 @@ const INITIAL_STATE: ContestPageInterface = {
     subscribed: false,
     contest: undefined,
     accountsHash: undefined,
+    rankingLookup: undefined,
 };
 
 /* ------------- Reducers ------------- */
@@ -79,21 +80,21 @@ function unsubscribeSuccess(state = INITIAL_STATE) {
     });
 }
 
-function updateContestParticipantScore(
-    state = INITIAL_STATE,
-    { participant, strokes, score }: any
-) {
-    const participants = Object.assign({}, state.contest.participants, {
-        [participant]: {
-            ...state.contest.participants[participant],
-            score,
-            strokes,
-        },
-    });
-    return Immutable.merge(state, {
-        contest: { ...state.contest, participants },
-    });
-}
+// function updateContestParticipantScore(
+//     state = INITIAL_STATE,
+//     { participant, strokes, score }: any
+// ) {
+//     const participants = Object.assign({}, state.contest.participants, {
+//         [participant]: {
+//             ...state.contest.participants[participant],
+//             score,
+//             strokes,
+//         },
+//     });
+//     return Immutable.merge(state, {
+//         contest: { ...state.contest, participants },
+//     });
+// }
 
 const HANDLERS = {
     [ContestPageTypes.INIT]: init,
@@ -106,7 +107,7 @@ const HANDLERS = {
     [ContestPageTypes.SET]: set,
     [ContestPageTypes.SUBSCRIBE_SUCCESS]: subscribeSuccess,
     [ContestPageTypes.UNSUBSCRIBE_SUCCESS]: unsubscribeSuccess,
-    [ContestPageTypes.UPDATE_CONTEST_PARTICIPANT_SCORE]: updateContestParticipantScore,
+    // [ContestPageTypes.UPDATE_CONTEST_PARTICIPANT_SCORE]: updateContestParticipantScore,
 };
 
 export const reducer = createReducer(INITIAL_STATE, HANDLERS);

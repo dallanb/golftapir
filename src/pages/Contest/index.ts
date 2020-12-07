@@ -13,7 +13,7 @@ export const reducer = combineReducers({
     data: dataReducer,
 });
 // Saga
-export { default as ContestPageSaga } from './saga';
+export { ContestPageSaga, ContestScoreChannel } from './saga';
 export {
     ContestPageSiderContentParticipantActiveContestActiveSaga,
     ContestPageSiderContentParticipantActiveContestPendingSaga,

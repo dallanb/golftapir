@@ -85,3 +85,8 @@ export const selectMyParticipantStatus = createSelector(
     [getContestPage],
     (contestPage) => _get(contestPage, ['participant', 'status'], undefined)
 );
+
+export const selectRankingLookup = createSelector(
+    [getContestPage],
+    (contestPage) => _get(contestPage, ['rankingLookup'], undefined)
+);

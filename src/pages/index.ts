@@ -25,6 +25,7 @@ export {
     default as Contest,
     reducer as contestPage,
     ContestPageSaga,
+    ContestScoreChannel,
     ContestPageSiderContentParticipantActiveContestActiveSaga,
     ContestPageSiderContentParticipantActiveContestPendingSaga,
     ContestPageRoutes,

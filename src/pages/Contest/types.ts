@@ -19,4 +19,5 @@ export interface ContestPageInterface {
     readonly subscribed: boolean;
     readonly contest: any;
     readonly accountsHash: any;
+    readonly rankingLookup: any;
 }
