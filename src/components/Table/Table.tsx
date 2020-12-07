@@ -1,5 +1,6 @@
 import React from 'react';
-import { useTable, useBlockLayout } from 'react-table';
+import { useTable, useBlockLayout, useSortBy } from 'react-table';
+import { DownOutlined, UpOutlined } from '@ant-design/icons';
 import { TableProps } from './types';
 import { List } from '@components';
 import defaultRowRenderer from './defaultRowRenderer';
@@ -22,8 +23,21 @@ const Table: React.FunctionComponent<TableProps> = ({
             data: items,
             columns: columnsSchema,
         },
-        useBlockLayout
+        useBlockLayout,
+        useSortBy
     );
+
+    const renderSortButtons = (column: any) => {
+        if (column.isSorted) {
+            if (column.isSortedDesc) {
+                return <UpOutlined />;
+            } else {
+                return <DownOutlined />;
+            }
+        }
+        return '';
+    };
+
     return (
         <div {...getTableProps()} className="table">
             <div>
@@ -40,9 +54,13 @@ const Table: React.FunctionComponent<TableProps> = ({
                                     className: column.className
                                         ? `th ${column.className}`
                                         : 'th',
+                                    ...column.getSortByToggleProps(),
                                 })}
                             >
                                 {column.render('Header')}
+                                <span className="table-head-sort">
+                                    {renderSortButtons(column)}
+                                </span>
                             </div>
                         ))}
                     </div>
