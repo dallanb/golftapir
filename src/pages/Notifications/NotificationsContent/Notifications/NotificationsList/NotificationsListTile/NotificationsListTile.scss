@@ -1,17 +1,29 @@
 .notifications-list-tile-view {
-    display: flex;
-    .notifications-list-tile-content {
+    padding: 5px 0;
+
+    .notifications-list-tile-card {
         display: flex;
-        padding-bottom: 10px;
-        .notifications-list-tile-content-avatar {
-            margin-right: 10px;
+        cursor: pointer;
+        height: 100%;
+
+        &:hover {
+            background: #dadde2;
+            opacity: 0.95;
         }
-        .notifications-list-tile-content-message {
-            .unread {
-                font-weight: bold;
+        display: flex;
+        .notifications-list-tile-content {
+            display: flex;
+            padding-bottom: 10px;
+            .notifications-list-tile-content-avatar {
+                margin-right: 10px;
+            }
+            .notifications-list-tile-content-message {
+                .unread {
+                    font-weight: bold;
+                }
             }
         }
-    }
-    .notifications-list-tile-button {
+        .notifications-list-tile-button {
+        }
     }
 }

@@ -1,31 +1,40 @@
 .competitor-results-list-tile-view {
-  display: flex;
+    padding: 5px 0;
+    .competitor-results-list-tile-card {
+        display: flex;
+        cursor: pointer;
+        height: 100%;
 
-  .ant-card-body {
-    width: 100%;
-  }
+        &:hover {
+            background: #dadde2;
+            opacity: 0.95;
+        }
+        .ant-card-body {
+            width: 100%;
+        }
 
-  .competitor-results-list-tile-content {
-    display: flex;
-    padding-bottom: 10px;
+        .competitor-results-list-tile-content {
+            display: flex;
+            padding-bottom: 10px;
 
-    .competitor-results-list-tile-content-avatar {
-      margin-right: 10px;
+            .competitor-results-list-tile-content-avatar {
+                margin-right: 10px;
+            }
+
+            .competitor-results-list-tile-content-info {
+                .competitor-results-list-tile-content-name {
+                }
+
+                .competitor-results-list-tile-content-status {
+                }
+            }
+
+            .competitor-results-list-tile-content-leaderboard {
+                margin-left: auto;
+            }
+        }
+
+        .competitor-results-list-tile-button {
+        }
     }
-
-    .competitor-results-list-tile-content-info {
-      .competitor-results-list-tile-content-name {
-      }
-
-      .competitor-results-list-tile-content-status {
-      }
-    }
-
-    .competitor-results-list-tile-content-leaderboard {
-      margin-left: auto;
-    }
-  }
-
-  .competitor-results-list-tile-button {
-  }
 }
