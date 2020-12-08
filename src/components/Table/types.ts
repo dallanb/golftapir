@@ -4,6 +4,7 @@ import { ListChildComponentProps } from 'react-window';
 export interface TableProps {
     rowRenderer?: React.FunctionComponent<RowRendererProps>;
     columnsSchema: any;
+    initialState?: any;
     size: number;
     height?: number;
     hasNextPage: boolean;

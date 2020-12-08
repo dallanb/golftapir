@@ -9,6 +9,7 @@ import './Table.scss';
 const Table: React.FunctionComponent<TableProps> = ({
     items,
     columnsSchema,
+    initialState,
     rowRenderer = defaultRowRenderer,
     ...restProps
 }) => {
@@ -22,6 +23,7 @@ const Table: React.FunctionComponent<TableProps> = ({
         {
             data: items,
             columns: columnsSchema,
+            initialState,
         },
         useBlockLayout,
         useSortBy

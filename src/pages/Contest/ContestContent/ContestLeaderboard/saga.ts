@@ -1,4 +1,3 @@
-import { AnyAction } from 'redux';
 import { buffers, channel } from 'redux-saga';
 import {
     actionChannel,
@@ -13,10 +12,7 @@ import ContestPageContentContestLeaderboardActions, {
     ContestPageContentContestLeaderboardTypes,
 } from './actions';
 import { ContestPageTypes } from '@pages/Contest/actions';
-import {
-    selectContest,
-    selectContestParticipants,
-} from '@pages/Contest/selector';
+import { selectContestParticipants } from '@pages/Contest/selector';
 import { initLookup, handleScoreUpdate } from './utils';
 import {
     selectIsInitialized,

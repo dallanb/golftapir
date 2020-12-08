@@ -14,7 +14,9 @@ const ContestLeaderboardTable: React.FunctionComponent<ContestLeaderboardTablePr
         const rank = _get(rankingLookup, [participant.score], undefined);
         return Object.assign({}, participant, { uuid }, rank);
     });
-    console.log(items);
+    const initialState = {
+        sortBy: [{ id: 'rank' }],
+    };
     // TODO: MAKE THIS REFACTORED LIKE THE REST OF THE LIST COMPONENTS
     const loadTableDimensions = (
         items: any[]
@@ -36,6 +38,7 @@ const ContestLeaderboardTable: React.FunctionComponent<ContestLeaderboardTablePr
                     isNextPageLoading={false}
                     minimumBatchSize={10}
                     columnsSchema={columnsSchema}
+                    initialState={initialState}
                 />
             </div>
         </div>
