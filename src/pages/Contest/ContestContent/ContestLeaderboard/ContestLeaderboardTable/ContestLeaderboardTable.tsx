@@ -1,4 +1,4 @@
-import React, { ReactElement, ReactText } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import { get as _get } from 'lodash';
 import { ContestLeaderboardTableProps } from './types';

@@ -154,18 +154,20 @@ const _oldScore = (lookup: any, score: number) => {
     }
 };
 
+// This could probably be improved further but it is safe for now
 const _updateRank = (lookup: any, new_score: number, old_score: number) => {
-    const dir = new_score < old_score ? 'prev' : 'next';
-    let curr = old_score;
+    const keys: any = Object.keys(lookup).map(Number);
+    let curr = Math.min(...keys);
     while (true) {
         _setRank(lookup, curr);
-        if (curr == new_score) break;
-        curr = lookup[curr][dir];
+        curr = lookup[curr]['next'];
+        if (curr == null) break;
     }
 };
 
 const _setRank = (lookup: any, score: number) => {
     const prev = lookup[score]['prev'];
+
     if (prev != null) {
         lookup[score]['rank'] = lookup[prev]['rank'] + lookup[prev]['count'];
     } else {
