@@ -68,11 +68,11 @@ function* fetchData({ options = { page: 1, per_page: 10 } }: AnyAction) {
             ({ user_uuid }: { user_uuid: string }) => user_uuid
         );
         if (accounts.length) {
-            const { accounts: accountParticipants } = yield call(
-                AccountService.bulkFetchAccounts,
-                { within: { key: 'membership_uuid', value: accounts } },
-                { include: 'avatar' }
-            );
+            const {
+                accounts: accountParticipants,
+            } = yield call(AccountService.bulkFetchAccounts, {
+                within: { key: 'membership_uuid', value: accounts },
+            });
             const accountsHash = _keyBy(accountParticipants, 'membership_uuid');
             yield put(
                 ContestPageSiderContentParticipantActiveContestPendingActions.set(

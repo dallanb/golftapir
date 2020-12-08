@@ -40,9 +40,26 @@ function* init() {
     }
 }
 
+function* refresh() {
+    try {
+        const sheets = yield select(selectContestParticipants);
+        yield put(ContestPageContentContestLeaderboardActions.set({ sheets }));
+        const lookup = initLookup(Object.values(sheets));
+        yield put(
+            ContestPageContentContestLeaderboardActions.setRankingLookup(lookup)
+        );
+        yield put(ContestPageContentContestLeaderboardActions.refreshSuccess());
+    } catch (err) {
+        yield put(
+            ContestPageContentContestLeaderboardActions.refreshFailure(err)
+        );
+    }
+}
+
 export function* ContestPageContentContestLeaderboardSaga() {
     yield all([
         takeLatest(ContestPageContentContestLeaderboardTypes.INIT, init),
+        takeLatest(ContestPageContentContestLeaderboardTypes.REFRESH, refresh),
     ]);
 }
 
