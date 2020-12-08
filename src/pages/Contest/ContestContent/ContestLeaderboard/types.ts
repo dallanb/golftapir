@@ -1,9 +1,7 @@
 export interface ContestLeaderboardProps {}
-export interface ContestPageContentLeaderboardInterface {
-    readonly isFetching: boolean;
+export interface ContestPageContentContestLeaderboardInterface {
     readonly isInitialized: boolean;
     readonly err?: Error;
-    readonly data: any;
-    readonly append: boolean;
-    readonly accountsHash: any;
+    readonly sheets: any;
+    readonly rankingLookup: any;
 }

@@ -13,6 +13,7 @@ const INITIAL_STATE: ContestPageInterface = {
     subscribed: false,
     contest: undefined,
     accountsHash: undefined,
+    rankingLookup: undefined,
 };
 
 /* ------------- Reducers ------------- */

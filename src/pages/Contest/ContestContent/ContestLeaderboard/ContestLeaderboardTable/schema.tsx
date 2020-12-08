@@ -4,8 +4,8 @@ import ContestLeaderboardTableParticipant from './ContestLeaderboardTablePartici
 export const columnsSchema = [
     {
         Header: 'Pos',
-        accessor: null,
-        Cell: () => <div>1</div>,
+        accessor: 'rank',
+        Cell: ({ value }: any) => value,
         className: 'pos',
     },
     {
