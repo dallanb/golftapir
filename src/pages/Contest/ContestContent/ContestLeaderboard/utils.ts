@@ -25,6 +25,25 @@ export const initLookup = (sheets: any[]) => {
     }, {});
 };
 
+// Algorithm
+/*  1. Go to new score and increment count
+ *       - if new does not exist, create it and assign prev, next, and rank accordingly *$* */
+/*  2. Go to prev score and decrement count
+ *       - if count == 0 assign prev and next accordingly  *$$* */
+/*  3. Check if new is greater or less than. This is the direction we will be traversing (ie gt == next chain AND lt == prev chain).  */
+/*  4. Until we hit new, update the rank according to prev rank + prev count.
+*       - if prev is null than set rank to 1 [normalize null to 0]
+/*  5. Check to see if count == 0 for old and remove if true
+*
+ */
+/*  Notes:
+ *       *$*: We will have two conditions for finding where to insert new:
+ *               - if new is lt old, traverse the prev chain from old and check if the value of prev is lt than new (if
+ *                 this condition fails this is where we insert new). Set rank prev rank + prev count. Do *$$*.
+ *       *$$*: Go to prev object and replace their next property value with the next property value of removed & Go to
+ *             next object and replace their prev property value with the prev property value of removed.
+ *
+ */
 // main level function
 export const handleScoreUpdate = (sheets: any, lookup: any, score: any) => {
     const { participant } = score;
