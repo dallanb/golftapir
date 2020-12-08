@@ -13,7 +13,11 @@ const ContestLeaderboardTableScorecard: React.FunctionComponent<ContestLeaderboa
         _get(original, ['first_name'], '') +
         ' ' +
         _get(original, ['last_name'], '');
-    return <div>{name}</div>;
+    return (
+        <div {...rowProps} className="tr">
+            {name}
+        </div>
+    );
 };
 
 export default ContestLeaderboardTableScorecard;
