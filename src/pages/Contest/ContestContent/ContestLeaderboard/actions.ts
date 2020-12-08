@@ -2,10 +2,13 @@ import { createActions } from 'reduxsauce';
 
 const { Types, Creators } = createActions(
     {
-        init: ['uuid'],
+        init: null,
         initSuccess: null,
         initFailure: ['err'],
         terminate: null,
+        refresh: null,
+        refreshSuccess: null,
+        refreshFailure: ['err'],
         set: ['data'],
         setSheet: ['sheet'],
         setRankingLookup: ['rankingLookup'],

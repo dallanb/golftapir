@@ -6,15 +6,42 @@ import {
 } from 'lodash';
 
 export const initLookup = (sheets: any[]) => {
-    const scores = sheets.map(({ score }) => score);
+    const scores = sheets.reduce(
+        (scores, { score }) => (score != null ? scores.concat(score) : scores),
+        []
+    );
     const count = _countBy(scores);
     const sortedCountKeys = Object.keys(count).sort(
         (a, b) => parseInt(a) - parseInt(b)
     );
-    return sortedCountKeys.reduce((lookup: any, score, idx) => {
-        lookup[score] = { rank: 1, count: null, prev: null, next: null };
-        lookup[score]['count'] = count[score];
-        const prev = _get(sortedCountKeys, [idx - 1], null);
+    return _lookupPopulate(sortedCountKeys, {}, count);
+};
+
+const _appendLookup = (lookup: any, score: any) => {
+    if (lookup[score]) {
+        lookup[score]['count']++;
+    } else {
+        const sortedKeys = [...Object.keys(lookup), score].sort(
+            (a, b) => parseInt(a) - parseInt(b)
+        );
+        _lookupPopulate(sortedKeys, lookup, {});
+    }
+    return lookup;
+};
+
+const _lookupPopulate = (
+    sortedKeys: any[],
+    initialLookup = {},
+    count: any = {}
+) =>
+    sortedKeys.reduce((lookup: any, score, idx) => {
+        if (!lookup[score]) {
+            lookup[score] = { rank: 1, count: 1, prev: null, next: null };
+            if (count[score]) {
+                lookup[score]['count'] = count[score];
+            }
+        }
+        const prev = _get(sortedKeys, [idx - 1], null);
         if (prev != null) {
             lookup[prev]['next'] = score;
             lookup[score]['rank'] =
@@ -22,8 +49,7 @@ export const initLookup = (sheets: any[]) => {
         }
         lookup[score]['prev'] = prev;
         return lookup;
-    }, {});
-};
+    }, initialLookup);
 
 // Algorithm
 /*  1. Go to new score and increment count
@@ -47,12 +73,20 @@ export const initLookup = (sheets: any[]) => {
 // main level function
 export const handleScoreUpdate = (sheets: any, lookup: any, score: any) => {
     const { participant } = score;
+    let localLookup = _cloneDeep(lookup);
+    const localSheets = _cloneDeep(sheets);
     const sheet = sheets[participant];
-    const localLookup = _cloneDeep(lookup);
-    const localSheet = _cloneDeep(sheet);
-    _ranker(localLookup, { prev_score: sheet.score, score: score.score });
+    const localSheet = localSheets[participant];
+
     localSheet.score = score.score;
     localSheet.strokes = score.strokes;
+
+    if (sheet.score != null) {
+        _ranker(localLookup, { prev_score: sheet.score, score: score.score });
+    } else {
+        localLookup = _appendLookup(localLookup, localSheet.score);
+    }
+
     return { lookup: localLookup, sheet: { [participant]: localSheet } };
 };
 

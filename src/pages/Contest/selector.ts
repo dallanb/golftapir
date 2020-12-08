@@ -62,9 +62,9 @@ export const selectIsOwner = createSelector(
         _get(base, ['me', 'membership_uuid'], undefined)
 );
 
-export const selectIsFetching = createSelector(
+export const selectIsRefreshing = createSelector(
     [getContestPage],
-    (contestPage) => _get(contestPage, ['isFetching'], false)
+    (contestPage) => _get(contestPage, ['isRefreshing'], false)
 );
 
 export const selectSubscribed = createSelector(

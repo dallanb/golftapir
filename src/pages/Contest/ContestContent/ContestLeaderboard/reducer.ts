@@ -38,6 +38,26 @@ function terminate() {
     return INITIAL_STATE;
 }
 
+function refresh(state = INITIAL_STATE) {
+    return Immutable.merge(state, {
+        isRefreshing: true,
+        err: null,
+    });
+}
+
+function refreshSuccess(state = INITIAL_STATE) {
+    return Immutable.merge(state, {
+        isRefreshing: false,
+    });
+}
+
+function refreshFailure(state: any, { err }: any) {
+    return Immutable.merge(state, {
+        isRefreshing: false,
+        err,
+    });
+}
+
 function set(state: any, { data }: any) {
     return Immutable.merge(state, {
         ...data,
@@ -61,6 +81,9 @@ const HANDLERS = {
     [ContestPageContentContestLeaderboardTypes.INIT_SUCCESS]: initSuccess,
     [ContestPageContentContestLeaderboardTypes.INIT_FAILURE]: initFailure,
     [ContestPageContentContestLeaderboardTypes.TERMINATE]: terminate,
+    [ContestPageContentContestLeaderboardTypes.REFRESH]: refresh,
+    [ContestPageContentContestLeaderboardTypes.REFRESH_SUCCESS]: refreshSuccess,
+    [ContestPageContentContestLeaderboardTypes.REFRESH_FAILURE]: refreshFailure,
     [ContestPageContentContestLeaderboardTypes.SET]: set,
     [ContestPageContentContestLeaderboardTypes.SET_SHEET]: setSheet,
     [ContestPageContentContestLeaderboardTypes.SET_RANKING_LOOKUP]: setRankingLookup,

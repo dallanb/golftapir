@@ -5,7 +5,15 @@ export const columnsSchema = [
     {
         Header: 'Pos',
         accessor: 'rank',
-        Cell: ({ value }: any) => value,
+        Cell: ({
+            value = 'NA',
+            row: {
+                original: { count },
+            },
+        }: any) => {
+            const prefix = count > 1 ? 'T' : '';
+            return `${prefix}${value}`;
+        },
         className: 'pos',
     },
     {

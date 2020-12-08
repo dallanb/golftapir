@@ -19,3 +19,7 @@ export const selectIsInitialized = createSelector(
     [getContestContentContestLeaderboard],
     (contestLeaderboard) => _get(contestLeaderboard, ['isInitialized'], false)
 );
+export const selectIsRefreshing = createSelector(
+    [getContestContentContestLeaderboard],
+    (contestLeaderboard) => _get(contestLeaderboard, ['isRefreshing'], false)
+);
