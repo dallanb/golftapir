@@ -26,7 +26,6 @@ const _appendLookup = (lookup: any, score: any) => {
         );
         _lookupPopulate(sortedKeys, lookup, {});
     }
-    return lookup;
 };
 
 const _lookupPopulate = (
@@ -73,7 +72,7 @@ const _lookupPopulate = (
 // main level function
 export const handleScoreUpdate = (sheets: any, lookup: any, score: any) => {
     const { participant } = score;
-    let localLookup = _cloneDeep(lookup);
+    const localLookup = _cloneDeep(lookup);
     const localSheets = _cloneDeep(sheets);
     const sheet = sheets[participant];
     const localSheet = localSheets[participant];
@@ -84,7 +83,7 @@ export const handleScoreUpdate = (sheets: any, lookup: any, score: any) => {
     if (sheet.score != null) {
         _ranker(localLookup, { prev_score: sheet.score, score: score.score });
     } else {
-        localLookup = _appendLookup(localLookup, localSheet.score);
+        _appendLookup(localLookup, localSheet.score);
     }
 
     return { lookup: localLookup, sheet: { [participant]: localSheet } };
