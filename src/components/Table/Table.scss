@@ -5,6 +5,8 @@
     border-bottom: 1px solid #f0f0f0;
 
     .tr {
+        transition: all 500ms ease-in-out;
+
         :last-child {
             td {
                 border-bottom: 0;

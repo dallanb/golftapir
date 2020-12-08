@@ -3,6 +3,7 @@ import { ListChildComponentProps } from 'react-window';
 
 export interface TableProps {
     rowRenderer?: React.FunctionComponent<RowRendererProps>;
+    rowSubRenderer?: React.FunctionComponent<RowRendererProps>;
     columnsSchema: any;
     initialState?: any;
     size: number;

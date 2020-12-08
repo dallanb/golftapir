@@ -5,6 +5,7 @@ import { ContestLeaderboardTableProps } from './types';
 import { Table } from '@components';
 import { columnsSchema } from './schema';
 import { selectRankingLookup, selectSheets } from '../selector';
+import renderRow from './renderRow';
 import './ContestLeaderboardTable.scss';
 
 const ContestLeaderboardTable: React.FunctionComponent<ContestLeaderboardTableProps> = ({}) => {
@@ -39,6 +40,7 @@ const ContestLeaderboardTable: React.FunctionComponent<ContestLeaderboardTablePr
                     minimumBatchSize={10}
                     columnsSchema={columnsSchema}
                     initialState={initialState}
+                    rowRenderer={renderRow}
                 />
             </div>
         </div>

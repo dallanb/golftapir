@@ -1,5 +1,5 @@
 import React from 'react';
-import { useTable, useBlockLayout, useSortBy } from 'react-table';
+import { useTable, useBlockLayout, useSortBy, useExpanded } from 'react-table';
 import { DownOutlined, UpOutlined } from '@ant-design/icons';
 import { TableProps } from './types';
 import { List } from '@components';
@@ -26,7 +26,8 @@ const Table: React.FunctionComponent<TableProps> = ({
             initialState,
         },
         useBlockLayout,
-        useSortBy
+        useSortBy,
+        useExpanded
     );
 
     const renderSortButtons = (column: any) => {
