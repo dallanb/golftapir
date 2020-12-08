@@ -1,19 +1,20 @@
 import React, { ReactElement, ReactText } from 'react';
 import { useSelector } from 'react-redux';
+import { get as _get } from 'lodash';
 import { ContestLeaderboardTableProps } from './types';
 import { Table } from '@components';
 import { columnsSchema } from './schema';
-import { selectData } from '@pages/Contest/selector';
+import { selectRankingLookup, selectSheets } from '../selector';
 import './ContestLeaderboardTable.scss';
 
 const ContestLeaderboardTable: React.FunctionComponent<ContestLeaderboardTableProps> = ({}) => {
-    const {
-        contest: { participants },
-    } = useSelector(selectData);
-    const items = Object.entries(participants).map(([uuid, participant]: any) =>
-        Object.assign({}, participant, { uuid })
-    );
-
+    const sheets = useSelector(selectSheets);
+    const rankingLookup = useSelector(selectRankingLookup);
+    const items = Object.entries(sheets).map(([uuid, participant]: any) => {
+        const rank = _get(rankingLookup, [participant.score], undefined);
+        return Object.assign({}, participant, { uuid }, rank);
+    });
+    console.log(items);
     // TODO: MAKE THIS REFACTORED LIKE THE REST OF THE LIST COMPONENTS
     const loadTableDimensions = (
         items: any[]
@@ -41,4 +42,4 @@ const ContestLeaderboardTable: React.FunctionComponent<ContestLeaderboardTablePr
     );
 };
 
-export default ContestLeaderboardTable;
+export default React.memo(ContestLeaderboardTable);

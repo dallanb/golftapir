@@ -80,12 +80,10 @@ export function* ContestLeaderboardScoreChannel() {
                 rankingLookup = lookup;
                 sheets = { ...sheets, ...sheet };
                 yield put(
-                    ContestPageContentContestLeaderboardActions.setRankingLookup(
-                        lookup
-                    )
-                );
-                yield put(
-                    ContestPageContentContestLeaderboardActions.setSheet(sheet)
+                    ContestPageContentContestLeaderboardActions.set({
+                        rankingLookup,
+                        sheets,
+                    })
                 );
             }
         } catch (err) {
