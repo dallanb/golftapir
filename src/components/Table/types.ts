@@ -7,7 +7,8 @@ export interface TableProps {
     columnsSchema: any;
     initialState?: any;
     size: number;
-    height?: number;
+    expandedSize: number;
+    bodyStyle: any;
     hasNextPage: boolean;
     isNextPageLoading: boolean;
     items: any;
@@ -18,4 +19,5 @@ export interface TableProps {
 export interface RowRendererProps {
     props: PropsWithChildren<ListChildComponentProps>;
     prepareRow: any;
+    listRef: React.Ref<any>;
 }

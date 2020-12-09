@@ -1,8 +1,9 @@
 import React from 'react';
-import { useTable, useBlockLayout, useSortBy, useExpanded } from 'react-table';
+import { useTable, useSortBy, useExpanded, useFlexLayout } from 'react-table';
 import { DownOutlined, UpOutlined } from '@ant-design/icons';
+import { get as _get } from 'lodash';
 import { TableProps } from './types';
-import { List } from '@components';
+import { VariableSizeList } from '@components';
 import defaultRowRenderer from './defaultRowRenderer';
 import './Table.scss';
 
@@ -11,8 +12,12 @@ const Table: React.FunctionComponent<TableProps> = ({
     columnsSchema,
     initialState,
     rowRenderer = defaultRowRenderer,
+    bodyStyle,
+    size,
+    expandedSize,
     ...restProps
 }) => {
+    const listRef = React.useRef(null);
     const {
         getTableProps,
         getTableBodyProps,
@@ -25,7 +30,7 @@ const Table: React.FunctionComponent<TableProps> = ({
             columns: columnsSchema,
             initialState,
         },
-        useBlockLayout,
+        useFlexLayout,
         useSortBy,
         useExpanded
     );
@@ -41,9 +46,12 @@ const Table: React.FunctionComponent<TableProps> = ({
         return '';
     };
 
+    const loadItemSize = (row: any): number =>
+        _get(row, ['isExpanded']) ? expandedSize : size;
+
     return (
         <div {...getTableProps()} className="table">
-            <div>
+            <div className="thead">
                 {headerGroups.map((headerGroup) => (
                     <div
                         {...headerGroup.getHeaderGroupProps({
@@ -69,11 +77,19 @@ const Table: React.FunctionComponent<TableProps> = ({
                     </div>
                 ))}
             </div>
-            <div {...getTableBodyProps()}>
-                <List
+            <div
+                className="tbody"
+                {...getTableBodyProps({
+                    style: bodyStyle,
+                })}
+            >
+                <VariableSizeList
                     items={rows}
-                    rowRenderer={(props) => rowRenderer({ props, prepareRow })}
-                    width={'100%'}
+                    rowRenderer={(props) =>
+                        rowRenderer({ props, prepareRow, listRef })
+                    }
+                    itemSize={(i) => loadItemSize(rows[i])}
+                    listRef={listRef}
                     {...restProps}
                 />
             </div>

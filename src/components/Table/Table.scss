@@ -1,11 +1,17 @@
 .table {
+    display: inline-flex;
+    flex-direction: column;
     width: 100%;
     border-spacing: 0;
     border-top: 1px solid #f0f0f0;
     border-bottom: 1px solid #f0f0f0;
 
+    .tr-group {
+        display: flex;
+        flex-direction: column;
+    }
     .tr {
-        transition: all 500ms ease-in-out;
+        display: flex;
 
         :last-child {
             td {

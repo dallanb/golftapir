@@ -18,22 +18,17 @@ const ContestLeaderboardTable: React.FunctionComponent<ContestLeaderboardTablePr
     const initialState = {
         sortBy: [{ id: 'rank' }],
     };
-    // TODO: MAKE THIS REFACTORED LIKE THE REST OF THE LIST COMPONENTS
-    const loadTableDimensions = (
-        items: any[]
-    ): { size: number; height: number } => {
-        // move this info to schema.tsx
-        const size = 50;
-        const height = items.length * size;
-
-        return { size, height };
-    };
+    const size = 50;
+    const expandedSize = 300;
+    const bodyStyle = { height: items.length * size };
 
     return (
         <div className="contest-leaderboard-table">
             <div className="table-wrap">
                 <Table
-                    {...loadTableDimensions(items)}
+                    size={size}
+                    expandedSize={expandedSize}
+                    bodyStyle={bodyStyle}
                     items={items}
                     hasNextPage={false}
                     isNextPageLoading={false}
