@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { get as _get } from 'lodash';
 import { ContestLeaderboardTableProps } from './types';
-import { Table } from '@components';
+import { VirtualTable } from '@components';
 import { columnsSchema } from './schema';
 import { selectRankingLookup, selectSheets } from '../selector';
 import renderRow from './renderRow';
@@ -18,16 +18,16 @@ const ContestLeaderboardTable: React.FunctionComponent<ContestLeaderboardTablePr
     const initialState = {
         sortBy: [{ id: 'rank' }],
     };
-    const size = 50;
-    const expandedSize = 300;
-    const bodyStyle = { height: items.length * size };
+
+    const itemSize = (row: any): number =>
+        _get(row, ['isExpanded']) ? 300 : 50;
+    const bodyStyle = { height: items.length * 50 + 250 };
 
     return (
         <div className="contest-leaderboard-table">
             <div className="table-wrap">
-                <Table
-                    size={size}
-                    expandedSize={expandedSize}
+                <VirtualTable
+                    itemSize={itemSize}
                     bodyStyle={bodyStyle}
                     items={items}
                     hasNextPage={false}

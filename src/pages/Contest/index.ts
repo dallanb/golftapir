@@ -19,6 +19,7 @@ export { default as ContestPageSaga } from './saga';
 export {
     ContestPageContentContestLeaderboardSaga,
     ContestLeaderboardScoreChannel,
+    ContestPageContentContestLeaderboardScorecardSaga,
 } from './ContestContent';
 export {
     ContestPageSiderContentParticipantActiveContestActiveSaga,

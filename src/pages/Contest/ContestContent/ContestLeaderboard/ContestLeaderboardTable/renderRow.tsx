@@ -1,5 +1,5 @@
 import React from 'react';
-import { RowRendererProps } from '@components/Table/types';
+import { RowRendererProps } from '@components/VirtualTable/types';
 import ContestLeaderboardTableScorecard from './ContestLeaderboardTableScorecard';
 
 const renderRow: React.FunctionComponent<RowRendererProps> = ({
