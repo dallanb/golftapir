@@ -4,8 +4,11 @@
         flex-direction: column;
         width: 100%;
         border-spacing: 0;
-        border-top: 1px solid #f0f0f0;
         border-bottom: 1px solid #f0f0f0;
+
+        .thead {
+            border-bottom: 1px solid #f0f0f0;
+        }
 
         .tr-group {
             display: flex;
@@ -30,8 +33,6 @@
         .td {
             margin: 0;
             padding: 0.5rem;
-            border-bottom: 1px solid #f0f0f0;
-
             :last-child {
                 border-right: 0;
             }
