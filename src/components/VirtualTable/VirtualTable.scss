@@ -1,0 +1,40 @@
+.virtual-table {
+    &.table {
+        display: inline-flex;
+        flex-direction: column;
+        width: 100%;
+        border-spacing: 0;
+        border-top: 1px solid #f0f0f0;
+        border-bottom: 1px solid #f0f0f0;
+
+        .tr-group {
+            display: flex;
+            flex-direction: column;
+        }
+        .tr {
+            display: flex;
+
+            :last-child {
+                td {
+                    border-bottom: 0;
+                }
+            }
+        }
+        .th {
+            .table-head-sort {
+                margin-left: 5px;
+            }
+        }
+
+        .th,
+        .td {
+            margin: 0;
+            padding: 0.5rem;
+            border-bottom: 1px solid #f0f0f0;
+
+            :last-child {
+                border-right: 0;
+            }
+        }
+    }
+}

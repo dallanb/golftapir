@@ -1,10 +1,11 @@
-import React, { ReactElement, ReactText } from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { get as _get } from 'lodash';
 import { ContestLeaderboardTableProps } from './types';
-import { Table } from '@components';
-import { columnsSchema } from './schema';
+import { VirtualTable } from '@components';
+import columnsSchema from './schema';
 import { selectRankingLookup, selectSheets } from '../selector';
+import renderRow from './renderRow';
 import './ContestLeaderboardTable.scss';
 
 const ContestLeaderboardTable: React.FunctionComponent<ContestLeaderboardTableProps> = ({}) => {
@@ -14,28 +15,27 @@ const ContestLeaderboardTable: React.FunctionComponent<ContestLeaderboardTablePr
         const rank = _get(rankingLookup, [participant.score], undefined);
         return Object.assign({}, participant, { uuid }, rank);
     });
-    console.log(items);
-    // TODO: MAKE THIS REFACTORED LIKE THE REST OF THE LIST COMPONENTS
-    const loadTableDimensions = (
-        items: any[]
-    ): { size: number; height: number } => {
-        // move this info to schema.tsx
-        const size = 50;
-        const height = items.length * size;
+    const bodyStyle = { height: items.length * 50 + 150 };
 
-        return { size, height };
+    const initialState = {
+        sortBy: [{ id: 'rank' }],
     };
+    const itemSize = (row: any): number =>
+        _get(row, ['isExpanded']) ? 200 : 50;
 
     return (
         <div className="contest-leaderboard-table">
             <div className="table-wrap">
-                <Table
-                    {...loadTableDimensions(items)}
+                <VirtualTable
+                    itemSize={itemSize}
+                    bodyStyle={bodyStyle}
                     items={items}
                     hasNextPage={false}
                     isNextPageLoading={false}
                     minimumBatchSize={10}
                     columnsSchema={columnsSchema}
+                    initialState={initialState}
+                    rowRenderer={renderRow}
                 />
             </div>
         </div>

@@ -4,6 +4,7 @@ import { RowRendererProps } from './types';
 const defaultRowRenderer: React.FunctionComponent<RowRendererProps> = ({
     props: { style, index, data },
     prepareRow,
+    listRef,
 }) => {
     const row = data[index];
     prepareRow(row);

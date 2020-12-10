@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { CompetitorsListProps } from './types';
-import { List } from '@components';
+import { FixedSizeList } from '@components';
 import CompetitorsPageContentCompetitorsActions from '../actions';
 import {
     selectListData,
@@ -47,7 +47,7 @@ const CompetitorsList: React.FunctionComponent<CompetitorsListProps> = ({
     };
 
     return (
-        <List
+        <FixedSizeList
             {...tableDimensions}
             items={data}
             hasNextPage={hasNextPage()}

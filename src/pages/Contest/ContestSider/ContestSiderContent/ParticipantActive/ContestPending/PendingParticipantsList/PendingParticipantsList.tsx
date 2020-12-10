@@ -1,7 +1,7 @@
 import React, { ReactText, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ComponentContent from '@layouts/ComponentContent';
-import { List } from '@components';
+import { FixedSizeList } from '@components';
 import { PendingParticipantsListProps } from './types';
 import PendingParticipantsListTile from './PendingParticipantsListTile';
 import { selectData, selectListData, selectListIsFetching } from '../selector';
@@ -43,7 +43,7 @@ const PendingParticipantsList: React.FunctionComponent<PendingParticipantsListPr
             componentRef={ref}
             showSpinner={!isInitialized}
         >
-            <List
+            <FixedSizeList
                 {...tableDimensions}
                 hasNextPage={false}
                 isNextPageLoading={isFetching}

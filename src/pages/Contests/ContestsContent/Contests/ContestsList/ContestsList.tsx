@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { get as _get } from 'lodash';
 import { ContestsListProps } from './types';
-import { List } from '@components';
+import { FixedSizeList } from '@components';
 import ContestsPageContentContestsActions from '../actions';
 import {
     selectListData,
@@ -44,7 +44,7 @@ const ContestsList: React.FunctionComponent<ContestsListProps> = ({
         metadata && metadata.page * metadata.per_page < metadata.total_count;
 
     return (
-        <List
+        <FixedSizeList
             {...tableDimensions}
             items={data}
             hasNextPage={hasNextPage}

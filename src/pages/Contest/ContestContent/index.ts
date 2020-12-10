@@ -4,13 +4,17 @@ import { combineReducers } from 'redux';
 export { default } from './ContestContent';
 
 // Reducer
-import { reducer as contestLeaderboardReducer } from './ContestLeaderboard';
+import { reducer as dataReducer, scorecardReducer } from './ContestLeaderboard';
 export const reducer = combineReducers({
-    contestLeaderboard: contestLeaderboardReducer,
+    contestLeaderboard: combineReducers({
+        data: dataReducer,
+        scorecard: scorecardReducer,
+    }),
 });
 
 // Saga
 export {
     ContestPageContentContestLeaderboardSaga,
     ContestLeaderboardScoreChannel,
+    ContestPageContentContestLeaderboardScorecardSaga,
 } from './ContestLeaderboard';

@@ -40,4 +40,4 @@ const ContestLeaderboardTableParticipant: React.FunctionComponent<ContestPartici
     );
 };
 
-export default ContestLeaderboardTableParticipant;
+export default React.memo(ContestLeaderboardTableParticipant);

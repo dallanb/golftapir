@@ -1,16 +1,14 @@
 import React from 'react';
-import { useTable, useBlockLayout, useSortBy } from 'react-table';
-import { DownOutlined, UpOutlined } from '@ant-design/icons';
 import { TableProps } from './types';
-import { List } from '@components';
-import defaultRowRenderer from './defaultRowRenderer';
+import { useTable } from 'react-table';
+
 import './Table.scss';
 
 const Table: React.FunctionComponent<TableProps> = ({
-    items,
+    header = true,
     columnsSchema,
-    rowRenderer = defaultRowRenderer,
-    ...restProps
+    items,
+    style,
 }) => {
     const {
         getTableProps,
@@ -18,63 +16,44 @@ const Table: React.FunctionComponent<TableProps> = ({
         headerGroups,
         rows,
         prepareRow,
-    } = useTable(
-        {
-            data: items,
-            columns: columnsSchema,
-        },
-        useBlockLayout,
-        useSortBy
-    );
+    } = useTable({
+        data: items,
+        columns: columnsSchema,
+    });
 
-    const renderSortButtons = (column: any) => {
-        if (column.isSorted) {
-            if (column.isSortedDesc) {
-                return <UpOutlined />;
-            } else {
-                return <DownOutlined />;
-            }
-        }
-        return '';
-    };
-
+    // Render the UI for your table
     return (
-        <div {...getTableProps()} className="table">
-            <div>
-                {headerGroups.map((headerGroup) => (
-                    <div
-                        {...headerGroup.getHeaderGroupProps({
-                            style: { width: '100%' },
-                        })}
-                        className="tr"
-                    >
-                        {headerGroup.headers.map((column: any) => (
-                            <div
-                                {...column.getHeaderProps({
-                                    className: column.className
-                                        ? `th ${column.className}`
-                                        : 'th',
-                                    ...column.getSortByToggleProps(),
-                                })}
-                            >
-                                {column.render('Header')}
-                                <span className="table-head-sort">
-                                    {renderSortButtons(column)}
-                                </span>
-                            </div>
-                        ))}
-                    </div>
-                ))}
-            </div>
-            <div {...getTableBodyProps()}>
-                <List
-                    items={rows}
-                    rowRenderer={(props) => rowRenderer({ props, prepareRow })}
-                    width={'100%'}
-                    {...restProps}
-                />
-            </div>
-        </div>
+        <table {...getTableProps({ style })}>
+            {header && (
+                <thead>
+                    {headerGroups.map((headerGroup) => (
+                        <tr {...headerGroup.getHeaderGroupProps()}>
+                            {headerGroup.headers.map((column) => (
+                                <th {...column.getHeaderProps()}>
+                                    {column.render('Header')}
+                                </th>
+                            ))}
+                        </tr>
+                    ))}
+                </thead>
+            )}
+            <tbody {...getTableBodyProps()}>
+                {rows.map((row, i) => {
+                    prepareRow(row);
+                    return (
+                        <tr {...row.getRowProps()}>
+                            {row.cells.map((cell) => {
+                                return (
+                                    <td {...cell.getCellProps()}>
+                                        {cell.render('Cell')}
+                                    </td>
+                                );
+                            })}
+                        </tr>
+                    );
+                })}
+            </tbody>
+        </table>
     );
 };
 

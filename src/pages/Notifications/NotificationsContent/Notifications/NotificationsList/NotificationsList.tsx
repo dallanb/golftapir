@@ -2,7 +2,7 @@ import React, { ReactText } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { NotificationsListProps } from './types';
-import { List } from '@components';
+import { FixedSizeList } from '@components';
 import NotificationsPageContentNotificationsActions from '../actions';
 import {
     selectListData,
@@ -55,7 +55,7 @@ const NotificationsList: React.FunctionComponent<NotificationsListProps> = ({
     };
 
     return (
-        <List
+        <FixedSizeList
             {...tableDimensions}
             items={data}
             hasNextPage={hasNextPage()}

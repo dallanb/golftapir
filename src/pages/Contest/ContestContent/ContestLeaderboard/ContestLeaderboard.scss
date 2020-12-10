@@ -1,16 +1,19 @@
 .contest-leaderboard {
     display: block;
     max-width: 100%;
-    .pos {
+    .expander {
         width: 5% !important;
     }
+    .pos {
+        width: 10% !important;
+    }
     .participant {
-        width: 75% !important;
+        width: 65% !important;
     }
     .score {
         width: 10% !important;
     }
     .strokes {
-        width: 10% !important;;
+        width: 10% !important;
     }
 }

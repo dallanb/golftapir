@@ -1,12 +1,12 @@
 import React from 'react';
-import { FixedSizeList } from 'react-window';
+import { FixedSizeList as List } from 'react-window';
 // import AutoSizer from 'react-virtualized-auto-sizer';
 import InfiniteLoader from 'react-window-infinite-loader';
 import { ListProps } from './types';
 import defaultRowRenderer from './defaultRowRenderer';
-import './List.scss';
+import './FixedSizeList.scss';
 
-const List: React.FunctionComponent<ListProps> = ({
+const FixedSizeList: React.FunctionComponent<ListProps> = ({
     rowRenderer = defaultRowRenderer,
     size,
     hasNextPage,
@@ -38,8 +38,8 @@ const List: React.FunctionComponent<ListProps> = ({
         >
             {({ onItemsRendered, ref }) => (
                 <section>
-                    <FixedSizeList
-                        className="list"
+                    <List
+                        className="fixed-size-list"
                         itemCount={itemCount}
                         itemData={items}
                         itemSize={size}
@@ -49,10 +49,10 @@ const List: React.FunctionComponent<ListProps> = ({
                         ref={ref}
                     >
                         {rowRenderer}
-                    </FixedSizeList>
+                    </List>
                 </section>
             )}
         </InfiniteLoader>
     );
 };
-export default List;
+export default FixedSizeList;
