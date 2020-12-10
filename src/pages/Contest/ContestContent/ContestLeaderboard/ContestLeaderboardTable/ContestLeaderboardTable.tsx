@@ -20,8 +20,8 @@ const ContestLeaderboardTable: React.FunctionComponent<ContestLeaderboardTablePr
     };
 
     const itemSize = (row: any): number =>
-        _get(row, ['isExpanded']) ? 300 : 50;
-    const bodyStyle = { height: items.length * 50 + 250 };
+        _get(row, ['isExpanded']) ? 200 : 50;
+    const bodyStyle = { height: items.length * 50 + 150 };
 
     return (
         <div className="contest-leaderboard-table">

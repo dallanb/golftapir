@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectData } from './selector';
 import ContestPageContentContestLeaderboardScorecardActions from './actions';
 import { selectContestUUID } from '@pages/Contest/selector';
+import './ContestLeaderboardTableScorecard.scss';
 
 const ContestLeaderboardTableScorecard: React.FunctionComponent<ContestLeaderboardTableScorecardProps> = ({
     row,
@@ -19,7 +20,7 @@ const ContestLeaderboardTableScorecard: React.FunctionComponent<ContestLeaderboa
     const {
         original: { uuid: user },
     } = row;
-
+    console.log(items);
     useEffect(() => {
         dispatch(
             ContestPageContentContestLeaderboardScorecardActions.init(
@@ -35,13 +36,17 @@ const ContestLeaderboardTableScorecard: React.FunctionComponent<ContestLeaderboa
     }, []);
 
     const columnsSchema = columnsSchemaGenerator(19);
-    console.log(items);
     return (
         <ComponentContent
             showSpinner={!isInitialized}
             className="contest-leaderboard-table-scorecard"
         >
-            <Table columnsSchema={columnsSchema} items={items} />
+            <Table
+                columnsSchema={columnsSchema}
+                items={items}
+                header={false}
+                style={{ height: '150px', width: '100%' }}
+            />
         </ComponentContent>
     );
 };
