@@ -30,6 +30,7 @@ const ContestLeaderboardTable: React.FunctionComponent<ContestLeaderboardTablePr
                     itemSize={itemSize}
                     className="contest-leaderboard-table-table"
                     headClassName="contest-leaderboard-table-header"
+                    bodyClassName="contest-leaderboard-table-body"
                     bodyStyle={bodyStyle}
                     items={items}
                     hasNextPage={false}

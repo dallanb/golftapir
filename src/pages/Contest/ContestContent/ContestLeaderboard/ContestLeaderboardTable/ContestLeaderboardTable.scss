@@ -1,34 +1,26 @@
 .table-wrap {
     display: block;
     max-width: 100%;
-    .tr {
-        &.cell {
-            height: 75px;
-            border-bottom: 1px solid #f0f0f0;
+
+    .contest-leaderboard-table-table {
+        border-radius: 4px;
+        overflow: hidden;
+
+        .contest-leaderboard-table-header {
+            font-weight: bold;
+            height: 50px;
+            border-bottom: 1px solid rgba(24, 144, 255, 0.1);
+        }
+        .contest-leaderboard-table-body {
+            .tr {
+                &.cell {
+                    height: 75px;
+                    border-bottom: 1px solid rgba(24, 144, 255, 0.1);
+                }
+            }
+        }
+        .tr-group:nth-child(odd) .cell {
+            background: rgba(230, 247, 255, 0.2);
         }
     }
 }
-
-.contest-leaderboard-table-table {
-    border: #f0f0f0 1px solid;
-    border-radius: 4px;
-    overflow: hidden;
-    box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.1);
-
-    .contest-leaderboard-table-header {
-        background: #333333;
-        color: rgba(255, 255, 255, 0.65);
-        font-weight: bold;
-        height: 50px;
-    }
-}
-
-//.contest-leaderboard-table-table {
-//    .contest-leaderboard-table-header {
-//        background: #333333;
-//        border-radius: 4px 4px 0 0;
-//        color: rgba(255, 255, 255, 0.85);
-//        font-weight: bold;
-//        height: 60px;
-//    }
-//}
