@@ -2,16 +2,20 @@ import React from 'react';
 import ContestLeaderboardTableParticipant from './ContestLeaderboardTableParticipant';
 import ContestLeaderboardTableToggle from './ContestLeaderboardTableToggle';
 
-export const columnsSchema = [
+const columnsSchema = [
     {
         // Make an expander cell
         Header: () => null, // No header
         id: 'expander', // It needs an ID
-        Cell: ({ row, listRef }: any) => (
+        Cell: ({ row, listRef, toggleAllRowsExpanded }: any) => (
             // Use Cell to render an expander for each row.
             // We can use the getToggleRowExpandedProps prop-getter
             // to build the expander.
-            <ContestLeaderboardTableToggle row={row} listRef={listRef} />
+            <ContestLeaderboardTableToggle
+                row={row}
+                listRef={listRef}
+                toggleAllRows={toggleAllRowsExpanded}
+            />
         ),
         // We can override the cell renderer with a SubCell to be used with an expanded row
         SubCell: () => null, // No expander on an expanded row
@@ -53,3 +57,5 @@ export const columnsSchema = [
         className: 'strokes',
     },
 ];
+
+export default columnsSchema;

@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { get as _get } from 'lodash';
 import { ContestLeaderboardTableProps } from './types';
 import { VirtualTable } from '@components';
-import { columnsSchema } from './schema';
+import columnsSchema from './schema';
 import { selectRankingLookup, selectSheets } from '../selector';
 import renderRow from './renderRow';
 import './ContestLeaderboardTable.scss';
@@ -15,13 +15,13 @@ const ContestLeaderboardTable: React.FunctionComponent<ContestLeaderboardTablePr
         const rank = _get(rankingLookup, [participant.score], undefined);
         return Object.assign({}, participant, { uuid }, rank);
     });
+    const bodyStyle = { height: items.length * 50 + 150 };
+
     const initialState = {
         sortBy: [{ id: 'rank' }],
     };
-
     const itemSize = (row: any): number =>
         _get(row, ['isExpanded']) ? 200 : 50;
-    const bodyStyle = { height: items.length * 50 + 150 };
 
     return (
         <div className="contest-leaderboard-table">
