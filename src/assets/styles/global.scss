@@ -1,25 +1,22 @@
 // Colours
 .ant-layout {
-    background: #f1f2f4 !important;
+    background: rgba(230, 247, 255, 1) !important;
 }
-//.ant-layout-CompetitorSider {
-//    background: #333333 !important;
-//    .ant-layout-CompetitorSider-trigger {
-//        background: #3f3f3f;
-//    }
-//}
+
 .ant-menu {
     &.ant-menu-dark,
     &.ant-menu-dark:not(.ant-menu-horizontal) {
-        background: #333333;
+        background: rgba(19,115,204, 1);
         .ant-menu-item {
-            &.ant-menu-item-selected {
-                background: #232323;
-            }
+            color: white;
+
+            //&.ant-menu-item-selected {
+            //    background: #232323 !important;
+            //}
         }
     }
 }
 
 .ant-layout-footer {
-    background: #f1f2f4 !important;
+    background: rgba(230, 247, 255, 1) !important;
 }

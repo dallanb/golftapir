@@ -52,7 +52,10 @@ const ContestScorecard: React.FunctionComponent<ContestScorecardProps> = () => {
                     <Button
                         type="text"
                         icon={
-                            <MinusCircleTwoTone className="contest-scorecard-strokes-minus" />
+                            <MinusCircleTwoTone
+                                twoToneColor="rgba(19,115,204, 1)"
+                                className="contest-scorecard-strokes-minus"
+                            />
                         }
                         disabled={!strokes}
                         onClick={() => updateScore(hole, strokes - 1)}
@@ -63,7 +66,10 @@ const ContestScorecard: React.FunctionComponent<ContestScorecardProps> = () => {
                     <Button
                         type="text"
                         icon={
-                            <PlusCircleTwoTone className="contest-scorecard-strokes-plus" />
+                            <PlusCircleTwoTone
+                                twoToneColor="rgba(19,115,204, 1)"
+                                className="contest-scorecard-strokes-plus"
+                            />
                         }
                         onClick={() => updateScore(hole, strokes + 1)}
                     />

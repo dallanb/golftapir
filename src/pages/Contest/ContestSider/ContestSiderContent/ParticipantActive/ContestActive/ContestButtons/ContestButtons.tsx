@@ -22,6 +22,7 @@ const ContestButtons: React.FunctionComponent<ContestButtonsProps> = () => {
     return (
         <Button
             block
+            type="primary"
             key={constants.ACTION.COMPLETE.KEY}
             className={`contest-button ${constants.ACTION.APPROVE.KEY}`}
             onClick={handleApproveClick}
