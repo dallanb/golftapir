@@ -8,7 +8,7 @@ export interface GridProps {
     loadMoreItems: (
         startIndex: number,
         stopIndex: number,
-        resolve: () => void
+        resolve: (key: any) => void
     ) => void;
     //Callback function determining if the item at an index is loaded
     isItemLoading: boolean;

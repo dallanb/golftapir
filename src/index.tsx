@@ -5,7 +5,7 @@ import { FirebaseClient } from '@libs';
 import * as serviceWorker from './serviceWorker';
 
 import './index.less';
-import 'antd/dist/antd.css';
+import 'antd/dist/antd.less';
 
 FirebaseClient.init();
 ReactDOM.render(<App />, document.getElementById('root'));

@@ -26,7 +26,7 @@ const Grid: React.FunctionComponent<GridProps> = ({
             isItemLoaded={(index) => !hasNextPage || index < itemCount}
             loadMoreItems={(startIndex, stopIndex) =>
                 isItemLoading
-                    ? new Promise((resolve) => resolve())
+                    ? new Promise((resolve) => resolve(null))
                     : new Promise((resolve) =>
                           loadMoreItems(startIndex, stopIndex, resolve)
                       )
