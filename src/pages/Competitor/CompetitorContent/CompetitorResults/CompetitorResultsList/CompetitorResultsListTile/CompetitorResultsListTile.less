@@ -1,3 +1,5 @@
+@import 'src/assets/styles/global';
+
 .competitor-results-list-tile-view {
     padding: 5px 0;
     .competitor-results-list-tile-card {
@@ -5,9 +7,8 @@
         cursor: pointer;
         height: 100%;
 
-        &:hover {
-            background: #dadde2;
-            opacity: 0.95;
+        &.filled {
+            background: @tile-fill;
         }
         .ant-card-body {
             width: 100%;

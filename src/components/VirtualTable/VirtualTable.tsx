@@ -1,5 +1,5 @@
 import React from 'react';
-import classNames from 'classnames';
+import classnames from 'classnames';
 import { useTable, useSortBy, useExpanded, useFlexLayout } from 'react-table';
 import { DownOutlined, UpOutlined } from '@ant-design/icons';
 import { get as _get } from 'lodash';
@@ -50,9 +50,9 @@ const VirtualTable: React.FunctionComponent<VirtualTableProps> = ({
         return '';
     };
 
-    const tableCx = classNames('virtual-table', 'table', className);
-    const headerCx = classNames('thead', headClassName);
-    const bodyCx = classNames('tbody', bodyClassName);
+    const tableCx = classnames('virtual-table', 'table', className);
+    const headerCx = classnames('thead', headClassName);
+    const bodyCx = classnames('tbody', bodyClassName);
     return (
         <div {...getTableProps()} className={tableCx}>
             <div className={headerCx} style={headStyle}>

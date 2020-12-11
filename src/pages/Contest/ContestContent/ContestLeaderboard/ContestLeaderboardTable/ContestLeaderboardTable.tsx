@@ -15,13 +15,13 @@ const ContestLeaderboardTable: React.FunctionComponent<ContestLeaderboardTablePr
         const rank = _get(rankingLookup, [participant.score], undefined);
         return Object.assign({}, participant, { uuid }, rank);
     });
-    const bodyStyle = { height: items.length * 75 + 150 };
+    const bodyStyle = { height: items.length * 50 + 150 };
 
     const initialState = {
         sortBy: [{ id: 'rank' }],
     };
     const itemSize = (row: any): number =>
-        _get(row, ['isExpanded']) ? 225 : 75;
+        _get(row, ['isExpanded']) ? 200 : 50;
 
     return (
         <div className="contest-leaderboard-table">

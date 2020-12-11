@@ -31,7 +31,7 @@ const ContestLeaderboardTableParticipant: React.FunctionComponent<ContestPartici
             <Avatar
                 src={s3_filename && withS3URL(s3_filename)}
                 name={name}
-                size={54}
+                size={36}
                 className="contest-participants-table-participant-avatar"
             />
             <div className="contest-participants-table-participant-name">

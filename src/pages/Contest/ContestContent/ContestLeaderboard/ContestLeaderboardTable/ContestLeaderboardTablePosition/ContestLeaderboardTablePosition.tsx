@@ -28,9 +28,7 @@ const ContestLeaderboardTablePosition: React.FunctionComponent<ContestLeaderboar
             <div className="contest-leaderboard-table-position-icon">
                 {renderTrendIcon(trend)}
             </div>
-            <div className="contest=leaderboard-table-position-position">
-                {pos}
-            </div>
+            <div className="contest-leaderboard-table-position-rank">{pos}</div>
         </div>
     );
 };
