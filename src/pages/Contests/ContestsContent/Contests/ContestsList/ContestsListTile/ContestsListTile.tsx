@@ -7,11 +7,13 @@ import constants from '@constants';
 import { mapStatusColour, withS3URL } from '@utils';
 import { Avatar } from '@components';
 import './ContestsListTile.less';
+import classNames from 'classnames';
 
 const ContestsListTile: React.FunctionComponent<ContestsListTileProps> = ({
     props: { index, style, data },
     history,
 }) => {
+    const isEven = index % 2;
     const item = _get(data, [index], undefined);
     const handleClick = (options: any) => {
         history.push(`/app${constants.ROUTES.CONTEST.ROUTE}`, options);
@@ -24,12 +26,12 @@ const ContestsListTile: React.FunctionComponent<ContestsListTileProps> = ({
         avatar && withS3URL(avatar, constants.S3_FOLDERS.CONTEST.AVATAR);
     const status = _get(item, ['status'], undefined);
     const participants = _get(item, ['participants'], {});
-
+    const cardCx = classNames('contest-list-tile-card', { filled: !isEven });
     return (
         <div key={index} style={style} className="contest-list-tile-view">
             <Card
                 bordered={false}
-                className="contest-list-tile-card"
+                className={cardCx}
                 onClick={() => handleClick(item)}
             >
                 <div className="contest-list-tile-content">

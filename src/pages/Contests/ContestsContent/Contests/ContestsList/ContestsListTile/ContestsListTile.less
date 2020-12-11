@@ -1,14 +1,12 @@
+@import 'src/assets/styles/global';
 .contest-list-tile-view {
-    padding: 5px 0;
-
     .contest-list-tile-card {
         display: flex;
         cursor: pointer;
         height: 100%;
 
-        &:hover {
-            background: #dadde2;
-            opacity: 0.95;
+        &.filled {
+            background: @tile-fill;
         }
 
         .ant-card-body {
