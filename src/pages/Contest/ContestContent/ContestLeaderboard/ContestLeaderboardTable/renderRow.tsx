@@ -13,7 +13,7 @@ const renderRow: React.FunctionComponent<RowRendererProps> = ({
 
     return (
         <div className="tr-group" {...rowProps}>
-            <div className="tr">
+            <div className="tr cell">
                 {row.cells.map((cell: any) => (
                     <div
                         {...cell.getCellProps({
@@ -27,7 +27,7 @@ const renderRow: React.FunctionComponent<RowRendererProps> = ({
                 ))}
             </div>
             {row.isExpanded && (
-                <div className="tr">
+                <div className="tr expander">
                     <ContestLeaderboardTableScorecard row={row} />
                 </div>
             )}

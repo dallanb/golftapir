@@ -21,7 +21,7 @@ const constants = {
         },
         READY: {
             COLOUR: 'blue',
-            TWO_TONE_COLOUR: '#1890ff',
+            TWO_TONE_COLOUR: 'rgba(19,115,204, 1);',
             KEY: 'ready',
         },
         ACTIVE: {
@@ -52,7 +52,7 @@ const constants = {
     },
     ACTION: {
         ACTIVATE: {
-            TWO_TONE_COLOUR: '#1890ff',
+            TWO_TONE_COLOUR: 'rgba(19,115,204, 1);',
             KEY: 'activate',
             LABEL: 'Activate',
         },

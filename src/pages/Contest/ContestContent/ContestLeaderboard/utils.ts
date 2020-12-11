@@ -79,6 +79,7 @@ export const handleScoreUpdate = (sheets: any, lookup: any, score: any) => {
 
     localSheet.score = score.score;
     localSheet.strokes = score.strokes;
+    localSheet.trend = _calculateTrend(score.score, sheet.score);
 
     if (sheet.score != null) {
         _ranker(localLookup, { prev_score: sheet.score, score: score.score });
@@ -178,5 +179,15 @@ const _setRank = (lookup: any, score: number) => {
 const _cleanUp = (lookup: any, score: number) => {
     if (!lookup[score]['count']) {
         delete lookup[score];
+    }
+};
+
+const _calculateTrend = (new_score: number, old_score: number) => {
+    if (new_score < old_score) {
+        return 'upward';
+    } else if (new_score > old_score) {
+        return 'downward';
+    } else {
+        return 'sideway';
     }
 };

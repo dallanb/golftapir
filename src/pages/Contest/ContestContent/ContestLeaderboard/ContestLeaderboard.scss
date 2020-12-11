@@ -12,6 +12,9 @@
     }
     .score {
         width: 10% !important;
+        &.td {
+            font-weight: bold;
+        }
     }
     .strokes {
         width: 10% !important;

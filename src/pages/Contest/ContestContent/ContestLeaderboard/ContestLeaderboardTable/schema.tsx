@@ -1,6 +1,7 @@
 import React from 'react';
 import ContestLeaderboardTableParticipant from './ContestLeaderboardTableParticipant';
 import ContestLeaderboardTableToggle from './ContestLeaderboardTableToggle';
+import ContestLeaderboardTablePosition from './ContestLeaderboardTablePosition';
 
 const columnsSchema = [
     {
@@ -24,15 +25,7 @@ const columnsSchema = [
     {
         Header: 'Pos',
         accessor: 'rank',
-        Cell: ({
-            value = 'NA',
-            row: {
-                original: { count },
-            },
-        }: any) => {
-            const prefix = count > 1 ? 'T' : '';
-            return `${prefix}${value}`;
-        },
+        Cell: ({ row }: any) => <ContestLeaderboardTablePosition row={row} />,
         SubCell: (cellProps: any) => <> {cellProps.value} 🎉</>,
         className: 'pos',
     },

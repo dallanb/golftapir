@@ -7,7 +7,11 @@ export interface VirtualTableProps {
     columnsSchema: any;
     initialState?: any;
     itemSize: (row: any) => number;
-    bodyStyle: any;
+    className?: string;
+    headClassName?: string;
+    bodyClassName?: string;
+    headStyle?: any;
+    bodyStyle?: any;
     hasNextPage: boolean;
     isNextPageLoading: boolean;
     items: any;

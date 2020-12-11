@@ -1,4 +1,26 @@
 .table-wrap {
     display: block;
     max-width: 100%;
+
+    .contest-leaderboard-table-table {
+        border-radius: 4px;
+        overflow: hidden;
+
+        .contest-leaderboard-table-header {
+            font-weight: bold;
+            height: 50px;
+            border-bottom: 1px solid rgba(24, 144, 255, 0.1);
+        }
+        .contest-leaderboard-table-body {
+            .tr {
+                &.cell {
+                    height: 75px;
+                    border-bottom: 1px solid rgba(24, 144, 255, 0.1);
+                }
+            }
+        }
+        .tr-group:nth-child(odd) .cell {
+            background: rgba(230, 247, 255, 0.3);
+        }
+    }
 }

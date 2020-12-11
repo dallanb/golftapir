@@ -20,15 +20,15 @@ const ContestButtons: React.FunctionComponent<ContestButtonsProps> = () => {
         );
     };
     return (
-        <div className={`contest-button ${constants.ACTION.APPROVE.KEY}`}>
-            <Button
-                block
-                key={constants.ACTION.COMPLETE.KEY}
-                onClick={handleApproveClick}
-            >
-                {constants.ACTION.COMPLETE.LABEL}
-            </Button>
-        </div>
+        <Button
+            block
+            type="primary"
+            key={constants.ACTION.COMPLETE.KEY}
+            className={`contest-button ${constants.ACTION.APPROVE.KEY}`}
+            onClick={handleApproveClick}
+        >
+            {constants.ACTION.COMPLETE.LABEL}
+        </Button>
     );
 };
 

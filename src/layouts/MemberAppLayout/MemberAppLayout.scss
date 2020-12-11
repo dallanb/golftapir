@@ -6,7 +6,7 @@
     }
 
     .member-app-sider-layout {
-        background: #333333 !important;
+        background: rgba(19,115,204, 1) !important;
         .member-app-sider-layout-title {
             height: 32px;
             background: url(../../assets/images/tapir_white.png);
@@ -25,7 +25,7 @@
             position: absolute;
             bottom: 0;
             button {
-                background: #3f3f3f;
+                background: rgba(19,115,204, 1);
                 color: #fff;
             }
         }

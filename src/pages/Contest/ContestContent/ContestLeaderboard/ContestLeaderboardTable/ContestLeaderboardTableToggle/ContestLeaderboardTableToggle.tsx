@@ -1,5 +1,5 @@
 import React from 'react';
-import { MinusCircleOutlined, PlusCircleOutlined } from '@ant-design/icons';
+import { MinusCircleTwoTone, PlusCircleTwoTone } from '@ant-design/icons/lib';
 import { ContestLeaderboardTableToggleProps } from './types';
 
 const ContestLeaderboardTableToggle: React.FunctionComponent<ContestLeaderboardTableToggleProps> = ({
@@ -17,7 +17,11 @@ const ContestLeaderboardTableToggle: React.FunctionComponent<ContestLeaderboardT
             listRef.current && listRef.current.resetAfterIndex(0);
         }}
     >
-        {row.isExpanded ? <MinusCircleOutlined /> : <PlusCircleOutlined />}
+        {row.isExpanded ? (
+            <MinusCircleTwoTone twoToneColor="rgba(19,115,204, 1)" />
+        ) : (
+            <PlusCircleTwoTone twoToneColor="rgba(19,115,204, 1)" />
+        )}
     </span>
 );
 export default ContestLeaderboardTableToggle;
