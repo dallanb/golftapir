@@ -2,21 +2,9 @@
 .ant-layout {
     background: rgba(230, 247, 255, 1) !important;
 }
-
-.ant-menu {
-    &.ant-menu-dark,
-    &.ant-menu-dark:not(.ant-menu-horizontal) {
-        background: rgba(19,115,204, 1);
-        .ant-menu-item {
-            color: white;
-
-            //&.ant-menu-item-selected {
-            //    background: #232323 !important;
-            //}
-        }
-    }
-}
-
-.ant-layout-footer {
++ .ant-layout-footer {
     background: rgba(230, 247, 255, 1) !important;
 }
+
+@table-border: fade(@primary-color, 10%);
+@tile-fill: fade(@primary-color, 5%);

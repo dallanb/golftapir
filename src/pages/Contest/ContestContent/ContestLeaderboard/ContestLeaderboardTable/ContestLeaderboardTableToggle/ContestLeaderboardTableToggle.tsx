@@ -17,11 +17,7 @@ const ContestLeaderboardTableToggle: React.FunctionComponent<ContestLeaderboardT
             listRef.current && listRef.current.resetAfterIndex(0);
         }}
     >
-        {row.isExpanded ? (
-            <MinusCircleTwoTone twoToneColor="rgba(19,115,204, 1)" />
-        ) : (
-            <PlusCircleTwoTone twoToneColor="rgba(19,115,204, 1)" />
-        )}
+        {row.isExpanded ? <MinusCircleTwoTone /> : <PlusCircleTwoTone />}
     </span>
 );
 export default ContestLeaderboardTableToggle;

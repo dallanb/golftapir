@@ -89,6 +89,7 @@ class MemberAppLayout extends React.Component<
                         theme="dark"
                         defaultSelectedKeys={['0']}
                         selectedKeys={selectedKeys}
+                        className="member-app-sider-layout-menu"
                         mode="inline"
                     >
                         {this.getMenuItems(menuRoutes, menuProps)}
