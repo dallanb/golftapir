@@ -4,7 +4,7 @@ import { App } from '@apps';
 import { FirebaseClient } from '@libs';
 import * as serviceWorker from './serviceWorker';
 
-import './index.scss';
+import './index.less';
 import 'antd/dist/antd.css';
 
 FirebaseClient.init();

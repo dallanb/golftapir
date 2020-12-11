@@ -7,7 +7,7 @@ import ContestsCreateHeader from './ContestsCreateHeader';
 import ContestsCreateContent from './ContestsCreateContent';
 import ContestsCreateSider from './ContestsCreateSider';
 import { selectData } from './selector';
-import './ContestsCreate.scss';
+import './ContestsCreate.less';
 
 const ContestsCreate: React.FunctionComponent<ContestsCreateProps> = () => {
     const dispatch = useDispatch();

@@ -8,7 +8,7 @@ import AccountHeader from './AccountHeader';
 import AccountContent from './AccountContent';
 import AccountSider from './AccountSider';
 import { selectData } from './selector';
-import './Account.scss';
+import './Account.less';
 
 const Account: React.FunctionComponent<AccountProps> = () => {
     const dispatch = useDispatch();

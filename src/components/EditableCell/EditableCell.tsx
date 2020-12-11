@@ -1,6 +1,6 @@
 import React, { ChangeEvent } from 'react';
 import { EditableCellProps } from './types';
-import './EditableCell.scss';
+import './EditableCell.less';
 
 const EditableCell: React.FunctionComponent<EditableCellProps> = ({
     initialValue,

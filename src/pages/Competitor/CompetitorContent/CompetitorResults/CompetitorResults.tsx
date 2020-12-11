@@ -4,7 +4,7 @@ import CompetitorResultsList from './CompetitorResultsList';
 import { CompetitorResultsProps } from './types';
 import CompetitorPageContentCompetitorResultsActions from './actions';
 import { selectData } from './selector';
-import './CompetitorResults.scss';
+import './CompetitorResults.less';
 import ComponentContent from '@layouts/ComponentContent';
 
 const CompetitorResults: React.FunctionComponent<CompetitorResultsProps> = ({}) => {

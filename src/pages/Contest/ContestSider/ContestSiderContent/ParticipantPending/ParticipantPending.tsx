@@ -5,7 +5,7 @@ import { ParticipantPendingProps } from './types';
 import ContestPageActions from '@pages/Contest/actions';
 import { selectMyParticipant } from '@pages/Contest/selector';
 import constants from '@constants';
-import './ParticipantPending.scss';
+import './ParticipantPending.less';
 
 const ParticipantPending: React.FunctionComponent<ParticipantPendingProps> = () => {
     const dispatch = useDispatch();

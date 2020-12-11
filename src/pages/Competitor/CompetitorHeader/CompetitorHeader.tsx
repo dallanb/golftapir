@@ -7,7 +7,7 @@ import {
 import { CompetitorHeaderProps } from './types';
 import { ContentLayoutHeader } from '@layouts';
 import CONSTANTS from '@locale/en-CA';
-import './CompetitorHeader.scss';
+import './CompetitorHeader.less';
 
 const CompetitorHeader: React.FunctionComponent<CompetitorHeaderProps> = () => {
     const title = useSelector(selectAccountName);

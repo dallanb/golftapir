@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ContestActiveProps } from './types';
 import ContestScorecard from './ContestScorecard';
 import ContestButtons from './ContestButtons';
-import './ContestActive.scss';
+import './ContestActive.less';
 import ContestPageSiderContentParticipantActiveContestActiveActions from './actions';
 import { selectData } from './selector';
 import ComponentContent from '@layouts/ComponentContent';

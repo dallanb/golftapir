@@ -1,6 +1,6 @@
 import React from 'react';
 import { SubscriptionToggleProps } from './types';
-import './SubscriptionToggle.scss';
+import './SubscriptionToggle.less';
 import { Button } from 'antd';
 
 const SubscriptionToggle: React.FunctionComponent<SubscriptionToggleProps> = ({

@@ -9,7 +9,7 @@ import HeaderTitle from './HeaderTitle';
 import HeaderSubTitle from './HeaderSubTitle';
 import HeaderExtra from './HeaderExtra';
 import { ContentLayoutHeader } from '@layouts';
-import './ContestHeader.scss';
+import './ContestHeader.less';
 
 const ContestHeader: React.FunctionComponent<ContestHeaderProps> = () => {
     return (

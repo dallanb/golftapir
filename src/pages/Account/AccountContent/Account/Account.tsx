@@ -5,7 +5,7 @@ import { AccountProps } from './types';
 import AccountPageContentAccountActions from './actions';
 import { selectData } from './selector';
 import ComponentContent from '@layouts/ComponentContent';
-import './Account.scss';
+import './Account.less';
 
 const Account: React.FunctionComponent<AccountProps> = ({}) => {
     const dispatch = useDispatch();

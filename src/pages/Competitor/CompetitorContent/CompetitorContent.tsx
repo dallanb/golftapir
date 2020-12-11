@@ -4,7 +4,7 @@ import { ContentLayoutContent } from '@layouts';
 import CompetitorResults from './CompetitorResults';
 import { CompetitorContentProps } from './types';
 import { selectData } from '../selector';
-import './CompetitorContent.scss';
+import './CompetitorContent.less';
 
 const CompetitorContent: React.FunctionComponent<CompetitorContentProps> = ({}) => {
     const { isInitialized } = useSelector(selectData);

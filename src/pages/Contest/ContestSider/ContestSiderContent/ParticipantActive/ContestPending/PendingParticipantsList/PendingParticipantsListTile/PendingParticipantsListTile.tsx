@@ -5,7 +5,7 @@ import { selectAccountsHash } from '../../selector';
 import { PendingParticipantsListTileProps } from './types';
 import { prepareParticipant } from '@pages/Contest/utils';
 import RemindButton from './RemindButton';
-import './PendingParticipantsListTile.scss';
+import './PendingParticipantsListTile.less';
 
 const PendingParticipantsListTile: React.FunctionComponent<PendingParticipantsListTileProps> = ({
     props: { index, style, data },

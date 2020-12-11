@@ -3,7 +3,7 @@ import { ContentLayoutSider } from '@layouts';
 import { NotificationsSiderProps } from './types';
 import NotificationsSiderHeader from './NotificationsSiderHeader';
 import NotificationsSiderContent from './NotificationsSiderContent';
-import './NotificationsSider.scss';
+import './NotificationsSider.less';
 
 const NotificationsSider: React.FunctionComponent<NotificationsSiderProps> = () => {
     return (

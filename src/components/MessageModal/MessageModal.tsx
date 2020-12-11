@@ -3,7 +3,7 @@ import { Modal } from 'antd';
 import { useSelector } from 'react-redux';
 import { MessageModalProps } from './types';
 import { selectModalData } from '@selectors/ModalSelector';
-import './MessageModal.scss';
+import './MessageModal.less';
 
 const MessageModal: React.FunctionComponent<MessageModalProps> = () => {
     const {

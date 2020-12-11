@@ -6,7 +6,7 @@ import ContestsListTileLeaderboard from './ContestsListTileLeaderboard';
 import constants from '@constants';
 import { mapStatusColour, withS3URL } from '@utils';
 import { Avatar } from '@components';
-import './ContestsListTile.scss';
+import './ContestsListTile.less';
 
 const ContestsListTile: React.FunctionComponent<ContestsListTileProps> = ({
     props: { index, style, data },

@@ -9,7 +9,7 @@ import {
     MenuItemRendererProps,
 } from './types';
 import { UserTile } from '@components';
-import './MemberAppLayout.scss';
+import './MemberAppLayout.less';
 import defaultMenuItemRenderer from './defaultMenuItemRenderer';
 import { getRouteBase } from '@utils';
 

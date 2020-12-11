@@ -3,7 +3,7 @@ import { ContentLayoutSider } from '@layouts';
 import { CompetitorsSiderProps } from './types';
 import CompetitorsSiderHeader from './CompetitorsSiderHeader';
 import CompetitorsSiderContent from './CompetitorsSiderContent';
-import './CompetitorsSider.scss';
+import './CompetitorsSider.less';
 
 const CompetitorsSider: React.FunctionComponent<CompetitorsSiderProps> = () => {
     return (

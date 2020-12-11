@@ -5,7 +5,7 @@ import {
     selectContestName,
     selectContestStartTime,
 } from '@pages/Contest/selector';
-import './HeaderTitle.scss';
+import './HeaderTitle.less';
 import { useSelector } from 'react-redux';
 
 const HeaderTitle: React.FunctionComponent<HeaderTitleProps> = () => {

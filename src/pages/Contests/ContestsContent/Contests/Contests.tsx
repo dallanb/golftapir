@@ -5,7 +5,7 @@ import { ContestsProps } from './types';
 import ContestsPageContentContestsActions from './actions';
 import { selectData } from './selector';
 import ComponentContent from '@layouts/ComponentContent';
-import './Contests.scss';
+import './Contests.less';
 
 const Contests: React.FunctionComponent<ContestsProps> = ({}) => {
     const dispatch = useDispatch();

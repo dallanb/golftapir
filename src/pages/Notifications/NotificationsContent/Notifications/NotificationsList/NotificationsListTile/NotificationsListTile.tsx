@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, Card } from 'antd';
 import { get as _get } from 'lodash';
 import { NotificationsListTileProps } from './types';
-import './NotificationsListTile.scss';
+import './NotificationsListTile.less';
 import memoize from 'memoize-one';
 import { Avatar } from '@components';
 import { getAvatarSrc } from './utils';

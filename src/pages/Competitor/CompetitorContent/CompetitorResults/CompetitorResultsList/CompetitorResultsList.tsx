@@ -5,7 +5,7 @@ import { CompetitorResultsListProps } from './types';
 import { FixedSizeList } from '@components';
 import { selectListData, selectListIsFetching } from '../selector';
 import CompetitorResultsListTile from './CompetitorResultsListTile';
-import './CompetitorResultsList.scss';
+import './CompetitorResultsList.less';
 import { getRefHeight } from '@utils';
 
 const CompetitorResultsList: React.FunctionComponent<CompetitorResultsListProps> = ({

@@ -11,7 +11,7 @@ import {
 } from '@pages/Contest/selector';
 import constants from '@constants';
 import { useHistory } from 'react-router-dom';
-import './HeaderSubTitle.scss';
+import './HeaderSubTitle.less';
 
 const HeaderSubTitle: React.FunctionComponent<HeaderSubTitleProps> = () => {
     const dispatch = useDispatch();

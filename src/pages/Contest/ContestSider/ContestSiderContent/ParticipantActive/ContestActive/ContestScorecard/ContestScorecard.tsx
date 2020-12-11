@@ -6,7 +6,7 @@ import { MinusCircleTwoTone, PlusCircleTwoTone } from '@ant-design/icons/lib';
 import { ContestScorecardProps } from './types';
 import { selectSheet } from '../selector';
 import ContestPageSiderContentParticipantActiveContestActiveActions from '../actions';
-import './ContestScorecard.scss';
+import './ContestScorecard.less';
 
 const ContestScorecard: React.FunctionComponent<ContestScorecardProps> = () => {
     const dispatch = useDispatch();

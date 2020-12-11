@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectData } from './selector';
 import ContestPageContentContestLeaderboardScorecardActions from './actions';
 import { selectContestUUID } from '@pages/Contest/selector';
-import './ContestLeaderboardTableScorecard.scss';
+import './ContestLeaderboardTableScorecard.less';
 
 const ContestLeaderboardTableScorecard: React.FunctionComponent<ContestLeaderboardTableScorecardProps> = ({
     row,

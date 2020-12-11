@@ -1,7 +1,7 @@
 import React from 'react';
 import { Popover } from 'antd';
 import { UserPopoverProps } from './types';
-import './UserPopover.scss';
+import './UserPopover.less';
 
 const UserPopover: React.FunctionComponent<UserPopoverProps> = ({
     title,

@@ -7,7 +7,7 @@ import { ContestParticipantsTableParticipantProps } from './types';
 import { prepareParticipant } from '@pages/Contest/utils';
 import { Avatar } from '@components';
 import { withS3URL } from '@utils';
-import './ContestLeaderboardTableParticipant.scss';
+import './ContestLeaderboardTableParticipant.less';
 
 const ContestLeaderboardTableParticipant: React.FunctionComponent<ContestParticipantsTableParticipantProps> = ({
     uuid,

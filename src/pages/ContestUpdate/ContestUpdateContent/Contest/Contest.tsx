@@ -6,7 +6,7 @@ import { ContestProps } from './types';
 import ContestUpdatePageContentContestActions from './actions';
 import { selectData } from './selector';
 import ComponentContent from '@layouts/ComponentContent';
-import './Contest.scss';
+import './Contest.less';
 import constants from '@constants';
 
 const Contest: React.FunctionComponent<ContestProps> = ({}) => {

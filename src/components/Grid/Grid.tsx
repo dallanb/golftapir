@@ -3,7 +3,7 @@ import { FixedSizeGrid } from 'react-window';
 import { GridProps } from './types';
 import InfiniteLoader from 'react-window-infinite-loader';
 import defaultRowItemRenderer from './defaultRowItemRenderer';
-import './Grid.scss';
+import './Grid.less';
 
 const Grid: React.FunctionComponent<GridProps> = ({
     rowItemRenderer = defaultRowItemRenderer,

@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { Spin } from 'antd';
 import LogoutPageActions from './actions';
 import { LogoutProps, StateProps } from './types';
-import './Logout.scss';
+import './Logout.less';
 
 class Logout extends React.PureComponent<LogoutProps> {
     componentDidMount() {

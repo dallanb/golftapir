@@ -7,7 +7,7 @@ import { Form } from '@components';
 import ContestUpdatePageContentContestActions from '../actions';
 import { fieldSchema, validationSchema } from './schema';
 import { selectData as selectContestFormData } from '../selector';
-import './ContestForm.scss';
+import './ContestForm.less';
 
 const ContestForm: React.FunctionComponent<ContestFormProps> = () => {
     const dispatch = useDispatch();

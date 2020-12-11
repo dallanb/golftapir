@@ -9,8 +9,8 @@ import {
 import { store } from './store';
 import MessageModal from '@components/MessageModal/MessageModal';
 import { routes } from './routes';
-import './App.scss';
-import '../../assets/styles/global.scss';
+import './App.less';
+import '../../assets/styles/global.less';
 
 class App extends React.Component {
     render() {

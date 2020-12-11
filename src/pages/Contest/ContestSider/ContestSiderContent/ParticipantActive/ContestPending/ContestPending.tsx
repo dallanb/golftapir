@@ -6,7 +6,7 @@ import { selectData } from './selector';
 import PendingParticipantsTable from './PendingParticipantsList';
 import ComponentContent from '@layouts/ComponentContent';
 import ContestPageSiderContentParticipantActiveContestPendingActions from './actions';
-import './ContestPending.scss';
+import './ContestPending.less';
 
 const ContestPending: React.FunctionComponent<ContestPendingProps> = () => {
     const dispatch = useDispatch();

@@ -1,7 +1,7 @@
 import React from 'react';
 import { CaretDownFilled, CaretUpFilled } from '@ant-design/icons/lib';
 import { ContestLeaderboardTablePositionProps } from './types';
-import './ContestLeaderboardTablePosition.scss';
+import './ContestLeaderboardTablePosition.less';
 
 const ContestLeaderboardTablePosition: React.FunctionComponent<ContestLeaderboardTablePositionProps> = ({
     row: { original },

@@ -5,7 +5,7 @@ import { ContestButtonsProps } from './types';
 import { selectMyParticipant } from '@pages/Contest/selector';
 import ContestPageActions from '@pages/Contest/actions';
 import constants from '@constants';
-import './ContestButtons.scss';
+import './ContestButtons.less';
 
 const ContestButtons: React.FunctionComponent<ContestButtonsProps> = () => {
     const dispatch = useDispatch();

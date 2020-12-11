@@ -1,7 +1,7 @@
 import React from 'react';
 import { Badge } from 'antd';
 import { PendingBadgeProps } from './types';
-import './PendingBadge.scss';
+import './PendingBadge.less';
 
 const PendingBadge: React.FunctionComponent<PendingBadgeProps> = ({
     value: { pending },

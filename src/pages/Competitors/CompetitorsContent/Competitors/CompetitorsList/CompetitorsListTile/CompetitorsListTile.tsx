@@ -5,7 +5,7 @@ import { CompetitorsListTileProps } from './types';
 import constants from '@constants';
 import { getName, withS3URL } from '@utils';
 import { Avatar } from '@components';
-import './CompetitorsListTile.scss';
+import './CompetitorsListTile.less';
 
 const CompetitorsListTile: React.FunctionComponent<CompetitorsListTileProps> = ({
     props: { index, style, data },

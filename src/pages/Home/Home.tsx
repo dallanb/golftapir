@@ -7,7 +7,7 @@ import HomeHeader from './HomeHeader';
 import HomeContent from './HomeContent';
 import HomeSider from './HomeSider';
 import { selectData } from './selector';
-import './Home.scss';
+import './Home.less';
 
 const Home: React.FunctionComponent<HomeProps> = () => {
     const dispatch = useDispatch();

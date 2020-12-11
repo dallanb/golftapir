@@ -7,7 +7,7 @@ import ContestsPageActions from './actions';
 import ContestsSider from './ContestsSider';
 import ContestsHeader from './ContestsHeader';
 import ContestsContent from './ContestsContent';
-import './Contests.scss';
+import './Contests.less';
 
 const Contests: React.FunctionComponent<ContestsProps> = () => {
     const dispatch = useDispatch();

@@ -12,7 +12,7 @@ import {
 import NotificationsListTile from './NotificationsListTile';
 import { getRefHeight, topicToRouteMapper } from '@utils';
 import { NotificationActions } from '@actions';
-import './NotificationsList.scss';
+import './NotificationsList.less';
 
 const NotificationsList: React.FunctionComponent<NotificationsListProps> = ({
     containerRef,

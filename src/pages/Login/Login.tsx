@@ -5,7 +5,7 @@ import { withRouter } from 'react-router-dom';
 import LoginForm from './LoginForm';
 import { LoginProps, StateProps } from './types';
 import LoginPageActions from './actions';
-import './Login.scss';
+import './Login.less';
 
 class Login extends React.PureComponent<LoginProps> {
     componentDidMount() {

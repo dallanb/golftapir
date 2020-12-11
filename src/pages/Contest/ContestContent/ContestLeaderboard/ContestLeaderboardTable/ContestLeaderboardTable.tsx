@@ -6,7 +6,7 @@ import { VirtualTable } from '@components';
 import columnsSchema from './schema';
 import { selectRankingLookup, selectSheets } from '../selector';
 import renderRow from './renderRow';
-import './ContestLeaderboardTable.scss';
+import './ContestLeaderboardTable.less';
 
 const ContestLeaderboardTable: React.FunctionComponent<ContestLeaderboardTableProps> = ({}) => {
     const sheets = useSelector(selectSheets);

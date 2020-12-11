@@ -6,7 +6,7 @@ import { Form } from '@components';
 import { RegisterFormProps } from './types';
 import { StateProps } from '../types';
 import { fieldSchema, validationSchema } from './schema';
-import './RegisterForm.scss';
+import './RegisterForm.less';
 
 class RegisterForm extends React.PureComponent<RegisterFormProps> {
     handleSubmit = (values: FormikValues) => {

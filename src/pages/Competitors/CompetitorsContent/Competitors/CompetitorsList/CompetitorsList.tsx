@@ -10,7 +10,7 @@ import {
     selectListMetadata,
 } from '../selector';
 import CompetitorsListTile from './CompetitorsListTile';
-import './CompetitorsList.scss';
+import './CompetitorsList.less';
 import { getRefHeight } from '@utils';
 
 const CompetitorsList: React.FunctionComponent<CompetitorsListProps> = ({

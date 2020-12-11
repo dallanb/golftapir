@@ -2,7 +2,7 @@ import React from 'react';
 import { CompetitorsHeaderProps } from './types';
 import { ContentLayoutHeader } from '@layouts';
 import CONSTANTS from '@locale/en-CA';
-import './CompetitorsHeader.scss';
+import './CompetitorsHeader.less';
 
 const ContestsHeader: React.FunctionComponent<CompetitorsHeaderProps> = () => {
     const title = CONSTANTS.PAGES.COMPETITORS.TITLE;

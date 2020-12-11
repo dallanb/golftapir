@@ -5,7 +5,7 @@ import { mapStatusColour } from '@utils';
 import { HeaderTitleProps } from './types';
 import { selectMyName } from '@selectors/BaseSelector';
 import { selectMyParticipantStatus } from '@pages/Contest/selector';
-import './HeaderTitle.scss';
+import './HeaderTitle.less';
 
 const HeaderTitle: React.FunctionComponent<HeaderTitleProps> = () => {
     const name = useSelector(selectMyName);

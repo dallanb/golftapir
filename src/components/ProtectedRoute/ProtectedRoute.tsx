@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { ProtectedRouteProps } from './types';
-import './ProtectedRoute.scss';
+import './ProtectedRoute.less';
 
 const ProtectedRoute = ({
     component: Component,

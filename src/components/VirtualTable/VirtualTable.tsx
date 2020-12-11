@@ -6,7 +6,7 @@ import { get as _get } from 'lodash';
 import { VirtualTableProps } from './types';
 import { VariableSizeList } from '@components';
 import defaultRowRenderer from './defaultRowRenderer';
-import './VirtualTable.scss';
+import './VirtualTable.less';
 
 const VirtualTable: React.FunctionComponent<VirtualTableProps> = ({
     items,

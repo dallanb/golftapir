@@ -6,7 +6,7 @@ import constants from '@constants';
 import ContestActive from './ContestActive';
 import ContestPending from './ContestPending';
 import ContestReady from './ContestReady';
-import './ParticipantActive.scss';
+import './ParticipantActive.less';
 
 const ParticipantActive: React.FunctionComponent<ContestSiderActiveProps> = () => {
     const contestStatus = useSelector(selectContestStatus);

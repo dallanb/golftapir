@@ -1,7 +1,7 @@
 import React from 'react';
 import { ComponentContentProps } from './types';
 import { Layout, Spin } from 'antd';
-import './ComponentContent.scss';
+import './ComponentContent.less';
 
 const { Content } = Layout;
 

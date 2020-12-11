@@ -7,7 +7,7 @@ import CompetitorsPageActions from './actions';
 import CompetitorsSider from './CompetitorsSider';
 import CompetitorsHeader from './CompetitorsHeader';
 import CompetitorsContent from './CompetitorsContent';
-import './Competitors.scss';
+import './Competitors.less';
 
 const Competitors: React.FunctionComponent<CompetitorsProps> = () => {
     const dispatch = useDispatch();

@@ -2,7 +2,7 @@ import React from 'react';
 import { TableProps } from './types';
 import { useTable } from 'react-table';
 
-import './Table.scss';
+import './Table.less';
 
 const Table: React.FunctionComponent<TableProps> = ({
     header = true,

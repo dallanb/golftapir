@@ -6,7 +6,7 @@ import { ContestProps } from './types';
 import ContestsCreatePageContentContestActions from './actions';
 import { selectData } from './selector';
 import ComponentContent from '@layouts/ComponentContent';
-import './Contest.scss';
+import './Contest.less';
 import { get as _get } from 'lodash';
 import constants from '@constants';
 
