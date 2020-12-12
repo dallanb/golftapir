@@ -34,12 +34,12 @@ function* init() {
 
 function* debouncedHoleStrokeUpdate({ holeId, strokes }: AnyAction) {
     try {
-        const { uuid } = yield select(selectSheet);
+        const { uuid, holes } = yield select(selectSheet);
         yield fork(ScoreService.updateHole, uuid, holeId, { strokes });
         yield put(
             ContestPageSiderContentParticipantActiveContestActiveActions.debouncedHoleStrokeUpdateSuccess(
                 {
-                    [holeId]: { strokes },
+                    [holeId]: { strokes, ...holes[holeId] },
                 }
             )
         );
