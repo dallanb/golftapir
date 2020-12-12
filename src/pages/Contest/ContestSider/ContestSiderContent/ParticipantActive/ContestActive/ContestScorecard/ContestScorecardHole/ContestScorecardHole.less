@@ -1,0 +1,58 @@
+@import '/src/assets/styles/global';
+
+.contest-scorecard-hole {
+    display: flex;
+    .contest-scorecard-hole-static {
+        display: flex;
+        justify-content: space-around;
+        padding: 0 8px;
+        .contest-scorecard-hole-hole {
+            display: flex;
+            align-items: center;
+
+            .contest-scorecard-hole-hole-label {
+                color: fade(@primary-color, 50%);
+                margin-right: 16px;
+            }
+            .contest-scorecard-hole-hole-value {
+                font-size: 16px;
+            }
+        }
+        .contest-scorecard-hole-par {
+            display: flex;
+            align-items: center;
+
+            .contest-scorecard-hole-par-label {
+                color: fade(@primary-color, 50%);
+                margin-right: 16px;
+            }
+            .contest-scorecard-hole-par-value {
+                font-size: 16px;
+            }
+        }
+        .contest-scorecard-hole-distance {
+            display: flex;
+            align-items: center;
+
+            .contest-scorecard-hole-distance-label {
+                color: fade(@primary-color, 50%);
+                margin-right: 16px;
+            }
+            .contest-scorecard-hole-distance-value {
+                font-size: 16px;
+            }
+        }
+        .contest-scorecard-hole-divider {
+            height: 36px;
+        }
+    }
+
+    .contest-scorecard-hole-page-left {
+        line-height: 2.2rem !important;
+        font-size: 18px;
+    }
+    .contest-scorecard-hole-page-right {
+        line-height: 2.2rem !important;
+        font-size: 18px;
+    }
+}

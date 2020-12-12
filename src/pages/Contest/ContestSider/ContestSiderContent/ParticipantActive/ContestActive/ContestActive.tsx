@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import ComponentContent from '@layouts/ComponentContent';
 import { ContestActiveProps } from './types';
 import ContestScorecard from './ContestScorecard';
 import ContestButtons from './ContestButtons';
 import './ContestActive.less';
 import ContestPageSiderContentParticipantActiveContestActiveActions from './actions';
 import { selectData } from './selector';
-import ComponentContent from '@layouts/ComponentContent';
 
 const ContestActive: React.FunctionComponent<ContestActiveProps> = () => {
     const dispatch = useDispatch();
@@ -24,7 +24,7 @@ const ContestActive: React.FunctionComponent<ContestActiveProps> = () => {
     }, []);
     return (
         <>
-            <ContestScorecard isInitialized={isInitialized} />
+            <ContestScorecard />
             <ComponentContent
                 showSpinner={!isInitialized}
                 className="contest-buttons"
