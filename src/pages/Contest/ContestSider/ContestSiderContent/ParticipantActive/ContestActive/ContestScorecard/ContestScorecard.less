@@ -1,30 +1,71 @@
-.contest-scorecard {
+@import '/src/assets/styles/global';
+
+.contest-scorecard-static {
+    display: flex;
+    justify-content: space-around;
     .contest-scorecard-hole {
-    }
-    .contest-scorecard-strokes {
-        .contest-scorecard-strokes-label {
+        display: flex;
+        align-items: center;
+
+        .contest-scorecard-hole-label {
+            color: fade(@primary-color, 50%);
+            margin-right: 24px;
         }
-        .contest-scorecard-strokes-input {
+        .contest-scorecard-hole-value {
+            font-size: 16px;
+        }
+    }
+    .contest-scorecard-par {
+        display: flex;
+        align-items: center;
+
+        .contest-scorecard-par-label {
+            color: fade(@primary-color, 50%);
+            margin-right: 24px;
+        }
+        .contest-scorecard-par-value {
+            font-size: 16px;
+        }
+    }
+    .contest-scorecard-static-divider {
+        height: 36px;
+    }
+}
+
+.contest-scorecard-strokes {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+
+    .contest-scorecard-strokes-label {
+        color: fade(@primary-color, 50%);
+        margin-right: 24px;
+    }
+    .contest-scorecard-strokes-input {
+        display: flex;
+        .contest-scorecard-strokes-value {
             display: flex;
-            .contest-scorecard-strokes-value {
-                display: flex;
-                align-items: center;
-                font-size: 16px;
-            }
-            .contest-scorecard-strokes-plus {
+            align-items: center;
+            font-size: 16px;
+            padding-right: 4px;
+        }
+        .contest-scorecard-strokes-buttons {
+            display: flex;
+            flex-direction: column;
+            .contest-scorecard-strokes-up {
                 font-size: 16px;
                 cursor: pointer;
-                padding: 5px;
+                //color: @primary-color;
             }
 
-            .contest-scorecard-strokes-minus {
+            .contest-scorecard-strokes-down {
                 font-size: 16px;
                 cursor: pointer;
-                padding: 5px;
+                //color: @primary-color;
             }
         }
     }
-    .contest-scorecard-pagination {
-        margin-top: 30px;
-    }
+}
+.contest-scorecard-pagination {
+    margin-top: 30px;
 }

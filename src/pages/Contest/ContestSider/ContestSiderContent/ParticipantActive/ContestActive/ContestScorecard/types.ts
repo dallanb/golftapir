@@ -1,1 +1,3 @@
-export interface ContestScorecardProps {}
+export interface ContestScorecardProps {
+    isInitialized: boolean
+}

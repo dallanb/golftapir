@@ -24,12 +24,7 @@ const ContestActive: React.FunctionComponent<ContestActiveProps> = () => {
     }, []);
     return (
         <>
-            <ComponentContent
-                showSpinner={!isInitialized}
-                className="contest-scorecard"
-            >
-                <ContestScorecard />
-            </ComponentContent>
+            <ContestScorecard isInitialized={isInitialized} />
             <ComponentContent
                 showSpinner={!isInitialized}
                 className="contest-buttons"

@@ -1,14 +1,22 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { get as _get } from 'lodash';
-import { Button, Pagination } from 'antd';
-import { MinusCircleTwoTone, PlusCircleTwoTone } from '@ant-design/icons/lib';
+import { Button, Divider, Pagination, Statistic } from 'antd';
+import {
+    CaretDownFilled,
+    CaretUpFilled,
+    MinusCircleTwoTone,
+    PlusCircleTwoTone,
+} from '@ant-design/icons/lib';
 import { ContestScorecardProps } from './types';
 import { selectSheet } from '../selector';
 import ContestPageSiderContentParticipantActiveContestActiveActions from '../actions';
 import './ContestScorecard.less';
+import ComponentContent from '@layouts/ComponentContent';
 
-const ContestScorecard: React.FunctionComponent<ContestScorecardProps> = () => {
+const ContestScorecard: React.FunctionComponent<ContestScorecardProps> = ({
+    isInitialized,
+}) => {
     const dispatch = useDispatch();
     const sheet = useSelector(selectSheet);
     const uuid = _get(sheet, ['uuid'], null);
@@ -44,54 +52,82 @@ const ContestScorecard: React.FunctionComponent<ContestScorecardProps> = () => {
         );
     };
 
+    const renderPar = (hole: number) => {
+        const par = _get(holes, [hole, 'par'], 3);
+        return (
+            <div className="contest-scorecard-par">
+                <div className="contest-scorecard-par-label">Par</div>
+                <div className="contest-scorecard-par-value">{par}</div>
+            </div>
+        );
+    };
+
+    // move this into its own component
     const renderStrokes = (hole: number) => {
         return (
             <div className="contest-scorecard-strokes">
                 <div className="contest-scorecard-strokes-label">Strokes</div>
                 <div className="contest-scorecard-strokes-input">
-                    <Button
-                        type="text"
-                        icon={
-                            <MinusCircleTwoTone
-                                twoToneColor="rgba(19,115,204, 1)"
-                                className="contest-scorecard-strokes-minus"
-                            />
-                        }
-                        disabled={!strokes}
-                        onClick={() => updateScore(hole, strokes - 1)}
-                    />
                     <div className="contest-scorecard-strokes-value">
                         {strokes}
                     </div>
-                    <Button
-                        type="text"
-                        icon={
-                            <PlusCircleTwoTone
-                                twoToneColor="rgba(19,115,204, 1)"
-                                className="contest-scorecard-strokes-plus"
-                            />
-                        }
-                        onClick={() => updateScore(hole, strokes + 1)}
-                    />
+                    <div className="contest-scorecard-strokes-buttons">
+                        <Button
+                            type="text"
+                            icon={
+                                <CaretUpFilled className="contest-scorecard-strokes-up" />
+                            }
+                            size={'small'}
+                            onClick={() => updateScore(hole, strokes + 1)}
+                        />
+                        <Button
+                            type="text"
+                            icon={
+                                <CaretDownFilled className="contest-scorecard-strokes-down" />
+                            }
+                            size={'small'}
+                            disabled={!strokes}
+                            onClick={() => updateScore(hole, strokes - 1)}
+                        />
+                    </div>
                 </div>
             </div>
         );
     };
 
     return (
-        <div>
-            {renderHole(current)}
-            {renderStrokes(current)}
-            <Pagination
-                size="small"
-                showLessItems
-                onChange={onChange}
-                total={18}
-                defaultPageSize={1}
-                current={current}
+        <>
+            <ComponentContent
+                showSpinner={!isInitialized}
+                className="contest-scorecard-static"
+            >
+                {renderHole(current)}
+                <Divider
+                    type="vertical"
+                    className="contest-scorecard-static-divider"
+                />
+                {renderPar(current)}
+            </ComponentContent>
+            <ComponentContent
+                showSpinner={!isInitialized}
+                className="contest-scorecard-input"
+            >
+                {renderStrokes(current)}
+            </ComponentContent>
+            <ComponentContent
+                showSpinner={!isInitialized}
                 className="contest-scorecard-pagination"
-            />
-        </div>
+            >
+                <Pagination
+                    size="small"
+                    showLessItems
+                    onChange={onChange}
+                    total={18}
+                    defaultPageSize={1}
+                    current={current}
+                />
+            </ComponentContent>
+        </>
     );
 };
 
