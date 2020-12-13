@@ -1,10 +1,11 @@
 import React from 'react';
 import { TableProps } from './types';
 import { useTable } from 'react-table';
-
+import defaultRowRenderer from './defaultRowRenderer';
 import './Table.less';
 
 const Table: React.FunctionComponent<TableProps> = ({
+    rowRenderer = defaultRowRenderer,
     header = true,
     columnsSchema,
     items,
@@ -40,17 +41,7 @@ const Table: React.FunctionComponent<TableProps> = ({
             <tbody {...getTableBodyProps()}>
                 {rows.map((row, i) => {
                     prepareRow(row);
-                    return (
-                        <tr {...row.getRowProps()}>
-                            {row.cells.map((cell) => {
-                                return (
-                                    <td {...cell.getCellProps()}>
-                                        {cell.render('Cell')}
-                                    </td>
-                                );
-                            })}
-                        </tr>
-                    );
+                    return rowRenderer({ row });
                 })}
             </tbody>
         </table>

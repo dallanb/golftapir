@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { get as _get } from 'lodash';
 import ComponentContent from '@layouts/ComponentContent';
 import { Table } from '@components';
 import { ContestLeaderboardTableScorecardProps } from './types';
 import { columnsSchemaGenerator } from './schema';
-import { useDispatch, useSelector } from 'react-redux';
 import { selectData } from './selector';
+import renderRow from './renderRow';
 import ContestPageContentContestLeaderboardScorecardActions from './actions';
 import { selectContestUUID } from '@pages/Contest/selector';
 import './ContestLeaderboardTableScorecard.less';
@@ -42,6 +43,7 @@ const ContestLeaderboardTableScorecard: React.FunctionComponent<ContestLeaderboa
             className="contest-leaderboard-table-scorecard"
         >
             <Table
+                rowRenderer={renderRow}
                 columnsSchema={columnsSchema}
                 items={items}
                 header={false}
