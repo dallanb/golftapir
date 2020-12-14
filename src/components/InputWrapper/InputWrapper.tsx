@@ -5,6 +5,7 @@ import './InputWrapper.less';
 
 class InputWrapper extends React.PureComponent<InputWrapperProps> {
     render() {
+        console.log(this.props);
         const { children, childRef, ...restProps } = this.props;
         return <Form.Item {...restProps}>{children}</Form.Item>;
     }
