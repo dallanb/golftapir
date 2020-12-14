@@ -2,7 +2,7 @@ import React from 'react';
 import { ContestsListTileLeaderboardProps } from './types';
 import constants from '@constants';
 import { findLowestScoringParticipant } from '@pages/Contests/utils';
-import './ContestsListTileLeaderboard.scss';
+import './ContestsListTileLeaderboard.less';
 
 const ContestsListTileLeaderboard: React.FunctionComponent<ContestsListTileLeaderboardProps> = ({
     status,

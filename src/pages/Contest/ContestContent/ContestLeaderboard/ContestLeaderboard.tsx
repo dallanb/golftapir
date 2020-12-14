@@ -6,7 +6,7 @@ import ComponentContent from '@layouts/ComponentContent';
 import ContestPageContentContestLeaderboardActions from './actions';
 import { selectIsInitialized, selectIsRefreshing } from './selector';
 import { selectIsRefreshing as selectIsBaseRefreshing } from '@pages/Contest/selector';
-import './ContestLeaderboard.scss';
+import './ContestLeaderboard.less';
 
 const ContestLeaderboard: React.FunctionComponent<ContestLeaderboardProps> = ({}) => {
     const dispatch = useDispatch();

@@ -5,7 +5,7 @@ import UserCard from './UserCard';
 import UserMenu from './UserMenu';
 import UserPopover from './UserPopover';
 import { UserTileProps } from './types';
-import './UserTile.scss';
+import './UserTile.less';
 
 const UserTile: React.FunctionComponent<UserTileProps> = ({
     name,

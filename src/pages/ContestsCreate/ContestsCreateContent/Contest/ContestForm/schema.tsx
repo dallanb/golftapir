@@ -1,6 +1,5 @@
 import React from 'react';
 import * as Yup from 'yup';
-import 'yup-phone';
 import moment, { Moment } from 'moment';
 import ContestsCreatePageContentContestSearchParticipantActions from './ContestFormSearch/Participant/actions';
 import ContestsCreatePageContentContestSearchCourseActions from './ContestFormSearch/Course/actions';

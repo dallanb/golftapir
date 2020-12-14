@@ -9,7 +9,7 @@ import AccountPageContentAccountActions from '../actions';
 import { fieldSchema, validationSchema } from './schema';
 import { selectAccount } from '@pages/Account/selector';
 import { selectData as selectAccountFormData } from '../selector';
-import './AccountForm.scss';
+import './AccountForm.less';
 
 const AccountForm: React.FunctionComponent<AccountFormProps> = () => {
     const dispatch = useDispatch();

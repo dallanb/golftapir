@@ -5,7 +5,7 @@ import { HeaderExtraProps } from './types';
 import { selectContestStatus } from '@pages/Contest/selector';
 import constants from '@constants';
 import CONSTANTS from '@locale/en-CA';
-import './HeaderExtra.scss';
+import './HeaderExtra.less';
 
 const { Step } = Steps;
 

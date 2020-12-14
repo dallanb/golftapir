@@ -6,7 +6,7 @@ import { VirtualTable } from '@components';
 import columnsSchema from './schema';
 import { selectRankingLookup, selectSheets } from '../selector';
 import renderRow from './renderRow';
-import './ContestLeaderboardTable.scss';
+import './ContestLeaderboardTable.less';
 
 const ContestLeaderboardTable: React.FunctionComponent<ContestLeaderboardTableProps> = ({}) => {
     const sheets = useSelector(selectSheets);
@@ -15,13 +15,13 @@ const ContestLeaderboardTable: React.FunctionComponent<ContestLeaderboardTablePr
         const rank = _get(rankingLookup, [participant.score], undefined);
         return Object.assign({}, participant, { uuid }, rank);
     });
-    const bodyStyle = { height: items.length * 75 + 150 };
+    const bodyStyle = { height: items.length * 50 + 175 };
 
     const initialState = {
         sortBy: [{ id: 'rank' }],
     };
     const itemSize = (row: any): number =>
-        _get(row, ['isExpanded']) ? 225 : 75;
+        _get(row, ['isExpanded']) ? 225 : 50;
 
     return (
         <div className="contest-leaderboard-table">

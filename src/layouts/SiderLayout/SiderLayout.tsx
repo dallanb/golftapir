@@ -1,7 +1,7 @@
 import React from 'react';
 import { Layout } from 'antd';
 import { SiderLayoutProps } from './types';
-import './SiderLayout.scss';
+import './SiderLayout.less';
 
 const { Content, Sider } = Layout;
 

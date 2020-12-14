@@ -5,7 +5,7 @@ import { CompetitorsProps } from './types';
 import CompetitorsPageContentCompetitorsActions from './actions';
 import { selectData } from './selector';
 import ComponentContent from '@layouts/ComponentContent';
-import './Competitors.scss';
+import './Competitors.less';
 
 const Competitors: React.FunctionComponent<CompetitorsProps> = ({}) => {
     const dispatch = useDispatch();

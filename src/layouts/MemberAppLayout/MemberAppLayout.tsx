@@ -9,7 +9,7 @@ import {
     MenuItemRendererProps,
 } from './types';
 import { UserTile } from '@components';
-import './MemberAppLayout.scss';
+import './MemberAppLayout.less';
 import defaultMenuItemRenderer from './defaultMenuItemRenderer';
 import { getRouteBase } from '@utils';
 
@@ -89,6 +89,7 @@ class MemberAppLayout extends React.Component<
                         theme="dark"
                         defaultSelectedKeys={['0']}
                         selectedKeys={selectedKeys}
+                        className="member-app-sider-layout-menu"
                         mode="inline"
                     >
                         {this.getMenuItems(menuRoutes, menuProps)}

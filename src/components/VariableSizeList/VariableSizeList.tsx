@@ -4,7 +4,7 @@ import AutoSizer from 'react-virtualized-auto-sizer';
 import InfiniteLoader from 'react-window-infinite-loader';
 import { ListProps } from './types';
 import defaultRowRenderer from './defaultRowRenderer';
-import './VariableSizeList.scss';
+import './VariableSizeList.less';
 import { mergeRefs } from '@utils';
 
 const VariableSizeList: React.FunctionComponent<ListProps> = ({

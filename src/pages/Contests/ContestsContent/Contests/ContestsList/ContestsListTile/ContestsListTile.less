@@ -1,0 +1,40 @@
+@import 'src/assets/styles/global';
+.contest-list-tile-view {
+    .contest-list-tile-card {
+        display: flex;
+        cursor: pointer;
+        height: 100%;
+
+        &.filled {
+            background: @tile-fill;
+        }
+
+        .ant-card-body {
+            width: 100%;
+        }
+
+        .contest-list-tile-content {
+            display: flex;
+            padding-bottom: 10px;
+
+            .contest-list-tile-content-avatar {
+                margin-right: 10px;
+            }
+
+            .contest-list-tile-content-info {
+                .contest-list-tile-content-name {
+                }
+
+                .contest-list-tile-content-status {
+                }
+            }
+
+            .contest-list-tile-content-leaderboard {
+                margin-left: auto;
+            }
+        }
+
+        .contest-list-tile-button {
+        }
+    }
+}

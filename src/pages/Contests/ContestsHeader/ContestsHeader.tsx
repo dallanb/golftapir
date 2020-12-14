@@ -1,7 +1,7 @@
 import React from 'react';
 import { ContestsHeaderProps } from './types';
 import { ContentLayoutHeader } from '@layouts';
-import './ContestsHeader.scss';
+import './ContestsHeader.less';
 import CONSTANTS from '@locale/en-CA';
 
 const ContestsHeader: React.FunctionComponent<ContestsHeaderProps> = () => {

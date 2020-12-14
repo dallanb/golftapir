@@ -3,7 +3,7 @@ import { FixedSizeGrid } from 'react-window';
 import { GridProps } from './types';
 import InfiniteLoader from 'react-window-infinite-loader';
 import defaultRowItemRenderer from './defaultRowItemRenderer';
-import './Grid.scss';
+import './Grid.less';
 
 const Grid: React.FunctionComponent<GridProps> = ({
     rowItemRenderer = defaultRowItemRenderer,
@@ -26,7 +26,7 @@ const Grid: React.FunctionComponent<GridProps> = ({
             isItemLoaded={(index) => !hasNextPage || index < itemCount}
             loadMoreItems={(startIndex, stopIndex) =>
                 isItemLoading
-                    ? new Promise((resolve) => resolve())
+                    ? new Promise((resolve) => resolve(null))
                     : new Promise((resolve) =>
                           loadMoreItems(startIndex, stopIndex, resolve)
                       )

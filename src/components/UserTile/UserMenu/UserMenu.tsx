@@ -1,7 +1,7 @@
 import React from 'react';
 import { Menu } from 'antd';
 import { UserMenuProps } from './types';
-import './UserMenu.scss';
+import './UserMenu.less';
 
 const UserMenu: React.FunctionComponent<UserMenuProps> = ({ items }) => {
     const renderMenuItems = (

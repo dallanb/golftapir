@@ -2,7 +2,7 @@ import React from 'react';
 import moment from 'moment';
 import { DatePicker } from 'antd';
 import { DateTimePickerProps } from './types';
-import './DateTimePicker.scss';
+import './DateTimePicker.less';
 
 const DateTimePicker: React.FunctionComponent<DateTimePickerProps> = ({
     value: rawValue,

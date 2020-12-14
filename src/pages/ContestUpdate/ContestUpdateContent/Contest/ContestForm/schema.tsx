@@ -1,5 +1,4 @@
 import * as Yup from 'yup';
-import 'yup-phone';
 import InputWrapper from '@components/InputWrapper';
 import CONSTANTS from '@locale/en-CA';
 import moment, { Moment } from 'moment';

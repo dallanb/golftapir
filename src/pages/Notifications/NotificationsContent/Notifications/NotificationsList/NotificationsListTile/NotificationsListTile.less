@@ -1,0 +1,31 @@
+@import 'src/assets/styles/global';
+
+.notifications-list-tile-view {
+    padding: 5px 0;
+
+    .notifications-list-tile-card {
+        display: flex;
+        cursor: pointer;
+        height: 100%;
+
+        &.filled {
+            background: @tile-fill;
+        }
+
+        display: flex;
+        .notifications-list-tile-content {
+            display: flex;
+            padding-bottom: 10px;
+            .notifications-list-tile-content-avatar {
+                margin-right: 10px;
+            }
+            .notifications-list-tile-content-message {
+                .unread {
+                    font-weight: bold;
+                }
+            }
+        }
+        .notifications-list-tile-button {
+        }
+    }
+}

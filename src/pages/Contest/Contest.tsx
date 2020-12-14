@@ -9,7 +9,7 @@ import ContestPageActions from './actions';
 import ContestHeader from './ContestHeader';
 import ContestSider from './ContestSider';
 import ContestContent from './ContestContent';
-import './Contest.scss';
+import './Contest.less';
 
 const Contest: React.FunctionComponent<ContestProps> = () => {
     const dispatch = useDispatch();

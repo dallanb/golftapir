@@ -5,7 +5,7 @@ import { CompetitorActionsProps } from './types';
 import { selectData, selectIsMe } from '@pages/Competitor/selector';
 import { memoizedGenerateActions } from './utils';
 import { memoizedCompetitorActionRenderer } from './competitorActionRenderer';
-import './CompetitorActions.scss';
+import './CompetitorActions.less';
 
 const CompetitorActions: React.FunctionComponent<CompetitorActionsProps> = () => {
     const isMe = useSelector(selectIsMe);

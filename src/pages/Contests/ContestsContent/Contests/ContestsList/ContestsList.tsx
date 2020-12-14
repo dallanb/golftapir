@@ -11,7 +11,7 @@ import {
     selectListIsFetching,
 } from '../selector';
 import ContestsListTile from './ContestsListTile';
-import './ContestsList.scss';
+import './ContestsList.less';
 import { getRefHeight } from '@utils';
 
 const ContestsList: React.FunctionComponent<ContestsListProps> = ({

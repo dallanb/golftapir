@@ -9,7 +9,7 @@ import ContestUpdateHeader from './ContestUpdateHeader';
 import ContestUpdateContent from './ContestUpdateContent';
 import ContestUpdateSider from './ContestUpdateSider';
 import { selectData } from './selector';
-import './ContestUpdate.scss';
+import './ContestUpdate.less';
 
 const ContestUpdate: React.FunctionComponent<ContestUpdateProps> = () => {
     const dispatch = useDispatch();

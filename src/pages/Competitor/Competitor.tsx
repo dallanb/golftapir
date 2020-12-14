@@ -9,7 +9,7 @@ import CompetitorHeader from './CompetitorHeader';
 import CompetitorContent from './CompetitorContent';
 import CompetitorSider from './CompetitorSider';
 import { selectData } from './selector';
-import './Competitor.scss';
+import './Competitor.less';
 
 const Competitor: React.FunctionComponent<CompetitorProps> = () => {
     const dispatch = useDispatch();

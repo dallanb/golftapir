@@ -1,0 +1,28 @@
+@import 'src/assets/styles/global';
+.table-wrap {
+    display: block;
+    max-width: 100%;
+
+    .contest-leaderboard-table-table {
+        border-radius: 4px;
+        overflow: hidden;
+
+        .contest-leaderboard-table-header {
+            font-weight: bold;
+            height: 50px;
+            //border-bottom: 1px solid @table-border;
+        }
+        .contest-leaderboard-table-body {
+            .tr {
+                &.cell {
+                    height: 50px;
+                    align-items: center;
+                    //border-bottom: 1px solid @table-border;
+                }
+            }
+        }
+        .tr-group:nth-child(odd) .cell {
+            background: @tile-fill;
+        }
+    }
+}

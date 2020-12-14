@@ -6,7 +6,7 @@ import { Form } from '@components';
 import { LoginFormProps } from './types';
 import { StateProps } from '../types';
 import { fieldSchema, validationSchema } from './schema';
-import './LoginForm.scss';
+import './LoginForm.less';
 
 class LoginForm extends React.PureComponent<LoginFormProps> {
     handleSubmit = (values: FormikValues) => {

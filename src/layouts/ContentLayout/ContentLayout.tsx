@@ -1,7 +1,7 @@
 import React from 'react';
 import { Layout, Spin } from 'antd';
 import { ContentLayoutProps } from './types';
-import './ContentLayout.scss';
+import './ContentLayout.less';
 
 const { Content, Footer } = Layout;
 

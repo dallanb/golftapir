@@ -1,7 +1,7 @@
 import React from 'react';
 import { CaretDownFilled, CaretUpFilled } from '@ant-design/icons/lib';
 import { ContestLeaderboardTablePositionProps } from './types';
-import './ContestLeaderboardTablePosition.scss';
+import './ContestLeaderboardTablePosition.less';
 
 const ContestLeaderboardTablePosition: React.FunctionComponent<ContestLeaderboardTablePositionProps> = ({
     row: { original },
@@ -28,9 +28,7 @@ const ContestLeaderboardTablePosition: React.FunctionComponent<ContestLeaderboar
             <div className="contest-leaderboard-table-position-icon">
                 {renderTrendIcon(trend)}
             </div>
-            <div className="contest=leaderboard-table-position-position">
-                {pos}
-            </div>
+            <div className="contest-leaderboard-table-position-rank">{pos}</div>
         </div>
     );
 };

@@ -1,5 +1,4 @@
 import * as Yup from 'yup';
-import 'yup-phone';
 import InputWrapper from '@components/InputWrapper';
 import CONSTANTS from '@locale/en-CA';
 
@@ -154,8 +153,11 @@ export const validationSchema = Yup.object({
     }),
     phone: Yup.object({
         number: Yup.string()
-            .required(FORM.VALIDATION.PHONE_NUMBER_REQUIRED)
-            .phone(FORM.VALIDATION.PHONE_NUMBER_MATCHES),
+            .matches(
+                /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/,
+                FORM.VALIDATION.PHONE_NUMBER_MATCHES
+            )
+            .required(FORM.VALIDATION.PHONE_NUMBER_REQUIRED),
         country_code: Yup.string(),
         extension: Yup.string().nullable(),
     }),

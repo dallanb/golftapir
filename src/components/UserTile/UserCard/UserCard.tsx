@@ -3,7 +3,7 @@ import { Card } from 'antd';
 import { Avatar } from '@components';
 import { withS3URL } from '@utils';
 import { UserCardProps } from './types';
-import './UserCard.scss';
+import './UserCard.less';
 
 const UserCard: React.FunctionComponent<UserCardProps> = ({ name, avatar }) => {
     return (

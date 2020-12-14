@@ -5,7 +5,7 @@ import { withRouter } from 'react-router-dom';
 import { RegisterProps, StateProps } from './types';
 import RegisterFormActions from './actions';
 import RegisterForm from './RegisterForm';
-import './Register.scss';
+import './Register.less';
 
 class Register extends React.PureComponent<RegisterProps> {
     componentDidMount() {

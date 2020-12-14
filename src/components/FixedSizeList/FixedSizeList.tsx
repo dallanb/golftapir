@@ -4,7 +4,7 @@ import { FixedSizeList as List } from 'react-window';
 import InfiniteLoader from 'react-window-infinite-loader';
 import { ListProps } from './types';
 import defaultRowRenderer from './defaultRowRenderer';
-import './FixedSizeList.scss';
+import './FixedSizeList.less';
 
 const FixedSizeList: React.FunctionComponent<ListProps> = ({
     rowRenderer = defaultRowRenderer,

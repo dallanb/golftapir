@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form } from 'antd';
 import { InputWrapperProps } from './types';
-import './InputWrapper.scss';
+import './InputWrapper.less';
 
 class InputWrapper extends React.PureComponent<InputWrapperProps> {
     render() {

@@ -7,7 +7,7 @@ import { ContestParticipantsTableParticipantProps } from './types';
 import { prepareParticipant } from '@pages/Contest/utils';
 import { Avatar } from '@components';
 import { withS3URL } from '@utils';
-import './ContestLeaderboardTableParticipant.scss';
+import './ContestLeaderboardTableParticipant.less';
 
 const ContestLeaderboardTableParticipant: React.FunctionComponent<ContestParticipantsTableParticipantProps> = ({
     uuid,
@@ -31,7 +31,7 @@ const ContestLeaderboardTableParticipant: React.FunctionComponent<ContestPartici
             <Avatar
                 src={s3_filename && withS3URL(s3_filename)}
                 name={name}
-                size={54}
+                size={36}
                 className="contest-participants-table-participant-avatar"
             />
             <div className="contest-participants-table-participant-name">

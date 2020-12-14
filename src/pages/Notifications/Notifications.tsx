@@ -7,7 +7,7 @@ import NotificationsPageActions from './actions';
 import NotificationsSider from './NotificationsSider';
 import NotificationsHeader from './NotificationsHeader';
 import NotificationsContent from './NotificationsContent';
-import './Notifications.scss';
+import './Notifications.less';
 
 const Notifications: React.FunctionComponent<NotificationsProps> = () => {
     const dispatch = useDispatch();

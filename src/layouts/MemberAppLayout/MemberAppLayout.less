@@ -1,0 +1,57 @@
+@import '~antd/lib/style/themes/default.less';
+
+.member-app-layout-view {
+    min-height: 100vh !important;
+
+    .logo {
+        color: white;
+    }
+
+    .member-app-sider-layout {
+        background: @primary-color !important;
+        .member-app-sider-layout-title {
+            height: 32px;
+            background: url(../../assets/images/tapir_white.png);
+            background-size: cover;
+            margin: 16px;
+            display: flex;
+            color: white;
+            filter: invert(1);
+            .member-app-sider-layout-title-text {
+                align-content: end;
+            }
+        }
+        .member-app-sider-layout-menu {
+            background: @primary-color;
+        }
+        .member-app-sider-layout-footer {
+            width: 100%;
+            position: absolute;
+            bottom: 0;
+            button {
+                background: @primary-color;
+                color: #fff;
+            }
+        }
+        .menu-item {
+            display: flex;
+            &.ant-menu-item-selected {
+                background-color: @link-active-color !important;
+            }
+            &.ant-menu-item-active {
+                background-color: @link-hover-color !important;
+            }
+            .menu-item-icon {
+                span {
+                    margin-right: 0;
+                }
+                .ant-badge {
+                    color: inherit;
+                }
+            }
+            .menu-item-name {
+                margin-left: 10px;
+            }
+        }
+    }
+}

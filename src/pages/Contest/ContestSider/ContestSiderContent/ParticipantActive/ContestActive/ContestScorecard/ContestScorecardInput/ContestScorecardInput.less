@@ -1,0 +1,34 @@
+@import '/src/assets/styles/global';
+
+.contest-scorecard-input {
+    .contest-scorecard-input-strokes {
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+
+        .contest-scorecard-input-strokes-label {
+            color: fade(@primary-color, 50%);
+            margin-right: 24px;
+        }
+        .contest-scorecard-input-strokes-form {
+            display: flex;
+            .contest-scorecard-input-strokes-value {
+                display: flex;
+                align-items: center;
+                font-size: 18px;
+                padding: 0 4px;
+            }
+            .contest-scorecard-input-strokes-up {
+                font-size: 18px;
+                cursor: pointer;
+                line-height: 2rem;
+            }
+
+            .contest-scorecard-input-strokes-down {
+                font-size: 18px;
+                cursor: pointer;
+                line-height: 2rem;
+            }
+        }
+    }
+}

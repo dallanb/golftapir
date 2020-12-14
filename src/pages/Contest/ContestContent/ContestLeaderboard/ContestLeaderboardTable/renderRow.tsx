@@ -27,7 +27,7 @@ const renderRow: React.FunctionComponent<RowRendererProps> = ({
                 ))}
             </div>
             {row.isExpanded && (
-                <div className="tr expander">
+                <div className="tr expand">
                     <ContestLeaderboardTableScorecard row={row} />
                 </div>
             )}
