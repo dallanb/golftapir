@@ -1,6 +1,8 @@
 import { AnyAction } from 'redux';
 import { all, call, put, select, takeLatest } from 'redux-saga/effects';
+import { message } from 'antd';
 import { omit as _omit, pick as _pick, isEmpty as _isEmpty } from 'lodash';
+import CONSTANTS from '@locale/en-CA';
 import { AccountService, ContestService } from '@services';
 import { selectMe } from '@selectors/BaseSelector';
 import ContestsCreatePageContentContestActions, {
@@ -45,8 +47,10 @@ function* submit({ data }: AnyAction) {
         }
         yield put(ContestsCreatePageContentContestActions.setResult(result));
         yield put(ContestsCreatePageContentContestActions.submitSuccess());
+        message.success(CONSTANTS.CONTEST.SUCCESS.CREATE);
     } catch (err) {
         yield put(ContestsCreatePageContentContestActions.submitFailure());
+        message.error(CONSTANTS.CONTEST.ERROR.CREATE);
     }
 }
 

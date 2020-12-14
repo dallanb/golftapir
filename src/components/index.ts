@@ -7,6 +7,7 @@ export { default as Grid } from './Grid';
 export { default as InputWrapper } from './InputWrapper';
 export { default as FixedSizeList } from './FixedSizeList';
 export { default as MessageModal } from './MessageModal';
+export { default as OverlaySpin } from './OverlaySpin';
 export { default as PendingBadge } from './PendingBadge';
 export { default as ProtectedRoute } from './ProtectedRoute';
 export { default as SubscriptionToggle } from './SubscriptionToggle';
