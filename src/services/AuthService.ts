@@ -16,7 +16,13 @@ export default {
             headers: {},
         });
     },
-    register(data: { email: string; username: string; password: string }) {
+    register(data: {
+        email: string;
+        username: string;
+        password: string;
+        first_name: string;
+        last_name: string;
+    }) {
         return ClientProxy.post({
             url: config.AUTH_URL,
             endpoint: `/register`,

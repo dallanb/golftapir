@@ -11,8 +11,8 @@ import './RegisterForm.less';
 class RegisterForm extends React.PureComponent<RegisterFormProps> {
     handleSubmit = (values: FormikValues) => {
         const { register } = this.props;
-        const { email, username, password } = values;
-        register(email, username, password);
+        const { email, username, password, first_name, last_name } = values;
+        register(email, username, password, first_name, last_name);
     };
 
     render() {
@@ -37,8 +37,22 @@ const mapStateToProps = ({ registerPage }: StateProps) => {
 
 const mapDispatchToProps = (dispatch: any) => {
     return {
-        register(email: string, username: string, password: string) {
-            return dispatch(AuthActions.register(email, username, password));
+        register(
+            email: string,
+            username: string,
+            password: string,
+            first_name: string,
+            last_name: string
+        ) {
+            return dispatch(
+                AuthActions.register(
+                    email,
+                    username,
+                    password,
+                    first_name,
+                    last_name
+                )
+            );
         },
     };
 };

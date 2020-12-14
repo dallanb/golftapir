@@ -23,12 +23,20 @@ function* login({ email, password }: AnyAction) {
     }
 }
 
-function* register({ email, username, password }: AnyAction) {
+function* register({
+    email,
+    username,
+    password,
+    first_name,
+    last_name,
+}: AnyAction) {
     try {
         const res = yield call(AuthService.register, {
             email,
             username,
             password,
+            first_name,
+            last_name,
         });
         const { user, access_token } = res;
         ClientProxy.accessToken = access_token;

@@ -38,10 +38,50 @@ export const fieldSchema = [
             placeholder: FORM.LABELS.PASSWORD,
         },
     },
+    {
+        name: 'confirm_password',
+        type: 'password',
+        wrapper: InputWrapper,
+        options: {
+            prefixRenderer: () => (
+                <LockOutlined className="site-form-item-icon" />
+            ),
+            placeholder: FORM.LABELS.CONFIRM_PASSWORD,
+        },
+    },
+    {
+        name: 'first_name',
+        wrapper: InputWrapper,
+        options: {
+            prefixRenderer: () => (
+                <UserOutlined className="site-form-item-icon" />
+            ),
+            placeholder: FORM.LABELS.FIRST_NAME,
+        },
+    },
+    {
+        name: 'last_name',
+        wrapper: InputWrapper,
+        options: {
+            prefixRenderer: () => (
+                <UserOutlined className="site-form-item-icon" />
+            ),
+            placeholder: FORM.LABELS.LAST_NAME,
+        },
+    },
 ];
 
 export const validationSchema = Yup.object({
     email: Yup.string().required(FORM.VALIDATION.EMAIL_REQUIRED),
     username: Yup.string().required(FORM.VALIDATION.USERNAME_REQUIRED),
     password: Yup.string().required(FORM.VALIDATION.PASSWORD_REQUIRED),
+    confirm_password: Yup.string()
+        .required(FORM.VALIDATION.CONFIRM_PASSWORD_REQUIRED)
+        .oneOf([Yup.ref('password'), ''], 'Passwords must match'),
+    first_name: Yup.string()
+        .required(FORM.VALIDATION.FIRST_NAME_REQUIRED)
+        .max(100, FORM.VALIDATION.FIRST_NAME_MAX_LENGTH),
+    last_name: Yup.string()
+        .required(FORM.VALIDATION.LAST_NAME_REQUIRED)
+        .max(100, FORM.VALIDATION.LAST_NAME_MAX_LENGTH),
 });

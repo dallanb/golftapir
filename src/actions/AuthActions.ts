@@ -6,7 +6,7 @@ const { Types, Creators } = createActions(
         login: ['email', 'password'],
         loginSuccess: ['data'],
         loginFailure: ['err'],
-        register: ['email', 'username', 'password'],
+        register: ['email', 'username', 'password', 'first_name', 'last_name'],
         registerSuccess: null,
         registerFailure: ['err'],
         refresh: null,
