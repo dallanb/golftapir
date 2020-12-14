@@ -21,7 +21,6 @@ const ContestLeaderboardTableScorecard: React.FunctionComponent<ContestLeaderboa
     const {
         original: { uuid: user },
     } = row;
-    console.log(items);
     useEffect(() => {
         dispatch(
             ContestPageContentContestLeaderboardScorecardActions.init(
