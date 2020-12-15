@@ -39,7 +39,7 @@ function* debouncedHoleStrokeUpdate({ holeId, strokes }: AnyAction) {
         yield put(
             ContestPageSiderContentParticipantActiveContestActiveActions.debouncedHoleStrokeUpdateSuccess(
                 {
-                    [holeId]: { strokes, ...holes[holeId] },
+                    [holeId]: { ...holes[holeId], strokes },
                 }
             )
         );
