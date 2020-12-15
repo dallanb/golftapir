@@ -17,22 +17,34 @@
         .contest-list-tile-content {
             display: flex;
             align-items: center;
+            .contest-list-tile-content-main {
+                display: flex;
+                width: 50%;
 
-            .contest-list-tile-content-avatar {
-                margin-right: 10px;
-            }
-
-            .contest-list-tile-content-info {
-                .contest-list-tile-content-name {
-                    font-weight: bold;
+                .contest-list-tile-content-main-avatar {
+                    margin-right: 10px;
                 }
 
-                .contest-list-tile-content-status {
+                .contest-list-tile-content-main-info {
+                    .contest-list-tile-content-main-name {
+                        font-weight: bold;
+                    }
+
+                    .contest-list-tile-content-main-status {
+                    }
                 }
             }
+            .contest-list-tile-content-side {
+                display: flex;
+                justify-content: start;
+                width: 50%;
+                .contest-list-tile-content-side-course {
+                    padding-right: 24px;
+                }
 
-            .contest-list-tile-content-leaderboard {
-                margin-left: auto;
+                .contest-list-tile-content-side-leaderboard,
+                .contest-list-tile-content-side-date {
+                }
             }
         }
 
