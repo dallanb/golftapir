@@ -59,15 +59,22 @@ const ContestsListTile: React.FunctionComponent<ContestsListTileProps> = ({
                         <div className="contest-list-tile-content-side-course">
                             <ContestsListTileCourse course={course} />
                         </div>
-                        <div className="contest-list-tile-content-side-leaderboard">
-                            <ContestsListTileLeaderboard
-                                status={status}
-                                participants={Object.values(participants)}
-                            />
-                        </div>
-                        <div className="contest-list-tile-content-side-leaderboard">
-                            <ContestsListTileDate status={status} date={time} />
-                        </div>
+                        {status === constants.STATUS.PENDING.KEY ||
+                        status === constants.STATUS.READY.KEY ? (
+                            <div className="contest-list-tile-content-side-leaderboard">
+                                <ContestsListTileDate
+                                    status={status}
+                                    date={time}
+                                />
+                            </div>
+                        ) : (
+                            <div className="contest-list-tile-content-side-leaderboard">
+                                <ContestsListTileLeaderboard
+                                    status={status}
+                                    participants={Object.values(participants)}
+                                />
+                            </div>
+                        )}
                     </div>
                 </div>
                 {/*<div className="contest-list-tile-button">*/}
