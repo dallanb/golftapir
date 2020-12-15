@@ -124,11 +124,23 @@ const CONSTANTS = {
                     USERNAME: 'Username',
                     EMAIL: 'Email',
                     PASSWORD: 'Password',
+                    CONFIRM_PASSWORD: 'Confirm Password',
+                    FIRST_NAME: 'First Name',
+                    LAST_NAME: 'Last Name',
                 },
                 VALIDATION: {
                     USERNAME_REQUIRED: 'Please input your username!',
                     EMAIL_REQUIRED: 'Please input your email address!',
                     PASSWORD_REQUIRED: 'Please input your password!',
+                    CONFIRM_PASSWORD_REQUIRED: 'Please confirm your password!',
+                    CONFIRM_PASSWORD_MISMATCH:
+                        'The two passwords that you entered do not match!',
+                    FIRST_NAME_MAX_LENGTH:
+                        'First Name must be less than 100 characters',
+                    FIRST_NAME_REQUIRED: 'First Name is required',
+                    LAST_NAME_MAX_LENGTH:
+                        'Last Name must be less than 100 characters',
+                    LAST_NAME_REQUIRED: 'Last Name is required',
                 },
             },
         },

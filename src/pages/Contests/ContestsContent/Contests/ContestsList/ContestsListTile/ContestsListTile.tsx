@@ -8,6 +8,7 @@ import constants from '@constants';
 import { mapStatusColour, withS3URL } from '@utils';
 import { Avatar } from '@components';
 import './ContestsListTile.less';
+import ContestsListTileCourse from '@pages/Contests/ContestsContent/Contests/ContestsList/ContestsListTile/ContestsListTileCourse';
 
 const ContestsListTile: React.FunctionComponent<ContestsListTileProps> = ({
     props: { index, style, data },
@@ -25,6 +26,7 @@ const ContestsListTile: React.FunctionComponent<ContestsListTileProps> = ({
     const src =
         avatar && withS3URL(avatar, constants.S3_FOLDERS.CONTEST.AVATAR);
     const status = _get(item, ['status'], undefined);
+    const course = _get(item, ['location'], {});
     const participants = _get(item, ['participants'], {});
     const cardCx = classnames('contest-list-tile-card', { filled: !isEven });
     return (
@@ -48,6 +50,9 @@ const ContestsListTile: React.FunctionComponent<ContestsListTileProps> = ({
                                 text={status}
                             />
                         </div>
+                    </div>
+                    <div className="contest-list-tile-content-course">
+                        <ContestsListTileCourse course={course} />
                     </div>
                     <div className="contest-list-tile-content-leaderboard">
                         <ContestsListTileLeaderboard

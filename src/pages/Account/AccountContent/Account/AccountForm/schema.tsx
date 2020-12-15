@@ -154,7 +154,7 @@ export const validationSchema = Yup.object({
     phone: Yup.object({
         number: Yup.string()
             .matches(
-                /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/,
+                /^[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/,
                 FORM.VALIDATION.PHONE_NUMBER_MATCHES
             )
             .required(FORM.VALIDATION.PHONE_NUMBER_REQUIRED),

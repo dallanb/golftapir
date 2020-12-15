@@ -171,13 +171,14 @@ defaultFieldRenderer = (schema, formik) => {
         }
 
         if (wrapper) {
-            const touched = formik.touched[name];
-            const submitted = formik.submitCount > 0;
-            const hasError = formik.errors[name];
+            const formattedName = antdFormatName(name);
+            const touched = _get(formik, ['touched', ...formattedName]);
+            const submitted = _get(formik, ['submitCount']) > 0;
+            const hasError = _get(formik, ['errors', ...formattedName]);
             const submittedError = hasError && submitted;
             const touchedError = hasError && touched;
             field = wrap(wrapper, field, {
-                name: antdFormatName(name),
+                name: formattedName,
                 formik,
                 hasFeedback: submittedError || touchedError,
                 help: hasError || '',

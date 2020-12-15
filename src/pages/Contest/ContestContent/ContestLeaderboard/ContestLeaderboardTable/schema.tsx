@@ -26,7 +26,7 @@ const columnsSchema = [
         Header: 'Pos',
         accessor: 'rank',
         Cell: ({ row }: any) => <ContestLeaderboardTablePosition row={row} />,
-        SubCell: (cellProps: any) => <> {cellProps.value} 🎉</>,
+        SubCell: () => null,
         className: 'pos',
     },
     {

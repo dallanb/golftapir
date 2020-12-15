@@ -18,8 +18,6 @@ const AccountForm: React.FunctionComponent<AccountFormProps> = () => {
 
     const handleSubmit = (values: FormikValues) => {
         const { first_name, last_name, address, phone, avatar } = values;
-        console.log(avatar);
-        console.log(account);
         if (!_isEqual(avatar, account.avatar)) {
             dispatch(AccountActions.assignAvatar('me', avatar)); // TODO: Should this be moved to a local call?
         }
