@@ -7,6 +7,7 @@ import { getInitials, randomColourGenerator } from '@utils';
 const SiderLayoutHeader: React.FunctionComponent<SiderLayoutHeaderProps> = ({
     title,
     avatar,
+    extra,
 }) => {
     const renderAvatar = (avatar: SiderLayoutHeaderProps['avatar']) => {
         if (!avatar) {
@@ -32,6 +33,7 @@ const SiderLayoutHeader: React.FunctionComponent<SiderLayoutHeaderProps> = ({
         <PageHeader
             title={title}
             avatar={avatar && renderAvatar(avatar)}
+            extra={extra}
             className="sider-layout-header"
         />
     );

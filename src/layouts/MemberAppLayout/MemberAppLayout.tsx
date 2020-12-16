@@ -9,9 +9,9 @@ import {
     MenuItemRendererProps,
 } from './types';
 import { UserTile } from '@components';
-import './MemberAppLayout.less';
 import defaultMenuItemRenderer from './defaultMenuItemRenderer';
 import { getRouteBase } from '@utils';
+import './MemberAppLayout.less';
 
 const { Sider } = Layout;
 
