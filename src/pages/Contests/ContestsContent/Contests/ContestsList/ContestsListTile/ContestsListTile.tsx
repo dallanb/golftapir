@@ -27,7 +27,7 @@ const ContestsListTile: React.FunctionComponent<ContestsListTileProps> = ({
     const src =
         avatar && withS3URL(avatar, constants.S3_FOLDERS.CONTEST.AVATAR);
     const status = _get(item, ['status'], undefined);
-    const course = _get(item, ['location'], {});
+    const course = _get(item, ['location'], '');
     const time = _get(item, ['start_time'], undefined);
     const participants = _get(item, ['participants'], {});
     const cardCx = classnames('contest-list-tile-card', { filled: !isEven });
