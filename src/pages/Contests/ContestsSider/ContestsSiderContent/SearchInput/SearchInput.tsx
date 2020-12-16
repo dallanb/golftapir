@@ -18,6 +18,7 @@ const SearchInput: React.FunctionComponent<SearchInputProps> = () => {
         <Search
             placeholder={CONSTANTS.PAGES.CONTESTS.SEARCH}
             allowClear
+            enterButton
             loading={isSearching}
             onSearch={onSearch}
             className="search-input"
