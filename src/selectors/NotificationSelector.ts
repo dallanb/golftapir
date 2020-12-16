@@ -6,3 +6,7 @@ const getNotification = (state: any) => state.notification;
 export const selectData = createSelector([getNotification], (notification) =>
     _get(notification, ['data'], false)
 );
+
+export const selectPending = createSelector([getNotification], (notification) =>
+    _get(notification, ['pending'], false)
+);

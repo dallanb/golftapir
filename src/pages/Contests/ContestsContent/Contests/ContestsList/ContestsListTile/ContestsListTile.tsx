@@ -4,11 +4,12 @@ import { get as _get } from 'lodash';
 import classnames from 'classnames';
 import { ContestsListTileProps } from './types';
 import ContestsListTileLeaderboard from './ContestsListTileLeaderboard';
+import ContestsListTileCourse from './ContestsListTileCourse';
+import ContestsListTileDate from './ContestsListTileDate';
 import constants from '@constants';
 import { mapStatusColour, withS3URL } from '@utils';
 import { Avatar } from '@components';
 import './ContestsListTile.less';
-import ContestsListTileCourse from '@pages/Contests/ContestsContent/Contests/ContestsList/ContestsListTile/ContestsListTileCourse';
 
 const ContestsListTile: React.FunctionComponent<ContestsListTileProps> = ({
     props: { index, style, data },
@@ -27,6 +28,7 @@ const ContestsListTile: React.FunctionComponent<ContestsListTileProps> = ({
         avatar && withS3URL(avatar, constants.S3_FOLDERS.CONTEST.AVATAR);
     const status = _get(item, ['status'], undefined);
     const course = _get(item, ['location'], {});
+    const time = _get(item, ['start_time'], undefined);
     const participants = _get(item, ['participants'], {});
     const cardCx = classnames('contest-list-tile-card', { filled: !isEven });
     return (
@@ -37,28 +39,42 @@ const ContestsListTile: React.FunctionComponent<ContestsListTileProps> = ({
                 onClick={() => handleClick(item)}
             >
                 <div className="contest-list-tile-content">
-                    <div className="contest-list-tile-content-avatar">
-                        <Avatar src={src} name={name} size={48} />
-                    </div>
-                    <div className="contest-list-tile-content-info">
-                        <div className="contest-list-tile-content-name">
-                            {name}
+                    <div className="contest-list-tile-content-main">
+                        <div className="contest-list-tile-content-main-avatar">
+                            <Avatar src={src} name={name} size={48} />
                         </div>
-                        <div className="contest-list-tile-content-status">
-                            <Badge
-                                color={mapStatusColour(status)}
-                                text={status}
-                            />
+                        <div className="contest-list-tile-content-main-info">
+                            <div className="contest-list-tile-content-main-name">
+                                {name}
+                            </div>
+                            <div className="contest-list-tile-content-main-status">
+                                <Badge
+                                    color={mapStatusColour(status)}
+                                    text={status}
+                                />
+                            </div>
                         </div>
                     </div>
-                    <div className="contest-list-tile-content-course">
-                        <ContestsListTileCourse course={course} />
-                    </div>
-                    <div className="contest-list-tile-content-leaderboard">
-                        <ContestsListTileLeaderboard
-                            status={status}
-                            participants={Object.values(participants)}
-                        />
+                    <div className="contest-list-tile-content-side">
+                        <div className="contest-list-tile-content-side-course">
+                            <ContestsListTileCourse course={course} />
+                        </div>
+                        {status === constants.STATUS.PENDING.KEY ||
+                        status === constants.STATUS.READY.KEY ? (
+                            <div className="contest-list-tile-content-side-leaderboard">
+                                <ContestsListTileDate
+                                    status={status}
+                                    date={time}
+                                />
+                            </div>
+                        ) : (
+                            <div className="contest-list-tile-content-side-leaderboard">
+                                <ContestsListTileLeaderboard
+                                    status={status}
+                                    participants={Object.values(participants)}
+                                />
+                            </div>
+                        )}
                     </div>
                 </div>
                 {/*<div className="contest-list-tile-button">*/}
