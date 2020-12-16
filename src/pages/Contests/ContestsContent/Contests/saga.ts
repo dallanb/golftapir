@@ -8,7 +8,7 @@ import { fetchContestsList } from './helpers';
 
 function* init() {
     try {
-        yield call(fetchContestsList);
+        yield call(fetchContestsList, { page: 1, per_page: 10 });
         yield put(ContestsPageContentContestsActions.initSuccess());
     } catch (err) {
         yield put(ContestsPageContentContestsActions.initFailure(err));

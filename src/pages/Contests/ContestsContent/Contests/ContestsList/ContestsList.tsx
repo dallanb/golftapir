@@ -9,6 +9,7 @@ import {
     selectListData,
     selectListMetadata,
     selectListIsFetching,
+    selectListOptions,
 } from '../selector';
 import ContestsListTile from './ContestsListTile';
 import './ContestsList.less';
@@ -21,6 +22,7 @@ const ContestsList: React.FunctionComponent<ContestsListProps> = ({
     const history = useHistory();
     const data = useSelector(selectListData);
     const metadata = useSelector(selectListMetadata);
+    const options = useSelector(selectListOptions);
     const isFetching = useSelector(selectListIsFetching);
     const tableDimensions = {
         size: 100,
@@ -32,6 +34,7 @@ const ContestsList: React.FunctionComponent<ContestsListProps> = ({
         dispatch(
             ContestsPageContentContestsActions.fetchData(
                 {
+                    ...options,
                     page: Math.floor(stop / 10) + 1,
                     per_page: 10,
                 },

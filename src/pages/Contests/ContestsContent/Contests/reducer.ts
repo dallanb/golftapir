@@ -12,6 +12,7 @@ const INITIAL_STATE: ContestsPageContentContestsInterface = {
     data: undefined,
     metadata: undefined,
     append: false,
+    options: undefined,
 };
 
 /* ------------- Reducers ------------- */
@@ -47,9 +48,10 @@ function set(state: any, { data }: any) {
     });
 }
 
-function fetchData(state: any, { append = false }: any) {
+function fetchData(state: any, { options, append = false }: any) {
     return Immutable.merge(state, {
         isFetching: true,
+        options,
         append,
     });
 }

@@ -172,6 +172,7 @@ const CONSTANTS = {
         CONTESTS: {
             TITLE: 'Contests',
             DESCRIPTION: 'View Contests',
+            SEARCH: 'Search Contests',
         },
         NOTIFICATIONS: {
             TITLE: 'Notifications',

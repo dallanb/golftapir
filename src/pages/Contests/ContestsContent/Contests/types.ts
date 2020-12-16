@@ -6,4 +6,5 @@ export interface ContestsPageContentContestsInterface {
     data: any;
     metadata: any;
     append: boolean;
+    options: any;
 }
