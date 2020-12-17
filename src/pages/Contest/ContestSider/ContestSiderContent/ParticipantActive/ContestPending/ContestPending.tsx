@@ -25,7 +25,9 @@ const ContestPending: React.FunctionComponent<ContestPendingProps> = () => {
     const isOwner = useSelector(selectIsOwner);
 
     let content = (
-        <div>Please wait for all invited participants to respond</div>
+        <div className="contest-pending-message">
+            Please wait for all invited participants to respond
+        </div>
     );
 
     if (isOwner) {
