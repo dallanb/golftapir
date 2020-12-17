@@ -42,7 +42,12 @@ const ContestsListTile: React.FunctionComponent<ContestsListTileProps> = ({
                 <div className="contest-list-tile-content">
                     <div className="contest-list-tile-content-main">
                         <div className="contest-list-tile-content-main-avatar">
-                            <Avatar src={src} name={name} size={48} />
+                            <Avatar
+                                src={src}
+                                shape="square"
+                                name={name}
+                                size={48}
+                            />
                         </div>
                         <div className="contest-list-tile-content-main-info">
                             <div className="contest-list-tile-content-main-name">
