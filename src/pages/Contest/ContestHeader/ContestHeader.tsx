@@ -17,11 +17,11 @@ const ContestHeader: React.FunctionComponent<ContestHeaderProps> = () => {
             title={<HeaderTitle />}
             subTitle={<HeaderSubTitle />}
             extra={<Breadcrumb />}
-            avatar={{
-                name: useSelector(selectContestName),
-                src: useSelector(selectContestAvatarSrc),
-                size: 72,
-            }}
+            // avatar={{
+            //     name: useSelector(selectContestName),
+            //     src: useSelector(selectContestAvatarSrc),
+            //     size: 72,
+            // }}
         />
     );
 };

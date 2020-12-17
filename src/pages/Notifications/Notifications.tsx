@@ -14,8 +14,6 @@ const Notifications: React.FunctionComponent<NotificationsProps> = () => {
     const { isInitialized } = useSelector(selectData);
 
     useEffect(() => {
-        console.log('YOOO');
-        debugger;
         dispatch(NotificationsPageActions.init());
         return () => {
             dispatch(NotificationsPageActions.terminate());

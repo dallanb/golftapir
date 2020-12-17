@@ -20,6 +20,6 @@ export const protectedRoutes: any = [
     ...ContestsCreatePageRoutes,
     ...ContestUpdatePageRoutes,
     ...ContestPageRoutes,
-    ...HomePageRoutes,
     ...NotificationsPageRoutes,
+    ...HomePageRoutes,
 ];

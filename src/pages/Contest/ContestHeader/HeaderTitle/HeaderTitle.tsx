@@ -15,7 +15,7 @@ const HeaderTitle: React.FunctionComponent<HeaderTitleProps> = () => {
 
     return (
         <div className="header-title">
-            <div className="header-title-time">{startTime}</div>
+            {/*<div className="header-title-time">{startTime}</div>*/}
             <div className="header-title-title">{title}</div>
         </div>
     );
