@@ -7,7 +7,7 @@ import {
 import { ContestHeaderProps } from './types';
 import HeaderTitle from './HeaderTitle';
 import HeaderSubTitle from './HeaderSubTitle';
-import HeaderExtra from './HeaderExtra';
+import { Breadcrumb } from '@apps/MemberApp/components';
 import { ContentLayoutHeader } from '@layouts';
 import './ContestHeader.less';
 
@@ -16,7 +16,7 @@ const ContestHeader: React.FunctionComponent<ContestHeaderProps> = () => {
         <ContentLayoutHeader
             title={<HeaderTitle />}
             subTitle={<HeaderSubTitle />}
-            extra={<HeaderExtra />}
+            extra={<Breadcrumb />}
             avatar={{
                 name: useSelector(selectContestName),
                 src: useSelector(selectContestAvatarSrc),

@@ -14,7 +14,7 @@ export default [
     },
     {
         path: `/app${routes.NOTIFICATIONS.ROUTE}`,
-        name: routes.HOME.KEY,
+        name: routes.NOTIFICATIONS.KEY,
         icon: (props: { data: any; value: { pending: number } }) =>
             PendingBadge({ icon: routes.NOTIFICATIONS.ICON, ...props }),
         key: 'notifications',

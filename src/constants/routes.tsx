@@ -54,8 +54,8 @@ const routes = {
         ICON: null,
     },
     HOME: {
-        ROUTE: '/home',
-        BASE_ROUTE: '/home',
+        ROUTE: '',
+        BASE_ROUTE: '',
         KEY: CONSTANTS.PAGES.HOME.TITLE,
         ICON: HomeFilled,
     },

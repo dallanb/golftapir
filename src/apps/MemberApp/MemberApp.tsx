@@ -74,7 +74,7 @@ class MemberApp extends React.Component<MemberAppProps> {
                             />
                         )
                     )}
-                    <Route render={() => <Redirect to={`${url}/home`} />} />
+                    <Route render={() => <Redirect to={`${url}`} />} />
                 </Switch>
             </MemberAppLayout>
         );

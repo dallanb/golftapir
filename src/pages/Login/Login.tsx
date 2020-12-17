@@ -11,7 +11,7 @@ class Login extends React.PureComponent<LoginProps> {
     componentDidMount() {
         const { isLoggedIn, history, init } = this.props;
         if (isLoggedIn) {
-            history.push('/app/home');
+            history.push('/app');
         } else {
             init();
         }
@@ -20,7 +20,7 @@ class Login extends React.PureComponent<LoginProps> {
     componentDidUpdate(prevProps: Readonly<LoginProps>) {
         const { isLoggedIn, history } = this.props;
         if (isLoggedIn) {
-            history.push('/app/home');
+            history.push('/app');
         }
     }
 
