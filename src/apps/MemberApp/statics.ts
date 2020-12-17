@@ -11,17 +11,18 @@ import {
 } from '@ant-design/icons';
 
 import { PendingBadge } from '@components';
+import constants from '@constants';
 
 export default [
     {
-        path: '/app/home',
+        path: `/app${constants.ROUTES.HOME.ROUTE}`,
         component: Home,
         name: 'Home',
         icon: HomeFilled,
         key: 'home',
     },
     {
-        path: '/app/notifications',
+        path: `/app${constants.ROUTES.NOTIFICATIONS.ROUTE}`,
         // component: Home,
         name: 'Notifications',
         icon: (props: { data: any; value: { pending: number } }) =>
@@ -36,14 +37,14 @@ export default [
         key: 'messages',
     },
     {
-        path: '/app/competitors',
+        path: `/app${constants.ROUTES.COMPETITORS.ROUTE}`,
         // component: Home,
         name: 'Competitors',
         icon: CrownFilled,
         key: 'competitors',
     },
     {
-        path: '/app/contests',
+        path: `/app${constants.ROUTES.CONTESTS.ROUTE}`,
         // component: Home,
         name: 'Contests',
         icon: FlagFilled,
@@ -57,7 +58,7 @@ export default [
     //     key: 'wagers',
     // },
     {
-        path: '/app/settings',
+        path: `/app${constants.ROUTES.ACCOUNT.ROUTE}`,
         // component: Contest,
         name: 'Settings',
         icon: SettingFilled,

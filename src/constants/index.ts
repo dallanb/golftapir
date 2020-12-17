@@ -90,7 +90,7 @@ const constants = {
         },
         AUTH: { ROUTE: '/auth', BASE_ROUTE: '/auth', KEY: 'Auth' },
         COMPETITOR: {
-            ROUTE: '/competitor',
+            ROUTE: '/competitors/competitor',
             BASE_ROUTE: '/competitors',
             KEY: CONSTANTS.PAGES.COMPETITOR.TITLE,
         },
@@ -100,7 +100,7 @@ const constants = {
             KEY: CONSTANTS.PAGES.COMPETITORS.TITLE,
         },
         CONTEST: {
-            ROUTE: '/contest',
+            ROUTE: '/contests/contest',
             BASE_ROUTE: '/contests',
             KEY: CONSTANTS.PAGES.CONTEST.TITLE,
         },
@@ -115,7 +115,7 @@ const constants = {
             KEY: CONSTANTS.PAGES.CONTESTS_CREATE.TITLE,
         },
         CONTEST_UPDATE: {
-            ROUTE: '/contest/update',
+            ROUTE: '/contests/contest/update',
             BASE_ROUTE: '/contests',
             KEY: CONSTANTS.PAGES.CONTEST_UPDATE.TITLE,
         },
@@ -133,7 +133,7 @@ const constants = {
         },
         REGISTER: { ROUTE: '/register', BASE_ROUTE: '/register' },
         WAGER: {
-            ROUTE: '/wager',
+            ROUTE: '/wagers/wager',
             BASE_ROUTE: '/wagers',
             KEY: CONSTANTS.PAGES.WAGERS.TITLE,
         },
