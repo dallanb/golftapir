@@ -149,6 +149,7 @@ const CONSTANTS = {
             DESCRIPTION: 'Home Page',
         },
         CONTEST: {
+            TITLE: 'Contest',
             DESCRIPTION: 'Contest Info',
             STEPS: {
                 PENDING: {
@@ -205,7 +206,7 @@ const CONSTANTS = {
             },
         },
         CONTEST_UPDATE: {
-            TITLE: '',
+            TITLE: 'Contest Update',
             DESCRIPTION: 'Update Contest',
             FORM: {
                 LABELS: {

@@ -22,7 +22,7 @@ const HeaderExtra: React.FunctionComponent<HeaderExtraProps> = () => {
                 <Button
                     onClick={() =>
                         history.push(
-                            `/app${constants.ROUTES.NOTIFICATION.ROUTE}`
+                            `/app${constants.ROUTES.NOTIFICATIONS.ROUTE}`
                         )
                     }
                     type="text"
