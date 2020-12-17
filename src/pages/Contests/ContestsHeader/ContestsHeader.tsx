@@ -8,11 +8,14 @@ import CONSTANTS from '@locale/en-CA';
 const ContestsHeader: React.FunctionComponent<ContestsHeaderProps> = () => {
     const title = CONSTANTS.PAGES.CONTESTS.TITLE;
     const subTitle = CONSTANTS.PAGES.CONTESTS.DESCRIPTION;
-
+    const extra = <Breadcrumb />;
     return (
         <>
-            <ContentLayoutHeader title={title} subTitle={subTitle} />
-            <Breadcrumb />
+            <ContentLayoutHeader
+                title={title}
+                subTitle={subTitle}
+                extra={extra}
+            />
         </>
     );
 };

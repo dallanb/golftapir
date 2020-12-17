@@ -87,6 +87,7 @@ const constants = {
             ROUTE: '/settings',
             BASE_ROUTE: '/settings',
             KEY: CONSTANTS.PAGES.ACCOUNT.TITLE,
+
         },
         AUTH: { ROUTE: '/auth', BASE_ROUTE: '/auth', KEY: 'Auth' },
         COMPETITOR: {
