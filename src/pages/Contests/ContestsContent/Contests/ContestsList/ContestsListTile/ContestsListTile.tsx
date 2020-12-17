@@ -7,6 +7,7 @@ import ContestsListTileLeaderboard from './ContestsListTileLeaderboard';
 import ContestsListTileCourse from './ContestsListTileCourse';
 import ContestsListTileDate from './ContestsListTileDate';
 import constants from '@constants';
+import routes from '@constants/routes';
 import { mapStatusColour, withS3URL } from '@utils';
 import { Avatar } from '@components';
 import './ContestsListTile.less';
@@ -18,7 +19,7 @@ const ContestsListTile: React.FunctionComponent<ContestsListTileProps> = ({
     const isEven = index % 2;
     const item = _get(data, [index], undefined);
     const handleClick = (options: any) => {
-        history.push(`/app${constants.ROUTES.CONTEST.ROUTE}`, options);
+        history.push(`/app${routes.CONTEST.ROUTE}`, options);
     };
 
     const uuid = _get(item, ['uuid'], undefined);

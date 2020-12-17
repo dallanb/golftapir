@@ -2,9 +2,10 @@ import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { Breadcrumb as AntdBreadcrumb } from 'antd';
 import { BreadcrumbProps } from './types';
-import './Breadcrumb.less';
 import { getRouteBreadcrumb } from '@utils';
-import constants from '@constants';
+import routes from '@constants/routes';
+import './Breadcrumb.less';
+import { HomeFilled } from '@ant-design/icons/lib';
 
 const Breadcrumb: React.FunctionComponent<BreadcrumbProps> = (props) => {
     const { location } = props;
@@ -13,21 +14,26 @@ const Breadcrumb: React.FunctionComponent<BreadcrumbProps> = (props) => {
         .filter((i) => i && i !== 'app');
     const extraBreadcrumbItems = pathSnippets.map((_, index) => {
         const url = `/app/${pathSnippets.slice(0, index + 1).join('/')}`;
+        const { key, icon: Icon } = getRouteBreadcrumb(url);
         return (
             <AntdBreadcrumb.Item key={url}>
-                <Link to={url}>{getRouteBreadcrumb(url)}</Link>
+                <Link to={url}>
+                    {Icon && <Icon className="breadcrumb-key-icon" />}
+                    <span className="breadcrumb-key-name">{key}</span>
+                </Link>
             </AntdBreadcrumb.Item>
         );
     });
     const breadcrumbItems = [
-        <AntdBreadcrumb.Item key={constants.ROUTES.HOME.ROUTE}>
-            <Link to={`/app${constants.ROUTES.HOME.ROUTE}`}>
-                {constants.ROUTES.HOME.KEY}
+        <AntdBreadcrumb.Item key={routes.HOME.ROUTE}>
+            <Link to={`/app${routes.HOME.ROUTE}`}>
+                <HomeFilled className="breadcrumb-key-icon" />
+                <span className="breadcrumb-key-name">{routes.HOME.KEY}</span>
             </Link>
         </AntdBreadcrumb.Item>,
     ].concat(extraBreadcrumbItems);
 
-    return <AntdBreadcrumb>{breadcrumbItems}</AntdBreadcrumb>;
+    return <AntdBreadcrumb className="breadcrumb">{breadcrumbItems}</AntdBreadcrumb>;
 };
 
 export default withRouter(Breadcrumb);

@@ -1,12 +1,14 @@
 import { get as _get } from 'lodash';
-import constants from '@constants';
+import routes from '@constants/routes';
 
 const getRouteBreadcrumb = (route: string) => {
-    const routeObj = Object.values(constants.ROUTES).find(
+    const routeObj = Object.values(routes).find(
         (value: any) => `/app${value.ROUTE}` === route
     );
 
-    return _get(routeObj, ['KEY'], '');
+    const key = _get(routeObj, ['KEY'], '');
+    const icon = _get(routeObj, ['ICON'], null);
+    return { key, icon };
 };
 
 export default getRouteBreadcrumb;

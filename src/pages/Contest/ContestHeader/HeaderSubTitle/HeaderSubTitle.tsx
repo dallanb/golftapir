@@ -10,6 +10,7 @@ import {
     selectSubscribed,
 } from '@pages/Contest/selector';
 import constants from '@constants';
+import routes from '@constants/routes';
 import { useHistory } from 'react-router-dom';
 import './HeaderSubTitle.less';
 
@@ -28,10 +29,7 @@ const HeaderSubTitle: React.FunctionComponent<HeaderSubTitleProps> = () => {
             <Button
                 icon={<EditOutlined />}
                 onClick={() =>
-                    history.push(
-                        `/app${constants.ROUTES.CONTEST_UPDATE.ROUTE}`,
-                        contest
-                    )
+                    history.push(`/app${routes.CONTEST_UPDATE.ROUTE}`, contest)
                 }
                 disabled={
                     contest.status !== constants.STATUS.PENDING.KEY &&

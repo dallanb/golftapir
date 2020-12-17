@@ -1,9 +1,9 @@
 import Competitors from './Competitors';
-import constants from '@constants';
+import constantRoutes from '@constants/routes';
 
 const routes = [
     {
-        path: constants.ROUTES.COMPETITORS.ROUTE,
+        path: constantRoutes.COMPETITORS.ROUTE,
         component: Competitors,
         exact: true,
     },

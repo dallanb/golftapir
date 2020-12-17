@@ -1,9 +1,9 @@
 import Notifications from './Notifications';
-import constants from '@constants';
+import constantRoutes from '@constants/routes';
 
 const routes = [
     {
-        path: constants.ROUTES.NOTIFICATIONS.ROUTE,
+        path: constantRoutes.NOTIFICATIONS.ROUTE,
         component: Notifications,
         exact: true,
     },

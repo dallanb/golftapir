@@ -1,9 +1,9 @@
 import Account from './Account';
-import constants from '@constants';
+import constantRoutes from '@constants/routes';
 
 const routes = [
     {
-        path: constants.ROUTES.ACCOUNT.ROUTE,
+        path: constantRoutes.ACCOUNT.ROUTE,
         component: Account,
     },
 ];

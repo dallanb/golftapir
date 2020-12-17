@@ -1,9 +1,9 @@
 import Contest from './Contest';
-import constants from '@constants';
+import constantRoutes from '@constants/routes';
 
 const routes = [
     {
-        path: constants.ROUTES.CONTEST.ROUTE,
+        path: constantRoutes.CONTEST.ROUTE,
         component: Contest,
         exact: true,
     },
