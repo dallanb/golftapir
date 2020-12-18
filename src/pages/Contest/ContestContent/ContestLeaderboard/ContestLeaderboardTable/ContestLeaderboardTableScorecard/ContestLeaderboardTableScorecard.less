@@ -1,18 +1,23 @@
 @import 'src/assets/styles/global';
 
 .contest-leaderboard-table-scorecard {
+    display: flex;
     height: 205px;
     width: 100%;
     border-top: 1px solid #f0f0f0;
     border-bottom: 1px solid #f0f0f0;
-    table {
-        tr {
-            &.filled {
-                background: @tile-fill;
-            }
-            td {
-                &.head {
-                    font-weight: bold;
+    .contest-leaderboard-table-scorecard-participant-wrapper {
+    }
+    .contest-leaderboard-table-scorecard-table-wrapper {
+        table {
+            tr {
+                &.filled {
+                    background: @tile-fill;
+                }
+                td {
+                    &.head {
+                        font-weight: bold;
+                    }
                 }
             }
         }
