@@ -1,52 +1,40 @@
 import Home from '@pages/Home';
 
-import {
-    CrownFilled,
-    DollarCircleFilled,
-    FlagFilled,
-    HomeFilled,
-    MessageFilled,
-    NotificationFilled,
-    SettingFilled,
-} from '@ant-design/icons';
-
 import { PendingBadge } from '@components';
+import routes from '@constants/routes';
+import { MessageFilled } from '@ant-design/icons/lib';
 
 export default [
     {
-        path: '/app/home',
+        path: `/app${routes.HOME.ROUTE}`,
         component: Home,
-        name: 'Home',
-        icon: HomeFilled,
+        name: routes.HOME.KEY,
+        icon: routes.HOME.ICON,
         key: 'home',
     },
     {
-        path: '/app/notifications',
-        // component: Home,
-        name: 'Notifications',
+        path: `/app${routes.NOTIFICATIONS.ROUTE}`,
+        name: routes.NOTIFICATIONS.KEY,
         icon: (props: { data: any; value: { pending: number } }) =>
-            PendingBadge({ icon: NotificationFilled, ...props }),
+            PendingBadge({ icon: routes.NOTIFICATIONS.ICON, ...props }),
         key: 'notifications',
     },
     {
         path: '/app/messages',
-        // component: Home,
         name: 'Messages',
         icon: MessageFilled,
         key: 'messages',
     },
     {
-        path: '/app/competitors',
-        // component: Home,
-        name: 'Competitors',
-        icon: CrownFilled,
+        path: `/app${routes.COMPETITORS.ROUTE}`,
+        name: routes.COMPETITORS.KEY,
+        icon: routes.COMPETITORS.ICON,
         key: 'competitors',
     },
     {
-        path: '/app/contests',
-        // component: Home,
-        name: 'Contests',
-        icon: FlagFilled,
+        path: `/app${routes.CONTESTS.ROUTE}`,
+        name: routes.CONTESTS.KEY,
+        icon: routes.CONTESTS.ICON,
         key: 'contests',
     },
     // {
@@ -57,10 +45,9 @@ export default [
     //     key: 'wagers',
     // },
     {
-        path: '/app/settings',
-        // component: Contest,
-        name: 'Settings',
-        icon: SettingFilled,
+        path: `/app${routes.ACCOUNT.ROUTE}`,
+        name: routes.ACCOUNT.KEY,
+        icon: routes.ACCOUNT.ICON,
         key: 'settings',
     },
 ];

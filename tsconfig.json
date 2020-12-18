@@ -21,6 +21,7 @@
             "config": ["config"],
             "@components/*": ["components/*"],
             "@components": ["components/index.ts"],
+            "@constants/*": ["constants/*"],
             "@constants": ["constants/index.ts"],
             "@helpers/*": ["helpers/*"],
             "@helpers": ["helpers/index.ts"],

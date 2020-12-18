@@ -3,10 +3,12 @@ import SiderLayoutContent from '@layouts/SiderLayout/SiderLayoutContent';
 import ParticipantActive from './ParticipantActive';
 import ParticipantPending from './ParticipantPending';
 import ParticipantSpectator from './ParticipantSpectator';
+import ContestStart from './ContestStart';
 import { ContestSiderContentProps } from './types';
 import { useSelector } from 'react-redux';
 import { selectData, selectMyParticipantStatus } from '@pages/Contest/selector';
 import constants from '@constants';
+import ComponentContent from '@layouts/ComponentContent';
 
 const ContestSiderContent: React.FunctionComponent<ContestSiderContentProps> = ({}) => {
     const { isInitialized } = useSelector(selectData);
@@ -23,7 +25,12 @@ const ContestSiderContent: React.FunctionComponent<ContestSiderContentProps> = (
     };
     return (
         <SiderLayoutContent showSpinner={!isInitialized}>
-            {contentRenderer(participantStatus)}
+            <>
+                <ComponentContent className="contest-start-component-content">
+                    <ContestStart />
+                </ComponentContent>
+                {contentRenderer(participantStatus)}
+            </>
         </SiderLayoutContent>
     );
 };

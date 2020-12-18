@@ -7,6 +7,7 @@ import ContestsListTileLeaderboard from './ContestsListTileLeaderboard';
 import ContestsListTileCourse from './ContestsListTileCourse';
 import ContestsListTileDate from './ContestsListTileDate';
 import constants from '@constants';
+import routes from '@constants/routes';
 import { mapStatusColour, withS3URL } from '@utils';
 import { Avatar } from '@components';
 import './ContestsListTile.less';
@@ -18,7 +19,7 @@ const ContestsListTile: React.FunctionComponent<ContestsListTileProps> = ({
     const isEven = index % 2;
     const item = _get(data, [index], undefined);
     const handleClick = (options: any) => {
-        history.push(`/app${constants.ROUTES.CONTEST.ROUTE}`, options);
+        history.push(`/app${routes.CONTEST.ROUTE}`, options);
     };
 
     const uuid = _get(item, ['uuid'], undefined);
@@ -27,7 +28,7 @@ const ContestsListTile: React.FunctionComponent<ContestsListTileProps> = ({
     const src =
         avatar && withS3URL(avatar, constants.S3_FOLDERS.CONTEST.AVATAR);
     const status = _get(item, ['status'], undefined);
-    const course = _get(item, ['location'], {});
+    const course = _get(item, ['location'], '');
     const time = _get(item, ['start_time'], undefined);
     const participants = _get(item, ['participants'], {});
     const cardCx = classnames('contest-list-tile-card', { filled: !isEven });
@@ -41,7 +42,12 @@ const ContestsListTile: React.FunctionComponent<ContestsListTileProps> = ({
                 <div className="contest-list-tile-content">
                     <div className="contest-list-tile-content-main">
                         <div className="contest-list-tile-content-main-avatar">
-                            <Avatar src={src} name={name} size={48} />
+                            <Avatar
+                                src={src}
+                                shape="square"
+                                name={name}
+                                size={48}
+                            />
                         </div>
                         <div className="contest-list-tile-content-main-info">
                             <div className="contest-list-tile-content-main-name">

@@ -2,7 +2,7 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { Button } from 'antd';
 import { PlusCircleOutlined } from '@ant-design/icons';
-import constants from '@constants';
+import routes from '@constants/routes';
 import { CreateButtonProps } from './types';
 import './CreateButton.less';
 
@@ -10,7 +10,7 @@ const CreateButton: React.FunctionComponent<CreateButtonProps> = () => {
     const history = useHistory();
 
     const handleClick = () => {
-        history.push(`/app${constants.ROUTES.CONTESTS_CREATE.ROUTE}`);
+        history.push(`/app${routes.CONTESTS_CREATE.ROUTE}`);
     };
 
     return (

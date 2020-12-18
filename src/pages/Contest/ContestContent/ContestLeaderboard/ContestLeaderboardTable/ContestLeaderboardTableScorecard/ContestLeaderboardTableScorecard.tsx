@@ -8,8 +8,10 @@ import { columnsSchemaGenerator } from './schema';
 import { selectData } from './selector';
 import renderRow from './renderRow';
 import ContestPageContentContestLeaderboardScorecardActions from './actions';
+import HoleScoreInfo from './HoleScoreInfo';
 import { selectContestUUID } from '@pages/Contest/selector';
 import './ContestLeaderboardTableScorecard.less';
+import ScorecardParticipant from '@pages/Contest/ContestContent/ContestLeaderboard/ContestLeaderboardTable/ContestLeaderboardTableScorecard/ScorecardParticipant';
 
 const ContestLeaderboardTableScorecard: React.FunctionComponent<ContestLeaderboardTableScorecardProps> = ({
     row,
@@ -41,13 +43,19 @@ const ContestLeaderboardTableScorecard: React.FunctionComponent<ContestLeaderboa
             showSpinner={!isInitialized}
             className="contest-leaderboard-table-scorecard"
         >
-            <Table
-                rowRenderer={renderRow}
-                columnsSchema={columnsSchema}
-                items={items}
-                header={false}
-                style={{ height: '150px', width: '100%' }}
-            />
+            <div className="contest-leaderboard-table-scorecard-participant-wrapper">
+                <ScorecardParticipant user={user} />
+            </div>
+            <div className="contest-leaderboard-table-scorecard-table-wrapper">
+                <Table
+                    rowRenderer={renderRow}
+                    columnsSchema={columnsSchema}
+                    items={items}
+                    header={false}
+                    style={{ height: '160px', width: '100%' }}
+                />
+                <HoleScoreInfo />
+            </div>
         </ComponentContent>
     );
 };

@@ -21,6 +21,12 @@ export const selectListMetadata = createSelector(
         _get(contestsPageContentContestsResults, ['metadata'], [])
 );
 
+export const selectListOptions = createSelector(
+    [getContestsPageContentContests],
+    (contestsPageContentContestsResults) =>
+        _get(contestsPageContentContestsResults, ['options'], undefined)
+);
+
 export const selectListIsFetching = createSelector(
     [getContestsPageContentContests],
     (contestsPageContentContestsResults) =>

@@ -6,6 +6,7 @@ import {
 } from '@pages/Competitor/selector';
 import { CompetitorHeaderProps } from './types';
 import { ContentLayoutHeader } from '@layouts';
+import { Breadcrumb } from '@apps/MemberApp/components';
 import CONSTANTS from '@locale/en-CA';
 import './CompetitorHeader.less';
 
@@ -17,11 +18,13 @@ const CompetitorHeader: React.FunctionComponent<CompetitorHeaderProps> = () => {
         src: useSelector(selectAccountAvatarSrc),
         size: 72,
     };
+    const extra = <Breadcrumb />;
     return (
         <ContentLayoutHeader
             title={title}
             subTitle={subTitle}
             avatar={avatar}
+            extra={extra}
         />
     );
 };

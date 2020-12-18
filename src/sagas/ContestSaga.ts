@@ -133,6 +133,7 @@ function* updateContestParticipant({ uuid, data }: any) {
         message.error(CONSTANTS.CONTEST.ERROR.UPDATE_PARTICIPANT);
     }
 }
+
 function* fetchContestParticipants({ uuid, options }: any) {
     try {
         const res = yield call(

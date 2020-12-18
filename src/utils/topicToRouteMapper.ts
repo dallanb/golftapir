@@ -1,5 +1,6 @@
 import { get as _get } from 'lodash';
 import constants from '@constants';
+import routes from '@constants/routes';
 
 const topicToRouteMapper = (
     topic: string,
@@ -10,7 +11,6 @@ const topicToRouteMapper = (
         route: '/app',
         state: {},
     };
-    const routes = constants.ROUTES;
     switch (topic) {
         case constants.TOPICS.AUTH:
             mapping.route += routes.AUTH.ROUTE;

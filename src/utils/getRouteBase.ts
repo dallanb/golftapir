@@ -1,8 +1,8 @@
 import { get as _get } from 'lodash';
-import constants from '@constants';
+import routes from '@constants/routes';
 
 const getRouteBase = (route: string) => {
-    const routeObj = Object.values(constants.ROUTES).find(
+    const routeObj = Object.values(routes).find(
         (value: any) => `/app${value.ROUTE}` === route
     );
 

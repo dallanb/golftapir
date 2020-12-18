@@ -1,0 +1,50 @@
+.score-hole {
+    &.eagle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 22px;
+        height: 22px;
+        //margin: 10px;
+        border-radius: 50%;
+        border: 1px solid #fff;
+        box-shadow: 0 0 0 2px fade(@primary-color, 50%), 0 0 0 3px white,
+            0 0 0 5px fade(@primary-color, 50%);
+    }
+    &.birdie {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 26px;
+        height: 26px;
+        //margin: 10px;
+        border-radius: 50%;
+        border: 1px solid #fff;
+        box-shadow: 0 0 0 2px fade(@primary-color, 50%);
+    }
+    &.par {
+    }
+    &.bogey {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 24px;
+        height: 24px;
+        //margin: 10px;
+        //border-radius: 50%;
+        border: 1px solid #fff;
+        box-shadow: 0 0 0 2px fade(@primary-color, 50%);
+    }
+    &.double-bogey {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 18px;
+        height: 18px;
+        //margin: 10px;
+        //border-radius: 50%;
+        border: 1px solid #fff;
+        box-shadow: 0 0 0 2px fade(@primary-color, 50%), 0 0 0 3px white,
+            0 0 0 5px fade(@primary-color, 50%);
+    }
+}

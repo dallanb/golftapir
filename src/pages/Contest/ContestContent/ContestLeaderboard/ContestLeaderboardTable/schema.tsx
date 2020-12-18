@@ -1,4 +1,5 @@
 import React from 'react';
+import ContestLeaderboardTableCountry from './ContestLeaderboardTableCountry';
 import ContestLeaderboardTableParticipant from './ContestLeaderboardTableParticipant';
 import ContestLeaderboardTableToggle from './ContestLeaderboardTableToggle';
 import ContestLeaderboardTablePosition from './ContestLeaderboardTablePosition';
@@ -28,6 +29,15 @@ const columnsSchema = [
         Cell: ({ row }: any) => <ContestLeaderboardTablePosition row={row} />,
         SubCell: () => null,
         className: 'pos',
+    },
+    {
+        Header: 'Country',
+        accessor: 'uuid',
+        id: 'country',
+        Cell: ({ value }: any) => (
+            <ContestLeaderboardTableCountry uuid={value} />
+        ),
+        className: 'country',
     },
     {
         Header: 'Participant',

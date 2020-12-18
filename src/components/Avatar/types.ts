@@ -3,4 +3,5 @@ export interface AvatarProps {
     name: string;
     className?: string;
     size?: number | 'small' | 'large' | 'default' | undefined;
+    shape?: 'circle' | 'square';
 }

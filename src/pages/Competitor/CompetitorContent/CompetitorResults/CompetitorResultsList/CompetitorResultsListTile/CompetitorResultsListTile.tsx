@@ -1,9 +1,10 @@
 import React from 'react';
-import { Badge, Button, Card } from 'antd';
-import { get as _get, pick as _pick } from 'lodash';
+import { Badge, Card } from 'antd';
+import { get as _get } from 'lodash';
 import classnames from 'classnames';
 import { CompetitorResultsListTileProps } from './types';
 import constants from '@constants';
+import routes from '@constants/routes';
 import { mapStatusColour, withS3URL } from '@utils';
 import { Avatar } from '@components';
 import './CompetitorResultsListTile.less';
@@ -16,7 +17,7 @@ const CompetitorResultsListTile: React.FunctionComponent<CompetitorResultsListTi
 
     const item = _get(data, [index], undefined);
     const handleClick = (options: any) => {
-        history.push(`/app${constants.ROUTES.CONTEST.ROUTE}`, options);
+        history.push(`/app${routes.CONTEST.ROUTE}`, options);
     };
 
     const name = _get(item, ['name'], 'Loading...');

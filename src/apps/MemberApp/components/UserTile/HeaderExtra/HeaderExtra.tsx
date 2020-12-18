@@ -8,7 +8,7 @@ import {
 } from '@ant-design/icons';
 import { HeaderExtraProps } from './types';
 import './HeaderExtra.less';
-import constants from '@constants';
+import routes from '@constants/routes';
 import { PendingBadge } from '@components';
 import { selectPending } from '@selectors/NotificationSelector';
 import { useSelector } from 'react-redux';
@@ -22,7 +22,7 @@ const HeaderExtra: React.FunctionComponent<HeaderExtraProps> = () => {
                 <Button
                     onClick={() =>
                         history.push(
-                            `/app${constants.ROUTES.NOTIFICATION.ROUTE}`
+                            `/app${routes.NOTIFICATIONS.ROUTE}`
                         )
                     }
                     type="text"
@@ -37,7 +37,7 @@ const HeaderExtra: React.FunctionComponent<HeaderExtraProps> = () => {
             <div className="header-extra-messages">
                 <Button
                     onClick={() =>
-                        history.push(`/app${constants.ROUTES.HOME.ROUTE}`)
+                        history.push(`/app${routes.HOME.ROUTE}`)
                     }
                     type="text"
                     icon={<MessageFilled />}

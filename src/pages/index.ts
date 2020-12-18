@@ -37,6 +37,7 @@ export {
     reducer as contestsPage,
     ContestsPageSaga,
     ContestsPageContentContestsSaga,
+    ContestsPageSiderContentSearchSaga,
     ContestsPageRoutes,
 } from './Contests';
 export {

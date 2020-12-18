@@ -4,6 +4,7 @@ import { get as _get } from 'lodash';
 import classnames from 'classnames';
 import { CompetitorsListTileProps } from './types';
 import constants from '@constants';
+import routes from '@constants/routes';
 import { getName, withS3URL } from '@utils';
 import { Avatar } from '@components';
 import './CompetitorsListTile.less';
@@ -15,7 +16,7 @@ const CompetitorsListTile: React.FunctionComponent<CompetitorsListTileProps> = (
     const isEven = index % 2;
     const item = _get(data, [index], undefined);
     const handleClick = (options: any) => {
-        history.push(`/app${constants.ROUTES.COMPETITOR.ROUTE}`, options);
+        history.push(`/app${routes.COMPETITOR.ROUTE}`, options);
     };
 
     const name = getName(item, 'Loading...');

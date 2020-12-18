@@ -26,7 +26,7 @@ export function* initContest(uuid: string) {
         const { accounts: accountParticipants } = yield call(
             AccountService.bulkFetchAccounts,
             { within: { key: 'membership_uuid', value: accounts } },
-            { include: 'avatar' }
+            { include: 'avatar,address' }
         );
         const accountsHash = _keyBy(accountParticipants, 'membership_uuid');
         yield put(ContestPageActions.set({ accountsHash }));

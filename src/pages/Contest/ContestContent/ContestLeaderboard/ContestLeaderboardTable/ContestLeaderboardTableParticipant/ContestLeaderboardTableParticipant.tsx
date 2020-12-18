@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import constants from '@constants';
+import routes from '@constants/routes';
 import { selectAccountsHash } from '@pages/Contest/selector';
 import { ContestParticipantsTableParticipantProps } from './types';
 import { prepareParticipant } from '@pages/Contest/utils';
@@ -22,18 +22,15 @@ const ContestLeaderboardTableParticipant: React.FunctionComponent<ContestPartici
         <div
             className="contest-leaderboard-table-participant"
             onClick={() =>
-                history.push(
-                    `/app${constants.ROUTES.COMPETITOR.ROUTE}`,
-                    account
-                )
+                history.push(`/app${routes.COMPETITOR.ROUTE}`, account)
             }
         >
-            <Avatar
-                src={s3_filename && withS3URL(s3_filename)}
-                name={name}
-                size={36}
-                className="contest-participants-table-participant-avatar"
-            />
+            {/*<Avatar*/}
+            {/*    src={s3_filename && withS3URL(s3_filename)}*/}
+            {/*    name={name}*/}
+            {/*    size={36}*/}
+            {/*    className="contest-participants-table-participant-avatar"*/}
+            {/*/>*/}
             <div className="contest-participants-table-participant-name">
                 {name}
             </div>

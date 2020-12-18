@@ -1,15 +1,32 @@
 @import 'src/assets/styles/global';
 
 .contest-leaderboard-table-scorecard {
-    height: 175px;
+    display: flex;
+    height: 205px;
     width: 100%;
-    tr {
-        &.filled {
-            background: @tile-fill;
-        }
-        td {
-            &.head {
-                font-weight: bold;
+    border-top: 1px solid #f0f0f0;
+    border-bottom: 1px solid #f0f0f0;
+    //border-left: 1px solid #f0f0f0;
+    //border-right: 1px solid #f0f0f0;
+
+    .contest-leaderboard-table-scorecard-participant-wrapper {
+        width: 15%;
+        border-right: 1px solid #f0f0f0;
+    }
+    .contest-leaderboard-table-scorecard-table-wrapper {
+        overflow-x: auto;
+        overflow-y: hidden;
+        width: 85%;
+        table {
+            tr {
+                &.filled {
+                    background: @tile-fill;
+                }
+                td {
+                    &.head {
+                        font-weight: bold;
+                    }
+                }
             }
         }
     }

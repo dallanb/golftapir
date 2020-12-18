@@ -8,15 +8,18 @@ const Avatar: React.FunctionComponent<AvatarProps> = ({
     name = '',
     className,
     size,
+    shape,
 }) => {
     const props: {
         src?: AvatarProps['src'];
         style?: { backgroundColor: string; verticalAlign: string };
         className?: AvatarProps['className'];
         size?: AvatarProps['size'];
+        shape?: AvatarProps['shape'];
     } = {
         className,
         size,
+        shape,
     };
     let child = '';
     if (src) {

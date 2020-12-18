@@ -6,8 +6,8 @@ import { ContestProps } from './types';
 import ContestUpdatePageContentContestActions from './actions';
 import { selectData } from './selector';
 import ComponentContent from '@layouts/ComponentContent';
+import routes from '@constants/routes';
 import './Contest.less';
-import constants from '@constants';
 
 const Contest: React.FunctionComponent<ContestProps> = ({}) => {
     const dispatch = useDispatch();
@@ -17,7 +17,7 @@ const Contest: React.FunctionComponent<ContestProps> = ({}) => {
 
     useEffect(() => {
         if (isSubmitted && uuid) {
-            history.push(`/app${constants.ROUTES.CONTEST.ROUTE}`, {
+            history.push(`/app${routes.CONTEST.ROUTE}`, {
                 uuid,
             });
         }

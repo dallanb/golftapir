@@ -1,6 +1,8 @@
 import { useHistory } from 'react-router-dom';
 import memoize from 'memoize-one';
 import constants from '@constants';
+import routes from '@constants/routes';
+
 
 export const generateActions = (uuid?: string) => {
     const actions = [];
@@ -9,7 +11,7 @@ export const generateActions = (uuid?: string) => {
         actions.push({
             key: constants.ACTION.CHALLENGE.KEY,
             onClick: () =>
-                history.push(`/app${constants.ROUTES.CONTESTS_CREATE.ROUTE}`, {
+                history.push(`/app${routes.CONTESTS_CREATE.ROUTE}`, {
                     participant_uuid: uuid,
                 }),
         });

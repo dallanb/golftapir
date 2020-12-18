@@ -7,7 +7,7 @@ import { ContestProps } from './types';
 import ContestsCreatePageContentContestActions from './actions';
 import { selectData } from './selector';
 import ComponentContent from '@layouts/ComponentContent';
-import constants from '@constants';
+import routes from '@constants/routes';
 import { OverlaySpin } from '@components';
 import './Contest.less';
 
@@ -21,7 +21,7 @@ const Contest: React.FunctionComponent<ContestProps> = ({}) => {
 
     useEffect(() => {
         if (isSubmitted && result) {
-            history.push(`/app${constants.ROUTES.CONTEST.ROUTE}`, result);
+            history.push(`/app${routes.CONTEST.ROUTE}`, result);
         }
     });
 
