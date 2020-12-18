@@ -1,15 +1,19 @@
 @import 'src/assets/styles/global';
 
 .contest-leaderboard-table-scorecard {
-    height: 175px;
+    height: 205px;
     width: 100%;
-    tr {
-        &.filled {
-            background: @tile-fill;
-        }
-        td {
-            &.head {
-                font-weight: bold;
+    border-top: 1px solid #f0f0f0;
+    border-bottom: 1px solid #f0f0f0;
+    table {
+        tr {
+            &.filled {
+                background: @tile-fill;
+            }
+            td {
+                &.head {
+                    font-weight: bold;
+                }
             }
         }
     }

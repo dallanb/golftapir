@@ -1,5 +1,7 @@
 import React from 'react';
 import { range as _range } from 'lodash';
+import ScorecardHole from './ScorecardHole';
+
 export const columnsSchemaGenerator = (holes: number) => [
     {
         accessor: 'head',
@@ -9,7 +11,9 @@ export const columnsSchemaGenerator = (holes: number) => [
     ..._range(1, holes).map((hole: number) => {
         return {
             accessor: `hole-${hole}`,
-            Cell: ({ value }: any) => value,
+            Cell: ({ row, value }: any) => (
+                <ScorecardHole index={hole} row={row} value={value} />
+            ),
             className: 'hole',
         };
     }),

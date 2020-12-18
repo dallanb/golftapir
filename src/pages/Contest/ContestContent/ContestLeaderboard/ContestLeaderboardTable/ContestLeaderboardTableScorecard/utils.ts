@@ -1,13 +1,15 @@
 // Use this function to transform sheet data to be useful for the table component
+import constants from '@constants';
+
 export const normalizeData = (items: any[]) => {
     // hole
-    const hole: any = { head: 'Hole', tail: 'TOT' };
+    const hole: any = { head: constants.SCORECARD.HOLE, tail: 'TOT' };
     // par
-    const par: any = { head: 'Par', tail: null };
+    const par: any = { head: constants.SCORECARD.PAR, tail: null };
     // round
-    const round: any = { head: 'Round', tail: null };
+    const round: any = { head: constants.SCORECARD.ROUND, tail: null };
     // status
-    const status: any = { head: 'Status', tail: null };
+    const status: any = { head: constants.SCORECARD.STATUS, tail: null };
 
     Object.entries(items).forEach(([key, item]: any) => {
         // hole

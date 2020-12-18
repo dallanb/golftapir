@@ -8,6 +8,7 @@ import { columnsSchemaGenerator } from './schema';
 import { selectData } from './selector';
 import renderRow from './renderRow';
 import ContestPageContentContestLeaderboardScorecardActions from './actions';
+import HoleScoreInfo from './HoleScoreInfo';
 import { selectContestUUID } from '@pages/Contest/selector';
 import './ContestLeaderboardTableScorecard.less';
 
@@ -46,8 +47,9 @@ const ContestLeaderboardTableScorecard: React.FunctionComponent<ContestLeaderboa
                 columnsSchema={columnsSchema}
                 items={items}
                 header={false}
-                style={{ height: '150px', width: '100%' }}
+                style={{ height: '160px', width: '100%' }}
             />
+            <HoleScoreInfo />
         </ComponentContent>
     );
 };

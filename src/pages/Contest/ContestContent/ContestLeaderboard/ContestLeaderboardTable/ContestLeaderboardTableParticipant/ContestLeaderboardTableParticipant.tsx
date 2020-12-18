@@ -25,12 +25,12 @@ const ContestLeaderboardTableParticipant: React.FunctionComponent<ContestPartici
                 history.push(`/app${routes.COMPETITOR.ROUTE}`, account)
             }
         >
-            <Avatar
-                src={s3_filename && withS3URL(s3_filename)}
-                name={name}
-                size={36}
-                className="contest-participants-table-participant-avatar"
-            />
+            {/*<Avatar*/}
+            {/*    src={s3_filename && withS3URL(s3_filename)}*/}
+            {/*    name={name}*/}
+            {/*    size={36}*/}
+            {/*    className="contest-participants-table-participant-avatar"*/}
+            {/*/>*/}
             <div className="contest-participants-table-participant-name">
                 {name}
             </div>

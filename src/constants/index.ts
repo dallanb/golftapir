@@ -178,6 +178,19 @@ const constants = {
         WIDTH: 256,
         HEIGHT: 256,
     },
+    SCORECARD: {
+        ROUND: 'Round',
+        HOLE: 'Hole',
+        PAR: 'Par',
+        STATUS: 'Status',
+    },
+    HOLE_SCORE: {
+        DOUBLE_BOGEY: 2,
+        BOGEY: 1,
+        PAR: 0,
+        BIRDIE: -1,
+        EAGLE: -2
+    }
 };
 
 export default constants;
