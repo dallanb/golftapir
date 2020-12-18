@@ -5,6 +5,7 @@ import {
     CaretDownFilled,
     MessageFilled,
     NotificationFilled,
+    UserOutlined,
 } from '@ant-design/icons';
 import { HeaderExtraProps } from './types';
 import './HeaderExtra.less';
@@ -21,9 +22,7 @@ const HeaderExtra: React.FunctionComponent<HeaderExtraProps> = () => {
             <div className="header-extra-notification">
                 <Button
                     onClick={() =>
-                        history.push(
-                            `/app${routes.NOTIFICATIONS.ROUTE}`
-                        )
+                        history.push(`/app${routes.NOTIFICATIONS.ROUTE}`)
                     }
                     type="text"
                     icon={
@@ -32,15 +31,7 @@ const HeaderExtra: React.FunctionComponent<HeaderExtraProps> = () => {
                             icon={NotificationFilled}
                         />
                     }
-                />
-            </div>
-            <div className="header-extra-messages">
-                <Button
-                    onClick={() =>
-                        history.push(`/app${routes.HOME.ROUTE}`)
-                    }
-                    type="text"
-                    icon={<MessageFilled />}
+                    className="notification-button"
                 />
             </div>
             <div className="header-extra-drop-down">
@@ -48,6 +39,7 @@ const HeaderExtra: React.FunctionComponent<HeaderExtraProps> = () => {
                     onClick={() => {}}
                     type="text"
                     icon={<CaretDownFilled />}
+                    className="drop-down-button"
                 />
             </div>
         </div>
