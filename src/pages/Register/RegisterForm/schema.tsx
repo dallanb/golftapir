@@ -1,6 +1,6 @@
 import React from 'react';
 import * as Yup from 'yup';
-import { LockOutlined, UserOutlined } from '@ant-design/icons';
+import { GlobalOutlined, LockOutlined, UserOutlined } from '@ant-design/icons';
 import InputWrapper from '@components/InputWrapper';
 import CONSTANTS from '@locale/en-CA';
 
@@ -63,11 +63,11 @@ export const fieldSchema = [
         name: 'country',
         type: 'country-select',
         wrapper: InputWrapper,
-        wrapperOptions: {
-            label: FORM.LABELS.COUNTRY,
-        },
         options: {
-            dependants: ['phone.country_code'],
+            prefixRenderer: () => (
+                <GlobalOutlined className="site-form-item-icon" />
+            ),
+            placeholder: FORM.LABELS.COUNTRY,
         },
     },
 ];

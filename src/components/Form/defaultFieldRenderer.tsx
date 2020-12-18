@@ -43,6 +43,7 @@ defaultFieldRenderer = (schema, formik) => {
                             _get(options, ['prefixRenderer'], undefined) &&
                             options.prefixRenderer()
                         }
+                        autoComplete="off"
                     />
                 );
                 break;
@@ -152,6 +153,7 @@ defaultFieldRenderer = (schema, formik) => {
                     <Select
                         key={name}
                         ref={fieldRef}
+                        placeholder={_get(options, ['placeholder'], undefined)}
                         onChange={(value) => {
                             formik.setFieldValue(name, value);
                             if (_get(options, ['dependants'])) {
@@ -161,6 +163,12 @@ defaultFieldRenderer = (schema, formik) => {
                                 );
                             }
                         }}
+                        showSearch
+                        filterOption={(input, option: any) =>
+                            option.children
+                                .toLowerCase()
+                                .indexOf(input.toLowerCase()) >= 0
+                        }
                     >
                         {mapCountryOptions()}
                     </Select>
