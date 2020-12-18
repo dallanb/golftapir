@@ -35,18 +35,10 @@ export const fieldSchema = [
         },
     },
     {
-        name: 'first_name',
+        name: 'display_name',
         wrapper: InputWrapper,
         wrapperOptions: {
-            label: FORM.LABELS.FIRST_NAME,
-        },
-        options: {},
-    },
-    {
-        name: 'last_name',
-        wrapper: InputWrapper,
-        wrapperOptions: {
-            label: FORM.LABELS.LAST_NAME,
+            label: FORM.LABELS.DISPLAY_NAME,
         },
         options: {},
     },
@@ -55,6 +47,7 @@ export const fieldSchema = [
         wrapper: InputWrapper,
         wrapperOptions: {
             label: FORM.LABELS.ADDRESS_LINE_1,
+            hidden: true,
         },
         options: {},
     },
@@ -63,6 +56,7 @@ export const fieldSchema = [
         wrapper: InputWrapper,
         wrapperOptions: {
             label: FORM.LABELS.ADDRESS_LINE_2,
+            hidden: true,
         },
         options: {},
     },
@@ -71,6 +65,7 @@ export const fieldSchema = [
         wrapper: InputWrapper,
         wrapperOptions: {
             label: FORM.LABELS.CITY,
+            hidden: true,
         },
         options: {},
     },
@@ -79,6 +74,7 @@ export const fieldSchema = [
         wrapper: InputWrapper,
         wrapperOptions: {
             label: FORM.LABELS.PROVINCE,
+            hidden: true,
         },
         options: {},
     },
@@ -90,7 +86,7 @@ export const fieldSchema = [
             label: FORM.LABELS.COUNTRY,
         },
         options: {
-            dependants: ['phone.country_code'],
+            // dependants: ['phone.country_code'],
         },
     },
     {
@@ -98,6 +94,7 @@ export const fieldSchema = [
         wrapper: InputWrapper,
         wrapperOptions: {
             label: FORM.LABELS.POSTAL_CODE,
+            hidden: true,
         },
         options: {},
     },
@@ -106,6 +103,7 @@ export const fieldSchema = [
         wrapper: InputWrapper,
         wrapperOptions: {
             label: FORM.LABELS.PHONE_NUMBER,
+            hidden: true,
         },
         options: {},
     },
@@ -122,6 +120,7 @@ export const fieldSchema = [
         wrapper: InputWrapper,
         wrapperOptions: {
             label: FORM.LABELS.PHONE_EXTENSION,
+            hidden: true,
         },
         options: {},
     },
@@ -131,25 +130,18 @@ export const validationSchema = Yup.object({
     avatar: Yup.string(),
     username: Yup.string(),
     email: Yup.string(),
-    first_name: Yup.string()
-        .required(FORM.VALIDATION.FIRST_NAME_REQUIRED)
-        .max(100, FORM.VALIDATION.FIRST_NAME_MAX_LENGTH),
-    last_name: Yup.string()
-        .required(FORM.VALIDATION.LAST_NAME_REQUIRED)
-        .max(100, FORM.VALIDATION.LAST_NAME_MAX_LENGTH),
+    display_name: Yup.string()
+        .required(FORM.VALIDATION.DISPLAY_NAME_REQUIRED)
+        .max(50, FORM.VALIDATION.DISPLAY_NAME_MAX_LENGTH),
     address: Yup.object({
-        line_1: Yup.string().required(FORM.VALIDATION.ADDRESS_LINE_1_REQUIRED),
+        line_1: Yup.string().nullable(),
         line_2: Yup.string().nullable(),
-        city: Yup.string().required(FORM.VALIDATION.ADDRESS_CITY_REQUIRED),
-        province: Yup.string().required(
-            FORM.VALIDATION.ADDRESS_PROVINCE_REQUIRED
-        ),
+        city: Yup.string().nullable(),
+        province: Yup.string().nullable(),
         country: Yup.string().required(
             FORM.VALIDATION.ADDRESS_COUNTRY_REQUIRED
         ),
-        postal_code: Yup.string().required(
-            FORM.VALIDATION.ADDRESS_POSTAL_REQUIRED
-        ),
+        postal_code: Yup.string().nullable(),
     }),
     phone: Yup.object({
         number: Yup.string()
@@ -157,8 +149,8 @@ export const validationSchema = Yup.object({
                 /^[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/,
                 FORM.VALIDATION.PHONE_NUMBER_MATCHES
             )
-            .required(FORM.VALIDATION.PHONE_NUMBER_REQUIRED),
-        country_code: Yup.string(),
+            .nullable(),
+        country_code: Yup.string().nullable(),
         extension: Yup.string().nullable(),
     }),
 });

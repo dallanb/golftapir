@@ -1,7 +1,10 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import SiderLayoutHeader from '@layouts/SiderLayout/SiderLayoutHeader';
-import { selectMyAvatarSrc, selectMyName } from '@selectors/BaseSelector';
+import {
+    selectMyAvatarSrc,
+    selectMyDisplayName,
+} from '@selectors/BaseSelector';
 import HeaderTitle from './HeaderTitle';
 import HeaderExtra from './HeaderExtra';
 import { UserTileProps } from './types';
@@ -9,7 +12,7 @@ import { UserTileProps } from './types';
 const UserTile: React.FunctionComponent<UserTileProps> = () => {
     const title = <HeaderTitle />;
     const avatar = {
-        name: useSelector(selectMyName),
+        name: useSelector(selectMyDisplayName),
         src: useSelector(selectMyAvatarSrc),
         size: 48,
     };

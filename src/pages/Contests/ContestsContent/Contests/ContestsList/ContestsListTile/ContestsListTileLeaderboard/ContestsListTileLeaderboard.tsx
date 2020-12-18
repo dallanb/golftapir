@@ -19,7 +19,7 @@ const ContestsListTileLeaderboard: React.FunctionComponent<ContestsListTileLeade
                     `${participant.uuid}.jpeg`,
                     constants.S3_FOLDERS.ACCOUNT.AVATAR
                 );
-                const participantName = `${participant.first_name} ${participant.last_name}`;
+                const participantName = participant.display_name;
                 const participantScore = participant.score;
                 return (
                     <div className="leaderboard-active">
@@ -44,7 +44,7 @@ const ContestsListTileLeaderboard: React.FunctionComponent<ContestsListTileLeade
                     </div>
                 );
             } else {
-                const participantName = `${participant.first_name} ${participant.last_name}`;
+                const participantName = participant.display_name;
                 return (
                     <div className="leaderboard-completed">
                         <div className="leaderboard-completed-label">

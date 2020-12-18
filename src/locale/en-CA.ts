@@ -125,8 +125,8 @@ const CONSTANTS = {
                     EMAIL: 'Email',
                     PASSWORD: 'Password',
                     CONFIRM_PASSWORD: 'Confirm Password',
-                    FIRST_NAME: 'First Name',
-                    LAST_NAME: 'Last Name',
+                    DISPLAY_NAME: 'Display Name',
+                    COUNTRY: 'Country',
                 },
                 VALIDATION: {
                     USERNAME_REQUIRED: 'Please input your username!',
@@ -135,12 +135,10 @@ const CONSTANTS = {
                     CONFIRM_PASSWORD_REQUIRED: 'Please confirm your password!',
                     CONFIRM_PASSWORD_MISMATCH:
                         'The two passwords that you entered do not match!',
-                    FIRST_NAME_MAX_LENGTH:
-                        'First Name must be less than 100 characters',
-                    FIRST_NAME_REQUIRED: 'First Name is required',
-                    LAST_NAME_MAX_LENGTH:
-                        'Last Name must be less than 100 characters',
-                    LAST_NAME_REQUIRED: 'Last Name is required',
+                    DISPLAY_NAME_MAX_LENGTH:
+                        'Display Name must be less than 50 characters',
+                    DISPLAY_NAME_REQUIRED: 'Display Name is required',
+                    COUNTRY_REQUIRED: 'Country is required',
                 },
             },
         },
@@ -229,8 +227,7 @@ const CONSTANTS = {
                     AVATAR: 'Avatar',
                     USERNAME: 'Username',
                     EMAIL: 'Email',
-                    FIRST_NAME: 'First Name',
-                    LAST_NAME: 'Last Name',
+                    DISPLAY_NAME: 'Display Name',
                     ADDRESS_LINE_1: 'Address Line 1',
                     ADDRESS_LINE_2: 'Address Line 2',
                     CITY: 'City',
@@ -242,12 +239,9 @@ const CONSTANTS = {
                     PHONE_EXTENSION: 'Phone Extension',
                 },
                 VALIDATION: {
-                    FIRST_NAME_MAX_LENGTH:
-                        'First Name must be less than 100 characters',
-                    FIRST_NAME_REQUIRED: 'First Name is required',
-                    LAST_NAME_MAX_LENGTH:
-                        'Last Name must be less than 100 characters',
-                    LAST_NAME_REQUIRED: 'Last Name is required',
+                    DISPLAY_NAME_MAX_LENGTH:
+                        'Display Name must be less than 50 characters',
+                    DISPLAY_NAME_REQUIRED: 'Display Name is required',
                     ADDRESS_LINE_1_REQUIRED: 'Address is required',
                     ADDRESS_CITY_REQUIRED: 'City is required',
                     ADDRESS_PROVINCE_REQUIRED: 'Province is required',

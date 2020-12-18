@@ -50,23 +50,24 @@ export const fieldSchema = [
         },
     },
     {
-        name: 'first_name',
+        name: 'display_name',
         wrapper: InputWrapper,
         options: {
             prefixRenderer: () => (
                 <UserOutlined className="site-form-item-icon" />
             ),
-            placeholder: FORM.LABELS.FIRST_NAME,
+            placeholder: FORM.LABELS.DISPLAY_NAME,
         },
     },
     {
-        name: 'last_name',
+        name: 'country',
+        type: 'country-select',
         wrapper: InputWrapper,
+        wrapperOptions: {
+            label: FORM.LABELS.COUNTRY,
+        },
         options: {
-            prefixRenderer: () => (
-                <UserOutlined className="site-form-item-icon" />
-            ),
-            placeholder: FORM.LABELS.LAST_NAME,
+            dependants: ['phone.country_code'],
         },
     },
 ];
@@ -78,10 +79,8 @@ export const validationSchema = Yup.object({
     confirm_password: Yup.string()
         .required(FORM.VALIDATION.CONFIRM_PASSWORD_REQUIRED)
         .oneOf([Yup.ref('password'), ''], 'Passwords must match'),
-    first_name: Yup.string()
-        .required(FORM.VALIDATION.FIRST_NAME_REQUIRED)
-        .max(100, FORM.VALIDATION.FIRST_NAME_MAX_LENGTH),
-    last_name: Yup.string()
-        .required(FORM.VALIDATION.LAST_NAME_REQUIRED)
-        .max(100, FORM.VALIDATION.LAST_NAME_MAX_LENGTH),
+    display_name: Yup.string()
+        .required(FORM.VALIDATION.DISPLAY_NAME_REQUIRED)
+        .max(100, FORM.VALIDATION.DISPLAY_NAME_MAX_LENGTH),
+    country: Yup.string().required(FORM.VALIDATION.COUNTRY_REQUIRED),
 });

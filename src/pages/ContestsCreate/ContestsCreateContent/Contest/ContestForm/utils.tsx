@@ -30,14 +30,8 @@ export const participantSearchSelectOptionRenderer = (
         [...participantSearch, ...permanentParticipants],
         'membership_uuid'
     );
-    return Object.values(
-        participants
-    ).map(
-        (participant: {
-            membership_uuid: string;
-            first_name: string;
-            last_name: string;
-        }) => (
+    return Object.values(participants).map(
+        (participant: { membership_uuid: string; display_name: string }) => (
             <Select.Option
                 key={participant.membership_uuid}
                 value={participant.membership_uuid}
@@ -47,7 +41,9 @@ export const participantSearchSelectOptionRenderer = (
                             membership_uuid === participant.membership_uuid
                     ) > -1
                 }
-            >{`${participant.first_name} ${participant.last_name}`}</Select.Option>
+            >
+                {participant.display_name}
+            </Select.Option>
         )
     );
 };
