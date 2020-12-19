@@ -46,7 +46,7 @@ export default {
     searchAccounts(query: any = {}) {
         return ClientProxy.get({
             url: config.ACCOUNT_URL,
-            endpoint: `/accounts/search`,
+            endpoint: `/accounts`,
             query,
         });
     },

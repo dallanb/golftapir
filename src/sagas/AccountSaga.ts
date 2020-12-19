@@ -63,11 +63,10 @@ function* assignAvatar({ uuid, avatar }: AnyAction) {
     }
 }
 
-function* searchAccounts({ key }: AnyAction) {
+function* searchAccounts({ key: search }: AnyAction) {
     try {
         const res = yield call(AccountService.searchAccounts, {
-            key,
-            fields: 'name',
+            search,
         });
         const { accounts } = res;
         yield put(AccountActions.searchAccountsSuccess(accounts));
