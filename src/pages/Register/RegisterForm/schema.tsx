@@ -1,7 +1,7 @@
 import React from 'react';
 import * as Yup from 'yup';
 import { GlobalOutlined, LockOutlined, UserOutlined } from '@ant-design/icons';
-import InputWrapper from '@components/InputWrapper';
+import {BasicInputWrapper} from '@components';
 import CONSTANTS from '@locale/en-CA';
 
 const FORM = CONSTANTS.PAGES.REGISTER.FORM;
@@ -9,7 +9,7 @@ const FORM = CONSTANTS.PAGES.REGISTER.FORM;
 export const fieldSchema = [
     {
         name: 'email',
-        wrapper: InputWrapper,
+        wrapper: BasicInputWrapper,
         options: {
             prefixRenderer: () => (
                 <UserOutlined className="site-form-item-icon" />
@@ -19,7 +19,7 @@ export const fieldSchema = [
     },
     {
         name: 'username',
-        wrapper: InputWrapper,
+        wrapper: BasicInputWrapper,
         options: {
             prefixRenderer: () => (
                 <UserOutlined className="site-form-item-icon" />
@@ -30,7 +30,7 @@ export const fieldSchema = [
     {
         name: 'password',
         type: 'password',
-        wrapper: InputWrapper,
+        wrapper: BasicInputWrapper,
         options: {
             prefixRenderer: () => (
                 <LockOutlined className="site-form-item-icon" />
@@ -41,7 +41,7 @@ export const fieldSchema = [
     {
         name: 'confirm_password',
         type: 'password',
-        wrapper: InputWrapper,
+        wrapper: BasicInputWrapper,
         options: {
             prefixRenderer: () => (
                 <LockOutlined className="site-form-item-icon" />
@@ -51,7 +51,7 @@ export const fieldSchema = [
     },
     {
         name: 'display_name',
-        wrapper: InputWrapper,
+        wrapper: BasicInputWrapper,
         options: {
             prefixRenderer: () => (
                 <UserOutlined className="site-form-item-icon" />
@@ -62,7 +62,7 @@ export const fieldSchema = [
     {
         name: 'country',
         type: 'country-select',
-        wrapper: InputWrapper,
+        wrapper: BasicInputWrapper,
         options: {
             prefixRenderer: () => (
                 <GlobalOutlined className="site-form-item-icon" />

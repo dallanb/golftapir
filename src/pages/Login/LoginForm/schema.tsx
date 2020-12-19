@@ -1,6 +1,6 @@
 import React from 'react';
 import * as Yup from 'yup';
-import InputWrapper from '@components/InputWrapper';
+import {BasicInputWrapper} from '@components';
 import CONSTANTS from '@locale/en-CA';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 
@@ -9,7 +9,7 @@ const FORM = CONSTANTS.PAGES.LOGIN.FORM;
 export const fieldSchema = [
     {
         name: 'email',
-        wrapper: InputWrapper,
+        wrapper: BasicInputWrapper,
         options: {
             prefixRenderer: () => (
                 <UserOutlined className="site-form-item-icon" />
@@ -20,7 +20,7 @@ export const fieldSchema = [
     {
         name: 'password',
         type: 'password',
-        wrapper: InputWrapper,
+        wrapper: BasicInputWrapper,
         options: {
             prefixRenderer: () => (
                 <LockOutlined className="site-form-item-icon" />

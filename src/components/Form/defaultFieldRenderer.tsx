@@ -36,14 +36,16 @@ defaultFieldRenderer = (schema, formik) => {
                         name={name}
                         ref={fieldRef}
                         onChange={formik.handleChange}
+                        disabled={_get(options, ['disabled'], false)}
                         readOnly={_get(options, ['readonly'], false)}
-                        bordered={!_get(options, ['readonly'], false)}
+                        bordered={_get(options, ['bordered'], true)}
                         placeholder={_get(options, ['placeholder'], undefined)}
                         prefix={
                             _get(options, ['prefixRenderer'], undefined) &&
                             options.prefixRenderer()
                         }
                         autoComplete="off"
+                        className={_get(options, ['className'], undefined)}
                     />
                 );
                 break;
@@ -183,10 +185,12 @@ defaultFieldRenderer = (schema, formik) => {
             const touched = _get(formik, ['touched', ...formattedName]);
             const submitted = _get(formik, ['submitCount']) > 0;
             const hasError = _get(formik, ['errors', ...formattedName]);
+            const value = _get(formik, ['values', ...formattedName], null);
             const submittedError = hasError && submitted;
             const touchedError = hasError && touched;
             field = wrap(wrapper, field, {
                 name: formattedName,
+                value,
                 formik,
                 hasFeedback: submittedError || touchedError,
                 help: hasError || '',

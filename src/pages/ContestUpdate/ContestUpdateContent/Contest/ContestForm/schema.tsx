@@ -1,5 +1,5 @@
 import * as Yup from 'yup';
-import InputWrapper from '@components/InputWrapper';
+import {BasicInputWrapper} from '@components';
 import CONSTANTS from '@locale/en-CA';
 import moment, { Moment } from 'moment';
 
@@ -8,7 +8,7 @@ const FORM = CONSTANTS.PAGES.CONTEST_UPDATE.FORM;
 export const fieldSchema = [
     {
         name: 'name',
-        wrapper: InputWrapper,
+        wrapper: BasicInputWrapper,
         wrapperOptions: {
             label: FORM.LABELS.NAME,
         },
@@ -16,7 +16,7 @@ export const fieldSchema = [
     {
         name: 'avatar',
         type: 'avatar',
-        wrapper: InputWrapper,
+        wrapper: BasicInputWrapper,
         wrapperOptions: {
             label: FORM.LABELS.AVATAR,
             valuePropName: 'file',
@@ -25,7 +25,7 @@ export const fieldSchema = [
     {
         name: 'start_time',
         type: 'date-time-picker',
-        wrapper: InputWrapper,
+        wrapper: BasicInputWrapper,
         wrapperOptions: {
             label: FORM.LABELS.START_TIME,
         },

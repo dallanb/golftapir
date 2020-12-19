@@ -1,6 +1,11 @@
 import * as Yup from 'yup';
-import InputWrapper from '@components/InputWrapper';
+import {
+    AvatarInputWrapper,
+    BasicInputWrapper,
+    FloatLabelInputWrapper,
+} from '@components';
 import CONSTANTS from '@locale/en-CA';
+import React from 'react';
 
 const FORM = CONSTANTS.PAGES.ACCOUNT.FORM;
 
@@ -8,7 +13,7 @@ export const fieldSchema = [
     {
         name: 'avatar',
         type: 'avatar',
-        wrapper: InputWrapper,
+        wrapper: AvatarInputWrapper,
         wrapperOptions: {
             label: FORM.LABELS.AVATAR,
             valuePropName: 'file',
@@ -16,27 +21,27 @@ export const fieldSchema = [
     },
     {
         name: 'username',
-        wrapper: InputWrapper,
+        wrapper: FloatLabelInputWrapper,
         wrapperOptions: {
             label: FORM.LABELS.USERNAME,
         },
         options: {
-            readonly: true,
+            disabled: true,
         },
     },
     {
         name: 'email',
-        wrapper: InputWrapper,
+        wrapper: FloatLabelInputWrapper,
         wrapperOptions: {
             label: FORM.LABELS.EMAIL,
         },
         options: {
-            readonly: true,
+            disabled: true,
         },
     },
     {
         name: 'display_name',
-        wrapper: InputWrapper,
+        wrapper: FloatLabelInputWrapper,
         wrapperOptions: {
             label: FORM.LABELS.DISPLAY_NAME,
         },
@@ -44,7 +49,7 @@ export const fieldSchema = [
     },
     {
         name: 'address.line_1',
-        wrapper: InputWrapper,
+        wrapper: BasicInputWrapper,
         wrapperOptions: {
             label: FORM.LABELS.ADDRESS_LINE_1,
             hidden: true,
@@ -53,7 +58,7 @@ export const fieldSchema = [
     },
     {
         name: 'address.line_2',
-        wrapper: InputWrapper,
+        wrapper: BasicInputWrapper,
         wrapperOptions: {
             label: FORM.LABELS.ADDRESS_LINE_2,
             hidden: true,
@@ -62,7 +67,7 @@ export const fieldSchema = [
     },
     {
         name: 'address.city',
-        wrapper: InputWrapper,
+        wrapper: BasicInputWrapper,
         wrapperOptions: {
             label: FORM.LABELS.CITY,
             hidden: true,
@@ -71,7 +76,7 @@ export const fieldSchema = [
     },
     {
         name: 'address.province',
-        wrapper: InputWrapper,
+        wrapper: BasicInputWrapper,
         wrapperOptions: {
             label: FORM.LABELS.PROVINCE,
             hidden: true,
@@ -81,7 +86,7 @@ export const fieldSchema = [
     {
         name: 'address.country',
         type: 'country-select',
-        wrapper: InputWrapper,
+        wrapper: FloatLabelInputWrapper,
         wrapperOptions: {
             label: FORM.LABELS.COUNTRY,
         },
@@ -91,7 +96,7 @@ export const fieldSchema = [
     },
     {
         name: 'address.postal_code',
-        wrapper: InputWrapper,
+        wrapper: BasicInputWrapper,
         wrapperOptions: {
             label: FORM.LABELS.POSTAL_CODE,
             hidden: true,
@@ -100,7 +105,7 @@ export const fieldSchema = [
     },
     {
         name: 'phone.number',
-        wrapper: InputWrapper,
+        wrapper: BasicInputWrapper,
         wrapperOptions: {
             label: FORM.LABELS.PHONE_NUMBER,
             hidden: true,
@@ -109,7 +114,7 @@ export const fieldSchema = [
     },
     {
         name: 'phone.country_code',
-        wrapper: InputWrapper,
+        wrapper: BasicInputWrapper,
         wrapperOptions: {
             label: FORM.LABELS.PHONE_COUNTRY_CODE,
             hidden: true,
@@ -117,7 +122,7 @@ export const fieldSchema = [
     },
     {
         name: 'phone.extension',
-        wrapper: InputWrapper,
+        wrapper: BasicInputWrapper,
         wrapperOptions: {
             label: FORM.LABELS.PHONE_EXTENSION,
             hidden: true,
