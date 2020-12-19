@@ -132,6 +132,8 @@ defaultFieldRenderer = (schema, formik) => {
                                 )(date)
                             )
                         }
+                        placeholder={_get(options, ['placeholder'], '')}
+                        suffixIcon={_get(options, ['suffixIcon'], undefined)}
                         format={_get(
                             options,
                             ['format'],

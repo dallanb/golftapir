@@ -3,7 +3,7 @@ import * as Yup from 'yup';
 import moment, { Moment } from 'moment';
 import ContestsCreatePageContentContestSearchParticipantActions from './ContestFormSearch/Participant/actions';
 import ContestsCreatePageContentContestSearchCourseActions from './ContestFormSearch/Course/actions';
-import {BasicInputWrapper} from '@components';
+import { BasicInputWrapper, FloatLabelInputWrapper } from '@components';
 import {
     courseSearchSelectOptionRenderer,
     participantSearchSelectOptionRenderer,
@@ -23,13 +23,6 @@ export const fieldSchema = [
         options: {},
     },
     {
-        name: 'name',
-        wrapper: BasicInputWrapper,
-        wrapperOptions: {
-            label: FORM.LABELS.NAME,
-        },
-    },
-    {
         name: 'avatar',
         type: 'avatar',
         wrapper: BasicInputWrapper,
@@ -39,9 +32,16 @@ export const fieldSchema = [
         },
     },
     {
+        name: 'name',
+        wrapper: FloatLabelInputWrapper,
+        wrapperOptions: {
+            label: FORM.LABELS.NAME,
+        },
+    },
+    {
         name: 'start_time',
         type: 'date-time-picker',
-        wrapper: BasicInputWrapper,
+        wrapper: FloatLabelInputWrapper,
         wrapperOptions: {
             label: FORM.LABELS.START_TIME,
         },
@@ -55,7 +55,7 @@ export const fieldSchema = [
     {
         name: 'location_uuid',
         type: 'search-select',
-        wrapper: BasicInputWrapper,
+        wrapper: FloatLabelInputWrapper,
         wrapperOptions: {
             label: FORM.LABELS.COURSE,
         },
@@ -74,7 +74,7 @@ export const fieldSchema = [
     {
         name: 'participants',
         type: 'search-select',
-        wrapper: BasicInputWrapper,
+        wrapper: FloatLabelInputWrapper,
         wrapperOptions: {
             label: FORM.LABELS.PARTICIPANTS,
         },
