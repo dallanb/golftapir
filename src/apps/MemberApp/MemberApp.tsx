@@ -86,12 +86,11 @@ const mapStateToProps = ({ base, auth, notification }: any) => {
     const { isLoggedIn, forceLogout } = auth;
     const { pending } = notification;
 
-    const first_name = _get(me, ['first_name'], '');
-    const last_name = _get(me, ['last_name'], '');
+    const name = _get(me, ['display_name'], '');
     const menuProps = { icons: { notifications: { pending } } };
 
     return {
-        name: `${first_name} ${last_name}`,
+        name,
         avatar: _get(me, ['avatar', 's3_filename'], ''),
         isInitialized,
         isLoggedIn,

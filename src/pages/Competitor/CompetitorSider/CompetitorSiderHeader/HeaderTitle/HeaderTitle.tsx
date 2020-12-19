@@ -1,11 +1,11 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { HeaderTitleProps } from './types';
-import { selectMyName } from '@selectors/BaseSelector';
+import { selectMyDisplayName } from '@selectors/BaseSelector';
 import './HeaderTitle.less';
 
 const HeaderTitle: React.FunctionComponent<HeaderTitleProps> = () => {
-    const name = useSelector(selectMyName);
+    const name = useSelector(selectMyDisplayName);
     return (
         <div className="header-title">
             <div className="header-title-name">{name}</div>

@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import {
     selectAccountAvatarSrc,
-    selectAccountName,
+    selectAccountDisplayName,
 } from '@pages/Competitor/selector';
 import { CompetitorHeaderProps } from './types';
 import { ContentLayoutHeader } from '@layouts';
@@ -11,7 +11,7 @@ import CONSTANTS from '@locale/en-CA';
 import './CompetitorHeader.less';
 
 const CompetitorHeader: React.FunctionComponent<CompetitorHeaderProps> = () => {
-    const title = useSelector(selectAccountName);
+    const title = useSelector(selectAccountDisplayName);
     const subTitle = CONSTANTS.PAGES.COMPETITOR.DESCRIPTION;
     const avatar = {
         name: title,

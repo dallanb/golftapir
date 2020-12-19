@@ -17,16 +17,14 @@ const AccountForm: React.FunctionComponent<AccountFormProps> = () => {
     const account = useSelector(selectAccount);
 
     const handleSubmit = (values: FormikValues) => {
-        const { first_name, last_name, address, phone, avatar } = values;
+        const { display_name, address, avatar } = values;
         if (!_isEqual(avatar, account.avatar)) {
             dispatch(AccountActions.assignAvatar('me', avatar)); // TODO: Should this be moved to a local call?
         }
         dispatch(
             AccountPageContentAccountActions.submit({
-                first_name,
-                last_name,
+                display_name,
                 address,
-                phone,
             })
         );
     };

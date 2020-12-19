@@ -20,8 +20,8 @@ export default {
         email: string;
         username: string;
         password: string;
-        first_name: string;
-        last_name: string;
+        display_name: string;
+        country: string;
     }) {
         return ClientProxy.post({
             url: config.AUTH_URL,

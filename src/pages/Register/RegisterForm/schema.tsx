@@ -1,7 +1,7 @@
 import React from 'react';
 import * as Yup from 'yup';
-import { LockOutlined, UserOutlined } from '@ant-design/icons';
-import InputWrapper from '@components/InputWrapper';
+import { GlobalOutlined, LockOutlined, UserOutlined } from '@ant-design/icons';
+import {BasicInputWrapper} from '@components';
 import CONSTANTS from '@locale/en-CA';
 
 const FORM = CONSTANTS.PAGES.REGISTER.FORM;
@@ -9,7 +9,7 @@ const FORM = CONSTANTS.PAGES.REGISTER.FORM;
 export const fieldSchema = [
     {
         name: 'email',
-        wrapper: InputWrapper,
+        wrapper: BasicInputWrapper,
         options: {
             prefixRenderer: () => (
                 <UserOutlined className="site-form-item-icon" />
@@ -19,7 +19,7 @@ export const fieldSchema = [
     },
     {
         name: 'username',
-        wrapper: InputWrapper,
+        wrapper: BasicInputWrapper,
         options: {
             prefixRenderer: () => (
                 <UserOutlined className="site-form-item-icon" />
@@ -30,7 +30,7 @@ export const fieldSchema = [
     {
         name: 'password',
         type: 'password',
-        wrapper: InputWrapper,
+        wrapper: BasicInputWrapper,
         options: {
             prefixRenderer: () => (
                 <LockOutlined className="site-form-item-icon" />
@@ -41,7 +41,7 @@ export const fieldSchema = [
     {
         name: 'confirm_password',
         type: 'password',
-        wrapper: InputWrapper,
+        wrapper: BasicInputWrapper,
         options: {
             prefixRenderer: () => (
                 <LockOutlined className="site-form-item-icon" />
@@ -50,23 +50,24 @@ export const fieldSchema = [
         },
     },
     {
-        name: 'first_name',
-        wrapper: InputWrapper,
+        name: 'display_name',
+        wrapper: BasicInputWrapper,
         options: {
             prefixRenderer: () => (
                 <UserOutlined className="site-form-item-icon" />
             ),
-            placeholder: FORM.LABELS.FIRST_NAME,
+            placeholder: FORM.LABELS.DISPLAY_NAME,
         },
     },
     {
-        name: 'last_name',
-        wrapper: InputWrapper,
+        name: 'country',
+        type: 'country-select',
+        wrapper: BasicInputWrapper,
         options: {
             prefixRenderer: () => (
-                <UserOutlined className="site-form-item-icon" />
+                <GlobalOutlined className="site-form-item-icon" />
             ),
-            placeholder: FORM.LABELS.LAST_NAME,
+            placeholder: FORM.LABELS.COUNTRY,
         },
     },
 ];
@@ -78,10 +79,8 @@ export const validationSchema = Yup.object({
     confirm_password: Yup.string()
         .required(FORM.VALIDATION.CONFIRM_PASSWORD_REQUIRED)
         .oneOf([Yup.ref('password'), ''], 'Passwords must match'),
-    first_name: Yup.string()
-        .required(FORM.VALIDATION.FIRST_NAME_REQUIRED)
-        .max(100, FORM.VALIDATION.FIRST_NAME_MAX_LENGTH),
-    last_name: Yup.string()
-        .required(FORM.VALIDATION.LAST_NAME_REQUIRED)
-        .max(100, FORM.VALIDATION.LAST_NAME_MAX_LENGTH),
+    display_name: Yup.string()
+        .required(FORM.VALIDATION.DISPLAY_NAME_REQUIRED)
+        .max(100, FORM.VALIDATION.DISPLAY_NAME_MAX_LENGTH),
+    country: Yup.string().required(FORM.VALIDATION.COUNTRY_REQUIRED),
 });

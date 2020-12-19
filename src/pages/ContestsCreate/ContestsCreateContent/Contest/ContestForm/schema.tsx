@@ -3,7 +3,7 @@ import * as Yup from 'yup';
 import moment, { Moment } from 'moment';
 import ContestsCreatePageContentContestSearchParticipantActions from './ContestFormSearch/Participant/actions';
 import ContestsCreatePageContentContestSearchCourseActions from './ContestFormSearch/Course/actions';
-import InputWrapper from '@components/InputWrapper';
+import { BasicInputWrapper, FloatLabelInputWrapper } from '@components';
 import {
     courseSearchSelectOptionRenderer,
     participantSearchSelectOptionRenderer,
@@ -16,32 +16,32 @@ const FORM = CONSTANTS.PAGES.CONTESTS_CREATE.FORM;
 export const fieldSchema = [
     {
         name: 'sport_uuid',
-        wrapper: InputWrapper,
+        wrapper: BasicInputWrapper,
         wrapperOptions: {
             hidden: true,
         },
         options: {},
     },
     {
-        name: 'name',
-        wrapper: InputWrapper,
-        wrapperOptions: {
-            label: FORM.LABELS.NAME,
-        },
-    },
-    {
         name: 'avatar',
         type: 'avatar',
-        wrapper: InputWrapper,
+        wrapper: BasicInputWrapper,
         wrapperOptions: {
             label: FORM.LABELS.AVATAR,
             valuePropName: 'file',
         },
     },
     {
+        name: 'name',
+        wrapper: FloatLabelInputWrapper,
+        wrapperOptions: {
+            label: FORM.LABELS.NAME,
+        },
+    },
+    {
         name: 'start_time',
         type: 'date-time-picker',
-        wrapper: InputWrapper,
+        wrapper: FloatLabelInputWrapper,
         wrapperOptions: {
             label: FORM.LABELS.START_TIME,
         },
@@ -55,7 +55,7 @@ export const fieldSchema = [
     {
         name: 'location_uuid',
         type: 'search-select',
-        wrapper: InputWrapper,
+        wrapper: FloatLabelInputWrapper,
         wrapperOptions: {
             label: FORM.LABELS.COURSE,
         },
@@ -74,7 +74,7 @@ export const fieldSchema = [
     {
         name: 'participants',
         type: 'search-select',
-        wrapper: InputWrapper,
+        wrapper: FloatLabelInputWrapper,
         wrapperOptions: {
             label: FORM.LABELS.PARTICIPANTS,
         },

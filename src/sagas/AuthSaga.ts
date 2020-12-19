@@ -27,16 +27,16 @@ function* register({
     email,
     username,
     password,
-    first_name,
-    last_name,
+    display_name,
+    country,
 }: AnyAction) {
     try {
         const res = yield call(AuthService.register, {
             email,
             username,
             password,
-            first_name,
-            last_name,
+            display_name,
+            country,
         });
         const { user, access_token } = res;
         ClientProxy.accessToken = access_token;

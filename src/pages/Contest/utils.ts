@@ -13,12 +13,11 @@ export const prepareParticipant = (
 } => {
     const participant = { name: '', s3_filename: '', account: null };
     const account = _get(accountHash, [uuid], {
-        first_name: '',
-        last_name: '',
+        display_name: '',
         avatar: { s3_filename: '' },
     });
     participant.account = account;
-    participant.name = `${account.first_name} ${account.last_name}`;
+    participant.name = account.display_name;
     participant.s3_filename = _get(account, ['avatar', 's3_filename'], '');
     return participant;
 };

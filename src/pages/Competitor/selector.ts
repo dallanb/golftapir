@@ -16,13 +16,9 @@ export const selectAccount = createSelector(
     (competitorPage) => _get(competitorPage, ['account'], undefined)
 );
 
-export const selectAccountName = createSelector(
+export const selectAccountDisplayName = createSelector(
     [getCompetitorPage],
-    (competitorPage) => {
-        const first_mame = _get(competitorPage, ['account', 'first_name'], '');
-        const last_name = _get(competitorPage, ['account', 'last_name'], '');
-        return `${first_mame} ${last_name}`;
-    }
+    (competitorPage) => _get(competitorPage, ['account', 'display_name'], '')
 );
 
 export const selectAccountAvatar = createSelector(

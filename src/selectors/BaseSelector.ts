@@ -9,11 +9,9 @@ export const selectMe = createSelector([getBase], (base) =>
     _get(base, ['me'], [])
 );
 
-export const selectMyName = createSelector([getBase], (base) => {
-    const first_mame = _get(base, ['me', 'first_name'], '');
-    const last_name = _get(base, ['me', 'last_name'], '');
-    return `${first_mame} ${last_name}`;
-});
+export const selectMyDisplayName = createSelector([getBase], (base) =>
+    _get(base, ['me', 'display_name'], '')
+);
 export const selectMyUsername = createSelector([getBase], (base) =>
     _get(base, ['me', 'username'], '')
 );

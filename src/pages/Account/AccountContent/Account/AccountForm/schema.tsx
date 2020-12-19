@@ -1,6 +1,11 @@
 import * as Yup from 'yup';
-import InputWrapper from '@components/InputWrapper';
+import {
+    AvatarInputWrapper,
+    BasicInputWrapper,
+    FloatLabelInputWrapper,
+} from '@components';
 import CONSTANTS from '@locale/en-CA';
+import React from 'react';
 
 const FORM = CONSTANTS.PAGES.ACCOUNT.FORM;
 
@@ -8,7 +13,7 @@ export const fieldSchema = [
     {
         name: 'avatar',
         type: 'avatar',
-        wrapper: InputWrapper,
+        wrapper: AvatarInputWrapper,
         wrapperOptions: {
             label: FORM.LABELS.AVATAR,
             valuePropName: 'file',
@@ -16,102 +21,100 @@ export const fieldSchema = [
     },
     {
         name: 'username',
-        wrapper: InputWrapper,
+        wrapper: FloatLabelInputWrapper,
         wrapperOptions: {
             label: FORM.LABELS.USERNAME,
         },
         options: {
-            readonly: true,
+            disabled: true,
         },
     },
     {
         name: 'email',
-        wrapper: InputWrapper,
+        wrapper: FloatLabelInputWrapper,
         wrapperOptions: {
             label: FORM.LABELS.EMAIL,
         },
         options: {
-            readonly: true,
+            disabled: true,
         },
     },
     {
-        name: 'first_name',
-        wrapper: InputWrapper,
+        name: 'display_name',
+        wrapper: FloatLabelInputWrapper,
         wrapperOptions: {
-            label: FORM.LABELS.FIRST_NAME,
-        },
-        options: {},
-    },
-    {
-        name: 'last_name',
-        wrapper: InputWrapper,
-        wrapperOptions: {
-            label: FORM.LABELS.LAST_NAME,
+            label: FORM.LABELS.DISPLAY_NAME,
         },
         options: {},
     },
     {
         name: 'address.line_1',
-        wrapper: InputWrapper,
+        wrapper: BasicInputWrapper,
         wrapperOptions: {
             label: FORM.LABELS.ADDRESS_LINE_1,
+            hidden: true,
         },
         options: {},
     },
     {
         name: 'address.line_2',
-        wrapper: InputWrapper,
+        wrapper: BasicInputWrapper,
         wrapperOptions: {
             label: FORM.LABELS.ADDRESS_LINE_2,
+            hidden: true,
         },
         options: {},
     },
     {
         name: 'address.city',
-        wrapper: InputWrapper,
+        wrapper: BasicInputWrapper,
         wrapperOptions: {
             label: FORM.LABELS.CITY,
+            hidden: true,
         },
         options: {},
     },
     {
         name: 'address.province',
-        wrapper: InputWrapper,
+        wrapper: BasicInputWrapper,
         wrapperOptions: {
             label: FORM.LABELS.PROVINCE,
+            hidden: true,
         },
         options: {},
     },
     {
         name: 'address.country',
         type: 'country-select',
-        wrapper: InputWrapper,
+        wrapper: FloatLabelInputWrapper,
         wrapperOptions: {
             label: FORM.LABELS.COUNTRY,
         },
         options: {
-            dependants: ['phone.country_code'],
+            // dependants: ['phone.country_code'],
         },
     },
     {
         name: 'address.postal_code',
-        wrapper: InputWrapper,
+        wrapper: BasicInputWrapper,
         wrapperOptions: {
             label: FORM.LABELS.POSTAL_CODE,
+            hidden: true,
         },
         options: {},
     },
     {
         name: 'phone.number',
-        wrapper: InputWrapper,
+        wrapper: BasicInputWrapper,
         wrapperOptions: {
             label: FORM.LABELS.PHONE_NUMBER,
+            hidden: true,
         },
         options: {},
     },
     {
         name: 'phone.country_code',
-        wrapper: InputWrapper,
+        wrapper: BasicInputWrapper,
         wrapperOptions: {
             label: FORM.LABELS.PHONE_COUNTRY_CODE,
             hidden: true,
@@ -119,9 +122,10 @@ export const fieldSchema = [
     },
     {
         name: 'phone.extension',
-        wrapper: InputWrapper,
+        wrapper: BasicInputWrapper,
         wrapperOptions: {
             label: FORM.LABELS.PHONE_EXTENSION,
+            hidden: true,
         },
         options: {},
     },
@@ -131,25 +135,18 @@ export const validationSchema = Yup.object({
     avatar: Yup.string(),
     username: Yup.string(),
     email: Yup.string(),
-    first_name: Yup.string()
-        .required(FORM.VALIDATION.FIRST_NAME_REQUIRED)
-        .max(100, FORM.VALIDATION.FIRST_NAME_MAX_LENGTH),
-    last_name: Yup.string()
-        .required(FORM.VALIDATION.LAST_NAME_REQUIRED)
-        .max(100, FORM.VALIDATION.LAST_NAME_MAX_LENGTH),
+    display_name: Yup.string()
+        .required(FORM.VALIDATION.DISPLAY_NAME_REQUIRED)
+        .max(50, FORM.VALIDATION.DISPLAY_NAME_MAX_LENGTH),
     address: Yup.object({
-        line_1: Yup.string().required(FORM.VALIDATION.ADDRESS_LINE_1_REQUIRED),
+        line_1: Yup.string().nullable(),
         line_2: Yup.string().nullable(),
-        city: Yup.string().required(FORM.VALIDATION.ADDRESS_CITY_REQUIRED),
-        province: Yup.string().required(
-            FORM.VALIDATION.ADDRESS_PROVINCE_REQUIRED
-        ),
+        city: Yup.string().nullable(),
+        province: Yup.string().nullable(),
         country: Yup.string().required(
             FORM.VALIDATION.ADDRESS_COUNTRY_REQUIRED
         ),
-        postal_code: Yup.string().required(
-            FORM.VALIDATION.ADDRESS_POSTAL_REQUIRED
-        ),
+        postal_code: Yup.string().nullable(),
     }),
     phone: Yup.object({
         number: Yup.string()
@@ -157,8 +154,8 @@ export const validationSchema = Yup.object({
                 /^[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/,
                 FORM.VALIDATION.PHONE_NUMBER_MATCHES
             )
-            .required(FORM.VALIDATION.PHONE_NUMBER_REQUIRED),
-        country_code: Yup.string(),
+            .nullable(),
+        country_code: Yup.string().nullable(),
         extension: Yup.string().nullable(),
     }),
 });

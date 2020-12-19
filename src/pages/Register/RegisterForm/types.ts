@@ -3,8 +3,8 @@ export interface RegisterFormProps {
         email: string,
         username: string,
         password: string,
-        first_name: string,
-        last_name: string
+        display_name: string,
+        country: string
     ) => any;
     initialValues: any;
 }
