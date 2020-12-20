@@ -16,7 +16,7 @@ class AvatarInputWrapper extends React.PureComponent<AvatarInputWrapperProps> {
         } = this.props;
         return (
             <Form.Item {...restProps}>
-                <Avatar shape="square" size={128} src={value} name="Baby D" />
+                <Avatar shape="square" size={128} src={value} name="" />
                 <Form.Item noStyle name={name} valuePropName={valuePropName}>
                     {children}
                 </Form.Item>

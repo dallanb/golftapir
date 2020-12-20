@@ -27,6 +27,8 @@ defaultFieldRenderer = (schema, formik) => {
         wrapperOptions = {},
     }: any) => {
         let field;
+        const formattedName = antdFormatName(name);
+        const value = _get(formik, ['values', ...formattedName], null);
         const fieldRef = _get(options, ['ref'], undefined);
         const dispatch = useDispatch();
         switch (type) {
@@ -117,8 +119,8 @@ defaultFieldRenderer = (schema, formik) => {
                             )
                         }
                     >
-                        {_get(options, ['uploadButton'], undefined) ? (
-                            options.uploadButton
+                        {_get(options, ['uploadButtonRenderer'], undefined) ? (
+                            options.uploadButtonRenderer(value)
                         ) : (
                             <Button icon={<UploadOutlined />}>
                                 {_get(
@@ -195,11 +197,9 @@ defaultFieldRenderer = (schema, formik) => {
         }
 
         if (wrapper) {
-            const formattedName = antdFormatName(name);
             const touched = _get(formik, ['touched', ...formattedName]);
             const submitted = _get(formik, ['submitCount']) > 0;
             const hasError = _get(formik, ['errors', ...formattedName]);
-            const value = _get(formik, ['values', ...formattedName], null);
             const submittedError = hasError && submitted;
             const touchedError = hasError && touched;
             field = wrap(wrapper, field, {

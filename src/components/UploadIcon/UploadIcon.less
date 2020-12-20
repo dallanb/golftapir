@@ -3,21 +3,40 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        height: 128px;
-        width: 128px;
         position: absolute;
         top: 0;
         left: 0;
         cursor: pointer;
         color: white;
-        &:hover {
-            background: rgba(0, 0, 0, 0.6);
-            .upload-icon-icon {
-                display: block;
-            }
-        }
+        background: rgba(0, 0, 0, 0.3);
         .upload-icon-icon {
+            display: block;
+            font-size: 24px;
+        }
+        .upload-icon-trash {
+            display: block;
+            font-size: 24px;
+            padding-left: 8px;
+        }
+
+        .upload-icon-text {
             display: none;
+        }
+    }
+    &.empty {
+        .upload-icon-wrapper {
+            background: rgba(0, 0, 0, 1);
+            .upload-icon-icon {
+            }
+            .upload-icon-trash {
+                display: none;
+            }
+            .upload-icon-text {
+                display: block;
+                position: absolute;
+                top: 10px;
+                font-size: 12px;
+            }
         }
     }
 }

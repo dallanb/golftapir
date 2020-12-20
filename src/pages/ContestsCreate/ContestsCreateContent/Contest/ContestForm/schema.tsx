@@ -36,12 +36,13 @@ export const fieldSchema = [
             valuePropName: 'file',
         },
         options: {
-            buttonText: FORM.LABELS.UPLOAD_AVATAR,
-            uploadButton: (
+            uploadButtonRenderer: (value: any) => (
                 <UploadIcon
+                    text={FORM.LABELS.UPLOAD_AVATAR}
                     icon={CloudUploadOutlined}
                     height={128}
                     width={128}
+                    value={value}
                 />
             ),
         },
