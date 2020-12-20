@@ -1,4 +1,7 @@
 const CONSTANTS = {
+    FORM: {
+        UPLOAD: 'Upload',
+    },
     ACCOUNT: {
         ERROR: {
             UPDATE: 'Error updating Contest information',
@@ -192,6 +195,7 @@ const CONSTANTS = {
                 LABELS: {
                     NAME: 'Name',
                     AVATAR: 'Avatar',
+                    UPLOAD_AVATAR: 'Upload Avatar',
                     START_TIME: 'Start Time',
                     COURSE: 'Course',
                     PARTICIPANTS: 'Participants',

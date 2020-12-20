@@ -14,5 +14,6 @@ export { default as ProtectedRoute } from './ProtectedRoute';
 export { default as SubscriptionToggle } from './SubscriptionToggle';
 export { default as Table } from './Table';
 export { default as UserTile } from './UserTile';
+export { default as UploadIcon } from './UploadIcon';
 export { default as VirtualTable } from './VirtualTable';
 export { default as VariableSizeList } from './VariableSizeList';

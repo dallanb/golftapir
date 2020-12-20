@@ -9,9 +9,6 @@ const { Types, Creators } = createActions(
         fetchCourses: ['options', 'append'],
         fetchCoursesSuccess: ['data', 'metadata'],
         fetchCoursesFailure: ['err'],
-        searchCourses: ['key'],
-        searchCoursesSuccess: ['data'],
-        searchCoursesFailure: ['err'],
     },
     {
         prefix: 'COURSE_',

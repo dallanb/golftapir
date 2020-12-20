@@ -1,9 +1,15 @@
 import React from 'react';
 import * as Yup from 'yup';
 import moment, { Moment } from 'moment';
+import { CloudUploadOutlined } from '@ant-design/icons';
 import ContestsCreatePageContentContestSearchParticipantActions from './ContestFormSearch/Participant/actions';
 import ContestsCreatePageContentContestSearchCourseActions from './ContestFormSearch/Course/actions';
-import { BasicInputWrapper, FloatLabelInputWrapper } from '@components';
+import {
+    AvatarInputWrapper,
+    BasicInputWrapper,
+    FloatLabelInputWrapper,
+    UploadIcon,
+} from '@components';
 import {
     courseSearchSelectOptionRenderer,
     participantSearchSelectOptionRenderer,
@@ -25,10 +31,19 @@ export const fieldSchema = [
     {
         name: 'avatar',
         type: 'avatar',
-        wrapper: BasicInputWrapper,
+        wrapper: AvatarInputWrapper,
         wrapperOptions: {
-            label: FORM.LABELS.AVATAR,
             valuePropName: 'file',
+        },
+        options: {
+            buttonText: FORM.LABELS.UPLOAD_AVATAR,
+            uploadButton: (
+                <UploadIcon
+                    icon={CloudUploadOutlined}
+                    height={128}
+                    width={128}
+                />
+            ),
         },
     },
     {

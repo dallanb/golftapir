@@ -27,24 +27,9 @@ function* fetchCourses({ options }: AnyAction) {
     }
 }
 
-function* searchCourses({ key }: AnyAction) {
-    try {
-        const res = yield call(CourseService.searchCourses, {
-            key,
-            fields: 'name',
-        });
-        const { courses } = res;
-        yield put(CourseActions.searchCoursesSuccess(courses));
-    } catch (err) {
-        yield put(CourseActions.searchCoursesFailure(err));
-        message.error(CONSTANTS.COURSE.ERROR.SEARCH_ALL);
-    }
-}
-
 export default function* CourseSaga() {
     yield all([
         takeLatest(CourseTypes.FETCH_COURSE, fetchCourse),
         takeLatest(CourseTypes.FETCH_COURSES, fetchCourses),
-        takeLatest(CourseTypes.SEARCH_COURSES, searchCourses),
     ]);
 }

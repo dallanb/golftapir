@@ -16,11 +16,4 @@ export default {
             query,
         });
     },
-    searchCourses(query: any = {}) {
-        return ClientProxy.get({
-            url: config.COURSE_URL,
-            endpoint: `/courses/search`,
-            query,
-        });
-    },
 };

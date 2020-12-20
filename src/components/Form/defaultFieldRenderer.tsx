@@ -1,13 +1,14 @@
 import React from 'react';
-import { Input, Upload, Button, Select, InputNumber } from 'antd';
-import { UploadOutlined } from '@ant-design/icons/lib';
 import { useDispatch } from 'react-redux';
+import { Input, Upload, Button, Select, InputNumber } from 'antd';
+import { Moment } from 'moment';
+import { CloudUploadOutlined, UploadOutlined } from '@ant-design/icons/lib';
 import { get as _get, debounce as _debounce } from 'lodash';
 import { antdFormatName, mapCountryOptions } from './utils';
 import { FieldRendererProps } from './types';
 import { DateTimePicker } from '@components';
-import moment, { Moment } from 'moment';
 import { normalizeImage } from '@utils';
+import CONSTANTS from '@locale/en-CA';
 
 let defaultFieldRenderer: FieldRendererProps;
 
@@ -108,6 +109,8 @@ defaultFieldRenderer = (schema, formik) => {
                         key={name}
                         name={name}
                         ref={fieldRef}
+                        listType="picture"
+                        showUploadList={false}
                         beforeUpload={() => false}
                         onChange={(info) =>
                             normalizeImage(info.file).then((image) =>
@@ -115,7 +118,17 @@ defaultFieldRenderer = (schema, formik) => {
                             )
                         }
                     >
-                        <Button icon={<UploadOutlined />}>Upload</Button>
+                        {_get(options, ['uploadButton'], undefined) ? (
+                            options.uploadButton
+                        ) : (
+                            <Button icon={<UploadOutlined />}>
+                                {_get(
+                                    options,
+                                    ['buttonText'],
+                                    CONSTANTS.FORM.UPLOAD
+                                )}
+                            </Button>
+                        )}
                     </Upload>
                 );
                 break;

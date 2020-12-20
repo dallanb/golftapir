@@ -1,0 +1,23 @@
+.upload-icon {
+    .upload-icon-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 128px;
+        width: 128px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        cursor: pointer;
+        color: white;
+        &:hover {
+            background: rgba(0, 0, 0, 0.6);
+            .upload-icon-icon {
+                display: block;
+            }
+        }
+        .upload-icon-icon {
+            display: none;
+        }
+    }
+}

@@ -63,19 +63,6 @@ function* assignAvatar({ uuid, avatar }: AnyAction) {
     }
 }
 
-function* searchAccounts({ key: search }: AnyAction) {
-    try {
-        const res = yield call(AccountService.searchAccounts, {
-            search,
-        });
-        const { accounts } = res;
-        yield put(AccountActions.searchAccountsSuccess(accounts));
-    } catch (err) {
-        yield put(AccountActions.searchAccountsFailure(err));
-        message.error(CONSTANTS.ACCOUNT.ERROR.SEARCH_ALL);
-    }
-}
-
 function* bulkFetchAccounts({ within, options }: AnyAction) {
     try {
         const bulkAccounts = yield call(
@@ -100,7 +87,6 @@ export default function* AccountSaga() {
         takeLatest(AccountTypes.FETCH_ACCOUNTS, fetchAccounts),
         takeLatest(AccountTypes.UPDATE_ACCOUNT, updateAccount),
         takeLatest(AccountTypes.ASSIGN_AVATAR, assignAvatar),
-        takeLatest(AccountTypes.SEARCH_ACCOUNTS, searchAccounts),
         takeLatest(AccountTypes.BULK_FETCH_ACCOUNTS, bulkFetchAccounts),
     ]);
 }

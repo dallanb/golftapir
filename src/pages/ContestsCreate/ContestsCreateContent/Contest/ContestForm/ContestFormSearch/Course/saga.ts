@@ -7,9 +7,10 @@ import ContestsCreatePageContentContestSearchCourseActions, {
 
 function* search({ key }: AnyAction) {
     try {
-        const { courses } = yield call(CourseService.searchCourses, {
-            key,
-            fields: 'name',
+        const { courses } = yield call(CourseService.fetchCourses, {
+            page: 1,
+            per_page: 10,
+            search: key,
         });
         yield put(
             ContestsCreatePageContentContestSearchCourseActions.searchSuccess(
