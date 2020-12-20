@@ -229,6 +229,7 @@ const CONSTANTS = {
             FORM: {
                 LABELS: {
                     AVATAR: 'Avatar',
+                    UPLOAD_AVATAR: 'Upload Avatar',
                     USERNAME: 'Username',
                     EMAIL: 'Email',
                     DISPLAY_NAME: 'Display Name',

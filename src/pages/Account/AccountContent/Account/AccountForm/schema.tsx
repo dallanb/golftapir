@@ -11,8 +11,10 @@ export const fieldSchema = [
         type: 'avatar',
         wrapper: BasicInputWrapper,
         wrapperOptions: {
-            label: FORM.LABELS.AVATAR,
             valuePropName: 'file',
+        },
+        options: {
+            uploadLabel: FORM.LABELS.UPLOAD_AVATAR,
         },
     },
     {
