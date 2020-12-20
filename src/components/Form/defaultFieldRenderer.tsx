@@ -109,7 +109,6 @@ defaultFieldRenderer = (schema, formik) => {
                         key={name}
                         name={name}
                         ref={fieldRef}
-                        listType="picture"
                         showUploadList={false}
                         beforeUpload={() => false}
                         onChange={(info) =>
