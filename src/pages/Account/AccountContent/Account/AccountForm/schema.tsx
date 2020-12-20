@@ -1,9 +1,5 @@
 import * as Yup from 'yup';
-import {
-    AvatarInputWrapper,
-    BasicInputWrapper,
-    FloatLabelInputWrapper,
-} from '@components';
+import { BasicInputWrapper, FloatLabelInputWrapper } from '@components';
 import CONSTANTS from '@locale/en-CA';
 import React from 'react';
 
@@ -13,7 +9,7 @@ export const fieldSchema = [
     {
         name: 'avatar',
         type: 'avatar',
-        wrapper: AvatarInputWrapper,
+        wrapper: BasicInputWrapper,
         wrapperOptions: {
             label: FORM.LABELS.AVATAR,
             valuePropName: 'file',

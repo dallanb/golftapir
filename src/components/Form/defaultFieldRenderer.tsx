@@ -1,12 +1,11 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { Input, Upload, Button, Select, InputNumber } from 'antd';
+import { Input, Upload, Select, InputNumber } from 'antd';
 import { Moment } from 'moment';
-import { CloudUploadOutlined, UploadOutlined } from '@ant-design/icons/lib';
 import { get as _get, debounce as _debounce } from 'lodash';
 import { antdFormatName, mapCountryOptions } from './utils';
 import { FieldRendererProps } from './types';
-import { DateTimePicker } from '@components';
+import { DateTimePicker, UploadButton } from '@components';
 import { normalizeImage } from '@utils';
 import CONSTANTS from '@locale/en-CA';
 
@@ -111,6 +110,7 @@ defaultFieldRenderer = (schema, formik) => {
                         key={name}
                         name={name}
                         ref={fieldRef}
+                        listType="picture-card"
                         showUploadList={false}
                         beforeUpload={() => false}
                         onChange={(info) =>
@@ -119,16 +119,20 @@ defaultFieldRenderer = (schema, formik) => {
                             )
                         }
                     >
-                        {_get(options, ['uploadButtonRenderer'], undefined) ? (
-                            options.uploadButtonRenderer(value)
+                        {value ? (
+                            <img
+                                src={value}
+                                alt="avatar"
+                                style={{ width: '100%' }}
+                            />
                         ) : (
-                            <Button icon={<UploadOutlined />}>
-                                {_get(
+                            <UploadButton
+                                label={_get(
                                     options,
-                                    ['buttonText'],
+                                    ['uploadLabel'],
                                     CONSTANTS.FORM.UPLOAD
                                 )}
-                            </Button>
+                            />
                         )}
                     </Upload>
                 );

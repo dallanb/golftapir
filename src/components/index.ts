@@ -1,5 +1,4 @@
 export { default as Avatar } from './Avatar';
-export { default as AvatarInputWrapper } from './AvatarInputWrapper';
 export { default as BasicInputWrapper } from './BasicInputWrapper';
 export { default as DateTimePicker } from './DateTimePicker';
 export { default as EditableCell } from './EditableCell';
@@ -14,6 +13,6 @@ export { default as ProtectedRoute } from './ProtectedRoute';
 export { default as SubscriptionToggle } from './SubscriptionToggle';
 export { default as Table } from './Table';
 export { default as UserTile } from './UserTile';
-export { default as UploadIcon } from './UploadIcon';
+export { default as UploadButton } from './UploadButton';
 export { default as VirtualTable } from './VirtualTable';
 export { default as VariableSizeList } from './VariableSizeList';

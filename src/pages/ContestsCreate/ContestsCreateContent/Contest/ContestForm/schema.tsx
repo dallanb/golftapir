@@ -4,12 +4,7 @@ import moment, { Moment } from 'moment';
 import { CloudUploadOutlined } from '@ant-design/icons';
 import ContestsCreatePageContentContestSearchParticipantActions from './ContestFormSearch/Participant/actions';
 import ContestsCreatePageContentContestSearchCourseActions from './ContestFormSearch/Course/actions';
-import {
-    AvatarInputWrapper,
-    BasicInputWrapper,
-    FloatLabelInputWrapper,
-    UploadIcon,
-} from '@components';
+import { BasicInputWrapper, FloatLabelInputWrapper } from '@components';
 import {
     courseSearchSelectOptionRenderer,
     participantSearchSelectOptionRenderer,
@@ -31,20 +26,12 @@ export const fieldSchema = [
     {
         name: 'avatar',
         type: 'avatar',
-        wrapper: AvatarInputWrapper,
+        wrapper: BasicInputWrapper,
         wrapperOptions: {
             valuePropName: 'file',
         },
         options: {
-            uploadButtonRenderer: (value: any) => (
-                <UploadIcon
-                    text={FORM.LABELS.UPLOAD_AVATAR}
-                    icon={CloudUploadOutlined}
-                    height={128}
-                    width={128}
-                    value={value}
-                />
-            ),
+            uploadLabel: FORM.LABELS.UPLOAD_AVATAR,
         },
     },
     {
