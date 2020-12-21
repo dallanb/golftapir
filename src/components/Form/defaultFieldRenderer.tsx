@@ -2,12 +2,13 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Input, Upload, Select, InputNumber } from 'antd';
 import { Moment } from 'moment';
-import { get as _get, debounce as _debounce } from 'lodash';
+import { get as _get, debounce as _debounce, pick as _pick } from 'lodash';
 import { antdFormatName, mapCountryOptions } from './utils';
 import { FieldRendererProps } from './types';
 import { DateTimePicker, UploadButton } from '@components';
 import { normalizeImage } from '@utils';
 import CONSTANTS from '@locale/en-CA';
+import { PlusOutlined } from '@ant-design/icons';
 
 let defaultFieldRenderer: FieldRendererProps;
 
@@ -127,6 +128,11 @@ defaultFieldRenderer = (schema, formik) => {
                             />
                         ) : (
                             <UploadButton
+                                icon={_get(
+                                    options,
+                                    ['uploadIcon'],
+                                    PlusOutlined
+                                )}
                                 label={_get(
                                     options,
                                     ['uploadLabel'],

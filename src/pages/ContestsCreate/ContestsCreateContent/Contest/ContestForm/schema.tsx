@@ -32,6 +32,7 @@ export const fieldSchema = [
         },
         options: {
             uploadLabel: FORM.LABELS.UPLOAD_AVATAR,
+            uploadIcon: CloudUploadOutlined,
         },
     },
     {
