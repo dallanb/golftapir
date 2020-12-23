@@ -66,18 +66,6 @@ class MemberAppLayout extends React.Component<
         )
     );
 
-    getUserTileMenuItems = () => {
-        const { history } = this.props;
-        return (
-            <Menu.Item
-                key="logout"
-                onClick={() => history.push(`/auth/logout`)}
-            >
-                Logout
-            </Menu.Item>
-        );
-    };
-
     render() {
         const { name, avatar, menuRoutes, menuProps, children } = this.props;
         const { selectedKeys } = this.state;
@@ -94,13 +82,13 @@ class MemberAppLayout extends React.Component<
                     >
                         {this.getMenuItems(menuRoutes, menuProps)}
                     </Menu>
-                    <div className="member-app-sider-layout-footer">
-                        <UserTile
-                            name={name}
-                            avatar={avatar}
-                            menu={this.getUserTileMenuItems}
-                        />
-                    </div>
+                    {/*<div className="member-app-sider-layout-footer">*/}
+                    {/*    <UserTile*/}
+                    {/*        name={name}*/}
+                    {/*        avatar={avatar}*/}
+                    {/*        menu={this.getUserTileMenuItems}*/}
+                    {/*    />*/}
+                    {/*</div>*/}
                 </Sider>
                 {children}
             </Layout>

@@ -1,26 +1,24 @@
 import React from 'react';
-import { Button } from 'antd';
-import { UpOutlined } from '@ant-design/icons';
 import UserCard from './UserCard';
 import UserMenu from './UserMenu';
 import UserPopover from './UserPopover';
 import { UserTileProps } from './types';
 import './UserTile.less';
+import { Button } from 'antd';
+import { CaretDownFilled } from '@ant-design/icons';
 
-const UserTile: React.FunctionComponent<UserTileProps> = ({
-    name,
-    avatar,
-    menu,
-}) => {
+const UserTile: React.FunctionComponent<UserTileProps> = ({ menu }) => {
     return (
         <UserPopover
-            title={<UserCard name={name} avatar={avatar} />}
+            title=""
             content={<UserMenu items={menu} />}
             trigger="click"
         >
-            <Button className="user-tile-button">
-                <UserCard name={name} avatar={avatar} />
-            </Button>
+            <Button
+                type="text"
+                icon={<CaretDownFilled />}
+                className="drop-down-button"
+            />
         </UserPopover>
     );
 };

@@ -13,7 +13,7 @@ const UserMenu: React.FunctionComponent<UserMenuProps> = ({ items }) => {
         return items;
     };
 
-    return <Menu>{renderMenuItems(items)}</Menu>;
+    return <Menu className="user-menu">{renderMenuItems(items)}</Menu>;
 };
 
 export default UserMenu;

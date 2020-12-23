@@ -9,6 +9,7 @@ const UserPopover: React.FunctionComponent<UserPopoverProps> = ({
     trigger,
     children,
 }) => {
+    console.log('HERE');
     return (
         <Popover title={title} content={content} trigger={trigger}>
             {children}
