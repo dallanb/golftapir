@@ -1,7 +1,7 @@
 import React from 'react';
 import * as Yup from 'yup';
 import { GlobalOutlined, LockOutlined, UserOutlined } from '@ant-design/icons';
-import {BasicInputWrapper} from '@components';
+import { BasicInputWrapper, FloatLabelInputWrapper } from '@components';
 import CONSTANTS from '@locale/en-CA';
 
 const FORM = CONSTANTS.PAGES.REGISTER.FORM;
@@ -9,65 +9,77 @@ const FORM = CONSTANTS.PAGES.REGISTER.FORM;
 export const fieldSchema = [
     {
         name: 'email',
-        wrapper: BasicInputWrapper,
-        options: {
-            prefixRenderer: () => (
-                <UserOutlined className="site-form-item-icon" />
+        wrapper: FloatLabelInputWrapper,
+        options: {},
+        wrapperOptions: {
+            label: (
+                <>
+                    <UserOutlined /> {FORM.LABELS.EMAIL}
+                </>
             ),
-            placeholder: FORM.LABELS.EMAIL,
         },
     },
     {
         name: 'username',
-        wrapper: BasicInputWrapper,
-        options: {
-            prefixRenderer: () => (
-                <UserOutlined className="site-form-item-icon" />
+        wrapper: FloatLabelInputWrapper,
+        options: {},
+        wrapperOptions: {
+            label: (
+                <>
+                    <UserOutlined /> {FORM.LABELS.USERNAME}
+                </>
             ),
-            placeholder: FORM.LABELS.USERNAME,
         },
     },
     {
         name: 'password',
         type: 'password',
-        wrapper: BasicInputWrapper,
-        options: {
-            prefixRenderer: () => (
-                <LockOutlined className="site-form-item-icon" />
+        wrapper: FloatLabelInputWrapper,
+        options: {},
+        wrapperOptions: {
+            label: (
+                <>
+                    <LockOutlined /> {FORM.LABELS.PASSWORD}
+                </>
             ),
-            placeholder: FORM.LABELS.PASSWORD,
         },
     },
     {
         name: 'confirm_password',
         type: 'password',
-        wrapper: BasicInputWrapper,
-        options: {
-            prefixRenderer: () => (
-                <LockOutlined className="site-form-item-icon" />
+        wrapper: FloatLabelInputWrapper,
+        options: {},
+        wrapperOptions: {
+            label: (
+                <>
+                    <LockOutlined /> {FORM.LABELS.CONFIRM_PASSWORD}
+                </>
             ),
-            placeholder: FORM.LABELS.CONFIRM_PASSWORD,
         },
     },
     {
         name: 'display_name',
-        wrapper: BasicInputWrapper,
-        options: {
-            prefixRenderer: () => (
-                <UserOutlined className="site-form-item-icon" />
+        wrapper: FloatLabelInputWrapper,
+        options: {},
+        wrapperOptions: {
+            label: (
+                <>
+                    <UserOutlined /> {FORM.LABELS.DISPLAY_NAME}
+                </>
             ),
-            placeholder: FORM.LABELS.DISPLAY_NAME,
         },
     },
     {
         name: 'country',
         type: 'country-select',
-        wrapper: BasicInputWrapper,
-        options: {
-            prefixRenderer: () => (
-                <GlobalOutlined className="site-form-item-icon" />
+        wrapper: FloatLabelInputWrapper,
+        options: {},
+        wrapperOptions: {
+            label: (
+                <>
+                    <GlobalOutlined /> {FORM.LABELS.COUNTRY}
+                </>
             ),
-            placeholder: FORM.LABELS.COUNTRY,
         },
     },
 ];
