@@ -12,7 +12,11 @@ export const fieldSchema = [
         wrapper: FloatLabelInputWrapper,
         options: {},
         wrapperOptions: {
-            label: FORM.LABELS.EMAIL,
+            label: (
+                <>
+                    <UserOutlined /> {FORM.LABELS.EMAIL}
+                </>
+            ),
         },
     },
     {
@@ -21,7 +25,11 @@ export const fieldSchema = [
         wrapper: FloatLabelInputWrapper,
         options: {},
         wrapperOptions: {
-            label: FORM.LABELS.PASSWORD,
+            label: (
+                <>
+                    <LockOutlined /> {FORM.LABELS.PASSWORD}
+                </>
+            ),
         },
     },
 ];
