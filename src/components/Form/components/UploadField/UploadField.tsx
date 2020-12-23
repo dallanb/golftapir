@@ -1,4 +1,4 @@
-import React from 'React';
+import React from 'react';
 import { get as _get } from 'lodash';
 import { PlusOutlined } from '@ant-design/icons/lib';
 import { UploadFieldProps } from './types';
