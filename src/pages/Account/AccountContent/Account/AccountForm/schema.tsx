@@ -30,7 +30,7 @@ export const fieldSchema = [
         name: 'input-group',
         wrapper: NestedInputWrapper,
         wrapperOptions: {
-            className: 'account-form-input-group'
+            className: 'account-form-input-group',
         },
         options: {},
         fields: [
@@ -56,28 +56,28 @@ export const fieldSchema = [
                     disabled: true,
                 },
             },
-            {
-                name: 'display_name',
-                wrapper: FloatLabelInputWrapper,
-                wrapperOptions: {
-                    label: FORM.LABELS.DISPLAY_NAME,
-                    className: 'account-form-display-name-input',
-                },
-                options: {},
-            },
-            {
-                name: 'address.country',
-                type: 'country-select',
-                wrapper: FloatLabelInputWrapper,
-                wrapperOptions: {
-                    label: FORM.LABELS.COUNTRY,
-                    className: 'account-form-country-input',
-                },
-                options: {
-                    // dependants: ['phone.country_code'],
-                },
-            },
         ],
+    },
+    {
+        name: 'display_name',
+        wrapper: FloatLabelInputWrapper,
+        wrapperOptions: {
+            label: FORM.LABELS.DISPLAY_NAME,
+            className: 'account-form-display-name-input',
+        },
+        options: {},
+    },
+    {
+        name: 'address.country',
+        type: 'country-select',
+        wrapper: FloatLabelInputWrapper,
+        wrapperOptions: {
+            label: FORM.LABELS.COUNTRY,
+            className: 'account-form-country-input',
+        },
+        options: {
+            // dependants: ['phone.country_code'],
+        },
     },
     {
         name: 'address.line_1',

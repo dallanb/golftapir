@@ -4,7 +4,11 @@ import moment, { Moment } from 'moment';
 import { CloudUploadOutlined } from '@ant-design/icons';
 import ContestsCreatePageContentContestSearchParticipantActions from './ContestFormSearch/Participant/actions';
 import ContestsCreatePageContentContestSearchCourseActions from './ContestFormSearch/Course/actions';
-import { BasicInputWrapper, FloatLabelInputWrapper } from '@components';
+import {
+    BasicInputWrapper,
+    FloatLabelInputWrapper,
+    NestedInputWrapper,
+} from '@components';
 import {
     courseSearchSelectOptionRenderer,
     participantSearchSelectOptionRenderer,
@@ -30,34 +34,47 @@ export const fieldSchema = [
         wrapper: BasicInputWrapper,
         wrapperOptions: {
             valuePropName: 'file',
+            className: 'contest-form-avatar-upload',
         },
         options: {
-            className: 'contest-form-avatar-upload',
             uploadLabel: FORM.LABELS.UPLOAD_AVATAR,
             uploadIcon: CloudUploadOutlined,
             uploadS3Folder: constants.S3_FOLDERS.CONTEST.AVATAR,
         },
     },
     {
-        name: 'name',
-        wrapper: FloatLabelInputWrapper,
+        name: 'input-group',
+        wrapper: NestedInputWrapper,
         wrapperOptions: {
-            label: FORM.LABELS.NAME,
+            className: 'contest-form-input-group',
         },
-    },
-    {
-        name: 'start_time',
-        type: 'date-time-picker',
-        wrapper: FloatLabelInputWrapper,
-        wrapperOptions: {
-            label: FORM.LABELS.START_TIME,
-        },
-        options: {
-            format: 'YYYY-MM-DD HH:mm A',
-            disabledDate: (current: Moment) =>
-                current && current < moment().endOf('day'),
-            valueTransform: (value: Moment) => +value,
-        },
+        options: {},
+        fields: [
+            {
+                name: 'name',
+                wrapper: FloatLabelInputWrapper,
+                wrapperOptions: {
+                    label: FORM.LABELS.NAME,
+                    className: 'contest-form-name-input',
+                },
+            },
+            {
+                name: 'start_time',
+                type: 'date-time-picker',
+                wrapper: FloatLabelInputWrapper,
+                wrapperOptions: {
+                    label: FORM.LABELS.START_TIME,
+                    className: 'contest-form-start-time-input',
+                },
+                options: {
+                    format: 'YYYY-MM-DD HH:mm A',
+                    disabledDate: (current: Moment) =>
+                        current && current < moment().endOf('day'),
+                    valueTransform: (value: Moment) => +value,
+                    className: 'contest-date-time-picker',
+                },
+            },
+        ],
     },
     {
         name: 'location_uuid',
@@ -65,6 +82,7 @@ export const fieldSchema = [
         wrapper: FloatLabelInputWrapper,
         wrapperOptions: {
             label: FORM.LABELS.COURSE,
+            className: 'contest-form-location-input',
         },
         options: {
             ref: React.createRef<any>(),
@@ -84,6 +102,7 @@ export const fieldSchema = [
         wrapper: FloatLabelInputWrapper,
         wrapperOptions: {
             label: FORM.LABELS.PARTICIPANTS,
+            className: 'contest-form-participants-input',
         },
         options: {
             ref: React.createRef<any>(),

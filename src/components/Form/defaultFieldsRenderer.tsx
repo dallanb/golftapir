@@ -155,6 +155,7 @@ const fieldRenderer = (
                     format={_get(options, ['format'], 'YYYY-MM-DD HH:mm:ss')}
                     disabledDate={_get(options, ['disabledDate'], () => false)}
                     disabledTime={_get(options, ['disabledTime'], () => false)}
+                    className={_get(options, ['className'], '')}
                 />
             );
             break;

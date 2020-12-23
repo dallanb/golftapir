@@ -1,5 +1,5 @@
 import { Moment } from 'moment';
-import {ReactNode} from "react";
+import { ReactNode } from 'react';
 
 export interface DateTimePickerProps {
     value?: Moment | string;
@@ -9,6 +9,7 @@ export interface DateTimePickerProps {
     placeholder?: string;
     suffixIcon?: ReactNode;
     onChange: (value: Moment | null, dateString: string) => void;
+    className?: string;
     // disabledTime?: {
     //     disabledHours?: () => boolean;
     //     disabledMinutes?: (selectedHour: Moment) => boolean;

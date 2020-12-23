@@ -13,7 +13,7 @@ class Form extends React.Component<FormProps> {
     constructor(props: FormProps) {
         super(props);
         this.formRenderer = props.formRenderer || defaultFormRenderer;
-        this.fieldsRenderer = props.fieldRenderer || defaultFieldsRenderer;
+        this.fieldsRenderer = props.fieldsRenderer || defaultFieldsRenderer;
     }
 
     prepareForm = (formik: FormikProps<FormikValues>): JSX.Element => {
