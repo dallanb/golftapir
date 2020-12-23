@@ -9,6 +9,8 @@ export interface FormProps {
     onSubmit: (values: FormikValues) => void;
     formRenderer?: FormRendererProps;
     fieldsRenderer?: () => any;
+    validateOnChange?: boolean;
+    validateOnBlur?: boolean;
 }
 
 export interface FormRendererProps {

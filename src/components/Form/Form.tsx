@@ -43,12 +43,20 @@ class Form extends React.Component<FormProps> {
     };
 
     render() {
-        const { initialValues, validationSchema, onSubmit } = this.props;
+        const {
+            initialValues,
+            validationSchema,
+            onSubmit,
+            validateOnBlur = false,
+            validateOnChange = false,
+        } = this.props;
         return (
             <Formik
                 initialValues={initialValues}
                 validationSchema={validationSchema}
                 onSubmit={onSubmit}
+                validateOnBlur={validateOnBlur}
+                validateOnChange={validateOnChange}
             >
                 {(formik: FormikProps<FormikValues>) =>
                     this.prepareForm(formik)

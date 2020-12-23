@@ -9,6 +9,7 @@ export interface DateTimePickerProps {
     placeholder?: string;
     suffixIcon?: ReactNode;
     onChange: (value: Moment | null, dateString: string) => void;
+    onBlur: any;
     className?: string;
     // disabledTime?: {
     //     disabledHours?: () => boolean;

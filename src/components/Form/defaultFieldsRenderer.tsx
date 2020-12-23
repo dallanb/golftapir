@@ -45,6 +45,10 @@ const fieldRenderer = (
                     name={name}
                     ref={fieldRef}
                     onChange={formik.handleChange}
+                    onBlur={(e) => {
+                        formik.handleBlur(e);
+                        formik.validateField(name);
+                    }}
                     disabled={_get(options, ['disabled'], false)}
                     readOnly={_get(options, ['readonly'], false)}
                     bordered={_get(options, ['bordered'], true)}
@@ -65,6 +69,10 @@ const fieldRenderer = (
                     name={name}
                     ref={fieldRef}
                     onChange={(value) => formik.setFieldValue(name, value)}
+                    onBlur={(e) => {
+                        formik.handleBlur(e);
+                        formik.validateField(name);
+                    }}
                     readOnly={_get(options, ['readonly'], false)}
                     placeholder={_get(options, ['placeholder'], undefined)}
                     prefix={
@@ -82,6 +90,10 @@ const fieldRenderer = (
                     ref={fieldRef}
                     type="password"
                     onChange={formik.handleChange}
+                    onBlur={(e) => {
+                        formik.handleBlur(e);
+                        formik.validateField(name);
+                    }}
                     readOnly={_get(options, ['readonly'], false)}
                     bordered={!_get(options, ['readonly'], false)}
                     placeholder={_get(options, ['placeholder'], undefined)}
@@ -100,6 +112,10 @@ const fieldRenderer = (
                     ref={fieldRef}
                     mode={options.mode}
                     onChange={(value) => formik.setFieldValue(name, value)}
+                    onBlur={(e) => {
+                        formik.handleBlur(e);
+                        formik.validateField(name);
+                    }}
                     showSearch
                     onSearch={_debounce((value) => {
                         dispatch(options.onSearch(value));
@@ -150,6 +166,10 @@ const fieldRenderer = (
                             )(date)
                         )
                     }
+                    onBlur={(e: any) => {
+                        formik.handleBlur(e);
+                        formik.validateField(name);
+                    }}
                     placeholder={_get(options, ['placeholder'], '')}
                     suffixIcon={_get(options, ['suffixIcon'], undefined)}
                     format={_get(options, ['format'], 'YYYY-MM-DD HH:mm:ss')}
@@ -173,6 +193,10 @@ const fieldRenderer = (
                             );
                         }
                     }}
+                    onBlur={(e) => {
+                        formik.handleBlur(e);
+                        formik.validateField(name);
+                    }}
                     showSearch
                     filterOption={(input, option: any) =>
                         option.children
@@ -192,14 +216,16 @@ const fieldRenderer = (
         const touched = _get(formik, ['touched', ...formattedName]);
         const submitted = _get(formik, ['submitCount']) > 0;
         const hasError = _get(formik, ['errors', ...formattedName]);
+        const live = submitted || touched;
         const submittedError = hasError && submitted;
         const touchedError = hasError && touched;
+        const help = live ? hasError || '' : '';
         field = wrap(wrapper, field, {
             name: formattedName,
             value,
             formik,
             hasFeedback: submittedError || touchedError,
-            help: hasError || '',
+            help,
             validateStatus:
                 submittedError || touchedError ? 'error' : 'success',
             childRef: fieldRef,

@@ -134,6 +134,7 @@ const CONSTANTS = {
                 VALIDATION: {
                     USERNAME_REQUIRED: 'Please input your username!',
                     EMAIL_REQUIRED: 'Please input your email address!',
+                    EMAIL_TYPE: 'Please input a valid email address',
                     PASSWORD_REQUIRED: 'Please input your password!',
                     CONFIRM_PASSWORD_REQUIRED: 'Please confirm your password!',
                     CONFIRM_PASSWORD_MISMATCH:

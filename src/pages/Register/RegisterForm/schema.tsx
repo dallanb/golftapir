@@ -85,7 +85,9 @@ export const fieldSchema = [
 ];
 
 export const validationSchema = Yup.object({
-    email: Yup.string().required(FORM.VALIDATION.EMAIL_REQUIRED),
+    email: Yup.string()
+        .required(FORM.VALIDATION.EMAIL_REQUIRED)
+        .email(FORM.VALIDATION.EMAIL_TYPE),
     username: Yup.string().required(FORM.VALIDATION.USERNAME_REQUIRED),
     password: Yup.string().required(FORM.VALIDATION.PASSWORD_REQUIRED),
     confirm_password: Yup.string()
