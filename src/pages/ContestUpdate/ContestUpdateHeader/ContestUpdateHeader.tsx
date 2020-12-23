@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { ContestUpdateHeaderProps } from './types';
 import { ContentLayoutHeader } from '@layouts';
 import CONSTANTS from '@locale/en-CA';
-import { selectContestName, selectContestUUID } from '../selector';
+import { selectContest, selectContestName } from '../selector';
 import { Breadcrumb } from '@apps/MemberApp/components';
 import routes from '@constants/routes';
 
@@ -13,7 +13,7 @@ const ContestUpdateHeader: React.FunctionComponent<ContestUpdateHeaderProps> = (
     const extra = (
         <Breadcrumb
             state={{
-                [routes.CONTEST.KEY]: { uuid: useSelector(selectContestUUID) },
+                [routes.CONTEST.KEY]: { ...useSelector(selectContest) },
             }}
         />
     );
