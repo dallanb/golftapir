@@ -210,17 +210,14 @@ const fieldRenderer = (
     return field;
 };
 
-let defaultFieldsRenderer: FieldsRendererProps;
-
-defaultFieldsRenderer = (formik, schema) => {
+const defaultFieldsRenderer: FieldsRendererProps = (formik, schema) => {
     return schema.map((field: any) => {
         const fields = _get(field, ['fields'], undefined);
         if (fields) {
-            return wrap(
-                field.wrapper,
-                defaultFieldsRenderer(formik, fields),
-                field.wrapperOptions
-            );
+            return wrap(field.wrapper, defaultFieldsRenderer(formik, fields), {
+                name: field.name,
+                ...field.wrapperOptions,
+            });
         }
         return fieldRenderer(formik, field);
     });

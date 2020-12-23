@@ -12,7 +12,6 @@ const ContestsListTileLeaderboard: React.FunctionComponent<ContestsListTileLeade
 }) => {
     if (status !== constants.STATUS.PENDING.KEY) {
         const participant = findLowestScoringParticipant(participants);
-        console.log(participants);
         if (participant) {
             if (status !== constants.STATUS.COMPLETED.KEY) {
                 const participantAvatar = withS3URL(
