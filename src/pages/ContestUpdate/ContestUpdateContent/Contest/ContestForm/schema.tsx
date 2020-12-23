@@ -8,7 +8,7 @@ import {
 import CONSTANTS from '@locale/en-CA';
 import { CloudUploadOutlined } from '@ant-design/icons/lib';
 import constants from '@constants';
-import { withS3URL } from '@utils';
+import { formatUploadSrc } from '../utils';
 
 const FORM = CONSTANTS.PAGES.CONTEST_UPDATE.FORM;
 
@@ -25,10 +25,7 @@ export const fieldSchema = [
             uploadLabel: FORM.LABELS.UPLOAD_AVATAR,
             uploadIcon: CloudUploadOutlined,
             uploadS3Folder: constants.S3_FOLDERS.CONTEST.AVATAR,
-            uploadSrcFormatter: (
-                value: string,
-                options: { s3Folder: string }
-            ) => withS3URL(value, options.s3Folder),
+            uploadSrcFormatter: formatUploadSrc,
         },
     },
     {
