@@ -197,6 +197,7 @@ const CONSTANTS = {
                     NAME: 'Name',
                     AVATAR: 'Avatar',
                     UPLOAD_AVATAR: 'Upload Avatar',
+                    AVATAR_CROPPER_TITLE: 'Edit Avatar',
                     START_TIME: 'Start Time',
                     COURSE: 'Course',
                     PARTICIPANTS: 'Participants',
@@ -216,6 +217,7 @@ const CONSTANTS = {
                     NAME: 'Name',
                     AVATAR: 'Avatar',
                     UPLOAD_AVATAR: 'Upload Avatar',
+                    AVATAR_CROPPER_TITLE: 'Edit Avatar',
                     START_TIME: 'Start Time',
                     PARTICIPANTS: 'Participants',
                 },
@@ -232,6 +234,7 @@ const CONSTANTS = {
                 LABELS: {
                     AVATAR: 'Avatar',
                     UPLOAD_AVATAR: 'Upload Avatar',
+                    AVATAR_CROPPER_TITLE: 'Edit Avatar',
                     USERNAME: 'Username',
                     EMAIL: 'Email',
                     DISPLAY_NAME: 'Display Name',

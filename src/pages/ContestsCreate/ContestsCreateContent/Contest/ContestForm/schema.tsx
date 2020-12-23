@@ -36,6 +36,7 @@ export const fieldSchema = [
         wrapperOptions: {
             valuePropName: 'file',
             className: 'contest-form-avatar-upload',
+            modalTitle: FORM.LABELS.AVATAR_CROPPER_TITLE,
         },
         options: {
             uploadLabel: FORM.LABELS.UPLOAD_AVATAR,

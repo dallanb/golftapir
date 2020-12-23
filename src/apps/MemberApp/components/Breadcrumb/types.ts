@@ -1,3 +1,5 @@
 import { RouteComponentProps } from 'react-router-dom';
 
-export interface BreadcrumbProps extends RouteComponentProps {}
+export interface BreadcrumbProps extends RouteComponentProps {
+    state?: any;
+}

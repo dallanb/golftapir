@@ -18,3 +18,8 @@ export const selectContestName = createSelector(
     (contestUpdatePage) =>
         _get(contestUpdatePage, ['contest', 'name'], undefined)
 );
+export const selectContestUUID = createSelector(
+    [getContestUpdatePage],
+    (contestUpdatePage) =>
+        _get(contestUpdatePage, ['contest', 'uuid'], undefined)
+);

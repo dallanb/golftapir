@@ -7,4 +7,5 @@ export interface ImgCropWrapperProps {
     children: any;
     childRef: Ref<any>;
     className?: string;
+    modalTitle?: string;
 }

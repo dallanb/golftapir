@@ -6,10 +6,18 @@ import './ImgCropWrapper.less';
 
 class ImgCropWrapper extends React.PureComponent<ImgCropWrapperProps> {
     render() {
-        const { children, childRef, value, ...restProps } = this.props;
+        const {
+            children,
+            childRef,
+            value,
+            modalTitle,
+            ...restProps
+        } = this.props;
         return (
             <Form.Item {...restProps}>
-                <ImgCrop rotate>{children}</ImgCrop>
+                <ImgCrop rotate modalTitle={modalTitle}>
+                    {children}
+                </ImgCrop>
             </Form.Item>
         );
     }
