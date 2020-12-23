@@ -20,6 +20,6 @@ export interface FormRendererProps {
     ): JSX.Element;
 }
 
-export interface FieldRendererProps {
-    (schema: any, formik: FormikProps<FormikValues>): JSX.Element;
+export interface FieldsRendererProps {
+    (formik: FormikProps<FormikValues>, schema: any): JSX.Element;
 }

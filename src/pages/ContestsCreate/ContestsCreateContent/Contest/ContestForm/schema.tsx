@@ -11,6 +11,7 @@ import {
 } from './utils';
 import { searchSelectTagRenderer } from '@utils';
 import CONSTANTS from '@locale/en-CA';
+import constants from '@constants';
 
 const FORM = CONSTANTS.PAGES.CONTESTS_CREATE.FORM;
 
@@ -31,8 +32,10 @@ export const fieldSchema = [
             valuePropName: 'file',
         },
         options: {
+            className: 'contest-form-avatar-upload',
             uploadLabel: FORM.LABELS.UPLOAD_AVATAR,
             uploadIcon: CloudUploadOutlined,
+            uploadS3Folder: constants.S3_FOLDERS.CONTEST.AVATAR,
         },
     },
     {
