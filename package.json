@@ -72,6 +72,7 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "antd": "^4.6.1",
+    "antd-img-crop": "^3.13.2",
     "axios": "^0.20.0",
     "classnames": "^2.2.6",
     "countries-list": "^2.5.6",

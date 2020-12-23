@@ -6,6 +6,7 @@ export { default as Form } from './Form';
 export { default as Grid } from './Grid';
 export { default as FloatLabelInputWrapper } from './FloatLabelInputWrapper';
 export { default as FixedSizeList } from './FixedSizeList';
+export { default as ImgCropWrapper } from './ImgCropWrapper';
 export { default as MessageModal } from './MessageModal';
 export { default as NestedInputWrapper } from './NestedInputWrapper';
 export { default as OverlaySpin } from './OverlaySpin';

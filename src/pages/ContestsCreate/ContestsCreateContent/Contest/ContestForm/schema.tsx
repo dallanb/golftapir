@@ -7,6 +7,7 @@ import ContestsCreatePageContentContestSearchCourseActions from './ContestFormSe
 import {
     BasicInputWrapper,
     FloatLabelInputWrapper,
+    ImgCropWrapper,
     NestedInputWrapper,
 } from '@components';
 import {
@@ -31,7 +32,7 @@ export const fieldSchema = [
     {
         name: 'avatar',
         type: 'avatar',
-        wrapper: BasicInputWrapper,
+        wrapper: ImgCropWrapper,
         wrapperOptions: {
             valuePropName: 'file',
             className: 'contest-form-avatar-upload',

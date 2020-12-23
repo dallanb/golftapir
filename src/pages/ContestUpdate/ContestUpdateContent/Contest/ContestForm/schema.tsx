@@ -3,6 +3,7 @@ import moment, { Moment } from 'moment';
 import {
     BasicInputWrapper,
     FloatLabelInputWrapper,
+    ImgCropWrapper,
     NestedInputWrapper,
 } from '@components';
 import CONSTANTS from '@locale/en-CA';
@@ -16,7 +17,7 @@ export const fieldSchema = [
     {
         name: 'avatar',
         type: 'avatar',
-        wrapper: BasicInputWrapper,
+        wrapper: ImgCropWrapper,
         wrapperOptions: {
             valuePropName: 'file',
             className: 'contest-update-form-avatar-upload',

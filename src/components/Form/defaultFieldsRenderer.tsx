@@ -135,12 +135,12 @@ const fieldRenderer = (
                     ref={fieldRef}
                     listType="picture-card"
                     showUploadList={false}
-                    beforeUpload={() => false}
-                    onChange={(info) =>
-                        normalizeImage(info.file).then((image) =>
+                    beforeUpload={(file) => {
+                        normalizeImage(file).then((image) =>
                             formik.setFieldValue(name, image)
-                        )
-                    }
+                        );
+                        return false;
+                    }}
                     openFileDialogOnClick={!value}
                     className={_get(options, ['className'], '')}
                 >

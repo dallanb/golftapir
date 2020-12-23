@@ -4,6 +4,7 @@ import { CloudUploadOutlined } from '@ant-design/icons/lib';
 import {
     BasicInputWrapper,
     FloatLabelInputWrapper,
+    ImgCropWrapper,
     NestedInputWrapper,
 } from '@components';
 import CONSTANTS from '@locale/en-CA';
@@ -15,7 +16,7 @@ export const fieldSchema = [
     {
         name: 'avatar',
         type: 'avatar',
-        wrapper: BasicInputWrapper,
+        wrapper: ImgCropWrapper,
         wrapperOptions: {
             valuePropName: 'file',
             className: 'account-form-avatar-upload',
