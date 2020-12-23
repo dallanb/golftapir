@@ -70,7 +70,7 @@ export const fieldSchema = [
                     format: 'YYYY-MM-DD HH:mm A',
                     disabledDate: (current: Moment) =>
                         current && current < moment().endOf('day'),
-                    valueTransform: (value: Moment) => +value,
+                    valueTransform: (value: Moment) => value && +value,
                     className: 'contest-date-time-picker',
                 },
             },
@@ -122,7 +122,9 @@ export const validationSchema = Yup.object({
     sport_uuid: Yup.string(),
     name: Yup.string().required(FORM.VALIDATION.NAME_REQUIRED),
     avatar: Yup.string(),
-    start_time: Yup.string().required(FORM.VALIDATION.START_TIME_REQUIRED),
+    start_time: Yup.string()
+        .required(FORM.VALIDATION.START_TIME_REQUIRED)
+        .nullable(),
     location_uuid: Yup.string().required(FORM.VALIDATION.COURSE_REQUIRED),
     participants: Yup.array(),
 });
