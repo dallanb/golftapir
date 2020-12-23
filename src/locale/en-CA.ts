@@ -214,6 +214,7 @@ const CONSTANTS = {
                 LABELS: {
                     NAME: 'Name',
                     AVATAR: 'Avatar',
+                    UPLOAD_AVATAR: 'Upload Avatar',
                     START_TIME: 'Start Time',
                     PARTICIPANTS: 'Participants',
                 },

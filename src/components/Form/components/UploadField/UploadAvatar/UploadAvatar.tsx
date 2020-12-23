@@ -10,6 +10,7 @@ const UploadAvatar: React.FunctionComponent<UploadAvatarProps> = ({
     options,
     onDelete,
 }) => {
+    const formatter = _get(options, ['uploadSrcFormatter'], formatUploadSrc);
     return (
         <div className="upload-avatar">
             <div className="upload-avatar-mask" />
@@ -20,7 +21,7 @@ const UploadAvatar: React.FunctionComponent<UploadAvatarProps> = ({
                 />
             </div>
             <img
-                src={formatUploadSrc(value, {
+                src={formatter(value, {
                     s3Folder: _get(options, ['uploadS3Folder'], null),
                 })}
                 alt="avatar"
