@@ -1,11 +1,11 @@
 import React from 'react';
-import { Card } from 'antd';
+import { Badge, Card } from 'antd';
 import { get as _get } from 'lodash';
 import classnames from 'classnames';
 import { CompetitorsListTileProps } from './types';
 import constants from '@constants';
 import routes from '@constants/routes';
-import { getName, withS3URL } from '@utils';
+import { getName, mapStatusColour, withS3URL } from '@utils';
 import { Avatar } from '@components';
 import './CompetitorsListTile.less';
 
@@ -35,17 +35,25 @@ const CompetitorsListTile: React.FunctionComponent<CompetitorsListTileProps> = (
                 className={cardCx}
             >
                 <div className="competitors-list-tile-content">
-                    <div className="competitors-list-tile-content-avatar">
-                        <Avatar
-                            src={src}
-                            name={name}
-                            size={48}
-                            shape={'square'}
-                        />
-                    </div>
-                    <div className="competitors-list-tile-content-info">
-                        <div className="competitors-list-tile-content-name">
-                            {name}
+                    <div className="competitors-list-tile-content-main">
+                        <div className="competitors-list-tile-content-main-avatar">
+                            <Avatar
+                                src={src}
+                                name={name}
+                                size={48}
+                                shape={'square'}
+                            />
+                        </div>
+                        <div className="competitors-list-tile-content-main-info">
+                            <div className="competitors-list-tile-content-main-name">
+                                {name}
+                            </div>
+                            <div className="competitors-list-tile-content-main-status">
+                                <Badge
+                                    color={mapStatusColour(status)}
+                                    text={status}
+                                />
+                            </div>
                         </div>
                     </div>
                 </div>
