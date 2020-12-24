@@ -41,7 +41,7 @@ const NotificationsListTile: React.FunctionComponent<NotificationsListTileProps>
             >
                 <div className="notifications-list-tile-content">
                     <div className="notifications-list-tile-content-avatar">
-                        <Avatar src={src} name="" size={48} />
+                        <Avatar src={src} name="" size={48} shape="square" />
                     </div>
                     <div className="notifications-list-tile-content-message">
                         {renderMessage(item)}

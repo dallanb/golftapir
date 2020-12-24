@@ -29,6 +29,7 @@ const ContestsListTileLeaderboard: React.FunctionComponent<ContestsListTileLeade
                                     src={participantAvatar}
                                     name={participantName}
                                     size={36}
+                                    shape="square"
                                 />
                             </div>
                             <div className="leaderboard-active-content-stack">
