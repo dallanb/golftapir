@@ -6,7 +6,7 @@ import { CompetitorsListTileProps } from './types';
 import constants from '@constants';
 import routes from '@constants/routes';
 import { getName, mapStatusColour, withS3URL } from '@utils';
-import CompetitorsListTileCountry from './ContestsListTileCourse';
+import CompetitorsListTileCountry from './CompetitorsListTileCountry';
 import CompetitorsListTileWins from './CompetitorsListTileWins';
 import CompetitorsListTileEvents from './CompetitorsListTileEvents';
 import { Avatar } from '@components';
@@ -62,7 +62,7 @@ const CompetitorsListTile: React.FunctionComponent<CompetitorsListTileProps> = (
                     </div>
                     <div className="competitors-list-tile-content-side">
                         <div className="competitors-list-tile-content-side-country">
-                            <CompetitorsListTileCountry country={country} />
+                            <CompetitorsListTileCountry country={'CA'} />
                         </div>
                         <div className="competitors-list-tile-content-side-wins">
                             <CompetitorsListTileWins wins={0} />

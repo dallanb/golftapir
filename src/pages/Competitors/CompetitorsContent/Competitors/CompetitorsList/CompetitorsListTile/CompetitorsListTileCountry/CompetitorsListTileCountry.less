@@ -1,8 +1,17 @@
 .country {
-  .country-label {
-    color: fade(@primary-color, 50%);
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+    .country-label {
+        color: fade(@primary-color, 50%);
+    }
 
-  .country-content {
-  }
+    .country-content {
+        .country-content-flag {
+            .country-content-flag-icon {
+                display: flex;
+                width: 24px;
+            }
+        }
+    }
 }
