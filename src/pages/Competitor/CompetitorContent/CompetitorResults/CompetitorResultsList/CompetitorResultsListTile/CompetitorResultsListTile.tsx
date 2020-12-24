@@ -42,7 +42,12 @@ const CompetitorResultsListTile: React.FunctionComponent<CompetitorResultsListTi
             >
                 <div className="competitor-results-list-tile-content">
                     <div className="competitor-results-list-tile-content-avatar">
-                        <Avatar src={src} name={name} size={48} />
+                        <Avatar
+                            src={src}
+                            name={name}
+                            size={48}
+                            shape={'square'}
+                        />
                     </div>
                     <div className="competitor-results-list-tile-content-info">
                         <div className="competitor-results-list-tile-content-name">

@@ -6,6 +6,9 @@ import { CompetitorsListTileProps } from './types';
 import constants from '@constants';
 import routes from '@constants/routes';
 import { getName, mapStatusColour, withS3URL } from '@utils';
+import CompetitorsListTileCountry from './ContestsListTileCourse';
+import CompetitorsListTileWins from './CompetitorsListTileWins';
+import CompetitorsListTileEvents from './CompetitorsListTileEvents';
 import { Avatar } from '@components';
 import './CompetitorsListTile.less';
 
@@ -23,6 +26,7 @@ const CompetitorsListTile: React.FunctionComponent<CompetitorsListTileProps> = (
     const avatar = _get(item, ['avatar', 's3_filename'], undefined);
     const src =
         avatar && withS3URL(avatar, constants.S3_FOLDERS.ACCOUNT.AVATAR);
+    const status = _get(item, ['status'], undefined);
     const cardCx = classnames('competitors-list-tile-card', {
         filled: !isEven,
     });
@@ -54,6 +58,17 @@ const CompetitorsListTile: React.FunctionComponent<CompetitorsListTileProps> = (
                                     text={status}
                                 />
                             </div>
+                        </div>
+                    </div>
+                    <div className="competitors-list-tile-content-side">
+                        <div className="competitors-list-tile-content-side-country">
+                            <CompetitorsListTileCountry country={country} />
+                        </div>
+                        <div className="competitors-list-tile-content-side-wins">
+                            <CompetitorsListTileWins wins={0} />
+                        </div>
+                        <div className="competitors-list-tile-content-side-events">
+                            <CompetitorsListTileEvents events={0} />
                         </div>
                     </div>
                 </div>
