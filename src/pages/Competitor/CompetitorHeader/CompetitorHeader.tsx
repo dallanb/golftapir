@@ -1,9 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import {
-    selectAccountAvatarSrc,
-    selectAccountDisplayName,
-} from '@pages/Competitor/selector';
+import { selectAccountDisplayName } from '@pages/Competitor/selector';
 import { CompetitorHeaderProps } from './types';
 import { ContentLayoutHeader } from '@layouts';
 import { Breadcrumb } from '@apps/MemberApp/components';
@@ -13,19 +10,9 @@ import './CompetitorHeader.less';
 const CompetitorHeader: React.FunctionComponent<CompetitorHeaderProps> = () => {
     const title = useSelector(selectAccountDisplayName);
     const subTitle = CONSTANTS.PAGES.COMPETITOR.DESCRIPTION;
-    const avatar = {
-        name: title,
-        src: useSelector(selectAccountAvatarSrc),
-        size: 72,
-    };
     const extra = <Breadcrumb />;
     return (
-        <ContentLayoutHeader
-            title={title}
-            subTitle={subTitle}
-            avatar={avatar}
-            extra={extra}
-        />
+        <ContentLayoutHeader title={title} subTitle={subTitle} extra={extra} />
     );
 };
 

@@ -1,11 +1,14 @@
 import React from 'react';
-import { Card } from 'antd';
+import { Badge, Card } from 'antd';
 import { get as _get } from 'lodash';
 import classnames from 'classnames';
 import { CompetitorsListTileProps } from './types';
 import constants from '@constants';
 import routes from '@constants/routes';
-import { getName, withS3URL } from '@utils';
+import { getName, mapStatusColour, withS3URL } from '@utils';
+import CompetitorsListTileCountry from './CompetitorsListTileCountry';
+import CompetitorsListTileWins from './CompetitorsListTileWins';
+import CompetitorsListTileEvents from './CompetitorsListTileEvents';
 import { Avatar } from '@components';
 import './CompetitorsListTile.less';
 
@@ -23,6 +26,7 @@ const CompetitorsListTile: React.FunctionComponent<CompetitorsListTileProps> = (
     const avatar = _get(item, ['avatar', 's3_filename'], undefined);
     const src =
         avatar && withS3URL(avatar, constants.S3_FOLDERS.ACCOUNT.AVATAR);
+    const status = _get(item, ['status'], undefined);
     const cardCx = classnames('competitors-list-tile-card', {
         filled: !isEven,
     });
@@ -35,17 +39,36 @@ const CompetitorsListTile: React.FunctionComponent<CompetitorsListTileProps> = (
                 className={cardCx}
             >
                 <div className="competitors-list-tile-content">
-                    <div className="competitors-list-tile-content-avatar">
-                        <Avatar
-                            src={src}
-                            name={name}
-                            size={48}
-                            shape={'square'}
-                        />
+                    <div className="competitors-list-tile-content-main">
+                        <div className="competitors-list-tile-content-main-avatar">
+                            <Avatar
+                                src={src}
+                                name={name}
+                                size={48}
+                                shape={'square'}
+                            />
+                        </div>
+                        <div className="competitors-list-tile-content-main-info">
+                            <div className="competitors-list-tile-content-main-name">
+                                {name}
+                            </div>
+                            <div className="competitors-list-tile-content-main-status">
+                                <Badge
+                                    color={mapStatusColour(status)}
+                                    text={status}
+                                />
+                            </div>
+                        </div>
                     </div>
-                    <div className="competitors-list-tile-content-info">
-                        <div className="competitors-list-tile-content-name">
-                            {name}
+                    <div className="competitors-list-tile-content-side">
+                        <div className="competitors-list-tile-content-side-country">
+                            <CompetitorsListTileCountry country={'CA'} />
+                        </div>
+                        <div className="competitors-list-tile-content-side-wins">
+                            <CompetitorsListTileWins wins={0} />
+                        </div>
+                        <div className="competitors-list-tile-content-side-events">
+                            <CompetitorsListTileEvents events={0} />
                         </div>
                     </div>
                 </div>

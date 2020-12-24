@@ -9,7 +9,6 @@ import './Breadcrumb.less';
 import { HomeFilled } from '@ant-design/icons/lib';
 
 const Breadcrumb: React.FunctionComponent<BreadcrumbProps> = (props) => {
-    console.log(props);
     const { state, location } = props;
     const pathSnippets = location.pathname
         .split('/')

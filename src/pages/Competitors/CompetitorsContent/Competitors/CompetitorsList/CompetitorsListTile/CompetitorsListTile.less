@@ -17,22 +17,41 @@
 
         .competitors-list-tile-content {
             display: flex;
-            padding-bottom: 10px;
+            align-items: center;
+            height: 100%;
+            .competitors-list-tile-content-main {
+                display: flex;
+                width: 50%;
 
-            .competitors-list-tile-content-avatar {
-                margin-right: 10px;
-                .ant-avatar-square {
-                    border-radius: 4px;
+                .competitors-list-tile-content-main-avatar {
+                    margin-right: 10px;
+
+                    .ant-avatar-square {
+                        border-radius: 4px;
+                    }
+                }
+
+                .competitors-list-tile-content-main-info {
+                    .competitors-list-tile-content-main-name {
+                        font-weight: bold;
+                    }
+                    .competitors-list-tile-content-main-status {
+                    }
                 }
             }
-
-            .competitors-list-tile-content-info {
-                .competitors-list-tile-content-name {
+            .competitors-list-tile-content-side {
+                display: flex;
+                justify-content: start;
+                width: 50%;
+                .competitors-list-tile-content-side-country {
+                    width: 33%;
+                    //padding-right: 24px;
                 }
-            }
 
-            .competitors-list-tile-content-leaderboard {
-                margin-left: auto;
+                .competitors-list-tile-content-side-wins,
+                .competitors-list-tile-content-side-events {
+                    width: 33%;
+                }
             }
         }
 
