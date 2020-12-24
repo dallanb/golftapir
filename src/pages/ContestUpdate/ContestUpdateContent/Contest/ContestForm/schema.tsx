@@ -1,40 +1,68 @@
 import * as Yup from 'yup';
-import {BasicInputWrapper} from '@components';
-import CONSTANTS from '@locale/en-CA';
 import moment, { Moment } from 'moment';
+import {
+    BasicInputWrapper,
+    FloatLabelInputWrapper,
+    ImgCropWrapper,
+    NestedInputWrapper,
+} from '@components';
+import CONSTANTS from '@locale/en-CA';
+import { CloudUploadOutlined } from '@ant-design/icons/lib';
+import constants from '@constants';
+import { formatUploadSrc } from '../utils';
 
 const FORM = CONSTANTS.PAGES.CONTEST_UPDATE.FORM;
 
 export const fieldSchema = [
     {
-        name: 'name',
-        wrapper: BasicInputWrapper,
-        wrapperOptions: {
-            label: FORM.LABELS.NAME,
-        },
-    },
-    {
         name: 'avatar',
         type: 'avatar',
-        wrapper: BasicInputWrapper,
+        wrapper: ImgCropWrapper,
         wrapperOptions: {
-            label: FORM.LABELS.AVATAR,
             valuePropName: 'file',
+            className: 'contest-update-form-avatar-upload',
+            modalTitle: FORM.LABELS.AVATAR_CROPPER_TITLE,
+        },
+        options: {
+            uploadLabel: FORM.LABELS.UPLOAD_AVATAR,
+            uploadIcon: CloudUploadOutlined,
+            uploadS3Folder: constants.S3_FOLDERS.CONTEST.AVATAR,
+            uploadSrcFormatter: formatUploadSrc,
         },
     },
     {
-        name: 'start_time',
-        type: 'date-time-picker',
-        wrapper: BasicInputWrapper,
+        name: 'input-group',
+        wrapper: NestedInputWrapper,
         wrapperOptions: {
-            label: FORM.LABELS.START_TIME,
+            className: 'contest-form-input-group',
         },
-        options: {
-            format: 'YYYY-MM-DD HH:mm A',
-            disabledDate: (current: Moment) =>
-                current && current < moment().endOf('day'),
-            valueTransform: (value: Moment) => +value,
-        },
+        options: {},
+        fields: [
+            {
+                name: 'name',
+                wrapper: FloatLabelInputWrapper,
+                wrapperOptions: {
+                    label: FORM.LABELS.NAME,
+                    className: 'contest-form-name-input',
+                },
+            },
+            {
+                name: 'start_time',
+                type: 'date-time-picker',
+                wrapper: FloatLabelInputWrapper,
+                wrapperOptions: {
+                    label: FORM.LABELS.START_TIME,
+                    className: 'contest-form-start-time-input',
+                },
+                options: {
+                    format: 'YYYY-MM-DD HH:mm A',
+                    disabledDate: (current: Moment) =>
+                        current && current < moment().endOf('day'),
+                    valueTransform: (value: Moment) => +value,
+                    className: 'contest-date-time-picker',
+                },
+            },
+        ],
     },
 ];
 

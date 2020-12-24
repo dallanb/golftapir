@@ -1,5 +1,4 @@
 export { default as Avatar } from './Avatar';
-export { default as AvatarInputWrapper } from './AvatarInputWrapper';
 export { default as BasicInputWrapper } from './BasicInputWrapper';
 export { default as DateTimePicker } from './DateTimePicker';
 export { default as EditableCell } from './EditableCell';
@@ -7,7 +6,9 @@ export { default as Form } from './Form';
 export { default as Grid } from './Grid';
 export { default as FloatLabelInputWrapper } from './FloatLabelInputWrapper';
 export { default as FixedSizeList } from './FixedSizeList';
+export { default as ImgCropWrapper } from './ImgCropWrapper';
 export { default as MessageModal } from './MessageModal';
+export { default as NestedInputWrapper } from './NestedInputWrapper';
 export { default as OverlaySpin } from './OverlaySpin';
 export { default as PendingBadge } from './PendingBadge';
 export { default as ProtectedRoute } from './ProtectedRoute';

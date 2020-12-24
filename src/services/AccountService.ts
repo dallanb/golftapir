@@ -43,13 +43,6 @@ export default {
             },
         });
     },
-    searchAccounts(query: any = {}) {
-        return ClientProxy.get({
-            url: config.ACCOUNT_URL,
-            endpoint: `/accounts/search`,
-            query,
-        });
-    },
     bulkFetchAccounts(data: any, query: any = {}) {
         return ClientProxy.post({
             url: config.ACCOUNT_URL,

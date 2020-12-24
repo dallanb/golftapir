@@ -7,4 +7,5 @@ export interface FloatLabelInputWrapperProps {
     rules?: any;
     children: any;
     childRef: Ref<any>;
+    className?: string;
 }

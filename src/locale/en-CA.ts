@@ -1,4 +1,7 @@
 const CONSTANTS = {
+    FORM: {
+        UPLOAD: 'Upload',
+    },
     ACCOUNT: {
         ERROR: {
             UPDATE: 'Error updating Contest information',
@@ -131,6 +134,7 @@ const CONSTANTS = {
                 VALIDATION: {
                     USERNAME_REQUIRED: 'Please input your username!',
                     EMAIL_REQUIRED: 'Please input your email address!',
+                    EMAIL_TYPE: 'Please input a valid email address',
                     PASSWORD_REQUIRED: 'Please input your password!',
                     CONFIRM_PASSWORD_REQUIRED: 'Please confirm your password!',
                     CONFIRM_PASSWORD_MISMATCH:
@@ -192,6 +196,8 @@ const CONSTANTS = {
                 LABELS: {
                     NAME: 'Name',
                     AVATAR: 'Avatar',
+                    UPLOAD_AVATAR: 'Upload Avatar',
+                    AVATAR_CROPPER_TITLE: 'Edit Avatar',
                     START_TIME: 'Start Time',
                     COURSE: 'Course',
                     PARTICIPANTS: 'Participants',
@@ -210,6 +216,8 @@ const CONSTANTS = {
                 LABELS: {
                     NAME: 'Name',
                     AVATAR: 'Avatar',
+                    UPLOAD_AVATAR: 'Upload Avatar',
+                    AVATAR_CROPPER_TITLE: 'Edit Avatar',
                     START_TIME: 'Start Time',
                     PARTICIPANTS: 'Participants',
                 },
@@ -225,6 +233,8 @@ const CONSTANTS = {
             FORM: {
                 LABELS: {
                     AVATAR: 'Avatar',
+                    UPLOAD_AVATAR: 'Upload Avatar',
+                    AVATAR_CROPPER_TITLE: 'Edit Avatar',
                     USERNAME: 'Username',
                     EMAIL: 'Email',
                     DISPLAY_NAME: 'Display Name',

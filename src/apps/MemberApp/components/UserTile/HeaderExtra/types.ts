@@ -1,1 +1,3 @@
-export interface HeaderExtraProps {}
+export interface HeaderExtraProps {
+    user: any;
+}

@@ -1,11 +1,14 @@
+import React from 'react';
 import * as Yup from 'yup';
+import { CloudUploadOutlined } from '@ant-design/icons/lib';
 import {
-    AvatarInputWrapper,
     BasicInputWrapper,
     FloatLabelInputWrapper,
+    ImgCropWrapper,
+    NestedInputWrapper,
 } from '@components';
 import CONSTANTS from '@locale/en-CA';
-import React from 'react';
+import constants from '@constants';
 
 const FORM = CONSTANTS.PAGES.ACCOUNT.FORM;
 
@@ -13,39 +16,70 @@ export const fieldSchema = [
     {
         name: 'avatar',
         type: 'avatar',
-        wrapper: AvatarInputWrapper,
+        wrapper: ImgCropWrapper,
         wrapperOptions: {
-            label: FORM.LABELS.AVATAR,
             valuePropName: 'file',
+            className: 'account-form-avatar-upload',
+            modalTitle: FORM.LABELS.AVATAR_CROPPER_TITLE,
+        },
+        options: {
+            uploadLabel: FORM.LABELS.UPLOAD_AVATAR,
+            uploadIcon: CloudUploadOutlined,
+            uploadS3Folder: constants.S3_FOLDERS.ACCOUNT.AVATAR,
         },
     },
     {
-        name: 'username',
-        wrapper: FloatLabelInputWrapper,
+        name: 'input-group',
+        wrapper: NestedInputWrapper,
         wrapperOptions: {
-            label: FORM.LABELS.USERNAME,
+            className: 'account-form-input-group',
         },
-        options: {
-            disabled: true,
-        },
-    },
-    {
-        name: 'email',
-        wrapper: FloatLabelInputWrapper,
-        wrapperOptions: {
-            label: FORM.LABELS.EMAIL,
-        },
-        options: {
-            disabled: true,
-        },
+        options: {},
+        fields: [
+            {
+                name: 'username',
+                wrapper: FloatLabelInputWrapper,
+                wrapperOptions: {
+                    label: FORM.LABELS.USERNAME,
+                    className: 'account-form-username-input',
+                },
+                options: {
+                    disabled: true,
+                },
+            },
+            {
+                name: 'email',
+                wrapper: FloatLabelInputWrapper,
+                wrapperOptions: {
+                    label: FORM.LABELS.EMAIL,
+                    className: 'account-form-email-input',
+                },
+                options: {
+                    disabled: true,
+                },
+            },
+        ],
     },
     {
         name: 'display_name',
         wrapper: FloatLabelInputWrapper,
         wrapperOptions: {
             label: FORM.LABELS.DISPLAY_NAME,
+            className: 'account-form-display-name-input',
         },
         options: {},
+    },
+    {
+        name: 'address.country',
+        type: 'country-select',
+        wrapper: FloatLabelInputWrapper,
+        wrapperOptions: {
+            label: FORM.LABELS.COUNTRY,
+            className: 'account-form-country-input',
+        },
+        options: {
+            // dependants: ['phone.country_code'],
+        },
     },
     {
         name: 'address.line_1',
@@ -83,17 +117,7 @@ export const fieldSchema = [
         },
         options: {},
     },
-    {
-        name: 'address.country',
-        type: 'country-select',
-        wrapper: FloatLabelInputWrapper,
-        wrapperOptions: {
-            label: FORM.LABELS.COUNTRY,
-        },
-        options: {
-            // dependants: ['phone.country_code'],
-        },
-    },
+
     {
         name: 'address.postal_code',
         wrapper: BasicInputWrapper,

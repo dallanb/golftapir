@@ -8,7 +8,9 @@ export interface FormProps {
     submitButton?: JSX.Element;
     onSubmit: (values: FormikValues) => void;
     formRenderer?: FormRendererProps;
-    fieldRenderer?: () => any;
+    fieldsRenderer?: () => any;
+    validateOnChange?: boolean;
+    validateOnBlur?: boolean;
 }
 
 export interface FormRendererProps {
@@ -20,6 +22,6 @@ export interface FormRendererProps {
     ): JSX.Element;
 }
 
-export interface FieldRendererProps {
-    (schema: any, formik: FormikProps<FormikValues>): JSX.Element;
+export interface FieldsRendererProps {
+    (formik: FormikProps<FormikValues>, schema: any): JSX.Element;
 }

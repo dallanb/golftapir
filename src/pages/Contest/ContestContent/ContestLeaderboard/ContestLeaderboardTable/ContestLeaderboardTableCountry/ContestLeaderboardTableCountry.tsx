@@ -12,7 +12,6 @@ const ContestLeaderboardTableCountry: React.FunctionComponent<ContestLeaderboard
 }) => {
     const accountsHash = useSelector(selectAccountsHash);
     const country = _get(accountsHash, [uuid, 'address', 'country'], undefined);
-    console.log(country);
     const Country = _get(Flags, [country], null);
     return <Country className="contest-leaderboard-table-country-flag" />;
 };

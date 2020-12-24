@@ -16,6 +16,7 @@ const SiderLayoutHeader: React.FunctionComponent<SiderLayoutHeaderProps> = ({
         const avatarProps: AvatarProps = {
             className: avatar.className,
             size: avatar.size,
+            shape: avatar.shape,
         };
         if (avatar.src) {
             avatarProps['src'] = avatar.src;

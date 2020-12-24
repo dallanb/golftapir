@@ -5,11 +5,13 @@ import ContestsCreatePageContentContestSearchParticipantActions, {
     ContestsCreatePageContentContestSearchParticipantTypes,
 } from './actions';
 
-function* search({ key }: AnyAction) {
+// need to add search more somehow
+function* search({ key: search }: AnyAction) {
     try {
-        const { accounts } = yield call(AccountService.searchAccounts, {
-            key,
-            fields: 'name',
+        const { accounts } = yield call(AccountService.fetchAccounts, {
+            page: 1,
+            per_page: 10,
+            search,
         });
         yield put(
             ContestsCreatePageContentContestSearchParticipantActions.searchSuccess(

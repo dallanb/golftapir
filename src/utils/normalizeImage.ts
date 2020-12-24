@@ -25,7 +25,7 @@ const normalizeImage = (image: any): Promise<any> =>
                             constants.AVATAR.HEIGHT
                         );
                     }
-                    const dataURL = canvas.toDataURL('image/jpeg', 0.5);
+                    const dataURL = canvas.toDataURL('image/jpeg');
                     resolve(dataURL);
                 };
             };

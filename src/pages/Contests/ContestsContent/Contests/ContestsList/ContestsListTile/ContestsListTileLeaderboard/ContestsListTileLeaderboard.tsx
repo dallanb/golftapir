@@ -12,7 +12,6 @@ const ContestsListTileLeaderboard: React.FunctionComponent<ContestsListTileLeade
 }) => {
     if (status !== constants.STATUS.PENDING.KEY) {
         const participant = findLowestScoringParticipant(participants);
-        console.log(participants);
         if (participant) {
             if (status !== constants.STATUS.COMPLETED.KEY) {
                 const participantAvatar = withS3URL(
@@ -30,6 +29,7 @@ const ContestsListTileLeaderboard: React.FunctionComponent<ContestsListTileLeade
                                     src={participantAvatar}
                                     name={participantName}
                                     size={36}
+                                    shape="square"
                                 />
                             </div>
                             <div className="leaderboard-active-content-stack">

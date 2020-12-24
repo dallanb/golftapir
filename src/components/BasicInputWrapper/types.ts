@@ -6,4 +6,5 @@ export interface BasicInputWrapperProps {
     rules?: any;
     children: any;
     childRef: Ref<any>;
+    className?: string;
 }

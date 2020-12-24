@@ -2,22 +2,23 @@ import { Formik, FormikProps, FormikValues } from 'formik';
 import React from 'react';
 import { Button, Form as AntdForm } from 'antd';
 import defaultFormRenderer from './defaultFormRenderer';
-import defaultFieldRenderer from './defaultFieldRenderer';
-import { FieldRendererProps, FormProps, FormRendererProps } from './types';
+import defaultFieldsRenderer from './defaultFieldsRenderer';
+import { FieldsRendererProps, FormProps, FormRendererProps } from './types';
+import './Form.less';
 
 class Form extends React.Component<FormProps> {
     private readonly formRenderer: FormRendererProps;
-    private readonly fieldRenderer: FieldRendererProps;
+    private readonly fieldsRenderer: FieldsRendererProps;
 
     constructor(props: FormProps) {
         super(props);
         this.formRenderer = props.formRenderer || defaultFormRenderer;
-        this.fieldRenderer = props.fieldRenderer || defaultFieldRenderer;
+        this.fieldsRenderer = props.fieldsRenderer || defaultFieldsRenderer;
     }
 
     prepareForm = (formik: FormikProps<FormikValues>): JSX.Element => {
         const { fieldSchema, initialValues } = this.props;
-        const fields = this.fieldRenderer(fieldSchema, formik);
+        const fields = this.fieldsRenderer(formik, fieldSchema);
         const submitComponent = this.renderSubmit();
         return this.formRenderer(
             initialValues,
@@ -33,7 +34,7 @@ class Form extends React.Component<FormProps> {
             return submitButton;
         }
         return (
-            <AntdForm.Item>
+            <AntdForm.Item className="form-submit-button">
                 <Button type="primary" htmlType="submit">
                     Submit
                 </Button>
@@ -42,12 +43,20 @@ class Form extends React.Component<FormProps> {
     };
 
     render() {
-        const { initialValues, validationSchema, onSubmit } = this.props;
+        const {
+            initialValues,
+            validationSchema,
+            onSubmit,
+            validateOnBlur = false,
+            validateOnChange = false,
+        } = this.props;
         return (
             <Formik
                 initialValues={initialValues}
                 validationSchema={validationSchema}
                 onSubmit={onSubmit}
+                validateOnBlur={validateOnBlur}
+                validateOnChange={validateOnChange}
             >
                 {(formik: FormikProps<FormikValues>) =>
                     this.prepareForm(formik)

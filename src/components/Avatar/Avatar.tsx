@@ -9,6 +9,7 @@ const Avatar: React.FunctionComponent<AvatarProps> = ({
     className,
     size,
     shape,
+    style = {},
 }) => {
     const props: {
         src?: AvatarProps['src'];
@@ -28,6 +29,7 @@ const Avatar: React.FunctionComponent<AvatarProps> = ({
         props['style'] = {
             backgroundColor: randomColourGenerator(name),
             verticalAlign: 'middle',
+            ...style,
         };
         child = getInitials(name);
     }

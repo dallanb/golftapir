@@ -1,2 +1,59 @@
-.contest-form-view {
+.contest-form {
+    > form {
+        display: flex;
+        flex-wrap: wrap;
+        .contest-form-avatar-upload {
+            //flex-grow: 1;
+            margin-bottom: 0;
+            margin-right: 24px;
+            .ant-upload-select-picture-card {
+                height: 130px;
+                width: 130px;
+                border-radius: 8px;
+                overflow: hidden;
+            }
+            .upload-button {
+                .upload-button-label {
+                    font-size: 12px;
+                }
+                .upload-button-icon {
+                }
+            }
+        }
+        .contest-form-input-group {
+            display: flex;
+            //flex-wrap: wrap;
+            flex-grow: 1;
+            flex-direction: column;
+
+            .contest-form-name-input {
+                width: 100%;
+                //padding-right: 8px;
+                .ant-form-item {
+                    margin-bottom: 0;
+                }
+            }
+            .contest-form-start-time-input {
+                width: 100%;
+                .ant-form-item {
+                    margin-bottom: 0;
+                    .contest-date-time-picker {
+                        width: 100%;
+                    }
+                }
+            }
+        }
+        .contest-form-location-input {
+            width: 100%;
+            .ant-form-item {
+                margin-bottom: 0;
+            }
+        }
+        .contest-form-participants-input {
+            width: 100%;
+            .ant-form-item {
+                margin-bottom: 0;
+            }
+        }
+    }
 }

@@ -7,13 +7,20 @@ import { Form } from 'antd';
 const FloatLabelInputWrapper: React.FunctionComponent<FloatLabelInputWrapperProps> = (
     props
 ) => {
-    const { children, childRef, label, value, name, ...restProps } = props;
+    const {
+        children,
+        childRef,
+        label,
+        value,
+        name,
+        className,
+        ...restProps
+    } = props;
     const [focus, setFocus] = useState(false);
-    const cx = classnames('float-label-input-wrapper');
+    const cx = classnames('float-label-input-wrapper', className);
     const labelCx = classnames('label', {
         'label-float': focus || (value && value.length !== 0),
     });
-
     return (
         <div
             className={cx}

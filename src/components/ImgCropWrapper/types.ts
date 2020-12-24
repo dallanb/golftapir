@@ -1,9 +1,11 @@
 import { Ref } from 'react';
 
-export interface AvatarInputWrapperProps {
+export interface ImgCropWrapperProps {
     value: any;
     name: string;
     rules?: any;
     children: any;
     childRef: Ref<any>;
+    className?: string;
+    modalTitle?: string;
 }
