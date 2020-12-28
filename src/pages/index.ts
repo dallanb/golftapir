@@ -63,6 +63,13 @@ export {
     HomePageRoutes,
 } from './Home';
 export {
+    default as Leagues,
+    reducer as leaguesPage,
+    LeaguesPageSaga,
+    LeaguesPageContentLeaguesSaga,
+    LeaguesPageRoutes,
+} from './Leagues';
+export {
     default as Login,
     reducer as loginPage,
     LoginPageSaga,

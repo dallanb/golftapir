@@ -36,9 +36,9 @@ const CONSTANTS = {
         },
         ERROR: {
             FETCH: 'Error fetching Contest information',
-            FETCH_ALL: 'Error fetching Contests information',
+            FETCH_ALL: 'Error fetching Leagues information',
             FETCH_MATERIALIZED: 'Error fetching Contest information',
-            FETCH_ALL_MATERIALIZED: 'Error fetching Contests information',
+            FETCH_ALL_MATERIALIZED: 'Error fetching Leagues information',
             CREATE: 'Contest creation unsuccessful',
             UPDATE: 'Contest update unsuccessful!',
             FETCH_PARTICIPANT: 'Error fetch Contest participant information',
@@ -174,8 +174,8 @@ const CONSTANTS = {
         },
         CONTESTS: {
             TITLE: 'Contests',
-            DESCRIPTION: 'View Contests',
-            SEARCH: 'Search Contests',
+            DESCRIPTION: 'View Leagues',
+            SEARCH: 'Search Leagues',
         },
         NOTIFICATIONS: {
             TITLE: 'Notifications',
@@ -261,6 +261,15 @@ const CONSTANTS = {
                     PHONE_NUMBER_MATCHES: 'Phone Number is invalid',
                 },
             },
+        },
+        LEAGUES: {
+            TITLE: 'Leagues',
+            DESCRIPTION: 'View Leagues',
+            SEARCH: 'Search Leagues',
+        },
+        LEAGUES_CREATE: {
+            TITLE: 'Leagues',
+            DESCRIPTION: 'Create League',
         },
         WAGERS: {
             TITLE: 'Wagers',

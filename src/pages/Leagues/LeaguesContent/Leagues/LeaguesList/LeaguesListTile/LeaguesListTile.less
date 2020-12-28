@@ -1,0 +1,60 @@
+@import 'src/assets/styles/statics';
+.contest-list-tile-view {
+    .contest-list-tile-card {
+        display: flex;
+        cursor: pointer;
+        height: 100%;
+
+        &.filled {
+            background: @tile-fill;
+        }
+
+        .ant-card-body {
+            width: 100%;
+            padding: 12px 24px;
+        }
+
+        .contest-list-tile-content {
+            display: flex;
+            align-items: center;
+            height: 100%;
+            .contest-list-tile-content-main {
+                display: flex;
+                width: 50%;
+
+                .contest-list-tile-content-main-avatar {
+                    margin-right: 10px;
+                    .ant-avatar-square {
+                        border-radius: 4px;
+                    }
+                }
+
+                .contest-list-tile-content-main-info {
+                    .contest-list-tile-content-main-name {
+                        font-weight: bold;
+                    }
+
+                    .contest-list-tile-content-main-status {
+                    }
+                }
+            }
+            .contest-list-tile-content-side {
+                display: flex;
+                justify-content: start;
+                width: 50%;
+                .contest-list-tile-content-side-course {
+                    width: 50%;
+                    //padding-right: 24px;
+                }
+
+                .contest-list-tile-content-side-leaderboard,
+                .contest-list-tile-content-side-date {
+                    width: 50%;
+                }
+            }
+        }
+
+        .contest-list-tile-button {
+        }
+    }
+}

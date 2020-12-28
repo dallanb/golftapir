@@ -8,8 +8,8 @@ import CONSTANTS from '@locale/en-CA';
 function* fetchLeague({ uuid, options }: AnyAction) {
     try {
         const res = yield call(LeagueService.fetchLeague, uuid, options);
-        const { accounts } = res;
-        yield put(LeagueActions.fetchLeagueSuccess(accounts));
+        const { leagues } = res;
+        yield put(LeagueActions.fetchLeagueSuccess(leagues));
     } catch (err) {
         yield put(LeagueActions.fetchLeagueFailure(err));
         message.error(CONSTANTS.ACCOUNT.ERROR.FETCH);
@@ -19,8 +19,8 @@ function* fetchLeague({ uuid, options }: AnyAction) {
 function* fetchLeagues({ options }: AnyAction) {
     try {
         const res = yield call(LeagueService.fetchLeagues, options);
-        const { accounts } = res;
-        yield put(LeagueActions.fetchLeaguesSuccess(accounts));
+        const { leagues } = res;
+        yield put(LeagueActions.fetchLeaguesSuccess(leagues));
     } catch (err) {
         yield put(LeagueActions.fetchLeaguesFailure(err));
         message.error(CONSTANTS.ACCOUNT.ERROR.FETCH_ALL);
@@ -30,8 +30,8 @@ function* fetchLeagues({ options }: AnyAction) {
 function* updateLeague({ uuid, values }: AnyAction) {
     try {
         const res = yield call(LeagueService.updateLeague, uuid, values);
-        const { accounts } = res;
-        yield put(LeagueActions.updateLeagueSuccess(accounts));
+        const { leagues } = res;
+        yield put(LeagueActions.updateLeagueSuccess(leagues));
     } catch (err) {
         yield put(LeagueActions.updateLeagueFailure(err));
         message.error(CONSTANTS.ACCOUNT.ERROR.UPDATE);
@@ -40,8 +40,8 @@ function* updateLeague({ uuid, values }: AnyAction) {
 
 export default function* LeagueSaga() {
     yield all([
-        takeLatest(LeagueTypes.FETCH_ACCOUNT, fetchLeague),
-        takeLatest(LeagueTypes.FETCH_ACCOUNTS, fetchLeagues),
-        takeLatest(LeagueTypes.UPDATE_ACCOUNT, updateLeague),
+        takeLatest(LeagueTypes.FETCH_LEAGUE, fetchLeague),
+        takeLatest(LeagueTypes.FETCH_LEAGUES, fetchLeagues),
+        takeLatest(LeagueTypes.UPDATE_LEAGUE, updateLeague),
     ]);
 }

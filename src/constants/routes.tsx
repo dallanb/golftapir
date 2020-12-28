@@ -7,6 +7,7 @@ import {
     MessageFilled,
     NotificationFilled,
     SettingFilled,
+    TeamOutlined,
 } from '@ant-design/icons';
 
 const routes = {
@@ -36,7 +37,7 @@ const routes = {
         BASE_ROUTE: '/competitors',
         KEY: 'competitors',
         LABEL: CONSTANTS.PAGES.COMPETITORS.TITLE,
-        ICON: CrownFilled,
+        ICON: TeamOutlined,
     },
     CONTEST: {
         ROUTE: '/contests/contest',
@@ -72,6 +73,20 @@ const routes = {
         KEY: 'home',
         LABEL: CONSTANTS.PAGES.HOME.TITLE,
         ICON: HomeFilled,
+    },
+    LEAGUES: {
+        ROUTE: '/leagues',
+        BASE_ROUTE: '/leagues',
+        KEY: 'leagues',
+        LABEL: CONSTANTS.PAGES.LEAGUES.TITLE,
+        ICON: CrownFilled,
+    },
+    LEAGUES_CREATE: {
+        ROUTE: '/leagues/create',
+        BASE_ROUTE: '/leagues',
+        KEY: 'leagues_create',
+        LABEL: CONSTANTS.PAGES.LEAGUES.TITLE,
+        ICON: CrownFilled,
     },
     LOGIN: {
         ROUTE: '/login',

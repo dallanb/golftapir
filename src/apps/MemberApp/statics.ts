@@ -37,6 +37,12 @@ export default [
         icon: routes.CONTESTS.ICON,
         key: routes.CONTESTS.KEY,
     },
+    {
+        path: `/app${routes.LEAGUES.ROUTE}`,
+        name: routes.LEAGUES.LABEL,
+        icon: routes.LEAGUES.ICON,
+        key: routes.LEAGUES.KEY,
+    },
     // {
     //     path: '/app/wagers',
     //     // component: Home,
