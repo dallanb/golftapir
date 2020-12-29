@@ -8,7 +8,7 @@ import {
     modalReducer as modal,
     notificationReducer as notification,
 } from '@reducers';
-import {} from '@pages';
+import { leaguePage, LeaguePageSaga } from '@pages';
 import { default as BaseSaga } from '@apps/LeagueApp/saga';
 import {
     AccountSaga,
@@ -46,6 +46,7 @@ function configStore(): any {
             auth,
             modal,
             notification,
+            leaguePage,
         }),
         undefined,
         compose(
@@ -68,6 +69,7 @@ function configStore(): any {
             fork(ScoreSaga),
             fork(SocketSaga),
             fork(TopicSocketSaga),
+            fork(LeaguePageSaga),
         ]);
     }
     sagaMiddleware.run(memberAppSaga);

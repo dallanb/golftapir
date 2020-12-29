@@ -7,11 +7,10 @@ import LeagueAppView from './LeagueAppView';
 
 class LeagueApp extends React.Component<LeagueAppProps> {
     render() {
-        const { url } = this.props;
         return (
             <Provider store={store}>
                 <MessageModal />
-                <LeagueAppView url={url} />
+                <LeagueAppView />
             </Provider>
         );
     }

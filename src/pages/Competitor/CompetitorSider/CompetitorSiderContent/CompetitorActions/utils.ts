@@ -3,7 +3,6 @@ import memoize from 'memoize-one';
 import constants from '@constants';
 import routes from '@constants/routes';
 
-
 export const generateActions = (uuid?: string) => {
     const actions = [];
     const history = useHistory();
@@ -11,7 +10,7 @@ export const generateActions = (uuid?: string) => {
         actions.push({
             key: constants.ACTION.CHALLENGE.KEY,
             onClick: () =>
-                history.push(`/app${routes.CONTESTS_CREATE.ROUTE}`, {
+                history.push(routes.MEMBER_APP.CONTESTS_CREATE.ROUTE, {
                     participant_uuid: uuid,
                 }),
         });

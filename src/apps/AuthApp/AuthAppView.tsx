@@ -4,14 +4,14 @@ import { AuthLayout } from '@layouts';
 import { routes } from './routes';
 import { ComponentRoute } from './types';
 
-function AuthAppView({ url }: { url: string }) {
+function AuthAppView() {
     return (
         <AuthLayout>
             <Switch>
                 {routes.map(({ path, component, exact }: ComponentRoute) => (
                     <Route
                         key={path}
-                        path={`${url}${path}`}
+                        path={path}
                         component={component}
                         exact={exact}
                     />

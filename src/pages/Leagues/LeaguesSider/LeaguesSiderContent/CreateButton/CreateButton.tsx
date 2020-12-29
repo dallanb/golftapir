@@ -10,7 +10,7 @@ const CreateButton: React.FunctionComponent<CreateButtonProps> = () => {
     const history = useHistory();
 
     const handleClick = () => {
-        history.push(`/app${routes.LEAGUES_CREATE.ROUTE}`);
+        history.push(routes.MEMBER_APP.LEAGUES_CREATE.ROUTE);
     };
 
     return (

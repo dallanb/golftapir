@@ -19,7 +19,7 @@ const CompetitorsListTile: React.FunctionComponent<CompetitorsListTileProps> = (
     const isEven = index % 2;
     const item = _get(data, [index], undefined);
     const handleClick = (options: any) => {
-        history.push(`/app${routes.COMPETITOR.ROUTE}`, options);
+        history.push(routes.MEMBER_APP.COMPETITOR.ROUTE, options);
     };
 
     const name = getName(item, 'Loading...');

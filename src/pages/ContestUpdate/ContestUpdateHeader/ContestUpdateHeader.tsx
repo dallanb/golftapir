@@ -13,7 +13,9 @@ const ContestUpdateHeader: React.FunctionComponent<ContestUpdateHeaderProps> = (
     const extra = (
         <Breadcrumb
             state={{
-                [routes.CONTEST.KEY]: { ...useSelector(selectContest) },
+                [routes.MEMBER_APP.CONTEST.KEY]: {
+                    ...useSelector(selectContest),
+                },
             }}
         />
     );

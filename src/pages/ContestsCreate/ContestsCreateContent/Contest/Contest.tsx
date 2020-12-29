@@ -21,7 +21,7 @@ const Contest: React.FunctionComponent<ContestProps> = ({}) => {
 
     useEffect(() => {
         if (isSubmitted && result) {
-            history.push(`/app${routes.CONTEST.ROUTE}`, result);
+            history.push(routes.MEMBER_APP.CONTEST.ROUTE, result);
         }
     });
 

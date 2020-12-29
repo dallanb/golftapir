@@ -43,6 +43,8 @@ class MemberAppLayout extends React.Component<
 
         if (prevPath !== nextPath || !prevState.selectedKeys.length) {
             nextState.currentPath = nextPath;
+            console.log(nextProps.menuRoutes);
+
             nextState.selectedKeys[0] = nextProps.menuRoutes
                 .findIndex(({ path }: any) => path === pagePath)
                 .toString();

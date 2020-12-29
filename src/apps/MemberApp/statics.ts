@@ -6,18 +6,21 @@ import { MessageFilled } from '@ant-design/icons/lib';
 
 export default [
     {
-        path: `/app${routes.HOME.ROUTE}`,
+        path: routes.MEMBER_APP.HOME.ROUTE,
         component: Home,
-        name: routes.HOME.LABEL,
-        icon: routes.HOME.ICON,
-        key: routes.HOME.KEY,
+        name: routes.MEMBER_APP.HOME.LABEL,
+        icon: routes.MEMBER_APP.HOME.ICON,
+        key: routes.MEMBER_APP.HOME.KEY,
     },
     {
-        path: `/app${routes.NOTIFICATIONS.ROUTE}`,
-        name: routes.NOTIFICATIONS.LABEL,
+        path: routes.MEMBER_APP.NOTIFICATIONS.ROUTE,
+        name: routes.MEMBER_APP.NOTIFICATIONS.LABEL,
         icon: (props: { data: any; value: { pending: number } }) =>
-            PendingBadge({ icon: routes.NOTIFICATIONS.ICON, ...props }),
-        key: routes.NOTIFICATIONS.KEY,
+            PendingBadge({
+                icon: routes.MEMBER_APP.NOTIFICATIONS.ICON,
+                ...props,
+            }),
+        key: routes.MEMBER_APP.NOTIFICATIONS.KEY,
     },
     {
         path: '/app/messages',
@@ -26,22 +29,22 @@ export default [
         key: 'messages',
     },
     {
-        path: `/app${routes.COMPETITORS.ROUTE}`,
-        name: routes.COMPETITORS.LABEL,
-        icon: routes.COMPETITORS.ICON,
-        key: routes.COMPETITORS.KEY,
+        path: routes.MEMBER_APP.COMPETITORS.ROUTE,
+        name: routes.MEMBER_APP.COMPETITORS.LABEL,
+        icon: routes.MEMBER_APP.COMPETITORS.ICON,
+        key: routes.MEMBER_APP.COMPETITORS.KEY,
     },
     {
-        path: `/app${routes.CONTESTS.ROUTE}`,
-        name: routes.CONTESTS.LABEL,
-        icon: routes.CONTESTS.ICON,
-        key: routes.CONTESTS.KEY,
+        path: routes.MEMBER_APP.CONTESTS.ROUTE,
+        name: routes.MEMBER_APP.CONTESTS.LABEL,
+        icon: routes.MEMBER_APP.CONTESTS.ICON,
+        key: routes.MEMBER_APP.CONTESTS.KEY,
     },
     {
-        path: `/app${routes.LEAGUES.ROUTE}`,
-        name: routes.LEAGUES.LABEL,
-        icon: routes.LEAGUES.ICON,
-        key: routes.LEAGUES.KEY,
+        path: routes.MEMBER_APP.LEAGUES.ROUTE,
+        name: routes.MEMBER_APP.LEAGUES.LABEL,
+        icon: routes.MEMBER_APP.LEAGUES.ICON,
+        key: routes.MEMBER_APP.LEAGUES.KEY,
     },
     // {
     //     path: '/app/wagers',
@@ -51,9 +54,9 @@ export default [
     //     key: 'wagers',
     // },
     {
-        path: `/app${routes.ACCOUNT.ROUTE}`,
-        name: routes.ACCOUNT.LABEL,
-        icon: routes.ACCOUNT.ICON,
-        key: routes.ACCOUNT.KEY,
+        path: routes.MEMBER_APP.ACCOUNT.ROUTE,
+        name: routes.MEMBER_APP.ACCOUNT.LABEL,
+        icon: routes.MEMBER_APP.ACCOUNT.ICON,
+        key: routes.MEMBER_APP.ACCOUNT.KEY,
     },
 ];

@@ -19,7 +19,10 @@ const HeaderExtra: React.FunctionComponent<HeaderExtraProps> = ({ user }) => {
     const pending = useSelector(selectPending);
 
     const getUserTileMenuItems = () => (
-        <Menu.Item key="logout" onClick={() => history.push(`/auth/logout`)}>
+        <Menu.Item
+            key="logout"
+            onClick={() => history.push(routes.AUTH_APP.LOGOUT.ROUTE)}
+        >
             Log out{' '}
             <span className="header-extra-username">{user.username}</span>
         </Menu.Item>
@@ -30,7 +33,7 @@ const HeaderExtra: React.FunctionComponent<HeaderExtraProps> = ({ user }) => {
             <div className="header-extra-notification">
                 <Button
                     onClick={() =>
-                        history.push(`/app${routes.NOTIFICATIONS.ROUTE}`)
+                        history.push(routes.MEMBER_APP.NOTIFICATIONS.ROUTE)
                     }
                     type="text"
                     icon={

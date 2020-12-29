@@ -1,12 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { Button, Menu } from 'antd';
-import {
-    CaretDownFilled,
-    MessageFilled,
-    NotificationFilled,
-    UserOutlined,
-} from '@ant-design/icons';
+import { NotificationFilled } from '@ant-design/icons';
 import { HeaderExtraProps } from './types';
 import routes from '@constants/routes';
 import { PendingBadge, UserTile } from '@components';
@@ -30,7 +25,7 @@ const HeaderExtra: React.FunctionComponent<HeaderExtraProps> = ({ user }) => {
             <div className="header-extra-notification">
                 <Button
                     onClick={() =>
-                        history.push(`/app${routes.NOTIFICATIONS.ROUTE}`)
+                        history.push(routes.MEMBER_APP.NOTIFICATIONS.ROUTE)
                     }
                     type="text"
                     icon={

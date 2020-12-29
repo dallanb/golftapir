@@ -17,7 +17,7 @@ const Contest: React.FunctionComponent<ContestProps> = ({}) => {
 
     useEffect(() => {
         if (isSubmitted && uuid) {
-            history.push(`/app${routes.CONTEST.ROUTE}`, {
+            history.push(routes.MEMBER_APP.CONTEST.ROUTE, {
                 uuid,
             });
         }

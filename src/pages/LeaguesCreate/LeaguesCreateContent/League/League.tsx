@@ -21,7 +21,7 @@ const League: React.FunctionComponent<LeagueProps> = ({}) => {
 
     useEffect(() => {
         if (isSubmitted && result) {
-            history.push(`/app${routes.LEAGUE.ROUTE}`, result);
+            history.push(routes.LEAGUE_APP.LEAGUE.ROUTE, result);
         }
     });
 

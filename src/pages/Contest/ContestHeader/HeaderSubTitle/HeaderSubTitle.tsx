@@ -29,7 +29,10 @@ const HeaderSubTitle: React.FunctionComponent<HeaderSubTitleProps> = () => {
             <Button
                 icon={<EditOutlined />}
                 onClick={() =>
-                    history.push(`/app${routes.CONTEST_UPDATE.ROUTE}`, contest)
+                    history.push(
+                        routes.MEMBER_APP.CONTEST_UPDATE.ROUTE,
+                        contest
+                    )
                 }
                 disabled={
                     contest.status !== constants.STATUS.PENDING.KEY &&

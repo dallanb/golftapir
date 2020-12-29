@@ -7,6 +7,7 @@ import { MemberAppLayout } from '@layouts';
 import { ComponentRoute, LeagueAppViewProps } from './types';
 import { ProtectedRoute } from '@components';
 import { routes, protectedRoutes } from './routes';
+import constantRoutes from '@constants/routes';
 import { AuthActions } from '@actions';
 import BaseActions from './actions';
 import statics from '@apps/LeagueApp/statics';
@@ -34,7 +35,6 @@ class LeagueAppView extends React.Component<LeagueAppViewProps> {
     render() {
         const {
             isInitialized,
-            url,
             isLoggedIn,
             forceLogout,
             refresh,
@@ -55,7 +55,7 @@ class LeagueAppView extends React.Component<LeagueAppViewProps> {
                         ({ path, component, exact }: ComponentRoute) => (
                             <Route
                                 key={path}
-                                path={`${url}${path}`}
+                                path={path}
                                 component={component}
                                 exact={exact}
                             />
@@ -65,7 +65,7 @@ class LeagueAppView extends React.Component<LeagueAppViewProps> {
                         ({ path, component, exact }: ComponentRoute) => (
                             <ProtectedRoute
                                 key={path}
-                                path={`${url}${path}`}
+                                path={path}
                                 component={component}
                                 exact={exact}
                                 isLoggedIn={isLoggedIn}
@@ -74,7 +74,13 @@ class LeagueAppView extends React.Component<LeagueAppViewProps> {
                             />
                         )
                     )}
-                    <Route render={() => <Redirect to={`${url}`} />} />
+                    <Route
+                        render={() => (
+                            <Redirect
+                                to={constantRoutes.LEAGUE_APP.LEAGUE.ROUTE}
+                            />
+                        )}
+                    />
                 </Switch>
             </MemberAppLayout>
         );

@@ -3,10 +3,10 @@ import { Provider } from 'react-redux';
 import { store } from './store';
 import AuthAppView from '@apps/AuthApp/AuthAppView';
 
-function AuthApp({ url }: { url: string }) {
+function AuthApp() {
     return (
         <Provider store={store}>
-            <AuthAppView url={url} />
+            <AuthAppView />
         </Provider>
     );
 }

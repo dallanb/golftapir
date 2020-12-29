@@ -7,11 +7,10 @@ import MemberAppView from './MemberAppView';
 
 class MemberApp extends React.Component<MemberAppProps> {
     render() {
-        const { url } = this.props;
         return (
             <Provider store={store}>
                 <MessageModal />
-                <MemberAppView url={url} />
+                <MemberAppView />
             </Provider>
         );
     }
