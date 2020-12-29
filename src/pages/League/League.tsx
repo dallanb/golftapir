@@ -31,7 +31,7 @@ const League: React.FunctionComponent<LeagueProps> = () => {
             content={<LeagueContent />}
             sider={<LeagueSider />}
             // showSpinner={!isInitialized}
-            className="home-view"
+            className="league-view"
         />
     );
 };

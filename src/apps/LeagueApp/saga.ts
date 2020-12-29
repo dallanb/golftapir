@@ -15,6 +15,8 @@ import {
     AccountTypes,
     AuthActions,
     AuthTypes,
+    LeagueActions,
+    LeagueTypes,
     NotificationActions,
     NotificationTypes,
     SocketActions,
@@ -41,6 +43,9 @@ function* init({ uuid }: AnyAction) {
 
         const { data: me } = yield call(fetchAccount);
         yield put(BaseActions.set({ me }));
+
+        const { data: leagues } = yield call(fetchLeagues);
+        yield put(BaseActions.set({ leagues }));
 
         // prepare notifications
         const token = yield call(requestToken);
@@ -98,6 +103,26 @@ function* fetchAccount() {
     const { success, failure } = yield race({
         success: take(AccountTypes.FETCH_ACCOUNT_SUCCESS),
         failure: take(AccountTypes.FETCH_ACCOUNT_FAILURE),
+    });
+
+    if (failure) {
+        throw new Error(failure);
+    }
+
+    return success;
+}
+
+function* fetchLeagues() {
+    yield put(
+        LeagueActions.fetchLeagues({
+            per_page: 100,
+            page: 1,
+            include: 'avatar',
+        })
+    );
+    const { success, failure } = yield race({
+        success: take(LeagueTypes.FETCH_LEAGUES_SUCCESS),
+        failure: take(LeagueTypes.FETCH_LEAGUES_FAILURE),
     });
 
     if (failure) {

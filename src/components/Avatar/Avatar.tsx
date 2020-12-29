@@ -34,7 +34,6 @@ const Avatar: React.FunctionComponent<AvatarProps> = ({
         };
         child = getInitials(name);
     }
-    console.log(props);
     return <AntdAvatar {...props}>{child}</AntdAvatar>;
 };
 

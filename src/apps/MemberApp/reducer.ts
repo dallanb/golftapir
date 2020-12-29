@@ -10,6 +10,7 @@ export interface MemberAppInterface {
     readonly isInitialized: boolean;
     readonly err?: Error;
     readonly me: any;
+    readonly leagues: any[];
 }
 
 /* ------------- Initial State ------------- */
@@ -18,6 +19,7 @@ const INITIAL_STATE: MemberAppInterface = {
     isInitialized: false,
     err: undefined,
     me: undefined,
+    leagues: [],
 };
 
 /* ------------- Reducers ------------- */

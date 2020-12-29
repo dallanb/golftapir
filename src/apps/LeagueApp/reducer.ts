@@ -11,6 +11,7 @@ export interface LeagueAppInterface {
     readonly err?: Error;
     readonly me: any;
     readonly league: any;
+    readonly leagues: any[];
 }
 
 /* ------------- Initial State ------------- */
@@ -20,6 +21,7 @@ const INITIAL_STATE: LeagueAppInterface = {
     err: undefined,
     me: undefined,
     league: undefined,
+    leagues: [],
 };
 
 /* ------------- Reducers ------------- */
