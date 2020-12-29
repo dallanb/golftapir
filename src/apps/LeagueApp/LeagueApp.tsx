@@ -1,20 +1,20 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import { MemberAppProps } from './types';
+import { LeagueAppProps } from './types';
 import { MessageModal } from '@components';
 import { store } from './store';
-import MemberAppView from './MemberAppView';
+import LeagueAppView from './LeagueAppView';
 
-class MemberApp extends React.Component<MemberAppProps> {
+class LeagueApp extends React.Component<LeagueAppProps> {
     render() {
         const { url } = this.props;
         return (
             <Provider store={store}>
                 <MessageModal />
-                <MemberAppView url={url} />
+                <LeagueAppView url={url} />
             </Provider>
         );
     }
 }
 
-export default MemberApp;
+export default LeagueApp;

@@ -4,7 +4,7 @@ import { AuthLayout } from '@layouts';
 import { routes } from './routes';
 import { ComponentRoute } from './types';
 
-function Auth({ url }: { url: string }) {
+function AuthAppView({ url }: { url: string }) {
     return (
         <AuthLayout>
             <Switch>
@@ -21,4 +21,4 @@ function Auth({ url }: { url: string }) {
     );
 }
 
-export default Auth;
+export default AuthAppView;

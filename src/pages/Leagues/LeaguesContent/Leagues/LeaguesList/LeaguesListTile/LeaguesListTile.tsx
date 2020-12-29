@@ -17,7 +17,7 @@ const LeaguesListTile: React.FunctionComponent<LeaguesListTileProps> = ({
     const isEven = index % 2;
     const item = _get(data, [index], undefined);
     const handleClick = (options: any) => {
-        history.push(`/app${routes.CONTEST.ROUTE}`, options);
+        history.push(routes.LEAGUE.ROUTE, options);
     };
 
     const uuid = _get(item, ['uuid'], undefined);

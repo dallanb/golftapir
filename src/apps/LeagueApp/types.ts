@@ -1,4 +1,4 @@
-export interface MemberAppViewProps {
+export interface LeagueAppViewProps {
     name: string;
     avatar: string;
     url: string;
@@ -12,7 +12,7 @@ export interface MemberAppViewProps {
     init: () => void;
     terminate: () => void;
 }
-export interface MemberAppProps {
+export interface LeagueAppProps {
     url: string;
 }
 export interface ComponentRoute {

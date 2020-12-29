@@ -1,7 +1,27 @@
 import { applyMiddleware, compose, createStore, combineReducers } from 'redux';
 import createSagaMiddleware from 'redux-saga';
+import { all, fork } from 'redux-saga/effects';
 import { createLogger } from 'redux-logger';
-import { memberAppReducer, memberAppSaga } from '../MemberApp';
+import { reducer as base } from '@apps/LeagueApp/reducer';
+import {
+    authReducer as auth,
+    modalReducer as modal,
+    notificationReducer as notification,
+} from '@reducers';
+import {} from '@pages';
+import { default as BaseSaga } from '@apps/LeagueApp/saga';
+import {
+    AccountSaga,
+    AuthSaga,
+    ContestSaga,
+    CourseSaga,
+    LeagueSaga,
+    ModalSaga,
+    NotificationSaga,
+    ScoreSaga,
+    SocketSaga,
+    TopicSocketSaga,
+} from '@sagas';
 
 function configStore(): any {
     const middleware = [];
@@ -21,7 +41,12 @@ function configStore(): any {
     enhancers.push(applyMiddleware(...middleware));
 
     const store = createStore(
-        memberAppReducer,
+        combineReducers({
+            base,
+            auth,
+            modal,
+            notification,
+        }),
         undefined,
         compose(
             ...enhancers,
@@ -30,6 +55,21 @@ function configStore(): any {
         )
     );
 
+    function* memberAppSaga() {
+        yield all([
+            fork(BaseSaga),
+            fork(AccountSaga),
+            fork(AuthSaga),
+            fork(ContestSaga),
+            fork(CourseSaga),
+            fork(LeagueSaga),
+            fork(ModalSaga),
+            fork(NotificationSaga),
+            fork(ScoreSaga),
+            fork(SocketSaga),
+            fork(TopicSocketSaga),
+        ]);
+    }
     sagaMiddleware.run(memberAppSaga);
 
     return { store };
