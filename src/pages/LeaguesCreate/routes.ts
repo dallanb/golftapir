@@ -1,10 +1,10 @@
-import ContestsCreate from './ContestsCreate';
+import LeaguesCreate from './LeaguesCreate';
 import constantRoutes from '@constants/routes';
 
 const routes = [
     {
-        path: constantRoutes.CONTESTS_CREATE.ROUTE,
-        component: ContestsCreate,
+        path: constantRoutes.LEAGUES_CREATE.ROUTE,
+        component: LeaguesCreate,
     },
 ];
 

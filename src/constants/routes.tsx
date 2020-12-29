@@ -74,6 +74,13 @@ const routes = {
         LABEL: CONSTANTS.PAGES.HOME.TITLE,
         ICON: HomeFilled,
     },
+    LEAGUE: {
+        ROUTE: '/league',
+        BASE_ROUTE: '/leagues',
+        KEY: 'league',
+        LABEL: CONSTANTS.PAGES.LEAGUE.TITLE,
+        ICON: CrownFilled,
+    },
     LEAGUES: {
         ROUTE: '/leagues',
         BASE_ROUTE: '/leagues',

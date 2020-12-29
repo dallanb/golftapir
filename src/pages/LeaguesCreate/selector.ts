@@ -1,9 +1,9 @@
 import { createSelector } from 'reselect';
 import { get as _get } from 'lodash';
 
-const getContestsCreatePage = (state: any) => state.contestsCreatePage.data;
+const getLeaguesCreatePage = (state: any) => state.leaguesCreatePage.data;
 
 export const selectData = createSelector(
-    [getContestsCreatePage],
-    (contestsCreatePage) => contestsCreatePage
+    [getLeaguesCreatePage],
+    (leaguesCreatePage) => leaguesCreatePage
 );

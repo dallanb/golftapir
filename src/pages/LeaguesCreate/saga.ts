@@ -1,15 +1,15 @@
 import { all, put, takeLatest } from 'redux-saga/effects';
 
-import ContestsCreatePageActions, { ContestsCreatePageTypes } from './actions';
+import LeaguesCreatePageActions, { LeaguesCreatePageTypes } from './actions';
 
 function* init() {
     try {
-        yield put(ContestsCreatePageActions.initSuccess());
+        yield put(LeaguesCreatePageActions.initSuccess());
     } catch (err) {
-        yield put(ContestsCreatePageActions.initFailure(err));
+        yield put(LeaguesCreatePageActions.initFailure(err));
     }
 }
 
-export default function* ContestsCreatePageSaga() {
-    yield all([takeLatest(ContestsCreatePageTypes.INIT, init)]);
+export default function* LeaguesCreatePageSaga() {
+    yield all([takeLatest(LeaguesCreatePageTypes.INIT, init)]);
 }

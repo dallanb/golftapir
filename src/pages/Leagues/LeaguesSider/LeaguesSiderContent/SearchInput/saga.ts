@@ -3,7 +3,7 @@ import { all, call, put, takeLatest } from 'redux-saga/effects';
 import LeaguesPageSiderContentSearchActions, {
     LeaguesPageSiderContentSearchTypes,
 } from './actions';
-import { refreshLeaguesList } from '@pages/Leagues/LeaguesSider/LeaguesSiderContent/SearchInput/helpers';
+import { refreshLeaguesList } from './helpers';
 
 function* search({ key }: AnyAction) {
     try {

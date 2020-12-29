@@ -1,11 +1,11 @@
 // @ts-ignore
 import { static as Immutable } from 'seamless-immutable';
 import { createReducer } from 'reduxsauce';
-import { ContestsCreatePageInterface } from './types';
-import { ContestsCreatePageTypes } from './actions';
+import { LeaguesCreatePageInterface } from './types';
+import { LeaguesCreatePageTypes } from './actions';
 
 /* ------------- Initial State ------------- */
-const INITIAL_STATE: ContestsCreatePageInterface = {
+const INITIAL_STATE: LeaguesCreatePageInterface = {
     isInitialized: false,
     err: undefined,
 };
@@ -47,11 +47,11 @@ function set(state: any, { data }: any) {
 }
 
 const HANDLERS = {
-    [ContestsCreatePageTypes.INIT]: init,
-    [ContestsCreatePageTypes.INIT_SUCCESS]: initSuccess,
-    [ContestsCreatePageTypes.INIT_FAILURE]: initFailure,
-    [ContestsCreatePageTypes.TERMINATE]: terminate,
-    [ContestsCreatePageTypes.SET]: set,
+    [LeaguesCreatePageTypes.INIT]: init,
+    [LeaguesCreatePageTypes.INIT_SUCCESS]: initSuccess,
+    [LeaguesCreatePageTypes.INIT_FAILURE]: initFailure,
+    [LeaguesCreatePageTypes.TERMINATE]: terminate,
+    [LeaguesCreatePageTypes.SET]: set,
 };
 
 export const reducer = createReducer(INITIAL_STATE, HANDLERS);

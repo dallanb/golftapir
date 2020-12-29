@@ -9,8 +9,8 @@ const { Types, Creators } = createActions(
         set: ['data'],
     },
     {
-        prefix: 'CONTESTS_CREATE_PAGE_',
+        prefix: 'LEAGUES_CREATE_PAGE_',
     }
 );
-export const ContestsCreatePageTypes = Types;
+export const LeaguesCreatePageTypes = Types;
 export default Creators;

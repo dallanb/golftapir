@@ -173,6 +173,9 @@ const constants = {
         CONTEST: {
             AVATAR: '/contest/avatars/',
         },
+        LEAGUE: {
+            AVATAR: '/league/avatars/'
+        }
     },
     AVATAR: {
         WIDTH: 256,

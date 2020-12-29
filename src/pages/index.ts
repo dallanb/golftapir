@@ -67,8 +67,17 @@ export {
     reducer as leaguesPage,
     LeaguesPageSaga,
     LeaguesPageContentLeaguesSaga,
+    LeaguesPageSiderContentSearchSaga,
     LeaguesPageRoutes,
 } from './Leagues';
+export {
+    default as LeaguesCreate,
+    reducer as leaguesCreatePage,
+    LeaguesCreatePageSaga,
+    LeaguesCreatePageContentLeagueSaga,
+    LeaguesCreatePageContentLeagueSearchParticipantSaga,
+    LeaguesCreatePageRoutes,
+} from './LeaguesCreate';
 export {
     default as Login,
     reducer as loginPage,

@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux';
 
 // Component
-export { default } from './ContestsCreate';
+export { default } from './LeaguesCreate';
 
 // Reducer
 import { reducer as dataReducer } from './reducer';
-import { reducer as contentReducer } from './ContestsCreateContent';
+import { reducer as contentReducer } from './LeaguesCreateContent';
 export const reducer = combineReducers({
     ui: combineReducers({
         content: contentReducer,
@@ -14,12 +14,11 @@ export const reducer = combineReducers({
 });
 
 // Saga
-export { default as ContestsCreatePageSaga } from './saga';
+export { default as LeaguesCreatePageSaga } from './saga';
 export {
-    ContestsCreatePageContentContestSaga,
-    ContestsCreatePageContentContestSearchCourseSaga,
-    ContestsCreatePageContentContestSearchParticipantSaga,
-} from './ContestsCreateContent';
+    LeaguesCreatePageContentLeagueSaga,
+    LeaguesCreatePageContentLeagueSearchParticipantSaga,
+} from './LeaguesCreateContent';
 
 // Routes
-export { default as ContestsCreatePageRoutes } from './routes';
+export { default as LeaguesCreatePageRoutes } from './routes';

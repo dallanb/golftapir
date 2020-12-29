@@ -1,6 +1,6 @@
-export interface ContestsCreateProps {}
+export interface LeaguesCreateProps {}
 
-export interface ContestsCreatePageInterface {
+export interface LeaguesCreatePageInterface {
     readonly isInitialized: boolean;
     readonly err?: Error;
 }

@@ -8,7 +8,11 @@ import { fetchLeaguesList } from './helpers';
 
 function* init() {
     try {
-        yield call(fetchLeaguesList, { page: 1, per_page: 10 });
+        yield call(fetchLeaguesList, {
+            page: 1,
+            per_page: 10,
+            include: 'avatar',
+        });
         yield put(LeaguesPageContentLeaguesActions.initSuccess());
     } catch (err) {
         yield put(LeaguesPageContentLeaguesActions.initFailure(err));

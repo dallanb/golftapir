@@ -4,8 +4,6 @@ import { get as _get } from 'lodash';
 import classnames from 'classnames';
 import { LeaguesListTileProps } from './types';
 import LeaguesListTileLeaderboard from './LeaguesListTileLeaderboard';
-import LeaguesListTileCourse from './LeaguesListTileCourse';
-import LeaguesListTileDate from './LeaguesListTileDate';
 import constants from '@constants';
 import routes from '@constants/routes';
 import { mapStatusColour, withS3URL } from '@utils';
@@ -24,9 +22,8 @@ const LeaguesListTile: React.FunctionComponent<LeaguesListTileProps> = ({
 
     const uuid = _get(item, ['uuid'], undefined);
     const name = _get(item, ['name'], 'Loading...');
-    const avatar = _get(item, ['avatar'], undefined);
-    const src =
-        avatar && withS3URL(avatar, constants.S3_FOLDERS.CONTEST.AVATAR);
+    const avatar = _get(item, ['avatar', 's3_filename'], undefined);
+    const src = avatar && withS3URL(avatar, constants.S3_FOLDERS.LEAGUE.AVATAR);
     const status = _get(item, ['status'], undefined);
     const course = _get(item, ['location'], '');
     const time = _get(item, ['start_time'], undefined);
@@ -62,25 +59,12 @@ const LeaguesListTile: React.FunctionComponent<LeaguesListTileProps> = ({
                         </div>
                     </div>
                     <div className="contest-list-tile-content-side">
-                        <div className="contest-list-tile-content-side-course">
-                            <LeaguesListTileCourse course={course} />
+                        <div className="contest-list-tile-content-side-leaderboard">
+                            <LeaguesListTileLeaderboard
+                                status={status}
+                                participants={Object.values(participants)}
+                            />
                         </div>
-                        {status === constants.STATUS.PENDING.KEY ||
-                        status === constants.STATUS.READY.KEY ? (
-                            <div className="contest-list-tile-content-side-leaderboard">
-                                <LeaguesListTileDate
-                                    status={status}
-                                    date={time}
-                                />
-                            </div>
-                        ) : (
-                            <div className="contest-list-tile-content-side-leaderboard">
-                                <LeaguesListTileLeaderboard
-                                    status={status}
-                                    participants={Object.values(participants)}
-                                />
-                            </div>
-                        )}
                     </div>
                 </div>
                 {/*<div className="contest-list-tile-button">*/}

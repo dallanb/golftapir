@@ -17,6 +17,25 @@ export default {
             query,
         });
     },
+    createLeague(data: any = {}) {
+        return ClientProxy.post({
+            url: config.LEAGUE_URL,
+            endpoint: `/leagues`,
+            data,
+        });
+    },
+    assignAvatar(uuid: string, avatar: any = {}) {
+        const formData = getFormData({ avatar });
+
+        return ClientProxy.post({
+            url: config.LEAGUE_URL,
+            endpoint: `/leagues/${uuid}/avatars`,
+            data: formData,
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        });
+    },
     updateLeague(uuid: string, data: any = {}) {
         return ClientProxy.put({
             url: config.LEAGUE_URL,

@@ -8,6 +8,7 @@ import {
     ContestsPageRoutes,
     HomePageRoutes,
     LeaguesPageRoutes,
+    LeaguesCreatePageRoutes,
     NotificationsPageRoutes,
 } from '@pages';
 
@@ -22,6 +23,7 @@ export const protectedRoutes: any = [
     ...ContestUpdatePageRoutes,
     ...ContestPageRoutes,
     ...LeaguesPageRoutes,
+    ...LeaguesCreatePageRoutes,
     ...NotificationsPageRoutes,
     ...HomePageRoutes,
 ];

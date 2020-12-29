@@ -6,7 +6,7 @@ import CONSTANTS from '@locale/en-CA';
 
 export function* refreshLeaguesList(search: string) {
     const options = Object.assign(
-        { page: 1, per_page: 10 },
+        { page: 1, per_page: 10, include: 'avatar' },
         search && { search }
     );
     yield put(LeaguesPageContentLeaguesActions.fetchData(options));
