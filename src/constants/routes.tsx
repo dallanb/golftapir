@@ -40,8 +40,8 @@ const routes = {
         ICON: TeamOutlined,
     },
     CONTEST: {
-        ROUTE: '/contests/contest',
-        BASE_ROUTE: '/contests',
+        ROUTE: '/contest',
+        BASE_ROUTE: '/contest',
         KEY: 'contest',
         LABEL: CONSTANTS.PAGES.CONTEST.TITLE,
         ICON: null,
