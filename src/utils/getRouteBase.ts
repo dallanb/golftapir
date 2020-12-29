@@ -18,7 +18,6 @@ const getRouteBase = (route: string) => {
     const routeObj = Object.values(appRoutes).find(
         (value: any) => value.ROUTE === route
     );
-    console.log(routeObj);
     return _get(routeObj, ['BASE_ROUTE'], '');
 };
 
