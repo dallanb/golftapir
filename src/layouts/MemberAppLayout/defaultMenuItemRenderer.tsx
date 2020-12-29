@@ -2,10 +2,11 @@ import React from 'react';
 import { Menu } from 'antd';
 import { get as _get } from 'lodash';
 import { MenuItemRendererProps } from './types';
+import { type } from 'os';
 
 const defaultFormRenderer: React.FunctionComponent<MenuItemRendererProps> = ({
     index,
-    route: { name: Name, icon, key, path },
+    route: { name, icon, key, path },
     onClick,
     menuProps,
 }) => {
@@ -13,6 +14,10 @@ const defaultFormRenderer: React.FunctionComponent<MenuItemRendererProps> = ({
         data: menuProps,
         value: _get(menuProps, ['icons', key], null),
     });
+    let Name = name;
+    if (typeof name === 'function') {
+        Name = name(_get(menuProps, ['names', key], null));
+    }
 
     return (
         <Menu.Item

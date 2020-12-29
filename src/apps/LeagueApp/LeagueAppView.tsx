@@ -1,6 +1,6 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { Redirect, Route, Switch } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Redirect, Route, Switch, useHistory } from 'react-router-dom';
 import { get as _get } from 'lodash';
 import { message, Spin } from 'antd';
 import { MemberAppLayout } from '@layouts';
@@ -12,11 +12,40 @@ import { AuthActions } from '@actions';
 import BaseActions from './actions';
 import statics from '@apps/LeagueApp/statics';
 import { FirebaseClient } from '@libs';
+import { selectData as selectBaseData } from '@selectors/BaseSelector';
+import { selectData as selectAuthData } from '@selectors/AuthSelectors';
+import { selectPending } from '@selectors/NotificationSelector';
+import { withS3URL } from '@utils';
+import constants from '@constants';
 
-class LeagueAppView extends React.Component<LeagueAppViewProps> {
-    componentDidMount() {
-        const { init } = this.props;
-        init();
+const LeagueAppView: React.FunctionComponent<LeagueAppViewProps> = () => {
+    const dispatch = useDispatch();
+    const history = useHistory();
+    const league = _get(history, ['location', 'state'], null);
+    const { me, isInitialized } = useSelector(selectBaseData);
+    const { isLoggedIn, forceLogout } = useSelector(selectAuthData);
+    const pending = useSelector(selectPending);
+    const name = _get(me, ['display_name'], '');
+    const avatar = _get(me, ['avatar', 's3_filename'], '');
+    const menuProps = {
+        names: { league: league.name },
+        icons: {
+            league: {
+                src: withS3URL(
+                    league.avatar.s3_filename,
+                    constants.S3_FOLDERS.LEAGUE.AVATAR
+                ),
+                name: league.name,
+                shape: 'square',
+                style: { borderRadius: '4px' },
+                size: 24,
+            },
+        },
+    };
+
+    useEffect(() => {
+        dispatch(BaseActions.preInit(league));
+        dispatch(BaseActions.init(league.uuid));
         FirebaseClient.onMessageListener()
             .then((payload) => {
                 const { title, body } = payload.data;
@@ -25,98 +54,49 @@ class LeagueAppView extends React.Component<LeagueAppViewProps> {
             .catch((err) => {
                 message.error(JSON.stringify(err));
             });
-    }
-
-    componentWillUnmount() {
-        const { terminate } = this.props;
-        terminate();
-    }
-
-    render() {
-        const {
-            isInitialized,
-            isLoggedIn,
-            forceLogout,
-            refresh,
-            name,
-            avatar,
-            menuProps,
-        } = this.props;
-        if (!isInitialized) return <Spin />;
-        return (
-            <MemberAppLayout
-                name={name}
-                avatar={avatar}
-                menuProps={menuProps}
-                menuRoutes={statics}
-            >
-                <Switch>
-                    {routes.map(
-                        ({ path, component, exact }: ComponentRoute) => (
-                            <Route
-                                key={path}
-                                path={path}
-                                component={component}
-                                exact={exact}
-                            />
-                        )
-                    )}
-                    {protectedRoutes.map(
-                        ({ path, component, exact }: ComponentRoute) => (
-                            <ProtectedRoute
-                                key={path}
-                                path={path}
-                                component={component}
-                                exact={exact}
-                                isLoggedIn={isLoggedIn}
-                                forceLogout={forceLogout}
-                                refresh={() => refresh()}
-                            />
-                        )
-                    )}
-                    <Route
-                        render={() => (
-                            <Redirect
-                                to={constantRoutes.LEAGUE_APP.LEAGUE.ROUTE}
-                            />
-                        )}
-                    />
-                </Switch>
-            </MemberAppLayout>
-        );
-    }
-}
-
-const mapStateToProps = ({ base, auth, notification }: any) => {
-    const { me, isInitialized } = base;
-    const { isLoggedIn, forceLogout } = auth;
-    const { pending } = notification;
-
-    const name = _get(me, ['display_name'], '');
-    const menuProps = { icons: { notifications: { pending } } };
-
-    return {
-        name,
-        avatar: _get(me, ['avatar', 's3_filename'], ''),
-        isInitialized,
-        isLoggedIn,
-        forceLogout,
-        menuProps,
-    };
-};
-
-const mapDispatchToProps = (dispatch: any) => {
-    return {
-        init() {
-            dispatch(BaseActions.init());
-        },
-        terminate() {
+        return () => {
             dispatch(BaseActions.terminate());
-        },
-        refresh() {
-            dispatch(AuthActions.refresh());
-        },
-    };
+        };
+    }, []);
+
+    if (!isInitialized) return <Spin />;
+    return (
+        <MemberAppLayout
+            name={name}
+            avatar={avatar}
+            menuProps={menuProps}
+            menuRoutes={statics}
+        >
+            <Switch>
+                {routes.map(({ path, component, exact }: ComponentRoute) => (
+                    <Route
+                        key={path}
+                        path={path}
+                        component={component}
+                        exact={exact}
+                    />
+                ))}
+                {protectedRoutes.map(
+                    ({ path, component, exact }: ComponentRoute) => (
+                        <ProtectedRoute
+                            key={path}
+                            path={path}
+                            component={component}
+                            exact={exact}
+                            isLoggedIn={isLoggedIn}
+                            forceLogout={forceLogout}
+                            refresh={() => dispatch(AuthActions.refresh())}
+                        />
+                    )
+                )}
+                <Route
+                    render={() => (
+                        <Redirect to={constantRoutes.LEAGUE_APP.LEAGUE.ROUTE} />
+                    )}
+                />
+            </Switch>
+        </MemberAppLayout>
+    );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(LeagueAppView);
+export default LeagueAppView;

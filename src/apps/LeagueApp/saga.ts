@@ -8,6 +8,7 @@ import {
     take,
     takeLatest,
 } from 'redux-saga/effects';
+import { AnyAction } from 'redux';
 import BaseActions, { BaseTypes } from './actions';
 import {
     AccountActions,
@@ -18,18 +19,22 @@ import {
     NotificationTypes,
     SocketActions,
 } from '@actions';
-import { selectData, selectIsLoggedIn } from '@selectors/AuthSelectors';
+import { selectAuthData, selectIsLoggedIn } from '@selectors/AuthSelectors';
 import { FirebaseClient } from '@libs';
 import { socketEventHandlers } from '@apps/LeagueApp/utils';
 
 // Action Handlers
-function* init() {
+function* preInit({ data: league }: AnyAction) {
+    yield put(BaseActions.set({ league }));
+}
+
+function* init({ uuid }: AnyAction) {
     try {
         const isLoggedIn = yield select(selectIsLoggedIn);
         if (!isLoggedIn) yield call(refresh);
 
         // I dont think i need to even pass auth Data cause the id can be grabbed from kong CompetitorHeader
-        const authData = yield select(selectData);
+        const authData = yield select(selectAuthData);
         yield put(
             SocketActions.init(authData, { eventHandler: socketEventHandlers })
         );
@@ -109,6 +114,7 @@ function* requestToken() {
 
 export default function* BaseSaga() {
     yield all([
+        takeLatest(BaseTypes.PRE_INIT, preInit),
         takeLatest(BaseTypes.INIT, init),
         takeLatest(BaseTypes.TERMINATE, terminate),
     ]);

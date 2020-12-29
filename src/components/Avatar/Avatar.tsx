@@ -21,6 +21,7 @@ const Avatar: React.FunctionComponent<AvatarProps> = ({
         className,
         size,
         shape,
+        style,
     };
     let child = '';
     if (src) {
@@ -33,6 +34,7 @@ const Avatar: React.FunctionComponent<AvatarProps> = ({
         };
         child = getInitials(name);
     }
+    console.log(props);
     return <AntdAvatar {...props}>{child}</AntdAvatar>;
 };
 

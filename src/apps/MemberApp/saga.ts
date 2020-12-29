@@ -18,7 +18,7 @@ import {
     NotificationTypes,
     SocketActions,
 } from '@actions';
-import { selectData, selectIsLoggedIn } from '@selectors/AuthSelectors';
+import { selectAuthData, selectIsLoggedIn } from '@selectors/AuthSelectors';
 import { FirebaseClient } from '@libs';
 import { socketEventHandlers } from '@apps/MemberApp/utils';
 
@@ -29,7 +29,7 @@ function* init() {
         if (!isLoggedIn) yield call(refresh);
 
         // I dont think i need to even pass auth Data cause the id can be grabbed from kong CompetitorHeader
-        const authData = yield select(selectData);
+        const authData = yield select(selectAuthData);
         yield put(
             SocketActions.init(authData, { eventHandler: socketEventHandlers })
         );

@@ -5,6 +5,8 @@ import constants from '@constants';
 
 const getBase = (state: any) => state.base;
 
+export const selectData = createSelector([getBase], (base) => base);
+
 export const selectMe = createSelector([getBase], (base) =>
     _get(base, ['me'], [])
 );

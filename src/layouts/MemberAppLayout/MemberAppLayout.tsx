@@ -12,6 +12,7 @@ import { UserTile } from '@components';
 import defaultMenuItemRenderer from './defaultMenuItemRenderer';
 import { getRouteBase } from '@utils';
 import './MemberAppLayout.less';
+import routes from '@constants/routes';
 
 const { Sider } = Layout;
 
@@ -68,12 +69,24 @@ class MemberAppLayout extends React.Component<
     );
 
     render() {
-        const { name, avatar, menuRoutes, menuProps, children } = this.props;
+        const {
+            name,
+            avatar,
+            menuRoutes,
+            menuProps,
+            history,
+            children,
+        } = this.props;
         const { selectedKeys } = this.state;
         return (
             <Layout className="member-app-layout-view">
                 <Sider className="member-app-sider-layout">
-                    <div className="member-app-sider-layout-title" />
+                    <div
+                        className="member-app-sider-layout-title"
+                        onClick={() =>
+                            history.push(routes.MEMBER_APP.HOME.ROUTE)
+                        }
+                    />
                     <Menu
                         theme="dark"
                         defaultSelectedKeys={['0']}
