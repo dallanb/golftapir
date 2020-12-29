@@ -9,12 +9,12 @@ import LeagueHeader from './LeagueHeader';
 import LeagueContent from './LeagueContent';
 import LeagueSider from './LeagueSider';
 import { selectData } from './selector';
+import { selectLeague } from '@selectors/BaseSelector';
 import './League.less';
 
 const League: React.FunctionComponent<LeagueProps> = () => {
     const dispatch = useDispatch();
-    const history = useHistory();
-    const league = _get(history, ['location', 'state'], null);
+    const league = useSelector(selectLeague);
     const { isInitialized } = useSelector(selectData);
 
     useEffect(() => {

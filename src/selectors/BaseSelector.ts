@@ -28,7 +28,7 @@ export const selectLeagues = createSelector([getBase], (base) =>
 );
 
 export const selectLeague = createSelector([getBase], (base) =>
-    _get(base, ['league'], [])
+    _get(base, ['league'], undefined)
 );
 
 export const selectLeagueUUID = createSelector([getBase], (base) =>

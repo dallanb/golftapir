@@ -12,7 +12,10 @@ import { AuthActions } from '@actions';
 import BaseActions from './actions';
 import statics from '@apps/LeagueApp/statics';
 import { FirebaseClient } from '@libs';
-import { selectData as selectBaseData } from '@selectors/BaseSelector';
+import {
+    selectData as selectBaseData,
+    selectLeague,
+} from '@selectors/BaseSelector';
 import { selectData as selectAuthData } from '@selectors/AuthSelectors';
 import { withS3URL } from '@utils';
 import constants from '@constants';
@@ -20,42 +23,49 @@ import constants from '@constants';
 const LeagueAppView: React.FunctionComponent<LeagueAppViewProps> = () => {
     const dispatch = useDispatch();
     const history = useHistory();
-    const league = _get(history, ['location', 'state'], null);
+    const prevLeague = _get(history, ['location', 'state'], null);
+    useEffect(() => {
+        if (!prevLeague) {
+            history.push(constantRoutes.MEMBER_APP.HOME.ROUTE);
+        } else {
+            dispatch(BaseActions.preInit(prevLeague));
+            dispatch(BaseActions.init(prevLeague.uuid));
+            FirebaseClient.onMessageListener()
+                .then((payload) => {
+                    const { title, body } = payload.data;
+                    message.success(`${title}; ${body}`);
+                })
+                .catch((err) => {
+                    message.error(JSON.stringify(err));
+                });
+        }
+        return () => {
+            dispatch(BaseActions.terminate());
+        };
+    }, []);
+
+    const league = useSelector(selectLeague);
     const { me, isInitialized } = useSelector(selectBaseData);
     const { isLoggedIn, forceLogout } = useSelector(selectAuthData);
     const name = _get(me, ['display_name'], '');
     const avatar = _get(me, ['avatar', 's3_filename'], '');
+    const leagueName = _get(league, ['name'], '');
+    const leagueAvatar = withS3URL(
+        _get(league, ['avatar', 's3_filename'], null),
+        constants.S3_FOLDERS.LEAGUE.AVATAR
+    );
     const menuProps = {
-        names: { league: league.name },
+        names: { league: leagueName },
         icons: {
             league: {
-                src: withS3URL(
-                    league.avatar.s3_filename,
-                    constants.S3_FOLDERS.LEAGUE.AVATAR
-                ),
-                name: league.name,
+                src: leagueAvatar,
+                name: leagueName,
                 shape: 'square',
                 style: { borderRadius: '4px' },
                 size: 24,
             },
         },
     };
-
-    useEffect(() => {
-        dispatch(BaseActions.preInit(league));
-        dispatch(BaseActions.init(league.uuid));
-        FirebaseClient.onMessageListener()
-            .then((payload) => {
-                const { title, body } = payload.data;
-                message.success(`${title}; ${body}`);
-            })
-            .catch((err) => {
-                message.error(JSON.stringify(err));
-            });
-        return () => {
-            dispatch(BaseActions.terminate());
-        };
-    }, []);
 
     if (!isInitialized) return <Spin />;
     return (
