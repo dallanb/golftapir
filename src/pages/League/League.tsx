@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { get as _get } from 'lodash';
 import { ContentLayout } from '@layouts';
 import { LeagueProps } from './types';
 import LeaguePageActions from './actions';
@@ -11,10 +13,13 @@ import './League.less';
 
 const League: React.FunctionComponent<LeagueProps> = () => {
     const dispatch = useDispatch();
+    const history = useHistory();
+    const league = _get(history, ['location', 'state'], null);
     const { isInitialized } = useSelector(selectData);
 
     useEffect(() => {
-        dispatch(LeaguePageActions.init());
+        dispatch(LeaguePageActions.preInit(league));
+        dispatch(LeaguePageActions.init(league.uuid));
         return () => {
             dispatch(LeaguePageActions.terminate());
         };

@@ -14,7 +14,6 @@ import statics from '@apps/LeagueApp/statics';
 import { FirebaseClient } from '@libs';
 import { selectData as selectBaseData } from '@selectors/BaseSelector';
 import { selectData as selectAuthData } from '@selectors/AuthSelectors';
-import { selectPending } from '@selectors/NotificationSelector';
 import { withS3URL } from '@utils';
 import constants from '@constants';
 
@@ -24,7 +23,6 @@ const LeagueAppView: React.FunctionComponent<LeagueAppViewProps> = () => {
     const league = _get(history, ['location', 'state'], null);
     const { me, isInitialized } = useSelector(selectBaseData);
     const { isLoggedIn, forceLogout } = useSelector(selectAuthData);
-    const pending = useSelector(selectPending);
     const name = _get(me, ['display_name'], '');
     const avatar = _get(me, ['avatar', 's3_filename'], '');
     const menuProps = {

@@ -1,9 +1,4 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-import {
-    selectContestName,
-    selectContestAvatarSrc,
-} from '@pages/Contest/selector';
 import { ContestHeaderProps } from './types';
 import HeaderTitle from './HeaderTitle';
 import HeaderSubTitle from './HeaderSubTitle';
@@ -17,11 +12,6 @@ const ContestHeader: React.FunctionComponent<ContestHeaderProps> = () => {
             title={<HeaderTitle />}
             subTitle={<HeaderSubTitle />}
             extra={<Breadcrumb />}
-            // avatar={{
-            //     name: useSelector(selectContestName),
-            //     src: useSelector(selectContestAvatarSrc),
-            //     size: 72,
-            // }}
         />
     );
 };
