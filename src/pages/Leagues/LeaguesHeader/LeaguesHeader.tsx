@@ -1,7 +1,7 @@
 import React from 'react';
 import { LeaguesHeaderProps } from './types';
 import { ContentLayoutHeader } from '@layouts';
-import { Breadcrumb } from '@apps/MemberApp/components';
+import { Breadcrumb } from '@components';
 import './LeaguesHeader.less';
 import CONSTANTS from '@locale/en-CA';
 

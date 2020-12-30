@@ -2,7 +2,7 @@ import React from 'react';
 import { ContestHeaderProps } from './types';
 import HeaderTitle from './HeaderTitle';
 import HeaderSubTitle from './HeaderSubTitle';
-import { Breadcrumb } from '@apps/MemberApp/components';
+import { Breadcrumb } from '@components';
 import { ContentLayoutHeader } from '@layouts';
 import './ContestHeader.less';
 

@@ -4,8 +4,7 @@ import { HomeHeaderProps } from './types';
 import { ContentLayoutHeader } from '@layouts';
 import CONSTANTS from '@locale/en-CA';
 import { selectMyDisplayName } from '@selectors/BaseSelector';
-import { Breadcrumb } from '@apps/MemberApp/components';
-
+import { Breadcrumb } from '@components';
 const HomeHeader: React.FunctionComponent<HomeHeaderProps> = () => {
     const title = useSelector(selectMyDisplayName);
     const subTitle = CONSTANTS.PAGES.HOME.DESCRIPTION;

@@ -4,7 +4,7 @@ import { ContestUpdateHeaderProps } from './types';
 import { ContentLayoutHeader } from '@layouts';
 import CONSTANTS from '@locale/en-CA';
 import { selectContest, selectContestName } from '../selector';
-import { Breadcrumb } from '@apps/MemberApp/components';
+import { Breadcrumb } from '@components';
 import routes from '@constants/routes';
 
 const ContestUpdateHeader: React.FunctionComponent<ContestUpdateHeaderProps> = () => {
