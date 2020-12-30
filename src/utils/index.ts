@@ -1,3 +1,4 @@
+export { default as getAppRoutes } from './getAppRoutes';
 export { default as getInitials } from './getInitials';
 export { default as getRandomInt } from './getRandomInt';
 export { default as getName } from './getName';
@@ -14,5 +15,6 @@ export { default as searchSelectTagRenderer } from './searchSelectTagRenderer';
 export { default as scrollbarWidth } from './scrollbarWidth';
 export { default as topicToRouteMapper } from './topicToRouteMapper';
 export { default as totalStrokeCalculator } from './totalStrokeCalculator';
+export { default as withDynamicRoute } from './withDynamicRoute';
 export { default as withS3URL } from './withS3URL';
 export { default as withTarget } from './withTarget';

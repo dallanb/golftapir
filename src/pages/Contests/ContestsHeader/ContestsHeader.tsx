@@ -1,7 +1,7 @@
 import React from 'react';
 import { ContestsHeaderProps } from './types';
 import { ContentLayoutHeader } from '@layouts';
-import { Breadcrumb } from '@apps/MemberApp/components';
+import { Breadcrumb } from '@components';
 import './ContestsHeader.less';
 import CONSTANTS from '@locale/en-CA';
 

@@ -8,9 +8,17 @@ const UserPopover: React.FunctionComponent<UserPopoverProps> = ({
     content,
     trigger,
     children,
+    className,
+    overlayClassName,
 }) => {
     return (
-        <Popover title={title} content={content} trigger={trigger}>
+        <Popover
+            title={title}
+            content={content}
+            trigger={trigger}
+            className={className}
+            overlayClassName={overlayClassName}
+        >
             {children}
         </Popover>
     );

@@ -14,11 +14,13 @@ import {
     AccountTypes,
     AuthActions,
     AuthTypes,
+    LeagueActions,
+    LeagueTypes,
     NotificationActions,
     NotificationTypes,
     SocketActions,
 } from '@actions';
-import { selectData, selectIsLoggedIn } from '@selectors/AuthSelectors';
+import { selectAuthData, selectIsLoggedIn } from '@selectors/AuthSelectors';
 import { FirebaseClient } from '@libs';
 import { socketEventHandlers } from '@apps/MemberApp/utils';
 
@@ -29,13 +31,16 @@ function* init() {
         if (!isLoggedIn) yield call(refresh);
 
         // I dont think i need to even pass auth Data cause the id can be grabbed from kong CompetitorHeader
-        const authData = yield select(selectData);
+        const authData = yield select(selectAuthData);
         yield put(
             SocketActions.init(authData, { eventHandler: socketEventHandlers })
         );
 
         const { data: me } = yield call(fetchAccount);
         yield put(BaseActions.set({ me }));
+
+        const { data: leagues } = yield call(fetchLeagues);
+        yield put(BaseActions.set({ leagues }));
 
         // prepare notifications
         const token = yield call(requestToken);
@@ -93,6 +98,25 @@ function* fetchAccount() {
     const { success, failure } = yield race({
         success: take(AccountTypes.FETCH_ACCOUNT_SUCCESS),
         failure: take(AccountTypes.FETCH_ACCOUNT_FAILURE),
+    });
+
+    if (failure) {
+        throw new Error(failure);
+    }
+
+    return success;
+}
+function* fetchLeagues() {
+    yield put(
+        LeagueActions.fetchLeagues({
+            per_page: 100,
+            page: 1,
+            include: 'avatar',
+        })
+    );
+    const { success, failure } = yield race({
+        success: take(LeagueTypes.FETCH_LEAGUES_SUCCESS),
+        failure: take(LeagueTypes.FETCH_LEAGUES_FAILURE),
     });
 
     if (failure) {

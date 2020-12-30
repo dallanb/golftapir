@@ -17,7 +17,7 @@ const CompetitorResultsListTile: React.FunctionComponent<CompetitorResultsListTi
 
     const item = _get(data, [index], undefined);
     const handleClick = (options: any) => {
-        history.push(`/app${routes.CONTEST.ROUTE}`, options);
+        history.push(routes.MEMBER_APP.CONTEST.ROUTE, options);
     };
 
     const name = _get(item, ['name'], 'Loading...');

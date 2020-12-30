@@ -1,13 +1,17 @@
-import { Auth, MemberApp } from '@apps';
+import { AuthApp, LeagueApp, MemberApp } from '@apps';
 import React from 'react';
 
 export const routes: any = [
     {
         path: '/auth',
-        render: ({ match: { url } }: any) => <Auth url={url} />,
+        render: () => <AuthApp />,
     },
     {
         path: '/app',
-        render: ({ match: { url } }: any) => <MemberApp url={url} />,
+        render: () => <MemberApp />,
+    },
+    {
+        path: '/league/:uuid',
+        render: () => <LeagueApp />,
     },
 ];

@@ -21,6 +21,7 @@ const Avatar: React.FunctionComponent<AvatarProps> = ({
         className,
         size,
         shape,
+        style,
     };
     let child = '';
     if (src) {

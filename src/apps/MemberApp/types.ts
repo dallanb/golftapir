@@ -1,7 +1,6 @@
-export interface MemberAppProps {
+export interface MemberAppViewProps {
     name: string;
     avatar: string;
-    url: string;
     isInitialized: boolean;
     isLoggedIn: boolean;
     forceLogout: boolean;
@@ -12,6 +11,7 @@ export interface MemberAppProps {
     init: () => void;
     terminate: () => void;
 }
+export interface MemberAppProps {}
 export interface ComponentRoute {
     path: string;
     component: any;

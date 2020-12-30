@@ -8,9 +8,9 @@ import {
     MemberAppLayoutState,
     MenuItemRendererProps,
 } from './types';
-import { UserTile } from '@components';
 import defaultMenuItemRenderer from './defaultMenuItemRenderer';
-import { getRouteBase } from '@utils';
+import { getRouteBase, withDynamicRoute } from '@utils';
+import routes from '@constants/routes';
 import './MemberAppLayout.less';
 
 const { Sider } = Layout;
@@ -39,12 +39,11 @@ class MemberAppLayout extends React.Component<
         const nextState = { ...prevState };
         const prevPath = _get(prevState, ['currentPath']);
         const nextPath = _get(nextProps, ['location', 'pathname']);
-        const pagePath = getRouteBase(nextPath);
-
+        const baseKey = getRouteBase(nextPath);
         if (prevPath !== nextPath || !prevState.selectedKeys.length) {
             nextState.currentPath = nextPath;
             nextState.selectedKeys[0] = nextProps.menuRoutes
-                .findIndex(({ path }: any) => path === pagePath)
+                .findIndex(({ key }: any) => baseKey === key)
                 .toString();
         }
         return nextState;
@@ -67,12 +66,24 @@ class MemberAppLayout extends React.Component<
     );
 
     render() {
-        const { name, avatar, menuRoutes, menuProps, children } = this.props;
+        const {
+            name,
+            avatar,
+            menuRoutes,
+            menuProps,
+            history,
+            children,
+        } = this.props;
         const { selectedKeys } = this.state;
         return (
             <Layout className="member-app-layout-view">
                 <Sider className="member-app-sider-layout">
-                    <div className="member-app-sider-layout-title" />
+                    <div
+                        className="member-app-sider-layout-title"
+                        onClick={() =>
+                            history.push(routes.MEMBER_APP.HOME.ROUTE)
+                        }
+                    />
                     <Menu
                         theme="dark"
                         defaultSelectedKeys={['0']}

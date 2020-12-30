@@ -1,12 +1,12 @@
 import { get as _get } from 'lodash';
-import routes from '@constants/routes';
-import { ReactElement } from 'react';
+import getAppRoutes from '@utils/getAppRoutes';
 
 const getRouteBreadcrumb = (
     route: string
 ): { key: any; label: any; icon: any } => {
-    const routeObj = Object.values(routes).find(
-        (value: any) => `/app${value.ROUTE}` === route
+    const appRoutes = getAppRoutes(route);
+    const routeObj = Object.values(appRoutes).find(
+        (value: any) => value.ROUTE === route
     );
 
     const key = _get(routeObj, ['KEY'], '');

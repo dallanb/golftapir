@@ -8,18 +8,18 @@ const topicToRouteMapper = (
     item: any
 ): { route: string; state: any } => {
     const mapping = {
-        route: '/app',
+        route: '',
         state: {},
     };
     switch (topic) {
         case constants.TOPICS.AUTH:
-            mapping.route += routes.AUTH.ROUTE;
+            mapping.route += routes.AUTH_APP.AUTH.ROUTE;
             break;
         case constants.TOPICS.ACCOUNTS:
-            mapping.route += routes.ACCOUNT.ROUTE;
+            mapping.route += routes.MEMBER_APP.ACCOUNT.ROUTE;
             break;
         case constants.TOPICS.CONTESTS:
-            mapping.route += routes.CONTEST.ROUTE;
+            mapping.route += routes.MEMBER_APP.CONTEST.ROUTE;
             switch (key) {
                 case constants.EVENTS.CONTESTS.PARTICIPANT_INVITED:
                 case constants.EVENTS.CONTESTS.PARTICIPANT_ACTIVE:

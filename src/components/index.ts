@@ -1,5 +1,6 @@
 export { default as Avatar } from './Avatar';
 export { default as BasicInputWrapper } from './BasicInputWrapper';
+export { default as Breadcrumb } from './Breadcrumb';
 export { default as DateTimePicker } from './DateTimePicker';
 export { default as EditableCell } from './EditableCell';
 export { default as Form } from './Form';

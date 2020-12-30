@@ -10,6 +10,7 @@
     .member-app-sider-layout {
         background: @primary-color !important;
         .member-app-sider-layout-title {
+            cursor: pointer;
             height: 32px;
             background: url(../../assets/images/tapir_white.png);
             background-size: cover;
@@ -51,6 +52,8 @@
             }
             .menu-item-name {
                 margin-left: 10px;
+                text-overflow: ellipsis;
+                overflow: hidden;
             }
         }
     }

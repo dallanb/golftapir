@@ -6,7 +6,7 @@ import { selectAccountsHash } from '@pages/Contest/selector';
 import { ContestParticipantsTableParticipantProps } from './types';
 import { prepareParticipant } from '@pages/Contest/utils';
 import { Avatar } from '@components';
-import { withS3URL } from '@utils';
+import { withDynamicRoute, withS3URL } from '@utils';
 import './ContestLeaderboardTableParticipant.less';
 
 const ContestLeaderboardTableParticipant: React.FunctionComponent<ContestParticipantsTableParticipantProps> = ({
@@ -22,7 +22,12 @@ const ContestLeaderboardTableParticipant: React.FunctionComponent<ContestPartici
         <div
             className="contest-leaderboard-table-participant"
             onClick={() =>
-                history.push(`/app${routes.COMPETITOR.ROUTE}`, account)
+                history.push(
+                    withDynamicRoute(routes.MEMBER_APP.COMPETITOR.ROUTE, {
+                        uuid,
+                    }),
+                    account
+                )
             }
         >
             {/*<Avatar*/}

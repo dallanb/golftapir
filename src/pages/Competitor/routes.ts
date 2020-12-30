@@ -3,7 +3,7 @@ import constantRoutes from '@constants/routes';
 
 const routes = [
     {
-        path: constantRoutes.COMPETITOR.ROUTE,
+        path: constantRoutes.MEMBER_APP.COMPETITOR.ROUTE,
         component: Competitor,
     },
 ];

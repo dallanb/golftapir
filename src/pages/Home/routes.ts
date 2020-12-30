@@ -3,7 +3,7 @@ import constantRoutes from '@constants/routes';
 
 const routes = [
     {
-        path: constantRoutes.HOME.ROUTE,
+        path: constantRoutes.MEMBER_APP.HOME.ROUTE,
         component: Home,
     },
 ];

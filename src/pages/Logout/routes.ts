@@ -3,7 +3,7 @@ import constantRoutes from '@constants/routes';
 
 const routes = [
     {
-        path: constantRoutes.LOGOUT.ROUTE,
+        path: constantRoutes.AUTH_APP.LOGOUT.ROUTE,
         component: Logout,
     },
 ];

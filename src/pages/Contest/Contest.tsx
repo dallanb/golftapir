@@ -15,7 +15,6 @@ const Contest: React.FunctionComponent<ContestProps> = () => {
     const dispatch = useDispatch();
     const history = useHistory();
     const contest = _get(history, ['location', 'state'], null);
-    console.log(contest);
     const { isInitialized } = useSelector(selectData);
 
     useEffect(() => {

@@ -5,7 +5,7 @@ import classnames from 'classnames';
 import { CompetitorsListTileProps } from './types';
 import constants from '@constants';
 import routes from '@constants/routes';
-import { getName, mapStatusColour, withS3URL } from '@utils';
+import { getName, mapStatusColour, withDynamicRoute, withS3URL } from '@utils';
 import CompetitorsListTileCountry from './CompetitorsListTileCountry';
 import CompetitorsListTileWins from './CompetitorsListTileWins';
 import CompetitorsListTileEvents from './CompetitorsListTileEvents';
@@ -18,8 +18,12 @@ const CompetitorsListTile: React.FunctionComponent<CompetitorsListTileProps> = (
 }) => {
     const isEven = index % 2;
     const item = _get(data, [index], undefined);
+    const uuid = _get(item, ['uuid'], null);
     const handleClick = (options: any) => {
-        history.push(`/app${routes.COMPETITOR.ROUTE}`, options);
+        history.push(
+            withDynamicRoute(routes.MEMBER_APP.COMPETITOR.ROUTE, { uuid }),
+            options
+        );
     };
 
     const name = getName(item, 'Loading...');

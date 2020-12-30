@@ -4,10 +4,10 @@ const CONSTANTS = {
     },
     ACCOUNT: {
         ERROR: {
-            UPDATE: 'Error updating Contest information',
-            ASSIGN_AVATAR: 'Error updating Contest avatar',
-            FETCH: 'Error fetching Contest information',
-            FETCH_MEMBERSHIP: 'Error fetching Contest Membership information',
+            UPDATE: 'Error updating League information',
+            ASSIGN_AVATAR: 'Error updating League avatar',
+            FETCH: 'Error fetching League information',
+            FETCH_MEMBERSHIP: 'Error fetching League Membership information',
             FETCH_ALL: 'Error fetching Accounts information',
             SEARCH_ALL: 'Error searching Accounts information',
             BULK_FETCH_ALL: 'Error fetch Accounts information',
@@ -36,9 +36,9 @@ const CONSTANTS = {
         },
         ERROR: {
             FETCH: 'Error fetching Contest information',
-            FETCH_ALL: 'Error fetching Contests information',
+            FETCH_ALL: 'Error fetching Contest information',
             FETCH_MATERIALIZED: 'Error fetching Contest information',
-            FETCH_ALL_MATERIALIZED: 'Error fetching Contests information',
+            FETCH_ALL_MATERIALIZED: 'Error fetching Contest information',
             CREATE: 'Contest creation unsuccessful',
             UPDATE: 'Contest update unsuccessful!',
             FETCH_PARTICIPANT: 'Error fetch Contest participant information',
@@ -49,7 +49,7 @@ const CONSTANTS = {
     COMPETITOR: {
         SUCCESS: {},
         ERROR: {
-            FETCH_CONTEST_RESULTS: 'Error fetching Contest results',
+            FETCH_CONTEST_RESULTS: 'Error fetching League results',
             FETCH_ALL: 'Error fetching Competitors information',
         },
     },
@@ -59,6 +59,18 @@ const CONSTANTS = {
             FETCH: 'Error fetching Course information',
             FETCH_ALL: 'Error fetching Courses information',
             SEARCH_ALL: 'Error searching Courses information',
+        },
+    },
+    LEAGUE: {
+        SUCCESS: {
+            CREATE: 'League creation successful!',
+            UPDATE: 'League update successful!',
+        },
+        ERROR: {
+            FETCH: 'Error fetching League information',
+            FETCH_ALL: 'Error fetching League information',
+            CREATE: 'League creation unsuccessful',
+            UPDATE: 'League update unsuccessful!',
         },
     },
     NOTIFICATION: {
@@ -152,7 +164,7 @@ const CONSTANTS = {
         },
         CONTEST: {
             TITLE: 'Contest',
-            DESCRIPTION: 'Contest Info',
+            DESCRIPTION: 'League Info',
             STEPS: {
                 PENDING: {
                     TITLE: 'Pending',
@@ -168,14 +180,14 @@ const CONSTANTS = {
                 },
                 COMPLETE: {
                     TITLE: 'Complete',
-                    DESCRIPTION: 'Contest complete.',
+                    DESCRIPTION: 'League complete.',
                 },
             },
         },
         CONTESTS: {
             TITLE: 'Contests',
-            DESCRIPTION: 'View Contests',
-            SEARCH: 'Search Contests',
+            DESCRIPTION: 'View League',
+            SEARCH: 'Search League',
         },
         NOTIFICATIONS: {
             TITLE: 'Notifications',
@@ -191,7 +203,7 @@ const CONSTANTS = {
         },
         CONTESTS_CREATE: {
             TITLE: 'Contests',
-            DESCRIPTION: 'Create Contest',
+            DESCRIPTION: 'Create League',
             FORM: {
                 LABELS: {
                     NAME: 'Name',
@@ -229,7 +241,7 @@ const CONSTANTS = {
         },
         ACCOUNT: {
             TITLE: 'Account',
-            DESCRIPTION: 'Update Contest Settings',
+            DESCRIPTION: 'Update League Settings',
             FORM: {
                 LABELS: {
                     AVATAR: 'Avatar',
@@ -259,6 +271,31 @@ const CONSTANTS = {
                     ADDRESS_POSTAL_REQUIRED: 'Postal / Zip Code is required',
                     PHONE_NUMBER_REQUIRED: 'Phone Number is required',
                     PHONE_NUMBER_MATCHES: 'Phone Number is invalid',
+                },
+            },
+        },
+        LEAGUE: {
+            TITLE: 'League',
+            DESCRIPTION: 'View League',
+        },
+        LEAGUES: {
+            TITLE: 'Leagues',
+            DESCRIPTION: 'View Leagues',
+            SEARCH: 'Search League',
+        },
+        LEAGUES_CREATE: {
+            TITLE: 'Leagues',
+            DESCRIPTION: 'Create League',
+            FORM: {
+                LABELS: {
+                    AVATAR: 'Avatar',
+                    UPLOAD_AVATAR: 'Upload Avatar',
+                    AVATAR_CROPPER_TITLE: 'Edit Avatar',
+                    NAME: 'Name',
+                },
+                VALIDATION: {
+                    NAME_MAX_LENGTH: 'Name must be less than 50 characters',
+                    NAME_REQUIRED: 'Name is required',
                 },
             },
         },
