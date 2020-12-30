@@ -9,7 +9,7 @@ import routes from '@constants/routes';
 import { Avatar, PendingBadge, UserTile } from '@components';
 import { selectPending } from '@selectors/NotificationSelector';
 import { selectLeagues } from '@selectors/BaseSelector';
-import { withS3URL } from '@utils';
+import { withDynamicRoute, withS3URL } from '@utils';
 import constants from '@constants';
 import './HeaderExtra.less';
 
@@ -23,7 +23,12 @@ const HeaderExtra: React.FunctionComponent<HeaderExtraProps> = ({ user }) => {
             <Menu.Item
                 key={league.uuid}
                 onClick={() =>
-                    history.push(routes.LEAGUE_APP.LEAGUE.ROUTE, league)
+                    history.push(
+                        withDynamicRoute(routes.LEAGUE_APP.LEAGUE.ROUTE, {
+                            uuid: league.uuid,
+                        }),
+                        league
+                    )
                 }
             >
                 <div className="header-extra-league">
