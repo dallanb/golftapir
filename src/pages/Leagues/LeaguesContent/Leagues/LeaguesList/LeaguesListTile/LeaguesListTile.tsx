@@ -6,7 +6,7 @@ import { LeaguesListTileProps } from './types';
 import LeaguesListTileLeaderboard from './LeaguesListTileLeaderboard';
 import constants from '@constants';
 import routes from '@constants/routes';
-import { mapStatusColour, withS3URL } from '@utils';
+import { mapStatusColour, withDynamicRoute, withS3URL } from '@utils';
 import { Avatar } from '@components';
 import './LeaguesListTile.less';
 
@@ -16,11 +16,15 @@ const LeaguesListTile: React.FunctionComponent<LeaguesListTileProps> = ({
 }) => {
     const isEven = index % 2;
     const item = _get(data, [index], undefined);
+    const uuid = _get(item, ['uuid'], undefined);
+
     const handleClick = (options: any) => {
-        history.push(routes.LEAGUE_APP.LEAGUE.ROUTE, options);
+        history.push(
+            withDynamicRoute(routes.LEAGUE_APP.LEAGUE.ROUTE, { uuid }),
+            options
+        );
     };
 
-    const uuid = _get(item, ['uuid'], undefined);
     const name = _get(item, ['name'], 'Loading...');
     const avatar = _get(item, ['avatar', 's3_filename'], undefined);
     const src = avatar && withS3URL(avatar, constants.S3_FOLDERS.LEAGUE.AVATAR);

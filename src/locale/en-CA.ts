@@ -222,8 +222,8 @@ const CONSTANTS = {
             },
         },
         CONTEST_UPDATE: {
-            TITLE: 'League Update',
-            DESCRIPTION: 'Update League',
+            TITLE: 'Contest Update',
+            DESCRIPTION: 'Update Contest',
             FORM: {
                 LABELS: {
                     NAME: 'Name',

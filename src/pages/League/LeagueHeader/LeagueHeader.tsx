@@ -4,7 +4,7 @@ import { LeagueHeaderProps } from './types';
 import { ContentLayoutHeader } from '@layouts';
 import CONSTANTS from '@locale/en-CA';
 import { selectLeague, selectLeagueName } from '../selector';
-import { Breadcrumb } from '@apps/MemberApp/components';
+import { Breadcrumb } from '@apps/LeagueApp/components';
 import routes from '@constants/routes';
 
 const LeagueHeader: React.FunctionComponent<LeagueHeaderProps> = () => {

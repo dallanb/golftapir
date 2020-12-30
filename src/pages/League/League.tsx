@@ -16,6 +16,8 @@ const League: React.FunctionComponent<LeagueProps> = () => {
     const dispatch = useDispatch();
     const league = useSelector(selectLeague);
     const { isInitialized } = useSelector(selectData);
+    const history = useHistory();
+    console.log(_get(history, ['location', 'state'], null));
 
     useEffect(() => {
         dispatch(LeaguePageActions.preInit(league));

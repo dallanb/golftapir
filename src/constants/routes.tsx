@@ -137,8 +137,8 @@ const routes = {
     },
     LEAGUE_APP: {
         LEAGUE: {
-            ROUTE: '/league',
-            BASE_ROUTE: '/league',
+            ROUTE: '/league/:uuid',
+            BASE_ROUTE: '/league/:uuid',
             KEY: 'league',
             LABEL: CONSTANTS.PAGES.LEAGUE.TITLE,
             ICON: CrownFilled,

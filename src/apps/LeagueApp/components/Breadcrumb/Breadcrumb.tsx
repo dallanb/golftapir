@@ -10,34 +10,37 @@ import { HomeFilled } from '@ant-design/icons/lib';
 
 const Breadcrumb: React.FunctionComponent<BreadcrumbProps> = (props) => {
     const { state, location } = props;
-    const pathSnippets = location.pathname.split('/').filter((i) => i);
-    const extraBreadcrumbItems = pathSnippets.map((_, index) => {
-        const url = pathSnippets.slice(0, index + 1).join('/');
-        const { key, label, icon: Icon } = getRouteBreadcrumb(url);
-        return (
-            <AntdBreadcrumb.Item key={url}>
-                <Link
-                    to={{
-                        pathname: url,
-                        state: _get(state, [key], {}),
-                    }}
-                >
-                    {Icon && <Icon className="breadcrumb-key-icon" />}
-                    <span className="breadcrumb-key-name">{label}</span>
-                </Link>
-            </AntdBreadcrumb.Item>
-        );
-    });
-    const breadcrumbItems = [
-        <AntdBreadcrumb.Item key={routes.LEAGUE_APP.LEAGUE.ROUTE}>
-            <Link to={routes.LEAGUE_APP.LEAGUE.ROUTE}>
-                <HomeFilled className="breadcrumb-key-icon" />
-                <span className="breadcrumb-key-name">
-                    {routes.LEAGUE_APP.LEAGUE.LABEL}
-                </span>
-            </Link>
-        </AntdBreadcrumb.Item>,
-    ].concat(extraBreadcrumbItems);
+    const pathSnippets = location.pathname
+        .replace(
+            /\b[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}\b/,
+            ':uuid'
+        )
+        .split('/')
+        .filter((i) => i);
+    const breadcrumbItems = pathSnippets.reduce(
+        (accum: any, snippet: string, index) => {
+            const url = `/${pathSnippets.slice(0, index + 1).join('/')}`;
+            const { key, label, icon: Icon } = getRouteBreadcrumb(url);
+            if (snippet.startsWith(':')) {
+                accum.pop();
+            }
+            accum.push(
+                <AntdBreadcrumb.Item key={url}>
+                    <Link
+                        to={{
+                            pathname: url,
+                            state: _get(state, [key], {}),
+                        }}
+                    >
+                        {Icon && <Icon className="breadcrumb-key-icon" />}
+                        <span className="breadcrumb-key-name">{label}</span>
+                    </Link>
+                </AntdBreadcrumb.Item>
+            );
+            return accum;
+        },
+        []
+    );
 
     return (
         <AntdBreadcrumb className="breadcrumb">
