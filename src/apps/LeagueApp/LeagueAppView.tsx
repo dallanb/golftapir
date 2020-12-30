@@ -32,6 +32,17 @@ const LeagueAppView: React.FunctionComponent<LeagueAppViewProps> = () => {
     const params = useParams();
     const prevLeague = _get(history, ['location', 'state'], null);
     const prevUUID = _get(params, ['uuid'], null);
+    const { me, isInitialized, isRefreshing } = useSelector(selectBaseData);
+    const league = useSelector(selectLeague);
+    const leagueUUID = _get(league, ['uuid'], '');
+    const isReady = isInitialized && !isRefreshing;
+
+    useEffect(() => {
+        if (isReady && leagueUUID !== prevUUID) {
+            dispatch(BaseActions.refresh(prevUUID));
+        }
+    });
+
     useEffect(() => {
         if (!prevUUID) {
             history.push(constantRoutes.MEMBER_APP.HOME.ROUTE);
@@ -52,12 +63,9 @@ const LeagueAppView: React.FunctionComponent<LeagueAppViewProps> = () => {
         };
     }, []);
 
-    const league = useSelector(selectLeague);
-    const { me, isInitialized } = useSelector(selectBaseData);
     const { isLoggedIn, forceLogout } = useSelector(selectAuthData);
     const name = _get(me, ['display_name'], '');
     const avatar = _get(me, ['avatar', 's3_filename'], '');
-    const leagueUUID = _get(league, ['uuid'], '');
     const leagueName = _get(league, ['name'], '');
     const leagueAvatar = withS3URL(
         _get(league, ['avatar', 's3_filename'], null),
@@ -77,7 +85,7 @@ const LeagueAppView: React.FunctionComponent<LeagueAppViewProps> = () => {
         },
     };
 
-    if (!isInitialized) return <Spin />;
+    if (!isReady) return <Spin />;
     return (
         <MemberAppLayout
             name={name}

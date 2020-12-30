@@ -7,6 +7,7 @@ import { AccountTypes } from '@actions';
 /* ------------- Interface ------------- */
 export interface LeagueAppInterface {
     readonly isFetching: boolean;
+    readonly isRefreshing: boolean;
     readonly isInitialized: boolean;
     readonly err?: Error;
     readonly me: any;
@@ -17,6 +18,7 @@ export interface LeagueAppInterface {
 /* ------------- Initial State ------------- */
 const INITIAL_STATE: LeagueAppInterface = {
     isFetching: false,
+    isRefreshing: false,
     isInitialized: false,
     err: undefined,
     me: undefined,
@@ -49,6 +51,26 @@ function initFailure(state: any, { err }: any) {
     });
 }
 
+function refresh(state = INITIAL_STATE) {
+    return Immutable.merge(state, {
+        isRefreshing: true,
+        err: null,
+    });
+}
+
+function refreshSuccess(state = INITIAL_STATE) {
+    return Immutable.merge(state, {
+        isRefreshing: false,
+    });
+}
+
+function refreshFailure(state: any, { err }: any) {
+    return Immutable.merge(state, {
+        isRefreshing: false,
+        err,
+    });
+}
+
 function terminate() {
     return INITIAL_STATE;
 }
@@ -63,6 +85,9 @@ const HANDLERS = {
     [BaseTypes.INIT]: init,
     [BaseTypes.INIT_SUCCESS]: initSuccess,
     [BaseTypes.INIT_FAILURE]: initFailure,
+    [BaseTypes.REFRESH]: refresh,
+    [BaseTypes.REFRESH_SUCCESS]: refreshSuccess,
+    [BaseTypes.REFRESH_FAILURE]: refreshFailure,
     [BaseTypes.TERMINATE]: terminate,
     [BaseTypes.SET]: set,
 };

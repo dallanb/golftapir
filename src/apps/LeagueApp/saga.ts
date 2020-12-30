@@ -33,7 +33,7 @@ function* preInit({ data: league }: AnyAction) {
 function* init({ uuid }: AnyAction) {
     try {
         const isLoggedIn = yield select(selectIsLoggedIn);
-        if (!isLoggedIn) yield call(refresh);
+        if (!isLoggedIn) yield call(refreshAuth);
 
         // I dont think i need to even pass auth Data cause the id can be grabbed from kong CompetitorHeader
         const authData = yield select(selectAuthData);
@@ -71,6 +71,17 @@ function* init({ uuid }: AnyAction) {
     }
 }
 
+function* refresh({ uuid }: AnyAction) {
+    try {
+        console.log('HERE');
+        const { data: league } = yield call(fetchLeague, uuid);
+        yield put(BaseActions.set({ league }));
+        yield put(BaseActions.refreshSuccess());
+    } catch (err) {
+        yield put(BaseActions.refreshFailure(err));
+    }
+}
+
 function* terminate() {
     try {
         yield put(SocketActions.terminate());
@@ -80,7 +91,7 @@ function* terminate() {
 }
 
 // Helpers
-function* refresh() {
+function* refreshAuth() {
     yield put(AuthActions.refresh());
     const { failure, timeout } = yield race({
         success: take(AuthTypes.REFRESH_SUCCESS),
@@ -162,6 +173,7 @@ export default function* BaseSaga() {
     yield all([
         takeLatest(BaseTypes.PRE_INIT, preInit),
         takeLatest(BaseTypes.INIT, init),
+        takeLatest(BaseTypes.REFRESH, refresh),
         takeLatest(BaseTypes.TERMINATE, terminate),
     ]);
 }
