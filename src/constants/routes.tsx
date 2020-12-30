@@ -50,7 +50,7 @@ const routes = {
             ICON: SettingFilled,
         },
         COMPETITOR: {
-            ROUTE: '/app/competitors/competitor',
+            ROUTE: '/app/competitors/competitor/:uuid',
             BASE_KEY: 'competitors',
             KEY: 'competitor',
             LABEL: CONSTANTS.PAGES.COMPETITOR.TITLE,

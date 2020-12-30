@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, withRouter, useParams } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { Breadcrumb as AntdBreadcrumb } from 'antd';
 import { get as _get } from 'lodash';
 import { BreadcrumbProps } from './types';
@@ -7,23 +7,8 @@ import { getRouteBreadcrumb, withDynamicRoute } from '@utils';
 import './Breadcrumb.less';
 
 const Breadcrumb: React.FunctionComponent<BreadcrumbProps> = (props) => {
-    const { state, params, location } = props;
-    const routeParams = useParams();
-    const pathSnippets = location.pathname
-        .split('/')
-        .reduce((accum: any, i: string) => {
-            if (i) {
-                const param = Object.entries(routeParams).find(
-                    ([_, val]: any) => i === val
-                );
-                if (param) {
-                    accum.push(`:${param[0]}`);
-                } else {
-                    accum.push(i);
-                }
-            }
-            return accum;
-        }, []);
+    const { state, params, match } = props;
+    const pathSnippets = match.path.split('/').filter((snippet) => snippet);
     const breadcrumbItems = pathSnippets.reduce(
         (accum: any, snippet: string, index: number) => {
             const url = `/${pathSnippets.slice(0, index + 1).join('/')}`;
