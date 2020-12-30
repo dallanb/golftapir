@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { LeagueHeaderProps } from './types';
 import { ContentLayoutHeader } from '@layouts';
 import CONSTANTS from '@locale/en-CA';
-import { selectLeague, selectLeagueName } from '../selector';
+import { selectLeague, selectLeagueName, selectLeagueUUID } from '../selector';
 import { Breadcrumb } from '@apps/LeagueApp/components';
 import routes from '@constants/routes';
 
@@ -15,6 +15,11 @@ const LeagueHeader: React.FunctionComponent<LeagueHeaderProps> = () => {
             state={{
                 [routes.LEAGUE_APP.LEAGUE.KEY]: {
                     ...useSelector(selectLeague),
+                },
+            }}
+            params={{
+                [routes.LEAGUE_APP.LEAGUE.KEY]: {
+                    uuid: useSelector(selectLeagueUUID),
                 },
             }}
         />

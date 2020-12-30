@@ -15,3 +15,6 @@ export const selectLeague = createSelector([getLeaguePage], (leaguePage) =>
 export const selectLeagueName = createSelector([getLeaguePage], (leaguePage) =>
     _get(leaguePage, ['league', 'name'], undefined)
 );
+export const selectLeagueUUID = createSelector([getLeaguePage], (leaguePage) =>
+    _get(leaguePage, ['league', 'uuid'], undefined)
+);
