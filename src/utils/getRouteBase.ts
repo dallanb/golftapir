@@ -1,24 +1,26 @@
 import { get as _get } from 'lodash';
-import routes from '@constants/routes';
+import getAppRoutes from '@utils/getAppRoutes';
 
 const getRouteBase = (route: string) => {
-    const app = route.split('/')[1];
-    let appRoutes = {};
-    switch (app) {
-        case 'app':
-            appRoutes = routes.MEMBER_APP;
-            break;
-        case 'auth':
-            appRoutes = routes.AUTH_APP;
-            break;
-        case 'league':
-            appRoutes = routes.LEAGUE_APP;
-            break;
-    }
-    const routeObj = Object.values(appRoutes).find(
-        (value: any) => value.ROUTE === route
-    );
-    return _get(routeObj, ['BASE_ROUTE'], '');
+    const appRoutes = getAppRoutes(route);
+    const routeSplit = route.split('/');
+    const routeObj = Object.values(appRoutes).find((appRoute: any) => {
+        const appRouteSplit = appRoute.ROUTE.split('/');
+        if (appRouteSplit.length !== routeSplit.length) {
+            return false;
+        }
+        return appRouteSplit.every((splitItem: string, index: number) => {
+            if (splitItem.startsWith(':')) {
+                return true;
+            }
+            if (splitItem === routeSplit[index]) {
+                return true;
+            }
+            return false;
+        });
+    });
+
+    return _get(routeObj, ['BASE_KEY'], null);
 };
 
 export default getRouteBase;

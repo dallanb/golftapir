@@ -7,8 +7,8 @@ import { ScorecardParticipantProps } from './types';
 import { Avatar } from '@components';
 import { selectAccountsHash } from '@pages/Contest/selector';
 import { getName, withS3URL } from '@utils';
+import routes from '@constants/routes';
 import './ScorecardParticipant.less';
-import constants from '@constants';
 
 const ScorecardParticipant: React.FunctionComponent<ScorecardParticipantProps> = ({
     user,
@@ -43,10 +43,9 @@ const ScorecardParticipant: React.FunctionComponent<ScorecardParticipantProps> =
                         type="primary"
                         key="profile"
                         onClick={() =>
-                            history.push(
-                                `/app${constants.ROUTES.COMPETITOR.ROUTE}`,
-                                { ...account }
-                            )
+                            history.push(routes.MEMBER_APP.COMPETITOR.ROUTE, {
+                                ...account,
+                            })
                         }
                     >
                         Profile

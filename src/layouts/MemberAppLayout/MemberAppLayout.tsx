@@ -8,11 +8,10 @@ import {
     MemberAppLayoutState,
     MenuItemRendererProps,
 } from './types';
-import { UserTile } from '@components';
 import defaultMenuItemRenderer from './defaultMenuItemRenderer';
-import { getRouteBase } from '@utils';
-import './MemberAppLayout.less';
+import { getRouteBase, withDynamicRoute } from '@utils';
 import routes from '@constants/routes';
+import './MemberAppLayout.less';
 
 const { Sider } = Layout;
 
@@ -40,13 +39,11 @@ class MemberAppLayout extends React.Component<
         const nextState = { ...prevState };
         const prevPath = _get(prevState, ['currentPath']);
         const nextPath = _get(nextProps, ['location', 'pathname']);
-        const pagePath = getRouteBase(nextPath);
-
+        const baseKey = getRouteBase(nextPath);
         if (prevPath !== nextPath || !prevState.selectedKeys.length) {
             nextState.currentPath = nextPath;
-
             nextState.selectedKeys[0] = nextProps.menuRoutes
-                .findIndex(({ path }: any) => path === pagePath)
+                .findIndex(({ key }: any) => baseKey === key)
                 .toString();
         }
         return nextState;

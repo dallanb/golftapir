@@ -44,6 +44,9 @@ function* init({ uuid }: AnyAction) {
         const { data: me } = yield call(fetchAccount);
         yield put(BaseActions.set({ me }));
 
+        const { data: league } = yield call(fetchLeague, uuid);
+        yield put(BaseActions.set({ league }));
+
         const { data: leagues } = yield call(fetchLeagues);
         yield put(BaseActions.set({ leagues }));
 
@@ -123,6 +126,24 @@ function* fetchLeagues() {
     const { success, failure } = yield race({
         success: take(LeagueTypes.FETCH_LEAGUES_SUCCESS),
         failure: take(LeagueTypes.FETCH_LEAGUES_FAILURE),
+    });
+
+    if (failure) {
+        throw new Error(failure);
+    }
+
+    return success;
+}
+
+function* fetchLeague(uuid: string) {
+    yield put(
+        LeagueActions.fetchLeague(uuid, {
+            include: 'avatar',
+        })
+    );
+    const { success, failure } = yield race({
+        success: take(LeagueTypes.FETCH_LEAGUE_SUCCESS),
+        failure: take(LeagueTypes.FETCH_LEAGUE_FAILURE),
     });
 
     if (failure) {

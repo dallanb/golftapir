@@ -1,24 +1,31 @@
 import React from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { Link, withRouter, useParams } from 'react-router-dom';
 import { Breadcrumb as AntdBreadcrumb } from 'antd';
 import { get as _get } from 'lodash';
 import { BreadcrumbProps } from './types';
 import { getRouteBreadcrumb, withDynamicRoute } from '@utils';
-import routes from '@constants/routes';
 import './Breadcrumb.less';
-import { HomeFilled } from '@ant-design/icons/lib';
 
 const Breadcrumb: React.FunctionComponent<BreadcrumbProps> = (props) => {
     const { state, params, location } = props;
+    const routeParams = useParams();
     const pathSnippets = location.pathname
-        .replace(
-            /\b[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}\b/,
-            ':uuid'
-        )
         .split('/')
-        .filter((i) => i);
+        .reduce((accum: any, i: string) => {
+            if (i) {
+                const param = Object.entries(routeParams).find(
+                    ([_, val]: any) => i === val
+                );
+                if (param) {
+                    accum.push(`:${param[0]}`);
+                } else {
+                    accum.push(i);
+                }
+            }
+            return accum;
+        }, []);
     const breadcrumbItems = pathSnippets.reduce(
-        (accum: any, snippet: string, index) => {
+        (accum: any, snippet: string, index: number) => {
             const url = `/${pathSnippets.slice(0, index + 1).join('/')}`;
             const { key, label, icon: Icon } = getRouteBreadcrumb(url);
             if (snippet.startsWith(':')) {

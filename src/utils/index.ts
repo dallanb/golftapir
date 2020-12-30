@@ -1,3 +1,4 @@
+export { default as getAppRoutes } from './getAppRoutes';
 export { default as getInitials } from './getInitials';
 export { default as getRandomInt } from './getRandomInt';
 export { default as getName } from './getName';

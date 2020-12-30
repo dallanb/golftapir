@@ -11,7 +11,7 @@ export const routes: any = [
         render: () => <MemberApp />,
     },
     {
-        path: '/league',
+        path: '/league/:uuid',
         render: () => <LeagueApp />,
     },
 ];

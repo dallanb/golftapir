@@ -18,12 +18,16 @@ const defaultFormRenderer: React.FunctionComponent<MenuItemRendererProps> = ({
     if (typeof name === 'function') {
         Name = name(_get(menuProps, ['names', key], null));
     }
+    let Path = path;
+    if (typeof path === 'function') {
+        Path = path(_get(menuProps, ['paths', key], null));
+    }
 
     return (
         <Menu.Item
             className="menu-item"
             key={index}
-            onClick={(item) => onClick(item, path)}
+            onClick={(item) => onClick(item, Path)}
         >
             <div className="menu-item-icon"> {Icon}</div>
             <div className="menu-item-name">{Name}</div>
