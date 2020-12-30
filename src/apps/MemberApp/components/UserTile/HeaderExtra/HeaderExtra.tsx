@@ -75,7 +75,10 @@ const HeaderExtra: React.FunctionComponent<HeaderExtraProps> = ({ user }) => {
                 />
             </div>
             <div className="header-extra-drop-down">
-                <UserTile menu={getUserTileMenuItems} />
+                <UserTile
+                    menu={getUserTileMenuItems}
+                    popoverOverlayClassName="header-extra-popover"
+                />
             </div>
         </div>
     );
