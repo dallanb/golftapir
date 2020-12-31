@@ -1,14 +1,16 @@
 // @ts-ignore
 import { static as Immutable } from 'seamless-immutable';
 import { createReducer } from 'reduxsauce';
-import { AccountTypes, AuthTypes } from '@actions';
+import { AccountTypes, AuthTypes, NotificationTypes } from '@actions';
 import { localStorageSave } from '@utils';
+import { NotificationInterface } from '@reducers/NotificationReducer';
 
 /* ------------- Interface ------------- */
 export interface BaseInterface {
     readonly me: any;
     readonly isLoggedIn: boolean;
     readonly forceLogout: boolean;
+    readonly pending: number;
 }
 
 /* ------------- Initial State ------------- */
@@ -16,6 +18,7 @@ const INITIAL_STATE: BaseInterface = {
     me: undefined,
     isLoggedIn: false,
     forceLogout: false,
+    pending: 0,
 };
 
 /* ------------- Reducers ------------- */
@@ -53,12 +56,27 @@ const fetchMyAccountSuccess = localStorageSave((state: any, { data }: any) =>
     })
 );
 
+const fetchNotificationPendingSuccess = localStorageSave(
+    (state: any, { pending }: NotificationInterface) =>
+        Immutable.merge(state, {
+            pending,
+        })
+);
+
+const fetchNotificationPendingFailure = localStorageSave((state: any) =>
+    Immutable.merge(state, {
+        pending: INITIAL_STATE.pending,
+    })
+);
+
 const HANDLERS = {
     [AuthTypes.LOGIN_SUCCESS]: loginSuccess,
     [AuthTypes.REFRESH_SUCCESS]: refreshSuccess,
     [AuthTypes.REFRESH_FAILURE]: refreshFailure,
     [AuthTypes.LOGOUT_SUCCESS]: logoutSuccess,
     [AccountTypes.FETCH_MY_ACCOUNT_SUCCESS]: fetchMyAccountSuccess,
+    [NotificationTypes.FETCH_PENDING_SUCCESS]: fetchNotificationPendingSuccess,
+    [NotificationTypes.FETCH_PENDING_FAILURE]: fetchNotificationPendingFailure,
 };
 
 export default createReducer(INITIAL_STATE, HANDLERS);

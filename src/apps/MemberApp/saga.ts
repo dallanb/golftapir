@@ -10,8 +10,6 @@ import {
 } from 'redux-saga/effects';
 import MemberAppActions, { MemberAppTypes } from './actions';
 import {
-    AccountActions,
-    AccountTypes,
     AuthActions,
     AuthTypes,
     LeagueActions,
@@ -20,24 +18,29 @@ import {
     NotificationTypes,
     SocketActions,
 } from '@actions';
-import { selectAuthData, selectIsLoggedIn } from '@selectors/AuthSelectors';
 import { FirebaseClient } from '@libs';
 import { socketEventHandlers } from '@apps/MemberApp/utils';
 import { ClientProxy } from '@services';
+import { selectMe } from '@selectors/BaseSelector';
+import { fetchMyAccount } from '@helpers';
 
 // Action Handlers
 function* init() {
     try {
         if (!ClientProxy.accessToken) yield call(refresh);
 
+        const me = yield select(selectMe) ||
+            call(fetchMyAccount, { include: 'avatar' });
         // I dont think i need to even pass auth Data cause the id can be grabbed from kong CompetitorHeader
-        const authData = yield select(selectAuthData);
+        // const authData = yield select(selectAuthData);
         yield put(
-            SocketActions.init(authData, { eventHandler: socketEventHandlers })
+            SocketActions.init(me.membership_uuid, {
+                eventHandler: socketEventHandlers,
+            })
         );
 
-        const { data: me } = yield call(fetchAccount);
-        yield put(MemberAppActions.set({ me }));
+        // const { data: me } = yield call(fetchAccount);
+        // yield put(MemberAppActions.set({ me }));
 
         const { data: leagues } = yield call(fetchLeagues);
         yield put(MemberAppActions.set({ leagues }));
@@ -89,23 +92,6 @@ function* refresh() {
     }
 }
 
-function* fetchAccount() {
-    yield put(
-        AccountActions.fetchAccount('me', {
-            include: 'avatar',
-        })
-    );
-    const { success, failure } = yield race({
-        success: take(AccountTypes.FETCH_ACCOUNT_SUCCESS),
-        failure: take(AccountTypes.FETCH_ACCOUNT_FAILURE),
-    });
-
-    if (failure) {
-        throw new Error(failure);
-    }
-
-    return success;
-}
 function* fetchLeagues() {
     yield put(
         LeagueActions.fetchLeagues({
