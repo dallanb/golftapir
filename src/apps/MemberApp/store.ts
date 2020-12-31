@@ -66,6 +66,7 @@ import {
     SocketSaga,
     TopicSocketSaga,
 } from '@sagas';
+import {saveState} from "../../localStorage";
 
 function configStore(): any {
     const middleware = [];
@@ -159,6 +160,12 @@ function configStore(): any {
     }
     sagaMiddleware.run(memberAppSaga);
 
+    store.subscribe(() => {
+        saveState({
+            auth: store.getState().auth,
+
+        });
+    });
     return { store };
 }
 
