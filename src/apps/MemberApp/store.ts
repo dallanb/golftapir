@@ -2,6 +2,7 @@ import { applyMiddleware, compose, createStore, combineReducers } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import { all, fork } from 'redux-saga/effects';
 import { createLogger } from 'redux-logger';
+import { get as _get } from 'lodash';
 import { reducer as base } from '@apps/MemberApp/reducer';
 import {
     authReducer as auth,
@@ -66,9 +67,9 @@ import {
     SocketSaga,
     TopicSocketSaga,
 } from '@sagas';
-import {saveState} from "../../localStorage";
+import { saveState } from '../../localStorage';
 
-function configStore(): any {
+function configStore(options?: { preloadedState: any }): any {
     const middleware = [];
     const enhancers = [];
     let monitor = null;
@@ -104,7 +105,7 @@ function configStore(): any {
             logoutPage,
             notificationsPage,
         }),
-        undefined,
+        _get(options, ['preloadedState'], {}),
         compose(
             ...enhancers,
             (window as any).__REDUX_DEVTOOLS_EXTENSION__ &&
@@ -161,16 +162,14 @@ function configStore(): any {
     sagaMiddleware.run(memberAppSaga);
 
     store.subscribe(() => {
+        const state = store.getState();
         saveState({
-            auth: store.getState().auth,
-
+            auth: _get(state, ['auth'], {}),
+            base: _get(state, ['base'], {}),
+            // notification: _get(state, ['notification'], {}),
         });
     });
     return { store };
 }
-
-const { store } = configStore();
-
-export { store };
 
 export default configStore;

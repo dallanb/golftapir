@@ -2,18 +2,19 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { MemberAppProps } from './types';
 import { MessageModal } from '@components';
-import { store } from './store';
+import configStore from './store';
 import MemberAppView from './MemberAppView';
+import { loadState } from '../../localStorage';
 
-class MemberApp extends React.Component<MemberAppProps> {
-    render() {
-        return (
-            <Provider store={store}>
-                <MessageModal />
-                <MemberAppView />
-            </Provider>
-        );
-    }
-}
+const MemberApp: React.FunctionComponent<MemberAppProps> = () => {
+    const preloadedState = loadState(['auth', 'base', 'notification']);
+    const { store } = configStore({ preloadedState });
+    return (
+        <Provider store={store}>
+            <MessageModal />
+            <MemberAppView />
+        </Provider>
+    );
+};
 
 export default MemberApp;

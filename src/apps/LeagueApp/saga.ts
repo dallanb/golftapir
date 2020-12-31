@@ -24,6 +24,7 @@ import {
 import { selectAuthData, selectIsLoggedIn } from '@selectors/AuthSelectors';
 import { FirebaseClient } from '@libs';
 import { socketEventHandlers } from '@apps/LeagueApp/utils';
+import { ClientProxy } from '@services';
 
 // Action Handlers
 function* preInit({ data: league }: AnyAction) {
@@ -32,8 +33,7 @@ function* preInit({ data: league }: AnyAction) {
 
 function* init({ uuid }: AnyAction) {
     try {
-        const isLoggedIn = yield select(selectIsLoggedIn);
-        if (!isLoggedIn) yield call(refreshAuth);
+        if (!ClientProxy.accessToken) yield call(refreshAuth);
 
         // I dont think i need to even pass auth Data cause the id can be grabbed from kong CompetitorHeader
         const authData = yield select(selectAuthData);
@@ -73,7 +73,6 @@ function* init({ uuid }: AnyAction) {
 
 function* refresh({ uuid }: AnyAction) {
     try {
-        console.log('HERE');
         const { data: league } = yield call(fetchLeague, uuid);
         yield put(BaseActions.set({ league }));
         yield put(BaseActions.refreshSuccess());

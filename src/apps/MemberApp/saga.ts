@@ -23,12 +23,12 @@ import {
 import { selectAuthData, selectIsLoggedIn } from '@selectors/AuthSelectors';
 import { FirebaseClient } from '@libs';
 import { socketEventHandlers } from '@apps/MemberApp/utils';
+import { ClientProxy } from '@services';
 
 // Action Handlers
 function* init() {
     try {
-        const isLoggedIn = yield select(selectIsLoggedIn);
-        if (!isLoggedIn) yield call(refresh);
+        if (!ClientProxy.accessToken) yield call(refresh);
 
         // I dont think i need to even pass auth Data cause the id can be grabbed from kong CompetitorHeader
         const authData = yield select(selectAuthData);

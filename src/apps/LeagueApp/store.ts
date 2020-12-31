@@ -23,6 +23,7 @@ import {
     SocketSaga,
     TopicSocketSaga,
 } from '@sagas';
+import { saveState } from '../../localStorage';
 
 function configStore(options?: { preloadedState: any }): any {
     const middleware = [];
@@ -75,11 +76,15 @@ function configStore(options?: { preloadedState: any }): any {
     }
     sagaMiddleware.run(memberAppSaga);
 
+    store.subscribe(() => {
+        const state = store.getState();
+        saveState({
+            auth: _get(state, ['auth'], {}),
+            base: _get(state, ['base'], {}),
+            notification: _get(state, ['notification'], {}),
+        });
+    });
     return { store };
 }
-
-const { store } = configStore();
-
-export { store };
 
 export default configStore;

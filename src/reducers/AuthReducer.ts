@@ -103,6 +103,7 @@ function logout(state = INITIAL_STATE) {
 
 function logoutSuccess(state: any) {
     return Immutable.merge(state, {
+        ...INITIAL_STATE,
         isSubmitting: false,
         err: null,
         isLoggedIn: false,

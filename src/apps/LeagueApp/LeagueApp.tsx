@@ -4,9 +4,11 @@ import { LeagueAppProps } from './types';
 import { MessageModal } from '@components';
 import configStore from './store';
 import LeagueAppView from './LeagueAppView';
+import { loadState } from '../../localStorage';
 
 const LeagueApp: React.FunctionComponent<LeagueAppProps> = () => {
-    const { store } = configStore();
+    const preloadedState = loadState(['auth', 'base', 'notification']);
+    const { store } = configStore({ preloadedState });
     return (
         <Provider store={store}>
             <MessageModal />

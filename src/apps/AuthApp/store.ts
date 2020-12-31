@@ -12,8 +12,10 @@ import {
     RegisterPageSaga,
 } from '@pages';
 import { AuthSaga } from '@sagas';
+import { saveState } from '../../localStorage';
+import { get as _get } from 'lodash';
 
-function configStore(): any {
+function configStore(options?: { preloadedState: any }): any {
     const middleware = [];
     const enhancers = [];
     let monitor = null;
@@ -37,7 +39,7 @@ function configStore(): any {
             logoutPage,
             registerPage,
         }),
-        undefined,
+        _get(options, ['preloadedState'], {}),
         compose(
             ...enhancers,
             (window as any).__REDUX_DEVTOOLS_EXTENSION__ &&
@@ -54,12 +56,13 @@ function configStore(): any {
         ]);
     }
     sagaMiddleware.run(memberAppSaga);
-
+    store.subscribe(() => {
+        const state = store.getState();
+        saveState({
+            auth: _get(state, ['auth'], {}),
+        });
+    });
     return { store };
 }
-
-const { store } = configStore();
-
-export { store };
 
 export default configStore;

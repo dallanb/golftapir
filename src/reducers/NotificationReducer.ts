@@ -2,6 +2,10 @@
 import { static as Immutable } from 'seamless-immutable';
 import { createReducer } from 'reduxsauce';
 import { NotificationTypes } from '@actions';
+import { localStorageSave } from '@utils';
+
+/* ------------- KEY ------------- */
+const key = 'notification';
 
 /* ------------- Interface ------------- */
 export interface NotificationInterface {
@@ -14,17 +18,19 @@ const INITIAL_STATE: NotificationInterface = {
 };
 
 /* ------------- Reducers ------------- */
-function fetchPendingSuccess(state: any, { pending }: NotificationInterface) {
-    return Immutable.merge(state, {
-        pending,
-    });
-}
-function fetchPendingFailure(state: any, { err }: any) {
-    return Immutable.merge(state, {
+const fetchPendingSuccess = localStorageSave(
+    (state: any, { pending }: NotificationInterface) =>
+        Immutable.merge(state, {
+            pending,
+        })
+)(key);
+
+const fetchPendingFailure = localStorageSave((state: any, { err }: any) =>
+    Immutable.merge(state, {
         err,
         pending: INITIAL_STATE.pending,
-    });
-}
+    })
+)(key);
 
 const HANDLERS = {
     [NotificationTypes.FETCH_PENDING_SUCCESS]: fetchPendingSuccess,
