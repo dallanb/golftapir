@@ -2,6 +2,7 @@ import { applyMiddleware, compose, createStore, combineReducers } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import { all, fork } from 'redux-saga/effects';
 import { createLogger } from 'redux-logger';
+import { get as _get } from 'lodash';
 import { reducer as base } from '@apps/LeagueApp/reducer';
 import {
     authReducer as auth,
@@ -23,7 +24,7 @@ import {
     TopicSocketSaga,
 } from '@sagas';
 
-function configStore(): any {
+function configStore(options?: { preloadedState: any }): any {
     const middleware = [];
     const enhancers = [];
     let monitor = null;
@@ -48,7 +49,7 @@ function configStore(): any {
             notification,
             leaguePage,
         }),
-        undefined,
+        _get(options, ['preloadedState'], {}),
         compose(
             ...enhancers,
             (window as any).__REDUX_DEVTOOLS_EXTENSION__ &&
