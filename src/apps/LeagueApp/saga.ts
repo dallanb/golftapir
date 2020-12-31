@@ -9,7 +9,7 @@ import {
     takeLatest,
 } from 'redux-saga/effects';
 import { AnyAction } from 'redux';
-import BaseActions, { BaseTypes } from './actions';
+import LeagueAppActions, { LeagueAppTypes } from './actions';
 import {
     AccountActions,
     AccountTypes,
@@ -21,34 +21,40 @@ import {
     NotificationTypes,
     SocketActions,
 } from '@actions';
-import { selectAuthData, selectIsLoggedIn } from '@selectors/AuthSelectors';
 import { FirebaseClient } from '@libs';
 import { socketEventHandlers } from '@apps/LeagueApp/utils';
 import { ClientProxy } from '@services';
+import { selectMe } from '@selectors/BaseSelector';
 
 // Action Handlers
 function* preInit({ data: league }: AnyAction) {
-    yield put(BaseActions.set({ league }));
+    yield put(LeagueAppActions.set({ league }));
 }
 
 function* init({ uuid }: AnyAction) {
     try {
         if (!ClientProxy.accessToken) yield call(refreshAuth);
 
-        // I dont think i need to even pass auth Data cause the id can be grabbed from kong CompetitorHeader
-        const authData = yield select(selectAuthData);
+        const me = yield select(selectMe) || call(fetchMyAccount);
+
+        // // I dont think i need to even pass auth Data cause the id can be grabbed from kong CompetitorHeader
+        // const authData = yield select(selectAuthData)
         yield put(
-            SocketActions.init(authData, { eventHandler: socketEventHandlers })
+            SocketActions.init(me.membership_uuid, {
+                eventHandler: socketEventHandlers,
+            })
         );
 
-        const { data: me } = yield call(fetchAccount);
-        yield put(BaseActions.set({ me }));
+        // TODO: SORT THIS OUT
+        // const { data: me } = yield call(fetchAccount);
+        // yield put(LeagueAppActions.set({ me }));
+        // WAIT UNTIL WE ARE DONE FETCHING ACCOUNT?
 
         const { data: league } = yield call(fetchLeague, uuid);
-        yield put(BaseActions.set({ league }));
+        yield put(LeagueAppActions.set({ league }));
 
         const { data: leagues } = yield call(fetchLeagues);
-        yield put(BaseActions.set({ leagues }));
+        yield put(LeagueAppActions.set({ leagues }));
 
         // prepare notifications
         const token = yield call(requestToken);
@@ -65,19 +71,19 @@ function* init({ uuid }: AnyAction) {
             throw new Error('Unable to set token');
         }
 
-        yield put(BaseActions.initSuccess());
+        yield put(LeagueAppActions.initSuccess());
     } catch (err) {
-        yield put(BaseActions.initFailure(err));
+        yield put(LeagueAppActions.initFailure(err));
     }
 }
 
 function* refresh({ uuid }: AnyAction) {
     try {
         const { data: league } = yield call(fetchLeague, uuid);
-        yield put(BaseActions.set({ league }));
-        yield put(BaseActions.refreshSuccess());
+        yield put(LeagueAppActions.set({ league }));
+        yield put(LeagueAppActions.refreshSuccess());
     } catch (err) {
-        yield put(BaseActions.refreshFailure(err));
+        yield put(LeagueAppActions.refreshFailure(err));
     }
 }
 
@@ -107,15 +113,15 @@ function* refreshAuth() {
     }
 }
 
-function* fetchAccount() {
+function* fetchMyAccount() {
     yield put(
-        AccountActions.fetchAccount('me', {
+        AccountActions.fetchMyAccount({
             include: 'avatar',
         })
     );
     const { success, failure } = yield race({
-        success: take(AccountTypes.FETCH_ACCOUNT_SUCCESS),
-        failure: take(AccountTypes.FETCH_ACCOUNT_FAILURE),
+        success: take(AccountTypes.FETCH_MY_ACCOUNT_SUCCESS),
+        failure: take(AccountTypes.FETCH_MY_ACCOUNT_FAILURE),
     });
 
     if (failure) {
@@ -168,11 +174,11 @@ function* requestToken() {
     return token;
 }
 
-export default function* BaseSaga() {
+export default function* LeagueAppSaga() {
     yield all([
-        takeLatest(BaseTypes.PRE_INIT, preInit),
-        takeLatest(BaseTypes.INIT, init),
-        takeLatest(BaseTypes.REFRESH, refresh),
-        takeLatest(BaseTypes.TERMINATE, terminate),
+        takeLatest(LeagueAppTypes.PRE_INIT, preInit),
+        takeLatest(LeagueAppTypes.INIT, init),
+        takeLatest(LeagueAppTypes.REFRESH, refresh),
+        takeLatest(LeagueAppTypes.TERMINATE, terminate),
     ]);
 }

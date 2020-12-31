@@ -3,9 +3,10 @@ import createSagaMiddleware from 'redux-saga';
 import { all, fork } from 'redux-saga/effects';
 import { createLogger } from 'redux-logger';
 import { get as _get } from 'lodash';
-import { reducer as base } from '@apps/LeagueApp/reducer';
+import { reducer as leagueApp } from '@apps/LeagueApp/reducer';
 import {
     authReducer as auth,
+    baseReducer as base,
     modalReducer as modal,
     notificationReducer as notification,
 } from '@reducers';
@@ -23,7 +24,6 @@ import {
     SocketSaga,
     TopicSocketSaga,
 } from '@sagas';
-import { saveState } from '../../localStorage';
 
 function configStore(options?: { preloadedState: any }): any {
     const middleware = [];
@@ -48,6 +48,7 @@ function configStore(options?: { preloadedState: any }): any {
             auth,
             modal,
             notification,
+            leagueApp,
             leaguePage,
         }),
         _get(options, ['preloadedState'], {}),
@@ -76,14 +77,14 @@ function configStore(options?: { preloadedState: any }): any {
     }
     sagaMiddleware.run(memberAppSaga);
 
-    store.subscribe(() => {
-        const state = store.getState();
-        saveState({
-            auth: _get(state, ['auth'], {}),
-            base: _get(state, ['base'], {}),
-            notification: _get(state, ['notification'], {}),
-        });
-    });
+    // store.subscribe(() => {
+    //     const state = store.getState();
+    //     saveState({
+    //         auth: _get(state, ['auth'], {}),
+    //         base: _get(state, ['base'], {}),
+    //         notification: _get(state, ['notification'], {}),
+    //     });
+    // });
     return { store };
 }
 

@@ -18,11 +18,8 @@ import { AuthActions } from '@actions';
 import BaseActions from './actions';
 import statics from '@apps/LeagueApp/statics';
 import { FirebaseClient } from '@libs';
-import {
-    selectData as selectBaseData,
-    selectLeague,
-} from '@selectors/BaseSelector';
-import { selectData as selectAuthData } from '@selectors/AuthSelectors';
+import { selectData as selectBaseData } from '@selectors/BaseSelector';
+import { selectData } from './selector';
 import { withS3URL } from '@utils';
 import constants from '@constants';
 
@@ -32,8 +29,8 @@ const LeagueAppView: React.FunctionComponent<LeagueAppViewProps> = () => {
     const params = useParams();
     const prevLeague = _get(history, ['location', 'state'], null);
     const prevUUID = _get(params, ['uuid'], null);
-    const { me, isInitialized, isRefreshing } = useSelector(selectBaseData);
-    const league = useSelector(selectLeague);
+    const { isInitialized, isRefreshing, league } = useSelector(selectData);
+    const { me, isLoggedIn, forceLogout } = useSelector(selectBaseData);
     const leagueUUID = _get(league, ['uuid'], '');
     const isReady = isInitialized && !isRefreshing;
 
@@ -63,7 +60,6 @@ const LeagueAppView: React.FunctionComponent<LeagueAppViewProps> = () => {
         };
     }, []);
 
-    const { isLoggedIn, forceLogout } = useSelector(selectAuthData);
     const name = _get(me, ['display_name'], '');
     const avatar = _get(me, ['avatar', 's3_filename'], '');
     const leagueName = _get(league, ['name'], '');

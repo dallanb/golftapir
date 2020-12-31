@@ -7,7 +7,7 @@ import LeagueAppView from './LeagueAppView';
 import { loadState } from '../../localStorage';
 
 const LeagueApp: React.FunctionComponent<LeagueAppProps> = () => {
-    const preloadedState = loadState(['auth', 'base', 'notification']);
+    const preloadedState = loadState(['base']);
     const { store } = configStore({ preloadedState });
     return (
         <Provider store={store}>

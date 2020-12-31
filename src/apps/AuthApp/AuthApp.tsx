@@ -5,7 +5,7 @@ import { loadState } from '../../localStorage';
 import configStore from './store';
 
 const AuthApp: React.FunctionComponent = () => {
-    const preloadedState = loadState(['auth']);
+    const preloadedState = loadState(['base']);
     const { store } = configStore({ preloadedState });
     return (
         <Provider store={store}>

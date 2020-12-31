@@ -8,7 +8,7 @@ const getBase = (state: any) => state.base;
 export const selectData = createSelector([getBase], (base) => base);
 
 export const selectMe = createSelector([getBase], (base) =>
-    _get(base, ['me'], [])
+    _get(base, ['me'], undefined)
 );
 
 export const selectMyDisplayName = createSelector([getBase], (base) =>

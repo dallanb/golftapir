@@ -1,7 +1,7 @@
 // @ts-ignore
 import { static as Immutable } from 'seamless-immutable';
 import { createReducer } from 'reduxsauce';
-import { BaseTypes } from './actions';
+import { LeagueAppTypes } from './actions';
 import { AccountTypes } from '@actions';
 
 /* ------------- Interface ------------- */
@@ -82,14 +82,14 @@ function set(state: any, { data }: any) {
 }
 
 const HANDLERS = {
-    [BaseTypes.INIT]: init,
-    [BaseTypes.INIT_SUCCESS]: initSuccess,
-    [BaseTypes.INIT_FAILURE]: initFailure,
-    [BaseTypes.REFRESH]: refresh,
-    [BaseTypes.REFRESH_SUCCESS]: refreshSuccess,
-    [BaseTypes.REFRESH_FAILURE]: refreshFailure,
-    [BaseTypes.TERMINATE]: terminate,
-    [BaseTypes.SET]: set,
+    [LeagueAppTypes.INIT]: init,
+    [LeagueAppTypes.INIT_SUCCESS]: initSuccess,
+    [LeagueAppTypes.INIT_FAILURE]: initFailure,
+    [LeagueAppTypes.REFRESH]: refresh,
+    [LeagueAppTypes.REFRESH_SUCCESS]: refreshSuccess,
+    [LeagueAppTypes.REFRESH_FAILURE]: refreshFailure,
+    [LeagueAppTypes.TERMINATE]: terminate,
+    [LeagueAppTypes.SET]: set,
 };
 
 export const reducer = createReducer(INITIAL_STATE, HANDLERS);

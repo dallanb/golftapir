@@ -1,8 +1,7 @@
 // @ts-ignore
 import { static as Immutable } from 'seamless-immutable';
 import { createReducer } from 'reduxsauce';
-import { BaseTypes } from './actions';
-import { AccountTypes } from '@actions';
+import { MemberAppTypes } from './actions';
 
 /* ------------- Interface ------------- */
 export interface MemberAppInterface {
@@ -58,11 +57,11 @@ function set(state: any, { data }: any) {
 }
 
 const HANDLERS = {
-    [BaseTypes.INIT]: init,
-    [BaseTypes.INIT_SUCCESS]: initSuccess,
-    [BaseTypes.INIT_FAILURE]: initFailure,
-    [BaseTypes.TERMINATE]: terminate,
-    [BaseTypes.SET]: set,
+    [MemberAppTypes.INIT]: init,
+    [MemberAppTypes.INIT_SUCCESS]: initSuccess,
+    [MemberAppTypes.INIT_FAILURE]: initFailure,
+    [MemberAppTypes.TERMINATE]: terminate,
+    [MemberAppTypes.SET]: set,
 };
 
 export const reducer = createReducer(INITIAL_STATE, HANDLERS);

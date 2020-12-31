@@ -7,7 +7,7 @@ import MemberAppView from './MemberAppView';
 import { loadState } from '../../localStorage';
 
 const MemberApp: React.FunctionComponent<MemberAppProps> = () => {
-    const preloadedState = loadState(['auth', 'base', 'notification']);
+    const preloadedState = loadState(['base']);
     const { store } = configStore({ preloadedState });
     return (
         <Provider store={store}>

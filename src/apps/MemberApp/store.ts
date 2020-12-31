@@ -3,9 +3,10 @@ import createSagaMiddleware from 'redux-saga';
 import { all, fork } from 'redux-saga/effects';
 import { createLogger } from 'redux-logger';
 import { get as _get } from 'lodash';
-import { reducer as base } from '@apps/MemberApp/reducer';
+import { reducer as memberApp } from '@apps/MemberApp/reducer';
 import {
     authReducer as auth,
+    baseReducer as base,
     modalReducer as modal,
     notificationReducer as notification,
 } from '@reducers';
@@ -92,6 +93,7 @@ function configStore(options?: { preloadedState: any }): any {
             auth,
             modal,
             notification,
+            memberApp,
             accountPage,
             competitorPage,
             competitorsPage,
@@ -161,14 +163,14 @@ function configStore(options?: { preloadedState: any }): any {
     }
     sagaMiddleware.run(memberAppSaga);
 
-    store.subscribe(() => {
-        const state = store.getState();
-        saveState({
-            auth: _get(state, ['auth'], {}),
-            base: _get(state, ['base'], {}),
-            // notification: _get(state, ['notification'], {}),
-        });
-    });
+    // store.subscribe(() => {
+    //     const state = store.getState();
+    //     saveState({
+    //         auth: _get(state, ['auth'], {}),
+    //         base: _get(state, ['base'], {}),
+    //         // notification: _get(state, ['notification'], {}),
+    //     });
+    // });
     return { store };
 }
 

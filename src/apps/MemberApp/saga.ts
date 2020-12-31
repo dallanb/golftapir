@@ -8,7 +8,7 @@ import {
     take,
     takeLatest,
 } from 'redux-saga/effects';
-import BaseActions, { BaseTypes } from './actions';
+import MemberAppActions, { MemberAppTypes } from './actions';
 import {
     AccountActions,
     AccountTypes,
@@ -37,10 +37,10 @@ function* init() {
         );
 
         const { data: me } = yield call(fetchAccount);
-        yield put(BaseActions.set({ me }));
+        yield put(MemberAppActions.set({ me }));
 
         const { data: leagues } = yield call(fetchLeagues);
-        yield put(BaseActions.set({ leagues }));
+        yield put(MemberAppActions.set({ leagues }));
 
         // prepare notifications
         const token = yield call(requestToken);
@@ -57,9 +57,9 @@ function* init() {
             throw new Error('Unable to set token');
         }
 
-        yield put(BaseActions.initSuccess());
+        yield put(MemberAppActions.initSuccess());
     } catch (err) {
-        yield put(BaseActions.initFailure(err));
+        yield put(MemberAppActions.initFailure(err));
     }
 }
 
@@ -131,9 +131,9 @@ function* requestToken() {
     return token;
 }
 
-export default function* BaseSaga() {
+export default function* MemberAppSaga() {
     yield all([
-        takeLatest(BaseTypes.INIT, init),
-        takeLatest(BaseTypes.TERMINATE, terminate),
+        takeLatest(MemberAppTypes.INIT, init),
+        takeLatest(MemberAppTypes.TERMINATE, terminate),
     ]);
 }
