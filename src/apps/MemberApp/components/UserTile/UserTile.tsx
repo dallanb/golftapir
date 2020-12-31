@@ -1,11 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import SiderLayoutHeader from '@layouts/SiderLayout/SiderLayoutHeader';
-import {
-    selectMe,
-    selectMyAvatarSrc,
-    selectMyDisplayName,
-} from '@selectors/BaseSelector';
+import { selectMe, selectMyAvatarSrc } from '@selectors/BaseSelector';
 import HeaderTitle from './HeaderTitle';
 import HeaderExtra from './HeaderExtra';
 import { UserTileProps } from './types';

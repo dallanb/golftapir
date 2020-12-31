@@ -1,13 +1,19 @@
 // @ts-ignore
 import { static as Immutable } from 'seamless-immutable';
 import { createReducer } from 'reduxsauce';
-import { AccountTypes, AuthTypes, NotificationTypes } from '@actions';
+import {
+    AccountTypes,
+    AuthTypes,
+    LeagueTypes,
+    NotificationTypes,
+} from '@actions';
 import { localStorageSave } from '@utils';
 import { NotificationInterface } from '@reducers/NotificationReducer';
 
 /* ------------- Interface ------------- */
 export interface BaseInterface {
     readonly me: any;
+    readonly leagues: any;
     readonly isLoggedIn: boolean;
     readonly forceLogout: boolean;
     readonly pending: number;
@@ -16,6 +22,7 @@ export interface BaseInterface {
 /* ------------- Initial State ------------- */
 const INITIAL_STATE: BaseInterface = {
     me: undefined,
+    leagues: undefined,
     isLoggedIn: false,
     forceLogout: false,
     pending: 0,
@@ -68,6 +75,11 @@ const fetchNotificationPendingFailure = localStorageSave((state: any) =>
         pending: INITIAL_STATE.pending,
     })
 );
+const fetchMyLeaguesSuccess = localStorageSave((state: any, { data }: any) =>
+    Immutable.merge(state, {
+        leagues: data,
+    })
+);
 
 const HANDLERS = {
     [AuthTypes.LOGIN_SUCCESS]: loginSuccess,
@@ -77,6 +89,7 @@ const HANDLERS = {
     [AccountTypes.FETCH_MY_ACCOUNT_SUCCESS]: fetchMyAccountSuccess,
     [NotificationTypes.FETCH_PENDING_SUCCESS]: fetchNotificationPendingSuccess,
     [NotificationTypes.FETCH_PENDING_FAILURE]: fetchNotificationPendingFailure,
+    [LeagueTypes.FETCH_MY_LEAGUES_SUCCESS]: fetchMyLeaguesSuccess,
 };
 
 export default createReducer(INITIAL_STATE, HANDLERS);
