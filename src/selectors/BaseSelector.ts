@@ -30,3 +30,7 @@ export const selectLeagues = createSelector([getBase], (base) =>
 export const selectPending = createSelector([getBase], (base) =>
     _get(base, ['pending'], 0)
 );
+
+export const selectExpiry = createSelector([getBase], (base) =>
+    _get(base, ['expiry'], 0)
+);

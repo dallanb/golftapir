@@ -1,10 +1,23 @@
 import { AnyAction } from 'redux';
-import { all, call, put, takeLatest } from 'redux-saga/effects';
+import {
+    all,
+    call,
+    cancel,
+    cancelled,
+    fork,
+    put,
+    take,
+    takeLatest,
+} from 'redux-saga/effects';
+import { eventChannel, END } from 'redux-saga';
 import { message } from 'antd';
 import AuthActions, { AuthTypes } from '@actions/AuthActions';
 import { ClientProxy, AuthService } from '@services';
 import CONSTANTS from '@locale/en-CA';
+import { countdown } from '@utils';
 import { FirebaseClient } from '@libs';
+
+let tokenWatchTask: any;
 
 function* ping() {
     yield call(AuthService.ping);
@@ -12,10 +25,12 @@ function* ping() {
 
 function* login({ email, password }: AnyAction) {
     try {
+        yield tokenWatchTask && cancel(tokenWatchTask);
         const res = yield call(AuthService.login, { email, password });
-        const { user, access_token } = res;
+        const { user, access_token, expiry } = res;
         ClientProxy.accessToken = access_token;
-        yield put(AuthActions.loginSuccess(user));
+        tokenWatchTask = yield fork(tokenCheck, expiry);
+        yield put(AuthActions.loginSuccess(user, expiry));
         message.success(CONSTANTS.AUTH.SUCCESS.LOGIN);
     } catch (err) {
         yield put(AuthActions.loginFailure(err));
@@ -50,10 +65,12 @@ function* register({
 
 function* refresh() {
     try {
+        yield tokenWatchTask && cancel(tokenWatchTask);
         const res = yield call(AuthService.refresh);
-        const { access_token, user } = res;
+        const { access_token, user, expiry } = res;
         ClientProxy.accessToken = access_token;
-        yield put(AuthActions.refreshSuccess(user));
+        tokenWatchTask = yield fork(tokenCheck, expiry);
+        yield put(AuthActions.refreshSuccess(user, expiry));
     } catch (err) {
         yield put(AuthActions.refreshFailure(err));
         message.error(CONSTANTS.AUTH.ERROR.SESSION);
@@ -62,6 +79,7 @@ function* refresh() {
 
 function* logout() {
     try {
+        yield tokenWatchTask && cancel(tokenWatchTask);
         const res = yield call(AuthService.logout);
         ClientProxy.accessToken = null;
         yield put(AuthActions.logoutSuccess());
@@ -69,6 +87,20 @@ function* logout() {
     } catch (err) {
         yield put(AuthActions.logoutFailure(err));
         message.error(CONSTANTS.AUTH.ERROR.LOGOUT);
+    }
+}
+
+export function* tokenCheck(expiry: number) {
+    const chan = yield call(countdown, expiry);
+    try {
+        while (true) {
+            let seconds = yield take(chan);
+            if (seconds <= expiry / 2) yield put(AuthActions.refresh());
+        }
+    } finally {
+        if (yield cancelled()) {
+            chan.close();
+        }
     }
 }
 
