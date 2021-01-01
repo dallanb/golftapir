@@ -104,6 +104,7 @@ const LeagueAppView: React.FunctionComponent<LeagueAppViewProps> = () => {
                             key={path}
                             path={path}
                             component={component}
+                            componentProps={{league}}
                             exact={exact}
                             isLoggedIn={isLoggedIn}
                             forceLogout={forceLogout}

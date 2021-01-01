@@ -2,9 +2,9 @@ import {
     all,
     call,
     delay,
+    fork,
     put,
     race,
-    fork,
     take,
     takeLatest,
 } from 'redux-saga/effects';

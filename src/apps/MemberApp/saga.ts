@@ -1,13 +1,11 @@
 import {
     all,
     call,
-    cancel,
-    cancelled,
+
     delay,
     fork,
     put,
     race,
-    select,
     take,
     takeLatest,
 } from 'redux-saga/effects';
@@ -30,16 +28,13 @@ function* init() {
         if (!ClientProxy.accessToken) yield call(refresh);
 
         const me = yield call(fetchMyAccount);
-        // I dont think i need to even pass auth Data cause the id can be grabbed from kong CompetitorHeader
-        // const authData = yield select(selectAuthData);
+
         yield put(
             SocketActions.init(me.membership_uuid, {
                 eventHandler: socketEventHandlers,
             })
         );
 
-        // const { data: me } = yield call(fetchAccount);
-        // yield put(MemberAppActions.set({ me }));
 
         yield fork(fetchMyLeagues);
 

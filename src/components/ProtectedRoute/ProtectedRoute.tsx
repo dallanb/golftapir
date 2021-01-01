@@ -8,6 +8,7 @@ const ProtectedRoute = ({
     isLoggedIn,
     forceLogout,
     refresh,
+    componentProps,
     ...restProps
 }: ProtectedRouteProps) => {
     const protect = (props: any) => {
@@ -16,7 +17,7 @@ const ProtectedRoute = ({
         }
         if (isLoggedIn) {
             // // TODO: maybe try to pass in props like league here!
-            return <Component {...props} />;
+            return <Component {...props} {...componentProps} />;
         }
     };
     return <Route {...restProps} render={protect} />;
