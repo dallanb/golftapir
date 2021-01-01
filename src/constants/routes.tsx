@@ -4,7 +4,6 @@ import {
     DollarCircleFilled,
     FlagFilled,
     HomeFilled,
-    MessageFilled,
     NotificationFilled,
     SettingFilled,
     TeamOutlined,
@@ -155,7 +154,7 @@ const routes = {
             BASE_KEY: 'league_members',
             KEY: 'league_members',
             LABEL: CONSTANTS.PAGES.LEAGUE_MEMBERS.TITLE,
-            ICON: CrownFilled,
+            ICON: TeamOutlined,
         },
     },
 };

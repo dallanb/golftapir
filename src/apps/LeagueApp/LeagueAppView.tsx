@@ -68,7 +68,10 @@ const LeagueAppView: React.FunctionComponent<LeagueAppViewProps> = () => {
         constants.S3_FOLDERS.LEAGUE.AVATAR
     );
     const menuProps = {
-        paths: { league: { uuid: leagueUUID } },
+        paths: {
+            league: { uuid: leagueUUID },
+            league_members: { uuid: leagueUUID },
+        },
         names: { league: leagueName },
         icons: {
             league: {
