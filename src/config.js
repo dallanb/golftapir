@@ -7,7 +7,7 @@ const config = {
     AUTH_URL: 'auth.techtapir.com',
     ACCOUNT_URL: 'account.techtapir.com',
     CONTEST_URL: 'contest.techtapir.com',
-    CONTESTANT_URL: 'contestant.techtapir.com',
+    MEMBER_URL: 'member.techtapir.com',
     COURSE_URL: 'course.techtapir.com',
     LEAGUE_URL: 'league.techtapir.com',
     WAGER_URL: 'wager.techtapir.com',
