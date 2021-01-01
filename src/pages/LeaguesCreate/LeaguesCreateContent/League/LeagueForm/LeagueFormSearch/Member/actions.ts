@@ -7,8 +7,8 @@ const { Types, Creators } = createActions(
         searchFailure: ['err'],
     },
     {
-        prefix: 'LEAGUES_CREATE_PAGE_CONTENT_LEAGUE_SEARCH_PARTICIPANT_',
+        prefix: 'LEAGUES_CREATE_PAGE_CONTENT_LEAGUE_SEARCH_MEMBER_',
     }
 );
-export const LeaguesCreatePageContentLeagueSearchParticipantTypes = Types;
+export const LeaguesCreatePageContentLeagueSearchMemberTypes = Types;
 export default Creators;

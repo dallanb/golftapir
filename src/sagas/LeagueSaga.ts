@@ -29,9 +29,8 @@ function* fetchLeagues({ options }: AnyAction) {
 
 function* fetchMyLeagues({ options }: AnyAction) {
     try {
-        const res = yield call(LeagueService.fetchLeagues, {
+        const res = yield call(LeagueService.fetchUserMemberLeagues, 'me', {
             ...options,
-            contestant: 'me',
         });
         const { leagues } = res;
         yield put(LeagueActions.fetchMyLeaguesSuccess(leagues));

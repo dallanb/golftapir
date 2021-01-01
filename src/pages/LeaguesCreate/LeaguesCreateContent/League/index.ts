@@ -12,4 +12,4 @@ export const reducer = combineReducers({
 
 // Saga
 export { default as LeaguesCreatePageContentLeagueSaga } from './saga';
-export { LeaguesCreatePageContentLeagueSearchParticipantSaga } from './LeagueForm';
+export { LeaguesCreatePageContentLeagueSearchMemberSaga } from './LeagueForm';

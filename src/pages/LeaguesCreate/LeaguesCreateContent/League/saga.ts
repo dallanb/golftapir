@@ -10,19 +10,10 @@ import LeaguesCreatePageContentLeagueActions, {
 } from './actions';
 import { prepareInitialValues } from './utils';
 
-function* init({ options = { participant_uuid: null } }: AnyAction) {
+function* init({ options }: AnyAction) {
     try {
         const me = yield select(selectMe);
-        const members = [];
-        if (options.participant_uuid) {
-            const { membership: member } = yield call(
-                AccountService.fetchAccountMembership,
-                options.participant_uuid,
-                {}
-            );
-            members.push(member);
-        }
-        const initialValues = prepareInitialValues({ me, members });
+        const initialValues = prepareInitialValues({ me, members: [] });
         yield put(
             LeaguesCreatePageContentLeagueActions.setInitialValues(
                 initialValues

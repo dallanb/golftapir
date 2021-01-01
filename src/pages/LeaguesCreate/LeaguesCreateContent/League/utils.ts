@@ -8,10 +8,10 @@ export const prepareInitialValues = (leagueData: {
     const { me, members } = leagueData;
     return {
         sport_uuid: config.GOLF_UUID,
-        participants: [
+        members: [
             me.membership_uuid,
             ...members.map((member: any) => member.membership_uuid),
         ],
-        permanent_participants: [me, ...members],
+        permanent_members: [me, ...members],
     };
 };

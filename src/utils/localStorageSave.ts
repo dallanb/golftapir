@@ -3,7 +3,7 @@ import { saveState } from '../localStorage';
 
 const localStorageSave = (f: any): any => (...args: any) => {
     const res = f(...args);
-    saveState({ res });
+    saveState({ base: res });
     return res;
 };
 

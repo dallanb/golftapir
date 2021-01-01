@@ -14,11 +14,7 @@ const LeagueForm: React.FunctionComponent<LeagueFormProps> = () => {
     const { initialValues } = useSelector(selectLeagueFormData);
 
     const handleSubmit = (values: FormikValues) => {
-        const league = _pick(values, [
-            'name',
-            'avatar',
-            // 'participants',
-        ]);
+        const league = _pick(values, ['name', 'avatar', 'members']);
         dispatch(LeaguesCreatePageContentLeagueActions.submit(league));
     };
     return (

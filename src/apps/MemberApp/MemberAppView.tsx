@@ -12,12 +12,12 @@ import { AuthActions } from '@actions';
 import MemberAppActions from './actions';
 import statics from '@apps/MemberApp/statics';
 import { FirebaseClient } from '@libs';
-import { selectData } from './selector';
+import { selectIsInitialized } from './selector';
 import { selectData as selectBaseData } from '@selectors/BaseSelector';
 
 const MemberAppView: React.FunctionComponent<MemberAppViewProps> = () => {
     const dispatch = useDispatch();
-    const { isInitialized } = useSelector(selectData);
+    const isInitialized = useSelector(selectIsInitialized);
     const { me, pending, isLoggedIn, forceLogout } = useSelector(
         selectBaseData
     );
@@ -39,7 +39,6 @@ const MemberAppView: React.FunctionComponent<MemberAppViewProps> = () => {
             dispatch(MemberAppActions.terminate());
         };
     }, []);
-
     if (!isInitialized) return <Spin />;
     return (
         <MemberAppLayout

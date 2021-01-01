@@ -7,7 +7,7 @@ import LeagueAppView from './LeagueAppView';
 import { loadState } from '../../localStorage';
 
 const LeagueApp: React.FunctionComponent<LeagueAppProps> = () => {
-    const preloadedState = loadState(['base']);
+    const preloadedState = loadState();
     const { store } = configStore({ preloadedState });
     return (
         <Provider store={store}>
@@ -17,4 +17,4 @@ const LeagueApp: React.FunctionComponent<LeagueAppProps> = () => {
     );
 };
 
-export default LeagueApp;
+export default React.memo(LeagueApp);

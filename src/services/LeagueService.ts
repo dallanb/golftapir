@@ -17,6 +17,20 @@ export default {
             query,
         });
     },
+    fetchMemberLeagues(uuid: string, query: any = {}) {
+        return ClientProxy.get({
+            url: config.LEAGUE_URL,
+            endpoint: `/members/${uuid}/leagues`,
+            query,
+        });
+    },
+    fetchUserMemberLeagues(uuid: string, query: any = {}) {
+        return ClientProxy.get({
+            url: config.LEAGUE_URL,
+            endpoint: `/members/leagues/user/${uuid}`,
+            query,
+        });
+    },
     createLeague(data: any = {}) {
         return ClientProxy.post({
             url: config.LEAGUE_URL,

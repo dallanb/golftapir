@@ -10,9 +10,7 @@ export interface LeagueAppInterface {
     readonly isRefreshing: boolean;
     readonly isInitialized: boolean;
     readonly err?: Error;
-    readonly me: any;
     readonly league: any;
-    readonly leagues: any[];
 }
 
 /* ------------- Initial State ------------- */
@@ -21,9 +19,7 @@ const INITIAL_STATE: LeagueAppInterface = {
     isRefreshing: false,
     isInitialized: false,
     err: undefined,
-    me: undefined,
     league: undefined,
-    leagues: [],
 };
 
 /* ------------- Reducers ------------- */

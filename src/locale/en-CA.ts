@@ -292,6 +292,7 @@ const CONSTANTS = {
                     UPLOAD_AVATAR: 'Upload Avatar',
                     AVATAR_CROPPER_TITLE: 'Edit Avatar',
                     NAME: 'Name',
+                    MEMBERS: 'Members',
                 },
                 VALIDATION: {
                     NAME_MAX_LENGTH: 'Name must be less than 50 characters',

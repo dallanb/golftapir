@@ -7,3 +7,7 @@ export const selectData = createSelector(
     [getMemberApp],
     (memberApp) => memberApp
 );
+
+export const selectIsInitialized = createSelector([getMemberApp], (memberApp) =>
+    _get(memberApp, ['isInitialized'], false)
+);

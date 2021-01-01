@@ -7,7 +7,7 @@ import MemberAppView from './MemberAppView';
 import { loadState } from '../../localStorage';
 
 const MemberApp: React.FunctionComponent<MemberAppProps> = () => {
-    const preloadedState = loadState(['base']);
+    const preloadedState = loadState();
     const { store } = configStore({ preloadedState });
     return (
         <Provider store={store}>
@@ -17,4 +17,4 @@ const MemberApp: React.FunctionComponent<MemberAppProps> = () => {
     );
 };
 
-export default MemberApp;
+export default React.memo(MemberApp);

@@ -45,6 +45,7 @@ const refreshSuccess = localStorageSave((state: any) =>
 
 const refreshFailure = localStorageSave((state: any, { err }: any) =>
     Immutable.merge(state, {
+        isLoggedIn: false,
         forceLogout: true,
     })
 );
@@ -75,6 +76,7 @@ const fetchNotificationPendingFailure = localStorageSave((state: any) =>
         pending: INITIAL_STATE.pending,
     })
 );
+
 const fetchMyLeaguesSuccess = localStorageSave((state: any, { data }: any) =>
     Immutable.merge(state, {
         leagues: data,

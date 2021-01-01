@@ -1,23 +1,23 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { Button, Menu } from 'antd';
+import { get as _get } from 'lodash';
 import { CheckOutlined, NotificationFilled } from '@ant-design/icons';
 import { HeaderExtraProps } from './types';
 import routes from '@constants/routes';
 import { Avatar, PendingBadge, UserTile } from '@components';
-import { selectPending } from '@selectors/NotificationSelector';
-import { useSelector } from 'react-redux';
-import { selectLeagueUUID, selectLeagues } from '@selectors/BaseSelector';
-import './HeaderExtra.less';
+import { selectPending, selectLeagues } from '@selectors/BaseSelector';
+import { selectLeagueUUID } from '@apps/LeagueApp/selector';
 import { withDynamicRoute, withS3URL } from '@utils';
-import { get as _get } from 'lodash';
 import constants from '@constants';
+import './HeaderExtra.less';
 
 const HeaderExtra: React.FunctionComponent<HeaderExtraProps> = ({ user }) => {
     const history = useHistory();
     const pending = useSelector(selectPending);
-    const leagues = useSelector(selectLeagues);
     const uuid = useSelector(selectLeagueUUID);
+    const leagues = useSelector(selectLeagues) || [];
 
     const getUserTileMenuItems: any = () => {
         const leagueMenuItems = leagues.map((league: any) => (

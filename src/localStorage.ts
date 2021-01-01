@@ -1,13 +1,10 @@
-import { pick as _pick } from 'lodash';
-
-export const loadState = (keys: string[] = []) => {
+export const loadState = () => {
     try {
         const serializedState = localStorage.getItem('state');
         if (serializedState === null) {
             return undefined;
         }
-        const state = JSON.parse(serializedState);
-        return _pick(state, keys);
+        return JSON.parse(serializedState);
     } catch (err) {
         console.error(err);
         return undefined;

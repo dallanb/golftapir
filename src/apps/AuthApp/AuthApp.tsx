@@ -5,7 +5,7 @@ import { loadState } from '../../localStorage';
 import configStore from './store';
 
 const AuthApp: React.FunctionComponent = () => {
-    const preloadedState = loadState(['base']);
+    const preloadedState = loadState();
     const { store } = configStore({ preloadedState });
     return (
         <Provider store={store}>
@@ -14,4 +14,4 @@ const AuthApp: React.FunctionComponent = () => {
     );
 };
 
-export default AuthApp;
+export default React.memo(AuthApp);

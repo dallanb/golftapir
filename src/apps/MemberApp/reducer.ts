@@ -8,8 +8,6 @@ export interface MemberAppInterface {
     readonly isFetching: boolean;
     readonly isInitialized: boolean;
     readonly err?: Error;
-    readonly me: any;
-    readonly leagues: any[];
 }
 
 /* ------------- Initial State ------------- */
@@ -17,8 +15,6 @@ const INITIAL_STATE: MemberAppInterface = {
     isFetching: false,
     isInitialized: false,
     err: undefined,
-    me: undefined,
-    leagues: [],
 };
 
 /* ------------- Reducers ------------- */
