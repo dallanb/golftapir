@@ -69,6 +69,13 @@ export {
     LeaguePageRoutes,
 } from './League';
 export {
+    default as LeagueMembers,
+    reducer as leagueMembersPage,
+    LeagueMembersPageSaga,
+    LeagueMembersPageContentMembersSaga,
+    LeagueMembersPageRoutes,
+} from './LeagueMembers';
+export {
     default as Leagues,
     reducer as leaguesPage,
     LeaguesPageSaga,

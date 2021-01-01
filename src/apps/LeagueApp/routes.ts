@@ -1,5 +1,8 @@
-import { LeaguePageRoutes } from '@pages';
+import { LeagueMembersPageRoutes, LeaguePageRoutes } from '@pages';
 
 export const routes: any = [];
 
-export const protectedRoutes: any = [...LeaguePageRoutes];
+export const protectedRoutes: any = [
+    ...LeaguePageRoutes,
+    ...LeagueMembersPageRoutes,
+];

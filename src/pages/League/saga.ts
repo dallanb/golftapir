@@ -4,9 +4,6 @@ import LeaguePageActions, { LeaguePageTypes } from './actions';
 import { initLeague } from './helpers';
 
 // Action Handlers
-function* preInit({ data: league }: AnyAction) {
-    yield put(LeaguePageActions.set({ league }));
-}
 
 function* init({ uuid }: AnyAction) {
     try {
@@ -19,7 +16,6 @@ function* init({ uuid }: AnyAction) {
 
 export default function* LeaguePageSaga() {
     yield all([
-        takeLatest(LeaguePageTypes.PRE_INIT, preInit),
         takeLatest(LeaguePageTypes.INIT, init),
     ]);
 }

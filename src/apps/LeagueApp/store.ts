@@ -10,7 +10,13 @@ import {
     modalReducer as modal,
     notificationReducer as notification,
 } from '@reducers';
-import { leaguePage, LeaguePageSaga } from '@pages';
+import {
+    leaguePage,
+    LeaguePageSaga,
+    leagueMembersPage,
+    LeagueMembersPageSaga,
+    LeagueMembersPageContentMembersSaga,
+} from '@pages';
 import { default as BaseSaga } from '@apps/LeagueApp/saga';
 import {
     AccountSaga,
@@ -50,6 +56,7 @@ function configStore(options?: { preloadedState: any }): any {
             notification,
             leagueApp,
             leaguePage,
+            leagueMembersPage,
         }),
         _get(options, ['preloadedState'], {}),
         compose(
@@ -73,18 +80,12 @@ function configStore(options?: { preloadedState: any }): any {
             fork(SocketSaga),
             fork(TopicSocketSaga),
             fork(LeaguePageSaga),
+            fork(LeagueMembersPageSaga),
+            fork(LeagueMembersPageContentMembersSaga),
         ]);
     }
     sagaMiddleware.run(memberAppSaga);
 
-    // store.subscribe(() => {
-    //     const state = store.getState();
-    //     saveState({
-    //         auth: _get(state, ['auth'], {}),
-    //         base: _get(state, ['base'], {}),
-    //         notification: _get(state, ['notification'], {}),
-    //     });
-    // });
     return { store };
 }
 

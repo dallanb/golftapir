@@ -7,14 +7,15 @@ import LeagueHeader from './LeagueHeader';
 import LeagueContent from './LeagueContent';
 import LeagueSider from './LeagueSider';
 import { selectData } from './selector';
+import { selectLeague } from '@apps/LeagueApp/selector';
 import './League.less';
 
-const League: React.FunctionComponent<LeagueProps> = ({ league }) => {
+const League: React.FunctionComponent<LeagueProps> = () => {
     const dispatch = useDispatch();
+    const league = useSelector(selectLeague);
     const { isInitialized } = useSelector(selectData);
 
     useEffect(() => {
-        dispatch(LeaguePageActions.preInit(league));
         dispatch(LeaguePageActions.init(league.uuid));
         return () => {
             dispatch(LeaguePageActions.terminate());

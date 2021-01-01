@@ -143,6 +143,20 @@ const routes = {
             LABEL: CONSTANTS.PAGES.LEAGUE.TITLE,
             ICON: CrownFilled,
         },
+        LEAGUE_MEMBER: {
+            ROUTE: '/league/:uuid/members/:member_uuid',
+            BASE_KEY: 'league_members',
+            KEY: 'league_member',
+            LABEL: CONSTANTS.PAGES.LEAGUE_MEMBER.TITLE,
+            ICON: null,
+        },
+        LEAGUE_MEMBERS: {
+            ROUTE: '/league/:uuid/members',
+            BASE_KEY: 'league_members',
+            KEY: 'league_members',
+            LABEL: CONSTANTS.PAGES.LEAGUE_MEMBERS.TITLE,
+            ICON: CrownFilled,
+        },
     },
 };
 

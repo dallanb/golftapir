@@ -163,14 +163,6 @@ function configStore(options?: { preloadedState: any }): any {
     }
     sagaMiddleware.run(memberAppSaga);
 
-    // store.subscribe(() => {
-    //     const state = store.getState();
-    //     saveState({
-    //         auth: _get(state, ['auth'], {}),
-    //         base: _get(state, ['base'], {}),
-    //         // notification: _get(state, ['notification'], {}),
-    //     });
-    // });
     return { store };
 }
 
