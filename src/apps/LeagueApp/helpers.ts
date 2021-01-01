@@ -14,5 +14,10 @@ export function* fetchMyAccount() {
 }
 
 export function* fetchMyLeagues() {
-    return yield call(fetchMyLeaguesHelper);
+    // let leagues = yield select(selectLeagues);
+    return yield call(fetchMyLeaguesHelper, {
+        page: 1,
+        per_page: 100,
+        include: 'avatar',
+    });
 }

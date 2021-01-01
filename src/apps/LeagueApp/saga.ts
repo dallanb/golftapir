@@ -4,15 +4,13 @@ import {
     delay,
     put,
     race,
-    select,
+    fork,
     take,
     takeLatest,
 } from 'redux-saga/effects';
 import { AnyAction } from 'redux';
 import LeagueAppActions, { LeagueAppTypes } from './actions';
 import {
-    AccountActions,
-    AccountTypes,
     AuthActions,
     AuthTypes,
     LeagueActions,
@@ -37,23 +35,16 @@ function* init({ uuid }: AnyAction) {
 
         const me = yield call(fetchMyAccount);
 
-        // // I dont think i need to even pass auth Data cause the id can be grabbed from kong CompetitorHeader
-        // const authData = yield select(selectAuthData)
         yield put(
             SocketActions.init(me.membership_uuid, {
                 eventHandler: socketEventHandlers,
             })
         );
 
-        // TODO: SORT THIS OUT
-        // const { data: me } = yield call(fetchAccount);
-        // yield put(LeagueAppActions.set({ me }));
-        // WAIT UNTIL WE ARE DONE FETCHING ACCOUNT?
-
         const { data: league } = yield call(fetchLeague, uuid);
         yield put(LeagueAppActions.set({ league }));
 
-        yield call(fetchMyLeagues);
+        yield fork(fetchMyLeagues);
 
         // prepare notifications
         const token = yield call(requestToken);

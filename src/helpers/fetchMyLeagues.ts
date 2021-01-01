@@ -1,7 +1,12 @@
 import { put, race, take } from 'redux-saga/effects';
 import { LeagueActions, LeagueTypes } from '@actions';
 
-function* fetchMyLeagues(options = { page: 1, per_page: 10 }) {
+function* fetchMyLeagues(
+    options: { page: number; per_page: number; include?: string } = {
+        page: 1,
+        per_page: 10,
+    }
+) {
     yield put(LeagueActions.fetchMyLeagues(options));
     const { success, failure } = yield race({
         success: take(LeagueTypes.FETCH_MY_LEAGUES_SUCCESS),

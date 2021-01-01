@@ -4,7 +4,7 @@ import {
     delay,
     put,
     race,
-    select,
+    fork,
     take,
     takeLatest,
 } from 'redux-saga/effects';
@@ -38,7 +38,7 @@ function* init() {
         // const { data: me } = yield call(fetchAccount);
         // yield put(MemberAppActions.set({ me }));
 
-        yield call(fetchMyLeagues);
+        yield fork(fetchMyLeagues);
 
         // prepare notifications
         const token = yield call(requestToken);
