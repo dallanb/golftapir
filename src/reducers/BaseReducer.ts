@@ -16,6 +16,7 @@ export interface BaseInterface {
     readonly leagues: any;
     readonly isLoggedIn: boolean;
     readonly forceLogout: boolean;
+    readonly expiry: number;
     readonly pending: number;
 }
 
@@ -25,26 +26,30 @@ const INITIAL_STATE: BaseInterface = {
     leagues: undefined,
     isLoggedIn: false,
     forceLogout: false,
+    expiry: 0,
     pending: 0,
 };
 
 /* ------------- Reducers ------------- */
-const loginSuccess = localStorageSave((state: any) =>
+const loginSuccess = localStorageSave((state: any, { expiry }: any) =>
     Immutable.merge(state, {
         isLoggedIn: true,
         forceLogout: false,
+        expiry,
     })
 );
 
-const refreshSuccess = localStorageSave((state: any) =>
+const refreshSuccess = localStorageSave((state: any, { expiry }: any) =>
     Immutable.merge(state, {
         isLoggedIn: true,
         forceLogout: false,
+        expiry,
     })
 );
 
 const refreshFailure = localStorageSave((state: any, { err }: any) =>
     Immutable.merge(state, {
+        ...INITIAL_STATE,
         isLoggedIn: false,
         forceLogout: true,
     })
