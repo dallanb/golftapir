@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
 
 // Reducer
-import { reducer as participantReducer } from './Participant';
+import { reducer as memberReducer } from './Member';
 export const reducer = combineReducers({
-    participant: participantReducer,
+    member: memberReducer,
 });
 
 // Saga
-export { LeaguesCreatePageContentLeagueSearchParticipantSaga } from './Participant';
+export { LeaguesCreatePageContentLeagueSearchMemberSaga } from './Member';

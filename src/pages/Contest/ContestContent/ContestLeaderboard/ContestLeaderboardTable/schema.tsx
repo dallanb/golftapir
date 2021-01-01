@@ -40,7 +40,7 @@ const columnsSchema = [
         className: 'country',
     },
     {
-        Header: 'Participant',
+        Header: 'Member',
         accessor: 'uuid',
         Cell: ({ value }: any) => (
             <ContestLeaderboardTableParticipant uuid={value} />

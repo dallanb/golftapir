@@ -9,8 +9,8 @@ const { Types, Creators } = createActions(
         set: ['data'],
     },
     {
-        prefix: 'BASE_',
+        prefix: 'MEMBER_APP_',
     }
 );
-export const BaseTypes = Types;
+export const MemberAppTypes = Types;
 export default Creators;

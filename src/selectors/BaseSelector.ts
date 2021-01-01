@@ -8,7 +8,7 @@ const getBase = (state: any) => state.base;
 export const selectData = createSelector([getBase], (base) => base);
 
 export const selectMe = createSelector([getBase], (base) =>
-    _get(base, ['me'], [])
+    _get(base, ['me'], undefined)
 );
 
 export const selectMyDisplayName = createSelector([getBase], (base) =>
@@ -24,13 +24,9 @@ export const selectMyAvatarSrc = createSelector([getBase], (base) => {
 });
 
 export const selectLeagues = createSelector([getBase], (base) =>
-    _get(base, ['leagues'], [])
+    _get(base, ['leagues'], undefined)
 );
 
-export const selectLeague = createSelector([getBase], (base) =>
-    _get(base, ['league'], undefined)
-);
-
-export const selectLeagueUUID = createSelector([getBase], (base) =>
-    _get(base, ['league', 'uuid'], null)
+export const selectPending = createSelector([getBase], (base) =>
+    _get(base, ['pending'], 0)
 );

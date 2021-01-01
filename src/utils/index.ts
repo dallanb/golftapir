@@ -5,6 +5,7 @@ export { default as getName } from './getName';
 export { default as getRefHeight } from './getRefHeight';
 export { default as getRouteBase } from './getRouteBase';
 export { default as getRouteBreadcrumb } from './getRouteBreadcrumb';
+export { default as localStorageSave } from './localStorageSave';
 export { default as mapActionColour } from './mapActionColour';
 export { default as mapActionLabel } from './mapActionLabel';
 export { default as mapStatusColour } from './mapStatusColour';

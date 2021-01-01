@@ -15,6 +15,7 @@ export { default as fetchNotifications } from './fetchNotifications';
 export { default as fetchScore } from './fetchScore';
 export { default as fetchScoreContest } from './fetchScoreContest';
 export { default as fetchMyScoreContestParticipantSheet } from './fetchMyScoreContestParticipantSheet';
+export { default as fetchMyLeagues } from './fetchMyLeagues';
 export { default as fetchWagers } from './fetchWagers';
 export { default as subscribe } from './subscribe';
 export { default as subscriptionExists } from './subscriptionExists';

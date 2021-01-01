@@ -13,8 +13,8 @@ const { Types, Creators } = createActions(
         set: ['data'],
     },
     {
-        prefix: 'BASE_',
+        prefix: 'LEAGUE_APP_',
     }
 );
-export const BaseTypes = Types;
+export const LeagueAppTypes = Types;
 export default Creators;

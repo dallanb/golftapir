@@ -27,6 +27,19 @@ function* fetchLeagues({ options }: AnyAction) {
     }
 }
 
+function* fetchMyLeagues({ options }: AnyAction) {
+    try {
+        const res = yield call(LeagueService.fetchUserMemberLeagues, 'me', {
+            ...options,
+        });
+        const { leagues } = res;
+        yield put(LeagueActions.fetchMyLeaguesSuccess(leagues));
+    } catch (err) {
+        yield put(LeagueActions.fetchMyLeaguesFailure(err));
+        message.error(CONSTANTS.ACCOUNT.ERROR.FETCH_ALL);
+    }
+}
+
 function* updateLeague({ uuid, values }: AnyAction) {
     try {
         const res = yield call(LeagueService.updateLeague, uuid, values);
@@ -42,6 +55,7 @@ export default function* LeagueSaga() {
     yield all([
         takeLatest(LeagueTypes.FETCH_LEAGUE, fetchLeague),
         takeLatest(LeagueTypes.FETCH_LEAGUES, fetchLeagues),
+        takeLatest(LeagueTypes.FETCH_MY_LEAGUES, fetchMyLeagues),
         takeLatest(LeagueTypes.UPDATE_LEAGUE, updateLeague),
     ]);
 }

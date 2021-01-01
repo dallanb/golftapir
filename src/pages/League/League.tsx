@@ -9,7 +9,7 @@ import LeagueHeader from './LeagueHeader';
 import LeagueContent from './LeagueContent';
 import LeagueSider from './LeagueSider';
 import { selectData } from './selector';
-import { selectLeague } from '@selectors/BaseSelector';
+import { selectLeague } from '@apps/LeagueApp/selector';
 import './League.less';
 
 const League: React.FunctionComponent<LeagueProps> = () => {

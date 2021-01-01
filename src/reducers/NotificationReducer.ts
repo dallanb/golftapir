@@ -14,17 +14,16 @@ const INITIAL_STATE: NotificationInterface = {
 };
 
 /* ------------- Reducers ------------- */
-function fetchPendingSuccess(state: any, { pending }: NotificationInterface) {
-    return Immutable.merge(state, {
+const fetchPendingSuccess = (state: any, { pending }: NotificationInterface) =>
+    Immutable.merge(state, {
         pending,
     });
-}
-function fetchPendingFailure(state: any, { err }: any) {
-    return Immutable.merge(state, {
+
+const fetchPendingFailure = (state: any, { err }: any) =>
+    Immutable.merge(state, {
         err,
         pending: INITIAL_STATE.pending,
     });
-}
 
 const HANDLERS = {
     [NotificationTypes.FETCH_PENDING_SUCCESS]: fetchPendingSuccess,

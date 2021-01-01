@@ -34,8 +34,10 @@ function initFailure(state: any, { err }: any) {
     });
 }
 
-function terminate() {
-    return INITIAL_STATE;
+function terminate(state: any) {
+    return Immutable.merge(state, {
+        ...INITIAL_STATE,
+    });
 }
 
 function set(state: any, { data }: any) {

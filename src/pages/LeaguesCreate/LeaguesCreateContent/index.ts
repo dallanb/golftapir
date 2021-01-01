@@ -12,5 +12,5 @@ export const reducer = combineReducers({
 // Saga
 export {
     LeaguesCreatePageContentLeagueSaga,
-    LeaguesCreatePageContentLeagueSearchParticipantSaga,
+    LeaguesCreatePageContentLeagueSearchMemberSaga,
 } from './League';

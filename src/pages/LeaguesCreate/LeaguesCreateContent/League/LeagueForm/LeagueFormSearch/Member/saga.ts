@@ -1,8 +1,8 @@
 import { AnyAction } from 'redux';
 import { all, call, put, takeLatest } from 'redux-saga/effects';
 import { AccountService } from '@services';
-import LeaguesCreatePageContentLeagueSearchParticipantActions, {
-    LeaguesCreatePageContentLeagueSearchParticipantTypes,
+import LeaguesCreatePageContentLeagueSearchMemberActions, {
+    LeaguesCreatePageContentLeagueSearchMemberTypes,
 } from './actions';
 
 // need to add search more somehow
@@ -14,15 +14,13 @@ function* search({ key: search }: AnyAction) {
             search,
         });
         yield put(
-            LeaguesCreatePageContentLeagueSearchParticipantActions.searchSuccess(
+            LeaguesCreatePageContentLeagueSearchMemberActions.searchSuccess(
                 accounts
             )
         );
     } catch (err) {
         yield put(
-            LeaguesCreatePageContentLeagueSearchParticipantActions.searchFailure(
-                err
-            )
+            LeaguesCreatePageContentLeagueSearchMemberActions.searchFailure(err)
         );
     }
 }
@@ -30,7 +28,7 @@ function* search({ key: search }: AnyAction) {
 export default function* LeaguesCreatePageContentLeagueSaga() {
     yield all([
         takeLatest(
-            LeaguesCreatePageContentLeagueSearchParticipantTypes.SEARCH,
+            LeaguesCreatePageContentLeagueSearchMemberTypes.SEARCH,
             search
         ),
     ]);

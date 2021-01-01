@@ -16,6 +16,17 @@ function* fetchAccount({ uuid, options }: AnyAction) {
     }
 }
 
+function* fetchMyAccount({ options }: AnyAction) {
+    try {
+        const res = yield call(AccountService.fetchAccount, 'me', options);
+        const { accounts } = res;
+        yield put(AccountActions.fetchMyAccountSuccess(accounts));
+    } catch (err) {
+        yield put(AccountActions.fetchMyAccountFailure(err));
+        message.error(CONSTANTS.ACCOUNT.ERROR.FETCH);
+    }
+}
+
 function* fetchAccountMembership({ uuid, options }: AnyAction) {
     try {
         const res = yield call(
@@ -80,6 +91,7 @@ function* bulkFetchAccounts({ within, options }: AnyAction) {
 export default function* AccountSaga() {
     yield all([
         takeLatest(AccountTypes.FETCH_ACCOUNT, fetchAccount),
+        takeLatest(AccountTypes.FETCH_MY_ACCOUNT, fetchMyAccount),
         takeLatest(
             AccountTypes.FETCH_ACCOUNT_MEMBERSHIP,
             fetchAccountMembership

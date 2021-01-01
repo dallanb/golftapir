@@ -1,11 +1,11 @@
 // @ts-ignore
 import { static as Immutable } from 'seamless-immutable';
 import { createReducer } from 'reduxsauce';
-import { LeaguesCreatePageContentLeagueSearchParticipantInterface } from './types';
-import { LeaguesCreatePageContentLeagueSearchParticipantTypes } from './actions';
+import { LeaguesCreatePageContentLeagueSearchMemberInterface } from './types';
+import { LeaguesCreatePageContentLeagueSearchMemberTypes } from './actions';
 
 /* ------------- Initial State ------------- */
-const INITIAL_STATE: LeaguesCreatePageContentLeagueSearchParticipantInterface = {
+const INITIAL_STATE: LeaguesCreatePageContentLeagueSearchMemberInterface = {
     isSearching: false,
     err: undefined,
     data: undefined,
@@ -32,9 +32,9 @@ function searchFailure(state = INITIAL_STATE, { err }: any) {
 }
 
 const HANDLERS = {
-    [LeaguesCreatePageContentLeagueSearchParticipantTypes.SEARCH]: search,
-    [LeaguesCreatePageContentLeagueSearchParticipantTypes.SEARCH_SUCCESS]: searchSuccess,
-    [LeaguesCreatePageContentLeagueSearchParticipantTypes.SEARCH_FAILURE]: searchFailure,
+    [LeaguesCreatePageContentLeagueSearchMemberTypes.SEARCH]: search,
+    [LeaguesCreatePageContentLeagueSearchMemberTypes.SEARCH_SUCCESS]: searchSuccess,
+    [LeaguesCreatePageContentLeagueSearchMemberTypes.SEARCH_FAILURE]: searchFailure,
 };
 
 export const reducer = createReducer(INITIAL_STATE, HANDLERS);

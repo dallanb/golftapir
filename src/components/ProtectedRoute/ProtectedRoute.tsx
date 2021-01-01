@@ -15,6 +15,7 @@ const ProtectedRoute = ({
             return <Redirect to="/auth/login" />;
         }
         if (isLoggedIn) {
+            // // TODO: maybe try to pass in props like league here!
             return <Component {...props} />;
         }
     };

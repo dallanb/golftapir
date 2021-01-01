@@ -4,43 +4,41 @@ import {
     delay,
     put,
     race,
-    select,
+    fork,
     take,
     takeLatest,
 } from 'redux-saga/effects';
-import BaseActions, { BaseTypes } from './actions';
+import MemberAppActions, { MemberAppTypes } from './actions';
 import {
-    AccountActions,
-    AccountTypes,
     AuthActions,
     AuthTypes,
-    LeagueActions,
-    LeagueTypes,
     NotificationActions,
     NotificationTypes,
     SocketActions,
 } from '@actions';
-import { selectAuthData, selectIsLoggedIn } from '@selectors/AuthSelectors';
 import { FirebaseClient } from '@libs';
 import { socketEventHandlers } from '@apps/MemberApp/utils';
+import { ClientProxy } from '@services';
+import { fetchMyAccount, fetchMyLeagues } from './helpers';
 
 // Action Handlers
 function* init() {
     try {
-        const isLoggedIn = yield select(selectIsLoggedIn);
-        if (!isLoggedIn) yield call(refresh);
+        if (!ClientProxy.accessToken) yield call(refresh);
 
+        const me = yield call(fetchMyAccount);
         // I dont think i need to even pass auth Data cause the id can be grabbed from kong CompetitorHeader
-        const authData = yield select(selectAuthData);
+        // const authData = yield select(selectAuthData);
         yield put(
-            SocketActions.init(authData, { eventHandler: socketEventHandlers })
+            SocketActions.init(me.membership_uuid, {
+                eventHandler: socketEventHandlers,
+            })
         );
 
-        const { data: me } = yield call(fetchAccount);
-        yield put(BaseActions.set({ me }));
+        // const { data: me } = yield call(fetchAccount);
+        // yield put(MemberAppActions.set({ me }));
 
-        const { data: leagues } = yield call(fetchLeagues);
-        yield put(BaseActions.set({ leagues }));
+        yield fork(fetchMyLeagues);
 
         // prepare notifications
         const token = yield call(requestToken);
@@ -57,9 +55,9 @@ function* init() {
             throw new Error('Unable to set token');
         }
 
-        yield put(BaseActions.initSuccess());
+        yield put(MemberAppActions.initSuccess());
     } catch (err) {
-        yield put(BaseActions.initFailure(err));
+        yield put(MemberAppActions.initFailure(err));
     }
 }
 
@@ -89,51 +87,14 @@ function* refresh() {
     }
 }
 
-function* fetchAccount() {
-    yield put(
-        AccountActions.fetchAccount('me', {
-            include: 'avatar',
-        })
-    );
-    const { success, failure } = yield race({
-        success: take(AccountTypes.FETCH_ACCOUNT_SUCCESS),
-        failure: take(AccountTypes.FETCH_ACCOUNT_FAILURE),
-    });
-
-    if (failure) {
-        throw new Error(failure);
-    }
-
-    return success;
-}
-function* fetchLeagues() {
-    yield put(
-        LeagueActions.fetchLeagues({
-            per_page: 100,
-            page: 1,
-            include: 'avatar',
-        })
-    );
-    const { success, failure } = yield race({
-        success: take(LeagueTypes.FETCH_LEAGUES_SUCCESS),
-        failure: take(LeagueTypes.FETCH_LEAGUES_FAILURE),
-    });
-
-    if (failure) {
-        throw new Error(failure);
-    }
-
-    return success;
-}
-
 function* requestToken() {
     const token = yield FirebaseClient.requestNotificationPermissions();
     return token;
 }
 
-export default function* BaseSaga() {
+export default function* MemberAppSaga() {
     yield all([
-        takeLatest(BaseTypes.INIT, init),
-        takeLatest(BaseTypes.TERMINATE, terminate),
+        takeLatest(MemberAppTypes.INIT, init),
+        takeLatest(MemberAppTypes.TERMINATE, terminate),
     ]);
 }

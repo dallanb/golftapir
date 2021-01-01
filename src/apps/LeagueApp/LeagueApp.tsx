@@ -2,18 +2,19 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { LeagueAppProps } from './types';
 import { MessageModal } from '@components';
-import { store } from './store';
+import configStore from './store';
 import LeagueAppView from './LeagueAppView';
+import { loadState } from '../../localStorage';
 
-class LeagueApp extends React.Component<LeagueAppProps> {
-    render() {
-        return (
-            <Provider store={store}>
-                <MessageModal />
-                <LeagueAppView />
-            </Provider>
-        );
-    }
-}
+const LeagueApp: React.FunctionComponent<LeagueAppProps> = () => {
+    const preloadedState = loadState();
+    const { store } = configStore({ preloadedState });
+    return (
+        <Provider store={store}>
+            <MessageModal />
+            <LeagueAppView />
+        </Provider>
+    );
+};
 
-export default LeagueApp;
+export default React.memo(LeagueApp);

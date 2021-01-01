@@ -10,16 +10,20 @@ import './Logout.less';
 class Logout extends React.PureComponent<LogoutProps> {
     componentDidMount() {
         const { init, isLoggedIn, history } = this.props;
-        if (isLoggedIn) {
-            init();
-        } else {
-            history.push('/auth/login');
-        }
+        // if (isLoggedIn) {
+        init();
+        // } else {
+        //     history.push('/auth/login');
+        // }
     }
 
     componentDidUpdate(prevProps: Readonly<LogoutProps>) {
-        const { isLoggedIn, history } = this.props;
-        if (!isLoggedIn) {
+        // const { isLoggedIn, history } = this.props;
+        // if (!isLoggedIn) {
+        //     history.push('/auth/login');
+        // }
+        const { isInitialized, isLoggedIn, history } = this.props;
+        if (isInitialized && !isLoggedIn) {
             history.push('/auth/login');
         }
     }
