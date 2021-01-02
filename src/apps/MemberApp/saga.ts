@@ -1,7 +1,6 @@
 import {
     all,
     call,
-
     delay,
     fork,
     put,
@@ -30,11 +29,10 @@ function* init() {
         const me = yield call(fetchMyAccount);
 
         yield put(
-            SocketActions.init(me.membership_uuid, {
+            SocketActions.init(me.user_uuid, {
                 eventHandler: socketEventHandlers,
             })
         );
-
 
         yield fork(fetchMyLeagues);
 

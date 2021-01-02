@@ -28,16 +28,12 @@ function* fetchData({
 }: AnyAction) {
     try {
         const competitorData = yield select(selectData);
-        const membership_uuid = _get(
-            competitorData,
-            ['account', 'membership_uuid'],
-            null
-        );
+        const member_uuid = _get(competitorData, ['member', 'uuid'], null);
         const { contests, _metadata: metadata } = yield call(
             ContestService.fetchContestsMaterialized,
             {
                 ...options,
-                participants: membership_uuid,
+                participants: member_uuid,
             }
         );
         yield put(

@@ -36,7 +36,7 @@ function* init({ uuid }: AnyAction) {
         const me = yield call(fetchMyAccount);
 
         yield put(
-            SocketActions.init(me.membership_uuid, {
+            SocketActions.init(me.user_uuid, {
                 eventHandler: socketEventHandlers,
             })
         );

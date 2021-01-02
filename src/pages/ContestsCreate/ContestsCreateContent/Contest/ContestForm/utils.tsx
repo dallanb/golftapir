@@ -28,7 +28,7 @@ export const participantSearchSelectOptionRenderer = (
     const participantSearch = useSelector(selectParticipantSearchData) || [];
     const participants = _keyBy(
         [...participantSearch, ...permanentParticipants],
-        'membership_uuid'
+        'member_uuid'
     );
     return Object.values(participants).map(
         (participant: { membership_uuid: string; display_name: string }) => (

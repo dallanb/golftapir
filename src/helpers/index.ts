@@ -1,5 +1,4 @@
 export { default as assignContestAvatar } from './assignContestAvatar';
-export { default as bulkFetchAccounts } from './bulkFetchAccounts';
 export { default as createContest } from './createContest';
 export { default as fetchContest } from './fetchContest';
 export { default as fetchContests } from './fetchContests';

@@ -10,19 +10,16 @@ export const memberSearchSelectOptionRenderer = (
 ) => {
     const permanentMembers = _get(formik, ['values', 'permanent_members'], {});
     const memberSearch = useSelector(selectMemberSearchData) || [];
-    const members = _keyBy(
-        [...memberSearch, ...permanentMembers],
-        'membership_uuid'
-    );
+    const members = _keyBy([...memberSearch, ...permanentMembers], 'user_uuid');
     return Object.values(members).map(
-        (member: { membership_uuid: string; display_name: string }) => (
+        (member: { user_uuid: string; display_name: string }) => (
             <Select.Option
-                key={member.membership_uuid}
-                value={member.membership_uuid}
+                key={member.user_uuid}
+                value={member.user_uuid}
                 disabled={
                     permanentMembers.findIndex(
-                        ({ membership_uuid }: { membership_uuid: string }) =>
-                            membership_uuid === member.membership_uuid
+                        ({ user_uuid }: { user_uuid: string }) =>
+                            user_uuid === member.user_uuid
                     ) > -1
                 }
             >

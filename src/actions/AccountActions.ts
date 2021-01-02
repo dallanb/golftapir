@@ -17,12 +17,6 @@ const { Types, Creators } = createActions(
         updateAccount: ['uuid', 'values'],
         updateAccountSuccess: ['data'],
         updateAccountFailure: ['err'],
-        assignAvatar: ['uuid', 'avatar'],
-        assignAvatarSuccess: ['data'],
-        assignAvatarFailure: ['err'],
-        bulkFetchAccounts: ['within', 'options'],
-        bulkFetchAccountsSuccess: ['data'],
-        bulkFetchAccountsFailure: ['err'],
     },
     {
         prefix: 'ACCOUNT_',
