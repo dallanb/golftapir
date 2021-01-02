@@ -79,6 +79,7 @@ const CONSTANTS = {
             FETCH: 'Error fetching Member information',
             FETCH_ALL: 'Error fetching Member information',
             UPDATE: 'Error updating Member information',
+            ASSIGN_AVATAR: 'Error updating Member avatar',
         },
     },
     NOTIFICATION: {

@@ -16,7 +16,7 @@ const ContestsListTileLeaderboard: React.FunctionComponent<ContestsListTileLeade
             if (status !== constants.STATUS.COMPLETED.KEY) {
                 const participantAvatar = withS3URL(
                     `${participant.uuid}.jpeg`,
-                    constants.S3_FOLDERS.ACCOUNT.AVATAR
+                    constants.S3_FOLDERS.MEMBER.AVATAR
                 );
                 const participantName = participant.display_name;
                 const participantScore = participant.score;

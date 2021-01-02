@@ -28,8 +28,7 @@ const CompetitorsListTile: React.FunctionComponent<CompetitorsListTileProps> = (
 
     const name = getName(item, 'Loading...');
     const avatar = _get(item, ['avatar', 's3_filename'], undefined);
-    const src =
-        avatar && withS3URL(avatar, constants.S3_FOLDERS.ACCOUNT.AVATAR);
+    const src = avatar && withS3URL(avatar, constants.S3_FOLDERS.MEMBER.AVATAR);
     const status = _get(item, ['status'], undefined);
     const cardCx = classnames('competitors-list-tile-card', {
         filled: !isEven,

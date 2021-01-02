@@ -18,6 +18,6 @@ export interface ContestPageInterface {
     readonly err?: Error;
     readonly subscribed: boolean;
     readonly contest: any;
-    readonly accountsHash: any;
+    readonly membersHash: any;
     readonly rankingLookup: any;
 }

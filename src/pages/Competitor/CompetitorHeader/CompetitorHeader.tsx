@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { selectAccountDisplayName } from '@pages/Competitor/selector';
+import { selectMemberDisplayName } from '@pages/Competitor/selector';
 import { CompetitorHeaderProps } from './types';
 import { ContentLayoutHeader } from '@layouts';
 import { Breadcrumb } from '@components';
@@ -8,7 +8,7 @@ import CONSTANTS from '@locale/en-CA';
 import './CompetitorHeader.less';
 
 const CompetitorHeader: React.FunctionComponent<CompetitorHeaderProps> = () => {
-    const title = useSelector(selectAccountDisplayName);
+    const title = useSelector(selectMemberDisplayName);
     const subTitle = CONSTANTS.PAGES.COMPETITOR.DESCRIPTION;
     const extra = <Breadcrumb />;
     return (

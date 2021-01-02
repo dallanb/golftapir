@@ -11,9 +11,9 @@ export const selectData = createSelector(
     (contestPage) => contestPage
 );
 
-export const selectAccountsHash = createSelector(
+export const selectMembersHash = createSelector(
     [getContestPage],
-    (contestPage) => _get(contestPage, ['accountsHash'], {})
+    (contestPage) => _get(contestPage, ['membersHash'], {})
 );
 
 export const selectContest = createSelector([getContestPage], (contestPage) =>

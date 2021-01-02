@@ -1,7 +1,12 @@
 import { call, put } from 'redux-saga/effects';
 import { keyBy as _keyBy } from 'lodash';
 import { TopicSocketActions } from '@actions';
-import { AccountService, ContestService, NotificationService } from '@services';
+import {
+    AccountService,
+    ContestService,
+    MemberService,
+    NotificationService,
+} from '@services';
 import ContestPageActions from './actions';
 import { socketEventHandlers } from './utils';
 
@@ -11,25 +16,25 @@ export function* initContest(uuid: string) {
         uuid
     );
     const { participants: participant } = yield call(
-        ContestService.fetchContestParticipantUser,
+        ContestService.fetchContestParticipantMember,
         uuid,
-        'me'
+        'me' // TODO: fix this
     );
     yield put(ContestPageActions.set({ contest }));
     yield put(ContestPageActions.set({ participant }));
 
     const { participants } = contest;
 
-    const accounts = Object.keys(participants);
+    const members = Object.keys(participants);
 
-    if (accounts.length) {
-        const { accounts: accountParticipants } = yield call(
-            AccountService.bulkFetchAccounts,
-            { within: { key: 'membership_uuid', value: accounts } },
+    if (members.length) {
+        const { members: memberParticipants } = yield call(
+            MemberService.bulkFetchMembers,
+            { within: { key: 'uuid', value: members } },
             { include: 'avatar,address' }
         );
-        const accountsHash = _keyBy(accountParticipants, 'membership_uuid');
-        yield put(ContestPageActions.set({ accountsHash }));
+        const membersHash = _keyBy(memberParticipants, 'uuid');
+        yield put(ContestPageActions.set({ membersHash }));
     }
 }
 

@@ -104,7 +104,7 @@ function* assignAvatar({ uuid, avatar }: AnyAction) {
 function* fetchContestParticipantUser({ contest_uuid, member_uuid }: any) {
     try {
         const res = yield call(
-            ContestService.fetchContestParticipantUser,
+            ContestService.fetchContestParticipantMember,
             contest_uuid,
             member_uuid
         );

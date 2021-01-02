@@ -10,6 +10,7 @@ export { default as fetchAccount } from './fetchAccount';
 export { default as fetchAccounts } from './fetchAccounts';
 export { default as fetchAccountMembership } from './fetchAccountMembership';
 export { default as fetchMyAccount } from './fetchMyAccount';
+export { default as fetchMyMemberUser } from './fetchMyMemberUser';
 export { default as fetchNotifications } from './fetchNotifications';
 export { default as fetchScore } from './fetchScore';
 export { default as fetchScoreContest } from './fetchScoreContest';

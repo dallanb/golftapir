@@ -11,7 +11,7 @@ export function* fetchMembersList() {
         failure: take(LeagueMembersPageContentMembersTypes.FETCH_DATA_FAILURE),
     });
     if (failure) {
-        throw new Error(CONSTANTS.LEAGUE_MEMBERS.ERROR.FETCH_ALL);
+        throw new Error(CONSTANTS.MEMBER.ERROR.FETCH_ALL);
     }
     return success;
 }

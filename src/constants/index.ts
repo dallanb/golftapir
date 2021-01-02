@@ -86,6 +86,8 @@ const constants = {
         AUTH: 'auth',
         ACCOUNTS: 'accounts',
         CONTESTS: 'contests',
+        LEAGUES: 'leagues',
+        MEMBERS: 'members',
         SCORES: 'scores',
         SPORTS: 'sports',
         WAGERS: 'wagers',
@@ -106,8 +108,8 @@ const constants = {
         },
     },
     S3_FOLDERS: {
-        ACCOUNT: {
-            AVATAR: '/account/avatars/',
+        MEMBER: {
+            AVATAR: '/member/avatars/',
         },
         CONTEST: {
             AVATAR: '/contest/avatars/',

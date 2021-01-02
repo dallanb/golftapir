@@ -7,5 +7,5 @@ export interface ContestPageSiderContentParticipantActiveContestPendingInterface
     readonly data: any;
     readonly metadata: any;
     readonly append: boolean;
-    readonly accountsHash: any;
+    readonly membersHash: any;
 }

@@ -17,11 +17,26 @@ export default {
             query,
         });
     },
+    fetchMemberUser(uuid: string, query: any = {}) {
+        return ClientProxy.get({
+            url: config.MEMBER_URL,
+            endpoint: `/members/user/${uuid}`,
+            query,
+        });
+    },
     updateMember(uuid: string, data: any = {}) {
         return ClientProxy.put({
             url: config.MEMBER_URL,
             endpoint: `/members/${uuid}`,
             data,
+        });
+    },
+    bulkFetchMembers(data: any, query: any = {}) {
+        return ClientProxy.post({
+            url: config.MEMBER_URL,
+            endpoint: `/members/bulk`,
+            data,
+            query,
         });
     },
     assignAvatar(uuid: string, avatar: any = {}) {

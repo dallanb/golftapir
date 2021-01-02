@@ -5,7 +5,7 @@ import { get as _get } from 'lodash';
 import { Button } from 'antd';
 import { ScorecardParticipantProps } from './types';
 import { Avatar } from '@components';
-import { selectAccountsHash } from '@pages/Contest/selector';
+import { selectMembersHash } from '@pages/Contest/selector';
 import { getName, withS3URL } from '@utils';
 import routes from '@constants/routes';
 import './ScorecardParticipant.less';
@@ -14,10 +14,10 @@ const ScorecardParticipant: React.FunctionComponent<ScorecardParticipantProps> =
     user,
 }) => {
     const history = useHistory();
-    const accountsHash = useSelector(selectAccountsHash);
-    const account = _get(accountsHash, [user], null);
-    const avatar = _get(account, ['avatar', 's3_filename'], null);
-    const name = getName(account, '');
+    const membersHash = useSelector(selectMembersHash);
+    const member = _get(membersHash, [user], null);
+    const avatar = _get(member, ['avatar', 's3_filename'], null);
+    const name = getName(member, '');
     return (
         <div className="scorecard-participant">
             <div className="scorecard-participant-user">
@@ -44,7 +44,7 @@ const ScorecardParticipant: React.FunctionComponent<ScorecardParticipantProps> =
                         key="profile"
                         onClick={() =>
                             history.push(routes.MEMBER_APP.COMPETITOR.ROUTE, {
-                                ...account,
+                                ...member,
                             })
                         }
                     >
