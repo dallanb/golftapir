@@ -65,7 +65,7 @@ function* fetchData({ options = { page: 1, per_page: 10 } }: AnyAction) {
 
         // fetch account mappings from the account api
         const accounts = participants.map(
-            ({ user_uuid }: { user_uuid: string }) => user_uuid
+            ({ member_uuid }: { member_uuid: string }) => member_uuid
         );
         if (accounts.length) {
             const {

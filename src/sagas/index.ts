@@ -4,6 +4,7 @@ export { default as ContestSaga } from './ContestSaga';
 export { default as CourseSaga } from './CourseSaga';
 export { default as LeagueSaga } from './LeagueSaga';
 export { default as ModalSaga } from './ModalSaga';
+export { default as MemberSaga } from './MemberSaga';
 export { default as NotificationSaga } from './NotificationSaga';
 export { default as ScoreSaga } from './ScoreSaga';
 export { default as SocketSaga } from './SocketSaga';

@@ -9,7 +9,7 @@ const { Types, Creators } = createActions(
         fetchScoreContest: ['uuid', 'options'],
         fetchScoreContestSuccess: ['data', 'metadata'],
         fetchScoreContestFailure: ['err'],
-        fetchScoreContestParticipantSheet: ['uuid', 'user_uuid', 'options'],
+        fetchScoreContestParticipantSheet: ['uuid', 'member_uuid', 'options'],
         fetchScoreContestParticipantSheetSuccess: ['data', 'metadata'],
         fetchScoreContestParticipantSheetFailure: ['err'],
         updateScore: ['uuid', 'data'],

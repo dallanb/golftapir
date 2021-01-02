@@ -8,12 +8,12 @@ import { normalizeData } from './utils';
 
 // Action Handlers
 
-function* init({ uuid, user_uuid, options }: AnyAction) {
+function* init({ uuid, member_uuid, options }: AnyAction) {
     try {
         const res = yield call(
             ScoreService.fetchScoreContestParticipantSheet,
             uuid,
-            user_uuid,
+            member_uuid,
             options
         );
         const { sheets } = res;

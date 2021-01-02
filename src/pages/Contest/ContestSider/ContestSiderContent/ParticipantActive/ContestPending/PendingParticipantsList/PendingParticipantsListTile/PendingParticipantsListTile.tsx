@@ -12,9 +12,9 @@ const PendingParticipantsListTile: React.FunctionComponent<PendingParticipantsLi
 }) => {
     const item = _get(data, [index], undefined);
     const uuid = _get(item, ['uuid'], undefined);
-    const user_uuid = _get(item, ['user_uuid'], undefined);
+    const member_uuid = _get(item, ['member_uuid'], undefined);
     const { name } = prepareParticipant(
-        user_uuid,
+        member_uuid,
         useSelector(selectAccountsHash)
     );
     return (

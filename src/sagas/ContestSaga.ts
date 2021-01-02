@@ -101,12 +101,12 @@ function* assignAvatar({ uuid, avatar }: AnyAction) {
     }
 }
 
-function* fetchContestParticipantUser({ contest_uuid, user_uuid }: any) {
+function* fetchContestParticipantUser({ contest_uuid, member_uuid }: any) {
     try {
         const res = yield call(
             ContestService.fetchContestParticipantUser,
             contest_uuid,
-            user_uuid
+            member_uuid
         );
         const { participants } = res;
         yield put(

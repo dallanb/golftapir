@@ -73,11 +73,12 @@ const CONSTANTS = {
             UPDATE: 'League update unsuccessful!',
         },
     },
-    LEAGUE_MEMBERS: {
+    MEMBER: {
         SUCCESS: {},
         ERROR: {
-            FETCH: 'Error fetching League members information',
-            FETCH_ALL: 'Error fetching League members information',
+            FETCH: 'Error fetching Member information',
+            FETCH_ALL: 'Error fetching Member information',
+            UPDATE: 'Error updating Member information',
         },
     },
     NOTIFICATION: {
