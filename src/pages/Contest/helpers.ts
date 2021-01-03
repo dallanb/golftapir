@@ -28,7 +28,7 @@ export function* initContest(uuid: string) {
         const { members: memberParticipants } = yield call(
             MemberService.bulkFetchMembers,
             { within: { key: 'uuid', value: members } },
-            { include: 'avatar,address' }
+            { include: 'avatar' }
         );
         const membersHash = _keyBy(memberParticipants, 'uuid');
         yield put(ContestPageActions.set({ membersHash }));

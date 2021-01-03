@@ -9,7 +9,7 @@ import ContestsCreatePageContentContestSearchParticipantActions, {
 // need to add search more somehow
 function* search({ key: search }: AnyAction) {
     try {
-        const { accounts } = yield call(MemberService.fetchMembers, {
+        const { members } = yield call(MemberService.fetchMembers, {
             page: 1,
             per_page: 10,
             league_uuid: yield select(selectMyLeagueUUID),
@@ -17,7 +17,7 @@ function* search({ key: search }: AnyAction) {
         });
         yield put(
             ContestsCreatePageContentContestSearchParticipantActions.searchSuccess(
-                accounts
+                members
             )
         );
     } catch (err) {

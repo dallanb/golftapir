@@ -15,6 +15,7 @@ const ContestForm: React.FunctionComponent<ContestFormProps> = () => {
 
     const handleSubmit = (values: FormikValues) => {
         const contest = _pick(values, [
+            'league_uuid',
             'sport_uuid',
             'location_uuid',
             'name',
