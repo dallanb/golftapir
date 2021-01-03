@@ -7,7 +7,7 @@ function* fetchAccountMembership(
     options: {
         include?: string;
     } = {
-        include: 'phone,address,avatar',
+        include: 'phone,address',
     }
 ) {
     yield put(AccountActions.fetchAccountMembership(uuid, options));

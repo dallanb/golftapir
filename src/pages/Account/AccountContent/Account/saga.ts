@@ -8,14 +8,18 @@ import AccountPageContentAccountActions, {
 import { prepareInitialValues } from './utils';
 import { selectAccount } from '@pages/Account/selector';
 import { omit as _omit } from 'lodash';
-import { selectMe } from '@selectors/BaseSelector';
+import { selectMe, selectMyAvatar } from '@selectors/BaseSelector';
 
 function* init() {
     try {
         const account = yield select(selectAccount);
+        const avatar = yield select(selectMyAvatar);
         const initialValues = prepareInitialValues(account);
         yield put(
-            AccountPageContentAccountActions.setInitialValues(initialValues)
+            AccountPageContentAccountActions.setInitialValues({
+                ...initialValues,
+                avatar,
+            })
         );
         yield put(AccountPageContentAccountActions.initSuccess());
     } catch (err) {

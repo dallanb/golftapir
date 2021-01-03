@@ -1,6 +1,6 @@
 import { AnyAction } from 'redux';
 import { all, call, put, takeLatest } from 'redux-saga/effects';
-import { AccountService } from '@services';
+import { MemberService } from '@services';
 import CompetitorPageActions, { CompetitorPageTypes } from './actions';
 
 function* preInit({ data: account }: AnyAction) {
@@ -10,10 +10,10 @@ function* preInit({ data: account }: AnyAction) {
 function* init({ uuid }: AnyAction) {
     try {
         const { membership: account } = yield call(
-            AccountService.fetchAccountMembership,
+            MemberService.fetchMember,
             uuid,
             {
-                include: 'phone,address,avatar',
+                include: 'avatar',
             }
         );
         yield put(CompetitorPageActions.set({ account }));
