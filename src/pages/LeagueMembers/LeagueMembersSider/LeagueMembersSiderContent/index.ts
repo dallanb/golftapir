@@ -3,10 +3,10 @@ import { combineReducers } from 'redux';
 export { default } from './LeagueMembersSiderContent';
 
 // Reducer
-import { reducer as searchReducer } from './SearchSelectInput';
+import { reducer as memberActiveReducer } from './MemberActive';
 export const reducer = combineReducers({
-    search: searchReducer,
+    memberActive: memberActiveReducer,
 });
 
 // Saga
-export { LeagueMembersPageSiderContentSearchSaga } from './SearchSelectInput';
+export { LeagueMembersPageSiderContentSearchSaga } from './MemberActive';

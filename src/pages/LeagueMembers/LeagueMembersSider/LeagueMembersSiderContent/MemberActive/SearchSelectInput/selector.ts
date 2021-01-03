@@ -2,7 +2,7 @@ import { createSelector } from 'reselect';
 import { get as _get } from 'lodash';
 
 const getLeagueMembersSiderContentSearchPage = (state: any) =>
-    state.leagueMembersPage.ui.sider.content.search;
+    state.leagueMembersPage.ui.sider.content.memberActive.search;
 
 export const selectData = createSelector(
     [getLeagueMembersSiderContentSearchPage],

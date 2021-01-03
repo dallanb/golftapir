@@ -1,6 +1,6 @@
 import { AnyAction } from 'redux';
 import { all, call, put, takeLatest } from 'redux-saga/effects';
-import { AccountService } from '@services';
+import { MemberService } from '@services';
 import LeaguesCreatePageContentLeagueSearchMemberActions, {
     LeaguesCreatePageContentLeagueSearchMemberTypes,
 } from './actions';
@@ -8,14 +8,14 @@ import LeaguesCreatePageContentLeagueSearchMemberActions, {
 // need to add search more somehow
 function* search({ key: search }: AnyAction) {
     try {
-        const { accounts } = yield call(AccountService.fetchAccounts, {
+        const { members } = yield call(MemberService.fetchMembers, {
             page: 1,
             per_page: 10,
             search,
         });
         yield put(
             LeaguesCreatePageContentLeagueSearchMemberActions.searchSuccess(
-                accounts
+                members
             )
         );
     } catch (err) {

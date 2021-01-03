@@ -18,12 +18,12 @@ const Members: React.FunctionComponent<MembersProps> = ({}) => {
         };
     }, []);
 
-    const { isInitialized } = useSelector(selectData);
+    const { isInitialized, isRefreshing } = useSelector(selectData);
 
     return (
         <ComponentContent
             componentRef={ref}
-            showSpinner={!isInitialized}
+            showSpinner={!isInitialized || isRefreshing}
             className="members"
         >
             <MembersList containerRef={ref} />

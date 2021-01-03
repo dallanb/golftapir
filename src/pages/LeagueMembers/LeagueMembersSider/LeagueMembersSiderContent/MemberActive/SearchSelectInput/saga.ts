@@ -1,11 +1,11 @@
 import { AnyAction } from 'redux';
-import { all, call, put, select, takeLatest } from 'redux-saga/effects';
+import { all, call, delay, put, select, takeLatest } from 'redux-saga/effects';
 import LeagueMembersPageSiderContentSearchActions, {
     LeagueMembersPageSiderContentSearchTypes,
 } from './actions';
-import { refreshMembersList } from './helpers';
-import {LeagueService, MemberService} from '@services';
-import {selectLeagueUUID} from "@apps/LeagueApp/selector";
+import { LeagueService, MemberService } from '@services';
+import { selectLeagueUUID } from '@apps/LeagueApp/selector';
+import { fetchMembersList } from '@pages/LeagueMembers/LeagueMembersContent/Members/helpers';
 
 function* search({ key }: AnyAction) {
     try {
@@ -27,12 +27,11 @@ function* search({ key }: AnyAction) {
 
 function* invite({ uuid: user_uuid }: AnyAction) {
     try {
-        const uuid = yield select(selectLeagueUUID)
-        yield call(LeagueService.createMember, uuid, {user_uuid});
-        yield call(refreshMembersList);
-        yield put(
-            LeagueMembersPageSiderContentSearchActions.inviteSuccess()
-        );
+        const uuid = yield select(selectLeagueUUID);
+        yield call(LeagueService.createMember, uuid, { user_uuid });
+        yield delay(1000); // TODO: fix this
+        yield call(fetchMembersList);
+        yield put(LeagueMembersPageSiderContentSearchActions.inviteSuccess());
     } catch (err) {
         yield put(
             LeagueMembersPageSiderContentSearchActions.inviteFailure(err)

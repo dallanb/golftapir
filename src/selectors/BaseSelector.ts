@@ -34,6 +34,10 @@ export const selectMyLeagueUUID = createSelector([getBase], (base) =>
     _get(base, ['me', 'league_uuid'], undefined)
 );
 
+export const selectMyStatus = createSelector([getBase], (base) =>
+    _get(base, ['me', 'status'], undefined)
+);
+
 export const selectLeagues = createSelector([getBase], (base) =>
     _get(base, ['leagues'], undefined)
 );

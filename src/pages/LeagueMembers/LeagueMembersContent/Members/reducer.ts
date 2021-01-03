@@ -7,6 +7,7 @@ import { LeagueMembersPageContentMembersInterface } from './types';
 /* ------------- Initial State ------------- */
 const INITIAL_STATE: LeagueMembersPageContentMembersInterface = {
     isFetching: false,
+    isRefreshing: false,
     isInitialized: false,
     err: undefined,
     data: undefined,
@@ -72,6 +73,26 @@ function fetchDataFailure(state: any, { err }: any) {
     });
 }
 
+function refresh(state = INITIAL_STATE) {
+    return Immutable.merge(state, {
+        isRefreshing: true,
+        err: null,
+    });
+}
+
+function refreshSuccess(state = INITIAL_STATE) {
+    return Immutable.merge(state, {
+        isRefreshing: false,
+    });
+}
+
+function refreshFailure(state: any, { err }: any) {
+    return Immutable.merge(state, {
+        isRefreshing: false,
+        err,
+    });
+}
+
 const HANDLERS = {
     [LeagueMembersPageContentMembersTypes.INIT]: init,
     [LeagueMembersPageContentMembersTypes.INIT_SUCCESS]: initSuccess,
@@ -81,6 +102,9 @@ const HANDLERS = {
     [LeagueMembersPageContentMembersTypes.FETCH_DATA]: fetchData,
     [LeagueMembersPageContentMembersTypes.FETCH_DATA_SUCCESS]: fetchDataSuccess,
     [LeagueMembersPageContentMembersTypes.FETCH_DATA_FAILURE]: fetchDataFailure,
+    [LeagueMembersPageContentMembersTypes.REFRESH]: refresh,
+    [LeagueMembersPageContentMembersTypes.REFRESH_SUCCESS]: refreshSuccess,
+    [LeagueMembersPageContentMembersTypes.REFRESH_FAILURE]: refreshFailure,
 };
 
 export const reducer = createReducer(INITIAL_STATE, HANDLERS);
