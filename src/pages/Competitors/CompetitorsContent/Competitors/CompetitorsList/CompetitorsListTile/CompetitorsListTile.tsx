@@ -30,6 +30,7 @@ const CompetitorsListTile: React.FunctionComponent<CompetitorsListTileProps> = (
     const avatar = _get(item, ['avatar', 's3_filename'], undefined);
     const src = avatar && withS3URL(avatar, constants.S3_FOLDERS.MEMBER.AVATAR);
     const status = _get(item, ['status'], undefined);
+    const country = _get(item, ['country'], undefined);
     const cardCx = classnames('competitors-list-tile-card', {
         filled: !isEven,
     });
@@ -65,7 +66,7 @@ const CompetitorsListTile: React.FunctionComponent<CompetitorsListTileProps> = (
                     </div>
                     <div className="competitors-list-tile-content-side">
                         <div className="competitors-list-tile-content-side-country">
-                            <CompetitorsListTileCountry country={'CA'} />
+                            <CompetitorsListTileCountry country={country} />
                         </div>
                         <div className="competitors-list-tile-content-side-wins">
                             <CompetitorsListTileWins wins={0} />
