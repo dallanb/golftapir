@@ -3,21 +3,22 @@ import { all, call, put, select, takeLatest } from 'redux-saga/effects';
 import { message } from 'antd';
 import { omit as _omit, pick as _pick, isEmpty as _isEmpty } from 'lodash';
 import CONSTANTS from '@locale/en-CA';
-import { AccountService, ContestService } from '@services';
+import { AccountService, ContestService, MemberService } from '@services';
 import { selectMe } from '@selectors/BaseSelector';
 import ContestsCreatePageContentContestActions, {
     ContestsCreatePageContentContestTypes,
 } from './actions';
 import { prepareInitialValues } from './utils';
 
-function* init({ options = { participant_uuid: null } }: AnyAction) {
+function* init({ options = { member_uuid: null } }: AnyAction) {
+    // TODO: TEST THIS FROM COMPETITORS  PAGE
     try {
         const me = yield select(selectMe);
         const members = [];
-        if (options.participant_uuid) {
-            const { membership: member } = yield call(
-                AccountService.fetchAccountMembership,
-                options.participant_uuid,
+        if (options.member_uuid) {
+            const { members: member } = yield call(
+                MemberService.fetchMember,
+                options.member_uuid,
                 {}
             );
             members.push(member);

@@ -8,10 +8,7 @@ export const prepareInitialValues = (contestData: {
     const { me, members } = contestData;
     return {
         sport_uuid: config.GOLF_UUID,
-        participants: [
-            me.member_uuid,
-            ...members.map((member: any) => member.member_uuid),
-        ],
+        participants: [me.uuid, ...members.map((member: any) => member.uuid)],
         permanent_participants: [me, ...members],
     };
 };
