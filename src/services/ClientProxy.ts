@@ -1,7 +1,7 @@
 import axios from 'axios';
 import qs from 'querystring';
 import { set as _set } from 'lodash';
-import { setCoreApiHeaders } from './utils';
+import { cleanQuery, setCoreApiHeaders } from './utils';
 
 class ClientProxy {
     private _accessToken: any;
@@ -19,7 +19,7 @@ class ClientProxy {
     }
 
     getUrl = (url: string, endpoint: string, query: any = {}) => {
-        const queryString = qs.stringify(query);
+        const queryString = cleanQuery(query);
         return queryString
             ? `https://${url}${endpoint}?${queryString}`
             : `https://${url}${endpoint}`;
