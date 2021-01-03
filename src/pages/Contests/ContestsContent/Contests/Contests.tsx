@@ -6,13 +6,17 @@ import ContestsPageContentContestsActions from './actions';
 import { selectData } from './selector';
 import ComponentContent from '@layouts/ComponentContent';
 import './Contests.less';
+import { selectMyLeagueUUID } from '@selectors/BaseSelector';
 
 const Contests: React.FunctionComponent<ContestsProps> = ({}) => {
     const dispatch = useDispatch();
     const ref = useRef(null);
+    const leagueUUID = useSelector(selectMyLeagueUUID);
 
     useEffect(() => {
-        dispatch(ContestsPageContentContestsActions.init());
+        dispatch(
+            ContestsPageContentContestsActions.init({ league_uuid: leagueUUID })
+        );
         return () => {
             dispatch(ContestsPageContentContestsActions.terminate());
         };

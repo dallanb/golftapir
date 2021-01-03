@@ -17,6 +17,7 @@ export { default as searchSelectTagRenderer } from './searchSelectTagRenderer';
 export { default as scrollbarWidth } from './scrollbarWidth';
 export { default as topicToRouteMapper } from './topicToRouteMapper';
 export { default as totalStrokeCalculator } from './totalStrokeCalculator';
+export { default as withAppRoute } from './withAppRoute';
 export { default as withDynamicRoute } from './withDynamicRoute';
 export { default as withS3URL } from './withS3URL';
 export { default as withTarget } from './withTarget';

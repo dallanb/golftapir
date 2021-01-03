@@ -1,4 +1,5 @@
-import { all, put, takeLatest } from 'redux-saga/effects';
+import { AnyAction } from 'redux';
+import { all, put, select, takeLatest } from 'redux-saga/effects';
 import ContestsPageActions, { ContestsPageTypes } from './actions';
 
 function* init() {
