@@ -64,30 +64,6 @@ function* updateAccount({ uuid, values }: AnyAction) {
     }
 }
 
-function* assignAvatar({ uuid, avatar }: AnyAction) {
-    try {
-        yield fork(AccountService.assignAvatar, uuid, avatar);
-        yield put(AccountActions.assignAvatarSuccess());
-    } catch (err) {
-        yield put(AccountActions.assignAvatarFailure(err));
-        message.error(CONSTANTS.ACCOUNT.ERROR.ASSIGN_AVATAR);
-    }
-}
-
-function* bulkFetchAccounts({ within, options }: AnyAction) {
-    try {
-        const bulkAccounts = yield call(
-            AccountService.bulkFetchAccounts,
-            { within },
-            options
-        );
-        yield put(AccountActions.bulkFetchAccountsSuccess(bulkAccounts));
-    } catch (err) {
-        yield put(AccountActions.bulkFetchAccountsFailure(err));
-        message.error(CONSTANTS.ACCOUNT.ERROR.BULK_FETCH_ALL);
-    }
-}
-
 export default function* AccountSaga() {
     yield all([
         takeLatest(AccountTypes.FETCH_ACCOUNT, fetchAccount),
@@ -98,7 +74,5 @@ export default function* AccountSaga() {
         ),
         takeLatest(AccountTypes.FETCH_ACCOUNTS, fetchAccounts),
         takeLatest(AccountTypes.UPDATE_ACCOUNT, updateAccount),
-        takeLatest(AccountTypes.ASSIGN_AVATAR, assignAvatar),
-        takeLatest(AccountTypes.BULK_FETCH_ACCOUNTS, bulkFetchAccounts),
     ]);
 }

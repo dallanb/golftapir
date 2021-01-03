@@ -3,6 +3,7 @@ export { default as AccountActions, AccountTypes } from './AccountActions';
 export { default as ContestActions, ContestTypes } from './ContestActions';
 export { default as CourseActions, CourseTypes } from './CourseActions';
 export { default as LeagueActions, LeagueTypes } from './LeagueActions';
+export { default as MemberActions, MemberTypes } from './MemberActions';
 export { default as ModalActions, ModalTypes } from './ModalActions';
 export {
     default as NotificationActions,

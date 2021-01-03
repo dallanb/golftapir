@@ -5,7 +5,7 @@ import CONSTANTS from '@locale/en-CA';
 function* fetchAccount(uuid: string) {
     yield put(
         AccountActions.fetchAccount(uuid, {
-            include: 'phone,address,avatar',
+            include: 'phone,address',
         })
     );
     const { success, failure } = yield race({

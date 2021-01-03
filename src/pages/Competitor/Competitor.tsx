@@ -20,7 +20,7 @@ const Competitor: React.FunctionComponent<CompetitorProps> = () => {
 
     useEffect(() => {
         dispatch(CompetitorPageActions.preInit(competitor));
-        dispatch(CompetitorPageActions.init(competitor.membership_uuid));
+        dispatch(CompetitorPageActions.init(competitor.member_uuid));
         return () => {
             dispatch(CompetitorPageActions.terminate());
         };

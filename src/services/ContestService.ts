@@ -64,10 +64,10 @@ export default {
             query,
         });
     },
-    fetchContestParticipantUser(contest_uuid: string, user_uuid: string) {
+    fetchContestParticipantMember(contest_uuid: string, member_uuid: string) {
         return ClientProxy.get({
             url: config.CONTEST_URL,
-            endpoint: `/contests/${contest_uuid}/participants/user/${user_uuid}`,
+            endpoint: `/contests/${contest_uuid}/participants/member/${member_uuid}`,
         });
     },
     updateContestParticipant(uuid: string, data: any = {}) {

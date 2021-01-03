@@ -15,3 +15,7 @@ export const selectLeague = createSelector([getLeagueApp], (leagueApp) =>
 export const selectLeagueUUID = createSelector([getLeagueApp], (leagueApp) =>
     _get(leagueApp, ['league', 'uuid'], null)
 );
+
+export const selectLeagueName = createSelector([getLeagueApp], (leagueApp) =>
+    _get(leagueApp, ['league', 'name'], undefined)
+);

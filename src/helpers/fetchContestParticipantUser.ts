@@ -2,9 +2,9 @@ import { put, race, take } from 'redux-saga/effects';
 import ContestActions, { ContestTypes } from '@actions/ContestActions';
 import CONSTANTS from '@locale/en-CA';
 
-function* fetchContestParticipantUser(contest_uuid: string, user_uuid: string) {
+function* fetchContestParticipantUser(contest_uuid: string, member_uuid: string) {
     yield put(
-        ContestActions.fetchContestParticipantUser(contest_uuid, user_uuid)
+        ContestActions.fetchContestParticipantUser(contest_uuid, member_uuid)
     );
     const { success, failure } = yield race({
         success: take(ContestTypes.FETCH_CONTEST_PARTICIPANT_USER_SUCCESS),

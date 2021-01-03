@@ -62,6 +62,7 @@ import {
     ContestSaga,
     CourseSaga,
     LeagueSaga,
+    MemberSaga,
     ModalSaga,
     NotificationSaga,
     ScoreSaga,
@@ -123,6 +124,7 @@ function configStore(options?: { preloadedState: any }): any {
             fork(ContestSaga),
             fork(CourseSaga),
             fork(LeagueSaga),
+            fork(MemberSaga),
             fork(ModalSaga),
             fork(NotificationSaga),
             fork(ScoreSaga),
@@ -163,14 +165,6 @@ function configStore(options?: { preloadedState: any }): any {
     }
     sagaMiddleware.run(memberAppSaga);
 
-    // store.subscribe(() => {
-    //     const state = store.getState();
-    //     saveState({
-    //         auth: _get(state, ['auth'], {}),
-    //         base: _get(state, ['base'], {}),
-    //         // notification: _get(state, ['notification'], {}),
-    //     });
-    // });
     return { store };
 }
 

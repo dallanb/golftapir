@@ -2,9 +2,9 @@
 import { static as Immutable } from 'seamless-immutable';
 import { createReducer } from 'reduxsauce';
 import {
-    AccountTypes,
     AuthTypes,
     LeagueTypes,
+    MemberTypes,
     NotificationTypes,
 } from '@actions';
 import { localStorageSave } from '@utils';
@@ -63,7 +63,7 @@ const logoutSuccess = localStorageSave((state: any) =>
     })
 );
 
-const fetchMyAccountSuccess = localStorageSave((state: any, { data }: any) =>
+const fetchMyMemberUserSuccess = localStorageSave((state: any, { data }: any) =>
     Immutable.merge(state, {
         me: data,
     })
@@ -93,7 +93,7 @@ const HANDLERS = {
     [AuthTypes.REFRESH_SUCCESS]: refreshSuccess,
     [AuthTypes.REFRESH_FAILURE]: refreshFailure,
     [AuthTypes.LOGOUT_SUCCESS]: logoutSuccess,
-    [AccountTypes.FETCH_MY_ACCOUNT_SUCCESS]: fetchMyAccountSuccess,
+    [MemberTypes.FETCH_MY_MEMBER_USER_SUCCESS]: fetchMyMemberUserSuccess,
     [NotificationTypes.FETCH_PENDING_SUCCESS]: fetchNotificationPendingSuccess,
     [NotificationTypes.FETCH_PENDING_FAILURE]: fetchNotificationPendingFailure,
     [LeagueTypes.FETCH_MY_LEAGUES_SUCCESS]: fetchMyLeaguesSuccess,

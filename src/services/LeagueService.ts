@@ -57,4 +57,32 @@ export default {
             data,
         });
     },
+    fetchLeagueMembers(uuid: string, query: any = {}) {
+        return ClientProxy.get({
+            url: config.LEAGUE_URL,
+            endpoint: `/leagues/${uuid}/members`,
+            query,
+        });
+    },
+    fetchMembers(uuid: string, query: any = {}) {
+        return ClientProxy.get({
+            url: config.LEAGUE_URL,
+            endpoint: `/members`,
+            query,
+        });
+    },
+    createMember(uuid: string, data: any = {}) {
+        return ClientProxy.post({
+            url: config.LEAGUE_URL,
+            endpoint: `/leagues/${uuid}/members`,
+            data,
+        });
+    },
+    updateMember(uuid: string, data: any = {}) {
+        return ClientProxy.put({
+            url: config.LEAGUE_URL,
+            endpoint: `/members/${uuid}`,
+            data,
+        });
+    },
 };

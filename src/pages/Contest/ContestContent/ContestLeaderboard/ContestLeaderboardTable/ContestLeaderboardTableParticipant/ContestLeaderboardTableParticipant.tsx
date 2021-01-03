@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import routes from '@constants/routes';
-import { selectAccountsHash } from '@pages/Contest/selector';
+import { selectMembersHash } from '@pages/Contest/selector';
 import { ContestParticipantsTableParticipantProps } from './types';
 import { prepareParticipant } from '@pages/Contest/utils';
 import { Avatar } from '@components';
@@ -13,9 +13,9 @@ const ContestLeaderboardTableParticipant: React.FunctionComponent<ContestPartici
     uuid,
 }) => {
     const history = useHistory();
-    const { name, s3_filename, account } = prepareParticipant(
+    const { name, s3_filename, member } = prepareParticipant(
         uuid,
-        useSelector(selectAccountsHash)
+        useSelector(selectMembersHash)
     );
 
     return (
@@ -26,7 +26,7 @@ const ContestLeaderboardTableParticipant: React.FunctionComponent<ContestPartici
                     withDynamicRoute(routes.MEMBER_APP.COMPETITOR.ROUTE, {
                         uuid,
                     }),
-                    account
+                    member
                 )
             }
         >

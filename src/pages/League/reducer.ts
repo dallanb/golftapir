@@ -9,7 +9,6 @@ import { LeaguePageInterface } from './types';
 const INITIAL_STATE: LeaguePageInterface = {
     isInitialized: false,
     err: undefined,
-    league: undefined,
 };
 
 /* ------------- Reducers ------------- */

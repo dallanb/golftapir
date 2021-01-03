@@ -1,7 +1,6 @@
 import {
     all,
     call,
-
     delay,
     fork,
     put,
@@ -20,23 +19,27 @@ import {
 import { FirebaseClient } from '@libs';
 import { socketEventHandlers } from '@apps/MemberApp/utils';
 import { ClientProxy } from '@services';
-import { fetchMyAccount, fetchMyLeagues } from './helpers';
+import { fetchMyLeagues, fetchMyMemberUser } from '@helpers';
 
 // Action Handlers
 function* init() {
     try {
         if (!ClientProxy.accessToken) yield call(refresh);
 
-        const me = yield call(fetchMyAccount);
+        const me = yield call(fetchMyMemberUser, { include: 'avatar' });
 
+        // see if i can make a 'me' api call for the socket api
         yield put(
-            SocketActions.init(me.membership_uuid, {
+            SocketActions.init(me.user_uuid, {
                 eventHandler: socketEventHandlers,
             })
         );
 
-
-        yield fork(fetchMyLeagues);
+        yield fork(fetchMyLeagues, {
+            page: 1,
+            per_page: 100,
+            include: 'avatar',
+        });
 
         // prepare notifications
         const token = yield call(requestToken);

@@ -5,20 +5,20 @@ import ContestPageActions from './actions';
 
 export const prepareParticipant = (
     uuid: string,
-    accountHash: any
+    membersHash: any
 ): {
     name: string;
     s3_filename: string;
-    account: any;
+    member: any;
 } => {
-    const participant = { name: '', s3_filename: '', account: null };
-    const account = _get(accountHash, [uuid], {
+    const participant = { name: '', s3_filename: '', member: null };
+    const member = _get(membersHash, [uuid], {
         display_name: '',
         avatar: { s3_filename: '' },
     });
-    participant.account = account;
-    participant.name = account.display_name;
-    participant.s3_filename = _get(account, ['avatar', 's3_filename'], '');
+    participant.member = member;
+    participant.name = member.display_name;
+    participant.s3_filename = _get(member, ['avatar', 's3_filename'], '');
     return participant;
 };
 

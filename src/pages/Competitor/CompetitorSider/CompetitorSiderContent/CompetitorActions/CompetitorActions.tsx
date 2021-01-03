@@ -9,8 +9,8 @@ import './CompetitorActions.less';
 
 const CompetitorActions: React.FunctionComponent<CompetitorActionsProps> = () => {
     const isMe = useSelector(selectIsMe);
-    const { account } = useSelector(selectData);
-    const uuid = _get(account, ['membership_uuid'], null);
+    const { member } = useSelector(selectData);
+    const uuid = _get(member, ['uuid'], null);
     const actions = memoizedGenerateActions(uuid);
 
     const Actions = memoizedCompetitorActionRenderer({

@@ -11,4 +11,11 @@ export default [
         icon: (props: any) => <Avatar {...props.value} />,
         key: routes.LEAGUE_APP.LEAGUE.KEY,
     },
+    {
+        path: (props: any) =>
+            withDynamicRoute(routes.LEAGUE_APP.LEAGUE_MEMBERS.ROUTE, props),
+        name: routes.LEAGUE_APP.LEAGUE_MEMBERS.LABEL,
+        icon: routes.LEAGUE_APP.LEAGUE_MEMBERS.ICON,
+        key: routes.LEAGUE_APP.LEAGUE_MEMBERS.KEY,
+    },
 ];

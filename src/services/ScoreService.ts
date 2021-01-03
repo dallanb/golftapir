@@ -18,12 +18,12 @@ export default {
     },
     fetchScoreContestParticipantSheet(
         uuid: string,
-        user_uuid: string,
+        member_uuid: string,
         query: any = {}
     ) {
         return ClientProxy.get({
             url: config.SCORE_URL,
-            endpoint: `/scores/contest/${uuid}/sheets/${user_uuid}`,
+            endpoint: `/scores/contest/${uuid}/sheets/${member_uuid}`,
             query,
         });
     },

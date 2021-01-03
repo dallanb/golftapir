@@ -22,7 +22,7 @@ import {
 import { FirebaseClient } from '@libs';
 import { socketEventHandlers } from '@apps/LeagueApp/utils';
 import { ClientProxy } from '@services';
-import { fetchMyAccount, fetchMyLeagues } from './helpers';
+import { fetchMyLeagues, fetchMyMemberUser } from '@helpers';
 
 // Action Handlers
 function* preInit({ data: league }: AnyAction) {
@@ -33,18 +33,26 @@ function* init({ uuid }: AnyAction) {
     try {
         if (!ClientProxy.accessToken) yield call(refreshAuth);
 
-        const me = yield call(fetchMyAccount);
+        const me = yield call(fetchMyMemberUser, {
+            league_uuid: uuid,
+            include: 'avatar',
+        });
 
+        // see if i can make a 'me' api call for the socket api
         yield put(
-            SocketActions.init(me.membership_uuid, {
+            SocketActions.init(me.user_uuid, {
                 eventHandler: socketEventHandlers,
             })
         );
 
+        yield fork(fetchMyLeagues, {
+            page: 1,
+            per_page: 100,
+            include: 'avatar',
+        });
+
         const { data: league } = yield call(fetchLeague, uuid);
         yield put(LeagueAppActions.set({ league }));
-
-        yield fork(fetchMyLeagues);
 
         // prepare notifications
         const token = yield call(requestToken);

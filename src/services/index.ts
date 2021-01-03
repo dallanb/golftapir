@@ -4,6 +4,7 @@ export { default as ContestService } from './ContestService';
 export { default as CourseService } from './CourseService';
 export { default as ClientProxy } from './ClientProxy';
 export { default as LeagueService } from './LeagueService';
+export { default as MemberService } from './MemberService';
 export { default as NotificationService } from './NotificationService';
 export { default as ScoreService } from './ScoreService';
 export { default as WagerService } from './WagerService';

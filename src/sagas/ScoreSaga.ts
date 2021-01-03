@@ -27,14 +27,14 @@ function* fetchScoreContest({ uuid, options }: AnyAction) {
 }
 function* fetchScoreContestParticipantSheet({
     uuid,
-    user_uuid,
+    member_uuid,
     options,
 }: AnyAction) {
     try {
         const res = yield call(
             ScoreService.fetchScoreContestParticipantSheet,
             uuid,
-            user_uuid,
+            member_uuid,
             options
         );
         const { sheets, _metadata: metadata } = res;

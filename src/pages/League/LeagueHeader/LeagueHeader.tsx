@@ -3,7 +3,11 @@ import { useSelector } from 'react-redux';
 import { LeagueHeaderProps } from './types';
 import { ContentLayoutHeader } from '@layouts';
 import CONSTANTS from '@locale/en-CA';
-import { selectLeague, selectLeagueName, selectLeagueUUID } from '../selector';
+import {
+    selectLeague,
+    selectLeagueName,
+    selectLeagueUUID,
+} from '@apps/LeagueApp/selector';
 import { Breadcrumb } from '@components';
 import routes from '@constants/routes';
 

@@ -8,7 +8,7 @@ function* init() {
             AccountService.fetchAccount,
             'me',
             {
-                include: 'phone,address,avatar',
+                include: 'phone,address',
             }
         );
         yield put(AccountPageActions.set({ account }));

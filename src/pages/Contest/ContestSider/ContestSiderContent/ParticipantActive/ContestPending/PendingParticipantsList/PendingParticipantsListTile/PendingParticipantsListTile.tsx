@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { get as _get } from 'lodash';
-import { selectAccountsHash } from '../../selector';
+import { selectMembersHash } from '../../selector';
 import { PendingParticipantsListTileProps } from './types';
 import { prepareParticipant } from '@pages/Contest/utils';
 import RemindButton from './RemindButton';
@@ -12,10 +12,10 @@ const PendingParticipantsListTile: React.FunctionComponent<PendingParticipantsLi
 }) => {
     const item = _get(data, [index], undefined);
     const uuid = _get(item, ['uuid'], undefined);
-    const user_uuid = _get(item, ['user_uuid'], undefined);
+    const member_uuid = _get(item, ['member_uuid'], undefined);
     const { name } = prepareParticipant(
-        user_uuid,
-        useSelector(selectAccountsHash)
+        member_uuid,
+        useSelector(selectMembersHash)
     );
     return (
         <div style={style} className="pending-participants-list-tile">

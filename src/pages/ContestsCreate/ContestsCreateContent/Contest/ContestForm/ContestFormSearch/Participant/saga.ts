@@ -1,6 +1,7 @@
 import { AnyAction } from 'redux';
-import { all, call, put, takeLatest } from 'redux-saga/effects';
-import { AccountService } from '@services';
+import { all, call, put, select, takeLatest } from 'redux-saga/effects';
+import { MemberService } from '@services';
+import { selectMyLeagueUUID } from '@selectors/BaseSelector';
 import ContestsCreatePageContentContestSearchParticipantActions, {
     ContestsCreatePageContentContestSearchParticipantTypes,
 } from './actions';
@@ -8,14 +9,15 @@ import ContestsCreatePageContentContestSearchParticipantActions, {
 // need to add search more somehow
 function* search({ key: search }: AnyAction) {
     try {
-        const { accounts } = yield call(AccountService.fetchAccounts, {
+        const { members } = yield call(MemberService.fetchMembers, {
             page: 1,
             per_page: 10,
+            league_uuid: yield select(selectMyLeagueUUID),
             search,
         });
         yield put(
             ContestsCreatePageContentContestSearchParticipantActions.searchSuccess(
-                accounts
+                members
             )
         );
     } catch (err) {

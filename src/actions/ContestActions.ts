@@ -24,7 +24,7 @@ const { Types, Creators } = createActions(
         assignAvatar: ['uuid', 'avatar'],
         assignAvatarSuccess: ['data'],
         assignAvatarFailure: ['err'],
-        fetchContestParticipantUser: ['contest_uuid', 'user_uuid'],
+        fetchContestParticipantUser: ['contest_uuid', 'member_uuid'],
         fetchContestParticipantUserSuccess: ['data'],
         fetchContestParticipantUserFailure: ['err'],
         fetchContestParticipants: ['uuid', 'options'],

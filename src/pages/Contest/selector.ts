@@ -11,9 +11,9 @@ export const selectData = createSelector(
     (contestPage) => contestPage
 );
 
-export const selectAccountsHash = createSelector(
+export const selectMembersHash = createSelector(
     [getContestPage],
-    (contestPage) => _get(contestPage, ['accountsHash'], {})
+    (contestPage) => _get(contestPage, ['membersHash'], {})
 );
 
 export const selectContest = createSelector([getContestPage], (contestPage) =>
@@ -59,7 +59,7 @@ export const selectIsOwner = createSelector(
     [getContestPage, getBase],
     (contestPage, base) =>
         _get(contestPage, ['contest', 'owner'], undefined) ===
-        _get(base, ['me', 'membership_uuid'], undefined)
+        _get(base, ['me', 'user_uuid'], undefined)
 );
 
 export const selectIsRefreshing = createSelector(

@@ -8,7 +8,7 @@ import {
     select,
     takeLatest,
 } from 'redux-saga/effects';
-import { AccountService, ContestService } from '@services';
+import { AccountService, ContestService, MemberService } from '@services';
 import ContestPageActions, { ContestPageTypes } from '@pages/Contest/actions';
 import ContestPageSiderContentParticipantActiveContestPendingActions, {
     ContestPageSiderContentParticipantActiveContestPendingTypes,
@@ -64,19 +64,20 @@ function* fetchData({ options = { page: 1, per_page: 10 } }: AnyAction) {
         );
 
         // fetch account mappings from the account api
-        const accounts = participants.map(
-            ({ user_uuid }: { user_uuid: string }) => user_uuid
+        const members = participants.map(
+            ({ member_uuid }: { member_uuid: string }) => member_uuid
         );
-        if (accounts.length) {
-            const {
-                accounts: accountParticipants,
-            } = yield call(AccountService.bulkFetchAccounts, {
-                within: { key: 'membership_uuid', value: accounts },
-            });
-            const accountsHash = _keyBy(accountParticipants, 'membership_uuid');
+        if (members.length) {
+            const { members: memberParticipants } = yield call(
+                MemberService.bulkFetchMembers,
+                {
+                    within: { key: 'uuid', value: members },
+                }
+            );
+            const membersHash = _keyBy(memberParticipants, 'uuid');
             yield put(
                 ContestPageSiderContentParticipantActiveContestPendingActions.set(
-                    { accountsHash }
+                    { membersHash }
                 )
             );
         }

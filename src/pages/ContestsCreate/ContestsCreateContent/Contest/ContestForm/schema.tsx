@@ -22,6 +22,14 @@ const FORM = CONSTANTS.PAGES.CONTESTS_CREATE.FORM;
 
 export const fieldSchema = [
     {
+        name: 'league_uuid',
+        wrapper: BasicInputWrapper,
+        wrapperOptions: {
+            hidden: true,
+        },
+        options: {},
+    },
+    {
         name: 'sport_uuid',
         wrapper: BasicInputWrapper,
         wrapperOptions: {

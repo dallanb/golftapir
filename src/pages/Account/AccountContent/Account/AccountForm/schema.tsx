@@ -25,7 +25,7 @@ export const fieldSchema = [
         options: {
             uploadLabel: FORM.LABELS.UPLOAD_AVATAR,
             uploadIcon: CloudUploadOutlined,
-            uploadS3Folder: constants.S3_FOLDERS.ACCOUNT.AVATAR,
+            uploadS3Folder: constants.S3_FOLDERS.MEMBER.AVATAR,
         },
     },
     {

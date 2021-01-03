@@ -1,35 +1,37 @@
-import { call, put } from 'redux-saga/effects';
+import { call, put, select } from 'redux-saga/effects';
 import { keyBy as _keyBy } from 'lodash';
 import { TopicSocketActions } from '@actions';
-import { AccountService, ContestService, NotificationService } from '@services';
+import { ContestService, MemberService, NotificationService } from '@services';
 import ContestPageActions from './actions';
 import { socketEventHandlers } from './utils';
+import { selectMe } from '@selectors/BaseSelector';
 
 export function* initContest(uuid: string) {
+    const me = yield select(selectMe);
     const { contests: contest } = yield call(
         ContestService.fetchContestMaterialized,
         uuid
     );
     const { participants: participant } = yield call(
-        ContestService.fetchContestParticipantUser,
+        ContestService.fetchContestParticipantMember,
         uuid,
-        'me'
+        me.uuid
     );
     yield put(ContestPageActions.set({ contest }));
     yield put(ContestPageActions.set({ participant }));
 
     const { participants } = contest;
 
-    const accounts = Object.keys(participants);
+    const members = Object.keys(participants);
 
-    if (accounts.length) {
-        const { accounts: accountParticipants } = yield call(
-            AccountService.bulkFetchAccounts,
-            { within: { key: 'membership_uuid', value: accounts } },
-            { include: 'avatar,address' }
+    if (members.length) {
+        const { members: memberParticipants } = yield call(
+            MemberService.bulkFetchMembers,
+            { within: { key: 'uuid', value: members } },
+            { include: 'avatar' }
         );
-        const accountsHash = _keyBy(accountParticipants, 'membership_uuid');
-        yield put(ContestPageActions.set({ accountsHash }));
+        const membersHash = _keyBy(memberParticipants, 'uuid');
+        yield put(ContestPageActions.set({ membersHash }));
     }
 }
 
