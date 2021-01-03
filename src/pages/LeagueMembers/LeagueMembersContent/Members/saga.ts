@@ -1,6 +1,6 @@
 import { AnyAction } from 'redux';
 import { all, call, put, select, takeLatest } from 'redux-saga/effects';
-import { LeagueService } from '@services';
+import { LeagueService, MemberService } from '@services';
 import LeagueMembersPageContentMembersActions, {
     LeagueMembersPageContentMembersTypes,
 } from './actions';
@@ -25,11 +25,10 @@ function* fetchData({
 }: AnyAction) {
     try {
         const uuid = yield select(selectLeagueUUID);
-        const { members, metadata } = yield call(
-            LeagueService.fetchLeagueMembers,
-            uuid,
-            options
-        );
+        const { members, metadata } = yield call(MemberService.fetchMembers, {
+            ...options,
+            league_uuid: uuid,
+        });
         yield put(
             LeagueMembersPageContentMembersActions.fetchDataSuccess(
                 members,
