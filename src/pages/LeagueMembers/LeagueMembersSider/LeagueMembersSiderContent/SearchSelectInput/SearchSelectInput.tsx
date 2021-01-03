@@ -20,6 +20,7 @@ const SearchSelectInput: React.FunctionComponent<SearchInputProps> = () => {
     };
     const onClick = () => {
         dispatch(LeagueMembersPageSiderContentSearchActions.invite(value));
+        setValue(undefined);
     };
 
     return (
