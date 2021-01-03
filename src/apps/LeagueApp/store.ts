@@ -16,6 +16,7 @@ import {
     leagueMembersPage,
     LeagueMembersPageSaga,
     LeagueMembersPageContentMembersSaga,
+    LeagueMembersPageSiderContentSearchSaga,
 } from '@pages';
 import { default as BaseSaga } from '@apps/LeagueApp/saga';
 import {
@@ -84,6 +85,7 @@ function configStore(options?: { preloadedState: any }): any {
             fork(LeaguePageSaga),
             fork(LeagueMembersPageSaga),
             fork(LeagueMembersPageContentMembersSaga),
+            fork(LeagueMembersPageSiderContentSearchSaga),
         ]);
     }
     sagaMiddleware.run(memberAppSaga);

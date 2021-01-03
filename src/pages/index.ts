@@ -73,6 +73,7 @@ export {
     reducer as leagueMembersPage,
     LeagueMembersPageSaga,
     LeagueMembersPageContentMembersSaga,
+    LeagueMembersPageSiderContentSearchSaga,
     LeagueMembersPageRoutes,
 } from './LeagueMembers';
 export {
