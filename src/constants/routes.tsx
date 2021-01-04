@@ -93,7 +93,7 @@ const routes = {
             ICON: null,
         },
         HOME: {
-            ROUTE: '',
+            ROUTE: '/home',
             BASE_KEY: 'home',
             KEY: 'home',
             LABEL: CONSTANTS.PAGES.HOME.TITLE,

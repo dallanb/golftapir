@@ -1,4 +1,5 @@
 export { default as countdown } from './countdown';
+export { default as getMenuSelectedKey } from './getMenuSelectedKey';
 export { default as getInitials } from './getInitials';
 export { default as getRandomInt } from './getRandomInt';
 export { default as getName } from './getName';

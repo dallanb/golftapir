@@ -20,7 +20,7 @@ class Register extends React.PureComponent<RegisterProps> {
         const { isRegistered, history } = this.props;
         if (isRegistered) {
             history.push(
-                withAppRoute(routes.ROUTES.LOGIN, {
+                withAppRoute(routes.ROUTES.LOGIN.ROUTE, {
                     app: constants.APPS.AUTH_APP,
                 })
             );

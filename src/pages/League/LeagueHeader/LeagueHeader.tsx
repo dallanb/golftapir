@@ -17,12 +17,12 @@ const LeagueHeader: React.FunctionComponent<LeagueHeaderProps> = () => {
     const extra = (
         <Breadcrumb
             state={{
-                [routes.LEAGUE_APP.HOME.KEY]: {
+                [routes.ROUTES.HOME.KEY]: {
                     ...useSelector(selectLeague),
                 },
             }}
             params={{
-                [routes.LEAGUE_APP.HOME.KEY]: {
+                [routes.ROUTES.HOME.KEY]: {
                     uuid: useSelector(selectLeagueUUID),
                 },
             }}

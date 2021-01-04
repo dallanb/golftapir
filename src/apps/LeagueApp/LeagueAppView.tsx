@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
     Redirect,
@@ -7,7 +7,7 @@ import {
     useHistory,
     useParams,
 } from 'react-router-dom';
-import { get as _get } from 'lodash';
+import { get as _get, map as _map } from 'lodash';
 import { message, Spin } from 'antd';
 import { MemberAppLayout } from '@layouts';
 import { ComponentRoute, LeagueAppViewProps } from './types';
@@ -19,14 +19,21 @@ import { AuthActions } from '@actions';
 import BaseActions from './actions';
 import statics from '@apps/LeagueApp/statics';
 import { FirebaseClient } from '@libs';
-import { withAppRoute, withS3URL } from '@utils';
+import { getMenuSelectedKey, withAppRoute, withS3URL } from '@utils';
 import { selectData as selectBaseData } from '@selectors/BaseSelector';
 import { selectData } from './selector';
+
+const initialSelectedKey = getMenuSelectedKey(
+    location.pathname,
+    constants.APPS.LEAGUE_APP,
+    _map(statics, 'key')
+);
 
 const LeagueAppView: React.FunctionComponent<LeagueAppViewProps> = () => {
     const dispatch = useDispatch();
     const history = useHistory();
     const params = useParams();
+    const [selectedKeys, setSelectedKeys] = useState(initialSelectedKey);
     const prevLeague = _get(history, ['location', 'state'], null);
     const prevUUID = _get(params, ['league_uuid'], null);
     const { isInitialized, isRefreshing, league } = useSelector(selectData);
@@ -92,16 +99,21 @@ const LeagueAppView: React.FunctionComponent<LeagueAppViewProps> = () => {
     if (!isReady) return <Spin />;
     return (
         <MemberAppLayout
+            app={constants.APPS.LEAGUE_APP}
             name={name}
             avatar={avatar}
             menuProps={menuProps}
             menuRoutes={statics}
+            menuItemOnClick={({ key }: { key: any }, path: string) => {
+                setSelectedKeys(key);
+            }}
+            selectedKeys={selectedKeys}
         >
             <Switch>
                 {routes.map(({ path, component, exact }: ComponentRoute) => (
                     <Route
                         key={path}
-                        path={`${constantRoutes.APPS.LEAGUE_APP}${path}`}
+                        path={`${constantRoutes.APPS.LEAGUE_APP.ROUTE}${path}`}
                         component={component}
                         exact={exact}
                     />
@@ -110,7 +122,7 @@ const LeagueAppView: React.FunctionComponent<LeagueAppViewProps> = () => {
                     ({ path, component, exact }: ComponentRoute) => (
                         <ProtectedRoute
                             key={path}
-                            path={`${constantRoutes.APPS.LEAGUE_APP}${path}`}
+                            path={`${constantRoutes.APPS.LEAGUE_APP.ROUTE}${path}`}
                             component={component}
                             exact={exact}
                             isLoggedIn={isLoggedIn}
