@@ -13,10 +13,13 @@ import constants from '@constants';
 import routes from '@constants/routes';
 import { useHistory } from 'react-router-dom';
 import './HeaderSubTitle.less';
+import { withAppRoute } from '@utils';
+import { selectMyLeagueUUID } from '@selectors/BaseSelector';
 
 const HeaderSubTitle: React.FunctionComponent<HeaderSubTitleProps> = () => {
     const dispatch = useDispatch();
     const history = useHistory();
+    const leagueUUID = useSelector(selectMyLeagueUUID);
     const subscribed = useSelector(selectSubscribed);
     const contest = useSelector(selectContest);
     const isOwner = useSelector(selectIsOwner);
@@ -30,7 +33,9 @@ const HeaderSubTitle: React.FunctionComponent<HeaderSubTitleProps> = () => {
                 icon={<EditOutlined />}
                 onClick={() =>
                     history.push(
-                        routes.MEMBER_APP.CONTEST_UPDATE.ROUTE,
+                        withAppRoute(routes.ROUTES.CONTEST_UPDATE.ROUTE, {
+                            routeProps: { league_uuid: leagueUUID },
+                        }),
                         contest
                     )
                 }

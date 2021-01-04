@@ -1,10 +1,8 @@
 export { default as countdown } from './countdown';
-export { default as getAppRoutes } from './getAppRoutes';
 export { default as getInitials } from './getInitials';
 export { default as getRandomInt } from './getRandomInt';
 export { default as getName } from './getName';
 export { default as getRefHeight } from './getRefHeight';
-export { default as getRouteBase } from './getRouteBase';
 export { default as getRouteBreadcrumb } from './getRouteBreadcrumb';
 export { default as localStorageSave } from './localStorageSave';
 export { default as mapActionColour } from './mapActionColour';

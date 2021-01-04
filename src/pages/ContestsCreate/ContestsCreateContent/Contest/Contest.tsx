@@ -10,6 +10,8 @@ import ComponentContent from '@layouts/ComponentContent';
 import routes from '@constants/routes';
 import { OverlaySpin } from '@components';
 import './Contest.less';
+import { withAppRoute } from '@utils';
+import { selectMyLeagueUUID } from '@selectors/BaseSelector';
 
 const Contest: React.FunctionComponent<ContestProps> = ({}) => {
     const dispatch = useDispatch();
@@ -17,11 +19,17 @@ const Contest: React.FunctionComponent<ContestProps> = ({}) => {
 
     const options = _get(history, ['location', 'state'], undefined);
 
+    const leagueUUID = useSelector(selectMyLeagueUUID);
     const { isSubmitted, isSubmitting, result } = useSelector(selectData);
 
     useEffect(() => {
         if (isSubmitted && result) {
-            history.push(routes.MEMBER_APP.CONTEST.ROUTE, result);
+            history.push(
+                withAppRoute(routes.ROUTES.CONTEST.ROUTE, {
+                    routeProps: { league_uuid: leagueUUID },
+                }),
+                result
+            );
         }
     });
 

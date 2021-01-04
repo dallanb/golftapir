@@ -5,7 +5,13 @@ import classnames from 'classnames';
 import { MembersListTileProps } from './types';
 import constants from '@constants';
 import routes from '@constants/routes';
-import { getName, mapStatusColour, withDynamicRoute, withS3URL } from '@utils';
+import {
+    getName,
+    mapStatusColour,
+    withAppRoute,
+    withDynamicRoute,
+    withS3URL,
+} from '@utils';
 import { Avatar } from '@components';
 import './MembersListTile.less';
 
@@ -19,9 +25,12 @@ const MembersListTile: React.FunctionComponent<MembersListTileProps> = ({
     const params = history.params;
     const handleClick = (options: any) => {
         history.push(
-            withDynamicRoute(routes.LEAGUE_APP.MEMBER.ROUTE, {
-                ...params,
-                member_uuid,
+            withAppRoute(routes.ROUTES.MEMBER.ROUTE, {
+                app: constants.APPS.LEAGUE_APP,
+                routeProps: {
+                    ...params,
+                    member_uuid,
+                },
             }),
             options
         );

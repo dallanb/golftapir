@@ -10,6 +10,8 @@ import ComponentContent from '@layouts/ComponentContent';
 import routes from '@constants/routes';
 import { OverlaySpin } from '@components';
 import './League.less';
+import { withAppRoute } from '@utils';
+import constants from '@constants';
 
 const League: React.FunctionComponent<LeagueProps> = ({}) => {
     const dispatch = useDispatch();
@@ -21,7 +23,11 @@ const League: React.FunctionComponent<LeagueProps> = ({}) => {
 
     useEffect(() => {
         if (isSubmitted && result) {
-            history.push(routes.MEMBER_APP.LEAGUES.ROUTE);
+            history.push(
+                withAppRoute(routes.ROUTES.LEAGUES.ROUTE, {
+                    app: constants.APPS.MEMBER_APP,
+                })
+            );
         }
     });
 

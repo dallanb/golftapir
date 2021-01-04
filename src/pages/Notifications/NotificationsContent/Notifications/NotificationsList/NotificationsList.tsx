@@ -47,7 +47,7 @@ const NotificationsList: React.FunctionComponent<NotificationsListProps> = ({
     };
 
     const tileOnClick = (item: any) => {
-        const { route, state } = topicToRouteMapper(item.topic, item.key, item);
+        const { route, state } = topicToRouteMapper(item.topic, item.key, item); // TODO: likely a problem here
         history.push(route, state);
         dispatch(
             NotificationActions.updateNotification(item._id, { read: true })

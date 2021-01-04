@@ -6,6 +6,9 @@ import { RegisterProps, StateProps } from './types';
 import RegisterFormActions from './actions';
 import RegisterForm from './RegisterForm';
 import './Register.less';
+import { withAppRoute } from '@utils';
+import constants from '@constants';
+import routes from '@constants/routes';
 
 class Register extends React.PureComponent<RegisterProps> {
     componentDidMount() {
@@ -16,7 +19,11 @@ class Register extends React.PureComponent<RegisterProps> {
     componentDidUpdate(prevProps: Readonly<RegisterProps>) {
         const { isRegistered, history } = this.props;
         if (isRegistered) {
-            history.push('/auth/login');
+            history.push(
+                withAppRoute(routes.ROUTES.LOGIN, {
+                    app: constants.APPS.AUTH_APP,
+                })
+            );
         }
     }
 

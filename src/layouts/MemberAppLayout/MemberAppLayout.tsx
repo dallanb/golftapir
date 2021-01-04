@@ -9,9 +9,10 @@ import {
     MenuItemRendererProps,
 } from './types';
 import defaultMenuItemRenderer from './defaultMenuItemRenderer';
-import { getRouteBase, withDynamicRoute } from '@utils';
+import { withAppRoute, withDynamicRoute } from '@utils';
 import routes from '@constants/routes';
 import './MemberAppLayout.less';
+import constants from '@constants';
 
 const { Sider } = Layout;
 
@@ -39,18 +40,17 @@ class MemberAppLayout extends React.Component<
         const nextState = { ...prevState };
         const prevPath = _get(prevState, ['currentPath']);
         const nextPath = _get(nextProps, ['location', 'pathname']);
-        console.log(nextProps);
-        const baseKey = getRouteBase(nextPath);
-        if (prevPath !== nextPath || !prevState.selectedKeys.length) {
-            nextState.currentPath = nextPath;
-            nextState.selectedKeys[0] = nextProps.menuRoutes
-                .findIndex(({ key }: any) => baseKey === key)
-                .toString();
-        }
+        // if (prevPath !== nextPath || !prevState.selectedKeys.length) {
+        //     nextState.currentPath = nextPath;
+        //     nextState.selectedKeys[0] = nextProps.menuRoutes
+        //         .findIndex(({ key }: any) => baseKey === key)
+        //         .toString();
+        // }
         return nextState;
     }
 
     menuItemOnClick = ({ key }: { key: any }, path: string) => {
+        console.log(key); // TODO: update state here
         const { history } = this.props;
         history.push(path);
     };
@@ -82,7 +82,11 @@ class MemberAppLayout extends React.Component<
                     <div
                         className="member-app-sider-layout-title"
                         onClick={() =>
-                            history.push(routes.MEMBER_APP.HOME.ROUTE)
+                            history.push(
+                                withAppRoute(routes.ROUTES.HOME.ROUTE, {
+                                    app: constants.APPS.MEMBER_APP,
+                                })
+                            )
                         }
                     />
                     <Menu
@@ -94,13 +98,6 @@ class MemberAppLayout extends React.Component<
                     >
                         {this.getMenuItems(menuRoutes, menuProps)}
                     </Menu>
-                    {/*<div className="member-app-sider-layout-footer">*/}
-                    {/*    <UserTile*/}
-                    {/*        name={name}*/}
-                    {/*        avatar={avatar}*/}
-                    {/*        menu={this.getUserTileMenuItems}*/}
-                    {/*    />*/}
-                    {/*</div>*/}
                 </Sider>
                 {children}
             </Layout>

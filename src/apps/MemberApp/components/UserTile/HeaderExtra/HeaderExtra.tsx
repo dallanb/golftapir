@@ -23,7 +23,7 @@ const HeaderExtra: React.FunctionComponent<HeaderExtraProps> = ({ user }) => {
                 key={league.uuid}
                 onClick={() =>
                     history.push(
-                        withAppRoute(routes.HOME.ROUTE, {
+                        withAppRoute(routes.ROUTES.HOME.ROUTE, {
                             app: constants.APPS.LEAGUE_APP,
                             routeProps: { leagueUUID: league.uuid },
                         }),
@@ -53,7 +53,13 @@ const HeaderExtra: React.FunctionComponent<HeaderExtraProps> = ({ user }) => {
         const authMenuItems = [
             <Menu.Item
                 key="logout"
-                onClick={() => history.push(`/auth/logout`)}
+                onClick={() =>
+                    history.push(
+                        withAppRoute(routes.ROUTES.LOGOUT.ROUTE, {
+                            app: constants.APPS.AUTH_APP,
+                        })
+                    )
+                }
             >
                 Log out{' '}
                 <span className="header-extra-username">{user.username}</span>
@@ -68,7 +74,7 @@ const HeaderExtra: React.FunctionComponent<HeaderExtraProps> = ({ user }) => {
                 <Button
                     onClick={() =>
                         history.push(
-                            withAppRoute(routes.NOTIFICATIONS.ROUTE, {
+                            withAppRoute(routes.ROUTES.NOTIFICATIONS.ROUTE, {
                                 app: constants.APPS.MEMBER_APP,
                             })
                         )

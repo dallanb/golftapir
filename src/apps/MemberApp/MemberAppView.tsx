@@ -53,7 +53,7 @@ const MemberAppView: React.FunctionComponent<MemberAppViewProps> = () => {
                 {routes.map(({ path, component, exact }: ComponentRoute) => (
                     <Route
                         key={path}
-                        path={path}
+                        path={`${constantRoutes.APPS.MEMBER_APP}${path}`}
                         component={component}
                         exact={exact}
                     />
@@ -62,7 +62,7 @@ const MemberAppView: React.FunctionComponent<MemberAppViewProps> = () => {
                     ({ path, component, exact }: ComponentRoute) => (
                         <ProtectedRoute
                             key={path}
-                            path={path}
+                            path={`${constantRoutes.APPS.MEMBER_APP}${path}`}
                             component={component}
                             exact={exact}
                             isLoggedIn={isLoggedIn}
@@ -74,7 +74,7 @@ const MemberAppView: React.FunctionComponent<MemberAppViewProps> = () => {
                 <Route
                     render={() => (
                         <Redirect
-                            to={withAppRoute(constantRoutes.HOME.ROUTE, {
+                            to={withAppRoute(constantRoutes.ROUTES.HOME.ROUTE, {
                                 app: constants.APPS.MEMBER_APP,
                             })}
                         />

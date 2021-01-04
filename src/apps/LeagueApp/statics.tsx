@@ -7,32 +7,32 @@ import constants from '@constants';
 export default [
     {
         path: (props: any) =>
-            withAppRoute(routes.HOME.ROUTE, {
+            withAppRoute(routes.ROUTES.HOME.ROUTE, {
                 app: constants.APPS.LEAGUE_APP,
                 routeProps: props,
             }),
         name: (leagueName: string) => leagueName,
         icon: (props: any) => <Avatar {...props.value} />,
-        key: routes.HOME.KEY,
+        key: routes.ROUTES.HOME.KEY,
     },
     {
         path: (props: any) =>
-            withAppRoute(routes.MEMBERS.ROUTE, {
+            withAppRoute(routes.ROUTES.MEMBERS.ROUTE, {
                 app: constants.APPS.LEAGUE_APP,
                 routeProps: props,
             }),
-        name: routes.MEMBERS.LABEL,
-        icon: routes.MEMBERS.ICON,
-        key: routes.MEMBERS.KEY,
+        name: routes.ROUTES.MEMBERS.LABEL,
+        icon: routes.ROUTES.MEMBERS.ICON,
+        key: routes.ROUTES.MEMBERS.KEY,
     },
     {
         path: (props: any) =>
-            withAppRoute(routes.CONTESTS.ROUTE, {
+            withAppRoute(routes.ROUTES.CONTESTS.ROUTE, {
                 app: constants.APPS.LEAGUE_APP,
                 routeProps: props,
             }),
-        name: routes.CONTESTS.LABEL,
-        icon: routes.CONTESTS.ICON,
-        key: routes.CONTESTS.KEY,
+        name: routes.ROUTES.CONTESTS.LABEL,
+        icon: routes.ROUTES.CONTESTS.ICON,
+        key: routes.ROUTES.CONTESTS.KEY,
     },
 ];

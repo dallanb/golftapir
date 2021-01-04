@@ -43,7 +43,7 @@ const LeagueAppView: React.FunctionComponent<LeagueAppViewProps> = () => {
     useEffect(() => {
         if (!prevUUID) {
             history.push(
-                withAppRoute(constantRoutes.HOME.ROUTE, {
+                withAppRoute(constantRoutes.ROUTES.HOME.ROUTE, {
                     app: constants.APPS.MEMBER_APP,
                     routeProps: {},
                 })
@@ -101,7 +101,7 @@ const LeagueAppView: React.FunctionComponent<LeagueAppViewProps> = () => {
                 {routes.map(({ path, component, exact }: ComponentRoute) => (
                     <Route
                         key={path}
-                        path={path}
+                        path={`${constantRoutes.APPS.LEAGUE_APP}${path}`}
                         component={component}
                         exact={exact}
                     />
@@ -110,7 +110,7 @@ const LeagueAppView: React.FunctionComponent<LeagueAppViewProps> = () => {
                     ({ path, component, exact }: ComponentRoute) => (
                         <ProtectedRoute
                             key={path}
-                            path={path}
+                            path={`${constantRoutes.APPS.LEAGUE_APP}${path}`}
                             component={component}
                             exact={exact}
                             isLoggedIn={isLoggedIn}
@@ -122,7 +122,7 @@ const LeagueAppView: React.FunctionComponent<LeagueAppViewProps> = () => {
                 <Route
                     render={() => (
                         <Redirect
-                            to={withAppRoute(constantRoutes.HOME.ROUTE, {
+                            to={withAppRoute(constantRoutes.ROUTES.HOME.ROUTE, {
                                 app: constants.APPS.LEAGUE_APP,
                                 routeProps: { league_uuid: leagueUUID },
                             })}

@@ -8,25 +8,25 @@ import constants from '@constants';
 
 export default [
     {
-        path: withAppRoute(routes.HOME.ROUTE, {
+        path: withAppRoute(routes.ROUTES.HOME.ROUTE, {
             app: constants.APPS.MEMBER_APP,
         }),
         component: Home,
-        name: routes.HOME.LABEL,
-        icon: routes.HOME.ICON,
-        key: routes.HOME.KEY,
+        name: routes.ROUTES.HOME.LABEL,
+        icon: routes.ROUTES.HOME.ICON,
+        key: routes.ROUTES.HOME.KEY,
     },
     {
-        path: withAppRoute(routes.NOTIFICATIONS.ROUTE, {
+        path: withAppRoute(routes.ROUTES.NOTIFICATIONS.ROUTE, {
             app: constants.APPS.MEMBER_APP,
         }),
-        name: routes.NOTIFICATIONS.LABEL,
+        name: routes.ROUTES.NOTIFICATIONS.LABEL,
         icon: (props: { data: any; value: { pending: number } }) =>
             PendingBadge({
-                icon: routes.NOTIFICATIONS.ICON,
+                icon: routes.ROUTES.NOTIFICATIONS.ICON,
                 ...props,
             }),
-        key: routes.NOTIFICATIONS.KEY,
+        key: routes.ROUTES.NOTIFICATIONS.KEY,
     },
     {
         path: '/app/messages',
@@ -35,28 +35,28 @@ export default [
         key: 'messages',
     },
     {
-        path: withAppRoute(routes.COMPETITORS.ROUTE, {
+        path: withAppRoute(routes.ROUTES.COMPETITORS.ROUTE, {
             app: constants.APPS.MEMBER_APP,
         }),
-        name: routes.COMPETITORS.LABEL,
-        icon: routes.COMPETITORS.ICON,
-        key: routes.COMPETITORS.KEY,
+        name: routes.ROUTES.COMPETITORS.LABEL,
+        icon: routes.ROUTES.COMPETITORS.ICON,
+        key: routes.ROUTES.COMPETITORS.KEY,
     },
     {
-        path: withAppRoute(routes.CONTESTS.ROUTE, {
+        path: withAppRoute(routes.ROUTES.CONTESTS.ROUTE, {
             app: constants.APPS.MEMBER_APP,
         }),
-        name: routes.CONTESTS.LABEL,
-        icon: routes.CONTESTS.ICON,
-        key: routes.CONTESTS.KEY,
+        name: routes.ROUTES.CONTESTS.LABEL,
+        icon: routes.ROUTES.CONTESTS.ICON,
+        key: routes.ROUTES.CONTESTS.KEY,
     },
     {
-        path: withAppRoute(routes.LEAGUES.ROUTE, {
+        path: withAppRoute(routes.ROUTES.LEAGUES.ROUTE, {
             app: constants.APPS.MEMBER_APP,
         }),
-        name: routes.LEAGUES.LABEL,
-        icon: routes.LEAGUES.ICON,
-        key: routes.LEAGUES.KEY,
+        name: routes.ROUTES.LEAGUES.LABEL,
+        icon: routes.ROUTES.LEAGUES.ICON,
+        key: routes.ROUTES.LEAGUES.KEY,
     },
     // {
     //     path: '/app/wagers',
@@ -66,11 +66,11 @@ export default [
     //     key: 'wagers',
     // },
     {
-        path: withAppRoute(routes.ACCOUNT.ROUTE, {
+        path: withAppRoute(routes.ROUTES.ACCOUNT.ROUTE, {
             app: constants.APPS.MEMBER_APP,
         }),
-        name: routes.ACCOUNT.LABEL,
-        icon: routes.ACCOUNT.ICON,
-        key: routes.ACCOUNT.KEY,
+        name: routes.ROUTES.ACCOUNT.LABEL,
+        icon: routes.ROUTES.ACCOUNT.ICON,
+        key: routes.ROUTES.ACCOUNT.KEY,
     },
 ];
