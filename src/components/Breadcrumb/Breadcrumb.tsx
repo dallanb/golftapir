@@ -7,8 +7,9 @@ import { getRouteBreadcrumb, withDynamicRoute } from '@utils';
 import './Breadcrumb.less';
 
 const Breadcrumb: React.FunctionComponent<BreadcrumbProps> = (props) => {
-    const { state, params, match } = props;
-    const pathSnippets = match.path.split('/').filter((snippet) => snippet);
+    const { state, params, match, route } = props;
+
+    const pathSnippets = route.split('/').filter((snippet) => snippet);
     const breadcrumbItems = pathSnippets.reduce(
         (accum: any, snippet: string, index: number) => {
             const url = `/${pathSnippets.slice(0, index + 1).join('/')}`;

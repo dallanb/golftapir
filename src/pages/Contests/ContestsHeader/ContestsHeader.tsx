@@ -2,13 +2,14 @@ import React from 'react';
 import { ContestsHeaderProps } from './types';
 import { ContentLayoutHeader } from '@layouts';
 import { Breadcrumb } from '@components';
-import './ContestsHeader.less';
+import constantRoutes from '@constants/routes';
 import CONSTANTS from '@locale/en-CA';
+import './ContestsHeader.less';
 
 const ContestsHeader: React.FunctionComponent<ContestsHeaderProps> = () => {
     const title = CONSTANTS.PAGES.CONTESTS.TITLE;
     const subTitle = CONSTANTS.PAGES.CONTESTS.DESCRIPTION;
-    const extra = <Breadcrumb />;
+    const extra = <Breadcrumb route={constantRoutes.ROUTES.CONTESTS.ROUTE} />;
     return (
         <>
             <ContentLayoutHeader

@@ -10,12 +10,14 @@ import {
 } from '@apps/LeagueApp/selector';
 import { Breadcrumb } from '@components';
 import routes from '@constants/routes';
+import constantRoutes from '@constants/routes';
 
 const LeagueHeader: React.FunctionComponent<LeagueHeaderProps> = () => {
     const title = useSelector(selectLeagueName);
     const subTitle = CONSTANTS.PAGES.LEAGUE.DESCRIPTION;
     const extra = (
         <Breadcrumb
+            route={constantRoutes.ROUTES.HOME.ROUTE}
             state={{
                 [routes.ROUTES.HOME.KEY]: {
                     ...useSelector(selectLeague),

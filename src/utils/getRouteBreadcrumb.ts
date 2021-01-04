@@ -4,7 +4,6 @@ import routes from '@constants/routes';
 const getRouteBreadcrumb = (
     route: string
 ): { key: any; label: any; icon: any } => {
-    console.log(route); // TODO: probably need to prepend or remove the app here
     const routeObj = Object.values(routes.ROUTES).find(
         (value: any) => value.ROUTE === route
     );

@@ -16,9 +16,6 @@ export const getMenuSelectedKey = (
             cleanSnippets = routeSnippets.slice(3);
             break;
     }
-    console.log(route);
-    console.log(app);
-    console.log(keys);
     const match = Object.values(routes.ROUTES).find((constantRoute: any) => {
         const constantRouteSnippets = constantRoute.ROUTE.split('/').filter(
             (snippet: string) => snippet
