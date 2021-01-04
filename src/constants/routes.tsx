@@ -51,7 +51,7 @@ const routes = {
             ICON: SettingFilled,
         },
         COMPETITOR: {
-            ROUTE: '/competitors/competitor/:competitor_uuid',
+            ROUTE: '/competitors/:competitor_uuid',
             BASE_KEY: 'competitors',
             KEY: 'competitor',
             LABEL: CONSTANTS.PAGES.COMPETITOR.TITLE,
@@ -65,7 +65,7 @@ const routes = {
             ICON: TeamOutlined,
         },
         CONTEST: {
-            ROUTE: '/contests/contest',
+            ROUTE: '/contests/:contest_uuid',
             BASE_KEY: 'contests',
             KEY: 'contest',
             LABEL: CONSTANTS.PAGES.CONTEST.TITLE,
@@ -86,7 +86,7 @@ const routes = {
             ICON: null,
         },
         CONTEST_UPDATE: {
-            ROUTE: '/contests/contest/update',
+            ROUTE: '/contests/:contest_uuid/update',
             BASE_KEY: 'contest',
             KEY: 'contest_update',
             LABEL: CONSTANTS.PAGES.CONTEST_UPDATE.TITLE,
@@ -122,7 +122,7 @@ const routes = {
         },
 
         WAGER: {
-            ROUTE: '/wagers/wager',
+            ROUTE: '/wagers/:wager_uuid',
             BASE_KEY: 'wagers',
             KEY: 'wager',
             LABEL: CONSTANTS.PAGES.WAGERS.TITLE,

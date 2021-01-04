@@ -25,7 +25,7 @@ const HeaderExtra: React.FunctionComponent<HeaderExtraProps> = ({ user }) => {
                     history.push(
                         withAppRoute(routes.ROUTES.HOME.ROUTE, {
                             app: constants.APPS.LEAGUE_APP,
-                            routeProps: { leagueUUID: league.uuid },
+                            routeProps: { league_uuid: league.uuid },
                         }),
                         league
                     )

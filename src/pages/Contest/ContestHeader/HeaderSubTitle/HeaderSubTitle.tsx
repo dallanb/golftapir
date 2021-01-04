@@ -34,7 +34,10 @@ const HeaderSubTitle: React.FunctionComponent<HeaderSubTitleProps> = () => {
                 onClick={() =>
                     history.push(
                         withAppRoute(routes.ROUTES.CONTEST_UPDATE.ROUTE, {
-                            routeProps: { league_uuid: leagueUUID },
+                            routeProps: {
+                                league_uuid: leagueUUID,
+                                contest_uuid: contest.uuid,
+                            },
                         }),
                         contest
                     )

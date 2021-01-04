@@ -26,7 +26,10 @@ const Contest: React.FunctionComponent<ContestProps> = ({}) => {
         if (isSubmitted && result) {
             history.push(
                 withAppRoute(routes.ROUTES.CONTEST.ROUTE, {
-                    routeProps: { league_uuid: leagueUUID },
+                    routeProps: {
+                        league_uuid: leagueUUID,
+                        contest_uuid: result.uuid,
+                    },
                 }),
                 result
             );

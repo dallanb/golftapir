@@ -8,21 +8,18 @@ import './Breadcrumb.less';
 
 const Breadcrumb: React.FunctionComponent<BreadcrumbProps> = (props) => {
     const { state, params, match, route } = props;
-
+    const appPath = match.path.replace(route, ''); // use this to render the home button
     const pathSnippets = route.split('/').filter((snippet) => snippet);
     const breadcrumbItems = pathSnippets.reduce(
         (accum: any, snippet: string, index: number) => {
             const url = `/${pathSnippets.slice(0, index + 1).join('/')}`;
             const { key, label, icon: Icon } = getRouteBreadcrumb(url);
-            if (snippet.startsWith(':')) {
-                accum.pop();
-            }
             accum.push(
                 <AntdBreadcrumb.Item key={url}>
                     <Link
                         to={{
                             pathname: withDynamicRoute(
-                                url,
+                                `${appPath}${url}`,
                                 _get(params, [key], {})
                             ),
                             state: _get(state, [key], {}),

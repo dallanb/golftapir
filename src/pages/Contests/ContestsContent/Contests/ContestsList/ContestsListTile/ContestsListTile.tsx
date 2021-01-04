@@ -21,16 +21,15 @@ const ContestsListTile: React.FunctionComponent<ContestsListTileProps> = ({
     const isEven = index % 2;
     const item = _get(data, [index], undefined);
     const leagueUUID = useSelector(selectMyLeagueUUID);
+    const uuid = _get(item, ['uuid'], undefined);
     const handleClick = (options: any) => {
         history.push(
             withAppRoute(routes.ROUTES.CONTEST.ROUTE, {
-                routeProps: { league_uuid: leagueUUID },
+                routeProps: { league_uuid: leagueUUID, contest_uuid: uuid },
             }),
             options
         );
     };
-
-    const uuid = _get(item, ['uuid'], undefined);
     const name = _get(item, ['name'], 'Loading...');
     const avatar = _get(item, ['avatar'], undefined);
     const src =
