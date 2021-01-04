@@ -9,5 +9,5 @@ export interface CompetitorProps extends RouteComponentProps {
 export interface CompetitorPageInterface {
     readonly isInitialized: boolean;
     readonly err?: Error;
-    readonly account: any;
+    readonly member: any;
 }

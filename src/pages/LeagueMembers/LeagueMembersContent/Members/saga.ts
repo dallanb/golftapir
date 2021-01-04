@@ -16,6 +16,15 @@ function* init() {
     }
 }
 
+function* refresh() {
+    try {
+        yield call(fetchMembersList);
+        yield put(LeagueMembersPageContentMembersActions.refreshSuccess());
+    } catch (err) {
+        yield put(LeagueMembersPageContentMembersActions.refreshFailure(err));
+    }
+}
+
 function* fetchData({
     options = {
         page: 1,
@@ -43,6 +52,7 @@ function* fetchData({
 export default function* LeagueMembersPageContentMembersSaga() {
     yield all([
         takeLatest(LeagueMembersPageContentMembersTypes.INIT, init),
+        takeLatest(LeagueMembersPageContentMembersTypes.REFRESH, refresh),
         takeLatest(LeagueMembersPageContentMembersTypes.FETCH_DATA, fetchData),
     ]);
 }

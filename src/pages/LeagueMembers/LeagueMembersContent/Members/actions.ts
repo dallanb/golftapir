@@ -10,6 +10,9 @@ const { Types, Creators } = createActions(
         fetchData: ['options', 'append'],
         fetchDataSuccess: ['data', 'metadata'],
         fetchDataFailure: ['err'],
+        refresh: null,
+        refreshSuccess: null,
+        refreshFailure: ['err'],
     },
     {
         prefix: 'LEAGUE_MEMBERS_PAGE_CONTENT_MEMBERS_',

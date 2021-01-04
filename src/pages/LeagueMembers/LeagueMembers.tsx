@@ -6,17 +6,17 @@ import LeagueMembersPageActions from './actions';
 import LeagueMembersHeader from './LeagueMembersHeader';
 import LeagueMembersContent from './LeagueMembersContent';
 import LeagueMembersSider from './LeagueMembersSider';
+import { selectMyLeagueUUID } from '@selectors/BaseSelector';
 import { selectData } from './selector';
-import {selectLeague} from "@apps/LeagueApp/selector";
 import './LeagueMembers.less';
 
 const LeagueMembers: React.FunctionComponent<LeagueMembersProps> = () => {
     const dispatch = useDispatch();
-    const league = useSelector(selectLeague)
+    const leagueUUID = useSelector(selectMyLeagueUUID);
     const { isInitialized } = useSelector(selectData);
 
     useEffect(() => {
-        dispatch(LeagueMembersPageActions.init(league.uuid));
+        dispatch(LeagueMembersPageActions.init(leagueUUID));
         return () => {
             dispatch(LeagueMembersPageActions.terminate());
         };

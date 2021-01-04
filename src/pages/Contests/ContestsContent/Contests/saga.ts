@@ -6,9 +6,9 @@ import ContestsPageContentContestsActions, {
 } from './actions';
 import { fetchContestsList } from './helpers';
 
-function* init() {
+function* init({ options }: AnyAction) {
     try {
-        yield call(fetchContestsList, { page: 1, per_page: 10 });
+        yield call(fetchContestsList, { page: 1, per_page: 10, ...options });
         yield put(ContestsPageContentContestsActions.initSuccess());
     } catch (err) {
         yield put(ContestsPageContentContestsActions.initFailure(err));

@@ -7,6 +7,12 @@ const { Types, Creators } = createActions(
         initFailure: ['err'],
         terminate: null,
         set: ['data'],
+        refresh: ['uuid'],
+        refreshSuccess: null,
+        refreshFailure: ['err'],
+        updateMemberStatus: ['uuid', 'status'],
+        updateMemberStatusSuccess: ['uuid', 'status'],
+        updateMemberStatusFailure: ['err'],
     },
     {
         prefix: 'LEAGUE_MEMBERS_PAGE_',

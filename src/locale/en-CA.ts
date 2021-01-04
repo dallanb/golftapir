@@ -294,6 +294,7 @@ const CONSTANTS = {
         LEAGUE_MEMBERS: {
             TITLE: 'League Members',
             DESCRIPTION: 'View League Members',
+            SEARCH: 'Invite Members',
         },
         LEAGUES: {
             TITLE: 'Leagues',

@@ -12,6 +12,7 @@ const INITIAL_STATE: ContestPageInterface = {
     err: undefined,
     subscribed: false,
     contest: undefined,
+    participant: undefined,
     membersHash: undefined,
     rankingLookup: undefined,
 };

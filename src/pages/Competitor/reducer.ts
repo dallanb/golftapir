@@ -8,7 +8,7 @@ import { CompetitorPageInterface } from './types';
 const INITIAL_STATE: CompetitorPageInterface = {
     isInitialized: false,
     err: undefined,
-    account: undefined,
+    member: undefined,
 };
 
 /* ------------- Reducers ------------- */
