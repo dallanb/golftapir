@@ -13,22 +13,22 @@ import { MemberAppLayout } from '@layouts';
 import { ComponentRoute, LeagueAppViewProps } from './types';
 import { ProtectedRoute } from '@components';
 import { routes, protectedRoutes } from './routes';
+import constants from '@constants';
 import constantRoutes from '@constants/routes';
 import { AuthActions } from '@actions';
 import BaseActions from './actions';
 import statics from '@apps/LeagueApp/statics';
 import { FirebaseClient } from '@libs';
+import { withAppRoute, withS3URL } from '@utils';
 import { selectData as selectBaseData } from '@selectors/BaseSelector';
 import { selectData } from './selector';
-import { withS3URL } from '@utils';
-import constants from '@constants';
 
 const LeagueAppView: React.FunctionComponent<LeagueAppViewProps> = () => {
     const dispatch = useDispatch();
     const history = useHistory();
     const params = useParams();
     const prevLeague = _get(history, ['location', 'state'], null);
-    const prevUUID = _get(params, ['uuid'], null);
+    const prevUUID = _get(params, ['league_uuid'], null);
     const { isInitialized, isRefreshing, league } = useSelector(selectData);
     const { me, isLoggedIn, forceLogout } = useSelector(selectBaseData);
     const leagueUUID = _get(league, ['uuid'], '');
@@ -42,7 +42,12 @@ const LeagueAppView: React.FunctionComponent<LeagueAppViewProps> = () => {
 
     useEffect(() => {
         if (!prevUUID) {
-            history.push(constantRoutes.MEMBER_APP.HOME.ROUTE);
+            history.push(
+                withAppRoute(constantRoutes.HOME.ROUTE, {
+                    app: constants.APPS.MEMBER_APP,
+                    routeProps: {},
+                })
+            );
         } else {
             dispatch(BaseActions.preInit(prevLeague));
             dispatch(BaseActions.init(prevUUID));
@@ -69,8 +74,8 @@ const LeagueAppView: React.FunctionComponent<LeagueAppViewProps> = () => {
     );
     const menuProps = {
         paths: {
-            league: { uuid: leagueUUID },
-            league_members: { uuid: leagueUUID },
+            league: { league_uuid: leagueUUID },
+            league_members: { league_uuid: leagueUUID },
         },
         names: { league: leagueName },
         icons: {
@@ -116,7 +121,12 @@ const LeagueAppView: React.FunctionComponent<LeagueAppViewProps> = () => {
                 )}
                 <Route
                     render={() => (
-                        <Redirect to={constantRoutes.LEAGUE_APP.LEAGUE.ROUTE} />
+                        <Redirect
+                            to={withAppRoute(constantRoutes.HOME.ROUTE, {
+                                app: constants.APPS.LEAGUE_APP,
+                                routeProps: { league_uuid: leagueUUID },
+                            })}
+                        />
                     )}
                 />
             </Switch>

@@ -1,21 +1,38 @@
 import React from 'react';
 import routes from '@constants/routes';
 import { Avatar } from '@components';
-import { withDynamicRoute } from '@utils';
+import { withAppRoute } from '@utils';
+import constants from '@constants';
 
 export default [
     {
         path: (props: any) =>
-            withDynamicRoute(routes.LEAGUE_APP.LEAGUE.ROUTE, props),
+            withAppRoute(routes.HOME.ROUTE, {
+                app: constants.APPS.LEAGUE_APP,
+                routeProps: props,
+            }),
         name: (leagueName: string) => leagueName,
         icon: (props: any) => <Avatar {...props.value} />,
-        key: routes.LEAGUE_APP.LEAGUE.KEY,
+        key: routes.HOME.KEY,
     },
     {
         path: (props: any) =>
-            withDynamicRoute(routes.LEAGUE_APP.LEAGUE_MEMBERS.ROUTE, props),
-        name: routes.LEAGUE_APP.LEAGUE_MEMBERS.LABEL,
-        icon: routes.LEAGUE_APP.LEAGUE_MEMBERS.ICON,
-        key: routes.LEAGUE_APP.LEAGUE_MEMBERS.KEY,
+            withAppRoute(routes.MEMBERS.ROUTE, {
+                app: constants.APPS.LEAGUE_APP,
+                routeProps: props,
+            }),
+        name: routes.MEMBERS.LABEL,
+        icon: routes.MEMBERS.ICON,
+        key: routes.MEMBERS.KEY,
+    },
+    {
+        path: (props: any) =>
+            withAppRoute(routes.CONTESTS.ROUTE, {
+                app: constants.APPS.LEAGUE_APP,
+                routeProps: props,
+            }),
+        name: routes.CONTESTS.LABEL,
+        icon: routes.CONTESTS.ICON,
+        key: routes.CONTESTS.KEY,
     },
 ];

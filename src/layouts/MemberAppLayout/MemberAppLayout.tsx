@@ -39,6 +39,7 @@ class MemberAppLayout extends React.Component<
         const nextState = { ...prevState };
         const prevPath = _get(prevState, ['currentPath']);
         const nextPath = _get(nextProps, ['location', 'pathname']);
+        console.log(nextProps);
         const baseKey = getRouteBase(nextPath);
         if (prevPath !== nextPath || !prevState.selectedKeys.length) {
             nextState.currentPath = nextPath;

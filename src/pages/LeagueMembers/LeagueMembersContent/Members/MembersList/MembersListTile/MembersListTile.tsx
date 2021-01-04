@@ -19,7 +19,7 @@ const MembersListTile: React.FunctionComponent<MembersListTileProps> = ({
     const params = history.params;
     const handleClick = (options: any) => {
         history.push(
-            withDynamicRoute(routes.LEAGUE_APP.LEAGUE_MEMBER.ROUTE, {
+            withDynamicRoute(routes.LEAGUE_APP.MEMBER.ROUTE, {
                 ...params,
                 member_uuid,
             }),

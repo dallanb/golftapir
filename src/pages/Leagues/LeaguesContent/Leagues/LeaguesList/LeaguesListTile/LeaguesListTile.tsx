@@ -20,7 +20,7 @@ const LeaguesListTile: React.FunctionComponent<LeaguesListTileProps> = ({
 
     const handleClick = (options: any) => {
         history.push(
-            withDynamicRoute(routes.LEAGUE_APP.LEAGUE.ROUTE, { uuid }),
+            withDynamicRoute(routes.LEAGUE_APP.HOME.ROUTE, { uuid }),
             options
         );
     };

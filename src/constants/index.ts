@@ -1,6 +1,11 @@
 import CONSTANTS from '@locale/en-CA';
 
 const constants = {
+    APPS: {
+        MEMBER_APP: 'member_app',
+        LEAGUE_APP: 'league_app',
+        AUTH_APP: 'auth_app',
+    },
     TARGETS: {
         ACCOUNT_PAGE: 'ACCOUNT_PAGE',
         CONTEST_PAGE: 'CONTEST_PAGE',

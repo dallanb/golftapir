@@ -14,6 +14,8 @@ import statics from '@apps/MemberApp/statics';
 import { FirebaseClient } from '@libs';
 import { selectIsInitialized } from './selector';
 import { selectData as selectBaseData } from '@selectors/BaseSelector';
+import { withAppRoute } from '@utils';
+import constants from '@constants';
 
 const MemberAppView: React.FunctionComponent<MemberAppViewProps> = () => {
     const dispatch = useDispatch();
@@ -71,7 +73,11 @@ const MemberAppView: React.FunctionComponent<MemberAppViewProps> = () => {
                 )}
                 <Route
                     render={() => (
-                        <Redirect to={constantRoutes.MEMBER_APP.HOME.ROUTE} />
+                        <Redirect
+                            to={withAppRoute(constantRoutes.HOME.ROUTE, {
+                                app: constants.APPS.MEMBER_APP,
+                            })}
+                        />
                     )}
                 />
             </Switch>

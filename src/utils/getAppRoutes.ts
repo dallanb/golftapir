@@ -10,7 +10,7 @@ const getAppRoutes = (route: string) => {
         case 'auth':
             appRoutes = routes.AUTH_APP;
             break;
-        case 'league':
+        case 'leagues':
             appRoutes = routes.LEAGUE_APP;
             break;
     }
