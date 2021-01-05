@@ -160,9 +160,9 @@ const mapStateToProps = ({ leagueApp, base }: any) => {
             league_members: { league_uuid: leagueUUID },
             contests: { league_uuid: leagueUUID },
         },
-        names: { league: leagueName },
+        names: { home: leagueName },
         icons: {
-            league: {
+            home: {
                 src: leagueAvatar,
                 name: leagueName,
                 shape: 'square',
