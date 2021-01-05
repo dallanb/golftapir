@@ -7,7 +7,6 @@ export const getMenuSelectedKey = (
     app: string,
     keys: any[]
 ): string[] => {
-    console.log('ROUTE: ', route);
     const routeSnippets = route.split('/');
     let cleanSnippets: string[] = [];
     switch (app) {

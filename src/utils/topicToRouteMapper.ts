@@ -1,12 +1,19 @@
 import { get as _get } from 'lodash';
 import constants from '@constants';
 import routes from '@constants/routes';
+import { withAppRoute } from '@utils/index';
 
 const topicToRouteMapper = (
     topic: string,
     key: string,
     item: any
-): { route: string; state: any } => {
+): {
+    route: string;
+    state: any;
+} => {
+    console.log('TOPIC: ', topic);
+    console.log('KEY: ', key);
+    console.log('ITEM: ', item);
     const mapping = {
         route: '',
         state: {},
@@ -25,6 +32,20 @@ const topicToRouteMapper = (
                 case constants.EVENTS.CONTESTS.PARTICIPANT_ACTIVE:
                 case constants.EVENTS.CONTESTS.CONTEST_READY:
                 case constants.EVENTS.CONTESTS.CONTEST_ACTIVE:
+                    mapping.route = withAppRoute(mapping.route, {
+                        routeProps: {
+                            contest_uuid: _get(
+                                item,
+                                ['properties', 'contest_uuid'],
+                                ''
+                            ),
+                            league_uuid: _get(
+                                item,
+                                ['properties', 'league_uuid'],
+                                ''
+                            ),
+                        },
+                    });
                     mapping.state = {
                         uuid: _get(item, ['properties', 'contest_uuid'], ''),
                     };

@@ -27,7 +27,6 @@ export default [
     },
     {
         path: (props: any) => {
-            console.log(props);
             return withAppRoute(routes.ROUTES.CONTESTS.ROUTE, {
                 app: constants.APPS.LEAGUE_APP,
                 routeProps: props,

@@ -10,7 +10,7 @@ import {
     selectListIsFetching,
 } from '../selector';
 import NotificationsListTile from './NotificationsListTile';
-import { getRefHeight, topicToRouteMapper } from '@utils';
+import { getRefHeight, topicToRouteMapper, withAppRoute } from '@utils';
 import { NotificationActions } from '@actions';
 import './NotificationsList.less';
 
@@ -47,7 +47,7 @@ const NotificationsList: React.FunctionComponent<NotificationsListProps> = ({
     };
 
     const tileOnClick = (item: any) => {
-        const { route, state } = topicToRouteMapper(item.topic, item.key, item); // TODO: likely a problem here
+        const { route, state } = topicToRouteMapper(item.topic, item.key, item);
         history.push(route, state);
         dispatch(
             NotificationActions.updateNotification(item._id, { read: true })

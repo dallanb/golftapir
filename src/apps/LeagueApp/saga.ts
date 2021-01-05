@@ -33,12 +33,13 @@ function* init({ uuid }: AnyAction) {
     try {
         if (!ClientProxy.accessToken) yield call(refreshAuth);
 
-        const me = yield call(fetchMyMemberUser, {
+        const { data: me } = yield call(fetchMyMemberUser, {
             league_uuid: uuid,
             include: 'avatar',
         });
 
         // see if i can make a 'me' api call for the socket api
+        console.log(me.user_uuid);
         yield put(
             SocketActions.init(me.user_uuid, {
                 eventHandler: socketEventHandlers,
