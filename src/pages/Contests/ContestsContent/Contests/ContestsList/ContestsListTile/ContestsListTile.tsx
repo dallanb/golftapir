@@ -8,9 +8,11 @@ import ContestsListTileCourse from './ContestsListTileCourse';
 import ContestsListTileDate from './ContestsListTileDate';
 import constants from '@constants';
 import routes from '@constants/routes';
-import { mapStatusColour, withS3URL } from '@utils';
+import { mapStatusColour, withAppRoute, withS3URL } from '@utils';
 import { Avatar } from '@components';
 import './ContestsListTile.less';
+import { useSelector } from 'react-redux';
+import { selectMyLeagueUUID } from '@selectors/BaseSelector';
 
 const ContestsListTile: React.FunctionComponent<ContestsListTileProps> = ({
     props: { index, style, data },
@@ -18,11 +20,16 @@ const ContestsListTile: React.FunctionComponent<ContestsListTileProps> = ({
 }) => {
     const isEven = index % 2;
     const item = _get(data, [index], undefined);
-    const handleClick = (options: any) => {
-        history.push(routes.MEMBER_APP.CONTEST.ROUTE, options);
-    };
-
+    const leagueUUID = useSelector(selectMyLeagueUUID);
     const uuid = _get(item, ['uuid'], undefined);
+    const handleClick = (options: any) => {
+        history.push(
+            withAppRoute(routes.ROUTES.CONTEST.ROUTE, {
+                routeProps: { league_uuid: leagueUUID, contest_uuid: uuid },
+            }),
+            options
+        );
+    };
     const name = _get(item, ['name'], 'Loading...');
     const avatar = _get(item, ['avatar'], undefined);
     const src =

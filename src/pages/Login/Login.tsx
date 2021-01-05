@@ -6,12 +6,13 @@ import LoginForm from './LoginForm';
 import { LoginProps, StateProps } from './types';
 import LoginPageActions from './actions';
 import './Login.less';
+import routes from '@constants/routes';
 
 class Login extends React.PureComponent<LoginProps> {
     componentDidMount() {
         const { isLoggedIn, history, init } = this.props;
         if (isLoggedIn) {
-            history.push('/app');
+            history.push(routes.APPS.MEMBER_APP.ROUTE);
         } else {
             init();
         }
@@ -20,7 +21,7 @@ class Login extends React.PureComponent<LoginProps> {
     componentDidUpdate(prevProps: Readonly<LoginProps>) {
         const { isLoggedIn, history } = this.props;
         if (isLoggedIn) {
-            history.push('/app');
+            history.push(routes.APPS.MEMBER_APP.ROUTE);
         }
     }
 

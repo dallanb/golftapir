@@ -8,18 +8,26 @@ import { selectData } from './selector';
 import ComponentContent from '@layouts/ComponentContent';
 import routes from '@constants/routes';
 import './Contest.less';
+import { withAppRoute } from '@utils';
+import { selectMyLeagueUUID } from '@selectors/BaseSelector';
 
 const Contest: React.FunctionComponent<ContestProps> = ({}) => {
     const dispatch = useDispatch();
     const history = useHistory();
 
+    const leagueUUID = useSelector(selectMyLeagueUUID);
     const { isSubmitted, uuid } = useSelector(selectData);
 
     useEffect(() => {
         if (isSubmitted && uuid) {
-            history.push(routes.MEMBER_APP.CONTEST.ROUTE, {
-                uuid,
-            });
+            history.push(
+                withAppRoute(routes.ROUTES.CONTEST.ROUTE, {
+                    routeProps: { league_uuid: leagueUUID, contest_uuid: uuid },
+                }),
+                {
+                    uuid,
+                }
+            );
         }
     });
 

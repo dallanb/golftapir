@@ -6,14 +6,16 @@ import CONSTANTS from '@locale/en-CA';
 import { selectContest, selectContestName } from '../selector';
 import { Breadcrumb } from '@components';
 import routes from '@constants/routes';
+import constantRoutes from '@constants/routes';
 
 const ContestUpdateHeader: React.FunctionComponent<ContestUpdateHeaderProps> = () => {
     const title = useSelector(selectContestName);
     const subTitle = CONSTANTS.PAGES.CONTEST_UPDATE.DESCRIPTION;
     const extra = (
         <Breadcrumb
+            route={constantRoutes.ROUTES.CONTEST_UPDATE.ROUTE}
             state={{
-                [routes.MEMBER_APP.CONTEST.KEY]: {
+                [routes.ROUTES.CONTEST.KEY]: {
                     ...useSelector(selectContest),
                 },
             }}

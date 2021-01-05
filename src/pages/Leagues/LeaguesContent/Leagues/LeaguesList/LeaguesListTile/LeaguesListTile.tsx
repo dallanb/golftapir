@@ -6,7 +6,12 @@ import { LeaguesListTileProps } from './types';
 import LeaguesListTileLeaderboard from './LeaguesListTileLeaderboard';
 import constants from '@constants';
 import routes from '@constants/routes';
-import { mapStatusColour, withDynamicRoute, withS3URL } from '@utils';
+import {
+    mapStatusColour,
+    withAppRoute,
+    withDynamicRoute,
+    withS3URL,
+} from '@utils';
 import { Avatar } from '@components';
 import './LeaguesListTile.less';
 
@@ -20,7 +25,10 @@ const LeaguesListTile: React.FunctionComponent<LeaguesListTileProps> = ({
 
     const handleClick = (options: any) => {
         history.push(
-            withDynamicRoute(routes.LEAGUE_APP.LEAGUE.ROUTE, { uuid }),
+            withAppRoute(routes.ROUTES.HOME.ROUTE, {
+                app: constants.APPS.LEAGUE_APP,
+                routeProps: { league_uuid: uuid },
+            }),
             options
         );
     };

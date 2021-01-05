@@ -3,7 +3,7 @@ import constantRoutes from '@constants/routes';
 
 const routes = [
     {
-        path: constantRoutes.AUTH_APP.REGISTER.ROUTE,
+        path: constantRoutes.ROUTES.REGISTER.ROUTE,
         component: Register,
     },
 ];

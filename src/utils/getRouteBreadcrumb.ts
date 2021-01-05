@@ -1,11 +1,10 @@
 import { get as _get } from 'lodash';
-import getAppRoutes from '@utils/getAppRoutes';
+import routes from '@constants/routes';
 
 const getRouteBreadcrumb = (
     route: string
 ): { key: any; label: any; icon: any } => {
-    const appRoutes = getAppRoutes(route);
-    const routeObj = Object.values(appRoutes).find(
+    const routeObj = Object.values(routes.ROUTES).find(
         (value: any) => value.ROUTE === route
     );
 

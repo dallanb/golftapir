@@ -5,7 +5,7 @@ import classnames from 'classnames';
 import { CompetitorResultsListTileProps } from './types';
 import constants from '@constants';
 import routes from '@constants/routes';
-import { mapStatusColour, withS3URL } from '@utils';
+import { mapStatusColour, withAppRoute, withS3URL } from '@utils';
 import { Avatar } from '@components';
 import './CompetitorResultsListTile.less';
 
@@ -17,7 +17,12 @@ const CompetitorResultsListTile: React.FunctionComponent<CompetitorResultsListTi
 
     const item = _get(data, [index], undefined);
     const handleClick = (options: any) => {
-        history.push(routes.MEMBER_APP.CONTEST.ROUTE, options);
+        history.push(
+            withAppRoute(routes.ROUTES.CONTEST.ROUTE, {
+                app: constants.APPS.MEMBER_APP,
+            }),
+            options
+        );
     };
 
     const name = _get(item, ['name'], 'Loading...');

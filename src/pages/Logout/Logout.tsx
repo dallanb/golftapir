@@ -6,6 +6,9 @@ import { Spin } from 'antd';
 import LogoutPageActions from './actions';
 import { LogoutProps, StateProps } from './types';
 import './Logout.less';
+import routes from '@constants/routes';
+import { withAppRoute } from '@utils';
+import constants from '@constants';
 
 class Logout extends React.PureComponent<LogoutProps> {
     componentDidMount() {
@@ -24,7 +27,11 @@ class Logout extends React.PureComponent<LogoutProps> {
         // }
         const { isInitialized, isLoggedIn, history } = this.props;
         if (isInitialized && !isLoggedIn) {
-            history.push('/auth/login');
+            history.push(
+                withAppRoute(routes.ROUTES.LOGIN.ROUTE, {
+                    app: constants.APPS.AUTH_APP,
+                })
+            );
         }
     }
 

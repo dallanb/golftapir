@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect, Route, Switch } from 'react-router-dom';
-import { get as _get } from 'lodash';
+import { get as _get, map as _map } from 'lodash';
 import { message, Spin } from 'antd';
 import { MemberAppLayout } from '@layouts';
 import { ComponentRoute, MemberAppViewProps } from './types';
@@ -14,9 +14,18 @@ import statics from '@apps/MemberApp/statics';
 import { FirebaseClient } from '@libs';
 import { selectIsInitialized } from './selector';
 import { selectData as selectBaseData } from '@selectors/BaseSelector';
+import { getMenuSelectedKey, withAppRoute } from '@utils';
+import constants from '@constants';
+
+const initialSelectedKey = getMenuSelectedKey(
+    location.pathname,
+    constants.APPS.MEMBER_APP,
+    _map(statics, 'key')
+);
 
 const MemberAppView: React.FunctionComponent<MemberAppViewProps> = () => {
     const dispatch = useDispatch();
+    const [selectedKeys, setSelectedKeys] = useState(initialSelectedKey);
     const isInitialized = useSelector(selectIsInitialized);
     const { me, pending, isLoggedIn, forceLogout } = useSelector(
         selectBaseData
@@ -42,16 +51,21 @@ const MemberAppView: React.FunctionComponent<MemberAppViewProps> = () => {
     if (!isInitialized) return <Spin />;
     return (
         <MemberAppLayout
+            app={constants.APPS.LEAGUE_APP}
             name={name}
             avatar={avatar}
             menuProps={menuProps}
             menuRoutes={statics}
+            menuItemOnClick={({ key }: { key: any }, path: string) => {
+                setSelectedKeys(key);
+            }}
+            selectedKeys={selectedKeys}
         >
             <Switch>
                 {routes.map(({ path, component, exact }: ComponentRoute) => (
                     <Route
                         key={path}
-                        path={path}
+                        path={`${constantRoutes.APPS.MEMBER_APP.ROUTE}${path}`}
                         component={component}
                         exact={exact}
                     />
@@ -60,7 +74,7 @@ const MemberAppView: React.FunctionComponent<MemberAppViewProps> = () => {
                     ({ path, component, exact }: ComponentRoute) => (
                         <ProtectedRoute
                             key={path}
-                            path={path}
+                            path={`${constantRoutes.APPS.MEMBER_APP.ROUTE}${path}`}
                             component={component}
                             exact={exact}
                             isLoggedIn={isLoggedIn}
@@ -71,7 +85,11 @@ const MemberAppView: React.FunctionComponent<MemberAppViewProps> = () => {
                 )}
                 <Route
                     render={() => (
-                        <Redirect to={constantRoutes.MEMBER_APP.HOME.ROUTE} />
+                        <Redirect
+                            to={withAppRoute(constantRoutes.ROUTES.HOME.ROUTE, {
+                                app: constants.APPS.MEMBER_APP,
+                            })}
+                        />
                     )}
                 />
             </Switch>

@@ -5,7 +5,13 @@ import classnames from 'classnames';
 import { CompetitorsListTileProps } from './types';
 import constants from '@constants';
 import routes from '@constants/routes';
-import { getName, mapStatusColour, withDynamicRoute, withS3URL } from '@utils';
+import {
+    getName,
+    mapStatusColour,
+    withAppRoute,
+    withDynamicRoute,
+    withS3URL,
+} from '@utils';
 import CompetitorsListTileCountry from './CompetitorsListTileCountry';
 import CompetitorsListTileWins from './CompetitorsListTileWins';
 import CompetitorsListTileEvents from './CompetitorsListTileEvents';
@@ -21,7 +27,11 @@ const CompetitorsListTile: React.FunctionComponent<CompetitorsListTileProps> = (
     const uuid = _get(item, ['uuid'], null);
     const handleClick = (options: any) => {
         history.push(
-            withDynamicRoute(routes.MEMBER_APP.COMPETITOR.ROUTE, { uuid }),
+            withAppRoute(routes.ROUTES.COMPETITOR.ROUTE, {
+                app: constants.APPS.MEMBER_APP,
+                routeProps: { competitor_uuid: uuid },
+            }),
+
             options
         );
     };

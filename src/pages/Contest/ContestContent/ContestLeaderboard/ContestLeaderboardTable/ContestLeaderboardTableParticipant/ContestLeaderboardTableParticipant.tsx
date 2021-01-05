@@ -6,8 +6,9 @@ import { selectMembersHash } from '@pages/Contest/selector';
 import { ContestParticipantsTableParticipantProps } from './types';
 import { prepareParticipant } from '@pages/Contest/utils';
 import { Avatar } from '@components';
-import { withDynamicRoute, withS3URL } from '@utils';
+import { withAppRoute, withS3URL } from '@utils';
 import './ContestLeaderboardTableParticipant.less';
+import constants from '@constants';
 
 const ContestLeaderboardTableParticipant: React.FunctionComponent<ContestParticipantsTableParticipantProps> = ({
     uuid,
@@ -23,8 +24,9 @@ const ContestLeaderboardTableParticipant: React.FunctionComponent<ContestPartici
             className="contest-leaderboard-table-participant"
             onClick={() =>
                 history.push(
-                    withDynamicRoute(routes.MEMBER_APP.COMPETITOR.ROUTE, {
-                        uuid,
+                    withAppRoute(routes.ROUTES.COMPETITOR.ROUTE, {
+                        app: constants.APPS.MEMBER_APP,
+                        routeProps: { competitor_uuid: uuid },
                     }),
                     member
                 )

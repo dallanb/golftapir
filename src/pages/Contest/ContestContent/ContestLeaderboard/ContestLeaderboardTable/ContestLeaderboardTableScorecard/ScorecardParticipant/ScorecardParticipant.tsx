@@ -6,14 +6,16 @@ import { Button } from 'antd';
 import { ScorecardParticipantProps } from './types';
 import { Avatar } from '@components';
 import { selectMembersHash } from '@pages/Contest/selector';
-import { getName, withS3URL } from '@utils';
+import { getName, withAppRoute, withS3URL } from '@utils';
 import routes from '@constants/routes';
 import './ScorecardParticipant.less';
+import { selectMyLeagueUUID } from '@selectors/BaseSelector';
 
 const ScorecardParticipant: React.FunctionComponent<ScorecardParticipantProps> = ({
     user,
 }) => {
     const history = useHistory();
+    const leagueUUID = useSelector(selectMyLeagueUUID);
     const membersHash = useSelector(selectMembersHash);
     const member = _get(membersHash, [user], null);
     const avatar = _get(member, ['avatar', 's3_filename'], null);
@@ -43,9 +45,15 @@ const ScorecardParticipant: React.FunctionComponent<ScorecardParticipantProps> =
                         type="primary"
                         key="profile"
                         onClick={() =>
-                            history.push(routes.MEMBER_APP.COMPETITOR.ROUTE, {
-                                ...member,
-                            })
+                            // TODO: competitor or league member?
+                            history.push(
+                                withAppRoute(routes.ROUTES.COMPETITOR.ROUTE, {
+                                    routeProps: { league_uuid: leagueUUID },
+                                }),
+                                {
+                                    ...member,
+                                }
+                            )
                         }
                     >
                         Profile

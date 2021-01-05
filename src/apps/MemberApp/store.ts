@@ -69,7 +69,6 @@ import {
     SocketSaga,
     TopicSocketSaga,
 } from '@sagas';
-import { saveState } from '../../localStorage';
 
 function configStore(options?: { preloadedState: any }): any {
     const middleware = [];

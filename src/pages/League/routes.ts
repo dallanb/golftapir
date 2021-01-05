@@ -3,7 +3,7 @@ import constantRoutes from '@constants/routes';
 
 const routes = [
     {
-        path: constantRoutes.LEAGUE_APP.LEAGUE.ROUTE,
+        path: constantRoutes.ROUTES.HOME.ROUTE,
         component: League,
     },
 ];

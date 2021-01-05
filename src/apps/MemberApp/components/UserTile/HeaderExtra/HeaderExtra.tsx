@@ -8,7 +8,7 @@ import { HeaderExtraProps } from './types';
 import routes from '@constants/routes';
 import { Avatar, PendingBadge, UserTile } from '@components';
 import { selectPending, selectLeagues } from '@selectors/BaseSelector';
-import { withDynamicRoute, withS3URL } from '@utils';
+import { withAppRoute, withS3URL } from '@utils';
 import constants from '@constants';
 import './HeaderExtra.less';
 
@@ -23,8 +23,9 @@ const HeaderExtra: React.FunctionComponent<HeaderExtraProps> = ({ user }) => {
                 key={league.uuid}
                 onClick={() =>
                     history.push(
-                        withDynamicRoute(routes.LEAGUE_APP.LEAGUE.ROUTE, {
-                            uuid: league.uuid,
+                        withAppRoute(routes.ROUTES.HOME.ROUTE, {
+                            app: constants.APPS.LEAGUE_APP,
+                            routeProps: { league_uuid: league.uuid },
                         }),
                         league
                     )
@@ -52,7 +53,13 @@ const HeaderExtra: React.FunctionComponent<HeaderExtraProps> = ({ user }) => {
         const authMenuItems = [
             <Menu.Item
                 key="logout"
-                onClick={() => history.push(`/auth/logout`)}
+                onClick={() =>
+                    history.push(
+                        withAppRoute(routes.ROUTES.LOGOUT.ROUTE, {
+                            app: constants.APPS.AUTH_APP,
+                        })
+                    )
+                }
             >
                 Log out{' '}
                 <span className="header-extra-username">{user.username}</span>
@@ -66,7 +73,11 @@ const HeaderExtra: React.FunctionComponent<HeaderExtraProps> = ({ user }) => {
             <div className="header-extra-notification">
                 <Button
                     onClick={() =>
-                        history.push(routes.MEMBER_APP.NOTIFICATIONS.ROUTE)
+                        history.push(
+                            withAppRoute(routes.ROUTES.NOTIFICATIONS.ROUTE, {
+                                app: constants.APPS.MEMBER_APP,
+                            })
+                        )
                     }
                     type="text"
                     icon={
