@@ -81,8 +81,9 @@ const LeagueAppView: React.FunctionComponent<LeagueAppViewProps> = () => {
     );
     const menuProps = {
         paths: {
-            league: { league_uuid: leagueUUID },
+            home: { league_uuid: leagueUUID },
             league_members: { league_uuid: leagueUUID },
+            contests: { league_uuid: leagueUUID },
         },
         names: { league: leagueName },
         icons: {

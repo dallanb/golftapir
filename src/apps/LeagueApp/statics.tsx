@@ -26,11 +26,13 @@ export default [
         key: routes.ROUTES.MEMBERS.KEY,
     },
     {
-        path: (props: any) =>
-            withAppRoute(routes.ROUTES.CONTESTS.ROUTE, {
+        path: (props: any) => {
+            console.log(props);
+            return withAppRoute(routes.ROUTES.CONTESTS.ROUTE, {
                 app: constants.APPS.LEAGUE_APP,
                 routeProps: props,
-            }),
+            });
+        },
         name: routes.ROUTES.CONTESTS.LABEL,
         icon: routes.ROUTES.CONTESTS.ICON,
         key: routes.ROUTES.CONTESTS.KEY,

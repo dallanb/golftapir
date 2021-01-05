@@ -9,6 +9,7 @@ const withAppRoute = (
 ) => {
     const { app, routeProps } = options;
     console.log(options);
+    console.log(route);
     if (app) {
         switch (app) {
             case constants.APPS.AUTH_APP:
