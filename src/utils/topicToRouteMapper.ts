@@ -55,6 +55,29 @@ const topicToRouteMapper = (
             }
 
             break;
+        case constants.TOPICS.MEMBERS:
+            mapping.route += routes.ROUTES.MEMBERS.ROUTE;
+            switch (key) {
+                case constants.EVENTS.MEMBERS.MEMBER_INVITED:
+                case constants.EVENTS.MEMBERS.MEMBER_ACTIVE:
+                    mapping.route = withAppRoute(mapping.route, {
+                        app: constants.APPS.LEAGUE_APP,
+                        routeProps: {
+                            league_uuid: _get(
+                                item,
+                                ['properties', 'league_uuid'],
+                                ''
+                            ),
+                        },
+                    });
+                    mapping.state = {
+                        uuid: _get(item, ['properties', 'league_uuid'], ''),
+                    };
+                    break;
+                default:
+                    console.log('key not found');
+            }
+            break;
         default:
             throw new Error(`Invalid topic: ${topic}`);
     }
