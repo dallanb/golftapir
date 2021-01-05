@@ -1,3 +1,4 @@
+import memoize from 'memoize-one';
 import constants from '@constants';
 import routes from '@constants/routes';
 
@@ -6,6 +7,7 @@ export const getMenuSelectedKey = (
     app: string,
     keys: any[]
 ): string[] => {
+    console.log('ROUTE: ', route);
     const routeSnippets = route.split('/');
     let cleanSnippets: string[] = [];
     switch (app) {
@@ -31,7 +33,6 @@ export const getMenuSelectedKey = (
         });
     });
 
-    console.log(match);
     if (match) {
         const keyIndex = keys.findIndex((key) => key === match.BASE_KEY);
         return [`${keyIndex}`];
