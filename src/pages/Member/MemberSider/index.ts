@@ -4,9 +4,9 @@ import { combineReducers } from 'redux';
 export { default } from './MemberSider';
 
 // Reducer
-import { reducer as contentReducer } from './MemberSiderContent';
-export const reducer = combineReducers({
-    content: contentReducer,
-});
+// import { reducer as contentReducer } from './MemberSiderContent';
+// export const reducer = combineReducers({
+//     content: contentReducer,
+// });
 // Saga
-export { MemberPageSiderContentSearchSaga } from './MemberSiderContent';
+// export { MemberPageSiderContentSearchSaga } from './MemberSiderContent';

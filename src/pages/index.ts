@@ -69,14 +69,6 @@ export {
     LeaguePageRoutes,
 } from './League';
 export {
-    default as Members,
-    reducer as membersPage,
-    MembersPageSaga,
-    MembersPageContentMembersSaga,
-    MembersPageSiderContentSearchSaga,
-    MembersPageRoutes,
-} from './Members';
-export {
     default as Leagues,
     reducer as leaguesPage,
     LeaguesPageSaga,
@@ -111,6 +103,21 @@ export {
     MemberSettingsPageContentMemberSaga,
     MemberSettingsPageRoutes,
 } from './MemberSettings';
+export {
+    default as Member,
+    reducer as memberPage,
+    MemberPageSaga,
+    MemberPageContentMemberResultsSaga,
+    MemberPageRoutes,
+} from './Member';
+export {
+    default as Members,
+    reducer as membersPage,
+    MembersPageSaga,
+    MembersPageContentMembersSaga,
+    MembersPageSiderContentSearchSaga,
+    MembersPageRoutes,
+} from './Members';
 export {
     default as Notifications,
     reducer as notificationsPage,

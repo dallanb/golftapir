@@ -157,7 +157,7 @@ const routes = {
             ICON: TeamOutlined,
         },
         MEMBER_SETTINGS: {
-            ROUTE: '/members/settings',
+            ROUTE: '/member_settings',
             BASE_KEY: 'member_settings',
             KEY: 'member_settings',
             LABEL: CONSTANTS.PAGES.MEMBER_SETTINGS.TITLE,

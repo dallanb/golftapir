@@ -32,6 +32,9 @@ import {
     ContestUpdatePageSaga,
     leaguePage,
     LeaguePageSaga,
+    memberPage,
+    MemberPageSaga,
+    MemberPageContentMemberResultsSaga,
     membersPage,
     MembersPageSaga,
     MembersPageContentMembersSaga,
@@ -84,6 +87,7 @@ function configStore(options?: { preloadedState: any }): any {
             contestsCreatePage,
             contestUpdatePage,
             leaguePage,
+            memberPage,
             membersPage,
             memberSettingsPage,
         }),
@@ -95,7 +99,7 @@ function configStore(options?: { preloadedState: any }): any {
         )
     );
 
-    function* memberAppSaga() {
+    function* LeagueAppSaga() {
         yield all([
             fork(BaseSaga),
             fork(AccountSaga),
@@ -125,6 +129,8 @@ function configStore(options?: { preloadedState: any }): any {
             fork(ContestUpdatePageSaga),
             fork(ContestUpdatePageContentContestSaga),
             fork(LeaguePageSaga),
+            fork(MemberPageSaga),
+            fork(MemberPageContentMemberResultsSaga),
             fork(MembersPageSaga),
             fork(MembersPageContentMembersSaga),
             fork(MembersPageSiderContentSearchSaga),
@@ -132,7 +138,7 @@ function configStore(options?: { preloadedState: any }): any {
             fork(MemberSettingsPageContentMemberSaga),
         ]);
     }
-    sagaMiddleware.run(memberAppSaga);
+    sagaMiddleware.run(LeagueAppSaga);
 
     return { store };
 }

@@ -1,6 +1,6 @@
 import React, { ReactText } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { get as _get } from 'lodash';
 import { ContestsListProps } from './types';
 import { FixedSizeList } from '@components';
@@ -20,6 +20,7 @@ const ContestsList: React.FunctionComponent<ContestsListProps> = ({
 }) => {
     const dispatch = useDispatch();
     const history = useHistory();
+    const params = useParams();
     const data = useSelector(selectListData);
     const metadata = useSelector(selectListMetadata);
     const options = useSelector(selectListOptions);
@@ -54,7 +55,7 @@ const ContestsList: React.FunctionComponent<ContestsListProps> = ({
             loadNextPage={loadMore}
             isNextPageLoading={isFetching}
             minimumBatchSize={10}
-            rowRenderer={(props) => ContestsListTile({ props, history })}
+            rowRenderer={(props) => ContestsListTile({ props, history, params })}
         />
     );
 };

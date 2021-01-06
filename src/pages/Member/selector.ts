@@ -1,9 +1,13 @@
 import { createSelector } from 'reselect';
 import { get as _get } from 'lodash';
 
-const getMemberPage = (state: any) => state.membersPage.data;
+const getMemberPage = (state: any) => state.memberPage.data;
 
 export const selectData = createSelector(
     [getMemberPage],
-    (membersPage) => membersPage
+    (memberPage) => memberPage
+);
+
+export const selectMember = createSelector([getMemberPage], (memberPage) =>
+    _get(memberPage, ['member'], undefined)
 );

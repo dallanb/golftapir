@@ -5,6 +5,7 @@ const routes = [
     {
         path: constantRoutes.ROUTES.MEMBERS.ROUTE,
         component: Members,
+        exact: true,
     },
 ];
 

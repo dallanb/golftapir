@@ -9,12 +9,12 @@ import { MemberPageInterface } from './types';
 const INITIAL_STATE: MemberPageInterface = {
     isInitialized: false,
     err: undefined,
+    member: undefined,
 };
 
 /* ------------- Reducers ------------- */
 function init(state = INITIAL_STATE) {
     return Immutable.merge(state, {
-        ...INITIAL_STATE,
         isInitialized: false,
         err: null,
     });

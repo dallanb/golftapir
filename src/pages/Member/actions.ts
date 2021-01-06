@@ -2,6 +2,7 @@ import { createActions } from 'reduxsauce';
 
 const { Types, Creators } = createActions(
     {
+        preInit: ['data'],
         init: ['uuid'],
         initSuccess: null,
         initFailure: ['err'],
@@ -10,9 +11,6 @@ const { Types, Creators } = createActions(
         refresh: ['uuid'],
         refreshSuccess: null,
         refreshFailure: ['err'],
-        updateMemberStatus: ['uuid', 'status'],
-        updateMemberStatusSuccess: ['uuid', 'status'],
-        updateMemberStatusFailure: ['err'],
     },
     {
         prefix: 'MEMBER_PAGE_',

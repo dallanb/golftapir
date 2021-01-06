@@ -7,6 +7,9 @@ import { fetchMyMemberUser } from '@helpers';
 import { MemberService } from '@services';
 
 // Action Handlers
+function* preInit({ data: member }: AnyAction) {
+    yield put(MemberPageActions.set({ member }));
+}
 
 function* init({ uuid }: AnyAction) {
     try {
@@ -29,21 +32,10 @@ function* refresh({ uuid }: AnyAction) {
     }
 }
 
-function* updateMemberStatus({ uuid, status }: AnyAction) {
-    try {
-        yield call(MemberService.updateMember, uuid, { status });
-        uuid = yield select(selectLeagueUUID);
-        yield put(MemberPageActions.refresh(uuid)); // this feels weird
-        yield put(MemberPageActions.updateMemberStatusSuccess(uuid, status));
-    } catch (err) {
-        yield put(MemberPageActions.updateMemberStatusFailure(err));
-    }
-}
-
 export default function* MemberPageSaga() {
     yield all([
+        takeLatest(MemberPageTypes.PRE_INIT, preInit),
         takeLatest(MemberPageTypes.INIT, init),
         takeLatest(MemberPageTypes.REFRESH, refresh),
-        takeLatest(MemberPageTypes.UPDATE_MEMBER_STATUS, updateMemberStatus),
     ]);
 }

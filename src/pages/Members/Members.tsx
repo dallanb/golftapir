@@ -28,7 +28,7 @@ const Members: React.FunctionComponent<MembersProps> = () => {
             content={<MembersContent />}
             sider={<MembersSider />}
             // showSpinner={!isInitialized}
-            className="league-members-view"
+            className="members-view"
         />
     );
 };

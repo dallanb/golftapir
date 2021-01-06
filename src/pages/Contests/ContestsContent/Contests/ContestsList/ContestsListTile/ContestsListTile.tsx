@@ -11,21 +11,19 @@ import routes from '@constants/routes';
 import { mapStatusColour, withAppRoute, withS3URL } from '@utils';
 import { Avatar } from '@components';
 import './ContestsListTile.less';
-import { useSelector } from 'react-redux';
-import { selectMyLeagueUUID } from '@selectors/BaseSelector';
 
 const ContestsListTile: React.FunctionComponent<ContestsListTileProps> = ({
     props: { index, style, data },
     history,
+    params,
 }) => {
     const isEven = index % 2;
     const item = _get(data, [index], undefined);
-    const leagueUUID = useSelector(selectMyLeagueUUID);
     const uuid = _get(item, ['uuid'], undefined);
     const handleClick = (options: any) => {
         history.push(
             withAppRoute(routes.ROUTES.CONTEST.ROUTE, {
-                routeProps: { league_uuid: leagueUUID, contest_uuid: uuid },
+                routeProps: { ...params, contest_uuid: uuid },
             }),
             options
         );

@@ -4,10 +4,10 @@ import { combineReducers } from 'redux';
 export { default } from './MemberContent';
 
 // Reducer
-// import { reducer as membersReducer } from './Member';
-// export const reducer = combineReducers({
-//     members: membersReducer,
-// });
+import { reducer as memberResultsReducer } from './MemberResults';
+export const reducer = combineReducers({
+    memberResults: memberResultsReducer,
+});
 
 // Saga
-// export { MemberPageContentMemberSaga } from './Member';
+export { MemberPageContentMemberResultsSaga } from './MemberResults';

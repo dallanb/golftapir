@@ -157,9 +157,11 @@ const mapStateToProps = ({ leagueApp, base }: any) => {
     const menuProps = {
         paths: {
             home: { league_uuid: leagueUUID },
-            league_members: { league_uuid: leagueUUID },
-            contests: { league_uuid: leagueUUID },
-            member_settings: { league_uuid: leagueUUID },
+            [constantRoutes.ROUTES.MEMBER_SETTINGS.KEY]: {
+                league_uuid: leagueUUID,
+            },
+            [constantRoutes.ROUTES.MEMBERS.KEY]: { league_uuid: leagueUUID },
+            [constantRoutes.ROUTES.CONTESTS.KEY]: { league_uuid: leagueUUID },
         },
         names: { home: leagueName },
         icons: {

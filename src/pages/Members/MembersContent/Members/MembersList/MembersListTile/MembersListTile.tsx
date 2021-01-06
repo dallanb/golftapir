@@ -1,4 +1,5 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
 import { Badge, Card } from 'antd';
 import { get as _get } from 'lodash';
 import classnames from 'classnames';
@@ -13,15 +14,14 @@ import './MembersListTile.less';
 const MembersListTile: React.FunctionComponent<MembersListTileProps> = ({
     props: { index, style, data },
     history,
+    params,
 }) => {
     const isEven = index % 2;
     const item = _get(data, [index], undefined);
     const member_uuid = _get(item, ['uuid'], null);
-    const params = history.params;
     const handleClick = (options: any) => {
         history.push(
             withAppRoute(routes.ROUTES.MEMBER.ROUTE, {
-                app: constants.APPS.LEAGUE_APP,
                 routeProps: {
                     ...params,
                     member_uuid,

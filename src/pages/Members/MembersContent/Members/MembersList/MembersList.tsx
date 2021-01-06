@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { MembersListProps } from './types';
 import { FixedSizeList } from '@components';
 import MembersPageContentMembersActions from '../actions';
@@ -17,6 +17,7 @@ const MembersList: React.FunctionComponent<MembersListProps> = ({
     containerRef,
 }) => {
     const history = useHistory();
+    const params = useParams();
 
     const data = useSelector(selectListData);
     const metadata = useSelector(selectListMetadata);
@@ -54,7 +55,7 @@ const MembersList: React.FunctionComponent<MembersListProps> = ({
             loadNextPage={loadMore}
             isNextPageLoading={isFetching}
             minimumBatchSize={10}
-            rowRenderer={(props) => MembersListTile({ props, history })}
+            rowRenderer={(props) => MembersListTile({ props, history, params })}
         />
     );
 };
