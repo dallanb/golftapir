@@ -318,6 +318,23 @@ const CONSTANTS = {
                 },
             },
         },
+        MEMBER_SETTINGS: {
+            TITLE: 'Member Settings',
+            DESCRIPTION: 'Update Member Settings',
+            FORM: {
+                LABELS: {
+                    AVATAR: 'Avatar',
+                    UPLOAD_AVATAR: 'Upload Avatar',
+                    AVATAR_CROPPER_TITLE: 'Edit Avatar',
+                    DISPLAY_NAME: 'Display Name',
+                },
+                VALIDATION: {
+                    DISPLAY_NAME_MAX_LENGTH:
+                        'Display Name must be less than 50 characters',
+                    DISPLAY_NAME_REQUIRED: 'Display Name is required',
+                },
+            },
+        },
         WAGERS: {
             TITLE: 'Wagers',
             DESCRIPTION: 'View Wagers',

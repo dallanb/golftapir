@@ -1,6 +1,6 @@
 import React from 'react';
 import { LeagueSiderHeaderProps } from './types';
-import { UserTile } from '@apps/LeagueApp/components';
+import { UserTile } from '@apps/components';
 
 const LeagueSiderHeader: React.FunctionComponent<LeagueSiderHeaderProps> = () => {
     return <UserTile />;

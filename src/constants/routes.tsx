@@ -144,17 +144,24 @@ const routes = {
         },
         MEMBER: {
             ROUTE: '/members/:member_uuid',
-            BASE_KEY: 'league_members',
+            BASE_KEY: 'member',
             KEY: 'league_member',
             LABEL: CONSTANTS.PAGES.LEAGUE_MEMBER.TITLE,
             ICON: null,
         },
         MEMBERS: {
             ROUTE: '/members',
-            BASE_KEY: 'league_members',
+            BASE_KEY: 'members',
             KEY: 'league_members',
             LABEL: CONSTANTS.PAGES.LEAGUE_MEMBERS.TITLE,
             ICON: TeamOutlined,
+        },
+        MEMBER_SETTINGS: {
+            ROUTE: '/members/settings',
+            BASE_KEY: 'member_settings',
+            KEY: 'member_settings',
+            LABEL: CONSTANTS.PAGES.MEMBER_SETTINGS.TITLE,
+            ICON: SettingFilled,
         },
     },
 };

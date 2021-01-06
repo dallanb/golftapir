@@ -36,6 +36,9 @@ import {
     LeagueMembersPageSaga,
     LeagueMembersPageContentMembersSaga,
     LeagueMembersPageSiderContentSearchSaga,
+    memberSettingsPage,
+    MemberSettingsPageSaga,
+    MemberSettingsPageContentMemberSaga,
 } from '@pages';
 import { default as BaseSaga } from '@apps/LeagueApp/saga';
 import {
@@ -82,6 +85,7 @@ function configStore(options?: { preloadedState: any }): any {
             contestUpdatePage,
             leaguePage,
             leagueMembersPage,
+            memberSettingsPage,
         }),
         _get(options, ['preloadedState'], {}),
         compose(
@@ -124,6 +128,8 @@ function configStore(options?: { preloadedState: any }): any {
             fork(LeagueMembersPageSaga),
             fork(LeagueMembersPageContentMembersSaga),
             fork(LeagueMembersPageSiderContentSearchSaga),
+            fork(MemberSettingsPageSaga),
+            fork(MemberSettingsPageContentMemberSaga),
         ]);
     }
     sagaMiddleware.run(memberAppSaga);

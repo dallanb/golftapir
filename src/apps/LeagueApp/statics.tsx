@@ -36,4 +36,15 @@ export default [
         icon: routes.ROUTES.CONTESTS.ICON,
         key: routes.ROUTES.CONTESTS.KEY,
     },
+    {
+        path: (props: any) => {
+            return withAppRoute(routes.ROUTES.MEMBER_SETTINGS.ROUTE, {
+                app: constants.APPS.LEAGUE_APP,
+                routeProps: props,
+            });
+        },
+        name: routes.ROUTES.MEMBER_SETTINGS.LABEL,
+        icon: routes.ROUTES.MEMBER_SETTINGS.ICON,
+        key: routes.ROUTES.MEMBER_SETTINGS.KEY,
+    },
 ];

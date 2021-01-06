@@ -105,6 +105,13 @@ export {
     LogoutPageRoutes,
 } from './Logout';
 export {
+    default as MemberSettings,
+    reducer as memberSettingsPage,
+    MemberSettingsPageSaga,
+    MemberSettingsPageContentMemberSaga,
+    MemberSettingsPageRoutes,
+} from './MemberSettings';
+export {
     default as Notifications,
     reducer as notificationsPage,
     NotificationsPageSaga,

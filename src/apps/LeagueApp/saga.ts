@@ -39,7 +39,6 @@ function* init({ uuid }: AnyAction) {
         });
 
         // see if i can make a 'me' api call for the socket api
-        console.log(me.user_uuid);
         yield put(
             SocketActions.init(me.user_uuid, {
                 eventHandler: socketEventHandlers,
