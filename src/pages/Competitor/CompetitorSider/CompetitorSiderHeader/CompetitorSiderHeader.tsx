@@ -1,5 +1,5 @@
 import React from 'react';
-import { UserTile } from '@apps/MemberApp/components';
+import { UserTile } from '@apps/components';
 import { CompetitorSiderHeaderProps } from './types';
 
 const CompetitorSiderHeader: React.FunctionComponent<CompetitorSiderHeaderProps> = () => {

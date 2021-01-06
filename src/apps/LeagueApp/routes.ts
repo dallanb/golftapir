@@ -3,14 +3,16 @@ import {
     ContestsCreatePageRoutes,
     ContestsPageRoutes,
     ContestUpdatePageRoutes,
-    LeagueMembersPageRoutes,
     LeaguePageRoutes,
+    MembersPageRoutes,
+    MemberSettingsPageRoutes,
 } from '@pages';
 
 export const routes: any = [];
 
 export const protectedRoutes: any = [
-    ...LeagueMembersPageRoutes,
+    ...MemberSettingsPageRoutes,
+    ...MembersPageRoutes,
     ...LeaguePageRoutes,
     ...ContestsPageRoutes,
     ...ContestsCreatePageRoutes,

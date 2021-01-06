@@ -69,13 +69,13 @@ export {
     LeaguePageRoutes,
 } from './League';
 export {
-    default as LeagueMembers,
-    reducer as leagueMembersPage,
-    LeagueMembersPageSaga,
-    LeagueMembersPageContentMembersSaga,
-    LeagueMembersPageSiderContentSearchSaga,
-    LeagueMembersPageRoutes,
-} from './LeagueMembers';
+    default as Members,
+    reducer as membersPage,
+    MembersPageSaga,
+    MembersPageContentMembersSaga,
+    MembersPageSiderContentSearchSaga,
+    MembersPageRoutes,
+} from './Members';
 export {
     default as Leagues,
     reducer as leaguesPage,
@@ -104,6 +104,13 @@ export {
     LogoutPageSaga,
     LogoutPageRoutes,
 } from './Logout';
+export {
+    default as MemberSettings,
+    reducer as memberSettingsPage,
+    MemberSettingsPageSaga,
+    MemberSettingsPageContentMemberSaga,
+    MemberSettingsPageRoutes,
+} from './MemberSettings';
 export {
     default as Notifications,
     reducer as notificationsPage,

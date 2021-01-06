@@ -1,3 +1,4 @@
+import memoize from 'memoize-one';
 import constants from '@constants';
 import routes from '@constants/routes';
 
@@ -31,7 +32,6 @@ export const getMenuSelectedKey = (
         });
     });
 
-    console.log(match);
     if (match) {
         const keyIndex = keys.findIndex((key) => key === match.BASE_KEY);
         return [`${keyIndex}`];

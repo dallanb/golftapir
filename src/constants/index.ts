@@ -108,6 +108,10 @@ const constants = {
             CONTEST_READY: 'contest_ready',
             CONTEST_ACTIVE: 'contest_active',
         },
+        MEMBERS: {
+            MEMBER_INVITED: 'member_invited',
+            MEMBER_ACTIVE: 'member_active',
+        },
         SCORES: {
             STROKE_UPDATE: 'stroke_update',
         },

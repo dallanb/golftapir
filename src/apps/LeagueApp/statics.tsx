@@ -27,7 +27,6 @@ export default [
     },
     {
         path: (props: any) => {
-            console.log(props);
             return withAppRoute(routes.ROUTES.CONTESTS.ROUTE, {
                 app: constants.APPS.LEAGUE_APP,
                 routeProps: props,
@@ -36,5 +35,16 @@ export default [
         name: routes.ROUTES.CONTESTS.LABEL,
         icon: routes.ROUTES.CONTESTS.ICON,
         key: routes.ROUTES.CONTESTS.KEY,
+    },
+    {
+        path: (props: any) => {
+            return withAppRoute(routes.ROUTES.MEMBER_SETTINGS.ROUTE, {
+                app: constants.APPS.LEAGUE_APP,
+                routeProps: props,
+            });
+        },
+        name: routes.ROUTES.MEMBER_SETTINGS.LABEL,
+        icon: routes.ROUTES.MEMBER_SETTINGS.ICON,
+        key: routes.ROUTES.MEMBER_SETTINGS.KEY,
     },
 ];

@@ -12,8 +12,8 @@ export const getAvatarSrc = memoize((data: any): string => {
             uuid = _get(data, ['properties', 'contest_uuid'], '');
             break;
         case constants.TOPICS.MEMBERS:
-            folder = constants.S3_FOLDERS.MEMBER.AVATAR;
-            uuid = _get(data, ['properties', 'participant_uuid'], '');
+            folder = constants.S3_FOLDERS.LEAGUE.AVATAR;
+            uuid = _get(data, ['properties', 'league_uuid'], '');
             break;
         default:
             return '';

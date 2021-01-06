@@ -33,7 +33,7 @@ function* init({ uuid }: AnyAction) {
     try {
         if (!ClientProxy.accessToken) yield call(refreshAuth);
 
-        const me = yield call(fetchMyMemberUser, {
+        const { data: me } = yield call(fetchMyMemberUser, {
             league_uuid: uuid,
             include: 'avatar',
         });

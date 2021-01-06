@@ -287,13 +287,13 @@ const CONSTANTS = {
             TITLE: 'League',
             DESCRIPTION: 'View League',
         },
-        LEAGUE_MEMBER: {
-            TITLE: 'League Member',
-            DESCRIPTION: 'View League Member',
+        MEMBER: {
+            TITLE: 'Member',
+            DESCRIPTION: 'View Member',
         },
-        LEAGUE_MEMBERS: {
-            TITLE: 'League Members',
-            DESCRIPTION: 'View League Members',
+        MEMBERS: {
+            TITLE: 'Members',
+            DESCRIPTION: 'View Members',
             SEARCH: 'Invite Members',
         },
         LEAGUES: {
@@ -315,6 +315,23 @@ const CONSTANTS = {
                 VALIDATION: {
                     NAME_MAX_LENGTH: 'Name must be less than 50 characters',
                     NAME_REQUIRED: 'Name is required',
+                },
+            },
+        },
+        MEMBER_SETTINGS: {
+            TITLE: 'Member Settings',
+            DESCRIPTION: 'Update Member Settings',
+            FORM: {
+                LABELS: {
+                    AVATAR: 'Avatar',
+                    UPLOAD_AVATAR: 'Upload Avatar',
+                    AVATAR_CROPPER_TITLE: 'Edit Avatar',
+                    DISPLAY_NAME: 'Display Name',
+                },
+                VALIDATION: {
+                    DISPLAY_NAME_MAX_LENGTH:
+                        'Display Name must be less than 50 characters',
+                    DISPLAY_NAME_REQUIRED: 'Display Name is required',
                 },
             },
         },
