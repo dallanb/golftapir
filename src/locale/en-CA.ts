@@ -287,13 +287,13 @@ const CONSTANTS = {
             TITLE: 'League',
             DESCRIPTION: 'View League',
         },
-        LEAGUE_MEMBER: {
-            TITLE: 'League Member',
-            DESCRIPTION: 'View League Member',
+        MEMBER: {
+            TITLE: 'Member',
+            DESCRIPTION: 'View Member',
         },
-        LEAGUE_MEMBERS: {
-            TITLE: 'League Members',
-            DESCRIPTION: 'View League Members',
+        MEMBERS: {
+            TITLE: 'Members',
+            DESCRIPTION: 'View Members',
             SEARCH: 'Invite Members',
         },
         LEAGUES: {

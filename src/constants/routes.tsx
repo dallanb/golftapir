@@ -144,16 +144,16 @@ const routes = {
         },
         MEMBER: {
             ROUTE: '/members/:member_uuid',
-            BASE_KEY: 'member',
-            KEY: 'league_member',
-            LABEL: CONSTANTS.PAGES.LEAGUE_MEMBER.TITLE,
+            BASE_KEY: 'members',
+            KEY: 'member',
+            LABEL: CONSTANTS.PAGES.MEMBER.TITLE,
             ICON: null,
         },
         MEMBERS: {
             ROUTE: '/members',
             BASE_KEY: 'members',
-            KEY: 'league_members',
-            LABEL: CONSTANTS.PAGES.LEAGUE_MEMBERS.TITLE,
+            KEY: 'members',
+            LABEL: CONSTANTS.PAGES.MEMBERS.TITLE,
             ICON: TeamOutlined,
         },
         MEMBER_SETTINGS: {
