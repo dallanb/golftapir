@@ -21,7 +21,6 @@ class Client {
         this._socket = socket;
     }
     init(uuid: string): Promise<void> {
-        console.log(uuid);
         this.socket = new WebSocket(
             `${this._url}?uuid=${uuid}&jwt=${ClientProxy.accessToken}`
         );
