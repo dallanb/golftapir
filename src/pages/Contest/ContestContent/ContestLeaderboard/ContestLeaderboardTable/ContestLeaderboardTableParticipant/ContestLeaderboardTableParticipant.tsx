@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import routes from '@constants/routes';
 import { selectContest, selectMembersHash } from '@pages/Contest/selector';
 import { ContestParticipantsTableParticipantProps } from './types';
-import { prepareParticipant, prepareTags } from '@pages/Contest/utils';
+import { prepareParticipant } from '@pages/Contest/utils';
 import { mapStatusColour, withAppRoute } from '@utils';
 import './ContestLeaderboardTableParticipant.less';
 import constants from '@constants';
@@ -14,11 +14,11 @@ const ContestLeaderboardTableParticipant: React.FunctionComponent<ContestPartici
     uuid,
 }) => {
     const history = useHistory();
-    const { name, s3_filename, member } = prepareParticipant(
+    const { name, s3_filename, member, tags } = prepareParticipant(
         uuid,
+        useSelector(selectContest),
         useSelector(selectMembersHash)
     );
-    const tags = prepareTags(uuid, useSelector(selectContest));
 
     return (
         <div

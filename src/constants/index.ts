@@ -21,38 +21,35 @@ const constants = {
     STATUS: {
         PENDING: {
             COLOUR: 'orange',
-            TWO_TONE_COLOUR: '#FFA500',
             KEY: 'pending',
         },
         READY: {
-            COLOUR: 'blue',
-            TWO_TONE_COLOUR: 'rgba(19,115,204, 1);',
+            COLOUR: 'geekblue',
             KEY: 'ready',
         },
         ACTIVE: {
             COLOUR: 'green',
-            TWO_TONE_COLOUR: '#52c41a',
             KEY: 'active',
         },
         INACTIVE: {
             COLOUR: 'red',
-            TWO_TONE_COLOUR: '#eb2f96',
             KEY: 'inactive',
         },
         COMPLETED: {
-            COLOUR: 'turquoise',
-            TWO_TONE_COLOUR: '#00E4FF',
+            COLOUR: 'blue',
             KEY: 'completed',
         },
         APPROVED: {
             COLOUR: 'purple',
-            TWO_TONE_COLOUR: '#7800FF',
             KEY: 'approved',
         },
         SPECTATOR: {
             COLOUR: 'brown',
-            TWO_TONE_COLOUR: '#5A2601',
             KEY: 'spectator',
+        },
+        OWNER: {
+            COLOUR: 'volcano',
+            KEY: 'owner',
         },
     },
     ACTION: {
@@ -108,6 +105,7 @@ const constants = {
             PARTICIPANT_COMPLETED: 'participant_completed',
             CONTEST_READY: 'contest_ready',
             CONTEST_ACTIVE: 'contest_active',
+            CONTEST_COMPLETED: 'contest_completed',
         },
         MEMBERS: {
             MEMBER_INVITED: 'member_invited',

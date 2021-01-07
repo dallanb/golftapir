@@ -5,35 +5,40 @@ import ContestPageActions from './actions';
 
 export const prepareParticipant = (
     uuid: string,
+    contest: any,
     membersHash: any
 ): {
     name: string;
     s3_filename: string;
     member: any;
+    tags: string[];
 } => {
-    const participant = { name: '', s3_filename: '', member: null };
+    const participant: {
+        name: string;
+        s3_filename: string;
+        member: any;
+        tags: string[];
+    } = { name: '', s3_filename: '', member: null, tags: [] };
+    const { participants: participantsHash, owner } = contest;
     const member = _get(membersHash, [uuid], {
         display_name: '',
         avatar: { s3_filename: '' },
+        user_uuid: null,
     });
+    const status: string = _get(
+        participantsHash,
+        [uuid, 'status'],
+        constants.STATUS.ACTIVE.KEY
+    );
     participant.member = member;
     participant.name = member.display_name;
     participant.s3_filename = _get(member, ['avatar', 's3_filename'], '');
-    return participant;
-};
-
-export const prepareTags = (uuid: string, contest: any): string[] => {
-    const tags = [];
-    const { participants: participantsHash, owner } = contest;
-    const status = _get(participantsHash, [uuid, 'status'], {
-        status: constants.STATUS.ACTIVE.KEY,
-    });
-    tags.push(status);
-    const isOwner = uuid === owner;
-    if (isOwner) {
-        tags.push('owner');
+    participant.tags.push(status);
+    if (owner === member.user_uuid) {
+        participant.tags.push(constants.STATUS.OWNER.KEY);
     }
-    return tags;
+
+    return participant;
 };
 
 export const mergeContestParticipant = (
@@ -57,10 +62,16 @@ export const socketEventHandlers = (socket: WebSocket, emitter: any) => {
                     case constants.EVENTS.CONTESTS.PARTICIPANT_ACTIVE:
                         emitter(ContestPageActions.refresh());
                         break;
+                    case constants.EVENTS.CONTESTS.PARTICIPANT_COMPLETED:
+                        emitter(ContestPageActions.refresh());
+                        break;
                     case constants.EVENTS.CONTESTS.CONTEST_READY:
                         emitter(ContestPageActions.refresh());
                         break;
                     case constants.EVENTS.CONTESTS.CONTEST_ACTIVE:
+                        emitter(ContestPageActions.refresh());
+                        break;
+                    case constants.EVENTS.CONTESTS.CONTEST_COMPLETED:
                         emitter(ContestPageActions.refresh());
                         break;
                     default:

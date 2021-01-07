@@ -6,6 +6,7 @@ import { PendingParticipantsListTileProps } from './types';
 import { prepareParticipant } from '@pages/Contest/utils';
 import RemindButton from './RemindButton';
 import './PendingParticipantsListTile.less';
+import { selectContest } from '@pages/Contest/selector';
 
 const PendingParticipantsListTile: React.FunctionComponent<PendingParticipantsListTileProps> = ({
     props: { index, style, data },
@@ -15,6 +16,7 @@ const PendingParticipantsListTile: React.FunctionComponent<PendingParticipantsLi
     const member_uuid = _get(item, ['member_uuid'], undefined);
     const { name } = prepareParticipant(
         member_uuid,
+        useSelector(selectContest),
         useSelector(selectMembersHash)
     );
     return (
