@@ -1,13 +1,27 @@
-.course {
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
+.course-component-content {
+    margin-top: 16px;
+    .course {
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
 
-    .course-label {
-        color: fade(@primary-color, 50%);
-        margin-right: 16px;
-    }
-    .course-value {
-        font-size: 16px;
+        .course-label {
+            color: fade(@primary-color, 50%);
+            margin-right: 16px;
+        }
+        .course-value {
+            font-size: 12px;
+            text-align: center;
+            //display: flex;
+            //align-items: center;
+            //flex-direction: row;
+            .course-value-name {
+                font-weight: bold;
+                width: 100%;
+            }
+            .course-value-address {
+                width: 100%;
+            }
+        }
     }
 }

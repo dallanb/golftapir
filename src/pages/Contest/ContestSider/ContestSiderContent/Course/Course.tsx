@@ -1,18 +1,41 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { get as _get } from 'lodash';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { get as _get, pick as _pick } from 'lodash';
 import { CourseProps } from './types';
-import { selectCourseData } from './selector';
+import { selectData } from './selector';
+import ContestPageSiderContentCourseActions from './actions';
 import './Course.less';
+import ComponentContent from '@layouts/ComponentContent';
+import { formatCourseAddress } from '@pages/Contest/ContestSider/ContestSiderContent/Course/utils';
 
 const Course: React.FunctionComponent<CourseProps> = () => {
-    const course = useSelector(selectCourseData);
+    const dispatch = useDispatch();
+    const { isInitialized, course } = useSelector(selectData);
+    // Possibly move this out to participant active
+    useEffect(() => {
+        dispatch(ContestPageSiderContentCourseActions.init());
+        return () => {
+            dispatch(ContestPageSiderContentCourseActions.terminate());
+        };
+    }, []);
+
     const name = _get(course, ['name'], '');
+    const address = formatCourseAddress(
+        _pick(course, ['city', 'province', 'country'])
+    );
     return (
-        <div className="course">
-            <div className="course-label">Course</div>
-            <div className="course-value">{name}</div>
-        </div>
+        <ComponentContent
+            className="course-component-content"
+            showSpinner={!isInitialized}
+        >
+            <div className="course">
+                <div className="course-label">Course</div>
+                <div className="course-value">
+                    <div className="course-value-name">{name}</div>
+                    <div className="course-value-address">{address}</div>
+                </div>
+            </div>
+        </ComponentContent>
     );
 };
 
