@@ -28,6 +28,7 @@ export {
     ContestPageContentContestLeaderboardSaga,
     ContestLeaderboardScoreChannel,
     ContestPageContentContestLeaderboardScorecardSaga,
+    ContestPageSiderContentCourseSaga,
     ContestPageSiderContentParticipantActiveContestActiveSaga,
     ContestPageSiderContentParticipantActiveContestPendingSaga,
     ContestPageSiderContentParticipantCompletedContestCompletedSaga,

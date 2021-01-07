@@ -29,5 +29,21 @@
     }
 
     .leaderboard-completed-content {
+        display: flex;
+        align-items: center;
+        .leaderboard-completed-content-avatar {
+            padding-right: 10px;
+            .ant-avatar-square {
+                border-radius: 4px;
+            }
+        }
+        .leaderboard-completed-content-stack {
+            .leaderboard-completed-content-name {
+                font-weight: bold;
+            }
+            .leaderboard-completed-content-score {
+                color: @primary-color;
+            }
+        }
     }
 }

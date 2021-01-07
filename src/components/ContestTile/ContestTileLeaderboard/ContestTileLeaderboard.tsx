@@ -14,13 +14,13 @@ const ContestTileLeaderboard: React.FunctionComponent<ContestTileLeaderboardProp
     if (status !== constants.STATUS.PENDING.KEY) {
         const participant = findLowestScoringParticipant(participants);
         if (participant) {
+            const participantAvatar = withS3URL(
+                `${participant.member_uuid}.jpeg`,
+                constants.S3_FOLDERS.MEMBER.AVATAR
+            );
+            const participantName = participant.display_name;
+            const participantScore = participant.score;
             if (status !== constants.STATUS.COMPLETED.KEY) {
-                const participantAvatar = withS3URL(
-                    `${participant.member_uuid}.jpeg`,
-                    constants.S3_FOLDERS.MEMBER.AVATAR
-                );
-                const participantName = participant.display_name;
-                const participantScore = participant.score;
                 return (
                     <div className="leaderboard-active">
                         <div className="leaderboard-active-label">LEADER</div>
@@ -45,14 +45,28 @@ const ContestTileLeaderboard: React.FunctionComponent<ContestTileLeaderboardProp
                     </div>
                 );
             } else {
-                const participantName = participant.display_name;
                 return (
                     <div className="leaderboard-completed">
                         <div className="leaderboard-completed-label">
                             WINNER
                         </div>
                         <div className="leaderboard-completed-content">
-                            {participantName} <CrownTwoTone />
+                            <div className="leaderboard-completed-content-avatar">
+                                <Avatar
+                                    src={participantAvatar}
+                                    name={participantName}
+                                    size={36}
+                                    shape="square"
+                                />
+                            </div>
+                            <div className="leaderboard-completed-content-stack">
+                                <div className="leaderboard-completed-content-name">
+                                    {participantName} <CrownTwoTone />
+                                </div>
+                                <div className="leaderboard-completed-content-score">
+                                    {participantScore}
+                                </div>
+                            </div>
                         </div>
                     </div>
                 );

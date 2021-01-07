@@ -22,6 +22,7 @@ export {
     ContestPageContentContestLeaderboardScorecardSaga,
 } from './ContestContent';
 export {
+    ContestPageSiderContentCourseSaga,
     ContestPageSiderContentParticipantActiveContestActiveSaga,
     ContestPageSiderContentParticipantActiveContestPendingSaga,
     ContestPageSiderContentParticipantCompletedContestCompletedSaga,

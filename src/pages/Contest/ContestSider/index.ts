@@ -11,6 +11,7 @@ export const reducer = combineReducers({
 
 // Saga
 export {
+    ContestPageSiderContentCourseSaga,
     ContestPageSiderContentParticipantActiveContestActiveSaga,
     ContestPageSiderContentParticipantActiveContestPendingSaga,
     ContestPageSiderContentParticipantCompletedContestCompletedSaga,
