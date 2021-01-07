@@ -24,6 +24,7 @@ export {
 export {
     ContestPageSiderContentParticipantActiveContestActiveSaga,
     ContestPageSiderContentParticipantActiveContestPendingSaga,
+    ContestPageSiderContentParticipantCompletedContestCompletedSaga,
 } from './ContestSider';
 
 // Routes

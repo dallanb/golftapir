@@ -13,4 +13,5 @@ export const reducer = combineReducers({
 export {
     ContestPageSiderContentParticipantActiveContestActiveSaga,
     ContestPageSiderContentParticipantActiveContestPendingSaga,
+    ContestPageSiderContentParticipantCompletedContestCompletedSaga,
 } from './ContestSiderContent';

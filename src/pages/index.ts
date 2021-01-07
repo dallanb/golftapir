@@ -30,6 +30,7 @@ export {
     ContestPageContentContestLeaderboardScorecardSaga,
     ContestPageSiderContentParticipantActiveContestActiveSaga,
     ContestPageSiderContentParticipantActiveContestPendingSaga,
+    ContestPageSiderContentParticipantCompletedContestCompletedSaga,
     ContestPageRoutes,
 } from './Contest';
 export {

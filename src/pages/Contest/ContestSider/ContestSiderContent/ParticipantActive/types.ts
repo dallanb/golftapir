@@ -1,1 +1,1 @@
-export interface ContestSiderActiveProps {}
+export interface ParticipantActiveProps {}

@@ -30,6 +30,7 @@ const topicToRouteMapper = (
             switch (key) {
                 case constants.EVENTS.CONTESTS.PARTICIPANT_INVITED:
                 case constants.EVENTS.CONTESTS.PARTICIPANT_ACTIVE:
+                case constants.EVENTS.CONTESTS.PARTICIPANT_COMPLETED:
                 case constants.EVENTS.CONTESTS.CONTEST_READY:
                 case constants.EVENTS.CONTESTS.CONTEST_ACTIVE:
                     mapping.route = withAppRoute(mapping.route, {

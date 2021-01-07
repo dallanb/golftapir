@@ -2,6 +2,7 @@ import React from 'react';
 import SiderLayoutContent from '@layouts/SiderLayout/SiderLayoutContent';
 import ParticipantActive from './ParticipantActive';
 import ParticipantPending from './ParticipantPending';
+import ParticipantCompleted from './ParticipantCompleted';
 import ParticipantSpectator from './ParticipantSpectator';
 import ContestStart from './ContestStart';
 import { ContestSiderContentProps } from './types';
@@ -19,6 +20,8 @@ const ContestSiderContent: React.FunctionComponent<ContestSiderContentProps> = (
                 return <ParticipantPending />;
             case constants.STATUS.ACTIVE.KEY:
                 return <ParticipantActive />;
+            case constants.STATUS.COMPLETED.KEY:
+                return <ParticipantCompleted />;
             default:
                 return <ParticipantSpectator />;
         }

@@ -2,13 +2,13 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import routes from '@constants/routes';
-import { selectMembersHash } from '@pages/Contest/selector';
+import { selectContest, selectMembersHash } from '@pages/Contest/selector';
 import { ContestParticipantsTableParticipantProps } from './types';
-import { prepareParticipant } from '@pages/Contest/utils';
-import { Avatar } from '@components';
-import { withAppRoute, withS3URL } from '@utils';
+import { prepareParticipant, prepareTags } from '@pages/Contest/utils';
+import { mapStatusColour, withAppRoute } from '@utils';
 import './ContestLeaderboardTableParticipant.less';
 import constants from '@constants';
+import { Tag } from 'antd';
 
 const ContestLeaderboardTableParticipant: React.FunctionComponent<ContestParticipantsTableParticipantProps> = ({
     uuid,
@@ -18,6 +18,7 @@ const ContestLeaderboardTableParticipant: React.FunctionComponent<ContestPartici
         uuid,
         useSelector(selectMembersHash)
     );
+    const tags = prepareTags(uuid, useSelector(selectContest));
 
     return (
         <div
@@ -40,6 +41,13 @@ const ContestLeaderboardTableParticipant: React.FunctionComponent<ContestPartici
             {/*/>*/}
             <div className="contest-participants-table-participant-name">
                 {name}
+            </div>
+            <div className="contest-participants-table-participant-tags">
+                {tags.map((tag: string) => (
+                    <Tag key={tag} color={mapStatusColour(tag)}>
+                        {tag}
+                    </Tag>
+                ))}
             </div>
         </div>
     );

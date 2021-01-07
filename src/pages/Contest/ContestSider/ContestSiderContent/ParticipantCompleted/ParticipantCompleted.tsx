@@ -1,27 +1,22 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { ParticipantActiveProps } from './types';
+import { ParticipantCompletedProps } from './types';
 import { selectContestStatus } from '@pages/Contest/selector';
 import constants from '@constants';
 import ContestActive from './ContestActive';
-import ContestPending from './ContestPending';
-import ContestReady from './ContestReady';
-import './ParticipantActive.less';
+import ContestCompleted from './ContestCompleted';
+import './ParticipantCompleted.less';
 
-const ParticipantActive: React.FunctionComponent<ParticipantActiveProps> = () => {
+const ParticipantCompleted: React.FunctionComponent<ParticipantCompletedProps> = () => {
     const contestStatus = useSelector(selectContestStatus);
 
     const contentRenderer = (status: string) => {
         let content = <div />;
         switch (status) {
-            case constants.STATUS.PENDING.KEY:
-                content = <ContestPending />;
-                break;
-            case constants.STATUS.READY.KEY:
-                content = <ContestReady />;
+            case constants.STATUS.COMPLETED.KEY:
+                content = <ContestCompleted />;
                 break;
             case constants.STATUS.ACTIVE.KEY:
-            case constants.STATUS.COMPLETED.KEY:
                 content = <ContestActive />;
                 break;
         }
@@ -31,4 +26,4 @@ const ParticipantActive: React.FunctionComponent<ParticipantActiveProps> = () =>
     return contentRenderer(contestStatus);
 };
 
-export default ParticipantActive;
+export default ParticipantCompleted;

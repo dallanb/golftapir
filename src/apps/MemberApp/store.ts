@@ -27,6 +27,7 @@ import {
     ContestPageSaga,
     ContestPageSiderContentParticipantActiveContestActiveSaga,
     ContestPageSiderContentParticipantActiveContestPendingSaga,
+    ContestPageSiderContentParticipantCompletedContestCompletedSaga,
     contestsCreatePage,
     ContestsCreatePageContentContestSaga,
     ContestsCreatePageContentContestSearchCourseSaga,
@@ -141,6 +142,9 @@ function configStore(options?: { preloadedState: any }): any {
             fork(ContestPageContentContestLeaderboardScorecardSaga),
             fork(ContestPageSiderContentParticipantActiveContestActiveSaga),
             fork(ContestPageSiderContentParticipantActiveContestPendingSaga),
+            fork(
+                ContestPageSiderContentParticipantCompletedContestCompletedSaga
+            ),
             fork(ContestsPageSaga),
             fork(ContestsPageContentContestsSaga),
             fork(ContestsPageSiderContentSearchSaga),

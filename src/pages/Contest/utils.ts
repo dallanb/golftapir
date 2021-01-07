@@ -22,6 +22,20 @@ export const prepareParticipant = (
     return participant;
 };
 
+export const prepareTags = (uuid: string, contest: any): string[] => {
+    const tags = [];
+    const { participants: participantsHash, owner } = contest;
+    const status = _get(participantsHash, [uuid, 'status'], {
+        status: constants.STATUS.ACTIVE.KEY,
+    });
+    tags.push(status);
+    const isOwner = uuid === owner;
+    if (isOwner) {
+        tags.push('owner');
+    }
+    return tags;
+};
+
 export const mergeContestParticipant = (
     existingParticipants: any,
     newParticipant: any
