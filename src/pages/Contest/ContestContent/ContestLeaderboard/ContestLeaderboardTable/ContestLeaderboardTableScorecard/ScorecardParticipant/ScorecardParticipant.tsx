@@ -19,6 +19,7 @@ const ScorecardParticipant: React.FunctionComponent<ScorecardParticipantProps> =
     const membersHash = useSelector(selectMembersHash);
     const member = _get(membersHash, [user], null);
     const avatar = _get(member, ['avatar', 's3_filename'], null);
+    const memberUUID = _get(member, ['uuid'], null);
     const name = getName(member, '');
     return (
         <div className="scorecard-participant">
@@ -47,8 +48,11 @@ const ScorecardParticipant: React.FunctionComponent<ScorecardParticipantProps> =
                         onClick={() =>
                             // TODO: competitor or league member?
                             history.push(
-                                withAppRoute(routes.ROUTES.COMPETITOR.ROUTE, {
-                                    routeProps: { league_uuid: leagueUUID },
+                                withAppRoute(routes.ROUTES.MEMBER.ROUTE, {
+                                    routeProps: {
+                                        league_uuid: leagueUUID,
+                                        member_uuid: memberUUID,
+                                    },
                                 }),
                                 {
                                     ...member,

@@ -1,10 +1,10 @@
 import React from 'react';
-import { ContestsListTileDateProps } from './types';
+import { ContestTileDateProps } from './types';
 import constants from '@constants';
 import { formatTimeStamp } from '@pages/Contest/utils';
-import './ContestsListTileDate.less';
+import './ContestTileDate.less';
 
-const ContestsListTileDate: React.FunctionComponent<ContestsListTileDateProps> = ({
+const ContestTileDate: React.FunctionComponent<ContestTileDateProps> = ({
     date,
     status,
 }) => {
@@ -22,4 +22,4 @@ const ContestsListTileDate: React.FunctionComponent<ContestsListTileDateProps> =
     return null;
 };
 
-export default ContestsListTileDate;
+export default ContestTileDate;

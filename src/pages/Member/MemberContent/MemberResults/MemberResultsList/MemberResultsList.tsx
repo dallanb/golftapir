@@ -2,9 +2,8 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { MemberResultsListProps } from './types';
-import { FixedSizeList } from '@components';
+import { ContestTile, FixedSizeList } from '@components';
 import { selectListData, selectListIsFetching } from '../selector';
-import MemberResultsListTile from './MemberResultsListTile';
 import { getRefHeight } from '@utils';
 import './MemberResultsList.less';
 
@@ -29,9 +28,7 @@ const MemberResultsList: React.FunctionComponent<MemberResultsListProps> = ({
             hasNextPage={false}
             isNextPageLoading={isFetching}
             minimumBatchSize={10}
-            rowRenderer={(props) =>
-                MemberResultsListTile({ props, history, params })
-            }
+            rowRenderer={(props) => ContestTile({ props, history, params })}
         />
     );
 };

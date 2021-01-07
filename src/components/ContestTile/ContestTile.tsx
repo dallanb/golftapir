@@ -2,17 +2,17 @@ import React from 'react';
 import { Badge, Card } from 'antd';
 import { get as _get } from 'lodash';
 import classnames from 'classnames';
-import { ContestsListTileProps } from './types';
-import ContestsListTileLeaderboard from './ContestsListTileLeaderboard';
-import ContestsListTileCourse from './ContestsListTileCourse';
-import ContestsListTileDate from './ContestsListTileDate';
+import { ContestTileProps } from './types';
+import ContestTileLeaderboard from './ContestTileLeaderboard';
+import ContestTileCourse from './ContestTileCourse';
+import ContestTileDate from './ContestTileDate';
 import constants from '@constants';
 import routes from '@constants/routes';
 import { mapStatusColour, withAppRoute, withS3URL } from '@utils';
 import { Avatar } from '@components';
-import './ContestsListTile.less';
+import './ContestTile.less';
 
-const ContestsListTile: React.FunctionComponent<ContestsListTileProps> = ({
+const ContestTile: React.FunctionComponent<ContestTileProps> = ({
     props: { index, style, data },
     history,
     params,
@@ -68,19 +68,19 @@ const ContestsListTile: React.FunctionComponent<ContestsListTileProps> = ({
                     </div>
                     <div className="contest-list-tile-content-side">
                         <div className="contest-list-tile-content-side-course">
-                            <ContestsListTileCourse course={course} />
+                            <ContestTileCourse course={course} />
                         </div>
                         {status === constants.STATUS.PENDING.KEY ||
                         status === constants.STATUS.READY.KEY ? (
                             <div className="contest-list-tile-content-side-leaderboard">
-                                <ContestsListTileDate
+                                <ContestTileDate
                                     status={status}
                                     date={time}
                                 />
                             </div>
                         ) : (
                             <div className="contest-list-tile-content-side-leaderboard">
-                                <ContestsListTileLeaderboard
+                                <ContestTileLeaderboard
                                     status={status}
                                     participants={Object.values(participants)}
                                 />
@@ -98,4 +98,4 @@ const ContestsListTile: React.FunctionComponent<ContestsListTileProps> = ({
     );
 };
 
-export default ContestsListTile;
+export default ContestTile;

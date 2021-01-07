@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { get as _get } from 'lodash';
 import { ContestsListProps } from './types';
-import { FixedSizeList } from '@components';
+import { FixedSizeList, ContestTile } from '@components';
 import ContestsPageContentContestsActions from '../actions';
 import {
     selectListData,
@@ -11,9 +11,8 @@ import {
     selectListIsFetching,
     selectListOptions,
 } from '../selector';
-import ContestsListTile from './ContestsListTile';
-import './ContestsList.less';
 import { getRefHeight } from '@utils';
+import './ContestsList.less';
 
 const ContestsList: React.FunctionComponent<ContestsListProps> = ({
     containerRef,
@@ -55,7 +54,7 @@ const ContestsList: React.FunctionComponent<ContestsListProps> = ({
             loadNextPage={loadMore}
             isNextPageLoading={isFetching}
             minimumBatchSize={10}
-            rowRenderer={(props) => ContestsListTile({ props, history, params })}
+            rowRenderer={(props) => ContestTile({ props, history, params })}
         />
     );
 };

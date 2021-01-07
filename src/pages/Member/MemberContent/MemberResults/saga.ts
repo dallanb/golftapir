@@ -6,16 +6,14 @@ import MemberPageContentMemberResultsActions, {
     MemberPageContentMemberResultsTypes,
 } from './actions';
 import { fetchMemberResults } from './helpers';
-import { selectData } from '@pages/Competitor/selector';
+import { selectData } from '@pages/Member/selector';
 
 function* init() {
     try {
         yield call(fetchMemberResults);
         yield put(MemberPageContentMemberResultsActions.initSuccess());
     } catch (err) {
-        yield put(
-            MemberPageContentMemberResultsActions.initFailure(err)
-        );
+        yield put(MemberPageContentMemberResultsActions.initFailure(err));
     }
 }
 
@@ -43,18 +41,13 @@ function* fetchData({
             )
         );
     } catch (err) {
-        yield put(
-            MemberPageContentMemberResultsActions.fetchDataFailure(err)
-        );
+        yield put(MemberPageContentMemberResultsActions.fetchDataFailure(err));
     }
 }
 
 export default function* MemberPageContentMemberResultsSaga() {
     yield all([
         takeLatest(MemberPageContentMemberResultsTypes.INIT, init),
-        takeLatest(
-            MemberPageContentMemberResultsTypes.FETCH_DATA,
-            fetchData
-        ),
+        takeLatest(MemberPageContentMemberResultsTypes.FETCH_DATA, fetchData),
     ]);
 }

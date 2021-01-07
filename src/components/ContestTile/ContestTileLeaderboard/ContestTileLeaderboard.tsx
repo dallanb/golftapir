@@ -1,12 +1,13 @@
 import React from 'react';
-import { ContestsListTileLeaderboardProps } from './types';
+import { ContestTileLeaderboardProps } from './types';
 import constants from '@constants';
 import { findLowestScoringParticipant } from '@pages/Contests/utils';
-import './ContestsListTileLeaderboard.less';
+import './ContestTileLeaderboard.less';
 import { withS3URL } from '@utils';
 import { Avatar } from '@components';
+import { CrownTwoTone } from '@ant-design/icons/lib';
 
-const ContestsListTileLeaderboard: React.FunctionComponent<ContestsListTileLeaderboardProps> = ({
+const ContestTileLeaderboard: React.FunctionComponent<ContestTileLeaderboardProps> = ({
     status,
     participants,
 }) => {
@@ -51,7 +52,7 @@ const ContestsListTileLeaderboard: React.FunctionComponent<ContestsListTileLeade
                             WINNER
                         </div>
                         <div className="leaderboard-completed-content">
-                            {participantName}
+                            {participantName} <CrownTwoTone />
                         </div>
                     </div>
                 );
@@ -61,4 +62,4 @@ const ContestsListTileLeaderboard: React.FunctionComponent<ContestsListTileLeade
     return null;
 };
 
-export default ContestsListTileLeaderboard;
+export default ContestTileLeaderboard;
