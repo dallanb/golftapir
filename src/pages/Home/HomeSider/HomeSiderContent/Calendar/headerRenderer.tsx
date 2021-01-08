@@ -11,19 +11,16 @@ const headerRenderer: React.FunctionComponent<CalenderHeaderProps> = ({
 }) => {
     const current = value.clone();
     const localeData = value.localeData();
-
     const monthOptions = _range(0, 12).map((i) => {
         current.month(i);
         const value = localeData.monthsShort(current);
-        console.log(value);
         return (
-            <Select.Option className="month-item" key={i} value={value}>
+            <Select.Option className="month-item" key={i} value={i}>
                 {value}
             </Select.Option>
         );
     });
     const month = value.month();
-    console.log(month);
 
     const year = value.year();
     const options = _range(year - 10, year + 10).map((i) => (
@@ -31,21 +28,9 @@ const headerRenderer: React.FunctionComponent<CalenderHeaderProps> = ({
             {i}
         </Select.Option>
     ));
-
     return (
         <div style={{ padding: 8 }}>
-            <Typography.Title level={4}>Custom header</Typography.Title>
             <Row gutter={8}>
-                <Col>
-                    <Radio.Group
-                        size="small"
-                        onChange={(e) => onTypeChange(e.target.value)}
-                        value={type}
-                    >
-                        <Radio.Button value="month">Month</Radio.Button>
-                        <Radio.Button value="year">Year</Radio.Button>
-                    </Radio.Group>
-                </Col>
                 <Col>
                     <Select
                         size="small"
@@ -64,8 +49,9 @@ const headerRenderer: React.FunctionComponent<CalenderHeaderProps> = ({
                     <Select
                         size="small"
                         dropdownMatchSelectWidth={false}
-                        value={String(month)}
+                        defaultValue={localeData.monthsShort(value)}
                         onChange={(selectedMonth) => {
+                            console.log(selectedMonth);
                             const newValue = value.clone();
                             newValue.month(parseInt(selectedMonth, 10));
                             onChange(newValue);
