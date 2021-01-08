@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect';
 
 const getHomePageSiderContentCalendar = (state: any) =>
-    state.homePage.data.sider.content.calendar;
+    state.homePage.ui.sider.content.calendar;
 
 export const selectData = createSelector(
     [getHomePageSiderContentCalendar],

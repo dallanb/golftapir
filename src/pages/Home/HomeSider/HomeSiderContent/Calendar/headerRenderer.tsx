@@ -1,5 +1,5 @@
 import React from 'react';
-import { Col, Radio, Row, Select, Typography } from 'antd';
+import { Col, Row, Select } from 'antd';
 import { CalenderHeaderProps } from './types';
 import { range as _range } from 'lodash';
 
@@ -51,7 +51,6 @@ const headerRenderer: React.FunctionComponent<CalenderHeaderProps> = ({
                         dropdownMatchSelectWidth={false}
                         defaultValue={localeData.monthsShort(value)}
                         onChange={(selectedMonth) => {
-                            console.log(selectedMonth);
                             const newValue = value.clone();
                             newValue.month(parseInt(selectedMonth, 10));
                             onChange(newValue);

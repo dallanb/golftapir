@@ -2,11 +2,14 @@ import { createActions } from 'reduxsauce';
 
 const { Types, Creators } = createActions(
     {
-        init: ['uuid'],
+        init: ['options'],
         initSuccess: null,
         initFailure: ['err'],
         terminate: null,
         set: ['data'],
+        fetchData: ['options', 'append'],
+        fetchDataSuccess: ['data', 'metadata'],
+        fetchDataFailure: ['err'],
     },
     {
         prefix: 'HOME_PAGE_SIDER_CONTENT_CALENDAR_',

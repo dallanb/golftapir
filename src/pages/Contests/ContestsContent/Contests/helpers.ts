@@ -4,7 +4,7 @@ import ContestsPageContentContestsActions, {
     ContestsPageContentContestsTypes,
 } from './actions';
 
-export function* fetchContestsList(options: any = { page: 1, per_page: 10 }) {
+export function* fetchContestsList(options: any) {
     yield put(ContestsPageContentContestsActions.fetchData(options));
     const { success, failure } = yield race({
         success: take(ContestsPageContentContestsTypes.FETCH_DATA_SUCCESS),

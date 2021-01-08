@@ -31,6 +31,13 @@ export default {
             query,
         });
     },
+    fetchContestsCalendar(query: any = {}) {
+        return ClientProxy.get({
+            url: config.CONTEST_URL,
+            endpoint: `/contests/calendar`,
+            query,
+        });
+    },
     createContest(data: any = {}) {
         return ClientProxy.post({
             url: config.CONTEST_URL,
