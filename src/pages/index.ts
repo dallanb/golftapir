@@ -62,6 +62,7 @@ export {
     default as Home,
     reducer as homePage,
     HomePageSaga,
+    HomePageSiderContentCalendarSaga,
     HomePageRoutes,
 } from './Home';
 export {

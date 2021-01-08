@@ -7,11 +7,13 @@ import {
     MemberPageRoutes,
     MembersPageRoutes,
     MemberSettingsPageRoutes,
+    HomePageRoutes,
 } from '@pages';
 
 export const routes: any = [];
 
 export const protectedRoutes: any = [
+    ...HomePageRoutes,
     ...MembersPageRoutes,
     ...MemberSettingsPageRoutes,
     ...MemberPageRoutes,
