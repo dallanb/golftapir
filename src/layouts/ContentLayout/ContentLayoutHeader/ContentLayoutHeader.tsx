@@ -3,6 +3,7 @@ import { PageHeader } from 'antd';
 import { ContentLayoutHeaderProps } from './types';
 import { AvatarProps } from 'antd/lib/avatar';
 import { getInitials, randomColourGenerator } from '@utils';
+import './ContentLayoutHeader.less';
 
 const ContentLayoutHeader: React.FunctionComponent<ContentLayoutHeaderProps> = ({
     title,
@@ -18,6 +19,7 @@ const ContentLayoutHeader: React.FunctionComponent<ContentLayoutHeaderProps> = (
         const avatarProps: AvatarProps = {
             className: avatar.className,
             size: avatar.size,
+            shape: avatar.shape,
         };
         if (avatar.src) {
             avatarProps['src'] = avatar.src;

@@ -1,5 +1,4 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
 import { Badge, Card } from 'antd';
 import { get as _get } from 'lodash';
 import classnames from 'classnames';
@@ -9,6 +8,7 @@ import routes from '@constants/routes';
 import { getName, mapStatusColour, withAppRoute, withS3URL } from '@utils';
 import { Avatar } from '@components';
 import MembersListTileCreatedAt from './MembersListTileCreatedAt';
+import MembersListTileCountry from './MembersListTileCountry';
 import './MembersListTile.less';
 
 const MembersListTile: React.FunctionComponent<MembersListTileProps> = ({
@@ -34,6 +34,7 @@ const MembersListTile: React.FunctionComponent<MembersListTileProps> = ({
     const name = getName(item, 'Loading...');
     const avatar = _get(item, ['avatar', 's3_filename'], undefined);
     const src = avatar && withS3URL(avatar, constants.S3_FOLDERS.MEMBER.AVATAR);
+    const country = _get(item, ['country'], undefined);
     const status = _get(item, ['status'], undefined);
     const ctime = _get(item, ['ctime'], undefined);
     const cardCx = classnames('members-list-tile-card', {
@@ -70,6 +71,9 @@ const MembersListTile: React.FunctionComponent<MembersListTileProps> = ({
                         </div>
                     </div>
                     <div className="members-list-tile-content-side">
+                        <div className="members-list-tile-content-side-country">
+                            <MembersListTileCountry country={country} />
+                        </div>
                         <div className="members-list-tile-content-side-created-at">
                             <MembersListTileCreatedAt ctime={ctime} />
                         </div>

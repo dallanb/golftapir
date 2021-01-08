@@ -3,7 +3,7 @@ import { ContestReadyProps } from './types';
 import './ContestReady.less';
 
 const ContestReady: React.FunctionComponent<ContestReadyProps> = () => {
-    return <div />;
+    return null;
 };
 
 export default ContestReady;
