@@ -10,19 +10,24 @@ const Contests: React.FunctionComponent<ContestsProps> = ({ date }) => {
     const { contestHash } = useSelector(selectData);
     const contests = _get(contestHash, [date.date()], []);
     return (
-        <ul className="contests-list">
-            {contests.map((contest: any) => {
-                console.log(contest);
-                return (
-                    <li key={contest.uuid} className="contest-item">
-                        <div className="contest-item-name">{contest.name}</div>
-                        <div className="contest-item-date">
-                            {formatTimeStamp(contest.start_time)}
-                        </div>
-                    </li>
-                );
-            })}
-        </ul>
+        <div className="contests-list">
+            <ul>
+                {contests.map((contest: any) => {
+                    console.log(contest);
+                    return (
+                        <li key={contest.uuid} className="contest-item">
+                            <span className="contest-item-name">
+                                {contest.name}
+                            </span>
+                            <br />
+                            <span className="contest-item-date">
+                                {formatTimeStamp(contest.start_time)}
+                            </span>
+                        </li>
+                    );
+                })}
+            </ul>
+        </div>
     );
 };
 
