@@ -12,16 +12,16 @@ import './MemberHeader.less';
 const MemberHeader: React.FunctionComponent<MemberHeaderProps> = () => {
     const member = useSelector(selectMember);
     const title = _get(member, ['display_name'], CONSTANTS.PAGES.MEMBER.TITLE);
-    const avatar = {
-        src: useSelector(selectMemberAvatarSrc),
-        name: title,
-    };
+    // const avatar = {
+    //     src: useSelector(selectMemberAvatarSrc),
+    //     name: title,
+    // };
     const subTitle = CONSTANTS.PAGES.MEMBER.DESCRIPTION;
     const extra = <Breadcrumb route={constantRoutes.ROUTES.MEMBER.ROUTE} />;
 
     return (
         <ContentLayoutHeader
-            avatar={{ ...avatar, shape: 'square', size: 36 }}
+            // avatar={{ ...avatar, shape: 'square', size: 36 }}
             title={title}
             subTitle={subTitle}
             extra={extra}

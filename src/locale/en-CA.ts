@@ -291,6 +291,7 @@ const CONSTANTS = {
             TITLE: 'Member',
             DESCRIPTION: 'View Member',
             TABS: {
+                INFO: 'Info',
                 RECENT: 'Recent Contests',
                 RESULTS: 'Results',
             },

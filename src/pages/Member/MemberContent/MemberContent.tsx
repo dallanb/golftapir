@@ -14,11 +14,14 @@ const MemberContent: React.FunctionComponent<MemberContentProps> = ({}) => {
     }
     return (
         <ContentLayoutContent>
-            <Tabs defaultActiveKey="1" onChange={callback}>
-                <TabPane tab={CONSTANTS.PAGES.MEMBER.TABS.RECENT} key="1">
+            <Tabs defaultActiveKey="2" onChange={callback}>
+                <TabPane tab={CONSTANTS.PAGES.MEMBER.TABS.INFO} key="1">
+                    <div />
+                </TabPane>
+                <TabPane tab={CONSTANTS.PAGES.MEMBER.TABS.RECENT} key="2">
                     <MemberResults />
                 </TabPane>
-                <TabPane tab={CONSTANTS.PAGES.MEMBER.TABS.RESULTS} key="2">
+                <TabPane tab={CONSTANTS.PAGES.MEMBER.TABS.RESULTS} key="3">
                     <div />
                 </TabPane>
             </Tabs>

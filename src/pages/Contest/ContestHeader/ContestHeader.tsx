@@ -15,12 +15,12 @@ import './ContestHeader.less';
 const ContestHeader: React.FunctionComponent<ContestHeaderProps> = () => {
     return (
         <ContentLayoutHeader
-            avatar={{
-                src: useSelector(selectContestAvatarSrc),
-                name: useSelector(selectContestName),
-                shape: 'square',
-                size: 36,
-            }}
+            // avatar={{
+            //     src: useSelector(selectContestAvatarSrc),
+            //     name: useSelector(selectContestName),
+            //     shape: 'square',
+            //     size: 36,
+            // }}
             title={<HeaderTitle />}
             subTitle={<HeaderSubTitle />}
             extra={<Breadcrumb route={constantRoutes.ROUTES.CONTEST.ROUTE} />}
