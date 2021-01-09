@@ -1,4 +1,23 @@
 .calendar-component-content {
     .calendar {
+        font-size: 12px;
+        table,
+        tr {
+            border-bottom: none;
+        }
+        .ant-picker-cell {
+            padding: 4px 0;
+            .ant-picker-calendar-date-content {
+                //height: 4px;
+                position: absolute;
+                margin-top: 3px;
+                width: 100%;
+                .ant-badge {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                }
+            }
+        }
     }
 }

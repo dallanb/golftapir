@@ -10,7 +10,7 @@ const dateCellRenderer: React.FunctionComponent<CalendarCellProps> = ({
     console.log(date);
     console.log(data);
     const items = data[date.date()] || [];
-    return <>{items.length ? <Badge status="success" /> : null}</>;
+    return <>{items.length ? <Badge color="green" /> : null}</>;
 };
 
 export default dateCellRenderer;

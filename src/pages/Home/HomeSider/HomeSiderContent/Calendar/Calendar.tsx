@@ -1,18 +1,21 @@
-import React, { useEffect } from 'react';
-import moment from 'moment';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import moment, { Moment } from 'moment';
 import { Badge, Calendar as AntdCalendar } from 'antd';
 import { CalendarProps } from './types';
 import ComponentContent from '@layouts/ComponentContent';
 import headerRenderer from './headerRenderer';
 import dateCellRenderer from './dateCellRenderer';
 import HomePageSiderContestCalendarSaga from './actions';
-import { useDispatch, useSelector } from 'react-redux';
 import { selectData } from './selector';
+import Contests from './Contests';
 import './Calendar.less';
 
 const Calendar: React.FunctionComponent<CalendarProps> = () => {
     const dispatch = useDispatch();
     const { isInitialized, contestHash } = useSelector(selectData);
+
+    const [date, setDate] = useState(moment());
 
     useEffect(() => {
         dispatch(
@@ -26,6 +29,10 @@ const Calendar: React.FunctionComponent<CalendarProps> = () => {
         };
     }, []);
 
+    const handleChange = (newDate: Moment) => {
+        setDate(newDate);
+    };
+
     return (
         <ComponentContent
             showSpinner={!isInitialized}
@@ -37,7 +44,11 @@ const Calendar: React.FunctionComponent<CalendarProps> = () => {
                 dateCellRender={(date) =>
                     dateCellRenderer({ date, data: contestHash })
                 }
+                value={date}
+                onChange={handleChange}
+                className="calendar"
             />
+            <Contests date={date} />
         </ComponentContent>
     );
 };
