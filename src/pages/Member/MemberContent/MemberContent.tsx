@@ -3,6 +3,7 @@ import { Tabs } from 'antd';
 import { ContentLayoutContent } from '@layouts';
 import { MemberContentProps } from './types';
 import MemberResults from './MemberResults';
+import MemberInfo from './MemberInfo';
 import CONSTANTS from '@locale/en-CA';
 import './MemberContent.less';
 
@@ -16,7 +17,7 @@ const MemberContent: React.FunctionComponent<MemberContentProps> = ({}) => {
         <ContentLayoutContent>
             <Tabs defaultActiveKey="2" onChange={callback}>
                 <TabPane tab={CONSTANTS.PAGES.MEMBER.TABS.INFO} key="1">
-                    <div />
+                    <MemberInfo />
                 </TabPane>
                 <TabPane tab={CONSTANTS.PAGES.MEMBER.TABS.RECENT} key="2">
                     <MemberResults />

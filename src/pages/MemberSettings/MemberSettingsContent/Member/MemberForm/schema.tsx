@@ -36,15 +36,49 @@ export const fieldSchema = [
         options: {},
         fields: [
             {
-                name: 'display_name',
+                name: 'username',
                 wrapper: FloatLabelInputWrapper,
                 wrapperOptions: {
-                    label: FORM.LABELS.DISPLAY_NAME,
-                    className: 'member-form-display-name-input',
+                    label: FORM.LABELS.USERNAME,
+                    className: 'member-form-username-input',
                 },
-                options: {},
+                options: {
+                    disabled: true,
+                },
+            },
+            {
+                name: 'email',
+                wrapper: FloatLabelInputWrapper,
+                wrapperOptions: {
+                    label: FORM.LABELS.EMAIL,
+                    className: 'member-form-email-input',
+                },
+                options: {
+                    disabled: true,
+                },
             },
         ],
+        
+    },
+    {
+        name: 'display_name',
+        wrapper: FloatLabelInputWrapper,
+        wrapperOptions: {
+            label: FORM.LABELS.DISPLAY_NAME,
+            className: 'member-form-display-name-input',
+        },
+        options: {},
+    },
+    {
+        name: 'country',
+        wrapper: FloatLabelInputWrapper,
+        wrapperOptions: {
+            label: FORM.LABELS.COUNTRY,
+            className: 'member-form-country-input',
+        },
+        options: {
+            disabled: true,
+        },
     },
 ];
 

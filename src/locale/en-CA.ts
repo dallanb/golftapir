@@ -332,6 +332,9 @@ const CONSTANTS = {
                     UPLOAD_AVATAR: 'Upload Avatar',
                     AVATAR_CROPPER_TITLE: 'Edit Avatar',
                     DISPLAY_NAME: 'Display Name',
+                    USERNAME: 'Username',
+                    EMAIL: 'Email',
+                    COUNTRY: 'Country',
                 },
                 VALIDATION: {
                     DISPLAY_NAME_MAX_LENGTH:

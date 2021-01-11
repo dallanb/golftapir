@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { FormikValues } from 'formik';
-import { pick as _pick } from 'lodash';
+import { isEqual as _isEqual, pick as _pick, set as _set } from 'lodash';
 import { AccountFormProps } from './types';
 import { Form } from '@components';
 import AccountPageContentAccountActions from '../actions';
@@ -14,7 +14,15 @@ const AccountForm: React.FunctionComponent<AccountFormProps> = () => {
     const { initialValues } = useSelector(selectAccountFormData);
 
     const handleSubmit = (values: FormikValues) => {
-        const account = _pick(values, ['display_name', 'address', 'avatar']);
+        const account = Object.entries(
+            _pick(values, ['display_name', 'address', 'avatar'])
+        ).reduce(
+            (accum: any, [key, value]: any) =>
+                !_isEqual(value, initialValues[key])
+                    ? _set(accum, [key], value)
+                    : accum,
+            {}
+        );
         dispatch(AccountPageContentAccountActions.submit(account));
     };
     return (
