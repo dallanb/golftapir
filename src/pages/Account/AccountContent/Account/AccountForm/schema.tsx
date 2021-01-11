@@ -15,7 +15,7 @@ const FORM = CONSTANTS.PAGES.ACCOUNT.FORM;
 export const fieldSchema = [
     {
         name: 'avatar',
-        type: 'avatar',
+        type: 'upload',
         wrapper: ImgCropWrapper,
         wrapperOptions: {
             valuePropName: 'file',

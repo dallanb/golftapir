@@ -16,6 +16,7 @@ const FloatLabelInputWrapper: React.FunctionComponent<FloatLabelInputWrapperProp
         className,
         ...restProps
     } = props;
+    console.log(props);
     const [focus, setFocus] = useState(false);
     const cx = classnames('float-label-input-wrapper', className);
     const labelCx = classnames('label', {

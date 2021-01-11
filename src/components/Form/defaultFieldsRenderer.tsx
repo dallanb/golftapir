@@ -5,9 +5,11 @@ import { Moment } from 'moment';
 import { get as _get, debounce as _debounce } from 'lodash';
 import { antdFormatName, mapCountryOptions } from './utils';
 import { FieldsRendererProps } from './types';
-import { DateTimePicker } from '@components';
+import { Avatar, DateTimePicker } from '@components';
 import { UploadField } from './components';
-import { normalizeImage } from '@utils';
+import { normalizeImage, withS3URL } from '@utils';
+import CONSTANTS from '@locale/en-CA';
+import constants from '@constants';
 
 const wrap = (Wrapper: any, field: any, options: any) => (
     <Wrapper key={options.name} {...options}>
@@ -127,7 +129,7 @@ const fieldRenderer = (
                 </Select>
             );
             break;
-        case 'avatar':
+        case 'upload':
             field = (
                 <Upload
                     key={name}
@@ -152,6 +154,27 @@ const fieldRenderer = (
                     />
                 </Upload>
             );
+            break;
+        case 'avatar':
+            field = (
+                <Avatar
+                    key={name}
+                    name={name}
+                    src={withS3URL(
+                        _get(value, ['s3_filename'], ''),
+                        _get(
+                            options,
+                            ['s3Folder'],
+                            constants.S3_FOLDERS.MEMBER.AVATAR
+                        )
+                    )}
+                    shape={_get(options, ['shape'], undefined)}
+                    size={_get(options, ['size'], undefined)}
+                    className={_get(options, ['className'], '')}
+                />
+            );
+            console.log(field);
+            console.log(value);
             break;
         case 'date-time-picker':
             field = (

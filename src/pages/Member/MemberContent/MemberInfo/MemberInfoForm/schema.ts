@@ -1,6 +1,7 @@
 import React from 'react';
 import * as Yup from 'yup';
 import {
+    BasicInputWrapper,
     FloatLabelInputWrapper,
     ImgCropWrapper,
     NestedInputWrapper,
@@ -14,14 +15,10 @@ export const fieldSchema = [
     {
         name: 'avatar',
         type: 'avatar',
-        wrapper: ImgCropWrapper,
-        wrapperOptions: {
-            valuePropName: 'file',
-            className: 'member-info-form-avatar-upload',
-        },
         options: {
-            readOnly: true,
-            uploadS3Folder: constants.S3_FOLDERS.MEMBER.AVATAR,
+            s3Folder: constants.S3_FOLDERS.MEMBER.AVATAR,
+            shape: 'square',
+            size: 130,
         },
     },
     {
@@ -40,7 +37,8 @@ export const fieldSchema = [
                     className: 'member-info-form-username-input',
                 },
                 options: {
-                    readOnly: true,
+                    readonly: true,
+                    bordered: false,
                 },
             },
             {
@@ -51,7 +49,8 @@ export const fieldSchema = [
                     className: 'member-info-form-email-input',
                 },
                 options: {
-                    readOnly: true,
+                    readonly: true,
+                    bordered: false,
                 },
             },
         ],
@@ -64,7 +63,8 @@ export const fieldSchema = [
             className: 'member-info-form-display-name-input',
         },
         options: {
-            readOnly: true,
+            readonly: true,
+            bordered: false,
         },
     },
     {
@@ -75,7 +75,8 @@ export const fieldSchema = [
             className: 'member-info-form-country-input',
         },
         options: {
-            readOnly: true,
+            readonly: true,
+            bordered: false,
         },
     },
 ];
