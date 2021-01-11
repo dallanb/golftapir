@@ -17,7 +17,7 @@ import './Calendar.less';
 const Calendar: React.FunctionComponent<CalendarProps> = () => {
     const dispatch = useDispatch();
     const history = useHistory();
-    const { isInitialized, contestHash } = useSelector(selectData);
+    const { isInitialized, isFetching, contestHash } = useSelector(selectData);
 
     const [date, setDate] = useState(moment());
 
@@ -34,6 +34,18 @@ const Calendar: React.FunctionComponent<CalendarProps> = () => {
     }, []);
 
     const handleChange = (newDate: Moment) => {
+        const currMonth = date.month();
+        const newMonth = newDate.month();
+        const currYear = date.year();
+        const newYear = newDate.year();
+        if (currMonth !== newMonth || currYear !== newYear) {
+            dispatch(
+                HomePageSiderContestCalendarSaga.fetchData({
+                    month: newMonth + 1,
+                    year: newYear,
+                })
+            );
+        }
         setDate(newDate);
     };
 
@@ -51,7 +63,7 @@ const Calendar: React.FunctionComponent<CalendarProps> = () => {
 
     return (
         <ComponentContent
-            showSpinner={!isInitialized}
+            showSpinner={!isInitialized || isFetching}
             className="calendar-component-content"
         >
             <AntdCalendar
