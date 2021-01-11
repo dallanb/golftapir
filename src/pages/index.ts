@@ -111,6 +111,7 @@ export {
     reducer as memberPage,
     MemberPageSaga,
     MemberPageContentMemberResultsSaga,
+    MemberPageContentMemberInfoSaga,
     MemberPageRoutes,
 } from './Member';
 export {

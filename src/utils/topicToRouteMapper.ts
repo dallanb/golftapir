@@ -11,9 +11,7 @@ const topicToRouteMapper = (
     route: string;
     state: any;
 } => {
-    console.log('TOPIC: ', topic);
-    console.log('KEY: ', key);
-    console.log('ITEM: ', item);
+
     const mapping = {
         route: '',
         state: {},

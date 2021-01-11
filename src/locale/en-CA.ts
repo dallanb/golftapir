@@ -295,6 +295,15 @@ const CONSTANTS = {
                 RECENT: 'Recent Contests',
                 RESULTS: 'Results',
             },
+            FORM: {
+                LABELS: {
+                    DISPLAY_NAME: 'Display Name',
+                    AVATAR: 'Avatar',
+                    USERNAME: 'Username',
+                    EMAIL: 'Email',
+                    COUNTRY: 'Country',
+                },
+            },
         },
         MEMBERS: {
             TITLE: 'Members',

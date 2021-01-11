@@ -1,6 +1,7 @@
 import { Formik, FormikProps, FormikValues } from 'formik';
 import React from 'react';
 import { Button, Form as AntdForm } from 'antd';
+import { isNull as _isNull } from 'lodash';
 import defaultFormRenderer from './defaultFormRenderer';
 import defaultFieldsRenderer from './defaultFieldsRenderer';
 import { FieldsRendererProps, FormProps, FormRendererProps } from './types';
@@ -28,9 +29,10 @@ class Form extends React.Component<FormProps> {
         );
     };
 
-    renderSubmit = (): JSX.Element => {
+    renderSubmit = (): JSX.Element | null => {
         const { submitButton } = this.props;
-        if (submitButton) {
+
+        if (_isNull(submitButton) || submitButton) {
             return submitButton;
         }
         return (

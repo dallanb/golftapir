@@ -84,7 +84,6 @@ const headerRenderer: React.FunctionComponent<CalenderHeaderProps> = ({
                     onChange={(selectedMonth) => {
                         const newValue = value.clone();
                         newValue.month(parseInt(selectedMonth, 10));
-                        console.log(newValue);
                         onChange(newValue);
                     }}
                     bordered={false}

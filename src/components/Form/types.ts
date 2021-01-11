@@ -5,7 +5,7 @@ export interface FormProps {
     initialValues: any;
     validationSchema: any;
     fieldSchema: any;
-    submitButton?: JSX.Element;
+    submitButton?: JSX.Element | null;
     onSubmit: (values: FormikValues) => void;
     formRenderer?: FormRendererProps;
     fieldsRenderer?: () => any;
@@ -18,7 +18,7 @@ export interface FormRendererProps {
         initialValues: any,
         fields: JSX.Element,
         handleSubmit: (e?: FormEvent<HTMLFormElement> | undefined) => void,
-        submitComponent: JSX.Element
+        submitComponent: JSX.Element | null
     ): JSX.Element;
 }
 
