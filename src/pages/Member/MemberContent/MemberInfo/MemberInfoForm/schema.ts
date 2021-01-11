@@ -18,7 +18,8 @@ export const fieldSchema = [
         options: {
             s3Folder: constants.S3_FOLDERS.MEMBER.AVATAR,
             shape: 'square',
-            size: 130,
+            size: 112,
+            className: 'member-info-form-avatar',
         },
     },
     {
@@ -53,31 +54,32 @@ export const fieldSchema = [
                     bordered: false,
                 },
             },
+            {
+                name: 'display_name',
+                wrapper: FloatLabelInputWrapper,
+                wrapperOptions: {
+                    label: FORM.LABELS.DISPLAY_NAME,
+                    className: 'member-info-form-display-name-input',
+                },
+                options: {
+                    readonly: true,
+                    bordered: false,
+                },
+            },
+            {
+                name: 'country',
+                type: 'flag',
+                wrapper: FloatLabelInputWrapper,
+                wrapperOptions: {
+                    label: FORM.LABELS.COUNTRY,
+                    className: 'member-info-form-country-input',
+                },
+                options: {
+                    readonly: true,
+                    bordered: false,
+                },
+            },
         ],
-    },
-    {
-        name: 'display_name',
-        wrapper: FloatLabelInputWrapper,
-        wrapperOptions: {
-            label: FORM.LABELS.DISPLAY_NAME,
-            className: 'member-info-form-display-name-input',
-        },
-        options: {
-            readonly: true,
-            bordered: false,
-        },
-    },
-    {
-        name: 'country',
-        wrapper: FloatLabelInputWrapper,
-        wrapperOptions: {
-            label: FORM.LABELS.COUNTRY,
-            className: 'member-info-form-country-input',
-        },
-        options: {
-            readonly: true,
-            bordered: false,
-        },
     },
 ];
 

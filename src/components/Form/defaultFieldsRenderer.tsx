@@ -4,12 +4,13 @@ import { Input, Upload, Select, InputNumber } from 'antd';
 import { Moment } from 'moment';
 import { get as _get, debounce as _debounce } from 'lodash';
 import { antdFormatName, mapCountryOptions } from './utils';
-import { FieldsRendererProps } from './types';
 import { Avatar, DateTimePicker } from '@components';
 import { UploadField } from './components';
 import { normalizeImage, withS3URL } from '@utils';
-import CONSTANTS from '@locale/en-CA';
 import constants from '@constants';
+// @ts-ignore
+import Flags from 'country-flag-icons/react/3x2';
+import { FieldsRendererProps } from './types';
 
 const wrap = (Wrapper: any, field: any, options: any) => (
     <Wrapper key={options.name} {...options}>
@@ -229,6 +230,12 @@ const fieldRenderer = (
                 >
                     {mapCountryOptions()}
                 </Select>
+            );
+            break;
+        case 'flag':
+            const Country = _get(Flags, [value], null);
+            field = (
+                <Country className={_get(options, ['className'], undefined)} />
             );
             break;
         default:
