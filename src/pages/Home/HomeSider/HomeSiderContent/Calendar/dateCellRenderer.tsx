@@ -7,8 +7,6 @@ const dateCellRenderer: React.FunctionComponent<CalendarCellProps> = ({
     date,
     data,
 }) => {
-    console.log(date);
-    console.log(data);
     const items = data[date.date()] || [];
     return <>{items.length ? <Badge color="green" /> : null}</>;
 };
