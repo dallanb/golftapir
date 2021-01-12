@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { range as _range } from 'lodash';
 import {
     DoubleLeftOutlined,
@@ -10,7 +10,7 @@ import { Button, Select } from 'antd';
 import { CalenderHeaderProps } from './types';
 import moment, { Moment } from 'moment';
 
-const headerRenderer: React.FunctionComponent<CalenderHeaderProps> = ({
+const defaultHeaderRenderer: React.FunctionComponent<CalenderHeaderProps> = ({
     value,
     type,
     onChange,
@@ -128,4 +128,4 @@ const headerRenderer: React.FunctionComponent<CalenderHeaderProps> = ({
     );
 };
 
-export default headerRenderer;
+export default defaultHeaderRenderer;

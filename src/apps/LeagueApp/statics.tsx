@@ -7,13 +7,13 @@ import constants from '@constants';
 export default [
     {
         path: (props: any) =>
-            withAppRoute(routes.ROUTES.HOME.ROUTE, {
+            withAppRoute(routes.ROUTES.LEAGUE_HOME.ROUTE, {
                 app: constants.APPS.LEAGUE_APP,
                 routeProps: props,
             }),
         name: (leagueName: string) => leagueName,
         icon: (props: any) => <Avatar {...props.value} />,
-        key: routes.ROUTES.HOME.KEY,
+        key: routes.ROUTES.LEAGUE_HOME.KEY,
     },
     {
         path: (props: any) =>

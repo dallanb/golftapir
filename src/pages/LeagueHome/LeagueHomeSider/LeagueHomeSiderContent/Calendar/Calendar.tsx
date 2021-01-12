@@ -5,7 +5,7 @@ import moment, { Moment } from 'moment';
 import { Calendar as ComponentCalendar } from '@components';
 import { CalendarProps } from './types';
 import ComponentContent from '@layouts/ComponentContent';
-import HomePageSiderContestCalendarSaga from './actions';
+import LeagueHomePageSiderContestCalendarSaga from './actions';
 import { selectData } from './selector';
 import { withAppRoute } from '@utils';
 import routes from '@constants/routes';
@@ -20,13 +20,13 @@ const Calendar: React.FunctionComponent<CalendarProps> = () => {
 
     useEffect(() => {
         dispatch(
-            HomePageSiderContestCalendarSaga.init({
+            LeagueHomePageSiderContestCalendarSaga.init({
                 month: moment().month() + 1,
                 year: moment().year(),
             })
         );
         return () => {
-            dispatch(HomePageSiderContestCalendarSaga.terminate());
+            dispatch(LeagueHomePageSiderContestCalendarSaga.terminate());
         };
     }, []);
 
@@ -37,7 +37,7 @@ const Calendar: React.FunctionComponent<CalendarProps> = () => {
         const newYear = newDate.year();
         if (currMonth !== newMonth || currYear !== newYear) {
             dispatch(
-                HomePageSiderContestCalendarSaga.fetchData({
+                LeagueHomePageSiderContestCalendarSaga.fetchData({
                     month: newMonth + 1,
                     year: newYear,
                 })

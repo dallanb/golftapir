@@ -292,7 +292,7 @@ const CONSTANTS = {
             DESCRIPTION: 'View Member',
             TABS: {
                 INFO: 'Info',
-                RECENT: 'Recent Contests',
+                RECENT: 'Recent List',
                 RESULTS: 'Results',
             },
             FORM: {

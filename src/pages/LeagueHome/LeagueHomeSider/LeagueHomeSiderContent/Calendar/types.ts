@@ -1,4 +1,4 @@
-export interface HomePageSiderContentCalendarInterface {
+export interface LeagueHomePageSiderContentCalendarInterface {
     isFetching: boolean;
     isInitialized: boolean;
     err: any;
