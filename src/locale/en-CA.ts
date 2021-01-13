@@ -171,6 +171,15 @@ const CONSTANTS = {
             TITLE: 'Home',
             DESCRIPTION: 'Home Page',
         },
+        LEAGUE_HOME: {
+            TITLE: 'League Home',
+            DESCRIPTION: 'League Home Page',
+            STATS: {
+                WINS: 'Wins',
+                WIN_PERCENTAGE: 'Win Percentage',
+                WINNINGS: 'Winnings',
+            },
+        },
         CONTEST: {
             TITLE: 'Contest',
             DESCRIPTION: 'League Info',

@@ -34,6 +34,8 @@ import {
     ContestUpdatePageSaga,
     leagueHomePage,
     LeagueHomePageSaga,
+    LeagueHomePageContentMemberStatsSaga,
+    LeagueHomePageSiderContentCalendarSaga,
     leaguePage,
     LeaguePageSaga,
     memberPage,
@@ -47,7 +49,6 @@ import {
     memberSettingsPage,
     MemberSettingsPageSaga,
     MemberSettingsPageContentMemberSaga,
-    LeagueHomePageSiderContentCalendarSaga,
 } from '@pages';
 import { default as BaseSaga } from '@apps/LeagueApp/saga';
 import {
@@ -140,6 +141,7 @@ function configStore(options?: { preloadedState: any }): any {
             fork(ContestUpdatePageSaga),
             fork(ContestUpdatePageContentContestSaga),
             fork(LeagueHomePageSaga),
+            fork(LeagueHomePageContentMemberStatsSaga),
             fork(LeagueHomePageSiderContentCalendarSaga),
             fork(LeaguePageSaga),
             fork(MemberPageSaga),

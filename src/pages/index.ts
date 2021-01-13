@@ -69,6 +69,7 @@ export {
     default as LeagueHome,
     reducer as leagueHomePage,
     LeagueHomePageSaga,
+    LeagueHomePageContentMemberStatsSaga,
     LeagueHomePageSiderContentCalendarSaga,
     LeagueHomePageRoutes,
 } from './LeagueHome';

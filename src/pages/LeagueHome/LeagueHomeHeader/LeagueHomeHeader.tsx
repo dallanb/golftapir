@@ -5,6 +5,7 @@ import { ContentLayoutHeader } from '@layouts';
 import CONSTANTS from '@locale/en-CA';
 import {
     selectLeague,
+    selectLeagueAvatarSrc,
     selectLeagueName,
     selectLeagueUUID,
 } from '@apps/LeagueApp/selector';
@@ -15,6 +16,10 @@ import constantRoutes from '@constants/routes';
 const LeagueHomeHeader: React.FunctionComponent<LeagueHomeHeaderProps> = () => {
     const title = useSelector(selectLeagueName);
     const subTitle = CONSTANTS.PAGES.LEAGUE.DESCRIPTION;
+    const avatar = {
+        src: useSelector(selectLeagueAvatarSrc),
+        name: useSelector(selectLeagueName),
+    };
     const extra = (
         <Breadcrumb
             route={constantRoutes.ROUTES.HOME.ROUTE}
@@ -31,7 +36,12 @@ const LeagueHomeHeader: React.FunctionComponent<LeagueHomeHeaderProps> = () => {
         />
     );
     return (
-        <ContentLayoutHeader title={title} subTitle={subTitle} extra={extra} />
+        <ContentLayoutHeader
+            title={title}
+            subTitle={subTitle}
+            avatar={{ ...avatar, shape: 'square', size: 64 }}
+            extra={extra}
+        />
     );
 };
 

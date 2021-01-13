@@ -27,7 +27,7 @@ function* init() {
         if (!ClientProxy.accessToken) yield call(refresh);
 
         const { data: me } = yield call(fetchMyMemberUser, {
-            include: 'avatar',
+            include: 'avatar,stat',
         });
 
         // see if i can make a 'me' api call for the socket api
