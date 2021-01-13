@@ -2,16 +2,14 @@ import React from 'react';
 import { ContentLayoutContent } from '@layouts';
 import { LeagueHomeContentProps } from './types';
 import MemberStats from './MemberStats';
-import ComponentContent from '@layouts/ComponentContent';
+import MemberStandings from './MemberStandings';
 
 const LeagueHomeContent: React.FunctionComponent<LeagueHomeContentProps> = ({}) => {
     return (
         <ContentLayoutContent>
             <>
                 <MemberStats />
-                <ComponentContent style={{ marginTop: '16px' }}>
-                    <div>YO</div>
-                </ComponentContent>
+                <MemberStandings />
             </>
         </ContentLayoutContent>
     );

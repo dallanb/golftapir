@@ -31,6 +31,13 @@ export default {
             data,
         });
     },
+    fetchMemberStandings(query: any = {}) {
+        return ClientProxy.get({
+            url: config.MEMBER_URL,
+            endpoint: `/members/standings`,
+            query,
+        });
+    },
     bulkFetchMembers(data: any, query: any = {}) {
         return ClientProxy.post({
             url: config.MEMBER_URL,

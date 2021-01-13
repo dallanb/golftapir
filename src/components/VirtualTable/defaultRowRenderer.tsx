@@ -1,5 +1,6 @@
 import React from 'react';
 import { RowRendererProps } from './types';
+import ContestLeaderboardTableScorecard from '@pages/Contest/ContestContent/ContestLeaderboard/ContestLeaderboardTable/ContestLeaderboardTableScorecard';
 
 const defaultRowRenderer: React.FunctionComponent<RowRendererProps> = ({
     props: { style, index, data },
@@ -8,15 +9,11 @@ const defaultRowRenderer: React.FunctionComponent<RowRendererProps> = ({
 }) => {
     const row = data[index];
     prepareRow(row);
+    const rowProps = row.getRowProps({ style });
     return (
-        <div
-            {...row.getRowProps({
-                style,
-            })}
-            className="tr"
-        >
-            {row.cells.map((cell: any) => {
-                return (
+        <div className="tr-group" {...rowProps}>
+            <div className="tr cell">
+                {row.cells.map((cell: any) => (
                     <div
                         {...cell.getCellProps({
                             className: cell.column.className
@@ -24,10 +21,10 @@ const defaultRowRenderer: React.FunctionComponent<RowRendererProps> = ({
                                 : 'td',
                         })}
                     >
-                        {cell.render('Cell')}
+                        {cell.render('Cell', { listRef })}
                     </div>
-                );
-            })}
+                ))}
+            </div>
         </div>
     );
 };

@@ -21,7 +21,9 @@ const MemberStats: React.FunctionComponent<MemberStatsProps> = () => {
     const winCount = _get(stat, ['win_count'], 0);
     const eventCount = _get(stat, ['event_count'], 0);
     const winningTotal = _get(stat, ['winning_total'], 0);
-    const winPercentage = winCount / eventCount || 'NA';
+    const winPercentage = isNaN(winCount / eventCount)
+        ? 'NA'
+        : (winCount / eventCount) * 100;
 
     useEffect(() => {
         dispatch(LeagueHomePageContentMemberStatsActions.init(leagueUUID));

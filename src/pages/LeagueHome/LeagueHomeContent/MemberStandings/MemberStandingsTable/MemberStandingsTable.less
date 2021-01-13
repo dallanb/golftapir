@@ -1,0 +1,29 @@
+@import 'src/assets/styles/statics';
+.table-wrap {
+  display: block;
+  max-width: 100%;
+
+  .member-standings-table-table {
+    border-radius: 4px;
+    overflow: hidden;
+    min-width: unset !important;
+
+    .member-standings-table-header {
+      font-weight: bold;
+      height: 50px;
+      //border-bottom: 1px solid @table-border;
+    }
+    .member-standings-table-body {
+      .tr {
+        &.cell {
+          height: 50px;
+          align-items: center;
+          //border-bottom: 1px solid @table-border;
+        }
+      }
+    }
+    .tr-group:nth-child(odd) .cell {
+      background: @tile-fill;
+    }
+  }
+}

@@ -1,16 +1,15 @@
 // @ts-ignore
 import { static as Immutable } from 'seamless-immutable';
 import { createReducer } from 'reduxsauce';
-import { ContestPageContentContestLeaderboardTypes } from './actions';
-import { ContestPageContentContestLeaderboardInterface } from './types';
+import { LeagueHomePageContentMemberStandingsTypes } from './actions';
+import { LeagueHomePageContentMemberStandingsInterface } from './types';
 
 /* ------------- Initial State ------------- */
-const INITIAL_STATE: ContestPageContentContestLeaderboardInterface = {
+const INITIAL_STATE: LeagueHomePageContentMemberStandingsInterface = {
     isInitialized: false,
     isRefreshing: false,
     err: undefined,
-    sheets: undefined,
-    rankingLookup: undefined,
+    members: undefined,
 };
 
 /* ------------- Reducers ------------- */
@@ -65,29 +64,22 @@ function set(state: any, { data }: any) {
     });
 }
 
-function setSheet(state = INITIAL_STATE, { sheet }: any) {
+function setMembers(state: any, { members }: any) {
     return Immutable.merge(state, {
-        sheets: { ...state.sheets, ...sheet },
-    });
-}
-
-function setRankingLookup(state = INITIAL_STATE, { rankingLookup }: any) {
-    return Immutable.merge(state, {
-        rankingLookup,
+        members,
     });
 }
 
 const HANDLERS = {
-    [ContestPageContentContestLeaderboardTypes.INIT]: init,
-    [ContestPageContentContestLeaderboardTypes.INIT_SUCCESS]: initSuccess,
-    [ContestPageContentContestLeaderboardTypes.INIT_FAILURE]: initFailure,
-    [ContestPageContentContestLeaderboardTypes.TERMINATE]: terminate,
-    [ContestPageContentContestLeaderboardTypes.REFRESH]: refresh,
-    [ContestPageContentContestLeaderboardTypes.REFRESH_SUCCESS]: refreshSuccess,
-    [ContestPageContentContestLeaderboardTypes.REFRESH_FAILURE]: refreshFailure,
-    [ContestPageContentContestLeaderboardTypes.SET]: set,
-    [ContestPageContentContestLeaderboardTypes.SET_SHEET]: setSheet,
-    [ContestPageContentContestLeaderboardTypes.SET_RANKING_LOOKUP]: setRankingLookup,
+    [LeagueHomePageContentMemberStandingsTypes.INIT]: init,
+    [LeagueHomePageContentMemberStandingsTypes.INIT_SUCCESS]: initSuccess,
+    [LeagueHomePageContentMemberStandingsTypes.INIT_FAILURE]: initFailure,
+    [LeagueHomePageContentMemberStandingsTypes.TERMINATE]: terminate,
+    [LeagueHomePageContentMemberStandingsTypes.REFRESH]: refresh,
+    [LeagueHomePageContentMemberStandingsTypes.REFRESH_SUCCESS]: refreshSuccess,
+    [LeagueHomePageContentMemberStandingsTypes.REFRESH_FAILURE]: refreshFailure,
+    [LeagueHomePageContentMemberStandingsTypes.SET]: set,
+    [LeagueHomePageContentMemberStandingsTypes.SET_MEMBERS]: setMembers,
 };
 
 export const reducer = createReducer(INITIAL_STATE, HANDLERS);
