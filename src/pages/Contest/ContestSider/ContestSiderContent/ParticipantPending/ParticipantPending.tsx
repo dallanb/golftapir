@@ -5,6 +5,7 @@ import { ParticipantPendingProps } from './types';
 import ContestPageActions from '@pages/Contest/actions';
 import { selectMyParticipant } from '@pages/Contest/selector';
 import constants from '@constants';
+import ComponentContent from '@layouts/ComponentContent';
 import './ParticipantPending.less';
 
 const ParticipantPending: React.FunctionComponent<ParticipantPendingProps> = () => {
@@ -29,7 +30,7 @@ const ParticipantPending: React.FunctionComponent<ParticipantPendingProps> = () 
     };
 
     return (
-        <div className="participant-pending">
+        <ComponentContent className="participant-pending">
             Please respond to the contest invitation below
             <div className="participant-pending-buttons">
                 <div className="participant-pending-buttons-button active">
@@ -48,7 +49,7 @@ const ParticipantPending: React.FunctionComponent<ParticipantPendingProps> = () 
                     </Button>
                 </div>
             </div>
-        </div>
+        </ComponentContent>
     );
 };
 

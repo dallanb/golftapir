@@ -82,6 +82,11 @@ const fieldRenderer = (
                         _get(options, ['prefixRenderer'], undefined) &&
                         options.prefixRenderer()
                     }
+                    className={_get(options, ['className'], undefined)}
+                    formatter={_get(options, ['formatter'], undefined)}
+                    parser={_get(options, ['parser'], undefined)}
+                    max={_get(options, ['max'], undefined)}
+                    min={_get(options, ['min'], undefined)}
                 />
             );
             break;

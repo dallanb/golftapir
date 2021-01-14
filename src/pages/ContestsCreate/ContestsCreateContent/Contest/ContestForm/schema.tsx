@@ -11,6 +11,7 @@ import {
     NestedInputWrapper,
 } from '@components';
 import {
+    contestBuyInParser,
     courseSearchSelectOptionRenderer,
     participantSearchSelectOptionRenderer,
 } from './utils';
@@ -87,6 +88,22 @@ export const fieldSchema = [
         ],
     },
     {
+        name: 'buy_in',
+        type: 'number',
+        wrapper: FloatLabelInputWrapper,
+        wrapperOptions: {
+            label: FORM.LABELS.BUY_IN,
+            className: 'contest-form-buy-in-input',
+        },
+        options: {
+            formatter: (value: string) =>
+                `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ','),
+            parser: contestBuyInParser,
+            min: 0,
+            className: 'contest-buy-in-input'
+        },
+    },
+    {
         name: 'location_uuid',
         type: 'search-select',
         wrapper: FloatLabelInputWrapper,
@@ -135,6 +152,7 @@ export const validationSchema = Yup.object({
     start_time: Yup.string()
         .required(FORM.VALIDATION.START_TIME_REQUIRED)
         .nullable(),
+    buy_in: Yup.string().required(FORM.VALIDATION.BUY_IN_REQUIRED),
     location_uuid: Yup.string().required(FORM.VALIDATION.COURSE_REQUIRED),
     participants: Yup.array(),
 });

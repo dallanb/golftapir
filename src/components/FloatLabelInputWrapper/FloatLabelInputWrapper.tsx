@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import classnames from 'classnames';
+import { isNil as _isNil } from 'lodash';
 import { FloatLabelInputWrapperProps } from './types';
 import './FloatLabelInputWrapper.less';
 import { Form } from 'antd';
@@ -16,11 +17,10 @@ const FloatLabelInputWrapper: React.FunctionComponent<FloatLabelInputWrapperProp
         className,
         ...restProps
     } = props;
-
     const [focus, setFocus] = useState(false);
     const cx = classnames('float-label-input-wrapper', className);
     const labelCx = classnames('label', {
-        'label-float': focus || (value && value.length !== 0),
+        'label-float': focus || (!_isNil(value) && value.length !== 0),
     });
     return (
         <div

@@ -1,5 +1,5 @@
 import { Select } from 'antd';
-import { keyBy as _keyBy, get as _get } from 'lodash';
+import { keyBy as _keyBy, get as _get, isNil as _isNil } from 'lodash';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { FormikProps, FormikValues } from 'formik';
@@ -46,4 +46,12 @@ export const participantSearchSelectOptionRenderer = (
             </Select.Option>
         )
     );
+};
+
+export const contestBuyInParser = (value: string) => {
+    if (value === '$') {
+        return 0;
+    } else {
+        return value.replace(/\$\s?|(,*)/g, '');
+    }
 };
