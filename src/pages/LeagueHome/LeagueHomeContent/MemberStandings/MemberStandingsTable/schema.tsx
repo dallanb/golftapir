@@ -16,7 +16,7 @@ const columnsSchema = [
         className: 'display-name',
     },
     {
-        Header: 'Events',
+        Header: 'Contests',
         accessor: 'stat.event_count',
         Cell: ({ value }: any) => value,
         className: 'event-count',

@@ -33,14 +33,26 @@ const MemberStats: React.FunctionComponent<MemberStatsProps> = () => {
     }, []);
 
     return (
-        <ComponentContent
-            showSpinner={!isInitialized}
-            className="member-stats-component-content"
-        >
-            <Wins value={winCount} />
-            <WinPercentage value={winPercentage} />
-            <Winnings value={winningTotal} />
-        </ComponentContent>
+        <div className="member-stats">
+            <ComponentContent
+                showSpinner={!isInitialized}
+                className="member-stats-wins"
+            >
+                <Wins value={winCount} />
+            </ComponentContent>
+            <ComponentContent
+                showSpinner={!isInitialized}
+                className="member-stats-win-percentage"
+            >
+                <WinPercentage value={winPercentage} />
+            </ComponentContent>
+            <ComponentContent
+                showSpinner={!isInitialized}
+                className="member-stats-winnings"
+            >
+                <Winnings value={winningTotal} />
+            </ComponentContent>
+        </div>
     );
 };
 

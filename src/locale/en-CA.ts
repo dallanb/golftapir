@@ -176,7 +176,7 @@ const CONSTANTS = {
             DESCRIPTION: 'League Home Page',
             STATS: {
                 WINS: 'Wins',
-                WIN_PERCENTAGE: 'Win Percentage',
+                WIN_PERCENTAGE: 'Win %',
                 WINNINGS: 'Winnings',
             },
         },

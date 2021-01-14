@@ -12,6 +12,7 @@ const WinPercentage: React.FunctionComponent<WinPercentageProps> = ({
             title={CONSTANTS.PAGES.LEAGUE_HOME.STATS.WIN_PERCENTAGE}
             value={value}
             suffix="%"
+            precision={0}
         />
     );
 };
