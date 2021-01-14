@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { Input, Upload, Select, InputNumber } from 'antd';
+import { Input, Upload, Select, InputNumber, Button } from 'antd';
 import { Moment } from 'moment';
 import { get as _get, debounce as _debounce } from 'lodash';
 import { antdFormatName, mapCountryOptions } from './utils';
@@ -11,6 +11,8 @@ import constants from '@constants';
 // @ts-ignore
 import Flags from 'country-flag-icons/react/3x2';
 import { FieldsRendererProps } from './types';
+import { Field, FieldArray } from 'formik';
+import { MinusCircleTwoTone, PlusCircleTwoTone } from '@ant-design/icons';
 
 const wrap = (Wrapper: any, field: any, options: any) => (
     <Wrapper key={options.name} {...options}>
@@ -40,6 +42,25 @@ const fieldRenderer = (
     const value = _get(formik, ['values', ...formattedName], null);
     const fieldRef = _get(options, ['ref'], undefined);
     const dispatch = useDispatch();
+
+    // wrapper props
+    const touched = _get(formik, ['touched', ...formattedName]);
+    const submitted = _get(formik, ['submitCount']) > 0;
+    const hasError = _get(formik, ['errors', ...formattedName]);
+    const live = submitted || touched;
+    const submittedError = hasError && submitted;
+    const touchedError = hasError && touched;
+    const help = live ? hasError || '' : '';
+    const wrapperProps = {
+        name: formattedName,
+        value,
+        formik,
+        hasFeedback: submittedError || touchedError,
+        help,
+        validateStatus: submittedError || touchedError ? 'error' : 'success',
+        childRef: fieldRef,
+        ...wrapperOptions,
+    };
     switch (type) {
         case 'input':
             field = (
@@ -64,6 +85,9 @@ const fieldRenderer = (
                     className={_get(options, ['className'], undefined)}
                 />
             );
+            if (wrapper) {
+                field = wrap(wrapper, field, wrapperProps);
+            }
             break;
         case 'number':
             field = (
@@ -71,7 +95,11 @@ const fieldRenderer = (
                     key={name}
                     name={name}
                     ref={fieldRef}
-                    onChange={(value) => formik.setFieldValue(name, value)}
+                    onChange={(value) => {
+                        value =
+                            typeof value === 'string' ? parseInt(value) : value;
+                        return formik.setFieldValue(name, value);
+                    }}
                     onBlur={(e) => {
                         formik.handleBlur(e);
                         formik.validateField(name);
@@ -89,6 +117,10 @@ const fieldRenderer = (
                     min={_get(options, ['min'], undefined)}
                 />
             );
+
+            if (wrapper) {
+                field = wrap(wrapper, field, wrapperProps);
+            }
             break;
         case 'password':
             field = (
@@ -111,6 +143,10 @@ const fieldRenderer = (
                     }
                 />
             );
+
+            if (wrapper) {
+                field = wrap(wrapper, field, wrapperProps);
+            }
             break;
         case 'search-select':
             //https://ant.design/components/select/#components-select-demo-select-users
@@ -134,6 +170,10 @@ const fieldRenderer = (
                     {options.optionRenderer(formik)}
                 </Select>
             );
+
+            if (wrapper) {
+                field = wrap(wrapper, field, wrapperProps);
+            }
             break;
         case 'upload':
             field = (
@@ -160,6 +200,10 @@ const fieldRenderer = (
                     />
                 </Upload>
             );
+
+            if (wrapper) {
+                field = wrap(wrapper, field, wrapperProps);
+            }
             break;
         case 'avatar':
             field = (
@@ -179,8 +223,10 @@ const fieldRenderer = (
                     className={_get(options, ['className'], '')}
                 />
             );
-            console.log(field);
-            console.log(value);
+
+            if (wrapper) {
+                field = wrap(wrapper, field, wrapperProps);
+            }
             break;
         case 'date-time-picker':
             field = (
@@ -207,6 +253,10 @@ const fieldRenderer = (
                     className={_get(options, ['className'], '')}
                 />
             );
+
+            if (wrapper) {
+                field = wrap(wrapper, field, wrapperProps);
+            }
             break;
         case 'country-select':
             field = (
@@ -236,37 +286,96 @@ const fieldRenderer = (
                     {mapCountryOptions()}
                 </Select>
             );
+
+            if (wrapper) {
+                field = wrap(wrapper, field, wrapperProps);
+            }
+            break;
+        case 'dynamic-input':
+            field = (
+                <FieldArray
+                    name={name}
+                    key={name}
+                    render={(arrayHelpers: any) => (
+                        <div
+                            className={_get(options, ['className'], undefined)}
+                        >
+                            {value.map((item: any, index: number) => (
+                                <Field
+                                    name={`${name}.${index}`}
+                                    key={`${name}.${index}`}
+                                >
+                                    {({ field, form, meta }: any) =>
+                                        fieldRenderer(formik, {
+                                            name: field.name,
+                                            type: _get(
+                                                options,
+                                                ['fieldType'],
+                                                undefined
+                                            ),
+                                            wrapper: _get(
+                                                options,
+                                                ['fieldWrapper'],
+                                                undefined
+                                            ),
+                                            options: _get(
+                                                options,
+                                                ['fieldOptions'],
+                                                undefined
+                                            ),
+                                            wrapperOptions: _get(
+                                                options,
+                                                ['fieldWrapperOptions'],
+                                                undefined
+                                            ),
+                                        })
+                                    }
+                                </Field>
+                            ))}
+                            {_get(
+                                options,
+                                ['buttonsRenderer'],
+                                (props: any) => null
+                            )({ value, formik, arrayHelpers })}
+                        </div>
+                    )}
+                />
+            );
             break;
         case 'flag':
             const Country = _get(Flags, [value], null);
             field = (
                 <Country className={_get(options, ['className'], undefined)} />
             );
+
+            if (wrapper) {
+                field = wrap(wrapper, field, wrapperProps);
+            }
             break;
         default:
             throw new Error('Invalid field type');
     }
 
-    if (wrapper) {
-        const touched = _get(formik, ['touched', ...formattedName]);
-        const submitted = _get(formik, ['submitCount']) > 0;
-        const hasError = _get(formik, ['errors', ...formattedName]);
-        const live = submitted || touched;
-        const submittedError = hasError && submitted;
-        const touchedError = hasError && touched;
-        const help = live ? hasError || '' : '';
-        field = wrap(wrapper, field, {
-            name: formattedName,
-            value,
-            formik,
-            hasFeedback: submittedError || touchedError,
-            help,
-            validateStatus:
-                submittedError || touchedError ? 'error' : 'success',
-            childRef: fieldRef,
-            ...wrapperOptions,
-        });
-    }
+    // if (wrapper) {
+    //     const touched = _get(formik, ['touched', ...formattedName]);
+    //     const submitted = _get(formik, ['submitCount']) > 0;
+    //     const hasError = _get(formik, ['errors', ...formattedName]);
+    //     const live = submitted || touched;
+    //     const submittedError = hasError && submitted;
+    //     const touchedError = hasError && touched;
+    //     const help = live ? hasError || '' : '';
+    //     field = wrap(wrapper, field, {
+    //         name: formattedName,
+    //         value,
+    //         formik,
+    //         hasFeedback: submittedError || touchedError,
+    //         help,
+    //         validateStatus:
+    //             submittedError || touchedError ? 'error' : 'success',
+    //         childRef: fieldRef,
+    //         ...wrapperOptions,
+    //     });
+    // }
 
     return field;
 };

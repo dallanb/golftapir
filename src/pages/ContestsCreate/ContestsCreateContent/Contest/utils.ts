@@ -10,6 +10,7 @@ export const prepareInitialValues = (contestData: {
         league_uuid: me.league_uuid,
         sport_uuid: config.GOLF_UUID,
         buy_in: 0,
+        payout: [100],
         participants: [me.uuid, ...members.map((member: any) => member.uuid)],
         permanent_participants: [me, ...members],
     };

@@ -1,9 +1,9 @@
-import { Ref } from 'react';
+import { ReactNode, Ref } from 'react';
 
 export interface FloatLabelInputWrapperProps {
     value: any;
     name: string;
-    label: string;
+    label: ReactNode;
     rules?: any;
     children: any;
     childRef: Ref<any>;

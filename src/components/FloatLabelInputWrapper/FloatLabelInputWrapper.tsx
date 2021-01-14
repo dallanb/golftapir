@@ -22,6 +22,7 @@ const FloatLabelInputWrapper: React.FunctionComponent<FloatLabelInputWrapperProp
     const labelCx = classnames('label', {
         'label-float': focus || (!_isNil(value) && value.length !== 0),
     });
+    const Label = typeof label === 'function' ? label({ name, value }) : label;
     return (
         <div
             className={cx}
@@ -32,7 +33,7 @@ const FloatLabelInputWrapper: React.FunctionComponent<FloatLabelInputWrapperProp
                 <Form.Item noStyle name={name}>
                     {children}
                 </Form.Item>
-                <label className={labelCx}>{label}</label>
+                <label className={labelCx}>{Label}</label>
             </Form.Item>
         </div>
     );

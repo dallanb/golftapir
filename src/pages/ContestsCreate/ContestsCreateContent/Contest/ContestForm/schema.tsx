@@ -1,6 +1,7 @@
 import React from 'react';
 import * as Yup from 'yup';
 import moment, { Moment } from 'moment';
+import { get as _get, isNil as _isNil } from 'lodash';
 import { CloudUploadOutlined } from '@ant-design/icons';
 import ContestsCreatePageContentContestSearchParticipantActions from './ContestFormSearch/Participant/actions';
 import ContestsCreatePageContentContestSearchCourseActions from './ContestFormSearch/Course/actions';
@@ -12,6 +13,9 @@ import {
 } from '@components';
 import {
     contestBuyInParser,
+    contestPayoutButtonsRenderer,
+    contestPayoutInParser,
+    contestPayoutLabelMaker,
     courseSearchSelectOptionRenderer,
     participantSearchSelectOptionRenderer,
 } from './utils';
@@ -88,22 +92,6 @@ export const fieldSchema = [
         ],
     },
     {
-        name: 'buy_in',
-        type: 'number',
-        wrapper: FloatLabelInputWrapper,
-        wrapperOptions: {
-            label: FORM.LABELS.BUY_IN,
-            className: 'contest-form-buy-in-input',
-        },
-        options: {
-            formatter: (value: string) =>
-                `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ','),
-            parser: contestBuyInParser,
-            min: 0,
-            className: 'contest-buy-in-input'
-        },
-    },
-    {
         name: 'location_uuid',
         type: 'search-select',
         wrapper: FloatLabelInputWrapper,
@@ -143,6 +131,43 @@ export const fieldSchema = [
             tagRenderer: searchSelectTagRenderer,
         },
     },
+    {
+        name: 'buy_in',
+        type: 'number',
+        wrapper: FloatLabelInputWrapper,
+        wrapperOptions: {
+            label: FORM.LABELS.BUY_IN,
+            className: 'contest-form-buy-in-input',
+        },
+        options: {
+            formatter: (value: string) =>
+                `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ','),
+            parser: contestBuyInParser,
+            min: 0,
+            className: 'contest-buy-in-input',
+        },
+    },
+    {
+        name: 'payout',
+        type: 'dynamic-input',
+        options: {
+            fieldWrapper: FloatLabelInputWrapper,
+            fieldWrapperOptions: {
+                label: contestPayoutLabelMaker,
+                className: 'contest-form-payout-input',
+            },
+            fieldType: 'number',
+            fieldOptions: {
+                formatter: (value: number) => `${value}%`,
+                parser: contestPayoutInParser,
+                max: 100,
+                min: 0,
+                className: 'contest-payout-input',
+            },
+            buttonsRenderer: contestPayoutButtonsRenderer,
+            className: 'contest-dynamic-payout-input',
+        },
+    },
 ];
 
 export const validationSchema = Yup.object({
@@ -152,7 +177,24 @@ export const validationSchema = Yup.object({
     start_time: Yup.string()
         .required(FORM.VALIDATION.START_TIME_REQUIRED)
         .nullable(),
-    buy_in: Yup.string().required(FORM.VALIDATION.BUY_IN_REQUIRED),
     location_uuid: Yup.string().required(FORM.VALIDATION.COURSE_REQUIRED),
     participants: Yup.array(),
+    buy_in: Yup.string().required(FORM.VALIDATION.BUY_IN_REQUIRED),
+    payout: Yup.array()
+        .required(FORM.VALIDATION.PAYOUT_REQUIRED)
+        .of(
+            Yup.number().test(
+                'payout-100',
+                FORM.VALIDATION.PAYOUT_100,
+                function () {
+                    const values = _get(this, ['parent']);
+                    if (!_isNil(values)) {
+                        return (
+                            values.reduce((a: any, b: any) => a + b, 0) === 100
+                        );
+                    }
+                    return false;
+                }
+            )
+        ),
 });

@@ -1,10 +1,13 @@
-import { Select } from 'antd';
+import { Button, Select } from 'antd';
 import { keyBy as _keyBy, get as _get, isNil as _isNil } from 'lodash';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { FormikProps, FormikValues } from 'formik';
 import { selectSearchData as selectParticipantSearchData } from './ContestFormSearch/Participant/selector';
 import { selectSearchData as selectCourseSearchData } from './ContestFormSearch/Course/selector';
+import CONSTANTS from '@locale/en-CA';
+import { ordinalSuffix } from '@utils';
+import { MinusCircleTwoTone, PlusCircleTwoTone } from '@ant-design/icons';
 
 export const courseSearchSelectOptionRenderer = (
     formik: FormikProps<FormikValues>
@@ -54,4 +57,47 @@ export const contestBuyInParser = (value: string) => {
     } else {
         return value.replace(/\$\s?|(,*)/g, '');
     }
+};
+
+export const contestPayoutInParser = (value: string) => {
+    console.log(value);
+    if (value === '%') {
+        return 0;
+    } else {
+        return value.replace('%', '');
+    }
+};
+
+export const contestPayoutLabelMaker = ({ name, value }: any) => {
+    const place = parseInt(name[1]) + 1;
+    return `${ordinalSuffix(place)} place ${
+        CONSTANTS.PAGES.CONTESTS_CREATE.FORM.LABELS.PAYOUT
+    }`;
+};
+
+export const contestPayoutButtonsRenderer = ({
+    value,
+    formik,
+    arrayHelpers,
+}: any) => {
+    console.log(formik);
+    const participants = _get(formik, ['values', 'participants'], []);
+    return (
+        <div className="contest-form-payout-dynamic-input-buttons">
+            <Button
+                disabled={value.length === 1}
+                onClick={() => arrayHelpers.remove(value.length - 1)}
+                type="text"
+                icon={<MinusCircleTwoTone />}
+                style={{ height: '24px', width: '24px' }}
+            />
+            <Button
+                disabled={participants.length <= value.length}
+                onClick={() => arrayHelpers.insert(value.length, 0)}
+                type="text"
+                icon={<PlusCircleTwoTone />}
+                style={{ height: '24px', width: '24px' }}
+            />
+        </div>
+    );
 };
