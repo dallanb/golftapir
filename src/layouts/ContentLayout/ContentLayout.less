@@ -5,20 +5,16 @@
         .content-layout-header > div {
             background: white;
         }
-        .content-layout-content {
-            .component-content-content {
-                background: white;
-            }
+        .content-layout-content > div {
+            background: white;
         }
     }
     .sider-layout-background {
         .sider-layout-header > div {
             background: white;
         }
-        .sider-layout-content {
-            .component-content-content {
-                background: white;
-            }
+        .sider-layout-content > div {
+            background: white;
         }
     }
 
@@ -45,16 +41,10 @@
 
     // nice soft shadow boxies
     .content-layout-header,
-    .sider-layout-header {
-        > div {
-            padding: 16px;
-            border-radius: 4px;
-            box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.1);
-        }
-    }
     .content-layout-content,
+    .sider-layout-header,
     .sider-layout-content {
-        .component-content-content {
+        > div {
             padding: 16px;
             border-radius: 4px;
             box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.1);

@@ -22,6 +22,8 @@ const ContestForm: React.FunctionComponent<ContestFormProps> = () => {
             'avatar',
             'start_time',
             'participants',
+            'buy_in',
+            'payout',
         ]);
         dispatch(ContestsCreatePageContentContestActions.submit(contest));
     };

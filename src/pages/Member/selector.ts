@@ -4,6 +4,7 @@ import { withS3URL } from '@utils';
 import constants from '@constants';
 
 const getMemberPage = (state: any) => state.memberPage.data;
+const getBase = (state: any) => state.base;
 
 export const selectData = createSelector(
     [getMemberPage],
@@ -26,4 +27,11 @@ export const selectMemberAvatarSrc = createSelector(
             filename && withS3URL(filename, constants.S3_FOLDERS.MEMBER.AVATAR)
         );
     }
+);
+
+export const selectIsMe = createSelector(
+    [getMemberPage, getBase],
+    (memberPage, base) =>
+        _get(memberPage, ['member', 'uuid'], undefined) ===
+        _get(base, ['me', 'uuid'], undefined)
 );

@@ -4,8 +4,8 @@ import MemberResultsList from './MemberResultsList';
 import { MemberResultsProps } from './types';
 import MemberPageContentMemberResultsActions from './actions';
 import { selectData } from './selector';
-import './MemberResults.less';
 import ComponentContent from '@layouts/ComponentContent';
+import './MemberResults.less';
 
 const MemberResults: React.FunctionComponent<MemberResultsProps> = ({}) => {
     const dispatch = useDispatch();

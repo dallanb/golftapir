@@ -1,29 +1,29 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { get as _get } from 'lodash';
-import { CompetitorActionsProps } from './types';
-import { selectData, selectIsMe } from '@pages/Competitor/selector';
+import { MemberActionsProps } from './types';
+import { selectData, selectIsMe } from '@pages/Member/selector';
 import { memoizedGenerateActions } from './utils';
-import { memoizedCompetitorActionRenderer } from './competitorActionRenderer';
+import { memoizedMemberActionRenderer } from './memberActionRenderer';
 import ComponentContent from '@layouts/ComponentContent';
-import './CompetitorActions.less';
+import './MemberActions.less';
 
-const CompetitorActions: React.FunctionComponent<CompetitorActionsProps> = () => {
+const MemberActions: React.FunctionComponent<MemberActionsProps> = () => {
     const isMe = useSelector(selectIsMe);
     const { member } = useSelector(selectData);
     const uuid = _get(member, ['uuid'], null);
     const actions = memoizedGenerateActions(uuid);
 
-    const Actions = memoizedCompetitorActionRenderer({
+    const Actions = memoizedMemberActionRenderer({
         actions,
         isMe,
     });
     if (!Actions) return null;
     return (
-        <ComponentContent className="competitor-actions">
+        <ComponentContent className="member-actions">
             {Actions}
         </ComponentContent>
     );
 };
 
-export default CompetitorActions;
+export default MemberActions;
