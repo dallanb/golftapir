@@ -25,6 +25,8 @@ const ContestForm: React.FunctionComponent<ContestFormProps> = () => {
             'buy_in',
             'payout',
         ]);
+        // convert payout to proportions
+        contest.payout = contest.payout.map((payout: number) => payout / 100);
         dispatch(ContestsCreatePageContentContestActions.submit(contest));
     };
     return (
