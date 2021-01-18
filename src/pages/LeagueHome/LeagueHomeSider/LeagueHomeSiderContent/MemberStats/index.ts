@@ -5,4 +5,4 @@ export { default } from './MemberStats';
 export { reducer } from './reducer';
 
 // Saga
-export { default as LeagueHomePageContentMemberStatsSaga } from './saga';
+export { default as LeagueHomePageSiderContentMemberStatsSaga } from './saga';

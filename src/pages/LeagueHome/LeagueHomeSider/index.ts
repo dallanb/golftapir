@@ -9,4 +9,7 @@ export const reducer = combineReducers({
 });
 
 // Saga
-export { LeagueHomePageSiderContentCalendarSaga } from './LeagueHomeSiderContent';
+export {
+    LeagueHomePageSiderContentMemberStatsSaga,
+    LeagueHomePageSiderContentCalendarSaga,
+} from './LeagueHomeSiderContent';

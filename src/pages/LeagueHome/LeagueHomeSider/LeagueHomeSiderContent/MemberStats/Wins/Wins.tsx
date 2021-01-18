@@ -1,15 +1,16 @@
 import React from 'react';
-import { Statistic } from 'antd';
 import { WinsProps } from './types';
 import CONSTANTS from '@locale/en-CA';
 import './Wins.less';
 
 const Wins: React.FunctionComponent<WinsProps> = ({ value }) => {
     return (
-        <Statistic
-            title={CONSTANTS.PAGES.LEAGUE_HOME.STATS.WINS}
-            value={value}
-        />
+        <div className="wins">
+            <div className="wins-label">
+                {CONSTANTS.PAGES.LEAGUE_HOME.STATS.WINS}
+            </div>
+            <div className="wins-value">{value}</div>
+        </div>
     );
 };
 

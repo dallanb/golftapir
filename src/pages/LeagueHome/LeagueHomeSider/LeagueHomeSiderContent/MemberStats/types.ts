@@ -1,5 +1,5 @@
 export interface MemberStatsProps {}
-export interface LeagueHomePageContentMemberStatsInterface {
+export interface LeagueHomePageSiderContentMemberStatsInterface {
     isInitialized: boolean;
     err: any;
     stat?: any;

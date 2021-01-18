@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { get as _get } from 'lodash';
 import { MemberStatsProps } from './types';
-import LeagueHomePageContentMemberStatsActions from './actions';
+import LeagueHomePageSiderContentMemberStatsActions from './actions';
 import { selectData, selectStat } from './selector';
 import ComponentContent from '@layouts/ComponentContent';
 import Wins from './Wins';
@@ -26,14 +26,15 @@ const MemberStats: React.FunctionComponent<MemberStatsProps> = () => {
         : (winCount / eventCount) * 100;
 
     useEffect(() => {
-        dispatch(LeagueHomePageContentMemberStatsActions.init(leagueUUID));
+        dispatch(LeagueHomePageSiderContentMemberStatsActions.init(leagueUUID));
         return () => {
-            dispatch(LeagueHomePageContentMemberStatsActions.terminate());
+            dispatch(LeagueHomePageSiderContentMemberStatsActions.terminate());
         };
     }, []);
 
     return (
-        <div className="member-stats">
+        // <div className="member-stats">
+        <>
             <ComponentContent
                 showSpinner={!isInitialized}
                 className="member-stats-wins"
@@ -52,7 +53,7 @@ const MemberStats: React.FunctionComponent<MemberStatsProps> = () => {
             >
                 <Winnings value={winningTotal} />
             </ComponentContent>
-        </div>
+        </>
     );
 };
 

@@ -12,5 +12,5 @@ const { Types, Creators } = createActions(
         prefix: 'LEAGUE_HOME_PAGE_CONTENT_MEMBER_STATS_',
     }
 );
-export const LeagueHomePageContentMemberStatsTypes = Types;
+export const LeagueHomePageSiderContentMemberStatsTypes = Types;
 export default Creators;
