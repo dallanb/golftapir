@@ -49,9 +49,9 @@ const ContentLayout: React.FunctionComponent<ContentLayoutProps> = ({
                 {renderSider()}
             </Layout>
 
-            <Footer className="footer">
-                Tech Tapir ©2020 Created by Dallan Bhatti
-            </Footer>
+            {/*<Footer className="footer">*/}
+            {/*    Tech Tapir ©2021 Created by Dallan Bhatti*/}
+            {/*</Footer>*/}
         </Layout>
     );
 };

@@ -4,6 +4,7 @@ import { ContentLayoutContent } from '@layouts';
 import Contests from './Contests';
 import { ContestsContentProps } from './types';
 import { selectData } from '../selector';
+import './ContestsContent.less'
 
 const ContestsContent: React.FunctionComponent<ContestsContentProps> = ({}) => {
     const { isInitialized } = useSelector(selectData);
