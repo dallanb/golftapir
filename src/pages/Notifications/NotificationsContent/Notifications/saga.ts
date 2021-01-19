@@ -85,6 +85,7 @@ function* markNotificationAsUnread({ _id }: AnyAction) {
     }
 }
 
+// TODO:HAVE TO PLAY AROUND WITH METADATA A BIT AS WELL
 function* markNotificationAsArchived({ _id }: AnyAction) {
     try {
         const { notifications } = yield call(

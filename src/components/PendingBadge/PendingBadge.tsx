@@ -8,7 +8,7 @@ const PendingBadge: React.FunctionComponent<PendingBadgeProps> = ({
     icon: Icon,
 }) => {
     return (
-        <Badge dot={pending > 0}>
+        <Badge size={'small'} count={pending}>
             <Icon />
         </Badge>
     );
