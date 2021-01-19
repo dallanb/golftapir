@@ -43,14 +43,6 @@ export default [
         key: routes.ROUTES.COMPETITORS.KEY,
     },
     {
-        path: withAppRoute(routes.ROUTES.CONTESTS.ROUTE, {
-            app: constants.APPS.MEMBER_APP,
-        }),
-        name: routes.ROUTES.CONTESTS.LABEL,
-        icon: routes.ROUTES.CONTESTS.ICON,
-        key: routes.ROUTES.CONTESTS.KEY,
-    },
-    {
         path: withAppRoute(routes.ROUTES.LEAGUES.ROUTE, {
             app: constants.APPS.MEMBER_APP,
         }),

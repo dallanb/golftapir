@@ -6,7 +6,8 @@ import { HomeSiderContentProps } from './types';
 const HomeSiderContent: React.FunctionComponent<HomeSiderContentProps> = ({}) => {
     return (
         <SiderLayoutContent>
-            <Calendar />
+            <div />
+            {/*<Calendar/>*/}
         </SiderLayoutContent>
     );
 };

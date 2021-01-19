@@ -6,6 +6,7 @@ import { selectIsInitialized, selectIsRefreshing } from './selector';
 import LeagueHomePageContentMemberStandingsActions from './actions';
 import MemberStandingsTable from './MemberStandingsTable';
 import './MemberStandings.less';
+import CONSTANTS from '@locale/en-CA';
 
 const MemberStandings: React.FunctionComponent<MemberStandingsProps> = () => {
     const dispatch = useDispatch();
@@ -25,6 +26,7 @@ const MemberStandings: React.FunctionComponent<MemberStandingsProps> = () => {
         <ComponentContent
             className="member-standings"
             showSpinner={showSpinner}
+            title={CONSTANTS.PAGES.LEAGUE_HOME.STANDINGS}
         >
             <MemberStandingsTable />
         </ComponentContent>

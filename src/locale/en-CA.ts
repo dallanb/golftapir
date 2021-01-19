@@ -170,10 +170,12 @@ const CONSTANTS = {
         HOME: {
             TITLE: 'Home',
             DESCRIPTION: 'Home Page',
+            LEAGUES: 'Leagues List',
         },
         LEAGUE_HOME: {
             TITLE: 'League Home',
             DESCRIPTION: 'League Home Page',
+            STANDINGS: 'Member Standings',
             STATS: {
                 WINS: 'Wins',
                 WIN_PERCENTAGE: 'Win Percentage',
@@ -183,6 +185,7 @@ const CONSTANTS = {
         CONTEST: {
             TITLE: 'Contest',
             DESCRIPTION: 'League Info',
+            LEADERBOARD: 'Leaderboard',
             STEPS: {
                 PENDING: {
                     TITLE: 'Pending',
@@ -204,8 +207,8 @@ const CONSTANTS = {
         },
         CONTESTS: {
             TITLE: 'Contests',
-            DESCRIPTION: 'View League',
-            SEARCH: 'Search League',
+            DESCRIPTION: 'View Contests',
+            SEARCH: 'Search Contests',
         },
         NOTIFICATIONS: {
             TITLE: 'Notifications',

@@ -7,6 +7,7 @@ import ContestPageContentContestLeaderboardActions from './actions';
 import { selectIsInitialized, selectIsRefreshing } from './selector';
 import { selectIsRefreshing as selectIsBaseRefreshing } from '@pages/Contest/selector';
 import './ContestLeaderboard.less';
+import CONSTANTS from '@locale/en-CA';
 
 const ContestLeaderboard: React.FunctionComponent<ContestLeaderboardProps> = ({}) => {
     const dispatch = useDispatch();
@@ -37,6 +38,7 @@ const ContestLeaderboard: React.FunctionComponent<ContestLeaderboardProps> = ({}
         <ComponentContent
             showSpinner={showSpinner}
             className="contest-leaderboard"
+            title={CONSTANTS.PAGES.CONTEST.LEADERBOARD}
         >
             <ContestLeaderboardTable />
         </ComponentContent>
