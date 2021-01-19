@@ -1,0 +1,47 @@
+.member-info-form {
+    > form {
+        display: flex;
+        flex-wrap: wrap;
+        .member-info-form-avatar {
+            margin-bottom: 0;
+            margin-right: 24px;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px fade(@primary-color, 20%) dashed;
+        }
+        .member-info-form-input-group {
+            display: flex;
+            flex-wrap: wrap;
+            width: 80%;
+            .member-info-form-username-input {
+                width: 50%;
+                //padding-right: 8px;
+                .ant-form-item {
+                    margin-bottom: 0;
+                }
+            }
+            .member-info-form-email-input {
+                width: 50%;
+                .ant-form-item {
+                    margin-bottom: 0;
+                }
+            }
+            .member-info-form-display-name-input {
+                width: 50%;
+                .ant-form-item {
+                    margin-bottom: 0;
+                }
+            }
+            .member-info-form-country-input {
+                width: 50%;
+                .ant-form-item {
+                    width: 36px;
+                    margin-bottom: 0;
+                    svg {
+                        padding: 20px 12px 4px 13px !important;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -3,7 +3,7 @@ import { static as Immutable } from 'seamless-immutable';
 import { createReducer } from 'reduxsauce';
 import { LeagueHomePageSiderContentCalendarTypes } from './actions';
 import { LeagueHomePageSiderContentCalendarInterface } from './types';
-import { generateContestHash } from '@pages/Home/HomeSider/HomeSiderContent/Calendar/utils';
+import { generateContestHash } from './utils';
 
 /* ------------- Initial State ------------- */
 const INITIAL_STATE: LeagueHomePageSiderContentCalendarInterface = {

@@ -171,6 +171,7 @@ const CONSTANTS = {
             TITLE: 'Home',
             DESCRIPTION: 'Home Page',
             LEAGUES: 'Leagues List',
+            MEMBER: 'Player Card',
         },
         LEAGUE_HOME: {
             TITLE: 'League Home',

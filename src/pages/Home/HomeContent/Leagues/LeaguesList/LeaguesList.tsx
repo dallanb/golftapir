@@ -17,7 +17,10 @@ const LeaguesList: React.FunctionComponent<LeaguesListProps> = ({
     const tableDimensions = {
         size: 100,
         width: '100%',
-        height: getRefHeight(containerRef, 200) - 32,
+        height: Math.min(
+            data.length * 100,
+            getRefHeight(containerRef, 200) - 32
+        ),
     };
 
     const loadMore = (start: number, stop: number) => null;
