@@ -12,24 +12,34 @@ import './NotificationsListTile.less';
 const NotificationsListTile: React.FunctionComponent<NotificationsListTileProps> = ({
     props: { index, style, data },
     onClick,
-    actions
+    actions,
 }) => {
     const isEven = index % 2;
     const item = _get(data, [index], undefined);
     const name = _get(item, ['topic'], 'Loading...');
+    const message = _get(item, ['message'], 'Loading...');
     const date = _get(item, ['ctime'], undefined);
+    const read = _get(item, ['read'], true);
     const src = item && getAvatarSrc(item);
 
-    const renderMessage = memoize((item) => {
-        const content = _get(item, ['message'], 'Loading...');
-        const read = _get(item, ['read'], true);
-        const className = classnames({ unread: !read });
-        return <div className={className}>{content}</div>;
-    });
-
+    const cx = classnames({ unread: !read });
     const cardCx = classnames('notifications-list-tile-card', {
         filled: !isEven,
     });
+
+    const markAsRead = (_id: string) => {
+        actions.markAsRead(_id);
+    };
+
+    const markAsUnread = (_id: string) => {
+        actions.markAsUnread(_id);
+    };
+
+    const markAsArchived = (_id: string) => {
+        actions.markAsArchived(_id);
+    };
+    console.log(read);
+    console.log(message);
 
     return (
         <div style={style} key={index} className="notifications-list-tile-view">
@@ -49,7 +59,7 @@ const NotificationsListTile: React.FunctionComponent<NotificationsListTileProps>
                         </div>
                         <div className="notifications-list-tile-content-info">
                             <div className="notifications-list-tile-content-message">
-                                {renderMessage(item)}
+                                <div className={cx}>{message}</div>
                             </div>
                             <div className="notifications-list-tile-content-date">
                                 {formatTimeString(date)}
@@ -57,7 +67,12 @@ const NotificationsListTile: React.FunctionComponent<NotificationsListTileProps>
                         </div>
                     </div>
                     <div className="notifications-list-tile-content-side">
-                        <TileActions item={item} actions={actions} />
+                        <TileActions
+                            item={item}
+                            markAsRead={markAsRead}
+                            markAsUnread={markAsUnread}
+                            markAsArchived={markAsArchived}
+                        />
                     </div>
                 </div>
             </Card>

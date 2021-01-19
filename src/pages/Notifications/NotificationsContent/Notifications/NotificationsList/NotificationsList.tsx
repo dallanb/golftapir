@@ -63,17 +63,21 @@ const NotificationsList: React.FunctionComponent<NotificationsListProps> = ({
     const actions = {
         markAsRead: (_id: string) =>
             dispatch(
-                NotificationActions.updateNotification(_id, { read: true })
+                NotificationsPageContentNotificationsActions.markNotificationAsRead(
+                    _id
+                )
             ),
         markAsUnread: (_id: string) =>
             dispatch(
-                NotificationActions.updateNotification(_id, { read: false })
+                NotificationsPageContentNotificationsActions.markNotificationAsUnread(
+                    _id
+                )
             ),
         markAsArchived: (_id: string) =>
             dispatch(
-                NotificationActions.updateNotification(_id, {
-                    archived: true,
-                })
+                NotificationsPageContentNotificationsActions.markNotificationAsArchived(
+                    _id
+                )
             ),
     };
 

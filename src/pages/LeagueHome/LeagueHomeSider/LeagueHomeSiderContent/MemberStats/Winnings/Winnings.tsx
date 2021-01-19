@@ -1,7 +1,6 @@
 import React from 'react';
 import { WinningsProps } from './types';
 import './Winnings.less';
-import { formatTimeStamp } from '@pages/Contest/utils';
 import CONSTANTS from '@locale/en-CA';
 
 const Winnings: React.FunctionComponent<WinningsProps> = ({ value }) => {

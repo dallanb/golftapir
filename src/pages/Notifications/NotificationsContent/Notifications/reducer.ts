@@ -3,6 +3,7 @@ import { static as Immutable } from 'seamless-immutable';
 import { createReducer } from 'reduxsauce';
 import { NotificationsPageContentNotificationsTypes } from './actions';
 import { NotificationsPageContentNotificationsInterface } from './types';
+import { insert, remove } from '@utils';
 
 /* ------------- Initial State ------------- */
 const INITIAL_STATE: NotificationsPageContentNotificationsInterface = {
@@ -72,6 +73,24 @@ function fetchDataFailure(state: any, { err }: any) {
     });
 }
 
+function markNotificationAsReadSuccess(state: any, { _id, item }: any) {
+    return Immutable.merge(state, {
+        data: insert(state.data, { _id }, item),
+    });
+}
+
+function markNotificationAsUnreadSuccess(state: any, { _id, item }: any) {
+    return Immutable.merge(state, {
+        data: insert(state.data, { _id }, item),
+    });
+}
+
+function markNotificationAsArchivedSuccess(state: any, { _id, item }: any) {
+    return Immutable.merge(state, {
+        data: remove(state.data, { _id }),
+    });
+}
+
 const HANDLERS = {
     [NotificationsPageContentNotificationsTypes.INIT]: init,
     [NotificationsPageContentNotificationsTypes.INIT_SUCCESS]: initSuccess,
@@ -81,6 +100,15 @@ const HANDLERS = {
     [NotificationsPageContentNotificationsTypes.FETCH_DATA]: fetchData,
     [NotificationsPageContentNotificationsTypes.FETCH_DATA_SUCCESS]: fetchDataSuccess,
     [NotificationsPageContentNotificationsTypes.FETCH_DATA_FAILURE]: fetchDataFailure,
+    // [NotificationsPageContentNotificationsTypes.MARK_NOTIFICATION_AS_READ]: markNotificationAsRead,
+    [NotificationsPageContentNotificationsTypes.MARK_NOTIFICATION_AS_READ_SUCCESS]: markNotificationAsReadSuccess,
+    // [NotificationsPageContentNotificationsTypes.MARK_NOTIFICATION_AS_READ_FAILURE]: markNotificationAsReadFailure,
+    // [NotificationsPageContentNotificationsTypes.MARK_NOTIFICATION_AS_UNREAD]: markNotificationAsUnread,
+    [NotificationsPageContentNotificationsTypes.MARK_NOTIFICATION_AS_UNREAD_SUCCESS]: markNotificationAsUnreadSuccess,
+    // [NotificationsPageContentNotificationsTypes.MARK_NOTIFICATION_AS_UNREAD_FAILURE]: markNotificationAsUnreadFailure,
+    // [NotificationsPageContentNotificationsTypes.MARK_NOTIFICATION_AS_ARCHIVED]: markNotificationAsArchived,
+    [NotificationsPageContentNotificationsTypes.MARK_NOTIFICATION_AS_ARCHIVED_SUCCESS]: markNotificationAsArchivedSuccess,
+    // [NotificationsPageContentNotificationsTypes.MARK_NOTIFICATION_AS_ARCHIVED_FAILURE]: markNotificationAsArchivedFailure,
 };
 
 export const reducer = createReducer(INITIAL_STATE, HANDLERS);

@@ -10,7 +10,9 @@ import { TileActionsProps } from './types';
 
 const TileActions: React.FunctionComponent<TileActionsProps> = ({
     item,
-    actions,
+    markAsRead,
+    markAsUnread,
+    markAsArchived,
 }) => {
     const isRead = _get(item, ['read'], true);
     const _id = _get(item, ['_id'], undefined);
@@ -21,16 +23,14 @@ const TileActions: React.FunctionComponent<TileActionsProps> = ({
                 icon={isRead ? <EyeInvisibleTwoTone /> : <EyeTwoTone />}
                 className="tile-action read"
                 disabled={!_id}
-                onClick={() =>
-                    isRead ? actions.markAsUnread(_id) : actions.markAsRead(_id)
-                }
+                onClick={() => (isRead ? markAsUnread(_id) : markAsRead(_id))}
             />
             <Button
                 type="text"
                 icon={<DeleteTwoTone />}
                 className="tile-action delete"
                 disabled={!_id}
-                onClick={() => actions.markAsArchived(_id)}
+                onClick={() => markAsArchived(_id)}
             />
         </div>
     );
