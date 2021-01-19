@@ -22,7 +22,7 @@ const NotificationsList: React.FunctionComponent<NotificationsListProps> = ({
     const metadata = useSelector(selectListMetadata);
     const isFetching = useSelector(selectListIsFetching);
     const tableDimensions = {
-        size: 100,
+        size: 75,
         width: '100%',
         height: getRefHeight(containerRef, 200) - 32,
     };
@@ -47,11 +47,17 @@ const NotificationsList: React.FunctionComponent<NotificationsListProps> = ({
     };
 
     const tileOnClick = (item: any) => {
-        const { route, state } = topicToRouteMapper(item.topic, item.key, item);
-        history.push(route, state);
-        dispatch(
-            NotificationActions.updateNotification(item._id, { read: true })
-        ); // TODO: Should this be moved to a local call?
+        if (item) {
+            const { route, state } = topicToRouteMapper(
+                item.topic,
+                item.key,
+                item
+            );
+            history.push(route, state);
+            dispatch(
+                NotificationActions.updateNotification(item._id, { read: true })
+            );
+        }
     };
 
     return (

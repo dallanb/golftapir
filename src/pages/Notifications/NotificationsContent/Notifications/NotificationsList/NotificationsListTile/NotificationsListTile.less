@@ -1,31 +1,52 @@
 @import 'src/assets/styles/statics';
 
 .notifications-list-tile-view {
-    padding: 5px 0;
+    margin: 5px 0;
 
     .notifications-list-tile-card {
         display: flex;
-        cursor: pointer;
         height: 100%;
 
         &.filled {
             background: @tile-fill;
         }
 
-        display: flex;
+        .ant-card-body {
+            width: 100%;
+            padding: 12px 24px;
+        }
+
         .notifications-list-tile-content {
             display: flex;
-            padding-bottom: 10px;
-            .notifications-list-tile-content-avatar {
-                margin-right: 10px;
-                .ant-avatar-square {
-                    border-radius: 4px;
+            align-items: center;
+            height: 100%;
+            .notifications-list-tile-content-main {
+                display: flex;
+                width: 90%;
+                cursor: pointer;
+                .notifications-list-tile-content-avatar {
+                    margin-right: 10px;
+                    .ant-avatar-square {
+                        border-radius: 4px;
+                        border: 1px fade(@primary-color, 10%) solid;
+                    }
+                }
+                .notifications-list-tile-content-info {
+                    .notifications-list-tile-content-message {
+                        .unread {
+                            font-weight: bold;
+                        }
+                    }
+                    .notifications-list-tile-content-date {
+                        color: fade(@primary-color, 50%);
+                        font-size: 12px;
+                    }
                 }
             }
-            .notifications-list-tile-content-message {
-                .unread {
-                    font-weight: bold;
-                }
+            .notifications-list-tile-content-side {
+                display: flex;
+                justify-content: flex-end;
+                width: 10%;
             }
         }
         .notifications-list-tile-button {
