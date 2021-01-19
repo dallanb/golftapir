@@ -60,6 +60,23 @@ const NotificationsList: React.FunctionComponent<NotificationsListProps> = ({
         }
     };
 
+    const actions = {
+        markAsRead: (_id: string) =>
+            dispatch(
+                NotificationActions.updateNotification(_id, { read: true })
+            ),
+        markAsUnread: (_id: string) =>
+            dispatch(
+                NotificationActions.updateNotification(_id, { read: false })
+            ),
+        markAsArchived: (_id: string) =>
+            dispatch(
+                NotificationActions.updateNotification(_id, {
+                    archived: true,
+                })
+            ),
+    };
+
     return (
         <FixedSizeList
             {...tableDimensions}
@@ -69,7 +86,7 @@ const NotificationsList: React.FunctionComponent<NotificationsListProps> = ({
             isNextPageLoading={isFetching}
             minimumBatchSize={10}
             rowRenderer={(props) =>
-                NotificationsListTile({ props, onClick: tileOnClick })
+                NotificationsListTile({ props, onClick: tileOnClick, actions })
             }
         />
     );

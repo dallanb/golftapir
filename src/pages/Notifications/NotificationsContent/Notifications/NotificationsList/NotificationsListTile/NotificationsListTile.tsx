@@ -12,6 +12,7 @@ import './NotificationsListTile.less';
 const NotificationsListTile: React.FunctionComponent<NotificationsListTileProps> = ({
     props: { index, style, data },
     onClick,
+    actions
 }) => {
     const isEven = index % 2;
     const item = _get(data, [index], undefined);
@@ -56,7 +57,7 @@ const NotificationsListTile: React.FunctionComponent<NotificationsListTileProps>
                         </div>
                     </div>
                     <div className="notifications-list-tile-content-side">
-                        <TileActions item={item} />
+                        <TileActions item={item} actions={actions} />
                     </div>
                 </div>
             </Card>

@@ -1,3 +1,4 @@
 export interface TileActionsProps {
-    item: any
+    item: any;
+    actions: any;
 }
