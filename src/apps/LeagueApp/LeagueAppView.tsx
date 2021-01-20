@@ -10,7 +10,7 @@ import {
     LeagueAppViewProps,
     LeagueAppViewState,
 } from './types';
-import {AppLoading, ProtectedRoute} from '@components';
+import { AppLoading, ProtectedRoute } from '@components';
 import { routes, protectedRoutes } from './routes';
 import constants from '@constants';
 import constantRoutes from '@constants/routes';
@@ -65,9 +65,10 @@ class LeagueAppView extends React.Component<
         terminate();
     }
 
-    componentWillUpdate(prevProps: LeagueAppViewProps) {
+    componentDidUpdate(prevProps: LeagueAppViewProps) {
         const { leagueUUID: prevLeagueUUID } = prevProps;
-        const { isReady, leagueUUID, refresh } = this.props;
+        const { isReady, refresh, match } = this.props;
+        const leagueUUID = _get(match, ['params', 'league_uuid'], null);
         if (isReady && prevLeagueUUID !== leagueUUID) {
             refresh(leagueUUID);
         }
