@@ -18,7 +18,7 @@ const MemberResultsList: React.FunctionComponent<MemberResultsListProps> = ({
     const tableDimensions = {
         size: 100,
         width: '100%',
-        height: getRefHeight(containerRef, 200) - 32,
+        height: getRefHeight(containerRef, 200) - 80,
     };
 
     return (

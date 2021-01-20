@@ -6,6 +6,7 @@ import MemberPageContentMemberInfoActions from './actions';
 import { selectData } from './selector';
 import ComponentContent from '@layouts/ComponentContent';
 import './MemberInfo.less';
+import CONSTANTS from '@locale/en-CA';
 
 const MemberInfo: React.FunctionComponent<MemberInfoProps> = () => {
     const dispatch = useDispatch();
@@ -24,6 +25,7 @@ const MemberInfo: React.FunctionComponent<MemberInfoProps> = () => {
             componentRef={ref}
             showSpinner={!isInitialized}
             className="member-info"
+            title={CONSTANTS.PAGES.MEMBER.TABS.INFO}
         >
             <MemberInfoForm />
         </ComponentContent>

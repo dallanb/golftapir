@@ -20,7 +20,6 @@ const Avatar: React.FunctionComponent<AvatarProps> = ({
               ...style,
           };
     const child = localSrc ? '' : getInitials(name);
-    console.log(child);
 
     const onError = () => {
         setLocalSrc(undefined);

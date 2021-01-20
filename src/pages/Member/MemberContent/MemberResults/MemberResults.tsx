@@ -6,6 +6,7 @@ import MemberPageContentMemberResultsActions from './actions';
 import { selectData } from './selector';
 import ComponentContent from '@layouts/ComponentContent';
 import './MemberResults.less';
+import CONSTANTS from '@locale/en-CA';
 
 const MemberResults: React.FunctionComponent<MemberResultsProps> = ({}) => {
     const dispatch = useDispatch();
@@ -25,6 +26,7 @@ const MemberResults: React.FunctionComponent<MemberResultsProps> = ({}) => {
             componentRef={ref}
             showSpinner={!isInitialized}
             className="member-results"
+            title={CONSTANTS.PAGES.MEMBER.TABS.RECENT}
         >
             <MemberResultsList containerRef={ref} />
         </ComponentContent>

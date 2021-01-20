@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import routes from '@constants/routes';
 import { selectContest, selectMembersHash } from '@pages/Contest/selector';
 import { ContestParticipantsTableParticipantProps } from './types';
@@ -14,6 +14,7 @@ const ContestLeaderboardTableParticipant: React.FunctionComponent<ContestPartici
     uuid,
 }) => {
     const history = useHistory();
+    const params = useParams();
     const { name, s3_filename, member, tags } = prepareParticipant(
         uuid,
         useSelector(selectContest),
@@ -25,9 +26,8 @@ const ContestLeaderboardTableParticipant: React.FunctionComponent<ContestPartici
             className="contest-leaderboard-table-participant"
             onClick={() =>
                 history.push(
-                    withAppRoute(routes.ROUTES.COMPETITOR.ROUTE, {
-                        app: constants.APPS.MEMBER_APP,
-                        routeProps: { competitor_uuid: uuid },
+                    withAppRoute(routes.ROUTES.MEMBER.ROUTE, {
+                        routeProps: { ...params, member_uuid: uuid },
                     }),
                     member
                 )
