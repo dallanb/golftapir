@@ -3,6 +3,7 @@ import ContestLeaderboardTableCountry from './ContestLeaderboardTableCountry';
 import ContestLeaderboardTableParticipant from './ContestLeaderboardTableParticipant';
 import ContestLeaderboardTableToggle from './ContestLeaderboardTableToggle';
 import ContestLeaderboardTablePosition from './ContestLeaderboardTablePosition';
+import { sortType } from '../utils';
 
 const columnsSchema = [
     {
@@ -29,6 +30,7 @@ const columnsSchema = [
         Cell: ({ row }: any) => <ContestLeaderboardTablePosition row={row} />,
         SubCell: () => null,
         className: 'pos',
+        sortType,
     },
     {
         Header: 'Country',
@@ -38,6 +40,7 @@ const columnsSchema = [
             <ContestLeaderboardTableCountry uuid={value} />
         ),
         className: 'country',
+        disableSortBy: true,
     },
     {
         Header: 'Member',
@@ -46,18 +49,21 @@ const columnsSchema = [
             <ContestLeaderboardTableParticipant uuid={value} />
         ),
         className: 'participant',
+        disableSortBy: true,
     },
     {
         Header: 'Score',
         accessor: 'score',
         Cell: ({ value }: any) => value,
         className: 'score',
+        sortType,
     },
     {
         Header: 'Strokes',
         accessor: 'strokes',
         Cell: ({ value }: any) => value,
         className: 'strokes',
+        sortType,
     },
 ];
 

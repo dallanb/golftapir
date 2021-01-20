@@ -3,7 +3,10 @@ import {
     countBy as _countBy,
     cloneDeep as _cloneDeep,
     get as _get,
+    isNil as _isNil,
 } from 'lodash';
+import { Row } from 'react-table';
+import memoize from 'memoize-one';
 
 export const initLookup = (sheets: any[]) => {
     const scores = sheets.reduce(
@@ -191,3 +194,18 @@ const _calculateTrend = (new_score: number, old_score: number) => {
         return 'sideway';
     }
 };
+
+//  Always have null or undefined rows at the bottom
+export const sortType = memoize(
+    (rowA: Row, rowB: Row, columnId: string, desc: boolean) => {
+        const valA = _get(rowA, ['values', columnId], undefined);
+        const valB = _get(rowB, ['values', columnId], undefined);
+        if (_isNil(valA)) {
+            return desc ? -1 : 1;
+        }
+        if (_isNil(valB)) {
+            return desc ? 1 : -1;
+        }
+        return valA > valB ? 1 : -1;
+    }
+);
