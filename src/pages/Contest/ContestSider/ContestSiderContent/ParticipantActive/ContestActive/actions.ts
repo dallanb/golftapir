@@ -8,9 +8,9 @@ const { Types, Creators } = createActions(
         terminate: null,
         set: ['data'],
         setSheet: ['sheet'],
-        debouncedHoleStrokeUpdate: ['holeId', 'strokes'],
-        debouncedHoleStrokeUpdateSuccess: ['hole'],
-        debouncedHoleStrokeUpdateFailure: ['err'],
+        holeStrokeUpdate: ['holeId', 'strokes'],
+        holeStrokeUpdateSuccess: ['hole'],
+        holeStrokeUpdateFailure: ['err'],
     },
     {
         prefix: 'CONTEST_PAGE_SIDER_CONTENT_PARTICIPANT_ACTIVE_CONTEST_ACTIVE_',

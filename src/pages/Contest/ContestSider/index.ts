@@ -14,5 +14,6 @@ export {
     ContestPageSiderContentCourseSaga,
     ContestPageSiderContentParticipantActiveContestActiveSaga,
     ContestPageSiderContentParticipantActiveContestPendingSaga,
+    ContestStrokeUpdateChannel,
     ContestPageSiderContentParticipantCompletedContestCompletedSaga,
 } from './ContestSiderContent';

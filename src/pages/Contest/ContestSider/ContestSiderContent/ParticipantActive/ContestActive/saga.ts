@@ -2,19 +2,20 @@ import { AnyAction } from 'redux';
 import {
     all,
     call,
+    cancel,
     debounce,
+    delay,
     fork,
     put,
     select,
+    take,
     takeLatest,
 } from 'redux-saga/effects';
 import ContestPageSiderContentParticipantActiveContestActiveActions, {
     ContestPageSiderContentParticipantActiveContestActiveTypes,
 } from './actions';
-import { ScoreService } from '@services';
 import { selectContestUUID } from '@pages/Contest/selector';
-import { selectSheet } from './selector';
-import { initSheet } from './helpers';
+import { initSheet, debouncedHoleStrokeUpdate } from './helpers';
 
 function* init() {
     try {
@@ -32,36 +33,35 @@ function* init() {
     }
 }
 
-function* debouncedHoleStrokeUpdate({ holeId, strokes }: AnyAction) {
-    try {
-        const { uuid, holes } = yield select(selectSheet);
-        yield fork(ScoreService.updateHole, uuid, holeId, { strokes });
-        yield put(
-            ContestPageSiderContentParticipantActiveContestActiveActions.debouncedHoleStrokeUpdateSuccess(
-                {
-                    [holeId]: { ...holes[holeId], strokes },
-                }
-            )
-        );
-    } catch (err) {
-        yield put(
-            ContestPageSiderContentParticipantActiveContestActiveActions.debouncedHoleStrokeUpdateFailure(
-                err
-            )
-        );
-    }
-}
-
 export default function* ContestPageSiderContentParticipantActiveContestActiveSaga() {
     yield all([
         takeLatest(
             ContestPageSiderContentParticipantActiveContestActiveTypes.INIT,
             init
         ),
-        debounce(
-            1000,
-            ContestPageSiderContentParticipantActiveContestActiveTypes.DEBOUNCED_HOLE_STROKE_UPDATE,
-            debouncedHoleStrokeUpdate
-        ),
     ]);
+}
+
+export function* ContestStrokeUpdateChannel() {
+    const map = new Map();
+
+    while (true) {
+        const action = yield take(
+            ContestPageSiderContentParticipantActiveContestActiveTypes.HOLE_STROKE_UPDATE
+        );
+        const { holeId, strokes } = action;
+        const existingTask = map.get(holeId);
+
+        if (existingTask) {
+            yield cancel(existingTask);
+        }
+
+        const newTask = yield fork(
+            debouncedHoleStrokeUpdate,
+            holeId,
+            strokes,
+            (id) => map.delete(id)
+        );
+        map.set(holeId, newTask);
+    }
 }

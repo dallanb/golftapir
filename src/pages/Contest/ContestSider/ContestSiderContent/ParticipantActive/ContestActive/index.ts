@@ -4,4 +4,7 @@ export { default } from './ContestActive';
 export { reducer } from './reducer';
 
 // Saga
-export { default as ContestPageSiderContentParticipantActiveContestActiveSaga } from './saga';
+export {
+    default as ContestPageSiderContentParticipantActiveContestActiveSaga,
+    ContestStrokeUpdateChannel,
+} from './saga';

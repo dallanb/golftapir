@@ -22,10 +22,16 @@ const ContestScorecardInput: React.FunctionComponent<ContestScorecardInputProps>
         setStrokes(currentStrokes);
     }, [hole]);
 
+    useEffect(() => {
+        return () => {
+            console.log('component unmount');
+        };
+    }, []);
+
     const updateScore = (page: number, newStrokes: number) => {
         setStrokes(newStrokes);
         dispatch(
-            ContestPageSiderContentParticipantActiveContestActiveActions.debouncedHoleStrokeUpdate(
+            ContestPageSiderContentParticipantActiveContestActiveActions.holeStrokeUpdate(
                 page,
                 newStrokes
             )

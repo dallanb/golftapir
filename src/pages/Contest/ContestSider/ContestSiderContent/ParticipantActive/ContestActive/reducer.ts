@@ -51,10 +51,7 @@ function setSheet(state: any, { sheet }: any) {
     });
 }
 
-function debouncedHoleStrokeUpdateSuccess(
-    state = INITIAL_STATE,
-    { hole }: any
-) {
+function holeStrokeUpdateSuccess(state = INITIAL_STATE, { hole }: any) {
     const holes = Object.assign({}, state.sheet.holes, hole);
     return Immutable.merge(state, {
         sheet: { ...state.sheet, holes },
@@ -68,7 +65,7 @@ const HANDLERS = {
     [ContestPageSiderContentParticipantActiveContestActiveTypes.TERMINATE]: terminate,
     [ContestPageSiderContentParticipantActiveContestActiveTypes.SET]: set,
     [ContestPageSiderContentParticipantActiveContestActiveTypes.SET_SHEET]: setSheet,
-    [ContestPageSiderContentParticipantActiveContestActiveTypes.DEBOUNCED_HOLE_STROKE_UPDATE_SUCCESS]: debouncedHoleStrokeUpdateSuccess,
+    [ContestPageSiderContentParticipantActiveContestActiveTypes.HOLE_STROKE_UPDATE_SUCCESS]: holeStrokeUpdateSuccess,
 };
 
 export const reducer = createReducer(INITIAL_STATE, HANDLERS);

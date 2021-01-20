@@ -12,5 +12,8 @@ export const reducer = combineReducers({
 });
 
 // Saga
-export { ContestPageSiderContentParticipantActiveContestActiveSaga } from './ContestActive';
+export {
+    ContestPageSiderContentParticipantActiveContestActiveSaga,
+    ContestStrokeUpdateChannel,
+} from './ContestActive';
 export { ContestPageSiderContentParticipantActiveContestPendingSaga } from './ContestPending';
