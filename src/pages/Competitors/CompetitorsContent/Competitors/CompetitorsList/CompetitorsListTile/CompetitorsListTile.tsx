@@ -5,16 +5,9 @@ import classnames from 'classnames';
 import { CompetitorsListTileProps } from './types';
 import constants from '@constants';
 import routes from '@constants/routes';
-import {
-    getName,
-    mapStatusColour,
-    withAppRoute,
-    withDynamicRoute,
-    withS3URL,
-} from '@utils';
+import { getName, mapStatusColour, withAppRoute, withS3URL } from '@utils';
 import CompetitorsListTileCountry from './CompetitorsListTileCountry';
-import CompetitorsListTileWins from './CompetitorsListTileWins';
-import CompetitorsListTileEvents from './CompetitorsListTileEvents';
+import CompetitorsListTileUsername from './CompetitorsListTileUsername';
 import { Avatar } from '@components';
 import './CompetitorsListTile.less';
 
@@ -37,6 +30,7 @@ const CompetitorsListTile: React.FunctionComponent<CompetitorsListTileProps> = (
     };
 
     const name = getName(item, 'Loading...');
+    const username = _get(item, ['username'], undefined);
     const avatar = _get(item, ['avatar', 's3_filename'], undefined);
     const src = avatar && withS3URL(avatar, constants.S3_FOLDERS.MEMBER.AVATAR);
     const status = _get(item, ['status'], undefined);
@@ -78,11 +72,8 @@ const CompetitorsListTile: React.FunctionComponent<CompetitorsListTileProps> = (
                         <div className="competitors-list-tile-content-side-country">
                             <CompetitorsListTileCountry country={country} />
                         </div>
-                        <div className="competitors-list-tile-content-side-wins">
-                            <CompetitorsListTileWins wins={0} />
-                        </div>
-                        <div className="competitors-list-tile-content-side-events">
-                            <CompetitorsListTileEvents events={0} />
+                        <div className="competitors-list-tile-content-side-username">
+                            <CompetitorsListTileUsername username={username} />
                         </div>
                     </div>
                 </div>

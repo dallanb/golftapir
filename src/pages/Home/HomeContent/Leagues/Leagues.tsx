@@ -2,8 +2,8 @@ import React, { useRef } from 'react';
 import ComponentContent from '@layouts/ComponentContent';
 import LeaguesList from './LeaguesList';
 import { LeaguesProps } from './types';
-import './Leagues.less';
 import CONSTANTS from '@locale/en-CA';
+import './Leagues.less';
 
 const Leagues: React.FunctionComponent<LeaguesProps> = () => {
     const ref = useRef(null);

@@ -28,28 +28,28 @@ export default [
             }),
         key: routes.ROUTES.NOTIFICATIONS.KEY,
     },
-    {
-        path: '/app/messages',
-        name: 'Messages',
-        icon: MessageFilled,
-        key: 'messages',
-    },
-    {
-        path: withAppRoute(routes.ROUTES.COMPETITORS.ROUTE, {
-            app: constants.APPS.MEMBER_APP,
-        }),
-        name: routes.ROUTES.COMPETITORS.LABEL,
-        icon: routes.ROUTES.COMPETITORS.ICON,
-        key: routes.ROUTES.COMPETITORS.KEY,
-    },
-    {
-        path: withAppRoute(routes.ROUTES.LEAGUES.ROUTE, {
-            app: constants.APPS.MEMBER_APP,
-        }),
-        name: routes.ROUTES.LEAGUES.LABEL,
-        icon: routes.ROUTES.LEAGUES.ICON,
-        key: routes.ROUTES.LEAGUES.KEY,
-    },
+    // {
+    //     path: '/app/messages',
+    //     name: 'Messages',
+    //     icon: MessageFilled,
+    //     key: 'messages',
+    // },
+    // {
+    //     path: withAppRoute(routes.ROUTES.COMPETITORS.ROUTE, {
+    //         app: constants.APPS.MEMBER_APP,
+    //     }),
+    //     name: routes.ROUTES.COMPETITORS.LABEL,
+    //     icon: routes.ROUTES.COMPETITORS.ICON,
+    //     key: routes.ROUTES.COMPETITORS.KEY,
+    // },
+    // {
+    //     path: withAppRoute(routes.ROUTES.LEAGUES.ROUTE, {
+    //         app: constants.APPS.MEMBER_APP,
+    //     }),
+    //     name: routes.ROUTES.LEAGUES.LABEL,
+    //     icon: routes.ROUTES.LEAGUES.ICON,
+    //     key: routes.ROUTES.LEAGUES.KEY,
+    // },
     // {
     //     path: '/app/wagers',
     //     // component: Home,

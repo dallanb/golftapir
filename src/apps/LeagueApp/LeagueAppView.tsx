@@ -10,7 +10,7 @@ import {
     LeagueAppViewProps,
     LeagueAppViewState,
 } from './types';
-import { ProtectedRoute } from '@components';
+import {AppLoading, ProtectedRoute} from '@components';
 import { routes, protectedRoutes } from './routes';
 import constants from '@constants';
 import constantRoutes from '@constants/routes';
@@ -86,7 +86,7 @@ class LeagueAppView extends React.Component<
         } = this.props;
         const { selectedKeys } = this.state;
 
-        if (!isReady) return <Spin />;
+        if (!isReady) return <AppLoading />;
         return (
             <MemberAppLayout
                 app={constants.APPS.LEAGUE_APP}

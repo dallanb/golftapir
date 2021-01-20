@@ -1,3 +1,4 @@
+export { default as AppLoading } from './AppLoading';
 export { default as Avatar } from './Avatar';
 export { default as BasicInputWrapper } from './BasicInputWrapper';
 export { default as Breadcrumb } from './Breadcrumb';

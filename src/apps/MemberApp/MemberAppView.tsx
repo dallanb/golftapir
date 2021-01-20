@@ -9,7 +9,7 @@ import {
     MemberAppViewProps,
     MemberAppViewState,
 } from './types';
-import { ProtectedRoute } from '@components';
+import { AppLoading, ProtectedRoute } from '@components';
 import { routes, protectedRoutes } from './routes';
 import constantRoutes from '@constants/routes';
 import { AuthActions } from '@actions';
@@ -63,7 +63,7 @@ class MemberAppView extends React.PureComponent<
             menuProps,
         } = this.props;
         const { selectedKeys } = this.state;
-        if (!isInitialized) return <Spin />;
+        if (!isInitialized) return <AppLoading />;
         return (
             <MemberAppLayout
                 app={constants.APPS.LEAGUE_APP}
