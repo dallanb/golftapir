@@ -72,4 +72,12 @@ export default {
             query,
         });
     },
+    inviteMember(data: any, query: any = {}) {
+        return ClientProxy.post({
+            url: config.MEMBER_URL,
+            endpoint: '/members/invite',
+            data,
+            query,
+        });
+    },
 };

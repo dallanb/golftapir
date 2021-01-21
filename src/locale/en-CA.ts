@@ -74,12 +74,15 @@ const CONSTANTS = {
         },
     },
     MEMBER: {
-        SUCCESS: {},
+        SUCCESS: {
+            INVITE: 'Invitation sent!',
+        },
         ERROR: {
             FETCH: 'Error fetching Member information',
             FETCH_ALL: 'Error fetching Member information',
             UPDATE: 'Error updating Member information',
             ASSIGN_AVATAR: 'Error updating Member avatar',
+            INVITE: 'Error sending invitation',
         },
     },
     NOTIFICATION: {
@@ -326,6 +329,19 @@ const CONSTANTS = {
             TITLE: 'Members',
             DESCRIPTION: 'View Members',
             SEARCH: 'Invite Members',
+        },
+        MEMBERS_CREATE: {
+            TITLE: 'Members',
+            DESCRIPTION: 'Invite Member',
+            FORM: {
+                LABELS: {
+                    EMAIL: 'Email',
+                },
+                VALIDATION: {
+                    EMAIL_REQUIRED: 'Please input an email address!',
+                    EMAIL_TYPE: 'Please input a valid email address',
+                },
+            },
         },
         LEAGUES: {
             TITLE: 'Leagues',

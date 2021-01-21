@@ -133,6 +133,13 @@ export {
     MembersPageRoutes,
 } from './Members';
 export {
+    default as MembersCreate,
+    reducer as membersCreatePage,
+    MembersCreatePageSaga,
+    MembersCreatePageContentMemberSaga,
+    MembersCreatePageRoutes,
+} from './MembersCreate';
+export {
     default as Notifications,
     reducer as notificationsPage,
     NotificationsPageSaga,

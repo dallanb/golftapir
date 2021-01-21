@@ -1,26 +1,45 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory, useParams } from 'react-router-dom';
 import { Button, Select, Spin } from 'antd';
-import { PlusCircleOutlined } from '@ant-design/icons/lib';
+import { PlusCircleOutlined, UserAddOutlined } from '@ant-design/icons/lib';
 import { SearchInputProps } from './types';
 import MembersPageSiderContentSearchActions from './actions';
-import { selectIsSearching, selectSearchData } from './selector';
+import { selectIsSearching, selectKey, selectSearchData } from './selector';
 import CONSTANTS from '@locale/en-CA';
+import { withAppRoute } from '@utils';
+import routes from '@constants/routes';
 import './SearchSelectInput.less';
 
 const { Option } = Select;
 
 const SearchSelectInput: React.FunctionComponent<SearchInputProps> = () => {
     const dispatch = useDispatch();
+    const history = useHistory();
+    const params = useParams();
     const [value, setValue] = useState<any>();
     const data = useSelector(selectSearchData) || [];
     const isSearching = useSelector(selectIsSearching);
+    const searchKey = useSelector(selectKey);
+    const newMemberKey = 'new';
     const onSearch = (val: string) => {
         dispatch(MembersPageSiderContentSearchActions.search(val));
     };
     const onClick = () => {
         dispatch(MembersPageSiderContentSearchActions.invite(value));
         setValue(undefined);
+    };
+    const onChange = (newValue: any) => {
+        if (newValue === newMemberKey) {
+            history.push(
+                withAppRoute(routes.ROUTES.MEMBERS_CREATE.ROUTE, {
+                    routeProps: { ...params },
+                }),
+                { email: searchKey }
+            );
+        } else {
+            return setValue(newValue);
+        }
     };
 
     return (
@@ -32,7 +51,7 @@ const SearchSelectInput: React.FunctionComponent<SearchInputProps> = () => {
                 notFoundContent={isSearching ? <Spin size="small" /> : null}
                 filterOption={false}
                 onSearch={onSearch}
-                onChange={setValue}
+                onChange={onChange}
                 className="search-select-input"
             >
                 {data.map((d: any) => (
@@ -40,8 +59,12 @@ const SearchSelectInput: React.FunctionComponent<SearchInputProps> = () => {
                         {d.display_name}
                     </Option>
                 ))}
-                <Option key={'new'} value={'new'} className="search-select-input-new-invite">
-                    Invite to App
+                <Option
+                    key={newMemberKey}
+                    value={newMemberKey}
+                    className="search-select-input-new-invite"
+                >
+                    <UserAddOutlined /> Invite to App
                 </Option>
             </Select>
             <Button

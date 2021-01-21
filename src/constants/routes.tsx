@@ -163,6 +163,13 @@ const routes = {
             LABEL: CONSTANTS.PAGES.MEMBERS.TITLE,
             ICON: TeamOutlined,
         },
+        MEMBERS_CREATE: {
+            ROUTE: '/members/create',
+            BASE_KEY: 'members',
+            KEY: 'members_create',
+            LABEL: CONSTANTS.PAGES.MEMBERS_CREATE.TITLE,
+            ICON: null,
+        },
         MEMBER_SETTINGS: {
             ROUTE: '/member_settings',
             BASE_KEY: 'member_settings',
