@@ -1,13 +1,14 @@
+import React from 'react';
+import { FormikProps, FormikValues } from 'formik';
+import { useSelector } from 'react-redux';
 import { Button, Select } from 'antd';
 import { keyBy as _keyBy, get as _get, isNil as _isNil } from 'lodash';
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { FormikProps, FormikValues } from 'formik';
+import { MinusCircleTwoTone, PlusCircleTwoTone } from '@ant-design/icons';
 import { selectSearchData as selectParticipantSearchData } from './ContestFormSearch/Participant/selector';
 import { selectSearchData as selectCourseSearchData } from './ContestFormSearch/Course/selector';
-import CONSTANTS from '@locale/en-CA';
 import { ordinalSuffix } from '@utils';
-import { MinusCircleTwoTone, PlusCircleTwoTone } from '@ant-design/icons';
+import { MemberTile } from '@components';
+import CONSTANTS from '@locale/en-CA';
 
 export const courseSearchSelectOptionRenderer = (
     formik: FormikProps<FormikValues>
@@ -40,12 +41,12 @@ export const participantSearchSelectOptionRenderer = (
                 value={participant.uuid}
                 disabled={
                     permanentParticipants.findIndex(
-                        ({ member_uuid }: { member_uuid: string }) =>
-                            member_uuid === participant.uuid
+                        ({ uuid }: { uuid: string }) =>
+                            uuid === participant.uuid
                     ) > -1
                 }
             >
-                {participant.display_name}
+                <MemberTile member={participant} />
             </Select.Option>
         )
     );
