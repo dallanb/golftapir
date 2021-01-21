@@ -1,5 +1,5 @@
 import React from 'react';
-import { get as _get } from 'lodash';
+import { get as _get, isEmpty as _isEmpty } from 'lodash';
 import { PlusOutlined } from '@ant-design/icons/lib';
 import { UploadFieldProps } from './types';
 import UploadAvatar from './UploadAvatar';
@@ -13,7 +13,8 @@ const UploadField: React.FunctionComponent<UploadFieldProps> = ({
     value,
     options,
 }) => {
-    if (value) {
+    const isEmpty = !value || _isEmpty(value);
+    if (!isEmpty) {
         const onDelete = () => {
             formik.setFieldValue(name, '');
         };

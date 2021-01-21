@@ -17,7 +17,7 @@ export const antdFormatName = (name: string): string[] => name.split('.');
 export const formatUploadSrc = (src: any, options: { s3Folder: string }) => {
     let uploadSrc = src;
     if (typeof src === 'object') {
-        const s3_filename = _get(src, ['s3_filename'], null);
+        const s3_filename = _get(src, ['s3_filename'], undefined);
         uploadSrc = withS3URL(s3_filename, options.s3Folder);
     }
     return uploadSrc;

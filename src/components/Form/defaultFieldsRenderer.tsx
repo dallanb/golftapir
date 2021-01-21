@@ -211,7 +211,7 @@ const fieldRenderer = (
                     key={name}
                     name={name}
                     src={withS3URL(
-                        _get(value, ['s3_filename'], ''),
+                        _get(value, ['s3_filename'], undefined),
                         _get(
                             options,
                             ['s3Folder'],
@@ -355,27 +355,6 @@ const fieldRenderer = (
         default:
             throw new Error('Invalid field type');
     }
-
-    // if (wrapper) {
-    //     const touched = _get(formik, ['touched', ...formattedName]);
-    //     const submitted = _get(formik, ['submitCount']) > 0;
-    //     const hasError = _get(formik, ['errors', ...formattedName]);
-    //     const live = submitted || touched;
-    //     const submittedError = hasError && submitted;
-    //     const touchedError = hasError && touched;
-    //     const help = live ? hasError || '' : '';
-    //     field = wrap(wrapper, field, {
-    //         name: formattedName,
-    //         value,
-    //         formik,
-    //         hasFeedback: submittedError || touchedError,
-    //         help,
-    //         validateStatus:
-    //             submittedError || touchedError ? 'error' : 'success',
-    //         childRef: fieldRef,
-    //         ...wrapperOptions,
-    //     });
-    // }
 
     return field;
 };

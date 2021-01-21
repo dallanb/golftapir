@@ -4,7 +4,7 @@ import { withS3URL } from '@utils';
 import memoize from 'memoize-one';
 import moment from 'moment';
 
-export const getAvatarSrc = memoize((data: any): string => {
+export const getAvatarSrc = memoize((data: any): string | undefined => {
     let folder = '';
     let uuid = '';
     switch (data.topic) {
