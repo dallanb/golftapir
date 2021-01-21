@@ -1,4 +1,5 @@
-import { NotificationActions } from '@actions';
+import { MemberActions, NotificationActions } from '@actions';
+import LeagueAppActions from './actions';
 import constants from '@constants';
 
 export const socketEventHandlers = (socket: WebSocket, emitter: any) => {
@@ -15,6 +16,13 @@ export const socketEventHandlers = (socket: WebSocket, emitter: any) => {
                         );
                         break;
                     default:
+                        break;
+                }
+                break;
+            case constants.TOPICS.CONTESTS:
+                switch (event) {
+                    case constants.EVENTS.CONTESTS.CONTEST_COMPLETED:
+                        emitter(MemberActions.refreshMyMemberStats());
                         break;
                 }
                 break;

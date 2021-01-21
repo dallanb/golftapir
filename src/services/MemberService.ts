@@ -58,4 +58,18 @@ export default {
             },
         });
     },
+    fetchStats(query: any = {}) {
+        return ClientProxy.get({
+            url: config.MEMBER_URL,
+            endpoint: `/stats`,
+            query,
+        });
+    },
+    fetchStat(uuid: string, query: any = {}) {
+        return ClientProxy.get({
+            url: config.MEMBER_URL,
+            endpoint: `/stats/${uuid}`,
+            query,
+        });
+    },
 };

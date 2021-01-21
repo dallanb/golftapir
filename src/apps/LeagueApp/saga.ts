@@ -79,7 +79,7 @@ function* refresh({ uuid }: AnyAction) {
     try {
         yield call(fetchMyMemberUser, {
             league_uuid: uuid,
-            include: 'avatar',
+            include: 'avatar,stat',
         });
         const { data: league } = yield call(fetchLeague, uuid);
         yield put(LeagueAppActions.set({ league }));

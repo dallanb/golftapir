@@ -69,6 +69,15 @@ const fetchMyMemberUserSuccess = localStorageSave((state: any, { data }: any) =>
     })
 );
 
+const refreshMyMemberStatsSuccess = localStorageSave(
+    (state: any, { stats: stat }: any) => {
+        const me = Object.assign({}, state.me, { stat });
+        return Immutable.merge(state, {
+            me,
+        });
+    }
+);
+
 const fetchNotificationPendingSuccess = localStorageSave(
     (state: any, { pending }: NotificationInterface) =>
         Immutable.merge(state, {
@@ -94,6 +103,7 @@ const HANDLERS = {
     [AuthTypes.REFRESH_FAILURE]: refreshFailure,
     [AuthTypes.LOGOUT_SUCCESS]: logoutSuccess,
     [MemberTypes.FETCH_MY_MEMBER_USER_SUCCESS]: fetchMyMemberUserSuccess,
+    [MemberTypes.REFRESH_MY_MEMBER_STATS_SUCCESS]: refreshMyMemberStatsSuccess,
     [NotificationTypes.FETCH_PENDING_SUCCESS]: fetchNotificationPendingSuccess,
     [NotificationTypes.FETCH_PENDING_FAILURE]: fetchNotificationPendingFailure,
     [LeagueTypes.FETCH_MY_LEAGUES_SUCCESS]: fetchMyLeaguesSuccess,

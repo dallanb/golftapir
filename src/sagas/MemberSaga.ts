@@ -1,9 +1,10 @@
 import { AnyAction } from 'redux';
-import { all, call, put, takeLatest } from 'redux-saga/effects';
+import { all, call, put, select, takeLatest } from 'redux-saga/effects';
 import { message } from 'antd';
 import MemberActions, { MemberTypes } from '@actions/MemberActions';
 import { MemberService } from '@services';
 import CONSTANTS from '@locale/en-CA';
+import { selectMyStat } from '@selectors/BaseSelector';
 
 function* fetchMember({ uuid, options }: AnyAction) {
     try {
@@ -74,6 +75,16 @@ function* assignAvatar({ uuid, avatar }: AnyAction) {
     }
 }
 
+function* refreshMyMemberStats({}) {
+    try {
+        const stat = yield select(selectMyStat);
+        const { stats } = yield call(MemberService.fetchStat, stat.uuid);
+        yield put(MemberActions.refreshMyMemberStatsSuccess(stats));
+    } catch (err) {
+        yield put(MemberActions.refreshMyMemberStatsFailure(err));
+    }
+}
+
 export default function* MemberSaga() {
     yield all([
         takeLatest(MemberTypes.FETCH_MEMBER, fetchMember),
@@ -82,5 +93,6 @@ export default function* MemberSaga() {
         takeLatest(MemberTypes.FETCH_MEMBERS, fetchMembers),
         takeLatest(MemberTypes.UPDATE_MEMBER, updateMember),
         takeLatest(MemberTypes.ASSIGN_AVATAR, assignAvatar),
+        takeLatest(MemberTypes.REFRESH_MY_MEMBER_STATS, refreshMyMemberStats),
     ]);
 }
