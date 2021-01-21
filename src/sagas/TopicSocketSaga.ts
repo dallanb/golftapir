@@ -41,7 +41,7 @@ function* init({ data, options }: AnyAction) {
         yield fork(read, options);
         yield put(TopicSocketActions.initSuccess());
     } catch (err) {
-        console.log(err);
+        console.error(err);
         message.error(CONSTANTS.SOCKET.ERROR.INIT);
     }
 }

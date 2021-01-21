@@ -23,7 +23,7 @@ class Client {
     init(): void {
         firebase.initializeApp(this._config);
         this.messaging = firebase.messaging();
-        console.log('Firebase Client Ready');
+        console.info('Firebase Client Ready');
     }
 
     async requestNotificationPermissions(): Promise<string | undefined> {
@@ -34,7 +34,7 @@ class Client {
             await this.messaging?.requestPermission();
             return await this.messaging?.getToken();
         } catch (e) {
-            console.log(e);
+            console.error(e);
         }
     }
 

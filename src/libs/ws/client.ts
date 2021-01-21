@@ -26,13 +26,13 @@ class Client {
         );
 
         this.socket.onclose = (event) => {
-            console.log('socket close event code, ', event.code);
+            console.info('socket close event code, ', event.code);
             switch (event.code) {
                 case 1000:
-                    console.log('normal closure');
+                    console.info('normal closure');
                     break;
                 default:
-                    console.log('reconnecting');
+                    console.info('reconnecting');
                     this.init(uuid);
             }
         };

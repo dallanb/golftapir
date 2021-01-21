@@ -6,7 +6,6 @@ import './ContestLeaderboardTablePosition.less';
 const ContestLeaderboardTablePosition: React.FunctionComponent<ContestLeaderboardTablePositionProps> = ({
     row: { original },
 }) => {
-    console.log(original);
     const { rank = 'NA', count = '', trend } = original;
     const prefix = count > 1 ? 'T' : '';
     const pos = `${prefix}${rank}`;

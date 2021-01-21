@@ -11,7 +11,6 @@ const topicToRouteMapper = (
     route: string;
     state: any;
 } => {
-
     const mapping = {
         route: '',
         state: {},
@@ -50,7 +49,7 @@ const topicToRouteMapper = (
                     };
                     break;
                 default:
-                    console.log('key not found');
+                    console.error('key not found');
             }
 
             break;
@@ -74,7 +73,7 @@ const topicToRouteMapper = (
                     };
                     break;
                 default:
-                    console.log('key not found');
+                    console.error('key not found');
             }
             break;
         default:

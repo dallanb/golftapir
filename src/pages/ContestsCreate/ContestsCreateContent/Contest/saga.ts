@@ -11,7 +11,6 @@ import ContestsCreatePageContentContestActions, {
 import { prepareInitialValues } from './utils';
 
 function* init({ options = { member_uuid: null } }: AnyAction) {
-    // TODO: TEST THIS FROM COMPETITORS  PAGE
     try {
         const me = yield select(selectMe);
         const members = [];

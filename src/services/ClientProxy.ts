@@ -59,7 +59,7 @@ class ClientProxy {
         // @ts-ignore
         return axios(options)
             .then((response: any) => {
-                console.log(url, response);
+                console.info(url, response);
                 const { data: respData } = response;
 
                 return respData.data ? respData.data : respData;

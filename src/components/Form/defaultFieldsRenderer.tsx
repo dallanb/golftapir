@@ -2,7 +2,11 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Input, Upload, Select, InputNumber, Button } from 'antd';
 import { Moment } from 'moment';
-import { get as _get, debounce as _debounce } from 'lodash';
+import {
+    get as _get,
+    debounce as _debounce,
+    isEmpty as _isEmpty,
+} from 'lodash';
 import { antdFormatName, mapCountryOptions } from './utils';
 import { Avatar, DateTimePicker } from '@components';
 import { UploadField } from './components';
@@ -12,7 +16,6 @@ import constants from '@constants';
 import Flags from 'country-flag-icons/react/3x2';
 import { FieldsRendererProps } from './types';
 import { Field, FieldArray } from 'formik';
-import { MinusCircleTwoTone, PlusCircleTwoTone } from '@ant-design/icons';
 
 const wrap = (Wrapper: any, field: any, options: any) => (
     <Wrapper key={options.name} {...options}>
@@ -189,7 +192,7 @@ const fieldRenderer = (
                         );
                         return false;
                     }}
-                    openFileDialogOnClick={!value}
+                    openFileDialogOnClick={!value || _isEmpty(value)}
                     className={_get(options, ['className'], '')}
                 >
                     <UploadField

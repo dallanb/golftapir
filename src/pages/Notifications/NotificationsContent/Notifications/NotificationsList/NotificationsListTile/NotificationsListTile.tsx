@@ -38,8 +38,6 @@ const NotificationsListTile: React.FunctionComponent<NotificationsListTileProps>
     const markAsArchived = (_id: string) => {
         actions.markAsArchived(_id);
     };
-    console.log(read);
-    console.log(message);
 
     return (
         <div style={style} key={index} className="notifications-list-tile-view">

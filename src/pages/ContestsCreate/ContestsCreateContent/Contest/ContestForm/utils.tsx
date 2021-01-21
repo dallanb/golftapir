@@ -61,7 +61,6 @@ export const contestBuyInParser = (value: string) => {
 };
 
 export const contestPayoutInParser = (value: string) => {
-    console.log(value);
     if (value === '%') {
         return 0;
     } else {
@@ -81,7 +80,7 @@ export const contestPayoutButtonsRenderer = ({
     formik,
     arrayHelpers,
 }: any) => {
-    console.log(formik);
+
     const participants = _get(formik, ['values', 'participants'], []);
     return (
         <div className="contest-form-payout-dynamic-input-buttons">

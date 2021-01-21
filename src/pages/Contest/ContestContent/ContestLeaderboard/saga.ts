@@ -100,7 +100,7 @@ export function* ContestLeaderboardScoreChannel() {
                 );
             }
         } catch (err) {
-            console.log(err);
+            console.error(err);
         }
     }
 }

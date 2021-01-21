@@ -40,7 +40,7 @@ function* init({ uuid, options }: AnyAction) {
         WebSocketNotificationClient.send('Thank you for the invite');
         yield fork(read, options);
     } catch (err) {
-        console.log(err);
+        console.error(err);
         message.error(CONSTANTS.SOCKET.ERROR.INIT);
     }
 }

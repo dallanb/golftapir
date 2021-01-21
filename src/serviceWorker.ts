@@ -46,8 +46,8 @@ export function register(config?: Config) {
 
         window.addEventListener('load', () => {
             const swUrl = `${process.env.PUBLIC_URL}/firebase-messaging-sw.js`;
-            console.log(isLocalhost);
-            console.log(swUrl);
+            console.info(isLocalhost);
+            console.info(swUrl);
             if (isLocalhost) {
                 // This is running on localhost. Let's check if a service worker still exists or not.
                 checkValidServiceWorker(swUrl, config);
@@ -55,7 +55,7 @@ export function register(config?: Config) {
                 // Add some additional logging to localhost, pointing developers to the
                 // service worker/PWA documentation.
                 navigator.serviceWorker.ready.then(() => {
-                    console.log(
+                    console.info(
                         'This web Routes is being served cache-first by a service ' +
                             'worker. To learn more, visit https://bit.ly/CRA-PWA'
                     );
@@ -80,11 +80,11 @@ function registerValidSW(swUrl: string, config?: Config) {
                 installingWorker.onstatechange = () => {
                     if (installingWorker.state === 'installed') {
                         if (navigator.serviceWorker.controller) {
-                            // At this point, the updated precached CompetitorContent has been fetched,
+                            // At this point, the updated precached content has been fetched,
                             // but the previous service worker will still serve the older
                             // CompetitorContent until all client tabs are closed.
-                            console.log(
-                                'New CompetitorContent is available and will be used when all ' +
+                            console.info(
+                                'New content is available and will be used when all ' +
                                     'tabs for this page are closed. See https://bit.ly/CRA-PWA.'
                             );
 
@@ -96,7 +96,7 @@ function registerValidSW(swUrl: string, config?: Config) {
                             // At this point, everything has been precached.
                             // It's the perfect time to display a
                             // "Content is cached for offline use." message.
-                            console.log('Content is cached for offline use.');
+                            console.info('Content is cached for offline use.');
 
                             // Execute callback
                             if (config && config.onSuccess) {
@@ -137,7 +137,7 @@ function checkValidServiceWorker(swUrl: string, config?: Config) {
             }
         })
         .catch(() => {
-            console.log(
+            console.error(
                 'No internet connection found. App is running in offline mode.'
             );
         });

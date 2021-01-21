@@ -13,6 +13,7 @@ function* search({ key: search }: AnyAction) {
             page: 1,
             per_page: 10,
             league_uuid: yield select(selectMyLeagueUUID),
+            include: 'avatar',
             search,
         });
         yield put(
