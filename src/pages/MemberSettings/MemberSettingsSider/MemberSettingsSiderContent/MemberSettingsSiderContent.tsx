@@ -3,11 +3,7 @@ import SiderLayoutContent from '@layouts/SiderLayout/SiderLayoutContent';
 import { MemberSettingsSiderContentProps } from './types';
 
 const MemberSettingsSiderContent: React.FunctionComponent<MemberSettingsSiderContentProps> = ({}) => {
-    return (
-        <SiderLayoutContent>
-            <div />
-        </SiderLayoutContent>
-    );
+    return <SiderLayoutContent>{null}</SiderLayoutContent>;
 };
 
 export default MemberSettingsSiderContent;

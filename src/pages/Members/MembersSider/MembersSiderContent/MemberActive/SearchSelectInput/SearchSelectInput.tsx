@@ -40,6 +40,9 @@ const SearchSelectInput: React.FunctionComponent<SearchInputProps> = () => {
                         {d.display_name}
                     </Option>
                 ))}
+                <Option key={'new'} value={'new'} className="search-select-input-new-invite">
+                    Invite to App
+                </Option>
             </Select>
             <Button
                 type="primary"

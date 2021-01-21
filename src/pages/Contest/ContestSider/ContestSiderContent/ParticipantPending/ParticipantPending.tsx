@@ -31,11 +31,10 @@ const ParticipantPending: React.FunctionComponent<ParticipantPendingProps> = () 
 
     return (
         <ComponentContent className="participant-pending">
-            Please respond to the contest invitation below
             <div className="participant-pending-buttons">
                 <div className="participant-pending-buttons-button active">
                     <Button block type="primary" onClick={handleAcceptClick}>
-                        Accept
+                        Accept Contest Invite
                     </Button>
                 </div>
                 <div className="participant-pending-buttons-button decline">
@@ -45,7 +44,7 @@ const ParticipantPending: React.FunctionComponent<ParticipantPendingProps> = () 
                         type="primary"
                         onClick={handleDeclineClick}
                     >
-                        Decline
+                        Decline Contest Invite
                     </Button>
                 </div>
             </div>

@@ -30,11 +30,10 @@ const MemberPending: React.FunctionComponent<MemberPendingProps> = () => {
 
     return (
         <div className="member-pending">
-            Please respond to the league invitation below
             <div className="member-pending-buttons">
                 <div className="member-pending-buttons-button active">
                     <Button block type="primary" onClick={handleAcceptClick}>
-                        Accept
+                        Accept League Invite
                     </Button>
                 </div>
                 <div className="member-pending-buttons-button decline">
@@ -44,7 +43,7 @@ const MemberPending: React.FunctionComponent<MemberPendingProps> = () => {
                         type="primary"
                         onClick={handleDeclineClick}
                     >
-                        Decline
+                        Decline League Invite
                     </Button>
                 </div>
             </div>
