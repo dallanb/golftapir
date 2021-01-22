@@ -29,7 +29,7 @@ function* submit({ data }: AnyAction) {
         const {
             members: { uuid },
             members: result,
-        } = yield call(MemberService.inviteMember, memberData);
+        } = yield call(MemberService.createInvite, memberData);
         const avatarData = _pick(data, ['avatar']);
         if (!_isEmpty(avatarData)) {
             yield call(MemberService.assignAvatar, uuid, avatarData.avatar);

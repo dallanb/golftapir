@@ -1,11 +1,5 @@
-import React from 'react';
 import * as Yup from 'yup';
-import {
-    BasicInputWrapper,
-    FloatLabelInputWrapper,
-    ImgCropWrapper,
-    NestedInputWrapper,
-} from '@components';
+import { FloatLabelInputWrapper, NestedInputWrapper } from '@components';
 import CONSTANTS from '@locale/en-CA';
 import constants from '@constants';
 
@@ -17,6 +11,7 @@ export const fieldSchema = [
         type: 'avatar',
         options: {
             s3Folder: constants.S3_FOLDERS.MEMBER.AVATAR,
+            avatarNameKey: 'display_name',
             shape: 'square',
             size: 112,
             className: 'member-info-form-avatar',
