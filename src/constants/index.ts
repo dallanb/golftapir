@@ -108,7 +108,7 @@ const constants = {
             CONTEST_COMPLETED: 'contest_completed',
         },
         MEMBERS: {
-            MEMBER_INVITED: 'member_invited',
+            MEMBER_PENDING: 'member_pending',
             MEMBER_ACTIVE: 'member_active',
         },
         SCORES: {

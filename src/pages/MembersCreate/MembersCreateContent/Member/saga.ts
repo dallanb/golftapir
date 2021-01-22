@@ -23,6 +23,7 @@ function* init({ options = { email: null } }: AnyAction) {
     }
 }
 
+// TODO
 function* submit({ data }: AnyAction) {
     try {
         const memberData = _omit(data, ['avatar']);
