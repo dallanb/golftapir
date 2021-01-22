@@ -4,6 +4,7 @@ import ComponentContent from '@layouts/ComponentContent';
 import { ContestSiderActiveProps } from './types';
 import { selectIsLeagueOwner } from '@apps/LeagueApp/selector';
 import SearchSelectInput from './SearchSelectInput';
+import Invites from './Invites';
 import './MemberActive.less';
 
 const MemberActive: React.FunctionComponent<ContestSiderActiveProps> = () => {
@@ -13,9 +14,10 @@ const MemberActive: React.FunctionComponent<ContestSiderActiveProps> = () => {
         return null;
     }
     return (
-        <ComponentContent className="search-input-component-content">
+        <>
             <SearchSelectInput />
-        </ComponentContent>
+            <Invites />
+        </>
     );
 };
 

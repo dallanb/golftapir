@@ -9,4 +9,7 @@ export const reducer = combineReducers({
     content: contentReducer,
 });
 // Saga
-export { MembersPageSiderContentSearchSaga } from './MembersSiderContent';
+export {
+    MembersPageSiderContentSearchSaga,
+    MembersPageSiderContentInvitesSaga,
+} from './MembersSiderContent';

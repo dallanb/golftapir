@@ -212,7 +212,14 @@ const fieldRenderer = (
             field = (
                 <Avatar
                     key={name}
-                    name={name}
+                    name={_get(
+                        formik,
+                        [
+                            'values',
+                            ...antdFormatName(_get(options, ['avatarNameKey'])),
+                        ],
+                        null
+                    )}
                     src={withS3URL(
                         _get(value, ['s3_filename'], undefined),
                         _get(

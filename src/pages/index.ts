@@ -130,6 +130,7 @@ export {
     MembersPageSaga,
     MembersPageContentMembersSaga,
     MembersPageSiderContentSearchSaga,
+    MembersPageSiderContentInvitesSaga,
     MembersPageRoutes,
 } from './Members';
 export {

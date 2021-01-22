@@ -26,15 +26,10 @@ function* init({ options = { email: null } }: AnyAction) {
 // TODO
 function* submit({ data }: AnyAction) {
     try {
-        const memberData = _omit(data, ['avatar']);
-        const {
-            members: { uuid },
-            members: result,
-        } = yield call(MemberService.inviteMember, memberData);
-        const avatarData = _pick(data, ['avatar']);
-        if (!_isEmpty(avatarData)) {
-            yield call(MemberService.assignAvatar, uuid, avatarData.avatar);
-        }
+        const { invites: result } = yield call(
+            MemberService.createInvite,
+            data
+        );
         yield put(MembersCreatePageContentMemberActions.setResult(result));
         yield put(MembersCreatePageContentMemberActions.submitSuccess());
         message.success(CONSTANTS.MEMBER.SUCCESS.INVITE);

@@ -11,7 +11,11 @@ const colourList = [
     'violet',
 ];
 
-const randomColourGenerator = (keyword?: string): string =>
-    colourList[getRandomInt(colourList.length)];
+const randomColourGenerator = (keyword?: string): string => {
+    const index = keyword
+        ? (keyword.length * 999) % colourList.length
+        : getRandomInt(colourList.length);
+    return colourList[index];
+};
 
 export default memoize(randomColourGenerator);

@@ -1,23 +1,34 @@
-import React from 'react';
-import { compose } from 'redux';
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
-import { RegisterProps, StateProps } from './types';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { get as _get } from 'lodash';
+import { RegisterProps } from './types';
 import RegisterFormActions from './actions';
 import RegisterForm from './RegisterForm';
-import './Register.less';
+import {selectIsInitialized, selectIsRegistered} from './selector';
 import { withAppRoute } from '@utils';
-import constants from '@constants';
 import routes from '@constants/routes';
+import constants from '@constants';
+import ComponentContent from "@layouts/ComponentContent";
+import './Register.less';
 
-class Register extends React.PureComponent<RegisterProps> {
-    componentDidMount() {
-        const { init } = this.props;
-        init();
-    }
+const Register: React.FunctionComponent<RegisterProps> = () => {
+    const history = useHistory();
+    const dispatch = useDispatch();
+    const search = _get(history, ['location', 'search'], '');
+    const params = new URLSearchParams(search);
+    const token = params.get('token');
+    const isRegistered = useSelector(selectIsRegistered);
+    const isInitialized = useSelector(selectIsInitialized)
 
-    componentDidUpdate(prevProps: Readonly<RegisterProps>) {
-        const { isRegistered, history } = this.props;
+    useEffect(() => {
+        dispatch(RegisterFormActions.init(token));
+        return () => {
+            dispatch(RegisterFormActions.terminate());
+        };
+    }, []);
+
+    useEffect(() => {
         if (isRegistered) {
             history.push(
                 withAppRoute(routes.ROUTES.LOGIN.ROUTE, {
@@ -25,33 +36,14 @@ class Register extends React.PureComponent<RegisterProps> {
                 })
             );
         }
-    }
+    }, [isRegistered]);
 
-    render() {
-        return (
-            <div className="register-view">
-                <RegisterForm />
-            </div>
-        );
-    }
-}
 
-const mapStateToProps = ({ registerPage }: StateProps) => {
-    const { isRegistered } = registerPage;
-    return {
-        isRegistered,
-    };
+    return (
+        <ComponentContent showSpinner={!isInitialized} className="register-view">
+            <RegisterForm />
+        </ComponentContent>
+    );
 };
 
-const mapDispatchToProps = (dispatch: any) => {
-    return {
-        init() {
-            return dispatch(RegisterFormActions.init());
-        },
-    };
-};
-
-export default compose(
-    withRouter,
-    connect(mapStateToProps, mapDispatchToProps)
-)(Register);
+export default Register;

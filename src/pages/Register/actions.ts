@@ -2,11 +2,12 @@ import { createActions } from 'reduxsauce';
 
 const { Types, Creators } = createActions(
     {
-        init: null,
+        init: ['token'],
         initSuccess: null,
         initFailure: ['err'],
         terminate: null,
         set: ['data'],
+        setFormInitialValues: ['formInitialValues'],
     },
     {
         prefix: 'REGISTER_PAGE_',

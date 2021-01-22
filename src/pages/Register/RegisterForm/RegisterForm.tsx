@@ -17,11 +17,12 @@ class RegisterForm extends React.PureComponent<RegisterFormProps> {
 
     render() {
         const { initialValues } = this.props;
+        const fieldsSchema = fieldSchema(initialValues);
         return (
             <Form
                 initialValues={initialValues}
                 validationSchema={validationSchema}
-                fieldSchema={fieldSchema}
+                fieldSchema={fieldsSchema}
                 onSubmit={this.handleSubmit}
             />
         );

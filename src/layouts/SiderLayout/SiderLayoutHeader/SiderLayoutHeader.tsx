@@ -22,7 +22,7 @@ const SiderLayoutHeader: React.FunctionComponent<SiderLayoutHeaderProps> = ({
             avatarProps['src'] = avatar.src;
         } else {
             avatarProps['style'] = {
-                backgroundColor: randomColourGenerator(),
+                backgroundColor: randomColourGenerator(avatar.name),
                 verticalAlign: 'middle',
             };
             avatarProps['children'] = getInitials(avatar.name);
