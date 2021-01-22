@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { Button, Select, Spin } from 'antd';
+import { debounce as _debounce } from 'lodash';
 import { PlusCircleOutlined, UserAddOutlined } from '@ant-design/icons/lib';
 import { SearchInputProps } from './types';
 import MembersPageSiderContentSearchActions from './actions';
@@ -10,6 +11,7 @@ import CONSTANTS from '@locale/en-CA';
 import { withAppRoute } from '@utils';
 import routes from '@constants/routes';
 import './SearchSelectInput.less';
+import ComponentContent from '@layouts/ComponentContent';
 
 const { Option } = Select;
 
@@ -43,38 +45,40 @@ const SearchSelectInput: React.FunctionComponent<SearchInputProps> = () => {
     };
 
     return (
-        <div className="search-select-input-wrapper">
-            <Select
-                showSearch
-                value={value}
-                placeholder={CONSTANTS.PAGES.MEMBERS.SEARCH}
-                notFoundContent={isSearching ? <Spin size="small" /> : null}
-                filterOption={false}
-                onSearch={onSearch}
-                onChange={onChange}
-                className="search-select-input"
-            >
-                {data.map((d: any) => (
-                    <Option key={d.user_uuid} value={d.user_uuid}>
-                        {d.display_name}
-                    </Option>
-                ))}
-                <Option
-                    key={newMemberKey}
-                    value={newMemberKey}
-                    className="search-select-input-new-invite"
+        <ComponentContent className="search-input-component-content">
+            <div className="search-select-input-wrapper">
+                <Select
+                    showSearch
+                    value={value}
+                    placeholder={CONSTANTS.PAGES.MEMBERS.SEARCH}
+                    notFoundContent={isSearching ? <Spin size="small" /> : null}
+                    filterOption={false}
+                    onSearch={_debounce(onSearch, 500, { maxWait: 1000 })}
+                    onChange={onChange}
+                    className="search-select-input"
                 >
-                    <UserAddOutlined /> Invite to App
-                </Option>
-            </Select>
-            <Button
-                type="primary"
-                icon={<PlusCircleOutlined />}
-                className="invite-button"
-                disabled={!value}
-                onClick={onClick}
-            />
-        </div>
+                    {data.map((d: any) => (
+                        <Option key={d.user_uuid} value={d.user_uuid}>
+                            {d.display_name}
+                        </Option>
+                    ))}
+                    <Option
+                        key={newMemberKey}
+                        value={newMemberKey}
+                        className="search-select-input-new-invite"
+                    >
+                        <UserAddOutlined /> Invite to App
+                    </Option>
+                </Select>
+                <Button
+                    type="primary"
+                    icon={<PlusCircleOutlined />}
+                    className="invite-button"
+                    disabled={!value}
+                    onClick={onClick}
+                />
+            </div>
+        </ComponentContent>
     );
 };
 

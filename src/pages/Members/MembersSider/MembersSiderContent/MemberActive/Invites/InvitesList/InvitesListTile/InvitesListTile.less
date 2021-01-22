@@ -1,0 +1,50 @@
+@import 'src/assets/styles/statics';
+.invites-list-tile-view {
+    .invites-list-tile-card {
+        display: flex;
+        height: 100%;
+
+        &.filled {
+            background: @tile-fill;
+        }
+
+        .ant-card-body {
+            width: 100%;
+            padding: 6px 12px;
+        }
+
+        .invites-list-tile-content {
+            display: flex;
+            align-items: center;
+            height: 100%;
+            .invites-list-tile-content-main {
+                display: flex;
+                width: 80%;
+
+                .invites-list-tile-content-main-avatar {
+                    margin-right: 10px;
+                    .ant-avatar-square {
+                        border-radius: 4px;
+                    }
+                }
+
+                .invites-list-tile-content-main-info {
+                    .invites-list-tile-content-main-name {
+                        font-weight: bold;
+                    }
+
+                    .invites-list-tile-content-main-status {
+                    }
+                }
+            }
+            .invites-list-tile-content-side {
+                display: flex;
+                justify-content: flex-end;
+                width: 20%;
+            }
+        }
+
+        .invites-list-tile-button {
+        }
+    }
+}
