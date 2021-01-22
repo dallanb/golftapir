@@ -1,16 +1,20 @@
 import React from 'react';
 import * as Yup from 'yup';
+import memoize from 'memoize-one';
+import { get as _get } from 'lodash';
 import { GlobalOutlined, LockOutlined, UserOutlined } from '@ant-design/icons';
-import { BasicInputWrapper, FloatLabelInputWrapper } from '@components';
+import { FloatLabelInputWrapper } from '@components';
 import CONSTANTS from '@locale/en-CA';
 
 const FORM = CONSTANTS.PAGES.REGISTER.FORM;
 
-export const fieldSchema = [
+export const fieldSchema = memoize((initialValues: any) => [
     {
         name: 'email',
         wrapper: FloatLabelInputWrapper,
-        options: {},
+        options: {
+            disabled: _get(initialValues, ['email'], false),
+        },
         wrapperOptions: {
             label: (
                 <>
@@ -82,7 +86,7 @@ export const fieldSchema = [
             ),
         },
     },
-];
+]);
 
 export const validationSchema = Yup.object({
     email: Yup.string()

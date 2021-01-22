@@ -44,4 +44,10 @@ export default {
             headers: {},
         });
     },
+    fetchInvite(token: string) {
+        return ClientProxy.get({
+            url: config.AUTH_URL,
+            endpoint: `/invites/token/${token}`,
+        });
+    },
 };

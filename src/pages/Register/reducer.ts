@@ -53,6 +53,12 @@ function set(state: any, { data }: any) {
     });
 }
 
+function setFormInitialValues(state: any, { formInitialValues }: any) {
+    return Immutable.merge(state, {
+        formInitialValues,
+    });
+}
+
 function registerSuccess(state: any) {
     return Immutable.merge(state, {
         isRegistered: true,
@@ -65,6 +71,7 @@ const HANDLERS = {
     [RegisterPageTypes.INIT_FAILURE]: initFailure,
     [RegisterPageTypes.TERMINATE]: terminate,
     [RegisterPageTypes.SET]: set,
+    [RegisterPageTypes.SET_FORM_INITIAL_VALUES]: setFormInitialValues,
     [AuthTypes.REGISTER_SUCCESS]: registerSuccess,
 };
 
