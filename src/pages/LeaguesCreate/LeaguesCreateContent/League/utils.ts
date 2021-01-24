@@ -1,17 +1,8 @@
 import { pick as _pick } from 'lodash';
 import config from 'config';
 
-export const prepareInitialValues = (leagueData: {
-    me: any;
-    members: any[];
-}) => {
-    const { me, members } = leagueData;
+export const prepareInitialValues = () => {
     return {
-        sport_uuid: config.GOLF_UUID,
-        members: [
-            me.user_uuid,
-            ...members.map((member: any) => member.user_uuid),
-        ],
-        permanent_members: [me, ...members],
+        sport_uuid: config.GOLF_UUID, // not being used right now when creating a league but will it be used eventually?
     };
 };

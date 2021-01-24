@@ -1,14 +1,14 @@
 import React from 'react';
 import * as Yup from 'yup';
 import { CloudUploadOutlined } from '@ant-design/icons';
-import LeaguesCreatePageContentLeagueSearchMemberActions from './LeagueFormSearch/Member/actions';
+// import LeaguesCreatePageContentLeagueSearchMemberActions from './LeagueFormSearch/Member/actions';
 import {
     FloatLabelInputWrapper,
     ImgCropWrapper,
     NestedInputWrapper,
 } from '@components';
-import { memberSearchSelectOptionRenderer } from './utils';
-import { searchSelectTagRenderer } from '@utils';
+// import { memberSearchSelectOptionRenderer } from './utils';
+// import { searchSelectTagRenderer } from '@utils';
 import CONSTANTS from '@locale/en-CA';
 import constants from '@constants';
 
@@ -48,28 +48,28 @@ export const fieldSchema = [
             },
         ],
     },
-    {
-        name: 'members',
-        type: 'search-select',
-        wrapper: FloatLabelInputWrapper,
-        wrapperOptions: {
-            label: FORM.LABELS.MEMBERS,
-            className: 'league-form-members-input',
-        },
-        options: {
-            ref: React.createRef<any>(),
-            onSearch: (value: string) =>
-                LeaguesCreatePageContentLeagueSearchMemberActions.search(value),
-            mode: 'multiple',
-            debounce: 500,
-            optionRenderer: memberSearchSelectOptionRenderer,
-            tagRenderer: searchSelectTagRenderer,
-        },
-    },
+    // {
+    //     name: 'members',
+    //     type: 'search-select',
+    //     wrapper: FloatLabelInputWrapper,
+    //     wrapperOptions: {
+    //         label: FORM.LABELS.MEMBERS,
+    //         className: 'league-form-members-input',
+    //     },
+    //     options: {
+    //         ref: React.createRef<any>(),
+    //         onSearch: (value: string) =>
+    //             LeaguesCreatePageContentLeagueSearchMemberActions.search(value),
+    //         mode: 'multiple',
+    //         debounce: 500,
+    //         optionRenderer: memberSearchSelectOptionRenderer,
+    //         tagRenderer: searchSelectTagRenderer,
+    //     },
+    // },
 ];
 
 export const validationSchema = Yup.object({
     name: Yup.string().required(FORM.VALIDATION.NAME_REQUIRED),
     avatar: Yup.string(),
-    members: Yup.array(),
+    // members: Yup.array(),
 });

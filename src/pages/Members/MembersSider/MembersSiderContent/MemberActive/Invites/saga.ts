@@ -22,13 +22,16 @@ function* init() {
 
 function* fetchData({ options = { page: 1, per_page: 10 } }: AnyAction) {
     try {
-        const { invites, _metadata: metadata } = yield call(
-            MemberService.fetchInvites,
-            options
+        const { members, _metadata: metadata } = yield call(
+            MemberService.fetchMembers,
+            {
+                ...options,
+                status: 'invited',
+            }
         );
         yield put(
             MembersPageSiderContentInvitesActions.fetchDataSuccess(
-                invites,
+                members,
                 metadata
             )
         );

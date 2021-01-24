@@ -3,10 +3,10 @@ import { combineReducers } from 'redux';
 export { default } from './LeagueForm';
 
 // Reducer
-import { reducer as searchReducer } from './LeagueFormSearch';
-export const reducer = combineReducers({
-    search: searchReducer,
-});
+// import { reducer as searchReducer } from './LeagueFormSearch';
+// export const reducer = combineReducers({
+//     search: searchReducer,
+// });
 
 // Saga
-export { LeaguesCreatePageContentLeagueSearchMemberSaga } from './LeagueFormSearch';
+// export { LeaguesCreatePageContentLeagueSearchMemberSaga } from './LeagueFormSearch';

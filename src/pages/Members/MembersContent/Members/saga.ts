@@ -37,6 +37,7 @@ function* fetchData({
         const { members, metadata } = yield call(MemberService.fetchMembers, {
             ...options,
             league_uuid: uuid,
+            status: 'active',
         });
         yield put(
             MembersPageContentMembersActions.fetchDataSuccess(members, metadata)

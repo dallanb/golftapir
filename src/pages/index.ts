@@ -94,7 +94,7 @@ export {
     reducer as leaguesCreatePage,
     LeaguesCreatePageSaga,
     LeaguesCreatePageContentLeagueSaga,
-    LeaguesCreatePageContentLeagueSearchMemberSaga,
+    // LeaguesCreatePageContentLeagueSearchMemberSaga,
     LeaguesCreatePageRoutes,
 } from './LeaguesCreate';
 export {

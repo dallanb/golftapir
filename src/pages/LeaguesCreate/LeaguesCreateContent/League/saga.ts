@@ -12,8 +12,7 @@ import { prepareInitialValues } from './utils';
 
 function* init({ options }: AnyAction) {
     try {
-        const me = yield select(selectMe);
-        const initialValues = prepareInitialValues({ me, members: [] });
+        const initialValues = prepareInitialValues();
         yield put(
             LeaguesCreatePageContentLeagueActions.setInitialValues(
                 initialValues

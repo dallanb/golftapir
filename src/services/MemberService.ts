@@ -72,25 +72,11 @@ export default {
             query,
         });
     },
-    createInvite(data: any, query: any = {}) {
+    createMember(data: any, query: any = {}) {
         return ClientProxy.post({
             url: config.MEMBER_URL,
-            endpoint: '/invites',
+            endpoint: '/members',
             data,
-            query,
-        });
-    },
-    fetchInvite(uuid: string, query: any = {}) {
-        return ClientProxy.get({
-            url: config.MEMBER_URL,
-            endpoint: `/invites/${uuid}`,
-            query,
-        });
-    },
-    fetchInvites(query: any = {}) {
-        return ClientProxy.get({
-            url: config.MEMBER_URL,
-            endpoint: '/invites',
             query,
         });
     },

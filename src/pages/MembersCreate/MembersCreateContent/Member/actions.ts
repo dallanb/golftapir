@@ -14,7 +14,7 @@ const { Types, Creators } = createActions(
         submitFailure: ['err'],
     },
     {
-        prefix: 'CONTESTS_CREATE_PAGE_CONTENT_CONTEST_',
+        prefix: 'MEMBERS_CREATE_PAGE_CONTENT_MEMBER_',
     }
 );
 export const MembersCreatePageContentMemberTypes = Types;

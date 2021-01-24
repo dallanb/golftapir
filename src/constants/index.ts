@@ -107,7 +107,7 @@ const constants = {
             CONTEST_ACTIVE: 'contest_active',
             CONTEST_COMPLETED: 'contest_completed',
         },
-        MEMBERS: {
+        LEAGUES: {
             MEMBER_PENDING: 'member_pending',
             MEMBER_ACTIVE: 'member_active',
         },

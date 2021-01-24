@@ -1,17 +1,20 @@
 import { AnyAction } from 'redux';
 import { all, call, put, select, takeLatest } from 'redux-saga/effects';
 import { message } from 'antd';
-import { omit as _omit, pick as _pick, isEmpty as _isEmpty } from 'lodash';
 import CONSTANTS from '@locale/en-CA';
 import { MemberService } from '@services';
 import MembersCreatePageContentMemberActions, {
     MembersCreatePageContentMemberTypes,
 } from './actions';
 import { prepareInitialValues } from './utils';
+import { selectLeagueUUID } from '@apps/LeagueApp/selector';
 
 function* init({ options = { email: null } }: AnyAction) {
     try {
-        const initialValues = prepareInitialValues(options);
+        const initialValues = prepareInitialValues({
+            ...options,
+            league_uuid: yield select(selectLeagueUUID),
+        });
         yield put(
             MembersCreatePageContentMemberActions.setInitialValues(
                 initialValues
@@ -23,11 +26,11 @@ function* init({ options = { email: null } }: AnyAction) {
     }
 }
 
-// TODO
 function* submit({ data }: AnyAction) {
+    // BUG
     try {
-        const { invites: result } = yield call(
-            MemberService.createInvite,
+        const { members: result } = yield call(
+            MemberService.createMember,
             data
         );
         yield put(MembersCreatePageContentMemberActions.setResult(result));
