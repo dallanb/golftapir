@@ -3,9 +3,9 @@ import { AnyAction } from 'redux';
 import MembersPageActions, { MembersPageTypes } from './actions';
 import { initMembers } from './helpers';
 import { selectLeagueUUID } from '@apps/LeagueApp/selector';
-import { fetchMyMemberUser } from '@helpers';
+import { fetchMyMembersMaterializedUser, fetchMyMemberUser } from '@helpers';
 import MembersPageContentMembersActions from './MembersContent/Members/actions';
-import { MemberService } from '@services';
+import { LeagueService, MemberService } from '@services';
 
 // Action Handlers
 
@@ -20,9 +20,8 @@ function* init({ uuid }: AnyAction) {
 
 function* refresh({ uuid }: AnyAction) {
     try {
-        yield call(fetchMyMemberUser, {
+        yield call(fetchMyMembersMaterializedUser, {
             league_uuid: uuid,
-            include: 'avatar',
         });
         yield put(MembersPageContentMembersActions.refresh());
         yield put(MembersPageActions.refreshSuccess());
@@ -33,7 +32,7 @@ function* refresh({ uuid }: AnyAction) {
 
 function* updateMemberStatus({ uuid, status }: AnyAction) {
     try {
-        yield call(MemberService.updateMember, uuid, { status });
+        yield call(LeagueService.updateMember, uuid, { status });
         uuid = yield select(selectLeagueUUID);
         yield put(MembersPageActions.refresh(uuid)); // this feels weird
         yield put(MembersPageActions.updateMemberStatusSuccess(uuid, status));

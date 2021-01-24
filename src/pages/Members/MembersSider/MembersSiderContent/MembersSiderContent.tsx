@@ -3,14 +3,14 @@ import SiderLayoutContent from '@layouts/SiderLayout/SiderLayoutContent';
 import { MembersSiderContentProps } from './types';
 import { useSelector } from 'react-redux';
 import { selectData } from '@pages/Members/selector';
-import { selectMyStatus } from '@selectors/BaseSelector';
+import { selectLeagueMemberStatus } from '@apps/LeagueApp/selector';
 import constants from '@constants';
 import MemberPending from './MemberPending';
 import MemberActive from './MemberActive';
 
 const MembersSiderContent: React.FunctionComponent<MembersSiderContentProps> = ({}) => {
     const { isInitialized } = useSelector(selectData);
-    const memberStatus = useSelector(selectMyStatus);
+    const memberStatus = useSelector(selectLeagueMemberStatus);
     const contentRenderer = (status: string) => {
         switch (status) {
             case constants.STATUS.PENDING.KEY:

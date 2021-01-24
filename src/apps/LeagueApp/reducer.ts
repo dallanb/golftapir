@@ -2,7 +2,7 @@
 import { static as Immutable } from 'seamless-immutable';
 import { createReducer } from 'reduxsauce';
 import { LeagueAppTypes } from './actions';
-import { AccountTypes } from '@actions';
+import { AccountTypes, LeagueTypes } from '@actions';
 
 /* ------------- Interface ------------- */
 export interface LeagueAppInterface {
@@ -11,6 +11,7 @@ export interface LeagueAppInterface {
     readonly isInitialized: boolean;
     readonly err?: Error;
     readonly league: any;
+    readonly leagueMember: any;
 }
 
 /* ------------- Initial State ------------- */
@@ -20,6 +21,7 @@ const INITIAL_STATE: LeagueAppInterface = {
     isInitialized: false,
     err: undefined,
     league: undefined,
+    leagueMember: undefined,
 };
 
 /* ------------- Reducers ------------- */
@@ -77,6 +79,21 @@ function set(state: any, { data }: any) {
     });
 }
 
+function fetchLeagueSuccess(state: any, { data: league }: any) {
+    return Immutable.merge(state, {
+        league,
+    });
+}
+
+function fetchMyMembersMaterializedUserSuccess(
+    state: any,
+    { data: leagueMember }: any
+) {
+    return Immutable.merge(state, {
+        leagueMember,
+    });
+}
+
 const HANDLERS = {
     [LeagueAppTypes.INIT]: init,
     [LeagueAppTypes.INIT_SUCCESS]: initSuccess,
@@ -86,6 +103,8 @@ const HANDLERS = {
     [LeagueAppTypes.REFRESH_FAILURE]: refreshFailure,
     [LeagueAppTypes.TERMINATE]: terminate,
     [LeagueAppTypes.SET]: set,
+    [LeagueTypes.FETCH_LEAGUE_SUCCESS]: fetchLeagueSuccess,
+    [LeagueTypes.FETCH_MY_MEMBERS_MATERIALIZED_USER_SUCCESS]: fetchMyMembersMaterializedUserSuccess,
 };
 
 export const reducer = createReducer(INITIAL_STATE, HANDLERS);

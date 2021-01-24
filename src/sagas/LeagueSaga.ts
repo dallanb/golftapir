@@ -51,11 +51,29 @@ function* updateLeague({ uuid, values }: AnyAction) {
     }
 }
 
+function* fetchMyMembersMaterializedUser({ options }: AnyAction) {
+    try {
+        const res = yield call(
+            LeagueService.fetchMembersMaterializedUser,
+            'me',
+            options
+        );
+        const { members } = res;
+        yield put(LeagueActions.fetchMyMembersMaterializedUserSuccess(members));
+    } catch (err) {
+        yield put(LeagueActions.fetchMyMembersMaterializedUserFailure(err));
+    }
+}
+
 export default function* LeagueSaga() {
     yield all([
         takeLatest(LeagueTypes.FETCH_LEAGUE, fetchLeague),
         takeLatest(LeagueTypes.FETCH_LEAGUES, fetchLeagues),
         takeLatest(LeagueTypes.FETCH_MY_LEAGUES, fetchMyLeagues),
         takeLatest(LeagueTypes.UPDATE_LEAGUE, updateLeague),
+        takeLatest(
+            LeagueTypes.FETCH_MY_MEMBERS_MATERIALIZED_USER,
+            fetchMyMembersMaterializedUser
+        ),
     ]);
 }

@@ -3,17 +3,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Button } from 'antd';
 import { MemberPendingProps } from './types';
 import MembersPageActions from '@pages/Members/actions';
-import { selectMe } from '@selectors/BaseSelector';
+import {selectLeagueMember} from "@apps/LeagueApp/selector";
 import constants from '@constants';
 import './MemberPending.less';
 
 const MemberPending: React.FunctionComponent<MemberPendingProps> = () => {
     const dispatch = useDispatch();
-    const me = useSelector(selectMe);
+    const member = useSelector(selectLeagueMember);
     const handleAcceptClick = () => {
         dispatch(
             MembersPageActions.updateMemberStatus(
-                me.uuid,
+                member.uuid,
                 constants.STATUS.ACTIVE.KEY
             )
         );
@@ -22,7 +22,7 @@ const MemberPending: React.FunctionComponent<MemberPendingProps> = () => {
     const handleDeclineClick = () => {
         dispatch(
             MembersPageActions.updateMemberStatus(
-                me.uuid,
+                member.uuid,
                 constants.STATUS.INACTIVE.KEY
             )
         );

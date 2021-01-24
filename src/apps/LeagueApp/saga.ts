@@ -13,16 +13,19 @@ import LeagueAppActions, { LeagueAppTypes } from './actions';
 import {
     AuthActions,
     AuthTypes,
-    LeagueActions,
-    LeagueTypes,
     NotificationActions,
     NotificationTypes,
     SocketActions,
 } from '@actions';
 import { FirebaseClient } from '@libs';
 import { socketEventHandlers } from '@apps/LeagueApp/utils';
-import { ClientProxy } from '@services';
-import { fetchMyLeagues, fetchMyMemberUser } from '@helpers';
+import { ClientProxy, LeagueService } from '@services';
+import {
+    fetchLeague,
+    fetchMyLeagues,
+    fetchMyMembersMaterializedUser,
+    fetchMyMemberUser,
+} from '@helpers';
 
 // Action Handlers
 function* preInit({ data: league }: AnyAction) {
@@ -51,8 +54,13 @@ function* init({ uuid }: AnyAction) {
             include: 'avatar',
         });
 
-        const { data: league } = yield call(fetchLeague, uuid);
-        yield put(LeagueAppActions.set({ league }));
+        yield call(fetchLeague, uuid, {
+            include: 'avatar',
+        });
+
+        yield call(fetchMyMembersMaterializedUser, {
+            league_uuid: uuid,
+        });
 
         // prepare notifications
         const token = yield call(requestToken);
@@ -81,8 +89,14 @@ function* refresh({ uuid }: AnyAction) {
             league_uuid: uuid,
             include: 'avatar,stat',
         });
-        const { data: league } = yield call(fetchLeague, uuid);
-        yield put(LeagueAppActions.set({ league }));
+
+        yield call(fetchLeague, uuid, {
+            include: 'avatar',
+        });
+
+        yield call(fetchMyMembersMaterializedUser, {
+            league_uuid: uuid,
+        });
         yield put(LeagueAppActions.refreshSuccess());
     } catch (err) {
         yield put(LeagueAppActions.refreshFailure(err));
@@ -113,24 +127,6 @@ function* refreshAuth() {
         yield put(AuthActions.refreshFailure());
         throw new Error('refresh failure');
     }
-}
-
-function* fetchLeague(uuid: string) {
-    yield put(
-        LeagueActions.fetchLeague(uuid, {
-            include: 'avatar',
-        })
-    );
-    const { success, failure } = yield race({
-        success: take(LeagueTypes.FETCH_LEAGUE_SUCCESS),
-        failure: take(LeagueTypes.FETCH_LEAGUE_FAILURE),
-    });
-
-    if (failure) {
-        throw new Error(failure);
-    }
-
-    return success;
 }
 
 function* requestToken() {

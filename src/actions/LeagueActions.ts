@@ -14,6 +14,9 @@ const { Types, Creators } = createActions(
         updateLeague: ['uuid', 'values'],
         updateLeagueSuccess: ['data'],
         updateLeagueFailure: ['err'],
+        fetchMyMembersMaterializedUser: ['options'],
+        fetchMyMembersMaterializedUserSuccess: ['data'],
+        fetchMyMembersMaterializedUserFailure: ['err'],
     },
     {
         prefix: 'LEAGUE_',

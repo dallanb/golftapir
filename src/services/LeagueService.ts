@@ -78,6 +78,13 @@ export default {
             query,
         });
     },
+    fetchMembersMaterializedUser(uuid: string, query: any = {}) {
+        return ClientProxy.get({
+            url: config.LEAGUE_URL,
+            endpoint: `/members/materialized/user/${uuid}`,
+            query,
+        });
+    },
     createMember(uuid: string, data: any = {}) {
         return ClientProxy.post({
             url: config.LEAGUE_URL,
