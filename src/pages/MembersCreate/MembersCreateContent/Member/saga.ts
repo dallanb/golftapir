@@ -2,12 +2,13 @@ import { AnyAction } from 'redux';
 import { all, call, put, select, takeLatest } from 'redux-saga/effects';
 import { message } from 'antd';
 import CONSTANTS from '@locale/en-CA';
-import { MemberService } from '@services';
+import { LeagueService } from '@services';
 import MembersCreatePageContentMemberActions, {
     MembersCreatePageContentMemberTypes,
 } from './actions';
 import { prepareInitialValues } from './utils';
 import { selectLeagueUUID } from '@apps/LeagueApp/selector';
+import { get as _get, omit as _omit } from 'lodash';
 
 function* init({ options = { email: null } }: AnyAction) {
     try {
@@ -29,9 +30,12 @@ function* init({ options = { email: null } }: AnyAction) {
 function* submit({ data }: AnyAction) {
     // BUG
     try {
+        const memberData = _omit(data, ['league_uuid']); // TODO: will have to handle a country update in members
+        const uuid = _get(data, ['league_uuid']);
         const { members: result } = yield call(
-            MemberService.createMember,
-            data
+            LeagueService.createMember,
+            uuid,
+            memberData
         );
         yield put(MembersCreatePageContentMemberActions.setResult(result));
         yield put(MembersCreatePageContentMemberActions.submitSuccess());

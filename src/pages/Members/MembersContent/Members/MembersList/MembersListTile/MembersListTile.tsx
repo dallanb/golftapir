@@ -32,7 +32,7 @@ const MembersListTile: React.FunctionComponent<MembersListTileProps> = ({
     };
 
     const name = getName(item, 'Loading...');
-    const avatar = _get(item, ['avatar', 's3_filename'], undefined);
+    const avatar = _get(item, ['avatar'], undefined);
     const src = avatar && withS3URL(avatar, constants.S3_FOLDERS.MEMBER.AVATAR);
     const country = _get(item, ['country'], undefined);
     const status = _get(item, ['status'], undefined);

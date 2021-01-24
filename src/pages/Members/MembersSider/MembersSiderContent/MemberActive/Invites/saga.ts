@@ -1,6 +1,6 @@
 import { AnyAction } from 'redux';
 import { all, call, delay, put, select, takeLatest } from 'redux-saga/effects';
-import { MemberService } from '@services';
+import { LeagueService } from '@services';
 import { selectLeagueUUID } from '@apps/LeagueApp/selector';
 import MembersPageSiderContentInvitesActions, {
     MembersPageSiderContentInvitesTypes,
@@ -23,7 +23,7 @@ function* init() {
 function* fetchData({ options = { page: 1, per_page: 10 } }: AnyAction) {
     try {
         const { members, _metadata: metadata } = yield call(
-            MemberService.fetchMembers,
+            LeagueService.fetchMembersMaterialized,
             {
                 ...options,
                 status: 'invited',

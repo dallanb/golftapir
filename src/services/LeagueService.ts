@@ -64,10 +64,17 @@ export default {
             query,
         });
     },
-    fetchMembers(uuid: string, query: any = {}) {
+    fetchMembers(query: any = {}) {
         return ClientProxy.get({
             url: config.LEAGUE_URL,
             endpoint: `/members`,
+            query,
+        });
+    },
+    fetchMembersMaterialized(query: any = {}) {
+        return ClientProxy.get({
+            url: config.LEAGUE_URL,
+            endpoint: `/members/materialized`,
             query,
         });
     },

@@ -29,16 +29,18 @@ function* fetchData({
     options = {
         page: 1,
         per_page: 10,
-        include: 'avatar',
     },
 }: AnyAction) {
     try {
         const uuid = yield select(selectLeagueUUID);
-        const { members, metadata } = yield call(MemberService.fetchMembers, {
-            ...options,
-            league_uuid: uuid,
-            status: 'active',
-        });
+        const { members, metadata } = yield call(
+            LeagueService.fetchMembersMaterialized,
+            {
+                ...options,
+                league_uuid: uuid,
+                status: 'active',
+            }
+        );
         yield put(
             MembersPageContentMembersActions.fetchDataSuccess(members, metadata)
         );
