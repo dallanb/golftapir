@@ -104,7 +104,7 @@ const HANDLERS = {
     [LeagueAppTypes.TERMINATE]: terminate,
     [LeagueAppTypes.SET]: set,
     [LeagueTypes.FETCH_LEAGUE_SUCCESS]: fetchLeagueSuccess,
-    [LeagueTypes.FETCH_MY_MEMBERS_MATERIALIZED_USER_SUCCESS]: fetchMyMembersMaterializedUserSuccess,
+    [LeagueTypes.FETCH_MY_MEMBERS_MATERIALIZED_USER_SUCCESS]: fetchMyMembersMaterializedUserSuccess, //TODO: SHOULD THIS BE HERE
 };
 
 export const reducer = createReducer(INITIAL_STATE, HANDLERS);
