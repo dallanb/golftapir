@@ -58,4 +58,11 @@ export default {
             endpoint: `/invites/token/${token}`,
         });
     },
+    forgotPassword(data: { email: string }) {
+        return ClientProxy.post({
+            url: config.AUTH_URL,
+            endpoint: `/forgot_password`,
+            data,
+        });
+    },
 };

@@ -18,6 +18,12 @@ const { Types, Creators } = createActions(
         logout: null,
         logoutSuccess: null,
         logoutFailure: ['err'],
+        forgotPassword: ['email'],
+        forgotPasswordSuccess: null,
+        forgotPasswordFailure: ['err'],
+        resetPassword: ['password'],
+        resetPasswordSuccess: null,
+        resetPasswordFailure: ['err'],
     },
     {
         prefix: 'AUTH_',

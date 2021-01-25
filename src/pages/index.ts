@@ -60,6 +60,12 @@ export {
     ContestUpdatePageRoutes,
 } from './ContestUpdate';
 export {
+    default as ForgotPassword,
+    reducer as forgotPasswordPage,
+    ForgotPasswordPageSaga,
+    ForgotPasswordPageRoutes,
+} from './ForgotPassword';
+export {
     default as Home,
     reducer as homePage,
     HomePageSaga,

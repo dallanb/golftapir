@@ -4,6 +4,8 @@ import { all, fork } from 'redux-saga/effects';
 import { createLogger } from 'redux-logger';
 import { authReducer as auth, baseReducer as base } from '@reducers';
 import {
+    forgotPasswordPage,
+    ForgotPasswordPageSaga,
     loginPage,
     LoginPageSaga,
     logoutPage,
@@ -37,6 +39,7 @@ function configStore(options?: { preloadedState: any }): any {
         combineReducers({
             auth,
             base,
+            forgotPasswordPage,
             loginPage,
             logoutPage,
             registerPage,
@@ -53,6 +56,7 @@ function configStore(options?: { preloadedState: any }): any {
     function* memberAppSaga() {
         yield all([
             fork(AuthSaga),
+            fork(ForgotPasswordPageSaga),
             fork(LoginPageSaga),
             fork(LogoutPageSaga),
             fork(RegisterPageSaga),

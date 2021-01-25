@@ -20,6 +20,7 @@ const CONSTANTS = {
             LOGOUT: 'Logout successful!',
             REGISTER: 'Registration successful!',
             VERIFY: 'Verification successful!',
+            FORGOT_PASSWORD: 'Forgot Password Email delivered!',
         },
         ERROR: {
             LOGIN: 'Login unsuccessful',
@@ -27,6 +28,7 @@ const CONSTANTS = {
             REGISTER: 'Registration unsuccessful',
             SESSION: 'Session expired',
             VERIFY: 'Verification unsuccessful',
+            FORGOT_PASSWORD: 'Forgot Password Email unsuccessful!',
         },
     },
     CONTEST: {
@@ -182,6 +184,20 @@ const CONSTANTS = {
         VERIFY: {
             TITLE: 'Account Verification',
             DESCRIPTION: 'Verify your email address',
+        },
+        FORGOT_PASSWORD: {
+            TITLE: 'Forgot Password',
+            DESCRIPTION: 'Recover forgotten password',
+            FORM: {
+                SUBMIT: 'Recover',
+                LABELS: {
+                    EMAIL: 'Email',
+                },
+                VALIDATION: {
+                    EMAIL_REQUIRED: 'Please input an email address!',
+                    EMAIL_TYPE: 'Please input a valid email address',
+                },
+            },
         },
         HOME: {
             TITLE: 'Home',

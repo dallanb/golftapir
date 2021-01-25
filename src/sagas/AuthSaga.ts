@@ -107,6 +107,17 @@ function* logout() {
     }
 }
 
+function* forgotPassword({ email }: AnyAction) {
+    try {
+        yield call(AuthService.forgotPassword, { email });
+        yield put(AuthActions.forgotPasswordSuccess());
+        message.success(CONSTANTS.AUTH.SUCCESS.FORGOT_PASSWORD);
+    } catch (err) {
+        yield put(AuthActions.forgotPasswordFailure(err));
+        message.error(CONSTANTS.AUTH.ERROR.FORGOT_PASSWORD);
+    }
+}
+
 export function* tokenCheck(expiry: number) {
     const chan = yield call(countdown, expiry);
     try {
@@ -129,5 +140,6 @@ export default function* AuthSaga() {
         takeLatest(AuthTypes.VERIFY, verify),
         takeLatest(AuthTypes.REFRESH, refresh),
         takeLatest(AuthTypes.LOGOUT, logout),
+        takeLatest(AuthTypes.FORGOT_PASSWORD, forgotPassword),
     ]);
 }
