@@ -16,15 +16,15 @@ export const selectLeague = createSelector([getLeagueApp], (leagueApp) =>
 );
 
 export const selectLeagueUUID = createSelector([getLeagueApp], (leagueApp) =>
-    _get(leagueApp, ['league', 'uuid'], null)
+    _get(leagueApp, ['league', 'data', 'uuid'], null)
 );
 
 export const selectLeagueName = createSelector([getLeagueApp], (leagueApp) =>
-    _get(leagueApp, ['league', 'name'], undefined)
+    _get(leagueApp, ['league', 'data', 'name'], undefined)
 );
 
 export const selectLeagueAvatar = createSelector([getLeagueApp], (leagueApp) =>
-    _get(leagueApp, ['league', 'avatar'], undefined)
+    _get(leagueApp, ['league', 'data', 'avatar'], undefined)
 );
 
 export const selectLeagueAvatarSrc = createSelector(
@@ -32,7 +32,7 @@ export const selectLeagueAvatarSrc = createSelector(
     (leagueApp) => {
         const filename = _get(
             leagueApp,
-            ['league', 'avatar', 's3_filename'],
+            ['league', 'data', 'avatar', 's3_filename'],
             undefined
         );
         return (
@@ -44,7 +44,7 @@ export const selectLeagueAvatarSrc = createSelector(
 export const selectIsLeagueOwner = createSelector(
     [getLeagueApp, getBase],
     (leagueApp, base) =>
-        _get(leagueApp, ['league', 'owner_uuid'], undefined) ===
+        _get(leagueApp, ['league', 'data', 'owner_uuid'], undefined) ===
         _get(base, ['me', 'user_uuid'], null)
 );
 
@@ -54,5 +54,6 @@ export const selectLeagueMember = createSelector([getLeagueApp], (leagueApp) =>
 
 export const selectLeagueMemberStatus = createSelector(
     [getLeagueApp],
-    (leagueApp) => _get(leagueApp, ['leagueMember', 'status'], undefined)
+    (leagueApp) =>
+        _get(leagueApp, ['leagueMember', 'data', 'status'], undefined)
 );

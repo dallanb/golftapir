@@ -32,6 +32,6 @@ export const selectMemberAvatarSrc = createSelector(
 export const selectIsMe = createSelector(
     [getMemberPage, getBase],
     (memberPage, base) =>
-        _get(memberPage, ['member', 'uuid'], undefined) ===
+        _get(memberPage, ['member', 'member'], undefined) ===
         _get(base, ['me', 'uuid'], undefined)
 );

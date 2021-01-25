@@ -7,7 +7,7 @@ const FORM = CONSTANTS.PAGES.MEMBER.FORM;
 
 export const fieldSchema = [
     {
-        name: 'avatar',
+        name: 'avatar.s3_filename',
         type: 'avatar',
         options: {
             s3Folder: constants.S3_FOLDERS.MEMBER.AVATAR,

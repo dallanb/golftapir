@@ -4,7 +4,7 @@ import MemberPageActions, { MemberPageTypes } from './actions';
 import { initMember } from './helpers';
 import { selectLeagueUUID } from '@apps/LeagueApp/selector';
 import { fetchMyMemberUser } from '@helpers';
-import { MemberService } from '@services';
+import { LeagueService } from '@services';
 
 // Action Handlers
 function* preInit({ data: member }: AnyAction) {
@@ -13,7 +13,14 @@ function* preInit({ data: member }: AnyAction) {
 
 function* init({ uuid }: AnyAction) {
     try {
-        yield call(initMember, uuid);
+        const { members: member } = yield call(
+            LeagueService.fetchMemberMaterialized,
+            uuid,
+            {
+                league_uuid: yield select(selectLeagueUUID),
+            }
+        );
+        yield put(MemberPageActions.set({ member }));
         yield put(MemberPageActions.initSuccess());
     } catch (err) {
         yield put(MemberPageActions.initFailure(err));

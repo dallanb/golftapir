@@ -221,7 +221,7 @@ const fieldRenderer = (
                         null
                     )}
                     src={withS3URL(
-                        _get(value, ['s3_filename'], undefined),
+                        value,
                         _get(
                             options,
                             ['s3Folder'],
