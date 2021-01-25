@@ -67,9 +67,14 @@ class LeagueAppView extends React.Component<
 
     componentDidUpdate(prevProps: LeagueAppViewProps) {
         const { leagueUUID: prevLeagueUUID } = prevProps;
-        const { isReady, refresh, match } = this.props;
+        const { isReady, isFetching, refresh, match } = this.props;
         const leagueUUID = _get(match, ['params', 'league_uuid'], null);
-        if (isReady && prevLeagueUUID !== leagueUUID) {
+        if (
+            isReady &&
+            !isFetching &&
+            prevLeagueUUID &&
+            prevLeagueUUID !== leagueUUID
+        ) {
             refresh(leagueUUID);
         }
     }
@@ -144,17 +149,18 @@ class LeagueAppView extends React.Component<
 }
 
 const mapStateToProps = ({ leagueApp, base }: any) => {
-    const { isInitialized, isRefreshing, league } = leagueApp;
+    const { isInitialized, isRefreshing, isFetching, league } = leagueApp;
     const { me, isLoggedIn, forceLogout } = base;
 
-    const leagueUUID = _get(league, ['uuid'], '');
+    const leagueUUID = _get(league, ['data', 'uuid'], undefined);
     const name = _get(me, ['display_name'], '');
     const avatar = _get(me, ['avatar', 's3_filename'], '');
-    const leagueName = _get(league, ['name'], '');
+    const leagueName = _get(league, ['data', 'name'], '');
     const leagueAvatar = withS3URL(
-        _get(league, ['avatar', 's3_filename'], null),
+        _get(league, ['data', 'avatar', 's3_filename'], null),
         constants.S3_FOLDERS.LEAGUE.AVATAR
     );
+    const leagueIsFetching = _get(league, ['isFetching'], false);
     const menuProps = {
         paths: {
             [constantRoutes.ROUTES.LEAGUE_HOME.KEY]: {
@@ -182,6 +188,7 @@ const mapStateToProps = ({ leagueApp, base }: any) => {
         name,
         avatar,
         leagueUUID,
+        isFetching: isFetching || leagueIsFetching,
         isReady: isInitialized && !isRefreshing,
         isLoggedIn,
         forceLogout,

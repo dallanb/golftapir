@@ -20,12 +20,7 @@ import {
 import { FirebaseClient } from '@libs';
 import { socketEventHandlers } from '@apps/LeagueApp/utils';
 import { ClientProxy, LeagueService } from '@services';
-import {
-    fetchLeague,
-    fetchMyLeagues,
-    fetchMyMembersMaterializedUser,
-    fetchMyMemberUser,
-} from '@helpers';
+import { fetchMyLeagues, fetchMyMemberUser } from '@helpers';
 
 // Action Handlers
 function* preInit({ data: league }: AnyAction) {
@@ -54,13 +49,17 @@ function* init({ uuid }: AnyAction) {
             include: 'avatar',
         });
 
-        yield call(fetchLeague, uuid, {
-            include: 'avatar',
-        });
+        yield put(
+            LeagueAppActions.fetchLeague(uuid, {
+                include: 'avatar',
+            })
+        );
 
-        yield call(fetchMyMembersMaterializedUser, {
-            league_uuid: uuid,
-        });
+        yield put(
+            LeagueAppActions.fetchLeagueMember('me', {
+                league_uuid: uuid,
+            })
+        );
 
         // prepare notifications
         const token = yield call(requestToken);
@@ -90,13 +89,17 @@ function* refresh({ uuid }: AnyAction) {
             include: 'avatar,stat',
         });
 
-        yield call(fetchLeague, uuid, {
-            include: 'avatar',
-        });
+        yield put(
+            LeagueAppActions.fetchLeague(uuid, {
+                include: 'avatar',
+            })
+        );
 
-        yield call(fetchMyMembersMaterializedUser, {
-            league_uuid: uuid,
-        });
+        yield put(
+            LeagueAppActions.fetchLeagueMember('me', {
+                league_uuid: uuid,
+            })
+        );
         yield put(LeagueAppActions.refreshSuccess());
     } catch (err) {
         yield put(LeagueAppActions.refreshFailure(err));
@@ -108,6 +111,32 @@ function* terminate() {
         yield put(SocketActions.terminate());
     } catch (err) {
         console.error(err);
+    }
+}
+
+function* fetchLeague({ uuid, options }: AnyAction) {
+    try {
+        const { leagues: league } = yield call(
+            LeagueService.fetchLeague,
+            uuid,
+            options
+        );
+        yield put(LeagueAppActions.fetchLeagueSuccess(league));
+    } catch (err) {
+        yield put(LeagueAppActions.fetchLeagueFailure(err));
+    }
+}
+
+function* fetchLeagueMember({ uuid, options }: AnyAction) {
+    try {
+        const { members: leagueMember } = yield call(
+            LeagueService.fetchMembersMaterializedUser,
+            uuid,
+            options
+        );
+        yield put(LeagueAppActions.fetchLeagueMemberSuccess(leagueMember));
+    } catch (err) {
+        yield put(LeagueAppActions.fetchLeagueMemberFailure(err));
     }
 }
 
@@ -140,5 +169,7 @@ export default function* LeagueAppSaga() {
         takeLatest(LeagueAppTypes.INIT, init),
         takeLatest(LeagueAppTypes.REFRESH, refresh),
         takeLatest(LeagueAppTypes.TERMINATE, terminate),
+        takeLatest(LeagueAppTypes.FETCH_LEAGUE, fetchLeague),
+        takeLatest(LeagueAppTypes.FETCH_LEAGUE_MEMBER, fetchLeagueMember),
     ]);
 }

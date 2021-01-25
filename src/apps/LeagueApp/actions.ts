@@ -11,6 +11,12 @@ const { Types, Creators } = createActions(
         refreshSuccess: null,
         refreshFailure: ['err'],
         set: ['data'],
+        fetchLeague: ['uuid', 'options'],
+        fetchLeagueSuccess: ['league'],
+        fetchLeagueFailure: ['err'],
+        fetchLeagueMember: ['uuid', 'options'],
+        fetchLeagueMemberSuccess: ['leagueMember'],
+        fetchLeagueMemberFailure: ['err'],
     },
     {
         prefix: 'LEAGUE_APP_',

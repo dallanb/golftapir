@@ -29,14 +29,19 @@ const MemberAppLayout: React.FunctionComponent<MemberAppLayoutProps> = ({
         history.push(path);
     };
 
-    const menuItems = menuRoutes.map((route: any, index: number) =>
-        menuItemRenderer({
-            index,
-            onClick: menuItemOnClick,
-            route,
-            menuProps,
-        })
-    );
+    const menuItemsRenderer = (
+        rendererMenuRoutes: any,
+        rendererMenuProps: any
+    ) => {
+        return rendererMenuRoutes.map((route: any, index: number) =>
+            menuItemRenderer({
+                index,
+                onClick: menuItemOnClick,
+                route,
+                menuProps: rendererMenuProps,
+            })
+        );
+    };
 
     return (
         <Layout className="member-app-layout-view">
@@ -58,7 +63,7 @@ const MemberAppLayout: React.FunctionComponent<MemberAppLayoutProps> = ({
                     className="member-app-sider-layout-menu"
                     mode="inline"
                 >
-                    {menuItems}
+                    {menuItemsRenderer(menuRoutes, menuProps)}
                 </Menu>
             </Sider>
             {children}

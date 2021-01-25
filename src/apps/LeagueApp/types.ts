@@ -6,6 +6,7 @@ export interface LeagueAppViewProps extends RouteComponentProps {
     avatar: string;
     isReady: boolean;
     isLoggedIn: boolean;
+    isFetching: boolean;
     forceLogout: boolean;
     menuProps: any;
     refresh: (uuid: string) => void;

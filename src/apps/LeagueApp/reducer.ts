@@ -20,8 +20,16 @@ const INITIAL_STATE: LeagueAppInterface = {
     isRefreshing: false,
     isInitialized: false,
     err: undefined,
-    league: undefined,
-    leagueMember: undefined,
+    league: {
+        isFetching: false,
+        data: undefined,
+        err: undefined,
+    },
+    leagueMember: {
+        isFetching: false,
+        data: undefined,
+        err: undefined,
+    },
 };
 
 /* ------------- Reducers ------------- */
@@ -79,21 +87,61 @@ function set(state: any, { data }: any) {
     });
 }
 
-function fetchLeagueSuccess(state: any, { data: league }: any) {
+function fetchLeague(state: any) {
     return Immutable.merge(state, {
-        league,
+        league: {
+            isFetching: true,
+            data: undefined,
+            err: undefined,
+        },
     });
 }
 
-function fetchMyMembersMaterializedUserSuccess(
-    state: any,
-    { data: leagueMember }: any
-) {
+function fetchLeagueSuccess(state: any, { league: data }: any) {
     return Immutable.merge(state, {
-        leagueMember,
+        league: { ...state.league, isFetching: false, data },
     });
 }
 
+function fetchLeagueFailure(state: any, { err }: any) {
+    return Immutable.merge(state, {
+        league: {
+            isFetching: false,
+            data: undefined,
+            err,
+        },
+    });
+}
+
+function fetchLeagueMember(state: any) {
+    return Immutable.merge(state, {
+        leagueMember: {
+            isFetching: true,
+            data: undefined,
+            err: undefined,
+        },
+    });
+}
+
+function fetchLeagueMemberSuccess(state: any, { leagueMember: data }: any) {
+    return Immutable.merge(state, {
+        leagueMember: {
+            ...state.leagueMember,
+            isFetching: false,
+            data,
+        },
+    });
+}
+
+function fetchLeagueMemberFailure(state: any, { err }: any) {
+    return Immutable.merge(state, {
+        league: {
+            isFetching: false,
+            data: undefined,
+            err,
+        },
+    });
+}
 const HANDLERS = {
     [LeagueAppTypes.INIT]: init,
     [LeagueAppTypes.INIT_SUCCESS]: initSuccess,
@@ -103,8 +151,12 @@ const HANDLERS = {
     [LeagueAppTypes.REFRESH_FAILURE]: refreshFailure,
     [LeagueAppTypes.TERMINATE]: terminate,
     [LeagueAppTypes.SET]: set,
-    [LeagueTypes.FETCH_LEAGUE_SUCCESS]: fetchLeagueSuccess,
-    [LeagueTypes.FETCH_MY_MEMBERS_MATERIALIZED_USER_SUCCESS]: fetchMyMembersMaterializedUserSuccess, //TODO: SHOULD THIS BE HERE
+    [LeagueAppTypes.FETCH_LEAGUE]: fetchLeague,
+    [LeagueAppTypes.FETCH_LEAGUE_SUCCESS]: fetchLeagueSuccess,
+    [LeagueAppTypes.FETCH_LEAGUE_FAILURE]: fetchLeagueFailure,
+    [LeagueAppTypes.FETCH_LEAGUE_MEMBER]: fetchLeagueMember,
+    [LeagueAppTypes.FETCH_LEAGUE_MEMBER_SUCCESS]: fetchLeagueMemberSuccess,
+    [LeagueAppTypes.FETCH_LEAGUE_MEMBER_FAILURE]: fetchLeagueMemberFailure,
 };
 
 export const reducer = createReducer(INITIAL_STATE, HANDLERS);
