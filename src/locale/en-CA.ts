@@ -1,6 +1,7 @@
 const CONSTANTS = {
     FORM: {
         UPLOAD: 'Upload',
+        SUBMIT: 'Submit',
     },
     ACCOUNT: {
         ERROR: {
@@ -18,12 +19,14 @@ const CONSTANTS = {
             LOGIN: 'Login successful!',
             LOGOUT: 'Logout successful!',
             REGISTER: 'Registration successful!',
+            VERIFY: 'Verification successful!',
         },
         ERROR: {
             LOGIN: 'Login unsuccessful',
             LOGOUT: 'Logout unsuccessful',
             REGISTER: 'Registration unsuccessful',
             SESSION: 'Session expired',
+            VERIFY: 'Verification unsuccessful',
         },
     },
     CONTEST: {
@@ -128,7 +131,12 @@ const CONSTANTS = {
         LOGIN: {
             TITLE: 'Login',
             DESCRIPTION: 'Enter your login credentials',
+            BUTTONS: {
+                FORGOT_PASSWORD: 'Forgot your password?',
+                REGISTER: 'Register',
+            },
             FORM: {
+                SUBMIT: 'Login',
                 LABELS: {
                     EMAIL: 'Email',
                     PASSWORD: 'Password',
@@ -147,6 +155,7 @@ const CONSTANTS = {
             TITLE: 'Register',
             DESCRIPTION: 'Enter your information',
             FORM: {
+                SUBMIT: 'Register',
                 LABELS: {
                     USERNAME: 'Username',
                     EMAIL: 'Email',
@@ -169,6 +178,10 @@ const CONSTANTS = {
                     COUNTRY_REQUIRED: 'Country is required',
                 },
             },
+        },
+        VERIFY: {
+            TITLE: 'Account Verification',
+            DESCRIPTION: 'Verify your email address',
         },
         HOME: {
             TITLE: 'Home',

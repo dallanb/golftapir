@@ -10,6 +10,8 @@ import {
     LogoutPageSaga,
     registerPage,
     RegisterPageSaga,
+    verifyPage,
+    VerifyPageSaga,
 } from '@pages';
 import { AuthSaga } from '@sagas';
 import { get as _get } from 'lodash';
@@ -38,6 +40,7 @@ function configStore(options?: { preloadedState: any }): any {
             loginPage,
             logoutPage,
             registerPage,
+            verifyPage,
         }),
         _get(options, ['preloadedState'], {}),
         compose(
@@ -53,6 +56,7 @@ function configStore(options?: { preloadedState: any }): any {
             fork(LoginPageSaga),
             fork(LogoutPageSaga),
             fork(RegisterPageSaga),
+            fork(VerifyPageSaga),
         ]);
     }
     sagaMiddleware.run(memberAppSaga);

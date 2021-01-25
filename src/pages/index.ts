@@ -153,3 +153,9 @@ export {
     RegisterPageSaga,
     RegisterPageRoutes,
 } from './Register';
+export {
+    default as Verify,
+    reducer as verifyPage,
+    VerifyPageSaga,
+    VerifyPageRoutes,
+} from './Verify';

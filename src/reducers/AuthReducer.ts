@@ -8,7 +8,9 @@ export interface AuthInterface {
     readonly data: any;
     readonly isFetching: boolean;
     readonly isSubmitting: boolean;
+    readonly isVerifying: boolean;
     readonly isLoggedIn: boolean;
+    readonly isVerified?: boolean;
     readonly forceLogout: boolean;
     readonly err?: Error;
 }
@@ -18,7 +20,9 @@ const INITIAL_STATE: AuthInterface = {
     data: undefined,
     isFetching: false,
     isSubmitting: false,
+    isVerifying: false,
     isLoggedIn: false,
+    isVerified: undefined,
     forceLogout: false,
     err: undefined,
 };
@@ -66,6 +70,28 @@ function registerFailure(state: any, { err }: any) {
     return Immutable.merge(state, {
         isSubmitting: false,
         err,
+    });
+}
+
+function verify(state = INITIAL_STATE) {
+    return Immutable.merge(state, {
+        isVerifying: true,
+        isVerified: undefined,
+    });
+}
+
+function verifySuccess(state: any) {
+    return Immutable.merge(state, {
+        isVerifying: false,
+        isVerified: true,
+    });
+}
+
+function verifyFailure(state: any, { err }: any) {
+    return Immutable.merge(state, {
+        err,
+        isVerifying: false,
+        isVerified: false,
     });
 }
 function refresh(state = INITIAL_STATE) {
@@ -125,6 +151,9 @@ const HANDLERS = {
     [AuthTypes.REGISTER]: register,
     [AuthTypes.REGISTER_SUCCESS]: registerSuccess,
     [AuthTypes.REGISTER_FAILURE]: registerFailure,
+    [AuthTypes.VERIFY]: verify,
+    [AuthTypes.VERIFY_SUCCESS]: verifySuccess,
+    [AuthTypes.VERIFY_FAILURE]: verifyFailure,
     [AuthTypes.REFRESH]: refresh,
     [AuthTypes.REFRESH_SUCCESS]: refreshSuccess,
     [AuthTypes.REFRESH_FAILURE]: refreshFailure,

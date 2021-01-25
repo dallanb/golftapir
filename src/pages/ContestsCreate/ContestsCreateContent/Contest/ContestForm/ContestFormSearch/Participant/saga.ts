@@ -9,6 +9,7 @@ import ContestsCreatePageContentContestSearchParticipantActions, {
 // need to add search more somehow
 function* search({ key: search }: AnyAction) {
     try {
+        // update this to use LeagueService (need to add search to members materialized)
         const { members } = yield call(MemberService.fetchMembers, {
             page: 1,
             per_page: 10,

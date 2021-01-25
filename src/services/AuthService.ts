@@ -30,6 +30,14 @@ export default {
             headers: {},
         });
     },
+    verify(data: { token: string }) {
+        return ClientProxy.post({
+            url: config.AUTH_URL,
+            endpoint: `/verify`,
+            data: data,
+            headers: {},
+        });
+    },
     refresh() {
         return ClientProxy.get({
             url: config.AUTH_URL,

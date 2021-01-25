@@ -5,8 +5,10 @@ import { withRouter } from 'react-router-dom';
 import LoginForm from './LoginForm';
 import { LoginProps, StateProps } from './types';
 import LoginPageActions from './actions';
-import './Login.less';
 import routes from '@constants/routes';
+import Register from './Register';
+import ForgotPassword from './ForgotPassword';
+import './Login.less';
 
 class Login extends React.PureComponent<LoginProps> {
     componentDidMount() {
@@ -29,6 +31,8 @@ class Login extends React.PureComponent<LoginProps> {
         return (
             <div className="login-view">
                 <LoginForm />
+                <Register />
+                <ForgotPassword />
             </div>
         );
     }

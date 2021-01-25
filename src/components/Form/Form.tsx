@@ -6,6 +6,7 @@ import defaultFormRenderer from './defaultFormRenderer';
 import defaultFieldsRenderer from './defaultFieldsRenderer';
 import { FieldsRendererProps, FormProps, FormRendererProps } from './types';
 import './Form.less';
+import CONSTANTS from '@locale/en-CA';
 
 class Form extends React.Component<FormProps> {
     private readonly formRenderer: FormRendererProps;
@@ -30,15 +31,19 @@ class Form extends React.Component<FormProps> {
     };
 
     renderSubmit = (): JSX.Element | null => {
-        const { submitButton } = this.props;
+        const {
+            submitButton,
+            submitButtonProps = {},
+            submitButtonText = CONSTANTS.FORM.SUBMIT,
+        } = this.props;
 
         if (_isNull(submitButton) || submitButton) {
             return submitButton;
         }
         return (
             <AntdForm.Item className="form-submit-button">
-                <Button type="primary" htmlType="submit">
-                    Submit
+                <Button type="primary" htmlType="submit" {...submitButtonProps}>
+                    {submitButtonText}
                 </Button>
             </AntdForm.Item>
         );

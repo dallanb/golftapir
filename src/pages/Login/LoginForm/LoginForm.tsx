@@ -7,6 +7,7 @@ import { LoginFormProps } from './types';
 import { StateProps } from '../types';
 import { fieldSchema, validationSchema } from './schema';
 import './LoginForm.less';
+import CONSTANTS from '@locale/en-CA';
 
 class LoginForm extends React.PureComponent<LoginFormProps> {
     handleSubmit = (values: FormikValues) => {
@@ -23,6 +24,8 @@ class LoginForm extends React.PureComponent<LoginFormProps> {
                 validationSchema={validationSchema}
                 fieldSchema={fieldSchema}
                 onSubmit={this.handleSubmit}
+                submitButtonText={CONSTANTS.PAGES.LOGIN.FORM.SUBMIT}
+                submitButtonProps={{ block: true }}
             />
         );
     }

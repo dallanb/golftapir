@@ -16,3 +16,11 @@ export const selectForceLogout = createSelector([getAuth], (auth) =>
 export const selectAuthData = createSelector([getAuth], (auth) =>
     _get(auth, ['data'], false)
 );
+
+export const selectIsVerified = createSelector([getAuth], (auth) =>
+    _get(auth, ['isVerified'], undefined)
+);
+
+export const selectIsVerifying = createSelector([getAuth], (auth) =>
+    _get(auth, ['isVerifying'], undefined)
+);

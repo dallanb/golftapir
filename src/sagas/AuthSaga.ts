@@ -33,8 +33,14 @@ function* login({ email, password }: AnyAction) {
         yield put(AuthActions.loginSuccess(user, expiry));
         message.success(CONSTANTS.AUTH.SUCCESS.LOGIN);
     } catch (err) {
+        const {
+            response: {
+                data: { msg },
+                status,
+            },
+        } = err;
         yield put(AuthActions.loginFailure(err));
-        message.error(CONSTANTS.AUTH.ERROR.LOGIN);
+        message.error(status === 401 ? msg : CONSTANTS.AUTH.ERROR.LOGIN);
     }
 }
 
@@ -60,6 +66,17 @@ function* register({
     } catch (err) {
         yield put(AuthActions.registerFailure(err));
         message.error(CONSTANTS.AUTH.ERROR.REGISTER);
+    }
+}
+
+function* verify({ token }: AnyAction) {
+    try {
+        yield call(AuthService.verify, { token });
+        yield put(AuthActions.verifySuccess());
+        message.success(CONSTANTS.AUTH.SUCCESS.VERIFY);
+    } catch (err) {
+        yield put(AuthActions.verifyFailure(err));
+        message.error(CONSTANTS.AUTH.ERROR.VERIFY);
     }
 }
 
@@ -109,6 +126,7 @@ export default function* AuthSaga() {
         takeLatest(AuthTypes.PING, ping),
         takeLatest(AuthTypes.LOGIN, login),
         takeLatest(AuthTypes.REGISTER, register),
+        takeLatest(AuthTypes.VERIFY, verify),
         takeLatest(AuthTypes.REFRESH, refresh),
         takeLatest(AuthTypes.LOGOUT, logout),
     ]);

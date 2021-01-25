@@ -7,6 +7,7 @@ import { RegisterFormProps } from './types';
 import { StateProps } from '../types';
 import { fieldSchema, validationSchema } from './schema';
 import './RegisterForm.less';
+import CONSTANTS from '@locale/en-CA';
 
 class RegisterForm extends React.PureComponent<RegisterFormProps> {
     handleSubmit = (values: FormikValues) => {
@@ -24,6 +25,8 @@ class RegisterForm extends React.PureComponent<RegisterFormProps> {
                 validationSchema={validationSchema}
                 fieldSchema={fieldsSchema}
                 onSubmit={this.handleSubmit}
+                submitButtonText={CONSTANTS.PAGES.REGISTER.FORM.SUBMIT}
+                submitButtonProps={{ block: true }}
             />
         );
     }

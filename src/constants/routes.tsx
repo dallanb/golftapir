@@ -43,6 +43,20 @@ const routes = {
             LABEL: null,
             ICON: null,
         },
+        VERIFY: {
+            ROUTE: '/verify',
+            BASE_KEY: 'auth',
+            KEY: 'verify',
+            LABEL: null,
+            ICON: null,
+        },
+        FORGOT_PASSWORD: {
+            ROUTE: '/forgot_password',
+            BASE_KEY: 'auth',
+            KEY: 'forgot_password',
+            LABEL: null,
+            ICON: null,
+        },
         ACCOUNT: {
             ROUTE: '/settings',
             BASE_KEY: 'settings',
