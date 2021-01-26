@@ -1,0 +1,49 @@
+.contest-info-form {
+    > form {
+        display: flex;
+        flex-wrap: wrap;
+        .contest-info-form-avatar {
+            margin-bottom: 0;
+            margin-right: 24px;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px fade(@primary-color, 20%) dashed;
+        }
+        .contest-info-form-input-group {
+            display: flex;
+            flex-wrap: wrap;
+            width: 80%;
+            .contest-info-form-username-input {
+                width: 50%;
+                //padding-right: 8px;
+                .ant-form-item {
+                    margin-bottom: 0;
+                }
+            }
+            .contest-info-form-status-input {
+                width: 50%;
+                .ant-form-item {
+                    margin-bottom: 0;
+                    .ant-input-prefix {
+                        margin-right: 0;
+                    }
+                    .ant-input {
+                        padding-left: 0 !important;
+                    }
+                }
+            }
+            .contest-info-form-name-input {
+                width: 50%;
+                .ant-form-item {
+                    margin-bottom: 0;
+                }
+            }
+            .contest-info-form-created-at-input {
+                width: 50%;
+                .ant-form-item {
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+}

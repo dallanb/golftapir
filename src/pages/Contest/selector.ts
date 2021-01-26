@@ -11,6 +11,11 @@ export const selectData = createSelector(
     (contestPage) => contestPage
 );
 
+export const selectIsInitialized = createSelector(
+    [getContestPage],
+    (contestPage) => _get(contestPage, ['isInitialized'], false)
+);
+
 export const selectMembersHash = createSelector(
     [getContestPage],
     (contestPage) => _get(contestPage, ['membersHash'], {})

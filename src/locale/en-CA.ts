@@ -260,8 +260,17 @@ const CONSTANTS = {
         },
         CONTEST: {
             TITLE: 'Contest',
-            DESCRIPTION: 'League Info',
+            DESCRIPTION: 'Contest Info',
+            INFO: 'Contest Info',
             LEADERBOARD: 'Leaderboard',
+            FORM: {
+                LABELS: {
+                    NAME: 'Name',
+                    CREATED_AT: 'Created At',
+                    AVATAR: 'Avatar',
+                    STATUS: 'Status',
+                },
+            },
             STEPS: {
                 PENDING: {
                     TITLE: 'Pending',
