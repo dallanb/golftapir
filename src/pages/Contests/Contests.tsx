@@ -22,7 +22,7 @@ const Contests: React.FunctionComponent<ContestsProps> = () => {
 
     return (
         <ContentLayout
-            header={<ContestsHeader />}
+            // header={<ContestsHeader />}
             sider={<ContestsSider />}
             content={<ContestsContent />}
             // showSpinner={!isInitialized}

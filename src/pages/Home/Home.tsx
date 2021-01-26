@@ -22,7 +22,7 @@ const Home: React.FunctionComponent<HomeProps> = () => {
 
     return (
         <ContentLayout
-            header={<HomeHeader />}
+            // header={<HomeHeader />}
             content={<HomeContent />}
             sider={<HomeSider />}
             // showSpinner={!isInitialized}

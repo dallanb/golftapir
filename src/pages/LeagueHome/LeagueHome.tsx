@@ -26,7 +26,7 @@ const LeagueHome: React.FunctionComponent<LeagueHomeProps> = () => {
 
     return (
         <ContentLayout
-            header={<LeagueHomeHeader />}
+            // header={<LeagueHomeHeader />}
             content={<LeagueHomeContent />}
             sider={<LeagueHomeSider />}
             // showSpinner={!isInitialized}

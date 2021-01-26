@@ -24,7 +24,7 @@ const MemberSettings: React.FunctionComponent<MemberSettingsProps> = () => {
 
     return (
         <ContentLayout
-            header={<MemberSettingsHeader />}
+            // header={<MemberSettingsHeader />}
             content={<MemberSettingsContent />}
             sider={<MemberSettingsSider />}
             // showSpinner={!isInitialized}

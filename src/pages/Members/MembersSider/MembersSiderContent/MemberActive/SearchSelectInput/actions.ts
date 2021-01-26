@@ -5,7 +5,7 @@ const { Types, Creators } = createActions(
         search: ['key'],
         searchSuccess: ['data'],
         searchFailure: ['err'],
-        invite: ['uuid'],
+        invite: ['uuid', 'email'],
         inviteSuccess: null,
         inviteFailure: ['err'],
     },

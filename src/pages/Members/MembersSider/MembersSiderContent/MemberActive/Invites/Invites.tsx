@@ -25,6 +25,7 @@ const Invites: React.FunctionComponent<InvitesProps> = ({}) => {
             componentRef={ref}
             showSpinner={!isInitialized}
             className="invites"
+            title={'Invites'}
         >
             <InvitesList containerRef={ref} />
         </ComponentContent>

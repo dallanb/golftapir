@@ -25,6 +25,7 @@ const Notifications: React.FunctionComponent<NotificationsProps> = ({}) => {
             componentRef={ref}
             showSpinner={!isInitialized}
             className="notifications"
+            title={'Notifications List'}
         >
             <NotificationsList containerRef={ref} />
         </ComponentContent>

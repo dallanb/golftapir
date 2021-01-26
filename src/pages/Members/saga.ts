@@ -3,9 +3,9 @@ import { AnyAction } from 'redux';
 import MembersPageActions, { MembersPageTypes } from './actions';
 import { initMembers } from './helpers';
 import { selectLeagueUUID } from '@apps/LeagueApp/selector';
-import { fetchMyMembersMaterializedUser, fetchMyMemberUser } from '@helpers';
 import MembersPageContentMembersActions from './MembersContent/Members/actions';
-import { LeagueService, MemberService } from '@services';
+import { LeagueService } from '@services';
+import LeagueAppActions from '@apps/LeagueApp/actions';
 
 // Action Handlers
 
@@ -20,9 +20,11 @@ function* init({ uuid }: AnyAction) {
 
 function* refresh({ uuid }: AnyAction) {
     try {
-        yield call(fetchMyMembersMaterializedUser, {
-            league_uuid: uuid,
-        });
+        yield put(
+            LeagueAppActions.fetchLeagueMember('me', {
+                league_uuid: uuid,
+            })
+        ); // this is too fast
         yield put(MembersPageContentMembersActions.refresh());
         yield put(MembersPageActions.refreshSuccess());
     } catch (err) {

@@ -82,7 +82,7 @@ const fieldRenderer = (
                     placeholder={_get(options, ['placeholder'], undefined)}
                     prefix={
                         _get(options, ['prefixRenderer'], undefined) &&
-                        options.prefixRenderer()
+                        options.prefixRenderer(formik, { name, value })
                     }
                     autoComplete="off"
                     className={_get(options, ['className'], undefined)}

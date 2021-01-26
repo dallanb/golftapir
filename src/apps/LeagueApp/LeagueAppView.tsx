@@ -149,10 +149,10 @@ class LeagueAppView extends React.Component<
 }
 
 const mapStateToProps = ({ leagueApp, base }: any) => {
-    const { isInitialized, isRefreshing, isFetching, league } = leagueApp;
+    const { isInitialized, isRefreshing, isFetching, league, uuid } = leagueApp;
     const { me, isLoggedIn, forceLogout } = base;
 
-    const leagueUUID = _get(league, ['data', 'uuid'], undefined);
+    const leagueUUID = uuid;
     const name = _get(me, ['display_name'], '');
     const avatar = _get(me, ['avatar', 's3_filename'], '');
     const leagueName = _get(league, ['data', 'name'], '');

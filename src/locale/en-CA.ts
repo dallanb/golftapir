@@ -243,10 +243,19 @@ const CONSTANTS = {
             TITLE: 'League Home',
             DESCRIPTION: 'League Home Page',
             STANDINGS: 'Member Standings',
+            LEAGUE: 'League Info',
             STATS: {
                 WINS: 'Wins',
                 WIN_PERCENTAGE: 'Win Percentage',
                 WINNINGS: 'Winnings',
+            },
+            FORM: {
+                LABELS: {
+                    NAME: 'Name',
+                    CREATED_AT: 'Est.',
+                    AVATAR: 'Avatar',
+                    STATUS: 'Status',
+                },
             },
         },
         CONTEST: {

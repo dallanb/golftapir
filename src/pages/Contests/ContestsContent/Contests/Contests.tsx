@@ -7,6 +7,7 @@ import { selectData } from './selector';
 import ComponentContent from '@layouts/ComponentContent';
 import './Contests.less';
 import { selectMyLeagueUUID } from '@selectors/BaseSelector';
+import { ContentLayoutContent } from '@layouts';
 
 const Contests: React.FunctionComponent<ContestsProps> = ({}) => {
     const dispatch = useDispatch();
@@ -29,6 +30,7 @@ const Contests: React.FunctionComponent<ContestsProps> = ({}) => {
             componentRef={ref}
             showSpinner={!isInitialized}
             className="contests"
+            title={'Contests List'}
         >
             <ContestsList containerRef={ref} />
         </ComponentContent>

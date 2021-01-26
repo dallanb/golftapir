@@ -25,6 +25,7 @@ const Members: React.FunctionComponent<MembersProps> = ({}) => {
             componentRef={ref}
             showSpinner={!isInitialized || isRefreshing}
             className="members"
+            title={'Members List'}
         >
             <MembersList containerRef={ref} />
         </ComponentContent>

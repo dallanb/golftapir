@@ -19,6 +19,10 @@ export const selectLeague = createSelector([getLeagueApp], (leagueApp) =>
     _get(leagueApp, ['league'], undefined)
 );
 
+export const selectLeagueData = createSelector([getLeagueApp], (leagueApp) =>
+    _get(leagueApp, ['league', 'data'], undefined)
+);
+
 export const selectLeagueName = createSelector([getLeagueApp], (leagueApp) =>
     _get(leagueApp, ['league', 'data', 'name'], undefined)
 );
@@ -56,4 +60,13 @@ export const selectLeagueMemberStatus = createSelector(
     [getLeagueApp],
     (leagueApp) =>
         _get(leagueApp, ['leagueMember', 'data', 'status'], undefined)
+);
+
+export const selectIsInitialized = createSelector([getLeagueApp], (leagueApp) =>
+    _get(leagueApp, ['isInitialized'], false)
+);
+
+export const selectIsLeagueFetching = createSelector(
+    [getLeagueApp],
+    (leagueApp) => _get(leagueApp, ['league', 'isFetching'], true)
 );
