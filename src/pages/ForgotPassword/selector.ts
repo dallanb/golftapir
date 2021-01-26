@@ -13,6 +13,16 @@ export const selectIsInitialized = createSelector(
     (forgotPasswordPage) => _get(forgotPasswordPage, ['isInitialized'], false)
 );
 
+export const selectIsSubmitting = createSelector(
+    [getForgotPasswordPage],
+    (forgotPasswordPage) => _get(forgotPasswordPage, ['isSubmitting'], false)
+);
+
+export const selectIsSubmitted = createSelector(
+    [getForgotPasswordPage],
+    (forgotPasswordPage) => _get(forgotPasswordPage, ['isSubmitted'], false)
+);
+
 export const selectFormInitialValues = createSelector(
     [getForgotPasswordPage],
     (forgotPasswordPage) =>

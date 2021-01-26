@@ -3,17 +3,17 @@ import { static as Immutable } from 'seamless-immutable';
 import { createReducer } from 'reduxsauce';
 import { AuthTypes } from '@actions';
 import CONSTANTS from '@locale/en-CA';
-import { ForgotPasswordPageTypes } from './actions';
-import { ForgotPasswordPageInterface } from './types';
+import { ResetPasswordPageTypes } from './actions';
+import { ResetPasswordPageInterface } from './types';
 
 /* ------------- Initial State ------------- */
-const INITIAL_STATE: ForgotPasswordPageInterface = {
+const INITIAL_STATE: ResetPasswordPageInterface = {
     isInitialized: false,
     isSubmitting: false,
     isSubmitted: false,
     err: undefined,
-    title: CONSTANTS.PAGES.FORGOT_PASSWORD.TITLE,
-    description: CONSTANTS.PAGES.FORGOT_PASSWORD.DESCRIPTION,
+    title: CONSTANTS.PAGES.RESET_PASSWORD.TITLE,
+    description: CONSTANTS.PAGES.RESET_PASSWORD.DESCRIPTION,
     formInitialValues: undefined,
 };
 
@@ -78,15 +78,15 @@ function submitFailure(state: any) {
 }
 
 const HANDLERS = {
-    [ForgotPasswordPageTypes.INIT]: init,
-    [ForgotPasswordPageTypes.INIT_SUCCESS]: initSuccess,
-    [ForgotPasswordPageTypes.INIT_FAILURE]: initFailure,
-    [ForgotPasswordPageTypes.TERMINATE]: terminate,
-    [ForgotPasswordPageTypes.SET]: set,
-    [ForgotPasswordPageTypes.SET_FORM_INITIAL_VALUES]: setFormInitialValues,
-    [AuthTypes.FORGOT_PASSWORD]: submit,
-    [AuthTypes.FORGOT_PASSWORD_SUCCESS]: submitSuccess,
-    [AuthTypes.FORGOT_PASSWORD_FAILURE]: submitFailure,
+    [ResetPasswordPageTypes.INIT]: init,
+    [ResetPasswordPageTypes.INIT_SUCCESS]: initSuccess,
+    [ResetPasswordPageTypes.INIT_FAILURE]: initFailure,
+    [ResetPasswordPageTypes.TERMINATE]: terminate,
+    [ResetPasswordPageTypes.SET]: set,
+    [ResetPasswordPageTypes.SET_FORM_INITIAL_VALUES]: setFormInitialValues,
+    [AuthTypes.RESET_PASSWORD]: submit,
+    [AuthTypes.RESET_PASSWORD_SUCCESS]: submitSuccess,
+    [AuthTypes.RESET_PASSWORD_FAILURE]: submitFailure,
 };
 
 export const reducer = createReducer(INITIAL_STATE, HANDLERS);

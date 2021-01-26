@@ -2,8 +2,8 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { get as _get } from 'lodash';
-import { ForgotPasswordProps } from './types';
-import ForgotPasswordFormActions from './actions';
+import { ResetPasswordProps } from './types';
+import ResetPasswordFormActions from './actions';
 import {
     selectIsInitialized,
     selectIsSubmitted,
@@ -14,11 +14,10 @@ import { withAppRoute } from '@utils';
 import routes from '@constants/routes';
 import constants from '@constants';
 import { OverlaySpin } from '@components';
-import ForgotPasswordForm from './ForgotPasswordForm';
-import ForgotPasswordButtons from './ForgotPasswordButtons';
-import './ForgotPassword.less';
+import ResetPasswordForm from './ResetPasswordForm';
+import './ResetPassword.less';
 
-const ForgotPassword: React.FunctionComponent<ForgotPasswordProps> = () => {
+const ResetPassword: React.FunctionComponent<ResetPasswordProps> = () => {
     const history = useHistory();
     const dispatch = useDispatch();
     const isInitialized = useSelector(selectIsInitialized);
@@ -26,9 +25,9 @@ const ForgotPassword: React.FunctionComponent<ForgotPasswordProps> = () => {
     const isSubmitting = useSelector(selectIsSubmitting);
 
     useEffect(() => {
-        dispatch(ForgotPasswordFormActions.init());
+        dispatch(ResetPasswordFormActions.init());
         return () => {
-            dispatch(ForgotPasswordFormActions.terminate());
+            dispatch(ResetPasswordFormActions.terminate());
         };
     }, []);
 
@@ -45,13 +44,12 @@ const ForgotPassword: React.FunctionComponent<ForgotPasswordProps> = () => {
     return (
         <ComponentContent
             showSpinner={!isInitialized}
-            className="forgot-password-view"
+            className="reset-password-view"
         >
-            <ForgotPasswordForm />
-            <ForgotPasswordButtons />
+            <ResetPasswordForm />
             <OverlaySpin visible={isSubmitting} />
         </ComponentContent>
     );
 };
 
-export default ForgotPassword;
+export default ResetPassword;

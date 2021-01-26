@@ -118,6 +118,17 @@ function* forgotPassword({ email }: AnyAction) {
     }
 }
 
+function* resetPassword({ password, token }: AnyAction) {
+    try {
+        yield call(AuthService.resetPassword, { password, token });
+        yield put(AuthActions.resetPasswordSuccess());
+        message.success(CONSTANTS.AUTH.SUCCESS.RESET_PASSWORD);
+    } catch (err) {
+        yield put(AuthActions.resetPasswordFailure(err));
+        message.error(CONSTANTS.AUTH.ERROR.RESET_PASSWORD);
+    }
+}
+
 export function* tokenCheck(expiry: number) {
     const chan = yield call(countdown, expiry);
     try {
@@ -141,5 +152,6 @@ export default function* AuthSaga() {
         takeLatest(AuthTypes.REFRESH, refresh),
         takeLatest(AuthTypes.LOGOUT, logout),
         takeLatest(AuthTypes.FORGOT_PASSWORD, forgotPassword),
+        takeLatest(AuthTypes.RESET_PASSWORD, resetPassword),
     ]);
 }

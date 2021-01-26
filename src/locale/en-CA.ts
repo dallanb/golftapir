@@ -21,6 +21,7 @@ const CONSTANTS = {
             REGISTER: 'Registration successful!',
             VERIFY: 'Verification successful!',
             FORGOT_PASSWORD: 'Forgot Password Email delivered!',
+            RESET_PASSWORD: 'Password Reset successful!',
         },
         ERROR: {
             LOGIN: 'Login unsuccessful',
@@ -28,7 +29,8 @@ const CONSTANTS = {
             REGISTER: 'Registration unsuccessful',
             SESSION: 'Session expired',
             VERIFY: 'Verification unsuccessful',
-            FORGOT_PASSWORD: 'Forgot Password Email unsuccessful!',
+            FORGOT_PASSWORD: 'Forgot Password Email unsuccessful',
+            RESET_PASSWORD: 'Password Reset unsuccessful',
         },
     },
     CONTEST: {
@@ -45,7 +47,7 @@ const CONSTANTS = {
             FETCH_MATERIALIZED: 'Error fetching Contest information',
             FETCH_ALL_MATERIALIZED: 'Error fetching Contest information',
             CREATE: 'Contest creation unsuccessful',
-            UPDATE: 'Contest update unsuccessful!',
+            UPDATE: 'Contest update unsuccessful',
             FETCH_PARTICIPANT: 'Error fetch Contest participant information',
             FETCH_PARTICIPANTS: 'Error fetch Contest participants information',
             UPDATE_PARTICIPANT: 'Error updating participant',
@@ -75,7 +77,7 @@ const CONSTANTS = {
             FETCH: 'Error fetching League information',
             FETCH_ALL: 'Error fetching League information',
             CREATE: 'League creation unsuccessful',
-            UPDATE: 'League update unsuccessful!',
+            UPDATE: 'League update unsuccessful',
         },
     },
     MEMBER: {
@@ -110,10 +112,10 @@ const CONSTANTS = {
             FETCH: 'Error fetching Score information',
             FETCH_CONTEST: 'Error fetching Score information',
             FETCH_CONTEST_SHEET: 'Error fetching Score information',
-            UPDATE: 'Score update unsuccessful!',
-            UPDATE_SCORE: 'Score update unsuccessful!',
-            UPDATE_SHEET: 'Score sheet update unsuccessful!',
-            UPDATE_HOLE: 'Score hole update unsuccessful!',
+            UPDATE: 'Score update unsuccessful',
+            UPDATE_SCORE: 'Score update unsuccessful',
+            UPDATE_SHEET: 'Score sheet update unsuccessful',
+            UPDATE_HOLE: 'Score hole update unsuccessful',
         },
     },
     SOCKET: {
@@ -134,8 +136,11 @@ const CONSTANTS = {
             TITLE: 'Login',
             DESCRIPTION: 'Enter your login credentials',
             BUTTONS: {
-                FORGOT_PASSWORD: 'Forgot your password?',
-                REGISTER: 'Register',
+                FORGOT_PASSWORD: { TEXT: '', BUTTON: 'Forgot your password?' },
+                REGISTER: {
+                    TEXT: "Don't have an account yet?",
+                    BUTTON: 'Register',
+                },
             },
             FORM: {
                 SUBMIT: 'Login',
@@ -156,6 +161,12 @@ const CONSTANTS = {
         REGISTER: {
             TITLE: 'Register',
             DESCRIPTION: 'Enter your information',
+            BUTTONS: {
+                LOGIN: {
+                    TEXT: 'Already have an account?',
+                    BUTTON: 'Login',
+                },
+            },
             FORM: {
                 SUBMIT: 'Register',
                 LABELS: {
@@ -188,6 +199,12 @@ const CONSTANTS = {
         FORGOT_PASSWORD: {
             TITLE: 'Forgot Password',
             DESCRIPTION: 'Recover forgotten password',
+            BUTTONS: {
+                LOGIN: {
+                    TEXT: 'Already have an account?',
+                    BUTTON: 'Login',
+                },
+            },
             FORM: {
                 SUBMIT: 'Recover',
                 LABELS: {
@@ -196,6 +213,23 @@ const CONSTANTS = {
                 VALIDATION: {
                     EMAIL_REQUIRED: 'Please input an email address!',
                     EMAIL_TYPE: 'Please input a valid email address',
+                },
+            },
+        },
+        RESET_PASSWORD: {
+            TITLE: 'Reset Password',
+            DESCRIPTION: 'Set a new password',
+            FORM: {
+                SUBMIT: 'Reset',
+                LABELS: {
+                    PASSWORD: 'New Password',
+                    CONFIRM_PASSWORD: 'Confirm Password',
+                },
+                VALIDATION: {
+                    PASSWORD_REQUIRED: 'Please input your password!',
+                    CONFIRM_PASSWORD_REQUIRED: 'Please confirm your password!',
+                    CONFIRM_PASSWORD_MISMATCH:
+                        'The two passwords that you entered do not match!',
                 },
             },
         },

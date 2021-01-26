@@ -21,7 +21,7 @@ const { Types, Creators } = createActions(
         forgotPassword: ['email'],
         forgotPasswordSuccess: null,
         forgotPasswordFailure: ['err'],
-        resetPassword: ['password'],
+        resetPassword: ['token', 'password'],
         resetPasswordSuccess: null,
         resetPasswordFailure: ['err'],
     },

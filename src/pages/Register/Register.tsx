@@ -5,11 +5,12 @@ import { get as _get } from 'lodash';
 import { RegisterProps } from './types';
 import RegisterFormActions from './actions';
 import RegisterForm from './RegisterForm';
-import {selectIsInitialized, selectIsRegistered} from './selector';
+import { selectIsInitialized, selectIsRegistered } from './selector';
 import { withAppRoute } from '@utils';
 import routes from '@constants/routes';
 import constants from '@constants';
-import ComponentContent from "@layouts/ComponentContent";
+import ComponentContent from '@layouts/ComponentContent';
+import RegisterButtons from './RegisterButtons';
 import './Register.less';
 
 const Register: React.FunctionComponent<RegisterProps> = () => {
@@ -19,7 +20,7 @@ const Register: React.FunctionComponent<RegisterProps> = () => {
     const params = new URLSearchParams(search);
     const token = params.get('token');
     const isRegistered = useSelector(selectIsRegistered);
-    const isInitialized = useSelector(selectIsInitialized)
+    const isInitialized = useSelector(selectIsInitialized);
 
     useEffect(() => {
         dispatch(RegisterFormActions.init(token));
@@ -38,10 +39,15 @@ const Register: React.FunctionComponent<RegisterProps> = () => {
         }
     }, [isRegistered]);
 
-
     return (
-        <ComponentContent showSpinner={!isInitialized} className="register-view">
-            <RegisterForm />
+        <ComponentContent
+            showSpinner={!isInitialized}
+            className="register-view"
+        >
+            <>
+                <RegisterForm />
+                <RegisterButtons />
+            </>
         </ComponentContent>
     );
 };

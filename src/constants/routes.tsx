@@ -57,6 +57,13 @@ const routes = {
             LABEL: null,
             ICON: null,
         },
+        RESET_PASSWORD: {
+            ROUTE: '/reset_password',
+            BASE_KEY: 'auth',
+            KEY: 'reset_password',
+            LABEL: null,
+            ICON: null,
+        },
         ACCOUNT: {
             ROUTE: '/settings',
             BASE_KEY: 'settings',

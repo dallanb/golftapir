@@ -1,20 +1,16 @@
 import React from 'react';
 import * as Yup from 'yup';
-import memoize from 'memoize-one';
-import { get as _get } from 'lodash';
 import { UserOutlined } from '@ant-design/icons';
 import { FloatLabelInputWrapper } from '@components';
 import CONSTANTS from '@locale/en-CA';
 
 const FORM = CONSTANTS.PAGES.FORGOT_PASSWORD.FORM;
 
-export const fieldSchema = memoize((initialValues: any) => [
+export const fieldSchema = [
     {
         name: 'email',
         wrapper: FloatLabelInputWrapper,
-        options: {
-            disabled: _get(initialValues, ['email'], false),
-        },
+        options: {},
         wrapperOptions: {
             label: (
                 <>
@@ -23,7 +19,7 @@ export const fieldSchema = memoize((initialValues: any) => [
             ),
         },
     },
-]);
+];
 
 export const validationSchema = Yup.object({
     email: Yup.string()

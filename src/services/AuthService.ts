@@ -65,4 +65,11 @@ export default {
             data,
         });
     },
+    resetPassword(data: { password: string; token: string }) {
+        return ClientProxy.post({
+            url: config.AUTH_URL,
+            endpoint: `/reset_password`,
+            data,
+        });
+    },
 };

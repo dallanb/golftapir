@@ -160,6 +160,12 @@ export {
     RegisterPageRoutes,
 } from './Register';
 export {
+    default as ResetPassword,
+    reducer as resetPasswordPage,
+    ResetPasswordPageSaga,
+    ResetPasswordPageRoutes,
+} from './ResetPassword';
+export {
     default as Verify,
     reducer as verifyPage,
     VerifyPageSaga,

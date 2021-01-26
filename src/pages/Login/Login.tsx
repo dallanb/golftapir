@@ -1,59 +1,44 @@
-import React from 'react';
-import { compose } from 'redux';
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import LoginForm from './LoginForm';
-import { LoginProps, StateProps } from './types';
+import { LoginProps } from './types';
 import LoginPageActions from './actions';
 import routes from '@constants/routes';
-import Register from './Register';
-import ForgotPassword from './ForgotPassword';
+import { selectIsLoggedIn } from '@selectors/AuthSelectors';
+import LoginButtons from './LoginButtons';
 import './Login.less';
 
-class Login extends React.PureComponent<LoginProps> {
-    componentDidMount() {
-        const { isLoggedIn, history, init } = this.props;
+const Login: React.FunctionComponent<LoginProps> = () => {
+    const dispatch = useDispatch();
+    const history = useHistory();
+    const isLoggedIn = useSelector(selectIsLoggedIn);
+
+    useEffect(() => {
         if (isLoggedIn) {
             history.push(routes.APPS.MEMBER_APP.ROUTE);
         } else {
-            init();
+            dispatch(LoginPageActions.init());
         }
-    }
+        return () => {
+            if (isLoggedIn) {
+                history.push(routes.APPS.MEMBER_APP.ROUTE, {});
+            }
+        };
+    }, []);
 
-    componentDidUpdate(prevProps: Readonly<LoginProps>) {
-        const { isLoggedIn, history } = this.props;
+    useEffect(() => {
         if (isLoggedIn) {
-            history.push(routes.APPS.MEMBER_APP.ROUTE);
+            history.push(routes.APPS.MEMBER_APP.ROUTE, {});
         }
-    }
+    }, [isLoggedIn]);
 
-    render() {
-        return (
-            <div className="login-view">
-                <LoginForm />
-                <Register />
-                <ForgotPassword />
-            </div>
-        );
-    }
-}
-
-const mapStateToProps = ({ auth }: StateProps) => {
-    const { isLoggedIn } = auth;
-    return {
-        isLoggedIn,
-    };
+    return (
+        <div className="login-view">
+            <LoginForm />
+            <LoginButtons />
+        </div>
+    );
 };
 
-const mapDispatchToProps = (dispatch: any) => {
-    return {
-        init() {
-            return dispatch(LoginPageActions.init());
-        },
-    };
-};
-
-export default compose(
-    withRouter,
-    connect(mapStateToProps, mapDispatchToProps)
-)(Login);
+export default Login;

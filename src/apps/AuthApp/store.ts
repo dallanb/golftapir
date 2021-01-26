@@ -12,6 +12,8 @@ import {
     LogoutPageSaga,
     registerPage,
     RegisterPageSaga,
+    resetPasswordPage,
+    ResetPasswordPageSaga,
     verifyPage,
     VerifyPageSaga,
 } from '@pages';
@@ -43,6 +45,7 @@ function configStore(options?: { preloadedState: any }): any {
             loginPage,
             logoutPage,
             registerPage,
+            resetPasswordPage,
             verifyPage,
         }),
         _get(options, ['preloadedState'], {}),
@@ -60,6 +63,7 @@ function configStore(options?: { preloadedState: any }): any {
             fork(LoginPageSaga),
             fork(LogoutPageSaga),
             fork(RegisterPageSaga),
+            fork(ResetPasswordPageSaga),
             fork(VerifyPageSaga),
         ]);
     }
