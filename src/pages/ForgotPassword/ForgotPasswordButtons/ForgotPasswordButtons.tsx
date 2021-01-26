@@ -1,7 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { ForgotPasswordButtonsProps } from './types';
-import LinkButton from '@components/LinkButton/LinkButton';
+import {LinkButton} from '@components';
 import { withAppRoute } from '@utils';
 import routes from '@constants/routes';
 import constants from '@constants';
