@@ -11,12 +11,12 @@ export const selectData = createSelector(
     (leagueApp) => leagueApp
 );
 
-export const selectLeague = createSelector([getLeagueApp], (leagueApp) =>
-    _get(leagueApp, ['league'], undefined)
+export const selectLeagueUUID = createSelector([getLeagueApp], (leagueApp) =>
+    _get(leagueApp, ['uuid'], undefined)
 );
 
-export const selectLeagueUUID = createSelector([getLeagueApp], (leagueApp) =>
-    _get(leagueApp, ['league', 'data', 'uuid'], null)
+export const selectLeague = createSelector([getLeagueApp], (leagueApp) =>
+    _get(leagueApp, ['league'], undefined)
 );
 
 export const selectLeagueName = createSelector([getLeagueApp], (leagueApp) =>

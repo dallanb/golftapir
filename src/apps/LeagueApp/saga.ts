@@ -23,8 +23,8 @@ import { ClientProxy, LeagueService } from '@services';
 import { fetchMyLeagues, fetchMyMemberUser } from '@helpers';
 
 // Action Handlers
-function* preInit({ data: league }: AnyAction) {
-    yield put(LeagueAppActions.set({ league }));
+function* preInit({ data }: AnyAction) {
+    yield put(LeagueAppActions.fetchLeagueSuccess(data));
 }
 
 function* init({ uuid }: AnyAction) {

@@ -10,6 +10,7 @@ export interface LeagueAppInterface {
     readonly isRefreshing: boolean;
     readonly isInitialized: boolean;
     readonly err?: Error;
+    readonly uuid?: string;
     readonly league: any;
     readonly leagueMember: any;
 }
@@ -20,6 +21,7 @@ const INITIAL_STATE: LeagueAppInterface = {
     isRefreshing: false,
     isInitialized: false,
     err: undefined,
+    uuid: undefined,
     league: {
         isFetching: false,
         data: undefined,
@@ -33,11 +35,12 @@ const INITIAL_STATE: LeagueAppInterface = {
 };
 
 /* ------------- Reducers ------------- */
-function init(state = INITIAL_STATE) {
+function init(state = INITIAL_STATE, { uuid }: any) {
     return Immutable.merge(state, {
         isFetching: true,
         isInitialized: false,
         err: null,
+        uuid,
     });
 }
 
@@ -57,10 +60,11 @@ function initFailure(state: any, { err }: any) {
     });
 }
 
-function refresh(state = INITIAL_STATE) {
+function refresh(state = INITIAL_STATE, { uuid }: any) {
     return Immutable.merge(state, {
         isRefreshing: true,
         err: null,
+        uuid,
     });
 }
 
@@ -90,8 +94,8 @@ function set(state: any, { data }: any) {
 function fetchLeague(state: any) {
     return Immutable.merge(state, {
         league: {
+            ...state.league,
             isFetching: true,
-            data: undefined,
             err: undefined,
         },
     });
@@ -106,6 +110,7 @@ function fetchLeagueSuccess(state: any, { league: data }: any) {
 function fetchLeagueFailure(state: any, { err }: any) {
     return Immutable.merge(state, {
         league: {
+            ...state.league,
             isFetching: false,
             data: undefined,
             err,
@@ -116,6 +121,7 @@ function fetchLeagueFailure(state: any, { err }: any) {
 function fetchLeagueMember(state: any) {
     return Immutable.merge(state, {
         leagueMember: {
+            ...state.leagueMember,
             isFetching: true,
             data: undefined,
             err: undefined,
@@ -135,7 +141,8 @@ function fetchLeagueMemberSuccess(state: any, { leagueMember: data }: any) {
 
 function fetchLeagueMemberFailure(state: any, { err }: any) {
     return Immutable.merge(state, {
-        league: {
+        leagueMember: {
+            ...state.leagueMember,
             isFetching: false,
             data: undefined,
             err,
