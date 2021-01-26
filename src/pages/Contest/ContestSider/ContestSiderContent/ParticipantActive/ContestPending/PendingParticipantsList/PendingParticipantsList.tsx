@@ -16,12 +16,12 @@ const PendingParticipantsList: React.FunctionComponent<PendingParticipantsListPr
     const data = useSelector(selectListData);
     const isFetching = useSelector(selectListIsFetching);
     const containerDimensions = {
-        height: Math.min(200, data.length * 50 + 32),
+        height: Math.min(200, data.length * 50 + 63),
     };
     const tableDimensions = {
         size: 50,
         width: '100%',
-        height: Math.min(getRefHeight(ref, 200) - 32),
+        height: Math.min(getRefHeight(ref, 200) - 63),
     };
 
     const loadMore = (start: number, stop: number) => {
@@ -42,6 +42,7 @@ const PendingParticipantsList: React.FunctionComponent<PendingParticipantsListPr
             style={{ ...containerDimensions }}
             componentRef={ref}
             showSpinner={!isInitialized}
+            title={'Pending Participants'}
         >
             <FixedSizeList
                 {...tableDimensions}

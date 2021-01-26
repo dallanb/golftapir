@@ -90,3 +90,12 @@ export const selectMyParticipantStatus = createSelector(
     [getContestPage],
     (contestPage) => _get(contestPage, ['participant', 'status'], undefined)
 );
+
+export const selectPayout = createSelector([getContestPage], (contestPage) =>
+    _get(contestPage, ['payout'], undefined)
+);
+
+export const selectPayoutBuyIn = createSelector(
+    [getContestPage],
+    (contestPage) => _get(contestPage, ['payout', 'buy_in'], undefined)
+);

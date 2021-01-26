@@ -15,6 +15,7 @@ const INITIAL_STATE: ContestPageInterface = {
     participant: undefined,
     membersHash: undefined,
     rankingLookup: undefined,
+    payout: undefined,
 };
 
 /* ------------- Reducers ------------- */

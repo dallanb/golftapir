@@ -29,18 +29,6 @@ export const fieldSchema = [
         },
         options: {},
         fields: [
-            // {
-            //     name: 'username',
-            //     wrapper: FloatLabelInputWrapper,
-            //     wrapperOptions: {
-            //         label: FORM.LABELS.USERNAME,
-            //         className: 'contest-info-form-username-input',
-            //     },
-            //     options: {
-            //         readonly: true,
-            //         bordered: false,
-            //     },
-            // },
             {
                 name: 'name',
                 wrapper: FloatLabelInputWrapper,
@@ -84,6 +72,18 @@ export const fieldSchema = [
                             className="contest-info-form-status"
                         />
                     ),
+                },
+            },
+            {
+                name: 'payout',
+                wrapper: FloatLabelInputWrapper,
+                wrapperOptions: {
+                    label: FORM.LABELS.PAYOUT,
+                    className: 'contest-info-form-payout-input',
+                },
+                options: {
+                    readonly: true,
+                    bordered: false,
                 },
             },
         ],

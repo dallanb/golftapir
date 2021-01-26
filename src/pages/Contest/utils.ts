@@ -9,6 +9,7 @@ export const prepareParticipant = (
     membersHash: any
 ): {
     name: string;
+    country: string;
     s3_filename: string;
     member: any;
     tags: string[];
@@ -16,12 +17,14 @@ export const prepareParticipant = (
     const participant: {
         name: string;
         s3_filename: string;
+        country: string;
         member: any;
         tags: string[];
-    } = { name: '', s3_filename: '', member: null, tags: [] };
+    } = { name: '', s3_filename: '', country: '', member: null, tags: [] };
     const { participants: participantsHash, owner } = contest;
     const member = _get(membersHash, [uuid], {
         display_name: '',
+        country: '',
         avatar: { s3_filename: '' },
         user_uuid: null,
     });
@@ -32,6 +35,7 @@ export const prepareParticipant = (
     );
     participant.member = member;
     participant.name = member.display_name;
+    participant.country = member.country;
     participant.s3_filename = _get(member, ['avatar', 's3_filename'], '');
     participant.tags.push(status);
     if (owner === member.user_uuid) {

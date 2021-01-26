@@ -269,6 +269,7 @@ const CONSTANTS = {
                     CREATED_AT: 'Created At',
                     AVATAR: 'Avatar',
                     STATUS: 'Status',
+                    PAYOUT: 'Total Payout',
                 },
             },
             STEPS: {

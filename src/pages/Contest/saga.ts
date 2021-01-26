@@ -5,6 +5,7 @@ import ContestPageActions, { ContestPageTypes } from './actions';
 import { selectContest } from './selector';
 import {
     initContest,
+    initPayout,
     initSocket,
     initSubscribed,
     terminateSocket,
@@ -17,8 +18,10 @@ function* preInit({ data: contest }: AnyAction) {
 
 function* init({ uuid }: AnyAction) {
     try {
+        // TODO: consider updating these to be actions in the contest reducer?
         yield fork(initSocket, uuid);
         yield fork(initSubscribed, uuid);
+        yield fork(initPayout, uuid);
         yield call(initContest, uuid);
         yield put(ContestPageActions.initSuccess());
     } catch (err) {

@@ -16,4 +16,10 @@ export default {
             query,
         });
     },
+    fetchContestsComplete(uuid: string) {
+        return ClientProxy.get({
+            url: config.WAGER_URL,
+            endpoint: `/contests/${uuid}/complete`,
+        });
+    },
 };

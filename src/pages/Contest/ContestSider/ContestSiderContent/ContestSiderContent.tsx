@@ -7,10 +7,12 @@ import ParticipantCompleted from './ParticipantCompleted';
 import ParticipantSpectator from './ParticipantSpectator';
 import ContestStart from './ContestStart';
 import Course from './Course';
+import ContestBuyIn from './ContestBuyIn';
 import { ContestSiderContentProps } from './types';
 import { selectData, selectMyParticipantStatus } from '@pages/Contest/selector';
 import constants from '@constants';
 import ComponentContent from '@layouts/ComponentContent';
+import './ContestSiderContent.less';
 
 const ContestSiderContent: React.FunctionComponent<ContestSiderContentProps> = ({}) => {
     const { isInitialized } = useSelector(selectData);
@@ -32,6 +34,9 @@ const ContestSiderContent: React.FunctionComponent<ContestSiderContentProps> = (
             <>
                 <ComponentContent className="contest-start-component-content">
                     <ContestStart />
+                </ComponentContent>
+                <ComponentContent className="contest-buy-in-component-content">
+                    <ContestBuyIn />
                 </ComponentContent>
                 <Course />
                 {contentRenderer(participantStatus)}

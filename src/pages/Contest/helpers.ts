@@ -1,7 +1,12 @@
 import { call, put, select } from 'redux-saga/effects';
 import { keyBy as _keyBy } from 'lodash';
 import { TopicSocketActions } from '@actions';
-import { ContestService, MemberService, NotificationService } from '@services';
+import {
+    ContestService,
+    MemberService,
+    NotificationService,
+    WagerService,
+} from '@services';
 import ContestPageActions from './actions';
 import { socketEventHandlers } from './utils';
 import { selectMe } from '@selectors/BaseSelector';
@@ -50,4 +55,12 @@ export function* initSocket(uuid: string) {
 
 export function* terminateSocket() {
     yield put(TopicSocketActions.terminate());
+}
+
+export function* initPayout(uuid: string) {
+    const { contest: payout } = yield call(
+        WagerService.fetchContestsComplete,
+        uuid
+    );
+    yield put(ContestPageActions.set({ payout }));
 }

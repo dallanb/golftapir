@@ -21,4 +21,5 @@ export interface ContestPageInterface {
     readonly participant: any;
     readonly membersHash: any;
     readonly rankingLookup: any;
+    readonly payout: any;
 }
