@@ -21,6 +21,9 @@ const { Types, Creators } = createActions(
         updateContestParticipantStatusSuccess: ['uuid', 'status'],
         updateContestParticipantStatusFailure: ['err'],
         updateContestParticipantScore: ['participant', 'strokes', 'score'],
+        fetchPayout: ['uuid'],
+        fetchPayoutSuccess: ['payout'],
+        fetchPayoutFailure: ['err'],
     },
     {
         prefix: 'CONTEST_PAGE_',

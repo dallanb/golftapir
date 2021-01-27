@@ -8,6 +8,7 @@ import ParticipantSpectator from './ParticipantSpectator';
 import ContestStart from './ContestStart';
 import Course from './Course';
 import ContestBuyIn from './ContestBuyIn';
+import PayoutProportions from './PayoutProportions';
 import { ContestSiderContentProps } from './types';
 import { selectData, selectMyParticipantStatus } from '@pages/Contest/selector';
 import constants from '@constants';
@@ -39,6 +40,7 @@ const ContestSiderContent: React.FunctionComponent<ContestSiderContentProps> = (
                     <ContestBuyIn />
                 </ComponentContent>
                 <Course />
+                <PayoutProportions />
                 {contentRenderer(participantStatus)}
             </>
         </SiderLayoutContent>

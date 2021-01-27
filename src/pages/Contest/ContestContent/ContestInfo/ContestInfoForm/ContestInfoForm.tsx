@@ -4,14 +4,13 @@ import { ContestInfoFormProps } from './types';
 import { Form } from '@components';
 import { fieldSchema, validationSchema } from './schema';
 import { prepareInitialValues } from '../utils';
-import { selectContest, selectPayout } from '@pages/Contest/selector';
+import { selectContest, selectPayoutData } from '@pages/Contest/selector';
 import './ContestInfoForm.less';
 
 const ContestInfoForm: React.FunctionComponent<ContestInfoFormProps> = () => {
     const contestData = useSelector(selectContest);
-    const payoutData = useSelector(selectPayout);
+    const payoutData = useSelector(selectPayoutData);
     const initialValues = prepareInitialValues(contestData, payoutData);
-    console.log(initialValues);
     return (
         <div className="contest-info-form">
             <Form

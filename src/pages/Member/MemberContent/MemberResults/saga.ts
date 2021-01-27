@@ -7,6 +7,7 @@ import MemberPageContentMemberResultsActions, {
 } from './actions';
 import { fetchMemberResults } from './helpers';
 import { selectData } from '@pages/Member/selector';
+import { selectLeagueUUID } from '@apps/LeagueApp/selector';
 
 function* init() {
     try {
@@ -26,12 +27,14 @@ function* fetchData({
 }: AnyAction) {
     try {
         const memberData = yield select(selectData);
-        const member_uuid = _get(memberData, ['member', 'uuid'], null);
+        const member_uuid = _get(memberData, ['member', 'member'], null);
+        const league_uuid = yield select(selectLeagueUUID);
         const { contests, _metadata: metadata } = yield call(
             ContestService.fetchContestsMaterialized,
             {
                 ...options,
                 participants: member_uuid,
+                league_uuid,
             }
         );
         yield put(

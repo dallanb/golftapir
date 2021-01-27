@@ -1,6 +1,6 @@
 import { AnyAction } from 'redux';
 import { all, call, fork, put, select, takeLatest } from 'redux-saga/effects';
-import { ContestService, NotificationService } from '@services';
+import { ContestService, NotificationService, WagerService } from '@services';
 import ContestPageActions, { ContestPageTypes } from './actions';
 import { selectContest } from './selector';
 import {
@@ -21,7 +21,7 @@ function* init({ uuid }: AnyAction) {
         // TODO: consider updating these to be actions in the contest reducer?
         yield fork(initSocket, uuid);
         yield fork(initSubscribed, uuid);
-        yield fork(initPayout, uuid);
+        yield put(ContestPageActions.fetchPayout(uuid));
         yield call(initContest, uuid);
         yield put(ContestPageActions.initSuccess());
     } catch (err) {
@@ -83,6 +83,18 @@ function* updateContestParticipantStatus({ uuid, status }: AnyAction) {
     }
 }
 
+function* fetchPayout({ uuid }: AnyAction) {
+    try {
+        const { contest: payout } = yield call(
+            WagerService.fetchContestsComplete,
+            uuid
+        );
+        yield put(ContestPageActions.fetchPayoutSuccess(payout));
+    } catch (err) {
+        yield put(ContestPageActions.fetchPayoutFailure(err));
+    }
+}
+
 export default function* ContestPageSaga() {
     yield all([
         takeLatest(ContestPageTypes.PRE_INIT, preInit),
@@ -95,5 +107,6 @@ export default function* ContestPageSaga() {
             ContestPageTypes.UPDATE_CONTEST_PARTICIPANT_STATUS,
             updateContestParticipantStatus
         ),
+        takeLatest(ContestPageTypes.FETCH_PAYOUT, fetchPayout),
     ]);
 }

@@ -95,7 +95,23 @@ export const selectPayout = createSelector([getContestPage], (contestPage) =>
     _get(contestPage, ['payout'], undefined)
 );
 
+export const selectPayoutData = createSelector(
+    [getContestPage],
+    (contestPage) => _get(contestPage, ['payout', 'data'], undefined)
+);
+
+export const selectPayoutIsFetching = createSelector(
+    [getContestPage],
+    (contestPage) => _get(contestPage, ['payout', 'isFetching'], undefined)
+);
+
 export const selectPayoutBuyIn = createSelector(
     [getContestPage],
-    (contestPage) => _get(contestPage, ['payout', 'buy_in'], undefined)
+    (contestPage) => _get(contestPage, ['payout', 'data', 'buy_in'], undefined)
+);
+
+export const selectPayoutProportions = createSelector(
+    [getContestPage],
+    (contestPage) =>
+        _get(contestPage, ['payout', 'data', 'payout_proportions'], undefined)
 );
