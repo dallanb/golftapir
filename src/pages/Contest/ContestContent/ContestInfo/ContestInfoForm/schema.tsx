@@ -42,11 +42,11 @@ export const fieldSchema = [
                 },
             },
             {
-                name: 'ctime',
+                name: 'buyIn',
                 wrapper: FloatLabelInputWrapper,
                 wrapperOptions: {
-                    label: FORM.LABELS.CREATED_AT,
-                    className: 'contest-info-form-created-at-input',
+                    label: FORM.LABELS.BUY_IN,
+                    className: 'contest-info-form-buy-in-input',
                 },
                 options: {
                     readonly: true,
@@ -72,6 +72,18 @@ export const fieldSchema = [
                             className="contest-info-form-status"
                         />
                     ),
+                },
+            },
+            {
+                name: 'start',
+                wrapper: FloatLabelInputWrapper,
+                wrapperOptions: {
+                    label: FORM.LABELS.START,
+                    className: 'contest-info-form-start-input',
+                },
+                options: {
+                    readonly: true,
+                    bordered: false,
                 },
             },
             {

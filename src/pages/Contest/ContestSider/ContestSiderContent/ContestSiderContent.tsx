@@ -33,12 +33,6 @@ const ContestSiderContent: React.FunctionComponent<ContestSiderContentProps> = (
     return (
         <SiderLayoutContent showSpinner={!isInitialized}>
             <>
-                <ComponentContent className="contest-start-component-content">
-                    <ContestStart />
-                </ComponentContent>
-                <ComponentContent className="contest-buy-in-component-content">
-                    <ContestBuyIn />
-                </ComponentContent>
                 <Course />
                 <PayoutProportions />
                 {contentRenderer(participantStatus)}

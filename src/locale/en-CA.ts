@@ -248,6 +248,13 @@ const CONSTANTS = {
                 WINS: 'Wins',
                 WIN_PERCENTAGE: 'Win Percentage',
                 WINNINGS: 'Winnings',
+                FORM: {
+                    LABELS: {
+                        WINS: 'Wins',
+                        WIN_PERCENTAGE: 'Win Percentage',
+                        WINNINGS: 'Winnings',
+                    },
+                },
             },
             FORM: {
                 LABELS: {
@@ -266,10 +273,11 @@ const CONSTANTS = {
             FORM: {
                 LABELS: {
                     NAME: 'Name',
-                    CREATED_AT: 'Created At',
+                    START: 'Start Time',
                     AVATAR: 'Avatar',
                     STATUS: 'Status',
                     PAYOUT: 'Total Payout',
+                    BUY_IN: 'Buy In',
                 },
             },
             STEPS: {

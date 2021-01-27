@@ -32,7 +32,7 @@ const PayoutProportionsList: React.FunctionComponent<PayoutProportionsListProps>
 
     return (
         <ComponentContent
-            title={'Payout Proportions'}
+            title={'Payout'}
             showSpinner={isFetching}
             style={containerDimensions}
             className="payout-proportions-component-content"

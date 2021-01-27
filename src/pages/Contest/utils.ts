@@ -102,5 +102,7 @@ export const socketEventHandlers = (socket: WebSocket, emitter: any) => {
     return () => {};
 };
 
-export const formatTimeStamp = (timestamp: number) =>
-    timestamp ? moment(timestamp).format('MMM DD h:mm A') : 'NA';
+export const formatTimeStamp = (timestamp: number) => {
+    console.log(timestamp ? moment(timestamp).format('LLLL') : 'NA');
+    return timestamp ? moment(timestamp).format('LLLL') : 'NA';
+};
