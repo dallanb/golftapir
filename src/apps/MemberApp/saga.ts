@@ -1,26 +1,16 @@
-import {
-    all,
-    call,
-    delay,
-    put,
-    race,
-    take,
-    takeLatest,
-} from 'redux-saga/effects';
+import { all, call, put, race, take, takeLatest } from 'redux-saga/effects';
 import { AnyAction } from 'redux';
 import MemberAppActions, { MemberAppTypes } from './actions';
 import {
-    AuthActions,
-    AuthTypes,
     BaseActions,
     BaseTypes,
     NotificationActions,
     NotificationTypes,
     SocketActions,
 } from '@actions';
-import { FirebaseClient } from '@libs';
 import { socketEventHandlers } from '@apps/MemberApp/utils';
 import { ClientProxy, LeagueService, MemberService } from '@services';
+import { refreshAuth, requestToken } from '@helpers';
 
 // Action Handlers
 function* init() {
@@ -38,7 +28,7 @@ function* init() {
 
 function* terminate() {
     try {
-        yield put(SocketActions.terminate());
+        yield put(BaseActions.terminateSockets());
     } catch (err) {
         console.error(err);
     }
@@ -51,29 +41,6 @@ function* refresh() {
     } catch (err) {
         yield put(MemberAppActions.refreshFailure());
     }
-}
-
-// Helpers
-function* refreshAuth() {
-    yield put(AuthActions.refresh());
-    const { failure, timeout } = yield race({
-        success: take(AuthTypes.REFRESH_SUCCESS),
-        failure: take(AuthTypes.REFRESH_FAILURE),
-        timeout: delay(5000),
-    });
-    if (timeout) {
-        yield put(AuthActions.refreshFailure());
-        throw new Error('refresh timeout');
-    }
-    if (failure) {
-        yield put(AuthActions.refreshFailure());
-        throw new Error('refresh failure');
-    }
-}
-
-function* requestToken() {
-    const token = yield FirebaseClient.requestNotificationPermissions();
-    return token;
 }
 
 export function* MemberAppSaga() {
@@ -132,6 +99,15 @@ function* initSockets({ uuid }: AnyAction) {
     }
 }
 
+function* terminateSockets() {
+    try {
+        yield put(SocketActions.terminate());
+        yield put(BaseActions.terminateSocketsSuccess());
+    } catch (err) {
+        yield put(BaseActions.terminateSocketsFailure(err));
+    }
+}
+
 // TODO: NOTIFICATIONS SHOULD BECOME PART OF BASE
 function* initNotifications() {
     // prepare notifications
@@ -155,6 +131,7 @@ export function* BaseSaga() {
         takeLatest(BaseTypes.INIT_ME, initMe),
         takeLatest(BaseTypes.INIT_LEAGUES, initLeagues),
         takeLatest(BaseTypes.INIT_SOCKETS, initSockets),
+        takeLatest(BaseTypes.TERMINATE_SOCKETS, terminateSockets),
         takeLatest(BaseTypes.INIT_NOTIFICATIONS, initNotifications),
     ]);
 }

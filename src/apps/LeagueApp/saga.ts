@@ -20,7 +20,12 @@ import {
 import { FirebaseClient } from '@libs';
 import { socketEventHandlers } from '@apps/LeagueApp/utils';
 import { ClientProxy, LeagueService } from '@services';
-import { fetchMyLeagues, fetchMyMemberUser } from '@helpers';
+import {
+    fetchMyLeagues,
+    fetchMyMemberUser,
+    refreshAuth,
+    requestToken,
+} from '@helpers';
 
 // Action Handlers
 function* preInit({ data }: AnyAction) {
@@ -138,29 +143,6 @@ function* fetchLeagueMember({ uuid, options }: AnyAction) {
     } catch (err) {
         yield put(LeagueAppActions.fetchLeagueMemberFailure(err));
     }
-}
-
-// Helpers
-function* refreshAuth() {
-    yield put(AuthActions.refresh());
-    const { failure, timeout } = yield race({
-        success: take(AuthTypes.REFRESH_SUCCESS),
-        failure: take(AuthTypes.REFRESH_FAILURE),
-        timeout: delay(5000),
-    });
-    if (timeout) {
-        yield put(AuthActions.refreshFailure());
-        throw new Error('refresh timeout');
-    }
-    if (failure) {
-        yield put(AuthActions.refreshFailure());
-        throw new Error('refresh failure');
-    }
-}
-
-function* requestToken() {
-    const token = yield FirebaseClient.requestNotificationPermissions();
-    return token;
 }
 
 export default function* LeagueAppSaga() {
