@@ -5,6 +5,7 @@ import { isEmpty as _isEmpty, pick as _pick } from 'lodash';
 import AccountPageContentAccountActions, {
     AccountPageContentAccountTypes,
 } from './actions';
+import MemberAppActions from '@apps/MemberApp/actions';
 import { prepareInitialValues } from './utils';
 import { selectAccount } from '@pages/Account/selector';
 import { omit as _omit } from 'lodash';
@@ -43,6 +44,7 @@ function* submit({ data }: AnyAction) {
             message.success(CONSTANTS.ACCOUNT.SUCCESS.ASSIGN_AVATAR);
         }
         yield put(AccountPageContentAccountActions.submitSuccess());
+        yield put(MemberAppActions.refresh());
     } catch (err) {
         yield put(AccountPageContentAccountActions.submitFailure());
         message.error(CONSTANTS.ACCOUNT.ERROR.UPDATE);
