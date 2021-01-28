@@ -4,6 +4,10 @@ const CONSTANTS = {
         SUBMIT: 'Submit',
     },
     ACCOUNT: {
+        SUCCESS: {
+            UPDATE: 'Account update successful!',
+            ASSIGN_AVATAR: 'Avatar update successful!',
+        },
         ERROR: {
             UPDATE: 'Error updating League information',
             ASSIGN_AVATAR: 'Error updating League avatar',

@@ -26,7 +26,7 @@ import {
     NotificationsPageContentNotificationsSaga,
     NotificationsPageSaga,
 } from '@pages';
-import { default as BaseSaga } from '@apps/MemberApp/saga';
+import { MemberAppSaga, BaseSaga } from '@apps/MemberApp/saga';
 import {
     AccountSaga,
     AuthSaga,
@@ -81,6 +81,7 @@ function configStore(options?: { preloadedState: any }): any {
     function* memberAppSaga() {
         yield all([
             fork(BaseSaga),
+            fork(MemberAppSaga),
             fork(AccountSaga),
             fork(AuthSaga),
             fork(CourseSaga),

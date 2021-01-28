@@ -20,11 +20,12 @@ import { FirebaseClient } from '@libs';
 import { socketEventHandlers } from '@apps/MemberApp/utils';
 import { ClientProxy } from '@services';
 import { fetchMyLeagues, fetchMyMemberUser } from '@helpers';
+import { AccountPageContentAccountTypes } from '@pages/Account/AccountContent/Account/actions';
 
 // Action Handlers
 function* init() {
     try {
-        if (!ClientProxy.accessToken) yield call(refresh);
+        if (!ClientProxy.accessToken) yield call(refreshAuth);
 
         const { data: me } = yield call(fetchMyMemberUser, {
             include: 'avatar,stat',
@@ -72,8 +73,19 @@ function* terminate() {
     }
 }
 
-// Helpers
 function* refresh() {
+    try {
+        yield call(fetchMyMemberUser, {
+            include: 'avatar,stat',
+        });
+        yield put(MemberAppActions.refreshSuccess());
+    } catch (err) {
+        yield put(MemberAppActions.refreshFailure());
+    }
+}
+
+// Helpers
+function* refreshAuth() {
     yield put(AuthActions.refresh());
     const { failure, timeout } = yield race({
         success: take(AuthTypes.REFRESH_SUCCESS),
@@ -95,9 +107,23 @@ function* requestToken() {
     return token;
 }
 
-export default function* MemberAppSaga() {
+export function* MemberAppSaga() {
     yield all([
         takeLatest(MemberAppTypes.INIT, init),
         takeLatest(MemberAppTypes.TERMINATE, terminate),
+        takeLatest(MemberAppTypes.REFRESH, refresh),
+    ]);
+}
+
+function* accountSubmit() {
+    yield put(MemberAppActions.refresh());
+}
+
+export function* BaseSaga() {
+    yield all([
+        takeLatest(
+            AccountPageContentAccountTypes.SUBMIT_SUCCESS,
+            accountSubmit
+        ),
     ]);
 }
