@@ -8,7 +8,9 @@ import { selectData } from '../selector';
 const AccountContent: React.FunctionComponent<AccountContentProps> = ({}) => {
     const { isInitialized } = useSelector(selectData);
     return (
-        <ContentLayoutContent showSpinner={!isInitialized}>
+        <ContentLayoutContent
+            showSpinner={!isInitialized}
+        >
             <Account />
         </ContentLayoutContent>
     );

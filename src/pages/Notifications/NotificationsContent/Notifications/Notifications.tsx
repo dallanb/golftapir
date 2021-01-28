@@ -6,7 +6,6 @@ import NotificationsPageContentNotificationsActions from './actions';
 import { selectData } from './selector';
 import ComponentContent from '@layouts/ComponentContent';
 import './Notifications.less';
-import MembersList from '@pages/Members/MembersContent/Members/MembersList';
 
 const Notifications: React.FunctionComponent<NotificationsProps> = ({}) => {
     const dispatch = useDispatch();
@@ -27,16 +26,11 @@ const Notifications: React.FunctionComponent<NotificationsProps> = ({}) => {
         options = undefined,
     } = useSelector(selectData);
 
-    const dimensions = {
-        height: Math.max(200, data.length * 75),
-    };
-
     return (
         <ComponentContent
             componentRef={ref}
             showSpinner={!isInitialized}
             className="notifications"
-            style={dimensions}
             title={'Notifications List'}
         >
             <NotificationsList

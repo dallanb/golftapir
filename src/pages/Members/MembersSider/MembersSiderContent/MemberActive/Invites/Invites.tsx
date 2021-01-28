@@ -27,15 +27,16 @@ const Invites: React.FunctionComponent<InvitesProps> = ({}) => {
     } = useSelector(selectData);
 
     const dimensions = {
-        height: Math.max(200, data.length * 50 + 63),
+        height: Math.min(400, data.length * 50),
     };
+    console.log(dimensions);
 
     return (
         <ComponentContent
             componentRef={ref}
             showSpinner={!isInitialized}
-            className="invites"
-            style={dimensions}
+            className="invites space"
+            bodyStyle={dimensions}
             title={'Invites'}
         >
             <InvitesList

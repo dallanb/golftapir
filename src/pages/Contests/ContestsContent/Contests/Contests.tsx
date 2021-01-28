@@ -7,8 +7,6 @@ import { selectData } from './selector';
 import ComponentContent from '@layouts/ComponentContent';
 import './Contests.less';
 import { selectMyLeagueUUID } from '@selectors/BaseSelector';
-import { ContentLayoutContent } from '@layouts';
-import InvitesList from '@pages/Members/MembersSider/MembersSiderContent/MemberActive/Invites/InvitesList';
 
 const Contests: React.FunctionComponent<ContestsProps> = ({}) => {
     const dispatch = useDispatch();
@@ -32,16 +30,11 @@ const Contests: React.FunctionComponent<ContestsProps> = ({}) => {
         options = undefined,
     } = useSelector(selectData);
 
-    const dimensions = {
-        height: Math.max(200, data.length * 100 + 63),
-    };
-
     return (
         <ComponentContent
             componentRef={ref}
             showSpinner={!isInitialized}
             className="contests"
-            style={dimensions}
             title={'Contests List'}
         >
             <ContestsList

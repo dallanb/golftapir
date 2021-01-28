@@ -5,11 +5,14 @@ import { ContestButtonsProps } from './types';
 import { selectMyParticipant } from '@pages/Contest/selector';
 import ContestPageActions from '@pages/Contest/actions';
 import constants from '@constants';
+import ComponentContent from '@layouts/ComponentContent';
+import { selectData } from '../selector';
 import './ContestButtons.less';
 
 const ContestButtons: React.FunctionComponent<ContestButtonsProps> = () => {
     const dispatch = useDispatch();
     const participant = useSelector(selectMyParticipant);
+    const { isInitialized } = useSelector(selectData);
 
     const handleApproveClick = () => {
         dispatch(
@@ -20,15 +23,22 @@ const ContestButtons: React.FunctionComponent<ContestButtonsProps> = () => {
         );
     };
     return (
-        <Button
-            block
-            type="primary"
-            key={constants.ACTION.COMPLETE.KEY}
-            className={`contest-button ${constants.ACTION.APPROVE.KEY}`}
-            onClick={handleApproveClick}
+        <ComponentContent
+            showSpinner={!isInitialized}
+            className="contest-buttons space"
+            bodyClassName="contest-buttons-body"
+            title={'Actions'}
         >
-            {constants.ACTION.COMPLETE.LABEL}
-        </Button>
+            <Button
+                block
+                type="primary"
+                key={constants.ACTION.COMPLETE.KEY}
+                className={`contest-button ${constants.ACTION.APPROVE.KEY}`}
+                onClick={handleApproveClick}
+            >
+                {constants.ACTION.COMPLETE.LABEL}
+            </Button>
+        </ComponentContent>
     );
 };
 

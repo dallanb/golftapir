@@ -4,7 +4,7 @@ import { MemberInfoProps } from './types';
 import MemberInfoForm from './MemberInfoForm';
 import ComponentContent from '@layouts/ComponentContent';
 import './MemberInfo.less';
-import CONSTANTS from "@locale/en-CA";
+import CONSTANTS from '@locale/en-CA';
 
 const MemberInfo: React.FunctionComponent<MemberInfoProps> = () => {
     const ref = useRef(null);

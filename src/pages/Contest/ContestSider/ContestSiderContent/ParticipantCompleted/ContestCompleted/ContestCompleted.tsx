@@ -21,7 +21,7 @@ const ContestCompleted: React.FunctionComponent<ContestCompletedProps> = () => {
     const country = _get(membersHash, [uuid, 'country'], undefined);
     const Country = _get(Flags, [country], null);
     return (
-        <ComponentContent className="contest-completed" title="Winner">
+        <ComponentContent className="contest-completed space" title="Winner">
             <div className="contest-completed-value">
                 <Country className="contest-completed-value-country-flag" />
                 <div className="contest-completed-value-name">{name}</div>

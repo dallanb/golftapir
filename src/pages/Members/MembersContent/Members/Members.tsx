@@ -6,7 +6,6 @@ import MembersPageContentMembersActions from './actions';
 import { selectData } from './selector';
 import ComponentContent from '@layouts/ComponentContent';
 import './Members.less';
-import InvitesList from '@pages/Members/MembersSider/MembersSiderContent/MemberActive/Invites/InvitesList';
 
 const Members: React.FunctionComponent<MembersProps> = ({}) => {
     const dispatch = useDispatch();
@@ -28,16 +27,11 @@ const Members: React.FunctionComponent<MembersProps> = ({}) => {
         options = undefined,
     } = useSelector(selectData);
 
-    const dimensions = {
-        height: Math.max(200, data.length * 100 + 63),
-    };
-
     return (
         <ComponentContent
             componentRef={ref}
             showSpinner={!isInitialized || isRefreshing}
-            className="members"
-            style={dimensions}
+            className="members-component-content"
             title={'Members List'}
         >
             <MembersList

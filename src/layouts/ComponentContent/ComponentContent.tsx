@@ -11,7 +11,9 @@ const ComponentContent: React.FunctionComponent<ComponentContentProps> = ({
     children,
     componentRef,
     className,
+    bodyClassName,
     style,
+    bodyStyle,
 }) => {
     const renderTitle = () => {
         if (title) {
@@ -26,12 +28,15 @@ const ComponentContent: React.FunctionComponent<ComponentContentProps> = ({
     };
 
     return (
-        <div className="component-content">
+        <div
+            ref={componentRef}
+            className={` component-content ${className}`}
+            style={style}
+        >
             {renderTitle()}
             <div
-                ref={componentRef}
-                className={`component-content-content ${className}`}
-                style={style}
+                className={`component-content-content ${bodyClassName}`}
+                style={bodyStyle}
             >
                 {renderComponent()}
             </div>

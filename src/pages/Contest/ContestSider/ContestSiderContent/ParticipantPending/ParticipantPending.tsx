@@ -30,7 +30,11 @@ const ParticipantPending: React.FunctionComponent<ParticipantPendingProps> = () 
     };
 
     return (
-        <ComponentContent className="participant-pending">
+        <ComponentContent
+            className="participant-pending space"
+            bodyClassName={'participant-pending-body'}
+            title={'Actions'}
+        >
             <div className="participant-pending-buttons">
                 <div className="participant-pending-buttons-button active">
                     <Button block type="primary" onClick={handleAcceptClick}>

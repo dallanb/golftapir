@@ -25,7 +25,7 @@ const Course: React.FunctionComponent<CourseProps> = () => {
     );
     return (
         <ComponentContent
-            className="course-component-content"
+            className="course-component-content space"
             showSpinner={!isInitialized}
             title={'Course'}
         >

@@ -6,6 +6,7 @@ import MembersPageActions from '@pages/Members/actions';
 import { selectLeagueMember } from '@apps/LeagueApp/selector';
 import constants from '@constants';
 import './MemberPending.less';
+import ComponentContent from '@layouts/ComponentContent';
 
 const MemberPending: React.FunctionComponent<MemberPendingProps> = () => {
     const dispatch = useDispatch();
@@ -29,7 +30,7 @@ const MemberPending: React.FunctionComponent<MemberPendingProps> = () => {
     };
 
     return (
-        <div className="member-pending">
+        <ComponentContent className="member-pending space">
             <div className="member-pending-buttons">
                 <div className="member-pending-buttons-button active">
                     <Button block type="primary" onClick={handleAcceptClick}>
@@ -47,7 +48,7 @@ const MemberPending: React.FunctionComponent<MemberPendingProps> = () => {
                     </Button>
                 </div>
             </div>
-        </div>
+        </ComponentContent>
     );
 };
 

@@ -17,7 +17,8 @@ const Leagues: React.FunctionComponent<LeaguesProps> = () => {
             componentRef={ref}
             title={CONSTANTS.PAGES.HOME.LEAGUES}
             showSpinner={_isNil(leagues)}
-            className="leagues"
+            className={'space'}
+            bodyClassName={'leagues'}
         >
             <LeaguesList containerRef={ref} data={leagues} />
         </ComponentContent>

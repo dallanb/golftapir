@@ -51,7 +51,11 @@ const SearchSelectInput: React.FunctionComponent<SearchInputProps> = () => {
     };
 
     return (
-        <ComponentContent className="search-input-component-content">
+        <ComponentContent
+            className="search-input-component-content space"
+            bodyClassName={'search-input-component-content-body'}
+            title={'Invite'}
+        >
             <div className="search-select-input-wrapper">
                 <Select
                     showSearch

@@ -4,9 +4,10 @@ import { Button } from 'antd';
 import { PlusCircleOutlined } from '@ant-design/icons';
 import routes from '@constants/routes';
 import { CreateButtonProps } from './types';
-import './CreateButton.less';
 import { withAppRoute } from '@utils';
 import constants from '@constants';
+import ComponentContent from '@layouts/ComponentContent';
+import './CreateButton.less';
 
 const CreateButton: React.FunctionComponent<CreateButtonProps> = () => {
     const history = useHistory();
@@ -20,11 +21,11 @@ const CreateButton: React.FunctionComponent<CreateButtonProps> = () => {
     };
 
     return (
-        <div className="create-button">
+        <ComponentContent title={'Actions'} className="create-button space" bodyClassName={"create-button-body"}>
             <Button block type="primary" onClick={handleClick}>
                 Create League <PlusCircleOutlined />
             </Button>
-        </div>
+        </ComponentContent>
     );
 };
 

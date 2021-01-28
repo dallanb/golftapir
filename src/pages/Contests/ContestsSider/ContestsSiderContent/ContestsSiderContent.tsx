@@ -10,12 +10,8 @@ const ContestsSiderContent: React.FunctionComponent<ContestsSiderContentProps> =
     return (
         <SiderLayoutContent>
             <>
-                <ComponentContent className="search-input-component-content">
                     <SearchInput />
-                </ComponentContent>
-                <ComponentContent className="create-button-component-content">
                     <CreateButton />
-                </ComponentContent>
             </>
         </SiderLayoutContent>
     );

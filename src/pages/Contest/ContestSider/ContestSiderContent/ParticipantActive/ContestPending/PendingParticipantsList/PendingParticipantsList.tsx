@@ -38,7 +38,7 @@ const PendingParticipantsList: React.FunctionComponent<PendingParticipantsListPr
 
     return (
         <ComponentContent
-            className="pending-participants"
+            className="pending-participants space"
             style={{ ...containerDimensions }}
             componentRef={ref}
             showSpinner={!isInitialized}

@@ -24,7 +24,7 @@ const NotificationsList: React.FunctionComponent<NotificationsListProps> = ({
     const history = useHistory();
 
     const tableDimensions = {
-        size: 75,
+        size: 100,
         width: '100%',
         height: getRefHeight(containerRef, 200),
     };
