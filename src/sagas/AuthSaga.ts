@@ -50,15 +50,21 @@ function* register({
     password,
     display_name,
     country,
+    token,
 }: AnyAction) {
     try {
-        const res = yield call(AuthService.register, {
-            email,
-            username,
-            password,
-            display_name,
-            country,
-        });
+        const payload = Object.assign(
+            {},
+            {
+                email,
+                username,
+                password,
+                display_name,
+                country,
+            },
+            token && { token }
+        );
+        const res = yield call(AuthService.register, payload);
         const { user, access_token } = res;
         ClientProxy.accessToken = access_token;
         yield put(AuthActions.registerSuccess(user));

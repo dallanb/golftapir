@@ -18,16 +18,33 @@ const Invites: React.FunctionComponent<InvitesProps> = ({}) => {
         };
     }, []);
 
-    const { isInitialized } = useSelector(selectData);
+    const {
+        isInitialized,
+        isFetching,
+        data = [],
+        metadata = [],
+        options = undefined,
+    } = useSelector(selectData);
+
+    const dimensions = {
+        height: Math.max(200, data.length * 50 + 63),
+    };
 
     return (
         <ComponentContent
             componentRef={ref}
             showSpinner={!isInitialized}
             className="invites"
+            style={dimensions}
             title={'Invites'}
         >
-            <InvitesList containerRef={ref} />
+            <InvitesList
+                containerRef={ref}
+                data={data}
+                metadata={metadata}
+                options={options}
+                isFetching={isFetching}
+            />
         </ComponentContent>
     );
 };

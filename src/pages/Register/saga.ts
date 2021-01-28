@@ -13,7 +13,7 @@ function* init({ token }: AnyAction) {
             );
             yield put(
                 RegisterPageActions.setFormInitialValues(
-                    _pick(invite, ['email'])
+                    _pick(invite, ['email', 'token'])
                 )
             );
         }

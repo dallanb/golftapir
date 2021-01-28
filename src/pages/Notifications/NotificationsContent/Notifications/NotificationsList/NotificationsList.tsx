@@ -16,15 +16,17 @@ import './NotificationsList.less';
 
 const NotificationsList: React.FunctionComponent<NotificationsListProps> = ({
     containerRef,
+    data,
+    metadata,
+    options,
+    isFetching,
 }) => {
     const history = useHistory();
-    const data = useSelector(selectListData);
-    const metadata = useSelector(selectListMetadata);
-    const isFetching = useSelector(selectListIsFetching);
+
     const tableDimensions = {
         size: 75,
         width: '100%',
-        height: getRefHeight(containerRef, 200) - 32,
+        height: getRefHeight(containerRef, 200),
     };
 
     const dispatch = useDispatch();

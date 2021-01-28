@@ -11,13 +11,15 @@ import './Leagues.less';
 const Leagues: React.FunctionComponent<LeaguesProps> = () => {
     const ref = useRef(null);
     const leagues = useSelector(selectLeagues);
+
     return (
         <ComponentContent
+            componentRef={ref}
             title={CONSTANTS.PAGES.HOME.LEAGUES}
             showSpinner={_isNil(leagues)}
             className="leagues"
         >
-            <LeaguesList containerRef={ref} />
+            <LeaguesList containerRef={ref} data={leagues} />
         </ComponentContent>
     );
 };

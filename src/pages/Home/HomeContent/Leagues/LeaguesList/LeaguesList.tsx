@@ -10,14 +10,14 @@ import './LeaguesList.less';
 
 const LeaguesList: React.FunctionComponent<LeaguesListProps> = ({
     containerRef,
+    data,
 }) => {
     const history = useHistory();
-    const data = useSelector(selectLeagues);
 
     const tableDimensions = {
         size: 100,
         width: '100%',
-        height: getRefHeight(containerRef, 200),
+        height: Math.min(400, data.length * 100),
     };
 
     const loadMore = (start: number, stop: number) => null;

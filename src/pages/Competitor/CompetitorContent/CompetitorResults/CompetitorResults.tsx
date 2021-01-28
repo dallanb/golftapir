@@ -6,6 +6,7 @@ import CompetitorPageContentCompetitorResultsActions from './actions';
 import { selectData } from './selector';
 import './CompetitorResults.less';
 import ComponentContent from '@layouts/ComponentContent';
+import InvitesList from '@pages/Members/MembersSider/MembersSiderContent/MemberActive/Invites/InvitesList';
 
 const CompetitorResults: React.FunctionComponent<CompetitorResultsProps> = ({}) => {
     const dispatch = useDispatch();
@@ -18,15 +19,32 @@ const CompetitorResults: React.FunctionComponent<CompetitorResultsProps> = ({}) 
         };
     }, []);
 
-    const { isInitialized } = useSelector(selectData);
+    const {
+        isInitialized,
+        isFetching,
+        data = [],
+        metadata = [],
+        options = undefined,
+    } = useSelector(selectData);
+
+    const dimensions = {
+        height: Math.max(200, data.length * 50 + 63),
+    };
 
     return (
         <ComponentContent
             componentRef={ref}
             showSpinner={!isInitialized}
+            style={dimensions}
             className="competitor-results"
         >
-            <CompetitorResultsList containerRef={ref} />
+            <CompetitorResultsList
+                containerRef={ref}
+                data={data}
+                metadata={metadata}
+                options={options}
+                isFetching={isFetching}
+            />
         </ComponentContent>
     );
 };

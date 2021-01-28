@@ -22,6 +22,7 @@ export default {
         password: string;
         display_name: string;
         country: string;
+        token?: string;
     }) {
         return ClientProxy.post({
             url: config.AUTH_URL,
