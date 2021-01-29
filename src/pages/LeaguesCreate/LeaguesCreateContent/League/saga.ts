@@ -9,6 +9,7 @@ import LeaguesCreatePageContentLeagueActions, {
     LeaguesCreatePageContentLeagueTypes,
 } from './actions';
 import { prepareInitialValues } from './utils';
+import { BaseActions } from '@actions';
 
 function* init({ options }: AnyAction) {
     try {
@@ -37,6 +38,7 @@ function* submit({ data }: AnyAction) {
         }
         yield put(LeaguesCreatePageContentLeagueActions.setResult(result));
         yield put(LeaguesCreatePageContentLeagueActions.submitSuccess());
+        yield put(BaseActions.refreshLeagues());
         message.success(CONSTANTS.LEAGUE.SUCCESS.CREATE);
     } catch (err) {
         yield put(LeaguesCreatePageContentLeagueActions.submitFailure());

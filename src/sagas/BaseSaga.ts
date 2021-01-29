@@ -59,6 +59,23 @@ function* initLeagues() {
     }
 }
 
+function* refreshLeagues() {
+    try {
+        const { leagues } = yield call(
+            LeagueService.fetchUserMemberLeagues,
+            'me',
+            {
+                page: 1,
+                per_page: 100,
+                include: 'avatar',
+            }
+        );
+        yield put(BaseActions.refreshLeaguesSuccess(leagues));
+    } catch (err) {
+        yield put(BaseActions.refreshLeaguesFailure(err));
+    }
+}
+
 function* initSockets({ handlers }: AnyAction) {
     try {
         yield put(
@@ -104,6 +121,7 @@ export default function* BaseSaga() {
         takeLatest(BaseTypes.INIT_ME, initMe),
         takeLatest(BaseTypes.REFRESH_ME, refreshMe),
         takeLatest(BaseTypes.INIT_LEAGUES, initLeagues),
+        takeLatest(BaseTypes.REFRESH_LEAGUES, refreshLeagues),
         takeLatest(BaseTypes.INIT_SOCKETS, initSockets),
         takeLatest(BaseTypes.TERMINATE_SOCKETS, terminateSockets),
         takeLatest(BaseTypes.INIT_NOTIFICATIONS, initNotifications),
