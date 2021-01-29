@@ -148,7 +148,7 @@ const refreshMeFailure = localStorageSave((state: any, { err }: any) =>
 
 const initLeagues = localStorageSave((state: any) =>
     Immutable.merge(state, {
-        me: {
+        leagues: {
             ...state.leagues,
             isInitialized: false,
             err: undefined,
@@ -158,7 +158,7 @@ const initLeagues = localStorageSave((state: any) =>
 
 const initLeaguesSuccess = localStorageSave((state: any, { data }: any) =>
     Immutable.merge(state, {
-        me: {
+        leagues: {
             ...state.leagues,
             isInitialized: true,
             data,
@@ -168,7 +168,7 @@ const initLeaguesSuccess = localStorageSave((state: any, { data }: any) =>
 
 const initLeaguesFailure = localStorageSave((state: any, { err }: any) =>
     Immutable.merge(state, {
-        me: {
+        leagues: {
             ...state.leagues,
             isInitialized: true,
             err,
@@ -178,7 +178,7 @@ const initLeaguesFailure = localStorageSave((state: any, { err }: any) =>
 
 const refreshLeagues = localStorageSave((state: any) =>
     Immutable.merge(state, {
-        me: {
+        leagues: {
             ...state.leagues,
             isRefreshing: true,
             err: undefined,
@@ -188,7 +188,7 @@ const refreshLeagues = localStorageSave((state: any) =>
 
 const refreshLeaguesSuccess = localStorageSave((state: any, { data }: any) =>
     Immutable.merge(state, {
-        me: {
+        leagues: {
             ...state.leagues,
             isRefreshing: false,
             data,
@@ -198,7 +198,7 @@ const refreshLeaguesSuccess = localStorageSave((state: any, { data }: any) =>
 
 const refreshLeaguesFailure = localStorageSave((state: any, { err }: any) =>
     Immutable.merge(state, {
-        me: {
+        leagues: {
             ...state.leagues,
             isRefreshing: true,
             err,

@@ -12,6 +12,7 @@ import { omit as _omit } from 'lodash';
 import { selectMe, selectMyAvatar } from '@selectors/BaseSelector';
 import { message } from 'antd';
 import CONSTANTS from '@locale/en-CA';
+import { BaseActions } from '@actions';
 
 function* init() {
     try {
@@ -44,7 +45,7 @@ function* submit({ data }: AnyAction) {
             message.success(CONSTANTS.ACCOUNT.SUCCESS.ASSIGN_AVATAR);
         }
         yield put(AccountPageContentAccountActions.submitSuccess());
-        yield put(MemberAppActions.refresh());
+        yield put(BaseActions.refreshMe());
     } catch (err) {
         yield put(AccountPageContentAccountActions.submitFailure());
         message.error(CONSTANTS.ACCOUNT.ERROR.UPDATE);

@@ -26,9 +26,10 @@ import {
     NotificationsPageContentNotificationsSaga,
     NotificationsPageSaga,
 } from '@pages';
-import { MemberAppSaga, BaseSaga } from '@apps/MemberApp/saga';
+import { default as MemberAppSaga } from '@apps/MemberApp/saga';
 import {
     AccountSaga,
+    BaseSaga,
     AuthSaga,
     CourseSaga,
     LeagueSaga,
@@ -60,10 +61,10 @@ function configStore(options?: { preloadedState: any }): any {
     const store = createStore(
         combineReducers({
             base,
+            app,
             auth,
             modal,
             notification,
-            app,
             accountPage,
             homePage,
             leaguesCreatePage,
@@ -78,7 +79,7 @@ function configStore(options?: { preloadedState: any }): any {
         )
     );
 
-    function* memberAppSaga() {
+    function* AppSaga() {
         yield all([
             fork(BaseSaga),
             fork(MemberAppSaga),
@@ -103,7 +104,7 @@ function configStore(options?: { preloadedState: any }): any {
             fork(NotificationsPageContentNotificationsSaga),
         ]);
     }
-    sagaMiddleware.run(memberAppSaga);
+    sagaMiddleware.run(AppSaga);
 
     return { store };
 }

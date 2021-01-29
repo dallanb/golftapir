@@ -7,7 +7,7 @@ import MemberPageContentMemberResultsActions, {
 } from './actions';
 import { fetchMemberResults } from './helpers';
 import { selectData } from '@pages/Member/selector';
-import { selectLeagueUUID } from '@apps/LeagueApp/selector';
+import { selectLeagueUUID } from '@selectors/AppSelector';
 
 function* init() {
     try {

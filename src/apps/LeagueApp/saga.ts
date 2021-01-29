@@ -1,31 +1,10 @@
-import {
-    all,
-    call,
-    delay,
-    fork,
-    put,
-    race,
-    take,
-    takeLatest,
-} from 'redux-saga/effects';
+import { all, call, put, takeLatest } from 'redux-saga/effects';
 import { AnyAction } from 'redux';
 import LeagueAppActions, { LeagueAppTypes } from './actions';
-import {
-    AuthActions,
-    AuthTypes,
-    NotificationActions,
-    NotificationTypes,
-    SocketActions,
-} from '@actions';
-import { FirebaseClient } from '@libs';
+import { BaseActions, SocketActions } from '@actions';
 import { socketEventHandlers } from '@apps/LeagueApp/utils';
 import { ClientProxy, LeagueService } from '@services';
-import {
-    fetchMyLeagues,
-    fetchMyMemberUser,
-    refreshAuth,
-    requestToken,
-} from '@helpers';
+import { refreshAuth } from '@helpers';
 
 // Action Handlers
 function* preInit({ data }: AnyAction) {
@@ -35,52 +14,20 @@ function* preInit({ data }: AnyAction) {
 function* init({ uuid }: AnyAction) {
     try {
         if (!ClientProxy.accessToken) yield call(refreshAuth);
-
-        const { data: me } = yield call(fetchMyMemberUser, {
-            league_uuid: uuid,
-            include: 'avatar,stat',
-        });
-
-        // see if i can make a 'me' api call for the socket api
-        yield put(
-            SocketActions.init(me.user_uuid, {
-                eventHandler: socketEventHandlers,
-            })
-        );
-
-        yield fork(fetchMyLeagues, {
-            page: 1,
-            per_page: 100,
-            include: 'avatar',
-        });
-
+        yield put(BaseActions.initMe(uuid));
+        yield put(BaseActions.initLeagues());
+        yield put(BaseActions.initSockets(socketEventHandlers));
+        yield put(BaseActions.initNotifications());
         yield put(
             LeagueAppActions.fetchLeague(uuid, {
                 include: 'avatar',
             })
         );
-
         yield put(
             LeagueAppActions.fetchLeagueMember('me', {
                 league_uuid: uuid,
             })
         );
-
-        // prepare notifications
-        const token = yield call(requestToken);
-
-        yield put(NotificationActions.setToken(token));
-        const { success, failure } = yield race({
-            success: take(NotificationTypes.SET_TOKEN_SUCCESS),
-            failure: take(NotificationTypes.SET_TOKEN_FAILURE),
-        });
-
-        yield put(NotificationActions.fetchPending());
-
-        if (failure) {
-            throw new Error('Unable to set token');
-        }
-
         yield put(LeagueAppActions.initSuccess());
     } catch (err) {
         yield put(LeagueAppActions.initFailure(err));
@@ -89,10 +36,7 @@ function* init({ uuid }: AnyAction) {
 
 function* refresh({ uuid }: AnyAction) {
     try {
-        yield call(fetchMyMemberUser, {
-            league_uuid: uuid,
-            include: 'avatar,stat',
-        });
+        yield put(BaseActions.refreshMe(uuid));
 
         yield put(
             LeagueAppActions.fetchLeague(uuid, {

@@ -1,7 +1,7 @@
 import { AnyAction } from 'redux';
 import { all, call, delay, put, select, takeLatest } from 'redux-saga/effects';
 import { LeagueService } from '@services';
-import { selectLeagueUUID } from '@apps/LeagueApp/selector';
+import { selectLeagueUUID } from '@selectors/AppSelector';
 import MembersPageSiderContentInvitesActions, {
     MembersPageSiderContentInvitesTypes,
 } from './actions';

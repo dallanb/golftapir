@@ -4,7 +4,7 @@ import MembersPageSiderContentSearchActions, {
     MembersPageSiderContentSearchTypes,
 } from './actions';
 import { LeagueService, MemberService } from '@services';
-import { selectLeagueUUID } from '@apps/LeagueApp/selector';
+import { selectLeagueUUID } from '@selectors/AppSelector';
 import { fetchMembersList } from '@pages/Members/MembersContent/Members/helpers';
 
 function* search({ key }: AnyAction) {

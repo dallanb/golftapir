@@ -8,7 +8,7 @@ import {
     selectLeagueAvatarSrc,
     selectLeagueName,
     selectLeagueUUID,
-} from '@apps/LeagueApp/selector';
+} from '@selectors/AppSelector';
 import { Breadcrumb } from '@components';
 import routes from '@constants/routes';
 import constantRoutes from '@constants/routes';

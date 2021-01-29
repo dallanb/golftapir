@@ -148,8 +148,8 @@ class LeagueAppView extends React.Component<
     }
 }
 
-const mapStateToProps = ({ leagueApp, base }: any) => {
-    const { isInitialized, isRefreshing, isFetching, league, uuid } = leagueApp;
+const mapStateToProps = ({ app, base }: any) => {
+    const { isInitialized, isRefreshing, isFetching, league, uuid } = app;
     const { me, isLoggedIn, forceLogout } = base;
 
     const leagueUUID = uuid;

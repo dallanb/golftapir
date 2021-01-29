@@ -1,6 +1,6 @@
 import { call, put, select } from 'redux-saga/effects';
 import { MemberService } from '@services';
-import { selectLeagueUUID } from '@apps/LeagueApp/selector';
+import { selectLeagueUUID } from '@selectors/AppSelector';
 import LeagueHomePageContentMemberStandingsActions from './actions';
 
 export function* initMemberStandings(

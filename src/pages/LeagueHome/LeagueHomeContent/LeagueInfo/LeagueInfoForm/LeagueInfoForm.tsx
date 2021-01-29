@@ -5,7 +5,7 @@ import { Form } from '@components';
 import { fieldSchema, validationSchema } from './schema';
 import { selectMe } from '@selectors/BaseSelector';
 import { prepareInitialValues } from '../utils';
-import { selectLeagueData } from '@apps/LeagueApp/selector';
+import { selectLeagueData } from '@selectors/AppSelector';
 import './LeagueInfoForm.less';
 
 const LeagueInfoForm: React.FunctionComponent<LeagueInfoFormProps> = () => {

@@ -3,7 +3,7 @@ import SiderLayoutContent from '@layouts/SiderLayout/SiderLayoutContent';
 import { MembersSiderContentProps } from './types';
 import { useSelector } from 'react-redux';
 import { selectData } from '@pages/Members/selector';
-import { selectLeagueMemberStatus } from '@apps/LeagueApp/selector';
+import { selectLeagueMemberStatus } from '@selectors/AppSelector';
 import constants from '@constants';
 import MemberPending from './MemberPending';
 import MemberActive from './MemberActive';

@@ -1,5 +1,6 @@
 export { default as AccountSaga } from './AccountSaga';
 export { default as AuthSaga } from './AuthSaga';
+export { default as BaseSaga } from './BaseSaga';
 export { default as ContestSaga } from './ContestSaga';
 export { default as CourseSaga } from './CourseSaga';
 export { default as LeagueSaga } from './LeagueSaga';

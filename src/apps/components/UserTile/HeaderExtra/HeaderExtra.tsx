@@ -8,7 +8,7 @@ import { HeaderExtraProps } from './types';
 import routes from '@constants/routes';
 import { Avatar, PendingBadge, UserTile } from '@components';
 import { selectPending, selectLeagues } from '@selectors/BaseSelector';
-import { selectLeagueUUID } from '@apps/LeagueApp/selector';
+import { selectLeagueUUID } from '@selectors/AppSelector';
 import { withAppRoute, withS3URL } from '@utils';
 import constants from '@constants';
 import './HeaderExtra.less';

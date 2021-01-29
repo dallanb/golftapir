@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Button } from 'antd';
 import { MemberPendingProps } from './types';
 import MembersPageActions from '@pages/Members/actions';
-import { selectLeagueMember } from '@apps/LeagueApp/selector';
+import { selectLeagueMember } from '@selectors/AppSelector';
 import constants from '@constants';
 import './MemberPending.less';
 import ComponentContent from '@layouts/ComponentContent';

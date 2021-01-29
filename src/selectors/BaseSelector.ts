@@ -11,6 +11,10 @@ export const selectMe = createSelector([getBase], (base) =>
     _get(base, ['me', 'data'], undefined)
 );
 
+export const selectMeIsInitialized = createSelector([getBase], (base) =>
+    _get(base, ['me', 'isInitialized'], false)
+);
+
 export const selectMyUUID = createSelector([getBase], (base) =>
     _get(base, ['me', 'data', 'uuid'], undefined)
 );

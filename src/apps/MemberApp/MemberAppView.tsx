@@ -118,8 +118,8 @@ class MemberAppView extends React.PureComponent<
     }
 }
 
-const mapStateToProps = ({ memberApp, base }: any) => {
-    const { isInitialized } = memberApp;
+const mapStateToProps = ({ app, base }: any) => {
+    const { isInitialized } = app;
     const { me, pending, isLoggedIn, forceLogout } = base;
 
     const name = _get(me, ['display_name'], '');

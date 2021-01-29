@@ -2,10 +2,10 @@ import { all, call, put, select, takeLatest } from 'redux-saga/effects';
 import { AnyAction } from 'redux';
 import MembersPageActions, { MembersPageTypes } from './actions';
 import { initMembers } from './helpers';
-import { selectLeagueUUID } from '@apps/LeagueApp/selector';
+import { selectLeagueUUID } from '@selectors/AppSelector';
 import MembersPageContentMembersActions from './MembersContent/Members/actions';
 import { LeagueService } from '@services';
-import LeagueAppActions from '@apps/LeagueApp/actions';
+import { BaseActions } from '@actions';
 
 // Action Handlers
 
@@ -20,11 +20,7 @@ function* init({ uuid }: AnyAction) {
 
 function* refresh({ uuid }: AnyAction) {
     try {
-        yield put(
-            LeagueAppActions.fetchLeagueMember('me', {
-                league_uuid: uuid,
-            })
-        ); // this is too fast
+        yield put(BaseActions.refreshMe(uuid));
         yield put(MembersPageContentMembersActions.refresh());
         yield put(MembersPageActions.refreshSuccess());
     } catch (err) {

@@ -20,9 +20,10 @@ class Client {
     set socket(socket: WebSocket | undefined) {
         this._socket = socket;
     }
-    init(uuid: string): Promise<void> {
+    init(): Promise<void> {
+        // need to pass JWT in order to not be stopped by KONG Gateway
         this.socket = new WebSocket(
-            `${this._url}?uuid=${uuid}&jwt=${ClientProxy.accessToken}`
+            `${this._url}?jwt=${ClientProxy.accessToken}`
         );
 
         this.socket.onclose = (event) => {
@@ -33,7 +34,7 @@ class Client {
                     break;
                 default:
                     console.info('reconnecting');
-                    this.init(uuid);
+                    this.init();
             }
         };
 

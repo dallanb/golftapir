@@ -8,7 +8,7 @@ import CONSTANTS from '@locale/en-CA';
 import {
     selectIsInitialized,
     selectIsLeagueFetching,
-} from '@apps/LeagueApp/selector';
+} from '@selectors/AppSelector';
 
 const LeagueInfo: React.FunctionComponent<LeagueInfoProps> = () => {
     const ref = useRef(null);

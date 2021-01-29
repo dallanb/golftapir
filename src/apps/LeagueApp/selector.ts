@@ -3,7 +3,7 @@ import { get as _get } from 'lodash';
 import { withS3URL } from '@utils';
 import constants from '@constants';
 
-const getLeagueApp = (state: any) => state.leagueApp;
+const getLeagueApp = (state: any) => state.app;
 const getBase = (state: any) => state.base;
 
 export const selectData = createSelector(

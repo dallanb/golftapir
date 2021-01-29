@@ -1,7 +1,7 @@
 import { all, call, put, select, takeLatest } from 'redux-saga/effects';
 import MemberSettingsPageActions, { MemberSettingsPageTypes } from './actions';
 import { MemberService } from '@services';
-import { selectLeagueUUID } from '@apps/LeagueApp/selector';
+import { selectLeagueUUID } from '@selectors/AppSelector';
 
 function* init() {
     try {
