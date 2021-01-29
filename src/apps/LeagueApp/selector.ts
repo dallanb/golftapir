@@ -49,11 +49,16 @@ export const selectIsLeagueOwner = createSelector(
     [getLeagueApp, getBase],
     (leagueApp, base) =>
         _get(leagueApp, ['league', 'data', 'owner_uuid'], undefined) ===
-        _get(base, ['me', 'user_uuid'], null)
+        _get(base, ['me', 'data', 'user_uuid'], null)
 );
 
 export const selectLeagueMember = createSelector([getLeagueApp], (leagueApp) =>
     _get(leagueApp, ['leagueMember'], undefined)
+);
+
+export const selectLeagueMemberData = createSelector(
+    [getLeagueApp],
+    (leagueApp) => _get(leagueApp, ['leagueMember', 'data'], undefined)
 );
 
 export const selectLeagueMemberStatus = createSelector(

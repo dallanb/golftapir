@@ -8,6 +8,10 @@ const getBase = (state: any) => state.base;
 export const selectData = createSelector([getBase], (base) => base);
 
 export const selectMe = createSelector([getBase], (base) =>
+    _get(base, ['me'], undefined)
+);
+
+export const selectMeData = createSelector([getBase], (base) =>
     _get(base, ['me', 'data'], undefined)
 );
 

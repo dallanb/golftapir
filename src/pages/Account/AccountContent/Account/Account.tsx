@@ -6,7 +6,6 @@ import AccountPageContentAccountActions from './actions';
 import { selectData } from './selector';
 import ComponentContent from '@layouts/ComponentContent';
 import './Account.less';
-import { ContentLayoutContent } from '@layouts';
 
 const Account: React.FunctionComponent<AccountProps> = ({}) => {
     const dispatch = useDispatch();

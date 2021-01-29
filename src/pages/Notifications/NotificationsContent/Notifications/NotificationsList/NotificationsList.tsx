@@ -4,11 +4,6 @@ import { useHistory } from 'react-router-dom';
 import { NotificationsListProps } from './types';
 import { FixedSizeList } from '@components';
 import NotificationsPageContentNotificationsActions from '../actions';
-import {
-    selectListData,
-    selectListMetadata,
-    selectListIsFetching,
-} from '../selector';
 import NotificationsListTile from './NotificationsListTile';
 import { getRefHeight, topicToRouteMapper, withAppRoute } from '@utils';
 import { NotificationActions } from '@actions';

@@ -20,7 +20,7 @@ const HeaderExtra: React.FunctionComponent<HeaderExtraProps> = ({ user }) => {
     const leagues = useSelector(selectLeagues) || [];
 
     const getUserTileMenuItems: any = () => {
-        const leagueMenuItems = leagues.map((league: any) => (
+        const leagueMenuItems = leagues.map(({ league, member }: any) => (
             <Menu.Item
                 key={league.uuid}
                 onClick={() =>
@@ -29,7 +29,7 @@ const HeaderExtra: React.FunctionComponent<HeaderExtraProps> = ({ user }) => {
                             app: constants.APPS.LEAGUE_APP,
                             routeProps: { league_uuid: league.uuid },
                         }),
-                        league
+                        { league, member }
                     )
                 }
             >

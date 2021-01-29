@@ -3,12 +3,12 @@ import { useSelector } from 'react-redux';
 import { MemberInfoFormProps } from './types';
 import { Form } from '@components';
 import { fieldSchema, validationSchema } from './schema';
-import { selectMe } from '@selectors/BaseSelector';
+import { selectMeData } from '@selectors/BaseSelector';
 import './MemberInfoForm.less';
 import { prepareInitialValues } from '../utils';
 
 const MemberInfoForm: React.FunctionComponent<MemberInfoFormProps> = () => {
-    const me = useSelector(selectMe);
+    const me = useSelector(selectMeData);
     const initialValues = prepareInitialValues(me);
     return (
         <div className="member-info-form">

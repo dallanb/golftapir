@@ -64,7 +64,7 @@ export const selectIsOwner = createSelector(
     [getContestPage, getBase],
     (contestPage, base) =>
         _get(contestPage, ['contest', 'owner'], undefined) ===
-        _get(base, ['me', 'user_uuid'], undefined)
+        _get(base, ['me', 'data', 'user_uuid'], undefined)
 );
 
 export const selectIsRefreshing = createSelector(

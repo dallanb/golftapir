@@ -28,13 +28,10 @@ const ComponentContent: React.FunctionComponent<ComponentContentProps> = ({
     };
 
     return (
-        <div
-            ref={componentRef}
-            className={` component-content ${className}`}
-            style={style}
-        >
+        <div className={` component-content ${className}`} style={style}>
             {renderTitle()}
             <div
+                ref={componentRef}
                 className={`component-content-content ${bodyClassName}`}
                 style={bodyStyle}
             >

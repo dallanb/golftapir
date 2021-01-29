@@ -1,11 +1,8 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { LeaguesListProps } from './types';
 import { FixedSizeList } from '@components';
-import { selectLeagues } from '@selectors/BaseSelector';
 import LeaguesListTile from './LeaguesListTile';
-import { getRefHeight } from '@utils';
 import './LeaguesList.less';
 
 const LeaguesList: React.FunctionComponent<LeaguesListProps> = ({

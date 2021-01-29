@@ -44,5 +44,5 @@ export const selectIsMe = createSelector(
     [getCompetitorPage, getBase],
     (competitorPage, base) =>
         _get(competitorPage, ['member', 'uuid'], undefined) ===
-        _get(base, ['me', 'uuid'], undefined)
+        _get(base, ['me', 'data', 'uuid'], undefined)
 );

@@ -4,7 +4,7 @@ import { message } from 'antd';
 import { omit as _omit, pick as _pick, isEmpty as _isEmpty } from 'lodash';
 import CONSTANTS from '@locale/en-CA';
 import { AccountService, LeagueService } from '@services';
-import { selectMe } from '@selectors/BaseSelector';
+import { selectMeData } from '@selectors/BaseSelector';
 import LeaguesCreatePageContentLeagueActions, {
     LeaguesCreatePageContentLeagueTypes,
 } from './actions';

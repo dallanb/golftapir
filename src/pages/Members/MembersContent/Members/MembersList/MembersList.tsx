@@ -21,7 +21,7 @@ const MembersList: React.FunctionComponent<MembersListProps> = ({
     const tableDimensions = {
         size: 100,
         width: '100%',
-        height: getRefHeight(containerRef, 200) - 32,
+        height: getRefHeight(containerRef, 200) - 61,
     };
 
     const dispatch = useDispatch();

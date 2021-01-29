@@ -33,5 +33,5 @@ export const selectIsMe = createSelector(
     [getMemberPage, getBase],
     (memberPage, base) =>
         _get(memberPage, ['member', 'member'], undefined) ===
-        _get(base, ['me', 'uuid'], undefined)
+        _get(base, ['me', 'data', 'uuid'], undefined)
 );

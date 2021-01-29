@@ -13,7 +13,7 @@ const PayoutProportionListTile: React.FunctionComponent<PayoutProportionsListTil
 }) => {
     const isEven = index % 2;
     const item = _get(data, [index], undefined);
-    console.log(item);
+
     const rank = _get(item, ['rank'], null);
     const proportion = _get(item, ['proportion'], null);
     const payout = _get(item, ['payout'], null);

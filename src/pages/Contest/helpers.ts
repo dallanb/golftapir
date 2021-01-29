@@ -1,4 +1,4 @@
-import { call, put, select } from 'redux-saga/effects';
+import { call, fork, put, select } from 'redux-saga/effects';
 import { keyBy as _keyBy } from 'lodash';
 import { TopicSocketActions } from '@actions';
 import {
@@ -12,18 +12,12 @@ import { socketEventHandlers } from './utils';
 import { selectMe } from '@selectors/BaseSelector';
 
 export function* initContest(uuid: string) {
-    const me = yield select(selectMe);
+    yield fork(initContestParticipant, uuid);
     const { contests: contest } = yield call(
         ContestService.fetchContestMaterialized,
         uuid
     );
-    const { participants: participant } = yield call(
-        ContestService.fetchContestParticipantMember,
-        uuid,
-        me.uuid
-    );
     yield put(ContestPageActions.set({ contest }));
-    yield put(ContestPageActions.set({ participant }));
 
     const { participants } = contest;
 
@@ -38,6 +32,16 @@ export function* initContest(uuid: string) {
         const membersHash = _keyBy(memberParticipants, 'uuid');
         yield put(ContestPageActions.set({ membersHash }));
     }
+}
+
+function* initContestParticipant(uuid: string) {
+    const { data } = yield select(selectMe);
+    const { participants: participant } = yield call(
+        ContestService.fetchContestParticipantMember,
+        uuid,
+        data.uuid
+    );
+    yield put(ContestPageActions.set({ participant }));
 }
 
 export function* initSubscribed(uuid: string) {

@@ -1,14 +1,19 @@
-import { all, call, put, takeLatest } from 'redux-saga/effects';
+import { all, call, fork, put, takeLatest } from 'redux-saga/effects';
 import { AnyAction } from 'redux';
+import { get as _get } from 'lodash';
 import LeagueAppActions, { LeagueAppTypes } from './actions';
 import { BaseActions, SocketActions } from '@actions';
 import { socketEventHandlers } from '@apps/LeagueApp/utils';
 import { ClientProxy, LeagueService } from '@services';
 import { refreshAuth } from '@helpers';
+import { initLeague, initLeagueMember } from './helpers';
 
 // Action Handlers
 function* preInit({ data }: AnyAction) {
-    yield put(LeagueAppActions.fetchLeagueSuccess(data));
+    const league = _get(data, ['league'], undefined);
+    const member = _get(data, ['member'], undefined);
+    yield put(LeagueAppActions.fetchLeagueSuccess(league));
+    yield put(LeagueAppActions.fetchLeagueMemberSuccess(member));
 }
 
 function* init({ uuid }: AnyAction) {
@@ -18,16 +23,8 @@ function* init({ uuid }: AnyAction) {
         yield put(BaseActions.initLeagues());
         yield put(BaseActions.initSockets(socketEventHandlers));
         yield put(BaseActions.initNotifications());
-        yield put(
-            LeagueAppActions.fetchLeague(uuid, {
-                include: 'avatar',
-            })
-        );
-        yield put(
-            LeagueAppActions.fetchLeagueMember('me', {
-                league_uuid: uuid,
-            })
-        );
+        yield fork(initLeague, uuid);
+        yield fork(initLeagueMember, uuid);
         yield put(LeagueAppActions.initSuccess());
     } catch (err) {
         yield put(LeagueAppActions.initFailure(err));
