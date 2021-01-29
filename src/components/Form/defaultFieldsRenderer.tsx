@@ -226,7 +226,8 @@ const fieldRenderer = (
                             options,
                             ['s3Folder'],
                             constants.S3_FOLDERS.MEMBER.AVATAR
-                        )
+                        ),
+                        new Date().getTime()
                     )}
                     shape={_get(options, ['shape'], undefined)}
                     size={_get(options, ['size'], undefined)}

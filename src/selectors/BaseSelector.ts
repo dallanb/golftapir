@@ -35,7 +35,15 @@ export const selectMyAvatarSrc = createSelector([getBase], (base) => {
         ['me', 'data', 'avatar', 's3_filename'],
         undefined
     );
-    return filename && withS3URL(filename, constants.S3_FOLDERS.MEMBER.AVATAR);
+    const timestamp = _get(
+        base,
+        ['me', 'data', 'avatar', 'timestamp'],
+        undefined
+    );
+    return (
+        filename &&
+        withS3URL(filename, constants.S3_FOLDERS.MEMBER.AVATAR, timestamp)
+    );
 });
 
 export const selectMyLeagueUUID = createSelector([getBase], (base) =>

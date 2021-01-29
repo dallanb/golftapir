@@ -1,6 +1,7 @@
 // @ts-ignore
 import { static as Immutable } from 'seamless-immutable';
 import { createReducer } from 'reduxsauce';
+import { get as _get, set as _set } from 'lodash';
 import {
     AuthTypes,
     BaseTypes,
@@ -126,15 +127,17 @@ const refreshMe = localStorageSave((state: any) =>
     })
 );
 
-const refreshMeSuccess = localStorageSave((state: any, { data }: any) =>
-    Immutable.merge(state, {
+const refreshMeSuccess = localStorageSave((state: any, { data }: any) => {
+    // set timestamp to ensure we pull the latest avatar
+    _set(data, ['avatar', 'timestamp'], new Date().getTime());
+    return Immutable.merge(state, {
         me: {
             ...state.me,
             isRefreshing: false,
             data,
         },
-    })
-);
+    });
+});
 
 const refreshMeFailure = localStorageSave((state: any, { err }: any) =>
     Immutable.merge(state, {

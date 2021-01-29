@@ -26,6 +26,22 @@ function* initMe({ league_uuid }: any) {
     }
 }
 
+function* refreshMe({ league_uuid }: any) {
+    try {
+        const { members: me } = yield call(
+            MemberService.fetchMemberUser,
+            'me',
+            {
+                league_uuid,
+                include: 'avatar,stat',
+            }
+        );
+        yield put(BaseActions.refreshMeSuccess(me));
+    } catch (err) {
+        yield put(BaseActions.refreshMeFailure(err));
+    }
+}
+
 function* initLeagues() {
     try {
         const { leagues } = yield call(
@@ -86,6 +102,7 @@ function* initNotifications() {
 export default function* BaseSaga() {
     yield all([
         takeLatest(BaseTypes.INIT_ME, initMe),
+        takeLatest(BaseTypes.REFRESH_ME, refreshMe),
         takeLatest(BaseTypes.INIT_LEAGUES, initLeagues),
         takeLatest(BaseTypes.INIT_SOCKETS, initSockets),
         takeLatest(BaseTypes.TERMINATE_SOCKETS, terminateSockets),
