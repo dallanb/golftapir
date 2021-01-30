@@ -1,6 +1,6 @@
 import { all, call, fork, put, takeLatest } from 'redux-saga/effects';
 import { AnyAction } from 'redux';
-import { get as _get } from 'lodash';
+import { get as _get, isObject as _isObject } from 'lodash';
 import LeagueAppActions, { LeagueAppTypes } from './actions';
 import { BaseActions, SocketActions } from '@actions';
 import { socketEventHandlers } from '@apps/LeagueApp/utils';
@@ -12,10 +12,10 @@ import { initLeague, initLeagueMember } from './helpers';
 function* preInit({ data }: AnyAction) {
     const league = _get(data, ['league'], undefined);
     const member = _get(data, ['member'], undefined);
-    if (league) {
+    if (league && _isObject(league)) {
         yield put(LeagueAppActions.fetchLeagueSuccess(league));
     }
-    if (member) {
+    if (member && _isObject(member)) {
         yield put(LeagueAppActions.fetchLeagueMemberSuccess(member));
     }
 }

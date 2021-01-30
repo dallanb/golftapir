@@ -9,7 +9,8 @@ import {
 } from '@services';
 import ContestPageActions from './actions';
 import { socketEventHandlers } from './utils';
-import { selectMe } from '@selectors/BaseSelector';
+import { selectLeagueMember } from '@selectors/AppSelector';
+import { selectLeagueMemberData } from '@apps/LeagueApp/selector';
 
 export function* initContest(uuid: string) {
     yield fork(initContestParticipant, uuid);
@@ -35,11 +36,11 @@ export function* initContest(uuid: string) {
 }
 
 function* initContestParticipant(uuid: string) {
-    const { data } = yield select(selectMe);
+    const leagueMember = yield select(selectLeagueMemberData);
     const { participants: participant } = yield call(
         ContestService.fetchContestParticipantMember,
         uuid,
-        data.uuid
+        leagueMember.member
     );
     yield put(ContestPageActions.set({ participant }));
 }

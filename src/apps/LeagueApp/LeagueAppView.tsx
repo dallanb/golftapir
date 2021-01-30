@@ -37,7 +37,8 @@ class LeagueAppView extends React.Component<
 
     componentDidMount() {
         const { preInit, init, history, location, match } = this.props;
-        const prevLeague = _get(location, ['state'], null);
+        const state = _get(location, ['state'], null);
+        console.log(state);
         const prevUUID = _get(match, ['params', 'league_uuid'], null);
         if (!prevUUID) {
             history.push(
@@ -47,7 +48,7 @@ class LeagueAppView extends React.Component<
                 })
             );
         } else {
-            preInit(prevLeague);
+            preInit(state);
             init(prevUUID);
             FirebaseClient.onMessageListener()
                 .then((payload) => {
@@ -150,7 +151,14 @@ class LeagueAppView extends React.Component<
 }
 
 const mapStateToProps = ({ app, base }: any) => {
-    const { isInitialized, isRefreshing, isFetching, league, uuid } = app;
+    const {
+        isInitialized,
+        isRefreshing,
+        isFetching,
+        league,
+        leagueMember,
+        uuid,
+    } = app;
     const { me, isLoggedIn, forceLogout } = base;
 
     const leagueUUID = uuid;
@@ -162,6 +170,7 @@ const mapStateToProps = ({ app, base }: any) => {
         constants.S3_FOLDERS.LEAGUE.AVATAR
     );
     const leagueIsFetching = _get(league, ['isFetching'], false);
+    const leagueMemberIsFetching = _get(leagueMember, ['isFetching'], false);
     const menuProps = {
         paths: {
             [constantRoutes.ROUTES.LEAGUE_HOME.KEY]: {
@@ -189,7 +198,7 @@ const mapStateToProps = ({ app, base }: any) => {
         name,
         avatar,
         leagueUUID,
-        isFetching: isFetching || leagueIsFetching,
+        isFetching: isFetching || leagueIsFetching || leagueMemberIsFetching,
         isReady: isInitialized && !isRefreshing,
         isLoggedIn,
         forceLogout,

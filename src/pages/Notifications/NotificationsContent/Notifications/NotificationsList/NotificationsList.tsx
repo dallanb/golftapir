@@ -7,7 +7,9 @@ import NotificationsPageContentNotificationsActions from '../actions';
 import NotificationsListTile from './NotificationsListTile';
 import { getRefHeight, topicToRouteMapper, withAppRoute } from '@utils';
 import { NotificationActions } from '@actions';
+import { selectLeagues } from '@selectors/BaseSelector';
 import './NotificationsList.less';
+import { filterLeaguesByNotification } from '@pages/Notifications/NotificationsContent/Notifications/utils';
 
 const NotificationsList: React.FunctionComponent<NotificationsListProps> = ({
     containerRef,
@@ -17,7 +19,7 @@ const NotificationsList: React.FunctionComponent<NotificationsListProps> = ({
     isFetching,
 }) => {
     const history = useHistory();
-
+    const leagues = useSelector(selectLeagues);
     const tableDimensions = {
         size: 100,
         width: '100%',
@@ -45,11 +47,15 @@ const NotificationsList: React.FunctionComponent<NotificationsListProps> = ({
 
     const tileOnClick = (item: any) => {
         if (item) {
+            const memberLeague = filterLeaguesByNotification(item, leagues);
             const { route, state } = topicToRouteMapper(
                 item.topic,
                 item.key,
                 item
             );
+            state.league = memberLeague?.league;
+            state.member = memberLeague?.member;
+            console.log(state);
             history.push(route, state);
             dispatch(
                 NotificationActions.updateNotification(item._id, { read: true })

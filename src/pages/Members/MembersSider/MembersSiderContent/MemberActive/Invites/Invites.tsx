@@ -29,7 +29,6 @@ const Invites: React.FunctionComponent<InvitesProps> = ({}) => {
     const dimensions = {
         height: Math.min(400, data.length * 50),
     };
-    console.log(dimensions);
 
     return (
         <ComponentContent

@@ -16,8 +16,12 @@ import {
 function* preInit({ data }: AnyAction) {
     const contest = _get(data, ['contest'], undefined);
     const participant = _get(data, ['participant'], undefined);
-    yield put(ContestPageActions.set({ contest }));
-    yield put(ContestPageActions.set({ participant }));
+    if (contest) {
+        yield put(ContestPageActions.set({ contest }));
+    }
+    if (participant) {
+        yield put(ContestPageActions.set({ participant }));
+    }
 }
 
 function* init({ uuid }: AnyAction) {
