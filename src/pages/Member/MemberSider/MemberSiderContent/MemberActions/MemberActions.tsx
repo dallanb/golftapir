@@ -11,7 +11,7 @@ import './MemberActions.less';
 const MemberActions: React.FunctionComponent<MemberActionsProps> = () => {
     const isMe = useSelector(selectIsMe);
     const { member } = useSelector(selectData);
-    const uuid = _get(member, ['uuid'], null);
+    const uuid = _get(member, ['member'], null);
     const actions = memoizedGenerateActions(uuid);
 
     const Actions = memoizedMemberActionRenderer({
@@ -20,7 +20,11 @@ const MemberActions: React.FunctionComponent<MemberActionsProps> = () => {
     });
     if (!Actions) return null;
     return (
-        <ComponentContent className="member-actions">
+        <ComponentContent
+            title={'Actions'}
+            className="member-actions space"
+            bodyClassName="member-actions-body"
+        >
             {Actions}
         </ComponentContent>
     );
