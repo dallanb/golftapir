@@ -6,6 +6,7 @@ import { MemberAppTypes } from './actions';
 /* ------------- Interface ------------- */
 export interface MemberAppInterface {
     readonly isFetching: boolean;
+    readonly isRefreshing: boolean;
     readonly isInitialized: boolean;
     readonly err?: Error;
 }
@@ -13,6 +14,7 @@ export interface MemberAppInterface {
 /* ------------- Initial State ------------- */
 const INITIAL_STATE: MemberAppInterface = {
     isFetching: false,
+    isRefreshing: false,
     isInitialized: false,
     err: undefined,
 };
@@ -42,6 +44,26 @@ function initFailure(state: any, { err }: any) {
     });
 }
 
+function refresh(state = INITIAL_STATE) {
+    return Immutable.merge(state, {
+        isRefreshing: true,
+        err: null,
+    });
+}
+
+function refreshSuccess(state = INITIAL_STATE) {
+    return Immutable.merge(state, {
+        isRefreshing: false,
+    });
+}
+
+function refreshFailure(state: any, { err }: any) {
+    return Immutable.merge(state, {
+        isRefreshing: false,
+        err,
+    });
+}
+
 function terminate() {
     return INITIAL_STATE;
 }
@@ -56,6 +78,9 @@ const HANDLERS = {
     [MemberAppTypes.INIT]: init,
     [MemberAppTypes.INIT_SUCCESS]: initSuccess,
     [MemberAppTypes.INIT_FAILURE]: initFailure,
+    [MemberAppTypes.REFRESH]: refresh,
+    [MemberAppTypes.REFRESH_SUCCESS]: refreshSuccess,
+    [MemberAppTypes.REFRESH_FAILURE]: refreshFailure,
     [MemberAppTypes.TERMINATE]: terminate,
     [MemberAppTypes.SET]: set,
 };

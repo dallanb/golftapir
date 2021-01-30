@@ -22,7 +22,7 @@ const Notifications: React.FunctionComponent<NotificationsProps> = () => {
 
     return (
         <ContentLayout
-            header={<NotificationsHeader />}
+            // header={<NotificationsHeader />}
             sider={<NotificationsSider />}
             content={<NotificationsContent />}
             // showSpinner={!isInitialized}

@@ -24,7 +24,7 @@ const Account: React.FunctionComponent<AccountProps> = () => {
 
     return (
         <ContentLayout
-            header={<AccountHeader />}
+            // header={<AccountHeader />}
             content={<AccountContent />}
             sider={<AccountSider />}
             // showSpinner={!isInitialized}

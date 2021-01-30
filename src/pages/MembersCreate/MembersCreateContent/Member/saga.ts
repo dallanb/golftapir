@@ -7,7 +7,7 @@ import MembersCreatePageContentMemberActions, {
     MembersCreatePageContentMemberTypes,
 } from './actions';
 import { prepareInitialValues } from './utils';
-import { selectLeagueUUID } from '@apps/LeagueApp/selector';
+import { selectLeagueUUID } from '@selectors/AppSelector';
 import { get as _get, omit as _omit } from 'lodash';
 
 function* init({ options = { email: null } }: AnyAction) {

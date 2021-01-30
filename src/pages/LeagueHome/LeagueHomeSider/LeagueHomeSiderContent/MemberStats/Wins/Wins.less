@@ -1,15 +1,19 @@
 .wins {
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  flex-direction: row;
-
-  .wins-label {
-    color: fade(@primary-color, 50%);
-    margin-right: 16px;
-  }
-  .wins-value {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: row;
+    height: 30px;
+    padding: 6px 12px;
     font-size: 12px;
-    font-weight: bold;
-  }
+
+    .wins-label {
+        color: fade(@primary-color, 50%);
+        margin-right: 16px;
+        width: 80%;
+    }
+    .wins-value {
+        font-weight: bold;
+        width: 20%;
+    }
 }

@@ -16,7 +16,7 @@ const LeaguesListTile: React.FunctionComponent<LeaguesListTileProps> = ({
 }) => {
     const isEven = index % 2;
     const item = _get(data, [index], undefined);
-    const uuid = _get(item, ['uuid'], undefined);
+    const uuid = _get(item, ['league', 'uuid'], undefined);
 
     const handleClick = (options: any) => {
         history.push(
@@ -27,12 +27,13 @@ const LeaguesListTile: React.FunctionComponent<LeaguesListTileProps> = ({
             options
         );
     };
-
-    const name = _get(item, ['name'], 'Loading...');
-    const avatar = _get(item, ['avatar', 's3_filename'], undefined);
+    const league = _get(item, ['league'], undefined);
+    const member = _get(item, ['member'], undefined);
+    const name = _get(league, ['name'], 'Loading...');
+    const avatar = _get(league, ['avatar', 's3_filename'], undefined);
     const src = avatar && withS3URL(avatar, constants.S3_FOLDERS.LEAGUE.AVATAR);
-    const status = _get(item, ['status'], undefined);
-    const participants = _get(item, ['participants'], {});
+    const status = _get(league, ['status'], undefined);
+    const participants = _get(league, ['participants'], {});
     const cardCx = classnames('leagues-list-tile-card', { filled: !isEven });
     return (
         <div key={index} style={style} className="leagues-list-tile-view">

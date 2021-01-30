@@ -1,13 +1,14 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { Button } from 'antd';
 import { PlusCircleOutlined } from '@ant-design/icons';
 import routes from '@constants/routes';
 import { CreateButtonProps } from './types';
-import './CreateButton.less';
 import { withAppRoute } from '@utils';
-import { useSelector } from 'react-redux';
 import { selectMyLeagueUUID } from '@selectors/BaseSelector';
+import ComponentContent from '@layouts/ComponentContent';
+import './CreateButton.less';
 
 const CreateButton: React.FunctionComponent<CreateButtonProps> = () => {
     const history = useHistory();
@@ -22,11 +23,15 @@ const CreateButton: React.FunctionComponent<CreateButtonProps> = () => {
     };
 
     return (
-        <div className="create-button">
+        <ComponentContent
+            className="create-button space"
+            bodyClassName={'create-button-body'}
+            title={'Actions'}
+        >
             <Button block type="primary" onClick={handleClick}>
                 Create Contest <PlusCircleOutlined />
             </Button>
-        </div>
+        </ComponentContent>
     );
 };
 

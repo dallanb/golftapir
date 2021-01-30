@@ -1,0 +1,42 @@
+@import 'src/assets/styles/statics';
+.payout-proportions-tile-view {
+    .payout-proportions-tile-card {
+        display: flex;
+        height: 100%;
+
+        &.filled {
+            background: @tile-fill;
+        }
+
+        .ant-card-body {
+            width: 100%;
+            padding: 6px 12px;
+        }
+
+        .payout-proportions-tile-content {
+            display: flex;
+            align-items: center;
+            height: 100%;
+            .payout-proportions-tile-content-main {
+                display: flex;
+                width: 80%;
+
+                .payout-proportions-tile-content-main-info {
+                    .payout-proportions-tile-content-main-rank {
+                        font-size: 12px;
+                    }
+                }
+            }
+            .payout-proportions-tile-content-side {
+                display: flex;
+                justify-content: flex-start;
+                font-size: 12px;
+                font-weight: bold;
+                width: 20%;
+            }
+        }
+
+        .payout-proportions-tile-button {
+        }
+    }
+}

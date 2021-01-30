@@ -1,62 +1,18 @@
-import {
-    all,
-    call,
-    delay,
-    fork,
-    put,
-    race,
-    take,
-    takeLatest,
-} from 'redux-saga/effects';
+import { all, call, put, takeLatest } from 'redux-saga/effects';
 import MemberAppActions, { MemberAppTypes } from './actions';
-import {
-    AuthActions,
-    AuthTypes,
-    NotificationActions,
-    NotificationTypes,
-    SocketActions,
-} from '@actions';
-import { FirebaseClient } from '@libs';
-import { socketEventHandlers } from '@apps/MemberApp/utils';
+import { BaseActions } from '@actions';
 import { ClientProxy } from '@services';
-import { fetchMyLeagues, fetchMyMemberUser } from '@helpers';
+import { refreshAuth } from '@helpers';
+import { socketEventHandlers } from './utils';
 
 // Action Handlers
 function* init() {
     try {
-        if (!ClientProxy.accessToken) yield call(refresh);
-
-        const { data: me } = yield call(fetchMyMemberUser, {
-            include: 'avatar,stat',
-        });
-
-        // see if i can make a 'me' api call for the socket api
-        yield put(
-            SocketActions.init(me.user_uuid, {
-                eventHandler: socketEventHandlers,
-            })
-        );
-
-        yield fork(fetchMyLeagues, {
-            page: 1,
-            per_page: 100,
-            include: 'avatar',
-        });
-
-        // prepare notifications
-        const token = yield call(requestToken);
-
-        yield put(NotificationActions.setToken(token));
-        const { success, failure } = yield race({
-            success: take(NotificationTypes.SET_TOKEN_SUCCESS),
-            failure: take(NotificationTypes.SET_TOKEN_FAILURE),
-        });
-
-        yield put(NotificationActions.fetchPending());
-
-        if (failure) {
-            throw new Error('Unable to set token');
-        }
+        if (!ClientProxy.accessToken) yield call(refreshAuth);
+        yield put(BaseActions.initMe());
+        yield put(BaseActions.initLeagues());
+        yield put(BaseActions.initSockets(socketEventHandlers));
+        yield put(BaseActions.initNotifications());
 
         yield put(MemberAppActions.initSuccess());
     } catch (err) {
@@ -66,38 +22,25 @@ function* init() {
 
 function* terminate() {
     try {
-        yield put(SocketActions.terminate());
+        yield put(BaseActions.terminateSockets());
     } catch (err) {
         console.error(err);
     }
 }
 
-// Helpers
 function* refresh() {
-    yield put(AuthActions.refresh());
-    const { failure, timeout } = yield race({
-        success: take(AuthTypes.REFRESH_SUCCESS),
-        failure: take(AuthTypes.REFRESH_FAILURE),
-        timeout: delay(5000),
-    });
-    if (timeout) {
-        yield put(AuthActions.refreshFailure());
-        throw new Error('refresh timeout');
+    try {
+        yield put(BaseActions.refreshMe());
+        yield put(MemberAppActions.refreshSuccess());
+    } catch (err) {
+        yield put(MemberAppActions.refreshFailure());
     }
-    if (failure) {
-        yield put(AuthActions.refreshFailure());
-        throw new Error('refresh failure');
-    }
-}
-
-function* requestToken() {
-    const token = yield FirebaseClient.requestNotificationPermissions();
-    return token;
 }
 
 export default function* MemberAppSaga() {
     yield all([
         takeLatest(MemberAppTypes.INIT, init),
         takeLatest(MemberAppTypes.TERMINATE, terminate),
+        takeLatest(MemberAppTypes.REFRESH, refresh),
     ]);
 }

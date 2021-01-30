@@ -3,7 +3,7 @@ import createSagaMiddleware from 'redux-saga';
 import { all, fork } from 'redux-saga/effects';
 import { createLogger } from 'redux-logger';
 import { get as _get } from 'lodash';
-import { reducer as leagueApp } from '@apps/LeagueApp/reducer';
+import { reducer as app } from '@apps/LeagueApp/reducer';
 import {
     authReducer as auth,
     baseReducer as base,
@@ -56,10 +56,11 @@ import {
     MemberSettingsPageSaga,
     MemberSettingsPageContentMemberSaga,
 } from '@pages';
-import { default as BaseSaga } from '@apps/LeagueApp/saga';
+import { default as LeagueAppSaga } from '@apps/LeagueApp/saga';
 import {
     AccountSaga,
     AuthSaga,
+    BaseSaga,
     ContestSaga,
     CourseSaga,
     LeagueSaga,
@@ -91,10 +92,10 @@ function configStore(options?: { preloadedState: any }): any {
     const store = createStore(
         combineReducers({
             base,
+            app,
             auth,
             modal,
             notification,
-            leagueApp,
             contestPage,
             contestsPage,
             contestsCreatePage,
@@ -114,9 +115,10 @@ function configStore(options?: { preloadedState: any }): any {
         )
     );
 
-    function* LeagueAppSaga() {
+    function* AppSaga() {
         yield all([
             fork(BaseSaga),
+            fork(LeagueAppSaga),
             fork(AccountSaga),
             fork(AuthSaga),
             fork(ContestSaga),
@@ -166,7 +168,7 @@ function configStore(options?: { preloadedState: any }): any {
             fork(MemberSettingsPageContentMemberSaga),
         ]);
     }
-    sagaMiddleware.run(LeagueAppSaga);
+    sagaMiddleware.run(AppSaga);
 
     return { store };
 }

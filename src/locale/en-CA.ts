@@ -4,6 +4,10 @@ const CONSTANTS = {
         SUBMIT: 'Submit',
     },
     ACCOUNT: {
+        SUCCESS: {
+            UPDATE: 'Account update successful!',
+            ASSIGN_AVATAR: 'Avatar update successful!',
+        },
         ERROR: {
             UPDATE: 'Error updating League information',
             ASSIGN_AVATAR: 'Error updating League avatar',
@@ -83,6 +87,8 @@ const CONSTANTS = {
     MEMBER: {
         SUCCESS: {
             INVITE: 'Invitation sent!',
+            UPDATE: 'Member update successful!',
+            ASSIGN_AVATAR: 'Member avatar update successful!',
         },
         ERROR: {
             FETCH: 'Error fetching Member information',
@@ -243,16 +249,43 @@ const CONSTANTS = {
             TITLE: 'League Home',
             DESCRIPTION: 'League Home Page',
             STANDINGS: 'Member Standings',
+            LEAGUE: 'League Info',
             STATS: {
                 WINS: 'Wins',
                 WIN_PERCENTAGE: 'Win Percentage',
                 WINNINGS: 'Winnings',
+                FORM: {
+                    LABELS: {
+                        WINS: 'Wins',
+                        WIN_PERCENTAGE: 'Win Percentage',
+                        WINNINGS: 'Winnings',
+                    },
+                },
+            },
+            FORM: {
+                LABELS: {
+                    NAME: 'Name',
+                    CREATED_AT: 'Est.',
+                    AVATAR: 'Avatar',
+                    STATUS: 'Status',
+                },
             },
         },
         CONTEST: {
             TITLE: 'Contest',
-            DESCRIPTION: 'League Info',
+            DESCRIPTION: 'Contest Info',
+            INFO: 'Contest Info',
             LEADERBOARD: 'Leaderboard',
+            FORM: {
+                LABELS: {
+                    NAME: 'Name',
+                    START: 'Start Time',
+                    AVATAR: 'Avatar',
+                    STATUS: 'Status',
+                    PAYOUT: 'Total Payout',
+                    BUY_IN: 'Buy In',
+                },
+            },
             STEPS: {
                 PENDING: {
                     TITLE: 'Pending',

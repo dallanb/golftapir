@@ -4,28 +4,24 @@ import { useHistory, useParams } from 'react-router-dom';
 import { MembersListProps } from './types';
 import { FixedSizeList } from '@components';
 import MembersPageContentMembersActions from '../actions';
-import {
-    selectListData,
-    selectListIsFetching,
-    selectListMetadata,
-} from '../selector';
 import MembersListTile from './MembersListTile';
 import { getRefHeight } from '@utils';
 import './MembersList.less';
 
 const MembersList: React.FunctionComponent<MembersListProps> = ({
     containerRef,
+    data,
+    metadata,
+    options,
+    isFetching,
 }) => {
     const history = useHistory();
     const params = useParams();
 
-    const data = useSelector(selectListData);
-    const metadata = useSelector(selectListMetadata);
-    const isFetching = useSelector(selectListIsFetching);
     const tableDimensions = {
         size: 100,
         width: '100%',
-        height: getRefHeight(containerRef, 200) - 32,
+        height: getRefHeight(containerRef, 200) - 61,
     };
 
     const dispatch = useDispatch();

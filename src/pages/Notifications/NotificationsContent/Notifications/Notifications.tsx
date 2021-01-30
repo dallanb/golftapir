@@ -18,15 +18,28 @@ const Notifications: React.FunctionComponent<NotificationsProps> = ({}) => {
         };
     }, []);
 
-    const { isInitialized } = useSelector(selectData);
+    const {
+        isInitialized,
+        isFetching,
+        data = [],
+        metadata = [],
+        options = undefined,
+    } = useSelector(selectData);
 
     return (
         <ComponentContent
             componentRef={ref}
             showSpinner={!isInitialized}
             className="notifications"
+            title={'Notifications List'}
         >
-            <NotificationsList containerRef={ref} />
+            <NotificationsList
+                containerRef={ref}
+                data={data}
+                metadata={metadata}
+                options={options}
+                isFetching={isFetching}
+            />
         </ComponentContent>
     );
 };

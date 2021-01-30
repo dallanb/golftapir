@@ -1,10 +1,14 @@
 import { call, put, select } from 'redux-saga/effects';
 import { MemberService } from '@services';
-import { selectLeagueUUID } from '@apps/LeagueApp/selector';
+import { selectLeagueUUID } from '@selectors/AppSelector';
 import LeagueHomePageContentMemberStandingsActions from './actions';
 
 export function* initMemberStandings(
-    options: any = { include: 'stat,avatar', sort_by: 'win_count.desc' }
+    options: any = {
+        include: 'stat,avatar',
+        status: 'active',
+        sort_by: 'win_count.desc',
+    }
 ) {
     const uuid = yield select(selectLeagueUUID);
     const { members } = yield call(MemberService.fetchMemberStandings, {

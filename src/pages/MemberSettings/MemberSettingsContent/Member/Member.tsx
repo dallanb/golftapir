@@ -20,7 +20,11 @@ const MemberSettings: React.FunctionComponent<MemberSettingsProps> = ({}) => {
     const { isInitialized } = useSelector(selectData);
 
     return (
-        <ComponentContent showSpinner={!isInitialized} className="member">
+        <ComponentContent
+            showSpinner={!isInitialized}
+            className="member-component-content"
+            title={'Settings'}
+        >
             <MemberForm />
         </ComponentContent>
     );

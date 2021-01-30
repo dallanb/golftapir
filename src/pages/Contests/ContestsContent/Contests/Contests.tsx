@@ -22,15 +22,28 @@ const Contests: React.FunctionComponent<ContestsProps> = ({}) => {
         };
     }, []);
 
-    const { isInitialized } = useSelector(selectData);
+    const {
+        isInitialized,
+        isFetching,
+        data = [],
+        metadata = [],
+        options = undefined,
+    } = useSelector(selectData);
 
     return (
         <ComponentContent
             componentRef={ref}
             showSpinner={!isInitialized}
             className="contests"
+            title={'Contests List'}
         >
-            <ContestsList containerRef={ref} />
+            <ContestsList
+                containerRef={ref}
+                data={data}
+                metadata={metadata}
+                options={options}
+                isFetching={isFetching}
+            />
         </ComponentContent>
     );
 };

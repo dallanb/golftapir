@@ -1,33 +1,27 @@
-import React, { ReactText } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
+import { useDispatch } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
-import { get as _get } from 'lodash';
 import { ContestsListProps } from './types';
 import { FixedSizeList, ContestTile } from '@components';
 import ContestsPageContentContestsActions from '../actions';
-import {
-    selectListData,
-    selectListMetadata,
-    selectListIsFetching,
-    selectListOptions,
-} from '../selector';
 import { getRefHeight } from '@utils';
 import './ContestsList.less';
 
 const ContestsList: React.FunctionComponent<ContestsListProps> = ({
     containerRef,
+    data,
+    metadata,
+    options,
+    isFetching,
 }) => {
     const dispatch = useDispatch();
     const history = useHistory();
     const params = useParams();
-    const data = useSelector(selectListData);
-    const metadata = useSelector(selectListMetadata);
-    const options = useSelector(selectListOptions);
-    const isFetching = useSelector(selectListIsFetching);
+
     const tableDimensions = {
         size: 100,
         width: '100%',
-        height: getRefHeight(containerRef, 200) - 32,
+        height: getRefHeight(containerRef, 200),
     };
 
     const loadMore = (start: number, stop: number) => {

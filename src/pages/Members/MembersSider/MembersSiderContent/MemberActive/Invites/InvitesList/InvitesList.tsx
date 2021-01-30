@@ -1,32 +1,26 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { InvitesListProps } from './types';
 import { FixedSizeList } from '@components';
 import MembersPageSiderContentInvitesActions from '../actions';
-import {
-    selectListData,
-    selectListMetadata,
-    selectListIsFetching,
-    selectListOptions,
-} from '../selector';
 import InvitesListTile from './InvitesListTile';
 import { getRefHeight } from '@utils';
 import './InvitesList.less';
 
 const InvitesList: React.FunctionComponent<InvitesListProps> = ({
     containerRef,
+    data,
+    metadata,
+    options,
+    isFetching,
 }) => {
     const dispatch = useDispatch();
     const history = useHistory();
-    const data = useSelector(selectListData);
-    const metadata = useSelector(selectListMetadata);
-    const options = useSelector(selectListOptions);
-    const isFetching = useSelector(selectListIsFetching);
     const tableDimensions = {
         size: 50,
         width: '100%',
-        height: getRefHeight(containerRef, 200) - 32,
+        height: getRefHeight(containerRef, 200),
     };
 
     const loadMore = (start: number, stop: number) => {

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { Button, Select, Spin } from 'antd';
-import { debounce as _debounce } from 'lodash';
+import { debounce as _debounce, isNil as _isNil } from 'lodash';
 import { PlusCircleOutlined, UserAddOutlined } from '@ant-design/icons/lib';
 import { SearchInputProps } from './types';
 import MembersPageSiderContentSearchActions from './actions';
@@ -24,11 +24,17 @@ const SearchSelectInput: React.FunctionComponent<SearchInputProps> = () => {
     const isSearching = useSelector(selectIsSearching);
     const searchKey = useSelector(selectKey);
     const newMemberKey = 'new';
+
     const onSearch = (val: string) => {
         dispatch(MembersPageSiderContentSearchActions.search(val));
     };
     const onClick = () => {
-        dispatch(MembersPageSiderContentSearchActions.invite(value));
+        dispatch(
+            MembersPageSiderContentSearchActions.invite(
+                data[value].user_uuid,
+                data[value].email
+            )
+        );
         setValue(undefined);
     };
     const onChange = (newValue: any) => {
@@ -45,7 +51,11 @@ const SearchSelectInput: React.FunctionComponent<SearchInputProps> = () => {
     };
 
     return (
-        <ComponentContent className="search-input-component-content">
+        <ComponentContent
+            className="search-input-component-content space"
+            bodyClassName={'search-input-component-content-body'}
+            title={'Invite'}
+        >
             <div className="search-select-input-wrapper">
                 <Select
                     showSearch
@@ -57,8 +67,8 @@ const SearchSelectInput: React.FunctionComponent<SearchInputProps> = () => {
                     onChange={onChange}
                     className="search-select-input"
                 >
-                    {data.map((d: any) => (
-                        <Option key={d.user_uuid} value={d.user_uuid}>
+                    {data.map((d: any, index: number) => (
+                        <Option key={index} value={index}>
                             {d.display_name}
                         </Option>
                     ))}
@@ -74,7 +84,7 @@ const SearchSelectInput: React.FunctionComponent<SearchInputProps> = () => {
                     type="primary"
                     icon={<PlusCircleOutlined />}
                     className="invite-button"
-                    disabled={!value}
+                    disabled={_isNil(value)}
                     onClick={onClick}
                 />
             </div>

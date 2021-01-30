@@ -4,8 +4,8 @@ import MembersPageSiderContentSearchActions, {
     MembersPageSiderContentSearchTypes,
 } from './actions';
 import { LeagueService, MemberService } from '@services';
-import { selectLeagueUUID } from '@apps/LeagueApp/selector';
-import { fetchMembersList } from '@pages/Members/MembersContent/Members/helpers';
+import { selectLeagueUUID } from '@selectors/AppSelector';
+import MembersPageContentMembersActions from '@pages/Members/MembersContent/Members/actions';
 
 function* search({ key }: AnyAction) {
     try {
@@ -21,12 +21,12 @@ function* search({ key }: AnyAction) {
     }
 }
 
-function* invite({ uuid: user_uuid }: AnyAction) {
+function* invite({ uuid: user_uuid, email }: AnyAction) {
     try {
         const uuid = yield select(selectLeagueUUID);
-        yield call(LeagueService.createMember, uuid, { user_uuid }); // Trigger an api error that says this person cant be added since they already exist
-        yield delay(1000); // TODO: fix this
-        yield call(fetchMembersList);
+        yield call(LeagueService.createMember, uuid, { user_uuid, email }); // Trigger an api error that says this person cant be added since they already exist
+        // yield delay(1000); // TODO: fix this
+        yield put(MembersPageContentMembersActions.refresh());
         yield put(MembersPageSiderContentSearchActions.inviteSuccess());
     } catch (err) {
         yield put(MembersPageSiderContentSearchActions.inviteFailure(err));

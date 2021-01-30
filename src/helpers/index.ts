@@ -1,6 +1,3 @@
-import fetchMyMembersMaterializedUser from '@helpers/fetchMyMembersMaterializedUser';
-import fetchLeague from '@helpers/fetchLeague';
-
 export { default as assignContestAvatar } from './assignContestAvatar';
 export { default as createContest } from './createContest';
 export { default as fetchContest } from './fetchContest';
@@ -22,6 +19,8 @@ export { default as fetchMyScoreContestParticipantSheet } from './fetchMyScoreCo
 export { default as fetchLeague } from './fetchLeague';
 export { default as fetchMyLeagues } from './fetchMyLeagues';
 export { default as fetchWagers } from './fetchWagers';
+export { default as refreshAuth } from './refreshAuth';
+export { default as requestToken } from './requestToken';
 export { default as subscribe } from './subscribe';
 export { default as subscriptionExists } from './subscriptionExists';
 export { default as unsubscribe } from './unsubscribe';

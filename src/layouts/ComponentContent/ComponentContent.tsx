@@ -1,4 +1,5 @@
 import React from 'react';
+import classnames from 'classnames';
 import { ComponentContentProps } from './types';
 import { Layout, Spin } from 'antd';
 import './ComponentContent.less';
@@ -11,7 +12,9 @@ const ComponentContent: React.FunctionComponent<ComponentContentProps> = ({
     children,
     componentRef,
     className,
+    bodyClassName,
     style,
+    bodyStyle,
 }) => {
     const renderTitle = () => {
         if (title) {
@@ -24,15 +27,14 @@ const ComponentContent: React.FunctionComponent<ComponentContentProps> = ({
         }
         return children;
     };
-
+    const cx = classnames('component-content', className);
+    const bodyCx = classnames('component-content-content', bodyClassName);
     return (
-        <div
-            ref={componentRef}
-            className={`component-content-content ${className}`}
-            style={style}
-        >
+        <div className={cx} style={style}>
             {renderTitle()}
-            {renderComponent()}
+            <div ref={componentRef} className={bodyCx} style={bodyStyle}>
+                {renderComponent()}
+            </div>
         </div>
     );
 };

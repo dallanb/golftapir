@@ -21,4 +21,9 @@ export interface ContestPageInterface {
     readonly participant: any;
     readonly membersHash: any;
     readonly rankingLookup: any;
+    readonly payout: {
+        isFetching: boolean;
+        data: any;
+        err?: Error;
+    };
 }

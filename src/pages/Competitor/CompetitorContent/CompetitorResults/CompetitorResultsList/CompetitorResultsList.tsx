@@ -10,10 +10,12 @@ import { getRefHeight } from '@utils';
 
 const CompetitorResultsList: React.FunctionComponent<CompetitorResultsListProps> = ({
     containerRef,
+    data,
+    metadata,
+    options,
+    isFetching,
 }) => {
     const history = useHistory();
-    const data = useSelector(selectListData);
-    const isFetching = useSelector(selectListIsFetching);
 
     const tableDimensions = {
         size: 100,

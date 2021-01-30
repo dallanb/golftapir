@@ -1,24 +1,24 @@
-import { call, put, select } from 'redux-saga/effects';
+import { call, fork, put, select } from 'redux-saga/effects';
 import { keyBy as _keyBy } from 'lodash';
 import { TopicSocketActions } from '@actions';
-import { ContestService, MemberService, NotificationService } from '@services';
+import {
+    ContestService,
+    MemberService,
+    NotificationService,
+    WagerService,
+} from '@services';
 import ContestPageActions from './actions';
 import { socketEventHandlers } from './utils';
-import { selectMe } from '@selectors/BaseSelector';
+import { selectLeagueMember } from '@selectors/AppSelector';
+import { selectLeagueMemberData } from '@apps/LeagueApp/selector';
 
 export function* initContest(uuid: string) {
-    const me = yield select(selectMe);
+    yield fork(initContestParticipant, uuid);
     const { contests: contest } = yield call(
         ContestService.fetchContestMaterialized,
         uuid
     );
-    const { participants: participant } = yield call(
-        ContestService.fetchContestParticipantMember,
-        uuid,
-        me.uuid
-    );
     yield put(ContestPageActions.set({ contest }));
-    yield put(ContestPageActions.set({ participant }));
 
     const { participants } = contest;
 
@@ -33,6 +33,16 @@ export function* initContest(uuid: string) {
         const membersHash = _keyBy(memberParticipants, 'uuid');
         yield put(ContestPageActions.set({ membersHash }));
     }
+}
+
+function* initContestParticipant(uuid: string) {
+    const leagueMember = yield select(selectLeagueMemberData);
+    const { participants: participant } = yield call(
+        ContestService.fetchContestParticipantMember,
+        uuid,
+        leagueMember.member
+    );
+    yield put(ContestPageActions.set({ participant }));
 }
 
 export function* initSubscribed(uuid: string) {
@@ -50,4 +60,12 @@ export function* initSocket(uuid: string) {
 
 export function* terminateSocket() {
     yield put(TopicSocketActions.terminate());
+}
+
+export function* initPayout(uuid: string) {
+    const { contest: payout } = yield call(
+        WagerService.fetchContestsComplete,
+        uuid
+    );
+    yield put(ContestPageActions.set({ payout }));
 }

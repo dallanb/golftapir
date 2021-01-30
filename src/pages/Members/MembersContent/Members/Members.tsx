@@ -18,15 +18,29 @@ const Members: React.FunctionComponent<MembersProps> = ({}) => {
         };
     }, []);
 
-    const { isInitialized, isRefreshing } = useSelector(selectData);
+    const {
+        isInitialized,
+        isRefreshing,
+        isFetching,
+        data = [],
+        metadata = [],
+        options = undefined,
+    } = useSelector(selectData);
 
     return (
         <ComponentContent
             componentRef={ref}
             showSpinner={!isInitialized || isRefreshing}
-            className="members"
+            className="members-component-content"
+            title={'Members List'}
         >
-            <MembersList containerRef={ref} />
+            <MembersList
+                containerRef={ref}
+                data={data}
+                metadata={metadata}
+                options={options}
+                isFetching={isFetching}
+            />
         </ComponentContent>
     );
 };

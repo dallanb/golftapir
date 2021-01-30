@@ -9,13 +9,11 @@ import {
     take,
     takeLatest,
 } from 'redux-saga/effects';
-import { eventChannel, END } from 'redux-saga';
 import { message } from 'antd';
 import AuthActions, { AuthTypes } from '@actions/AuthActions';
 import { ClientProxy, AuthService } from '@services';
 import CONSTANTS from '@locale/en-CA';
 import { countdown } from '@utils';
-import { FirebaseClient } from '@libs';
 
 let tokenWatchTask: any;
 
@@ -50,15 +48,21 @@ function* register({
     password,
     display_name,
     country,
+    token,
 }: AnyAction) {
     try {
-        const res = yield call(AuthService.register, {
-            email,
-            username,
-            password,
-            display_name,
-            country,
-        });
+        const payload = Object.assign(
+            {},
+            {
+                email,
+                username,
+                password,
+                display_name,
+                country,
+            },
+            token && { token }
+        );
+        const res = yield call(AuthService.register, payload);
         const { user, access_token } = res;
         ClientProxy.accessToken = access_token;
         yield put(AuthActions.registerSuccess(user));

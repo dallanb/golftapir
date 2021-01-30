@@ -30,7 +30,7 @@ const columnsSchema = [
     {
         Header: 'Winnings',
         accessor: 'stat.winning_total',
-        Cell: ({ value }: any) => `$ ${value}`,
+        Cell: ({ value }: any) => `$${value}`,
         className: 'winning-total',
     },
 ];

@@ -3,7 +3,7 @@ import createSagaMiddleware from 'redux-saga';
 import { all, fork } from 'redux-saga/effects';
 import { createLogger } from 'redux-logger';
 import { get as _get } from 'lodash';
-import { reducer as memberApp } from '@apps/MemberApp/reducer';
+import { reducer as app } from '@apps/MemberApp/reducer';
 import {
     authReducer as auth,
     baseReducer as base,
@@ -26,9 +26,10 @@ import {
     NotificationsPageContentNotificationsSaga,
     NotificationsPageSaga,
 } from '@pages';
-import { default as BaseSaga } from '@apps/MemberApp/saga';
+import { default as MemberAppSaga } from '@apps/MemberApp/saga';
 import {
     AccountSaga,
+    BaseSaga,
     AuthSaga,
     CourseSaga,
     LeagueSaga,
@@ -60,10 +61,10 @@ function configStore(options?: { preloadedState: any }): any {
     const store = createStore(
         combineReducers({
             base,
+            app,
             auth,
             modal,
             notification,
-            memberApp,
             accountPage,
             homePage,
             leaguesCreatePage,
@@ -78,9 +79,10 @@ function configStore(options?: { preloadedState: any }): any {
         )
     );
 
-    function* memberAppSaga() {
+    function* AppSaga() {
         yield all([
             fork(BaseSaga),
+            fork(MemberAppSaga),
             fork(AccountSaga),
             fork(AuthSaga),
             fork(CourseSaga),
@@ -102,7 +104,7 @@ function configStore(options?: { preloadedState: any }): any {
             fork(NotificationsPageContentNotificationsSaga),
         ]);
     }
-    sagaMiddleware.run(memberAppSaga);
+    sagaMiddleware.run(AppSaga);
 
     return { store };
 }

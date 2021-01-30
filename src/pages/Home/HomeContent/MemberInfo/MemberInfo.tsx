@@ -4,15 +4,16 @@ import { MemberInfoProps } from './types';
 import MemberInfoForm from './MemberInfoForm';
 import ComponentContent from '@layouts/ComponentContent';
 import './MemberInfo.less';
-import CONSTANTS from "@locale/en-CA";
+import CONSTANTS from '@locale/en-CA';
+import { selectMeIsInitialized } from '@selectors/BaseSelector';
 
 const MemberInfo: React.FunctionComponent<MemberInfoProps> = () => {
     const ref = useRef(null);
-
+    const isInitialized = useSelector(selectMeIsInitialized);
     return (
         <ComponentContent
             componentRef={ref}
-            showSpinner={false}
+            showSpinner={!isInitialized}
             className="member-info"
             title={CONSTANTS.PAGES.HOME.MEMBER}
         >

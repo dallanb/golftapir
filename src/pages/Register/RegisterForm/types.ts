@@ -4,7 +4,8 @@ export interface RegisterFormProps {
         username: string,
         password: string,
         display_name: string,
-        country: string
+        country: string,
+        token?: string
     ) => any;
     initialValues: any;
 }

@@ -42,6 +42,7 @@ const ContestLeaderboardTableScorecard: React.FunctionComponent<ContestLeaderboa
         <ComponentContent
             showSpinner={!isInitialized}
             className="contest-leaderboard-table-scorecard"
+            bodyClassName="contest-leaderboard-table-scorecard-body"
         >
             <div className="contest-leaderboard-table-scorecard-participant-wrapper">
                 <ScorecardParticipant user={user} />

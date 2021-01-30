@@ -45,7 +45,11 @@ const Contest: React.FunctionComponent<ContestProps> = ({}) => {
     const { isInitialized } = useSelector(selectData);
 
     return (
-        <ComponentContent showSpinner={!isInitialized} className="contest">
+        <ComponentContent
+            title={'Create Contest'}
+            showSpinner={!isInitialized}
+            className="contest"
+        >
             <ContestForm />
             <OverlaySpin visible={isSubmitting} />
         </ComponentContent>

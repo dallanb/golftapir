@@ -14,15 +14,11 @@ const ContestScorecard: React.FunctionComponent<ContestScorecardProps> = () => {
     return (
         <>
             <ComponentContent
-                className="contest-scorecard-input-component"
+                className="contest-scorecard-input-component space"
                 showSpinner={!isInitialized}
+                title={'Hole'}
             >
                 <ContestScorecardInput hole={hole} />
-            </ComponentContent>
-            <ComponentContent
-                className="contest-scorecard-hole-component"
-                showSpinner={!isInitialized}
-            >
                 <ContestScorecardHole hole={hole} setHole={setHole} />
             </ComponentContent>
         </>

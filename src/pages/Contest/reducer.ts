@@ -15,6 +15,11 @@ const INITIAL_STATE: ContestPageInterface = {
     participant: undefined,
     membersHash: undefined,
     rankingLookup: undefined,
+    payout: {
+        isFetching: false,
+        data: undefined,
+        err: undefined,
+    },
 };
 
 /* ------------- Reducers ------------- */
@@ -97,6 +102,36 @@ function updateContestParticipantScore(
     });
 }
 
+function fetchPayout(state = INITIAL_STATE) {
+    return Immutable.merge(state, {
+        payout: {
+            ...state.payout,
+            isFetching: true,
+            err: undefined,
+        },
+    });
+}
+
+function fetchPayoutSuccess(state = INITIAL_STATE, { payout: data }: any) {
+    return Immutable.merge(state, {
+        payout: {
+            ...state.payout,
+            isFetching: false,
+            data,
+        },
+    });
+}
+
+function fetchPayoutFailure(state = INITIAL_STATE, { err }: any) {
+    return Immutable.merge(state, {
+        payout: {
+            ...state.payout,
+            isFetching: false,
+            err,
+        },
+    });
+}
+
 const HANDLERS = {
     [ContestPageTypes.INIT]: init,
     [ContestPageTypes.INIT_SUCCESS]: initSuccess,
@@ -109,6 +144,9 @@ const HANDLERS = {
     [ContestPageTypes.SUBSCRIBE_SUCCESS]: subscribeSuccess,
     [ContestPageTypes.UNSUBSCRIBE_SUCCESS]: unsubscribeSuccess,
     [ContestPageTypes.UPDATE_CONTEST_PARTICIPANT_SCORE]: updateContestParticipantScore,
+    [ContestPageTypes.FETCH_PAYOUT]: fetchPayout,
+    [ContestPageTypes.FETCH_PAYOUT_SUCCESS]: fetchPayoutSuccess,
+    [ContestPageTypes.FETCH_PAYOUT_FAILURE]: fetchPayoutFailure,
 };
 
 export const reducer = createReducer(INITIAL_STATE, HANDLERS);

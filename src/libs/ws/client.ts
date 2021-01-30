@@ -1,4 +1,6 @@
 import { ClientProxy } from '@services';
+import qs from 'querystring';
+import { omitBy as _omitBy, isNil as _isNil } from 'lodash';
 
 class Client {
     private _url: string;
@@ -20,10 +22,13 @@ class Client {
     set socket(socket: WebSocket | undefined) {
         this._socket = socket;
     }
-    init(uuid: string): Promise<void> {
-        this.socket = new WebSocket(
-            `${this._url}?uuid=${uuid}&jwt=${ClientProxy.accessToken}`
+    init(uuid?: string): Promise<void> {
+        // need to pass JWT in order to not be stopped by KONG Gateway
+        const query = qs.stringify(
+            _omitBy({ jwt: ClientProxy.accessToken, uuid }, _isNil)
         );
+
+        this.socket = new WebSocket(`${this._url}?${query}`);
 
         this.socket.onclose = (event) => {
             console.info('socket close event code, ', event.code);
@@ -32,8 +37,8 @@ class Client {
                     console.info('normal closure');
                     break;
                 default:
-                    console.info('reconnecting');
-                    this.init(uuid);
+                    console.info('reconnecting'); // TODO: FIX THIS TO STOP RECONNECTING AFTER A FEW CONSECUTIVE FAILS
+                // this.init();
             }
         };
 

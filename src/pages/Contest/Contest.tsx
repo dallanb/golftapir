@@ -14,12 +14,12 @@ import './Contest.less';
 const Contest: React.FunctionComponent<ContestProps> = () => {
     const dispatch = useDispatch();
     const history = useHistory();
-    const contest = _get(history, ['location', 'state'], null);
+    const state = _get(history, ['location', 'state'], null);
     const { isInitialized } = useSelector(selectData);
 
     useEffect(() => {
-        dispatch(ContestPageActions.preInit(contest));
-        dispatch(ContestPageActions.init(contest.uuid));
+        dispatch(ContestPageActions.preInit(state));
+        dispatch(ContestPageActions.init(state.uuid));
         return () => {
             dispatch(ContestPageActions.terminate());
         };
@@ -27,7 +27,7 @@ const Contest: React.FunctionComponent<ContestProps> = () => {
 
     return (
         <ContentLayout
-            header={<ContestHeader />}
+            // header={<ContestHeader />}
             sider={<ContestSider />}
             content={<ContestContent />}
             // showSpinner={!isInitialized}

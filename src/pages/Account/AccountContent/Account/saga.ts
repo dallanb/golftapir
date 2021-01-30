@@ -8,7 +8,10 @@ import AccountPageContentAccountActions, {
 import { prepareInitialValues } from './utils';
 import { selectAccount } from '@pages/Account/selector';
 import { omit as _omit } from 'lodash';
-import { selectMe, selectMyAvatar } from '@selectors/BaseSelector';
+import { selectMeData, selectMyAvatar } from '@selectors/BaseSelector';
+import { message } from 'antd';
+import CONSTANTS from '@locale/en-CA';
+import { BaseActions } from '@actions';
 
 function* init() {
     try {
@@ -32,15 +35,19 @@ function* submit({ data }: AnyAction) {
         const accountData = _omit(data, ['avatar']); // will have to handle a country update in members
         if (!_isEmpty(accountData)) {
             yield call(AccountService.updateAccount, 'me', accountData);
+            message.success(CONSTANTS.ACCOUNT.SUCCESS.UPDATE);
         }
         const avatarData = _pick(data, ['avatar']);
         if (!_isEmpty(avatarData)) {
-            const me = yield select(selectMe);
+            const me = yield select(selectMeData);
             yield call(MemberService.assignAvatar, me.uuid, avatarData.avatar);
+            message.success(CONSTANTS.ACCOUNT.SUCCESS.ASSIGN_AVATAR);
         }
         yield put(AccountPageContentAccountActions.submitSuccess());
+        yield put(BaseActions.refreshMe());
     } catch (err) {
         yield put(AccountPageContentAccountActions.submitFailure());
+        message.error(CONSTANTS.ACCOUNT.ERROR.UPDATE);
     }
 }
 

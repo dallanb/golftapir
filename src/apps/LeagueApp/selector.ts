@@ -3,7 +3,7 @@ import { get as _get } from 'lodash';
 import { withS3URL } from '@utils';
 import constants from '@constants';
 
-const getLeagueApp = (state: any) => state.leagueApp;
+const getLeagueApp = (state: any) => state.app;
 const getBase = (state: any) => state.base;
 
 export const selectData = createSelector(
@@ -11,12 +11,16 @@ export const selectData = createSelector(
     (leagueApp) => leagueApp
 );
 
+export const selectLeagueUUID = createSelector([getLeagueApp], (leagueApp) =>
+    _get(leagueApp, ['uuid'], undefined)
+);
+
 export const selectLeague = createSelector([getLeagueApp], (leagueApp) =>
     _get(leagueApp, ['league'], undefined)
 );
 
-export const selectLeagueUUID = createSelector([getLeagueApp], (leagueApp) =>
-    _get(leagueApp, ['league', 'data', 'uuid'], null)
+export const selectLeagueData = createSelector([getLeagueApp], (leagueApp) =>
+    _get(leagueApp, ['league', 'data'], undefined)
 );
 
 export const selectLeagueName = createSelector([getLeagueApp], (leagueApp) =>
@@ -45,15 +49,29 @@ export const selectIsLeagueOwner = createSelector(
     [getLeagueApp, getBase],
     (leagueApp, base) =>
         _get(leagueApp, ['league', 'data', 'owner_uuid'], undefined) ===
-        _get(base, ['me', 'user_uuid'], null)
+        _get(base, ['me', 'data', 'user_uuid'], null)
 );
 
 export const selectLeagueMember = createSelector([getLeagueApp], (leagueApp) =>
     _get(leagueApp, ['leagueMember'], undefined)
 );
 
+export const selectLeagueMemberData = createSelector(
+    [getLeagueApp],
+    (leagueApp) => _get(leagueApp, ['leagueMember', 'data'], undefined)
+);
+
 export const selectLeagueMemberStatus = createSelector(
     [getLeagueApp],
     (leagueApp) =>
         _get(leagueApp, ['leagueMember', 'data', 'status'], undefined)
+);
+
+export const selectIsInitialized = createSelector([getLeagueApp], (leagueApp) =>
+    _get(leagueApp, ['isInitialized'], false)
+);
+
+export const selectIsLeagueFetching = createSelector(
+    [getLeagueApp],
+    (leagueApp) => _get(leagueApp, ['league', 'isFetching'], true)
 );

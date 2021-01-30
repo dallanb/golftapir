@@ -11,6 +11,11 @@ export const selectData = createSelector(
     (contestPage) => contestPage
 );
 
+export const selectIsInitialized = createSelector(
+    [getContestPage],
+    (contestPage) => _get(contestPage, ['isInitialized'], false)
+);
+
 export const selectMembersHash = createSelector(
     [getContestPage],
     (contestPage) => _get(contestPage, ['membersHash'], {})
@@ -59,7 +64,7 @@ export const selectIsOwner = createSelector(
     [getContestPage, getBase],
     (contestPage, base) =>
         _get(contestPage, ['contest', 'owner'], undefined) ===
-        _get(base, ['me', 'user_uuid'], undefined)
+        _get(base, ['me', 'data', 'user_uuid'], undefined)
 );
 
 export const selectIsRefreshing = createSelector(
@@ -84,4 +89,29 @@ export const selectMyParticipant = createSelector(
 export const selectMyParticipantStatus = createSelector(
     [getContestPage],
     (contestPage) => _get(contestPage, ['participant', 'status'], undefined)
+);
+
+export const selectPayout = createSelector([getContestPage], (contestPage) =>
+    _get(contestPage, ['payout'], undefined)
+);
+
+export const selectPayoutData = createSelector(
+    [getContestPage],
+    (contestPage) => _get(contestPage, ['payout', 'data'], undefined)
+);
+
+export const selectPayoutIsFetching = createSelector(
+    [getContestPage],
+    (contestPage) => _get(contestPage, ['payout', 'isFetching'], undefined)
+);
+
+export const selectPayoutBuyIn = createSelector(
+    [getContestPage],
+    (contestPage) => _get(contestPage, ['payout', 'data', 'buy_in'], undefined)
+);
+
+export const selectPayoutProportions = createSelector(
+    [getContestPage],
+    (contestPage) =>
+        _get(contestPage, ['payout', 'data', 'payout_proportions'], undefined)
 );

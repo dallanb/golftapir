@@ -61,7 +61,8 @@ const Calendar: React.FunctionComponent<CalendarProps> = () => {
     return (
         <ComponentContent
             showSpinner={!isInitialized || isFetching}
-            className="calendar-component-content"
+            className="calendar-component-content space"
+            title={'Upcoming Events'}
         >
             <ComponentCalendar
                 date={date}

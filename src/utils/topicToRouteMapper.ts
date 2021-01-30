@@ -54,7 +54,7 @@ const topicToRouteMapper = (
 
             break;
         case constants.TOPICS.LEAGUES:
-            mapping.route += routes.ROUTES.LEAGUES.ROUTE; // TODO MIGHT BE BETTER TO DO THIS TO MEMBERS ROUTE
+            mapping.route += routes.ROUTES.MEMBERS.ROUTE;
             switch (key) {
                 case constants.EVENTS.LEAGUES.MEMBER_PENDING:
                 case constants.EVENTS.LEAGUES.MEMBER_ACTIVE:

@@ -25,15 +25,13 @@ const Course: React.FunctionComponent<CourseProps> = () => {
     );
     return (
         <ComponentContent
-            className="course-component-content"
+            className="course-component-content space"
             showSpinner={!isInitialized}
+            title={'Course'}
         >
             <div className="course">
-                <div className="course-label">Course</div>
-                <div className="course-value">
-                    <div className="course-value-name">{name}</div>
-                    <div className="course-value-address">{address}</div>
-                </div>
+                <div className="course-name">{name}</div>
+                <div className="course-address">{address}</div>
             </div>
         </ComponentContent>
     );

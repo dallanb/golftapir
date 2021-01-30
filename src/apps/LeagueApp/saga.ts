@@ -1,81 +1,39 @@
-import {
-    all,
-    call,
-    delay,
-    fork,
-    put,
-    race,
-    take,
-    takeLatest,
-} from 'redux-saga/effects';
+import { all, call, fork, put, takeLatest } from 'redux-saga/effects';
 import { AnyAction } from 'redux';
+import { get as _get, isObject as _isObject } from 'lodash';
 import LeagueAppActions, { LeagueAppTypes } from './actions';
-import {
-    AuthActions,
-    AuthTypes,
-    NotificationActions,
-    NotificationTypes,
-    SocketActions,
-} from '@actions';
-import { FirebaseClient } from '@libs';
-import { socketEventHandlers } from '@apps/LeagueApp/utils';
+import { AppActions, AppTypes, BaseActions, SocketActions } from '@actions';
+import { socketEventHandlers } from './utils';
 import { ClientProxy, LeagueService } from '@services';
-import { fetchMyLeagues, fetchMyMemberUser } from '@helpers';
+import { refreshAuth } from '@helpers';
+import {
+    initLeague,
+    initLeagueMember,
+    refreshLeague,
+    refreshLeagueMember,
+} from './helpers';
 
 // Action Handlers
-function* preInit({ data: league }: AnyAction) {
-    yield put(LeagueAppActions.set({ league }));
+function* preInit({ data }: AnyAction) {
+    const league = _get(data, ['league'], undefined);
+    const member = _get(data, ['member'], undefined);
+    if (league && _isObject(league)) {
+        yield put(LeagueAppActions.fetchLeagueSuccess(league));
+    }
+    if (member && _isObject(member)) {
+        yield put(LeagueAppActions.fetchLeagueMemberSuccess(member));
+    }
 }
 
 function* init({ uuid }: AnyAction) {
     try {
         if (!ClientProxy.accessToken) yield call(refreshAuth);
-
-        const { data: me } = yield call(fetchMyMemberUser, {
-            league_uuid: uuid,
-            include: 'avatar,stat',
-        });
-
-        // see if i can make a 'me' api call for the socket api
-        yield put(
-            SocketActions.init(me.user_uuid, {
-                eventHandler: socketEventHandlers,
-            })
-        );
-
-        yield fork(fetchMyLeagues, {
-            page: 1,
-            per_page: 100,
-            include: 'avatar',
-        });
-
-        yield put(
-            LeagueAppActions.fetchLeague(uuid, {
-                include: 'avatar',
-            })
-        );
-
-        yield put(
-            LeagueAppActions.fetchLeagueMember('me', {
-                league_uuid: uuid,
-            })
-        );
-
-        // prepare notifications
-        const token = yield call(requestToken);
-
-        yield put(NotificationActions.setToken(token));
-        const { success, failure } = yield race({
-            success: take(NotificationTypes.SET_TOKEN_SUCCESS),
-            failure: take(NotificationTypes.SET_TOKEN_FAILURE),
-        });
-
-        yield put(NotificationActions.fetchPending());
-
-        if (failure) {
-            throw new Error('Unable to set token');
-        }
-
+        yield put(BaseActions.initMe(uuid));
+        yield put(BaseActions.initLeagues());
+        yield put(BaseActions.initSockets(socketEventHandlers));
+        yield put(BaseActions.initNotifications());
+        yield fork(initLeague, uuid);
+        yield fork(initLeagueMember, uuid);
         yield put(LeagueAppActions.initSuccess());
     } catch (err) {
         yield put(LeagueAppActions.initFailure(err));
@@ -84,10 +42,7 @@ function* init({ uuid }: AnyAction) {
 
 function* refresh({ uuid }: AnyAction) {
     try {
-        yield call(fetchMyMemberUser, {
-            league_uuid: uuid,
-            include: 'avatar,stat',
-        });
+        yield put(BaseActions.refreshMe(uuid));
 
         yield put(
             LeagueAppActions.fetchLeague(uuid, {
@@ -140,27 +95,22 @@ function* fetchLeagueMember({ uuid, options }: AnyAction) {
     }
 }
 
-// Helpers
-function* refreshAuth() {
-    yield put(AuthActions.refresh());
-    const { failure, timeout } = yield race({
-        success: take(AuthTypes.REFRESH_SUCCESS),
-        failure: take(AuthTypes.REFRESH_FAILURE),
-        timeout: delay(5000),
-    });
-    if (timeout) {
-        yield put(AuthActions.refreshFailure());
-        throw new Error('refresh timeout');
-    }
-    if (failure) {
-        yield put(AuthActions.refreshFailure());
-        throw new Error('refresh failure');
+function* appRefreshLeague({ uuid }: AnyAction) {
+    try {
+        yield fork(refreshLeague, uuid);
+        yield put(AppActions.refreshLeagueSuccess());
+    } catch (err) {
+        yield put(AppActions.refreshLeagueFailure(err));
     }
 }
 
-function* requestToken() {
-    const token = yield FirebaseClient.requestNotificationPermissions();
-    return token;
+function* appRefreshLeagueMember({ uuid }: AnyAction) {
+    try {
+        yield fork(refreshLeagueMember, uuid);
+        yield put(AppActions.refreshLeagueMemberSuccess());
+    } catch (err) {
+        yield put(AppActions.refreshLeagueMemberFailure(err));
+    }
 }
 
 export default function* LeagueAppSaga() {
@@ -171,5 +121,7 @@ export default function* LeagueAppSaga() {
         takeLatest(LeagueAppTypes.TERMINATE, terminate),
         takeLatest(LeagueAppTypes.FETCH_LEAGUE, fetchLeague),
         takeLatest(LeagueAppTypes.FETCH_LEAGUE_MEMBER, fetchLeagueMember),
+        takeLatest(AppTypes.REFRESH_LEAGUE, appRefreshLeague),
+        takeLatest(AppTypes.REFRESH_LEAGUE_MEMBER, appRefreshLeagueMember),
     ]);
 }

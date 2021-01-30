@@ -4,27 +4,26 @@ import { useHistory } from 'react-router-dom';
 import { NotificationsListProps } from './types';
 import { FixedSizeList } from '@components';
 import NotificationsPageContentNotificationsActions from '../actions';
-import {
-    selectListData,
-    selectListMetadata,
-    selectListIsFetching,
-} from '../selector';
 import NotificationsListTile from './NotificationsListTile';
 import { getRefHeight, topicToRouteMapper, withAppRoute } from '@utils';
 import { NotificationActions } from '@actions';
+import { selectLeagues } from '@selectors/BaseSelector';
 import './NotificationsList.less';
+import { filterLeaguesByNotification } from '@pages/Notifications/NotificationsContent/Notifications/utils';
 
 const NotificationsList: React.FunctionComponent<NotificationsListProps> = ({
     containerRef,
+    data,
+    metadata,
+    options,
+    isFetching,
 }) => {
     const history = useHistory();
-    const data = useSelector(selectListData);
-    const metadata = useSelector(selectListMetadata);
-    const isFetching = useSelector(selectListIsFetching);
+    const leagues = useSelector(selectLeagues);
     const tableDimensions = {
-        size: 75,
+        size: 100,
         width: '100%',
-        height: getRefHeight(containerRef, 200) - 32,
+        height: getRefHeight(containerRef, 200),
     };
 
     const dispatch = useDispatch();
@@ -48,11 +47,15 @@ const NotificationsList: React.FunctionComponent<NotificationsListProps> = ({
 
     const tileOnClick = (item: any) => {
         if (item) {
+            const memberLeague = filterLeaguesByNotification(item, leagues);
             const { route, state } = topicToRouteMapper(
                 item.topic,
                 item.key,
                 item
             );
+            state.league = memberLeague?.league;
+            state.member = memberLeague?.member;
+            console.log(state);
             history.push(route, state);
             dispatch(
                 NotificationActions.updateNotification(item._id, { read: true })

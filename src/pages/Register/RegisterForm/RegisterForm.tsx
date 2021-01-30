@@ -12,8 +12,15 @@ import CONSTANTS from '@locale/en-CA';
 class RegisterForm extends React.PureComponent<RegisterFormProps> {
     handleSubmit = (values: FormikValues) => {
         const { register } = this.props;
-        const { email, username, password, display_name, country } = values;
-        register(email, username, password, display_name, country);
+        const {
+            email,
+            username,
+            password,
+            display_name,
+            country,
+            token,
+        } = values;
+        register(email, username, password, display_name, country, token);
     };
 
     render() {
@@ -46,7 +53,8 @@ const mapDispatchToProps = (dispatch: any) => {
             username: string,
             password: string,
             display_name: string,
-            country: string
+            country: string,
+            token?: string
         ) {
             return dispatch(
                 AuthActions.register(
@@ -54,7 +62,8 @@ const mapDispatchToProps = (dispatch: any) => {
                     username,
                     password,
                     display_name,
-                    country
+                    country,
+                    token
                 )
             );
         },

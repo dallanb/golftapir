@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import ComponentContent from '@layouts/ComponentContent';
 import { ContestSiderActiveProps } from './types';
-import { selectIsLeagueOwner } from '@apps/LeagueApp/selector';
+import { selectIsLeagueOwner } from '@selectors/AppSelector';
 import SearchSelectInput from './SearchSelectInput';
 import Invites from './Invites';
 import './MemberActive.less';

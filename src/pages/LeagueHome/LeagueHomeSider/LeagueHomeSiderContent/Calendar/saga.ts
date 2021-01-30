@@ -5,7 +5,7 @@ import LeagueHomePageSiderContentCalendarActions, {
 } from './actions';
 import { fetchContestsCalendarList } from './helpers';
 import { ContestService } from '@services';
-import { selectLeagueUUID } from '@apps/LeagueApp/selector';
+import { selectLeagueUUID } from '@selectors/AppSelector';
 
 function* init({ options }: AnyAction) {
     try {

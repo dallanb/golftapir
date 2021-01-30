@@ -82,7 +82,7 @@ const fieldRenderer = (
                     placeholder={_get(options, ['placeholder'], undefined)}
                     prefix={
                         _get(options, ['prefixRenderer'], undefined) &&
-                        options.prefixRenderer()
+                        options.prefixRenderer(formik, { name, value })
                     }
                     autoComplete="off"
                     className={_get(options, ['className'], undefined)}
@@ -226,7 +226,8 @@ const fieldRenderer = (
                             options,
                             ['s3Folder'],
                             constants.S3_FOLDERS.MEMBER.AVATAR
-                        )
+                        ),
+                        new Date().getTime()
                     )}
                     shape={_get(options, ['shape'], undefined)}
                     size={_get(options, ['size'], undefined)}

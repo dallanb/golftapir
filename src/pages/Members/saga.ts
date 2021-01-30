@@ -2,12 +2,13 @@ import { all, call, put, select, takeLatest } from 'redux-saga/effects';
 import { AnyAction } from 'redux';
 import MembersPageActions, { MembersPageTypes } from './actions';
 import { initMembers } from './helpers';
-import { selectLeagueUUID } from '@apps/LeagueApp/selector';
-import { fetchMyMembersMaterializedUser, fetchMyMemberUser } from '@helpers';
+import { selectLeagueUUID } from '@selectors/AppSelector';
 import MembersPageContentMembersActions from './MembersContent/Members/actions';
-import { LeagueService, MemberService } from '@services';
+import { LeagueService } from '@services';
+import { AppActions, BaseActions } from '@actions';
 
 // Action Handlers
+function* preInit({ data }: AnyAction) {}
 
 function* init({ uuid }: AnyAction) {
     try {
@@ -20,9 +21,8 @@ function* init({ uuid }: AnyAction) {
 
 function* refresh({ uuid }: AnyAction) {
     try {
-        yield call(fetchMyMembersMaterializedUser, {
-            league_uuid: uuid,
-        });
+        yield put(BaseActions.refreshMe(uuid));
+        yield put(AppActions.refreshLeagueMember(uuid));
         yield put(MembersPageContentMembersActions.refresh());
         yield put(MembersPageActions.refreshSuccess());
     } catch (err) {
@@ -43,6 +43,7 @@ function* updateMemberStatus({ uuid, status }: AnyAction) {
 
 export default function* MembersPageSaga() {
     yield all([
+        takeLatest(MembersPageTypes.PRE_INIT, preInit),
         takeLatest(MembersPageTypes.INIT, init),
         takeLatest(MembersPageTypes.REFRESH, refresh),
         takeLatest(MembersPageTypes.UPDATE_MEMBER_STATUS, updateMemberStatus),

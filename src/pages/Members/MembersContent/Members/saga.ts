@@ -5,7 +5,7 @@ import MembersPageContentMembersActions, {
     MembersPageContentMembersTypes,
 } from './actions';
 import { fetchMembersList } from './helpers';
-import { selectLeagueUUID } from '@apps/LeagueApp/selector';
+import { selectLeagueUUID } from '@selectors/AppSelector';
 
 function* init() {
     try {

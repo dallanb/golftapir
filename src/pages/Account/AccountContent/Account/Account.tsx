@@ -20,7 +20,11 @@ const Account: React.FunctionComponent<AccountProps> = ({}) => {
     const { isInitialized } = useSelector(selectData);
 
     return (
-        <ComponentContent showSpinner={!isInitialized} className="account">
+        <ComponentContent
+            showSpinner={!isInitialized}
+            className="account"
+            title={'Account Settings'}
+        >
             <AccountForm />
         </ComponentContent>
     );

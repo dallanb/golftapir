@@ -4,11 +4,12 @@ import { message } from 'antd';
 import { omit as _omit, pick as _pick, isEmpty as _isEmpty } from 'lodash';
 import CONSTANTS from '@locale/en-CA';
 import { AccountService, LeagueService } from '@services';
-import { selectMe } from '@selectors/BaseSelector';
+import { selectMeData } from '@selectors/BaseSelector';
 import LeaguesCreatePageContentLeagueActions, {
     LeaguesCreatePageContentLeagueTypes,
 } from './actions';
 import { prepareInitialValues } from './utils';
+import { BaseActions } from '@actions';
 
 function* init({ options }: AnyAction) {
     try {
@@ -37,6 +38,7 @@ function* submit({ data }: AnyAction) {
         }
         yield put(LeaguesCreatePageContentLeagueActions.setResult(result));
         yield put(LeaguesCreatePageContentLeagueActions.submitSuccess());
+        yield put(BaseActions.refreshLeagues());
         message.success(CONSTANTS.LEAGUE.SUCCESS.CREATE);
     } catch (err) {
         yield put(LeaguesCreatePageContentLeagueActions.submitFailure());
