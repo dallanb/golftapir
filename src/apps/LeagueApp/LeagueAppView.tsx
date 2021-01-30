@@ -83,6 +83,7 @@ class LeagueAppView extends React.Component<
         const {
             leagueUUID,
             isReady,
+            isFetching,
             isLoggedIn,
             forceLogout,
             refreshAuth,
@@ -92,7 +93,7 @@ class LeagueAppView extends React.Component<
         } = this.props;
         const { selectedKeys } = this.state;
 
-        if (!isReady) return <AppLoading />;
+        if (!isReady || isFetching) return <AppLoading />;
         return (
             <MemberAppLayout
                 app={constants.APPS.LEAGUE_APP}

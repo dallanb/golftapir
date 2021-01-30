@@ -12,8 +12,12 @@ import { initLeague, initLeagueMember } from './helpers';
 function* preInit({ data }: AnyAction) {
     const league = _get(data, ['league'], undefined);
     const member = _get(data, ['member'], undefined);
-    yield put(LeagueAppActions.fetchLeagueSuccess(league));
-    yield put(LeagueAppActions.fetchLeagueMemberSuccess(member));
+    if (league) {
+        yield put(LeagueAppActions.fetchLeagueSuccess(league));
+    }
+    if (member) {
+        yield put(LeagueAppActions.fetchLeagueMemberSuccess(member));
+    }
 }
 
 function* init({ uuid }: AnyAction) {

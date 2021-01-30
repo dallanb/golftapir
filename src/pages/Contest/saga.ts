@@ -1,5 +1,6 @@
 import { AnyAction } from 'redux';
 import { all, call, fork, put, select, takeLatest } from 'redux-saga/effects';
+import { get as _get } from 'lodash';
 import { ContestService, NotificationService, WagerService } from '@services';
 import ContestPageActions, { ContestPageTypes } from './actions';
 import { selectContest } from './selector';
@@ -12,8 +13,11 @@ import {
 } from './helpers';
 
 // Action Handlers
-function* preInit({ data: contest }: AnyAction) {
+function* preInit({ data }: AnyAction) {
+    const contest = _get(data, ['contest'], undefined);
+    const participant = _get(data, ['participant'], undefined);
     yield put(ContestPageActions.set({ contest }));
+    yield put(ContestPageActions.set({ participant }));
 }
 
 function* init({ uuid }: AnyAction) {
