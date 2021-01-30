@@ -23,7 +23,7 @@ const LeaguesCreate: React.FunctionComponent<LeaguesCreateProps> = () => {
 
     return (
         <ContentLayout
-            header={<LeaguesCreateHeader />}
+            // header={<LeaguesCreateHeader />}
             content={<LeaguesCreateContent />}
             sider={<LeaguesCreateSider />}
             // showSpinner={!isInitialized}

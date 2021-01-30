@@ -41,7 +41,11 @@ const League: React.FunctionComponent<LeagueProps> = ({}) => {
     const { isInitialized } = useSelector(selectData);
 
     return (
-        <ComponentContent showSpinner={!isInitialized} className="league">
+        <ComponentContent
+            title={'Create League'}
+            showSpinner={!isInitialized}
+            className="league"
+        >
             <LeagueForm />
             <OverlaySpin visible={isSubmitting} />
         </ComponentContent>

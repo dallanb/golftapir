@@ -21,7 +21,7 @@ const PendingParticipantsList: React.FunctionComponent<PendingParticipantsListPr
     const tableDimensions = {
         size: 50,
         width: '100%',
-        height: Math.min(getRefHeight(ref, 200) - 63),
+        height: Math.min(getRefHeight(ref, 200)),
     };
 
     const loadMore = (start: number, stop: number) => {

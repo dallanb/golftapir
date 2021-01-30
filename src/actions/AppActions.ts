@@ -2,9 +2,12 @@ import { createActions } from 'reduxsauce';
 
 const { Types, Creators } = createActions(
     {
-        refresh: ['uuid'],
-        refreshSuccess: null,
-        refreshFailure: ['err'],
+        refreshLeague: ['uuid'],
+        refreshLeagueSuccess: null,
+        refreshLeagueFailure: ['err'],
+        refreshLeagueMember: ['uuid'],
+        refreshLeagueMemberSuccess: null,
+        refreshLeagueMemberFailure: ['err'],
     },
     {
         prefix: 'APP_',

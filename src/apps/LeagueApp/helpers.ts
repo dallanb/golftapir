@@ -14,6 +14,10 @@ export function* initLeague(uuid: string) {
     }
 }
 
+export function* refreshLeague(uuid: string) {
+    yield put(LeagueAppActions.fetchLeague(uuid, { include: 'avatar' }));
+}
+
 export function* initLeagueMember(uuid: string) {
     const data = yield select(selectLeagueMemberData);
     if (_isNil(data)) {
@@ -23,4 +27,12 @@ export function* initLeagueMember(uuid: string) {
             })
         );
     }
+}
+
+export function* refreshLeagueMember(uuid: string) {
+    yield put(
+        LeagueAppActions.fetchLeagueMember('me', {
+            league_uuid: uuid,
+        })
+    );
 }

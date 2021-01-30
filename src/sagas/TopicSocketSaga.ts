@@ -33,7 +33,7 @@ function* write({ data }: AnyAction) {
 function* init({ data, options }: AnyAction) {
     try {
         // maybe notify the server that the user has logged in?
-        yield WebSocketTopicClient.init();
+        yield WebSocketTopicClient.init(data.uuid);
         if (!WebSocketTopicClient.status()) {
             throw new Error();
         }

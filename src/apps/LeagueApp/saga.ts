@@ -2,11 +2,16 @@ import { all, call, fork, put, takeLatest } from 'redux-saga/effects';
 import { AnyAction } from 'redux';
 import { get as _get, isObject as _isObject } from 'lodash';
 import LeagueAppActions, { LeagueAppTypes } from './actions';
-import { BaseActions, SocketActions } from '@actions';
-import { socketEventHandlers } from '@apps/LeagueApp/utils';
+import { AppActions, AppTypes, BaseActions, SocketActions } from '@actions';
+import { socketEventHandlers } from './utils';
 import { ClientProxy, LeagueService } from '@services';
 import { refreshAuth } from '@helpers';
-import { initLeague, initLeagueMember } from './helpers';
+import {
+    initLeague,
+    initLeagueMember,
+    refreshLeague,
+    refreshLeagueMember,
+} from './helpers';
 
 // Action Handlers
 function* preInit({ data }: AnyAction) {
@@ -90,6 +95,24 @@ function* fetchLeagueMember({ uuid, options }: AnyAction) {
     }
 }
 
+function* appRefreshLeague({ uuid }: AnyAction) {
+    try {
+        yield fork(refreshLeague, uuid);
+        yield put(AppActions.refreshLeagueSuccess());
+    } catch (err) {
+        yield put(AppActions.refreshLeagueFailure(err));
+    }
+}
+
+function* appRefreshLeagueMember({ uuid }: AnyAction) {
+    try {
+        yield fork(refreshLeagueMember, uuid);
+        yield put(AppActions.refreshLeagueMemberSuccess());
+    } catch (err) {
+        yield put(AppActions.refreshLeagueMemberFailure(err));
+    }
+}
+
 export default function* LeagueAppSaga() {
     yield all([
         takeLatest(LeagueAppTypes.PRE_INIT, preInit),
@@ -98,5 +121,7 @@ export default function* LeagueAppSaga() {
         takeLatest(LeagueAppTypes.TERMINATE, terminate),
         takeLatest(LeagueAppTypes.FETCH_LEAGUE, fetchLeague),
         takeLatest(LeagueAppTypes.FETCH_LEAGUE_MEMBER, fetchLeagueMember),
+        takeLatest(AppTypes.REFRESH_LEAGUE, appRefreshLeague),
+        takeLatest(AppTypes.REFRESH_LEAGUE_MEMBER, appRefreshLeagueMember),
     ]);
 }

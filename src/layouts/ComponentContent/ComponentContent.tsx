@@ -1,4 +1,5 @@
 import React from 'react';
+import classnames from 'classnames';
 import { ComponentContentProps } from './types';
 import { Layout, Spin } from 'antd';
 import './ComponentContent.less';
@@ -26,15 +27,12 @@ const ComponentContent: React.FunctionComponent<ComponentContentProps> = ({
         }
         return children;
     };
-
+    const cx = classnames('component-content', className);
+    const bodyCx = classnames('component-content-content', bodyClassName);
     return (
-        <div className={` component-content ${className}`} style={style}>
+        <div className={cx} style={style}>
             {renderTitle()}
-            <div
-                ref={componentRef}
-                className={`component-content-content ${bodyClassName}`}
-                style={bodyStyle}
-            >
+            <div ref={componentRef} className={bodyCx} style={bodyStyle}>
                 {renderComponent()}
             </div>
         </div>

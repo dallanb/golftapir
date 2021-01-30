@@ -87,6 +87,8 @@ const CONSTANTS = {
     MEMBER: {
         SUCCESS: {
             INVITE: 'Invitation sent!',
+            UPDATE: 'Member update successful!',
+            ASSIGN_AVATAR: 'Member avatar update successful!',
         },
         ERROR: {
             FETCH: 'Error fetching Member information',

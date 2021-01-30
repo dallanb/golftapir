@@ -5,7 +5,7 @@ import { initMembers } from './helpers';
 import { selectLeagueUUID } from '@selectors/AppSelector';
 import MembersPageContentMembersActions from './MembersContent/Members/actions';
 import { LeagueService } from '@services';
-import { BaseActions } from '@actions';
+import { AppActions, BaseActions } from '@actions';
 
 // Action Handlers
 function* preInit({ data }: AnyAction) {}
@@ -22,7 +22,7 @@ function* init({ uuid }: AnyAction) {
 function* refresh({ uuid }: AnyAction) {
     try {
         yield put(BaseActions.refreshMe(uuid));
-        // yield put(AppActions.refreshLeagueMember()); // TODO: figure out a way refresh the app through a common action
+        yield put(AppActions.refreshLeagueMember(uuid));
         yield put(MembersPageContentMembersActions.refresh());
         yield put(MembersPageActions.refreshSuccess());
     } catch (err) {
