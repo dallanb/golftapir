@@ -30,7 +30,8 @@ const MemberPending: React.FunctionComponent<MemberPendingProps> = () => {
     };
 
     return (
-        <ComponentContent className="member-pending space">
+        <ComponentContent title={'Actions'} className="member-pending space"   bodyClassName="member-pending-body"
+        >
             <div className="member-pending-buttons">
                 <div className="member-pending-buttons-button active">
                     <Button block type="primary" onClick={handleAcceptClick}>

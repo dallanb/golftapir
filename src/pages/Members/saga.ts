@@ -8,6 +8,7 @@ import { LeagueService } from '@services';
 import { BaseActions } from '@actions';
 
 // Action Handlers
+function* preInit({ data }: AnyAction) {}
 
 function* init({ uuid }: AnyAction) {
     try {
@@ -21,6 +22,7 @@ function* init({ uuid }: AnyAction) {
 function* refresh({ uuid }: AnyAction) {
     try {
         yield put(BaseActions.refreshMe(uuid));
+        // yield put(AppActions.refreshLeagueMember()); // TODO: figure out a way refresh the app through a common action
         yield put(MembersPageContentMembersActions.refresh());
         yield put(MembersPageActions.refreshSuccess());
     } catch (err) {
@@ -41,6 +43,7 @@ function* updateMemberStatus({ uuid, status }: AnyAction) {
 
 export default function* MembersPageSaga() {
     yield all([
+        takeLatest(MembersPageTypes.PRE_INIT, preInit),
         takeLatest(MembersPageTypes.INIT, init),
         takeLatest(MembersPageTypes.REFRESH, refresh),
         takeLatest(MembersPageTypes.UPDATE_MEMBER_STATUS, updateMemberStatus),
