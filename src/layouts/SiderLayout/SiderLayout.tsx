@@ -23,7 +23,7 @@ const SiderLayout: React.FunctionComponent<SiderLayoutProps> = ({
         return content;
     };
     return (
-        <Sider width={300} className={`sider-layout`}>
+        <Sider width={350} className={`sider-layout`}>
             <Layout className="sider-layout-background">
                 {renderHeader()}
                 <Content className="sider-layout-content">

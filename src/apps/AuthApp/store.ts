@@ -2,6 +2,7 @@ import { applyMiddleware, compose, createStore, combineReducers } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import { all, fork } from 'redux-saga/effects';
 import { createLogger } from 'redux-logger';
+import { composeWithDevTools } from 'redux-devtools-extension';
 import { authReducer as auth, baseReducer as base } from '@reducers';
 import {
     forgotPasswordPage,
@@ -23,14 +24,16 @@ import { get as _get } from 'lodash';
 function configStore(options?: { preloadedState: any }): any {
     const middleware = [];
     const enhancers = [];
-    let monitor = null;
+    let monitor = undefined;
 
     /* ------------- Assemble Middleware ------------- */
-    monitor = (window as any).__SAGA_MONITOR_EXTENSION__;
-    const loggerMiddleware = createLogger({
-        collapsed: true,
-    });
-    middleware.push(loggerMiddleware);
+    if (process.env.NODE_ENV === 'development') {
+        monitor = (window as any).__SAGA_MONITOR_EXTENSION__;
+        const loggerMiddleware = createLogger({
+            collapsed: true,
+        });
+        middleware.push(loggerMiddleware);
+    }
 
     const sagaMiddleware = createSagaMiddleware({ sagaMonitor: monitor });
     middleware.push(sagaMiddleware);
@@ -49,11 +52,7 @@ function configStore(options?: { preloadedState: any }): any {
             verifyPage,
         }),
         _get(options, ['preloadedState'], {}),
-        compose(
-            ...enhancers,
-            (window as any).__REDUX_DEVTOOLS_EXTENSION__ &&
-                (window as any).__REDUX_DEVTOOLS_EXTENSION__()
-        )
+        composeWithDevTools(...enhancers)
     );
 
     function* memberAppSaga() {

@@ -21,7 +21,11 @@ const CreateButton: React.FunctionComponent<CreateButtonProps> = () => {
     };
 
     return (
-        <ComponentContent title={'Actions'} className="create-button space" bodyClassName={"create-button-body"}>
+        <ComponentContent
+            title={'Actions'}
+            className="create-button"
+            bodyClassName={'create-button-body'}
+        >
             <Button block type="primary" onClick={handleClick}>
                 Create League <PlusCircleOutlined />
             </Button>

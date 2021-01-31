@@ -35,7 +35,7 @@ const MemberStats: React.FunctionComponent<MemberStatsProps> = () => {
     return (
         <ComponentContent
             showSpinner={!isInitialized}
-            className="member-stats-wins space"
+            className="member-stats-wins"
             title={'My Stats'}
         >
             <Wins value={winCount} />

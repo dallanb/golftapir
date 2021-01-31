@@ -24,17 +24,23 @@
         }
     }
     .content-layout-content {
-        padding: 16px 24px 16px 24px;
+        padding: 24px 12px 24px 24px;
         overflow: auto;
     }
 
     .sider-layout {
         background: none;
-        margin: 16px 24px 16px 0;
-        .sider-layout-header {
-            padding: 0;
-        }
-        .sider-layout-content {
+        height: 100vh;
+        .ant-layout-sider-children {
+            display: flex;
+            flex-direction: column;
+            .sider-layout-header {
+                padding: 24px 24px 12px 12px;
+            }
+            .sider-layout-content {
+                padding: 12px 24px 24px 12px;
+                overflow: auto;
+            }
         }
     }
 
@@ -46,7 +52,7 @@
         > div {
             padding: 16px;
             border-radius: 4px;
-            box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 15px 5px fade(@primary-color, 5%);
         }
     }
 }
