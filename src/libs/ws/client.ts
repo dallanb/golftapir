@@ -3,13 +3,22 @@ import qs from 'querystring';
 import { omitBy as _omitBy, isNil as _isNil } from 'lodash';
 
 class Client {
-    private _url: string;
     private _socket?: WebSocket;
+    private _reconnectAttempts: number;
+    private readonly _url: string;
+    private readonly _maxReconnectAttempts: number;
     private readonly _socketOptions: { endpoint: string };
 
-    constructor(url: string) {
+    constructor(
+        url: string,
+        options?: {
+            maxReconnectAttempts?: number;
+        }
+    ) {
         this._url = url;
         this._socket = undefined;
+        this._maxReconnectAttempts = options?.maxReconnectAttempts || 10;
+        this._reconnectAttempts = 0;
         this._socketOptions = {
             endpoint: url,
         };
@@ -19,28 +28,36 @@ class Client {
         return this._socket;
     }
 
-    set socket(socket: WebSocket | undefined) {
-        this._socket = socket;
+    get reconnectAttempts(): number {
+        return this._reconnectAttempts;
     }
+
+    get maxReconnectAttempts(): number {
+        return this._maxReconnectAttempts;
+    }
+
     init(uuid?: string): Promise<void> {
         // need to pass JWT in order to not be stopped by KONG Gateway
         const query = qs.stringify(
             _omitBy({ jwt: ClientProxy.accessToken, uuid }, _isNil)
         );
 
-        this.socket = new WebSocket(`${this._url}?${query}`);
+        this._socket = new WebSocket(`${this._url}?${query}`);
 
-        this.socket.onclose = (event) => {
+        this._socket.onclose = (event) => {
             console.info('socket close event code, ', event.code);
             switch (event.code) {
                 case 1000:
                     console.info('normal closure');
                     break;
                 default:
-                    console.info('reconnecting'); // TODO: FIX THIS TO STOP RECONNECTING AFTER A FEW CONSECUTIVE FAILS
-                    setTimeout(() => {
-                        this.init();
-                    }, 5000);
+                    console.info('reconnecting');
+                    if (this._reconnectAttempts < this._maxReconnectAttempts) {
+                        setTimeout(() => {
+                            this.init();
+                            this._incrementReconnectAttempts();
+                        }, 100);
+                    }
             }
         };
 
@@ -50,38 +67,41 @@ class Client {
     }
 
     terminate(code: number = 1000): void {
-        this.socket?.close(code);
-    }
-
-    _connect(resolve: () => void, reject: () => void): void {
-        if (!this.socket) {
-            return reject();
-        }
-        if (this.socket.readyState === this.socket.OPEN) {
-            return resolve();
-        }
-        this.socket.onopen = () => resolve();
+        this._socket?.close(code);
     }
 
     status(): number | undefined {
-        return this.socket?.readyState;
+        return this._socket?.readyState;
     }
 
     send(data: string): Promise<void> {
         return new Promise((resolve, reject) => {
             try {
-                if (!this.socket) {
+                if (!this._socket) {
                     throw new Error();
                 }
                 if (!this.status()) {
                     throw new Error();
                 }
-                this.socket.send(data);
+                this._socket.send(data);
                 resolve();
             } catch (err) {
                 reject(err);
             }
         });
+    }
+    _connect(resolve: () => void, reject: () => void): void {
+        if (!this._socket) {
+            return reject();
+        }
+        if (this._socket.readyState === this._socket.OPEN) {
+            return resolve();
+        }
+        this._socket.onopen = () => resolve();
+    }
+
+    _incrementReconnectAttempts() {
+        this._reconnectAttempts += 1;
     }
 }
 
