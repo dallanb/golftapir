@@ -38,7 +38,9 @@ class Client {
                     break;
                 default:
                     console.info('reconnecting'); // TODO: FIX THIS TO STOP RECONNECTING AFTER A FEW CONSECUTIVE FAILS
-                    this.init();
+                    setTimeout(() => {
+                        this.init();
+                    }, 5000);
             }
         };
 
