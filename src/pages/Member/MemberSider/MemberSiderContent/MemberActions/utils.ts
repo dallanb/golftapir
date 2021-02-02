@@ -4,6 +4,22 @@ import constants from '@constants';
 import routes from '@constants/routes';
 import { withAppRoute } from '@utils';
 
+export const renderAction = (
+    key: string,
+    options: any
+): { show: boolean; enabled: boolean } => {
+    const renderAction = { show: false, enabled: true };
+    switch (key) {
+        case constants.ACTION.CHALLENGE.KEY:
+            renderAction.show = !options.isMe;
+            renderAction.enabled = true;
+            break;
+        default:
+            console.error('Invalid key: ', key);
+    }
+    return renderAction;
+};
+
 export const generateActions = (uuid?: string) => {
     const actions = [];
     const history = useHistory();
