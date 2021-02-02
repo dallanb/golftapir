@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Redirect, Route, Switch, withRouter } from 'react-router-dom';
 import { get as _get, map as _map } from 'lodash';
 import { message, Spin } from 'antd';
-import { MemberAppLayout } from '@layouts';
+import { AppLayout } from '@layouts';
 import {
     ComponentRoute,
     LeagueAppViewProps,
@@ -96,7 +96,7 @@ class LeagueAppView extends React.Component<
 
         if (!isReady || isFetching) return <AppLoading />;
         return (
-            <MemberAppLayout
+            <AppLayout
                 app={constants.APPS.LEAGUE_APP}
                 name={name}
                 avatar={avatar}
@@ -145,7 +145,7 @@ class LeagueAppView extends React.Component<
                         )}
                     />
                 </Switch>
-            </MemberAppLayout>
+            </AppLayout>
         );
     }
 }

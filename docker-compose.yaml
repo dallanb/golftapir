@@ -14,10 +14,10 @@ services:
       - ${HUNCHO_DIR}/secrets/golftapir/firebase-messaging-sw.js:/usr/share/nginx/dist/firebase-messaging-sw.js
     ports:
       - 80:80
-    networks:
-      - kong-net
-
-networks:
-  kong-net:
-    external:
-      name: frontend_kong-net
+#    networks:
+#      - kong-net
+#
+#networks:
+#  kong-net:
+#    external:
+#      name: frontend_kong-net

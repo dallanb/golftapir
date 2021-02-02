@@ -3,12 +3,15 @@ import { PageHeader, Spin } from 'antd';
 import { SiderLayoutHeaderProps } from './types';
 import { AvatarProps } from 'antd/lib/avatar';
 import { getInitials, randomColourGenerator } from '@utils';
+import classnames from 'classnames';
 
 const SiderLayoutHeader: React.FunctionComponent<SiderLayoutHeaderProps> = ({
     title,
     avatar,
     extra,
+    className,
 }) => {
+    const cx = classnames('sider-layout-header', className);
     const renderAvatar = (avatar: SiderLayoutHeaderProps['avatar']) => {
         if (!avatar) {
             return undefined;
@@ -35,7 +38,7 @@ const SiderLayoutHeader: React.FunctionComponent<SiderLayoutHeaderProps> = ({
             title={title}
             avatar={avatar && renderAvatar(avatar)}
             extra={extra}
-            className="sider-layout-header"
+            className={cx}
         />
     );
 };

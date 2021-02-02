@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import { Layout, Menu } from 'antd';
 import { withRouter } from 'react-router-dom';
-import { MemberAppLayoutProps } from './types';
+import { AppLayoutProps } from './types';
 import defaultMenuItemRenderer from './defaultMenuItemRenderer';
 import { withAppRoute } from '@utils';
 import routes from '@constants/routes';
-import './MemberAppLayout.less';
+import './AppLayout.less';
 import constants from '@constants';
 
 const { Sider } = Layout;
 
-const MemberAppLayout: React.FunctionComponent<MemberAppLayoutProps> = ({
+const AppLayout: React.FunctionComponent<AppLayoutProps> = ({
     app,
     name,
     avatar,
@@ -71,4 +71,4 @@ const MemberAppLayout: React.FunctionComponent<MemberAppLayoutProps> = ({
     );
 };
 
-export default withRouter(MemberAppLayout);
+export default withRouter(AppLayout);

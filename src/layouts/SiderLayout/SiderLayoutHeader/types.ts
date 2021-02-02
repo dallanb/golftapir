@@ -5,4 +5,5 @@ export interface SiderLayoutHeaderProps {
     title?: ReactNode;
     avatar?: AvatarProps;
     extra?: ReactNode | ReactNode[];
+    className?: string;
 }

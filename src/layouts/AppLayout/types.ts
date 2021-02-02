@@ -1,7 +1,7 @@
 import React from 'react';
 import { RouteComponentProps } from 'react-router';
 
-export interface MemberAppLayoutProps extends RouteComponentProps<any> {
+export interface AppLayoutProps extends RouteComponentProps<any> {
     app: string;
     name: string;
     avatar?: string;
@@ -11,7 +11,7 @@ export interface MemberAppLayoutProps extends RouteComponentProps<any> {
     menuItemOnClick?: ({ key }: { key: any }, path: string) => void;
     selectedKeys?: string[];
 }
-export interface MemberAppLayoutState {
+export interface AppLayoutState {
     selectedKeys: string[];
 }
 

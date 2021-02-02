@@ -1,0 +1,41 @@
+.header-extra {
+    display: flex;
+    margin: 0;
+    .header-extra-notification {
+        .notification-button {
+            height: 24px;
+            width: 24px;
+        }
+    }
+    .header-extra-drop-down {
+        .drop-down-button {
+            height: 24px;
+            width: 24px;
+        }
+    }
+}
+.header-extra-popover {
+    max-width: 300px;
+    .header-extra-username {
+        font-size: 14px;
+        line-height: 1;
+        color: fade(@primary-color, 50%);
+        font-weight: bold;
+    }
+    .header-extra-league {
+        display: flex;
+        .header-extra-league-avatar {
+            border-radius: 4px;
+        }
+        .header-extra-league-name {
+            padding-left: 12px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .header-extra-league-selected {
+            color: @primary-color;
+            padding-left: 12px;
+            width: 20px;
+        }
+    }
+}
