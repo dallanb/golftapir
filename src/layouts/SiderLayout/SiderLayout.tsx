@@ -2,12 +2,14 @@ import React from 'react';
 import { Layout } from 'antd';
 import { SiderLayoutProps } from './types';
 import './SiderLayout.less';
+import classnames from 'classnames';
 
 const { Content, Sider } = Layout;
 
 const SiderLayout: React.FunctionComponent<SiderLayoutProps> = ({
     header,
     content,
+    className,
 }) => {
     const renderHeader = () => {
         if (!header) {
@@ -22,8 +24,9 @@ const SiderLayout: React.FunctionComponent<SiderLayoutProps> = ({
         }
         return content;
     };
+    const cx = classnames('sider-layout', className);
     return (
-        <Sider width={350} className={`sider-layout`}>
+        <Sider width={350} className={cx}>
             <Layout className="sider-layout-background">
                 {renderHeader()}
                 <Content className="sider-layout-content">

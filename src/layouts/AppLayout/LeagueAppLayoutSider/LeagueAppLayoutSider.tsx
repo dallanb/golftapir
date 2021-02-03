@@ -16,7 +16,7 @@ const LeagueAppLayoutSider: React.FunctionComponent<LeagueAppLayoutSiderProps> =
             <div className="content-body">{content}</div>
         </>
     );
-    return <SiderLayout content={siderContent} />;
+    return <SiderLayout content={siderContent} className="app-sider-layout" />;
 };
 
 export default LeagueAppLayoutSider;

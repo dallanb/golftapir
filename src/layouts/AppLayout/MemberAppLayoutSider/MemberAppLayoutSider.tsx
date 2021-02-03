@@ -7,7 +7,15 @@ import './MemberAppLayoutSider.less';
 const MemberAppLayoutSider: React.FunctionComponent<MemberAppLayoutSiderProps> = ({
     content,
 }) => {
-    return <SiderLayout header={<UserTile />} content={content} />;
+    const siderContent = (
+        <>
+            <div className="content-header">
+                <UserTile />
+            </div>
+            <div className="content-body">{content}</div>
+        </>
+    );
+    return <SiderLayout content={siderContent} className="app-sider-layout" />;
 };
 
 export default MemberAppLayoutSider;
