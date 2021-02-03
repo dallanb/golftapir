@@ -1,16 +1,16 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Spin } from 'antd';
 import { Table } from '@components';
 import { ContestLeaderboardTableScorecardProps } from './types';
 import { columnsSchemaGenerator } from './schema';
 import { selectData } from './selector';
 import renderRow from './renderRow';
 import ContestPageContentContestLeaderboardScorecardActions from './actions';
+import ScorecardParticipant from './ScorecardParticipant';
 import HoleScoreInfo from './HoleScoreInfo';
 import { selectContestUUID } from '@pages/Contest/selector';
 import './ContestLeaderboardTableScorecard.less';
-import ScorecardParticipant from '@pages/Contest/ContestContent/ContestLeaderboard/ContestLeaderboardTable/ContestLeaderboardTableScorecard/ScorecardParticipant';
-import { Spin } from 'antd';
 
 const ContestLeaderboardTableScorecard: React.FunctionComponent<ContestLeaderboardTableScorecardProps> = ({
     row,

@@ -20,13 +20,15 @@ const PayoutProportionsList: React.FunctionComponent<PayoutProportionsListProps>
     const status = useSelector(selectContestStatus);
     const data = formatPayoutProportions(payoutData);
     const containerDimensions = {
-        height: Math.min(200, data.length * 50 + 63),
+        height: Math.min(200, data.length * 50),
     };
     const tableDimensions = {
         size: 50,
         width: '100%',
         height: Math.min(getRefHeight(ref, 200) - 63),
     };
+    console.log('Container height: ', containerDimensions.height);
+    console.log('Table height: ', tableDimensions.height);
 
     const loadMore = (start: number, stop: number) => null;
 
@@ -34,7 +36,8 @@ const PayoutProportionsList: React.FunctionComponent<PayoutProportionsListProps>
         <ComponentContent
             title={'Payout'}
             showSpinner={isFetching}
-            style={containerDimensions}
+            // showSpinner={true}
+            bodyStyle={containerDimensions}
             className="payout-proportions-component-content"
         >
             <FixedSizeList

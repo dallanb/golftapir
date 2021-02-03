@@ -28,7 +28,9 @@ const ComponentContent: React.FunctionComponent<ComponentContentProps> = ({
         return children;
     };
     const cx = classnames('component-content', className);
-    const bodyCx = classnames('component-content-content', bodyClassName);
+    const bodyCx = classnames('component-content-content', bodyClassName, {
+        spin: showSpinner,
+    });
     return (
         <div className={cx} style={style}>
             {renderTitle()}
