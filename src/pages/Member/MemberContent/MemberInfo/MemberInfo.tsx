@@ -1,29 +1,38 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { MemberInfoProps } from './types';
 import MemberInfoForm from './MemberInfoForm';
 import MemberPageContentMemberInfoActions from './actions';
-import { selectData } from './selector';
+import { selectIsInitialized } from './selector';
+import { selectIsInitialized as selectDataIsInitialized } from '@pages/Member/selector';
 import ComponentContent from '@layouts/ComponentContent';
-import './MemberInfo.less';
 import CONSTANTS from '@locale/en-CA';
+import './MemberInfo.less';
 
 const MemberInfo: React.FunctionComponent<MemberInfoProps> = () => {
     const dispatch = useDispatch();
     const ref = useRef(null);
+    const isInitialized = useSelector(selectIsInitialized);
+    const isDataInitialized = useSelector(selectDataIsInitialized);
+    const [isDataInitializing, setIsDataInitializing] = useState(true);
 
     useEffect(() => {
-        dispatch(MemberPageContentMemberInfoActions.init());
         return () => {
             dispatch(MemberPageContentMemberInfoActions.terminate());
         };
     }, []);
 
-    const { isInitialized } = useSelector(selectData);
+    useEffect(() => {
+        if (isDataInitialized && isDataInitializing) {
+            dispatch(MemberPageContentMemberInfoActions.init());
+            setIsDataInitializing(false);
+        }
+    }, [isDataInitialized]);
+
     return (
         <ComponentContent
             componentRef={ref}
-            showSpinner={!isInitialized}
+            showSpinner={!isInitialized || !isDataInitialized}
             className="member-info"
             title={CONSTANTS.PAGES.MEMBER.TABS.INFO}
         >

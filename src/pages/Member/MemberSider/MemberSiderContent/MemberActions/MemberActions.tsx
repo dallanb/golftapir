@@ -22,7 +22,7 @@ const MemberActions: React.FunctionComponent<MemberActionsProps> = () => {
     return (
         <ComponentContent
             title={'Actions'}
-            className="member-actions space"
+            className="member-actions"
             bodyClassName="member-actions-body"
         >
             {Actions}

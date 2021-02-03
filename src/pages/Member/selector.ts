@@ -11,6 +11,11 @@ export const selectData = createSelector(
     (memberPage) => memberPage
 );
 
+export const selectIsInitialized = createSelector(
+    [getMemberPage],
+    (memberPage) => _get(memberPage, ['isInitialized'], false)
+);
+
 export const selectMember = createSelector([getMemberPage], (memberPage) =>
     _get(memberPage, ['member'], undefined)
 );

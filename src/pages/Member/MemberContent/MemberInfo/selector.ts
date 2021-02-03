@@ -8,3 +8,8 @@ export const selectData = createSelector(
     [getMemberPageContentMemberInfo],
     (memberPageContentMemberInfo) => memberPageContentMemberInfo
 );
+export const selectIsInitialized = createSelector(
+    [getMemberPageContentMemberInfo],
+    (memberPageContentMemberInfo) =>
+        _get(memberPageContentMemberInfo, ['isInitialized'], false)
+);
