@@ -7,13 +7,16 @@ import './LeagueAppLayoutSider.less';
 const LeagueAppLayoutSider: React.FunctionComponent<LeagueAppLayoutSiderProps> = ({
     content,
 }) => {
-    const header = (
+    const siderContent = (
         <>
-            <UserTile />
-            <Wallet />
+            <div className="content-header">
+                <UserTile />
+                <Wallet />
+            </div>
+            <div className="content-body">{content}</div>
         </>
     );
-    return <SiderLayout header={header} content={content} />;
+    return <SiderLayout content={siderContent} />;
 };
 
 export default LeagueAppLayoutSider;

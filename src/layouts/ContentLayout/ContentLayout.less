@@ -2,19 +2,27 @@
     max-height: 100vh;
     overflow: hidden;
     .content-layout-background {
-        .content-layout-header > div {
-            background: white;
+        .content-layout-header {
+            .component-content {
+                background: white;
+            }
         }
-        .content-layout-content > div {
-            background: white;
+        .content-layout-content {
+            .component-content {
+                background: white;
+            }
         }
     }
     .sider-layout-background {
-        .sider-layout-header > div {
-            background: white;
+        .sider-layout-header {
+            .component-content {
+                background: white;
+            }
         }
-        .sider-layout-content > div {
-            background: white;
+        .sider-layout-content {
+            .component-content {
+                background: white;
+            }
         }
     }
 
@@ -51,7 +59,7 @@
     .content-layout-content,
     .sider-layout-header,
     .sider-layout-content {
-        > div {
+        .component-content {
             padding: 16px;
             border-radius: 4px;
             box-shadow: 0 0 15px 5px fade(@primary-color, 5%);

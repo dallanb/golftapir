@@ -14,7 +14,10 @@ const Wallet: React.FunctionComponent<WalletProps> = () => {
     const isInitialized = useSelector(selectMeIsInitialized);
     const balance = useSelector(selectMyWalletBalance);
     return (
-        <ComponentContent className="wallet" showSpinner={!isInitialized}>
+        <ComponentContent
+            className="wallet-component-content space"
+            showSpinner={!isInitialized}
+        >
             <div className="wallet-main">
                 <div className="wallet-balance">
                     <div className="wallet-balance-label">Your Balance</div>
@@ -28,7 +31,7 @@ const Wallet: React.FunctionComponent<WalletProps> = () => {
                 </div>
             </div>
             <div className="wallet-side">
-                <div className="wallet-side-button">
+                <div className="wallet-button">
                     <Button
                         onClick={() => null}
                         type="default"

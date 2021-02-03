@@ -4,16 +4,18 @@ import { useSelector } from 'react-redux';
 import { Button, Menu } from 'antd';
 import { get as _get } from 'lodash';
 import { CheckOutlined, NotificationFilled } from '@ant-design/icons';
-import { HeaderExtraProps } from './types';
+import { UserTileExtraProps } from './types';
 import routes from '@constants/routes';
 import { Avatar, PendingBadge, UserTile } from '@components';
 import { selectPending, selectLeagues } from '@selectors/BaseSelector';
 import { selectLeagueUUID } from '@selectors/AppSelector';
 import { withAppRoute, withS3URL } from '@utils';
 import constants from '@constants';
-import './HeaderExtra.less';
+import './UserTileExtra.less';
 
-const HeaderExtra: React.FunctionComponent<HeaderExtraProps> = ({ user }) => {
+const UserTileExtra: React.FunctionComponent<UserTileExtraProps> = ({
+    user,
+}) => {
     const history = useHistory();
     const pending = useSelector(selectPending);
     const uuid = useSelector(selectLeagueUUID);
@@ -33,8 +35,8 @@ const HeaderExtra: React.FunctionComponent<HeaderExtraProps> = ({ user }) => {
                     )
                 }
             >
-                <div className="header-extra-league">
-                    <div className="header-extra-league-avatar">
+                <div className="user-tile-extra-league">
+                    <div className="user-tile-extra-league-avatar">
                         <Avatar
                             src={withS3URL(
                                 _get(league, ['avatar', 's3_filename'], null),
@@ -45,10 +47,10 @@ const HeaderExtra: React.FunctionComponent<HeaderExtraProps> = ({ user }) => {
                             size={24}
                         />
                     </div>
-                    <div className="header-extra-league-name">
+                    <div className="user-tile-extra-league-name">
                         {league.name}
                     </div>
-                    <div className="header-extra-league-selected">
+                    <div className="user-tile-extra-league-selected">
                         {league.uuid === uuid && <CheckOutlined />}
                     </div>
                 </div>
@@ -66,15 +68,17 @@ const HeaderExtra: React.FunctionComponent<HeaderExtraProps> = ({ user }) => {
                 }
             >
                 Log out{' '}
-                <span className="header-extra-username">{user.username}</span>
+                <span className="user-tile-extra-username">
+                    {user.username}
+                </span>
             </Menu.Item>,
         ];
         return [...leagueMenuItems, ...authMenuItems];
     };
 
     return (
-        <div className="header-extra">
-            <div className="header-extra-notification">
+        <div className="user-tile-extra">
+            <div className="user-tile-extra-notification">
                 <Button
                     onClick={() =>
                         history.push(
@@ -93,14 +97,14 @@ const HeaderExtra: React.FunctionComponent<HeaderExtraProps> = ({ user }) => {
                     className="notification-button"
                 />
             </div>
-            <div className="header-extra-drop-down">
+            <div className="user-tile-extra-drop-down">
                 <UserTile
                     menu={getUserTileMenuItems}
-                    popoverOverlayClassName="header-extra-popover"
+                    popoverOverlayClassName="user-tile-extra-popover"
                 />
             </div>
         </div>
     );
 };
 
-export default HeaderExtra;
+export default UserTileExtra;
