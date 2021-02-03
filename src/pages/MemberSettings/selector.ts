@@ -8,6 +8,11 @@ export const selectData = createSelector(
     (memberSettingsPage) => memberSettingsPage
 );
 
+export const selectIsInitialized = createSelector(
+    [getMemberSettingsPage],
+    (memberSettingsPage) => _get(memberSettingsPage, ['isInitialized'], false)
+);
+
 export const selectMember = createSelector(
     [getMemberSettingsPage],
     (memberSettingsPage) => _get(memberSettingsPage, ['member'], undefined)

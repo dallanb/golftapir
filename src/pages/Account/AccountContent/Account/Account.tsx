@@ -1,14 +1,18 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import AccountForm from './AccountForm';
 import { AccountProps } from './types';
 import AccountPageContentAccountActions from './actions';
-import { selectData } from './selector';
 import ComponentContent from '@layouts/ComponentContent';
+import { selectIsInitialized as selectIsDataInitialized } from '@pages/Account/selector';
+import { selectIsInitialized } from './selector';
 import './Account.less';
 
 const Account: React.FunctionComponent<AccountProps> = ({}) => {
     const dispatch = useDispatch();
+    const isDataInitialized = useSelector(selectIsDataInitialized);
+    const isInitialized = useSelector(selectIsInitialized);
+    const [isDataInitializing, setDataIsInitializing] = useState(true);
 
     useEffect(() => {
         dispatch(AccountPageContentAccountActions.init());
@@ -17,11 +21,16 @@ const Account: React.FunctionComponent<AccountProps> = ({}) => {
         };
     }, []);
 
-    const { isInitialized } = useSelector(selectData);
+    useEffect(() => {
+        if (isDataInitialized && isDataInitializing) {
+            dispatch(AccountPageContentAccountActions.init());
+            setDataIsInitializing(false);
+        }
+    }, [isDataInitialized]);
 
     return (
         <ComponentContent
-            showSpinner={!isInitialized}
+            showSpinner={!isInitialized || !isDataInitialized}
             className="account"
             title={'Account Settings'}
         >
