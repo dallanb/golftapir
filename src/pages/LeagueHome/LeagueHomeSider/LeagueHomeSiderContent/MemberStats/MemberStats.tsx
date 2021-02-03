@@ -5,6 +5,7 @@ import { get as _get } from 'lodash';
 import { MemberStatsProps } from './types';
 import LeagueHomePageSiderContentMemberStatsActions from './actions';
 import { selectData, selectStat } from './selector';
+import { selectMeIsInitialized, selectMyStat } from '@selectors/BaseSelector';
 import ComponentContent from '@layouts/ComponentContent';
 import Wins from './Wins';
 import Winnings from './Winnings';
@@ -16,7 +17,8 @@ const MemberStats: React.FunctionComponent<MemberStatsProps> = () => {
     const params = useParams();
     const leagueUUID = _get(params, ['league_uuid'], undefined);
     const { isInitialized } = useSelector(selectData);
-    const stat = useSelector(selectStat);
+    const meIsInitialized = useSelector(selectMeIsInitialized);
+    const stat = useSelector(selectMyStat);
 
     const winCount = _get(stat, ['win_count'], 0);
     const eventCount = _get(stat, ['event_count'], 0);
@@ -34,7 +36,7 @@ const MemberStats: React.FunctionComponent<MemberStatsProps> = () => {
 
     return (
         <ComponentContent
-            showSpinner={!isInitialized}
+            showSpinner={!isInitialized || !meIsInitialized}
             className="member-stats-wins"
             title={'My Stats'}
         >

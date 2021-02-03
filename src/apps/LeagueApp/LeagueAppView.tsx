@@ -38,7 +38,6 @@ class LeagueAppView extends React.Component<
     componentDidMount() {
         const { preInit, init, history, location, match } = this.props;
         const state = _get(location, ['state'], null);
-        console.log(state);
         const prevUUID = _get(match, ['params', 'league_uuid'], null);
         if (!prevUUID) {
             history.push(

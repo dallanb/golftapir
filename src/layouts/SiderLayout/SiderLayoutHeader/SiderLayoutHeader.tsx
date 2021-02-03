@@ -7,9 +7,11 @@ import classnames from 'classnames';
 
 const SiderLayoutHeader: React.FunctionComponent<SiderLayoutHeaderProps> = ({
     title,
+    subTitle,
     avatar,
     extra,
     className,
+    showSpinner,
 }) => {
     const cx = classnames('sider-layout-header', className);
     const renderAvatar = (avatar: SiderLayoutHeaderProps['avatar']) => {
@@ -32,10 +34,11 @@ const SiderLayoutHeader: React.FunctionComponent<SiderLayoutHeaderProps> = ({
         }
         return avatarProps;
     };
-
+    if (showSpinner) return <Spin className={cx} />;
     return (
         <PageHeader
             title={title}
+            subTitle={subTitle}
             avatar={avatar && renderAvatar(avatar)}
             extra={extra}
             className={cx}

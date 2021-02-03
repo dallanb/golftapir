@@ -58,7 +58,7 @@ export const mergeContestParticipant = (
 export const socketEventHandlers = (socket: WebSocket, emitter: any) => {
     socket.onmessage = (evt: MessageEvent) => {
         const data = JSON.parse(evt.data);
-        // console.log(data);
+        // console.info(data);
         const [topic, event] = data.event.split(':');
         switch (topic) {
             case constants.TOPICS.CONTESTS:

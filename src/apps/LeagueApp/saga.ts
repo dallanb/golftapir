@@ -1,4 +1,11 @@
-import { all, call, fork, put, takeLatest } from 'redux-saga/effects';
+import {
+    all,
+    call,
+    fork,
+    put,
+    putResolve,
+    takeLatest,
+} from 'redux-saga/effects';
 import { AnyAction } from 'redux';
 import { get as _get, isObject as _isObject } from 'lodash';
 import LeagueAppActions, { LeagueAppTypes } from './actions';
@@ -28,9 +35,9 @@ function* preInit({ data }: AnyAction) {
 function* init({ uuid }: AnyAction) {
     try {
         if (!ClientProxy.accessToken) yield call(refreshAuth);
+        yield put(BaseActions.initSockets(socketEventHandlers));
         yield put(BaseActions.initMe(uuid));
         yield put(BaseActions.initLeagues());
-        yield put(BaseActions.initSockets(socketEventHandlers));
         yield put(BaseActions.initNotifications());
         yield fork(initLeague, uuid);
         yield fork(initLeagueMember, uuid);
@@ -63,7 +70,7 @@ function* refresh({ uuid }: AnyAction) {
 
 function* terminate() {
     try {
-        yield put(SocketActions.terminate());
+        yield put(BaseActions.terminateSockets());
     } catch (err) {
         console.error(err);
     }

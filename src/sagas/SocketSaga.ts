@@ -1,6 +1,7 @@
 import { AnyAction } from 'redux';
 import { eventChannel } from 'redux-saga';
 import { all, fork, take, call, put, takeLatest } from 'redux-saga/effects';
+import { isNil as _isNil } from 'lodash';
 import { WebSocketNotificationClient } from '@libs';
 import { SocketActions, SocketTypes } from '@actions';
 import { message } from 'antd';
@@ -33,11 +34,10 @@ function* write({ data }: AnyAction) {
 function* init({ options }: AnyAction) {
     try {
         // maybe notify the server that the user has logged in?
-        yield WebSocketNotificationClient.init();
-        if (!WebSocketNotificationClient.status()) {
+        const status = yield WebSocketNotificationClient.init();
+        if (!status) {
             throw new Error();
         }
-        WebSocketNotificationClient.send('Thank you for the invite');
         yield fork(read, options);
     } catch (err) {
         console.error(err);

@@ -12,7 +12,6 @@ const LinkButton: React.FunctionComponent<LinkButtonProps> = ({
     wrapperClassName,
     textClassName,
 }) => {
-    console.log(text);
     const cx = classnames('link-button', className);
     const wrapperCx = classnames('link-button-wrapper', wrapperClassName);
     const textCx = classnames(

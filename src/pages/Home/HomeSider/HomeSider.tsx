@@ -1,10 +1,10 @@
 import React from 'react';
-import LeagueAppLayoutSider from '@layouts/AppLayout/LeagueAppLayoutSider';
+import MemberAppLayoutSider from '@layouts/AppLayout/MemberAppLayoutSider';
 import HomeSiderContent from './HomeSiderContent';
 import { HomeSiderProps } from './types';
 
 const HomeSider: React.FunctionComponent<HomeSiderProps> = () => {
-    return <LeagueAppLayoutSider content={<HomeSiderContent />} />;
+    return <MemberAppLayoutSider content={<HomeSiderContent />} />;
 };
 
 export default HomeSider;

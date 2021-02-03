@@ -11,5 +11,5 @@ export const reducer = combineReducers({
 // Saga
 export {
     LeagueHomePageSiderContentMemberStatsSaga,
-    LeagueHomePageSiderContentCalendarSaga,
+    // LeagueHomePageSiderContentCalendarSaga,
 } from './LeagueHomeSiderContent';

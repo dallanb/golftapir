@@ -36,7 +36,8 @@ class Client {
         return this._maxReconnectAttempts;
     }
 
-    init(uuid?: string): Promise<void> {
+    // Init will return websocket connect status
+    async init(uuid?: string): Promise<number | undefined> {
         // need to pass JWT in order to not be stopped by KONG Gateway
         const query = qs.stringify(
             _omitBy({ jwt: ClientProxy.accessToken, uuid }, _isNil)
@@ -61,9 +62,7 @@ class Client {
             }
         };
 
-        return new Promise((resolve, reject) => {
-            this._connect(resolve, reject);
-        });
+        return await this._connect();
     }
 
     terminate(code: number = 1000): void {
@@ -80,7 +79,10 @@ class Client {
                 if (!this._socket) {
                     throw new Error();
                 }
-                if (!this.status()) {
+                if (
+                    _isNil(this._socket?.readyState) ||
+                    this._socket?.readyState > 1
+                ) {
                     throw new Error();
                 }
                 this._socket.send(data);
@@ -90,14 +92,19 @@ class Client {
             }
         });
     }
-    _connect(resolve: () => void, reject: () => void): void {
-        if (!this._socket) {
-            return reject();
-        }
-        if (this._socket.readyState === this._socket.OPEN) {
-            return resolve();
-        }
-        this._socket.onopen = () => resolve();
+
+    _connect(): Promise<number | undefined> {
+        return new Promise((resolve, reject) => {
+            if (!this._socket) {
+                return reject(this._socket);
+            }
+            if (this._socket.readyState === this._socket.OPEN) {
+                return resolve(this._socket.readyState);
+            }
+
+            // wait for the socket to open
+            this._socket.onopen = () => resolve(1);
+        });
     }
 
     _incrementReconnectAttempts() {

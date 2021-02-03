@@ -4,6 +4,7 @@ import { Button } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import { HeaderExtraProps } from './types';
 import './HeaderExtra.less';
+import { PlusCircleFilled } from '@ant-design/icons/lib';
 
 const HeaderExtra: React.FunctionComponent<HeaderExtraProps> = () => {
     const history = useHistory();
@@ -13,10 +14,12 @@ const HeaderExtra: React.FunctionComponent<HeaderExtraProps> = () => {
             <div className="header-extra-button">
                 <Button
                     onClick={() => null}
-                    type="primary"
+                    type="default"
                     shape="round"
                     icon={<PlusOutlined />}
-                />
+                >
+                    Add
+                </Button>
             </div>
         </div>
     );

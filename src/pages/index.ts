@@ -63,7 +63,7 @@ export {
     LeagueHomePageSaga,
     LeagueHomePageSiderContentMemberStatsSaga,
     LeagueHomePageContentMemberStandingsSaga,
-    LeagueHomePageSiderContentCalendarSaga,
+    // LeagueHomePageSiderContentCalendarSaga,
     LeagueHomePageRoutes,
 } from './LeagueHome';
 export {
