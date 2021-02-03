@@ -21,6 +21,7 @@ const MemberSettings: React.FunctionComponent<MemberSettingsProps> = ({}) => {
         };
     }, []);
 
+    // TODO analyze if I should setting data init and dispatching in the same if statement
     useEffect(() => {
         if (isDataInitialized && isDataInitializing) {
             dispatch(MemberSettingsPageContentMemberActions.init());
