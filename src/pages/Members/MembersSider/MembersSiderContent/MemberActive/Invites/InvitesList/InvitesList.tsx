@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import { get as _get } from 'lodash';
 import { InvitesListProps } from './types';
 import { FixedSizeList } from '@components';
 import MembersPageSiderContentInvitesActions from '../actions';
@@ -11,6 +12,7 @@ import './InvitesList.less';
 
 const InvitesList: React.FunctionComponent<InvitesListProps> = ({
     containerRef,
+    containerDimensions,
     data,
     metadata,
     options,
@@ -18,12 +20,15 @@ const InvitesList: React.FunctionComponent<InvitesListProps> = ({
 }) => {
     const dispatch = useDispatch();
     const history = useHistory();
-    const refHeight = getRefHeight(containerRef, 200);
 
     const tableDimensions = {
         size: 50,
         width: '100%',
-        height: refHeight,
+        height: _get(
+            containerDimensions,
+            ['height'],
+            getRefHeight(containerRef, 200)
+        ),
     };
 
     const loadMore = (start: number, stop: number) => {

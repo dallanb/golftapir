@@ -32,7 +32,11 @@ const PayoutProportions: React.FunctionComponent<PayoutProportionsProps> = () =>
             bodyStyle={dimensions}
             className="payout-proportions-component-content"
         >
-            <PayoutProportionsList containerRef={ref} data={data} />
+            <PayoutProportionsList
+                containerRef={ref}
+                containerDimensions={dimensions}
+                data={data}
+            />
         </ComponentContent>
     );
 };

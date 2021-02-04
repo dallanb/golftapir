@@ -38,11 +38,13 @@ const Invites: React.FunctionComponent<InvitesProps> = ({}) => {
             componentRef={ref}
             showSpinner={!isInitialized}
             className="invites space"
+            bodyClassName="invites-component-content-body"
             bodyStyle={dimensions}
             title={'Invites'}
         >
             <InvitesList
                 containerRef={ref}
+                containerDimensions={dimensions}
                 data={data}
                 metadata={metadata}
                 options={options}
