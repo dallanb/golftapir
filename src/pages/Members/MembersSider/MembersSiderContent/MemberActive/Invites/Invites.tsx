@@ -26,9 +26,13 @@ const Invites: React.FunctionComponent<InvitesProps> = ({}) => {
         options = undefined,
     } = useSelector(selectData);
 
+    const emptyHeight = 124;
     const dimensions = {
-        height: Math.min(400, data.length * 50),
+        height: emptyHeight,
     };
+    if (isInitialized && data.length) {
+        dimensions.height = Math.min(400, data.length * 50);
+    }
 
     return (
         <ComponentContent

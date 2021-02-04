@@ -5,6 +5,7 @@ import { InvitesListProps } from './types';
 import { FixedSizeList } from '@components';
 import MembersPageSiderContentInvitesActions from '../actions';
 import InvitesListTile from './InvitesListTile';
+import InvitesListEmpty from './InvitesListEmpty';
 import { getRefHeight } from '@utils';
 import './InvitesList.less';
 
@@ -17,10 +18,12 @@ const InvitesList: React.FunctionComponent<InvitesListProps> = ({
 }) => {
     const dispatch = useDispatch();
     const history = useHistory();
+    const refHeight = getRefHeight(containerRef, 200);
+
     const tableDimensions = {
         size: 50,
         width: '100%',
-        height: getRefHeight(containerRef, 200),
+        height: refHeight,
     };
 
     const loadMore = (start: number, stop: number) => {
@@ -48,6 +51,7 @@ const InvitesList: React.FunctionComponent<InvitesListProps> = ({
             isNextPageLoading={isFetching}
             minimumBatchSize={10}
             rowRenderer={(props) => InvitesListTile({ props, history })}
+            empty={<InvitesListEmpty />}
         />
     );
 };
