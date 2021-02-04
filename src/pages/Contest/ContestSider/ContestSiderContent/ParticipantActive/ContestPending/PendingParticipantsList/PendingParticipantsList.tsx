@@ -1,29 +1,28 @@
-import React, { ReactText, useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import ComponentContent from '@layouts/ComponentContent';
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { get as _get } from 'lodash';
 import { FixedSizeList } from '@components';
 import { PendingParticipantsListProps } from './types';
 import PendingParticipantsListTile from './PendingParticipantsListTile';
-import { selectData, selectListData, selectListIsFetching } from '../selector';
 import ContestPageSiderContentParticipantActiveContestPendingActions from '../actions';
-import './PendingParticipantsList.less';
 import { getRefHeight } from '@utils';
-import { get as _get } from 'lodash';
+import './PendingParticipantsList.less';
 
-// MAYBE TODO
-const PendingParticipantsList: React.FunctionComponent<PendingParticipantsListProps> = () => {
+const PendingParticipantsList: React.FunctionComponent<PendingParticipantsListProps> = ({
+    containerRef,
+    containerDimensions,
+    data,
+    isFetching,
+}) => {
     const dispatch = useDispatch();
-    const ref = useRef(null);
-    const { isInitialized } = useSelector(selectData);
-    const data = useSelector(selectListData);
-    const isFetching = useSelector(selectListIsFetching);
-    const containerDimensions = {
-        height: Math.min(200, data.length * 50 + 63),
-    };
     const tableDimensions = {
         size: 50,
         width: '100%',
-        height: _get(containerDimensions, ['height'], getRefHeight(ref, 200)),
+        height: _get(
+            containerDimensions,
+            ['height'],
+            getRefHeight(containerRef, 200)
+        ),
     };
 
     const loadMore = (start: number, stop: number) => {
@@ -39,23 +38,15 @@ const PendingParticipantsList: React.FunctionComponent<PendingParticipantsListPr
     };
 
     return (
-        <ComponentContent
-            className="pending-participants space"
-            style={{ ...containerDimensions }}
-            componentRef={ref}
-            showSpinner={!isInitialized}
-            title={'Pending Participants'}
-        >
-            <FixedSizeList
-                {...tableDimensions}
-                hasNextPage={false}
-                isNextPageLoading={isFetching}
-                items={data}
-                loadNextPage={loadMore}
-                minimumBatchSize={10}
-                rowRenderer={(props) => PendingParticipantsListTile({ props })}
-            />
-        </ComponentContent>
+        <FixedSizeList
+            {...tableDimensions}
+            hasNextPage={false}
+            isNextPageLoading={isFetching}
+            items={data}
+            loadNextPage={loadMore}
+            minimumBatchSize={10}
+            rowRenderer={(props) => PendingParticipantsListTile({ props })}
+        />
     );
 };
 
