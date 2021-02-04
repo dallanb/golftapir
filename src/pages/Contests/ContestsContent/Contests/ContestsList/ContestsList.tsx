@@ -49,6 +49,7 @@ const ContestsList: React.FunctionComponent<ContestsListProps> = ({
             isNextPageLoading={isFetching}
             minimumBatchSize={10}
             rowRenderer={(props) => ContestTile({ props, history, params })}
+            emptyDescription={'No Contests'}
         />
     );
 };

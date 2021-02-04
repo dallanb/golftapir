@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { set as _set } from 'lodash';
 import InvitesList from './InvitesList';
 import { InvitesProps } from './types';
 import MembersPageSiderContentInvitesActions from './actions';
@@ -25,13 +26,11 @@ const Invites: React.FunctionComponent<InvitesProps> = ({}) => {
         metadata = [],
         options = undefined,
     } = useSelector(selectData);
-
+    const dataHeight = Math.min(400, data.length * 50);
     const emptyHeight = 124;
-    const dimensions = {
-        height: emptyHeight,
-    };
-    if (isInitialized && data.length) {
-        dimensions.height = Math.min(400, data.length * 50);
+    const dimensions = {};
+    if (isInitialized) {
+        _set(dimensions, ['height'], dataHeight || emptyHeight);
     }
 
     return (

@@ -94,6 +94,7 @@ const NotificationsList: React.FunctionComponent<NotificationsListProps> = ({
             rowRenderer={(props) =>
                 NotificationsListTile({ props, onClick: tileOnClick, actions })
             }
+            emptyDescription={'No Notifications'}
         />
     );
 };
