@@ -4,12 +4,7 @@ import { ContestActiveProps } from './types';
 import './ContestActive.less';
 
 const ContestActive: React.FunctionComponent<ContestActiveProps> = () => {
-    return (
-        <ComponentContent className="contest-active">
-            Please wait for the rest of the participants to mark contest as
-            Complete
-        </ComponentContent>
-    );
+    return null;
 };
 
 export default ContestActive;

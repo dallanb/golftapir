@@ -29,8 +29,7 @@ const Notifications: React.FunctionComponent<NotificationsProps> = ({}) => {
     return (
         <ComponentContent
             componentRef={ref}
-            // showSpinner={!isInitialized}
-            showSpinner={true}
+            showSpinner={!isInitialized}
             className="notifications"
             title={'Notifications List'}
         >

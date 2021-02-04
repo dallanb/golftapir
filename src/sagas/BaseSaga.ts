@@ -33,7 +33,7 @@ function* refreshMe({ league_uuid }: any) {
             'me',
             {
                 league_uuid,
-                include: 'avatar,stat',
+                include: 'avatar,stat,wallet',
             }
         );
         yield put(BaseActions.refreshMeSuccess(me));

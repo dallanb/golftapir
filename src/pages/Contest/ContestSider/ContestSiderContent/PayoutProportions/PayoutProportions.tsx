@@ -29,7 +29,6 @@ const PayoutProportions: React.FunctionComponent<PayoutProportionsProps> = () =>
             componentRef={ref}
             title={'Payout'}
             showSpinner={isFetching}
-            // showSpinner={true}
             bodyStyle={dimensions}
             className="payout-proportions-component-content"
         >
