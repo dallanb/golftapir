@@ -14,3 +14,9 @@ export const selectIsInitialized = createSelector(
     (accountPageContentAccount) =>
         _get(accountPageContentAccount, ['isInitialized'], false)
 );
+
+export const selectIsSubmitting = createSelector(
+    [getAccountPageContentAccount],
+    (accountPageContentAccount) =>
+        _get(accountPageContentAccount, ['isSubmitting'], false)
+);

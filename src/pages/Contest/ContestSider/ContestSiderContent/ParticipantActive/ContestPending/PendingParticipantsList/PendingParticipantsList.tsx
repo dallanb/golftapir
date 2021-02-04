@@ -8,7 +8,9 @@ import { selectData, selectListData, selectListIsFetching } from '../selector';
 import ContestPageSiderContentParticipantActiveContestPendingActions from '../actions';
 import './PendingParticipantsList.less';
 import { getRefHeight } from '@utils';
+import { get as _get } from 'lodash';
 
+// MAYBE TODO
 const PendingParticipantsList: React.FunctionComponent<PendingParticipantsListProps> = () => {
     const dispatch = useDispatch();
     const ref = useRef(null);
@@ -21,7 +23,7 @@ const PendingParticipantsList: React.FunctionComponent<PendingParticipantsListPr
     const tableDimensions = {
         size: 50,
         width: '100%',
-        height: Math.min(getRefHeight(ref, 200)),
+        height: _get(containerDimensions, ['height'], getRefHeight(ref, 200)),
     };
 
     const loadMore = (start: number, stop: number) => {
