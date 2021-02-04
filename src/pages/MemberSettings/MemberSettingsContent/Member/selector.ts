@@ -14,3 +14,9 @@ export const selectIsInitialized = createSelector(
     (memberSettingsPageContentMember) =>
         _get(memberSettingsPageContentMember, ['isInitialized'], false)
 );
+
+export const selectIsSubmitting = createSelector(
+    [getMemberSettingsPageContentMember],
+    (memberSettingsPageContentMember) =>
+        _get(memberSettingsPageContentMember, ['isSubmitting'], false)
+);

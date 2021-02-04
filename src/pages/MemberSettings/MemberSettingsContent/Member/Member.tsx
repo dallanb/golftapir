@@ -3,16 +3,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import MemberForm from './MemberForm';
 import { MemberSettingsProps } from './types';
 import MemberSettingsPageContentMemberActions from './actions';
-
 import { selectIsInitialized as selectIsDataInitialized } from '@pages/MemberSettings/selector';
-import { selectIsInitialized } from './selector';
+import { selectIsInitialized, selectIsSubmitting } from './selector';
 import ComponentContent from '@layouts/ComponentContent';
+import { OverlaySpin } from '@components';
 import './Member.less';
 
 const MemberSettings: React.FunctionComponent<MemberSettingsProps> = ({}) => {
     const dispatch = useDispatch();
     const isDataInitialized = useSelector(selectIsDataInitialized);
     const isInitialized = useSelector(selectIsInitialized);
+    const isSubmitting = useSelector(selectIsSubmitting);
     const [isDataInitializing, setDataIsInitializing] = useState(true);
 
     useEffect(() => {
@@ -36,6 +37,7 @@ const MemberSettings: React.FunctionComponent<MemberSettingsProps> = ({}) => {
             title={'Settings'}
         >
             <MemberForm />
+            <OverlaySpin visible={isSubmitting} />
         </ComponentContent>
     );
 };
