@@ -48,6 +48,10 @@ export const selectLeagueMember = createSelector([getApp], (app) =>
     _get(app, ['leagueMember'], undefined)
 );
 
+export const selectLeagueMemberData = createSelector([getApp], (app) =>
+    _get(app, ['leagueMember', 'data'], undefined)
+);
+
 export const selectLeagueMemberStatus = createSelector([getApp], (app) =>
     _get(app, ['leagueMember', 'data', 'status'], undefined)
 );
