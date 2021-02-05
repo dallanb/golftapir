@@ -2,13 +2,13 @@
 .ant-layout {
     background: transparent !important;
     &.content-layout {
-        background: rgb(2, 0, 36) !important;
+        background: @primary-color !important;
         background: linear-gradient(
             90deg,
             #000000 0%,
             #096dd9 15%,
             #40a9ff 45%,
-            #096dd9 75%,
+            #096dd9 65%,
             #40a9ff 100%
         ) !important;
     }
@@ -24,4 +24,56 @@
 
 .ant-form-item {
     margin-bottom: 0 !important;
+}
+
+.ant-input[disabled] {
+    background-color: fade(@primary-color, 20%) !important;
+    border: 1px solid fade(@primary-color, 20%) !important;
+}
+.ant-input {
+    background-color: transparent !important;
+    border: 1px solid fade(@primary-color, 20%) !important;
+    &.ant-input-borderless {
+        border: none !important;
+    }
+}
+.ant-input-affix-wrapper {
+    background-color: transparent !important;
+    border: 1px solid fade(@primary-color, 20%) !important;
+    &.ant-input-affix-wrapper-readonly {
+        border: none !important;
+    }
+}
+.ant-select .ant-select-selector {
+    background-color: transparent !important;
+    border: 1px solid fade(@primary-color, 20%) !important;
+}
+
+//.ant-select-single:not(.ant-select-customize-input) .ant-select-selector {
+//    background-color: transparent !important;
+//    border: 1px solid fade(@primary-color, 20%) !important;
+//}
+//
+//.ant-select-single .ant-select-selector .ant-select-selection-search {
+//    background-color: transparent !important;
+//    border: 1px solid fade(@primary-color, 20%) !important;
+//}
+.ant-input-number {
+    background-color: transparent !important;
+    border: 1px solid fade(@primary-color, 20%) !important;
+}
+
+.ant-picker {
+    background-color: transparent !important;
+    border: 1px solid fade(@primary-color, 20%) !important;
+}
+.ant-upload-select-picture-card {
+    background-color: transparent !important;
+    border: 1px solid fade(@primary-color, 20%) !important;
+}
+
+.ant-input-search {
+    .ant-input {
+        border: none !important;
+    }
 }

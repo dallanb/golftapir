@@ -34,7 +34,7 @@ const Wallet: React.FunctionComponent<WalletProps> = () => {
                 <div className="wallet-button">
                     <Button
                         onClick={() => null}
-                        type="default"
+                        type="primary"
                         shape="round"
                         icon={<PlusOutlined />}
                     >
