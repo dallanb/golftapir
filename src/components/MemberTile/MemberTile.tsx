@@ -8,7 +8,7 @@ import './MemberTile.less';
 const MemberTile: React.FunctionComponent<MemberTileProps> = ({ member }) => {
     const name = _get(member, ['display_name'], '');
     const username = _get(member, ['username'], '');
-    const avatar = _get(member, ['avatar', 's3_filename'], undefined);
+    const avatar = _get(member, ['avatar'], undefined);
     const src = withS3URL(avatar);
     return (
         <div className="member-tile">

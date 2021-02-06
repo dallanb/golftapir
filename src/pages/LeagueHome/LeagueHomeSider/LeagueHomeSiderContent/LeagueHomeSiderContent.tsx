@@ -9,7 +9,7 @@ const LeagueHomeSiderContent: React.FunctionComponent<LeagueHomeSiderContentProp
         <SiderLayoutContent>
             <>
                 <MemberStats />
-                <Calendar />
+                {/*<Calendar />*/}
             </>
         </SiderLayoutContent>
     );

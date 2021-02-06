@@ -1,10 +1,9 @@
 import React from 'react';
 import classnames from 'classnames';
+import { get as _get } from 'lodash';
 import { ComponentContentProps } from './types';
-import { Layout, Spin } from 'antd';
+import { Spin } from 'antd';
 import './ComponentContent.less';
-
-const { Content } = Layout;
 
 const ComponentContent: React.FunctionComponent<ComponentContentProps> = ({
     showSpinner,
@@ -21,19 +20,23 @@ const ComponentContent: React.FunctionComponent<ComponentContentProps> = ({
             return <div className="component-content-title">{title}</div>;
         }
     };
-    const renderComponent = () => {
-        if (showSpinner) {
+    const renderComponent = (showSpin?: boolean) => {
+        if (showSpin) {
             return <Spin />;
         }
+
         return children;
     };
     const cx = classnames('component-content', className);
-    const bodyCx = classnames('component-content-content', bodyClassName);
+    const bodyCx = classnames('component-content-content', bodyClassName, {
+        spin: showSpinner,
+    });
+
     return (
         <div className={cx} style={style}>
             {renderTitle()}
             <div ref={componentRef} className={bodyCx} style={bodyStyle}>
-                {renderComponent()}
+                {renderComponent(showSpinner)}
             </div>
         </div>
     );

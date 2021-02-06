@@ -1,33 +1,29 @@
 @import 'src/assets/styles/statics';
 
 .contest-leaderboard-table-scorecard {
-    .contest-leaderboard-table-scorecard-body {
-        display: flex;
-        height: 205px;
-        width: 100%;
-        border-top: 1px solid #f0f0f0;
-        border-bottom: 1px solid #f0f0f0;
-        //border-left: 1px solid #f0f0f0;
-        //border-right: 1px solid #f0f0f0;
+    width: 100%;
+    max-width: 100%;
+    display: flex;
+    border-top: 1px solid #f0f0f0;
+    border-bottom: 1px solid #f0f0f0;
+    .contest-leaderboard-table-scorecard-participant-wrapper {
+        width: 15%;
+        border-right: 1px solid #f0f0f0;
+    }
+    .contest-leaderboard-table-scorecard-table-wrapper {
+        overflow-x: auto;
+        overflow-y: hidden;
+        flex-grow: 1;
+        table {
+            tr {
+                background: inherit;
+                &.filled {
+                    background: @tile-fill;
+                }
 
-        .contest-leaderboard-table-scorecard-participant-wrapper {
-            width: 15%;
-            border-right: 1px solid #f0f0f0;
-        }
-        .contest-leaderboard-table-scorecard-table-wrapper {
-            overflow-x: auto;
-            overflow-y: hidden;
-            width: 85%;
-            table {
-                tr {
-                    &.filled {
-                        background: @tile-fill;
-                    }
-
-                    td {
-                        &.head {
-                            font-weight: bold;
-                        }
+                td {
+                    &.head {
+                        font-weight: bold;
                     }
                 }
             }

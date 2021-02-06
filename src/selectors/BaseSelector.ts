@@ -57,8 +57,17 @@ export const selectMyLeagueUUID = createSelector([getBase], (base) =>
 export const selectMyStatus = createSelector([getBase], (base) =>
     _get(base, ['me', 'data', 'status'], undefined)
 );
+
 export const selectMyStat = createSelector([getBase], (base) =>
     _get(base, ['me', 'data', 'stat'], undefined)
+);
+
+export const selectMyWallet = createSelector([getBase], (base) =>
+    _get(base, ['me', 'data', 'wallet'], undefined)
+);
+
+export const selectMyWalletBalance = createSelector([getBase], (base) =>
+    _get(base, ['me', 'data', 'wallet', 'balance'], undefined)
 );
 
 export const selectLeagues = createSelector([getBase], (base) =>

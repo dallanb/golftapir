@@ -1,8 +1,9 @@
-import React, { ReactText } from 'react';
+import React, { ReactElement, ReactText } from 'react';
 import { ListChildComponentProps } from 'react-window';
 
 export interface ListProps {
     rowRenderer?: React.FunctionComponent<ListChildComponentProps>;
+    empty?: JSX.Element;
     size: number;
     hasNextPage: boolean;
     isNextPageLoading: boolean;
@@ -11,4 +12,5 @@ export interface ListProps {
     minimumBatchSize: number;
     height?: ReactText;
     width?: ReactText;
+    emptyDescription?: string;
 }

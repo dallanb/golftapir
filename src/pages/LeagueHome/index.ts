@@ -20,7 +20,7 @@ export { default as LeagueHomePageSaga } from './saga';
 export { LeagueHomePageContentMemberStandingsSaga } from './LeagueHomeContent';
 export {
     LeagueHomePageSiderContentMemberStatsSaga,
-    LeagueHomePageSiderContentCalendarSaga,
+    // LeagueHomePageSiderContentCalendarSaga,
 } from './LeagueHomeSider';
 
 // Routes

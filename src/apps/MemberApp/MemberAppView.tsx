@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import { get as _get, map as _map } from 'lodash';
 import { message, Spin } from 'antd';
-import { MemberAppLayout } from '@layouts';
+import { AppLayout } from '@layouts';
 import {
     ComponentRoute,
     MemberAppViewProps,
@@ -65,7 +65,7 @@ class MemberAppView extends React.PureComponent<
         const { selectedKeys } = this.state;
         if (!isInitialized) return <AppLoading />;
         return (
-            <MemberAppLayout
+            <AppLayout
                 app={constants.APPS.LEAGUE_APP}
                 name={name}
                 avatar={avatar}
@@ -113,7 +113,7 @@ class MemberAppView extends React.PureComponent<
                         )}
                     />
                 </Switch>
-            </MemberAppLayout>
+            </AppLayout>
         );
     }
 }

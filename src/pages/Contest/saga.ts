@@ -3,14 +3,15 @@ import { all, call, fork, put, select, takeLatest } from 'redux-saga/effects';
 import { get as _get } from 'lodash';
 import { ContestService, NotificationService, WagerService } from '@services';
 import ContestPageActions, { ContestPageTypes } from './actions';
+import { BaseActions } from '@actions';
 import { selectContest } from './selector';
 import {
     initContest,
-    initPayout,
     initSocket,
     initSubscribed,
     terminateSocket,
 } from './helpers';
+import { selectLeagueUUID } from '@selectors/AppSelector';
 
 // Action Handlers
 function* preInit({ data }: AnyAction) {
@@ -47,8 +48,10 @@ function* terminate() {
 
 function* refresh() {
     try {
+        const leagueUUID = yield select(selectLeagueUUID);
         const { uuid } = yield select(selectContest);
         yield call(initContest, uuid);
+        yield put(BaseActions.refreshMe(leagueUUID));
         yield put(ContestPageActions.refreshSuccess());
     } catch (err) {
         yield put(ContestPageActions.refreshFailure(err));

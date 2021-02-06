@@ -1,23 +1,32 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { get as _get, pick as _pick } from 'lodash';
 import { CourseProps } from './types';
+import { selectIsInitialized as selectDataIsInitialized } from '@pages/Contest/selector';
 import { selectData } from './selector';
 import ContestPageSiderContentCourseActions from './actions';
-import './Course.less';
 import ComponentContent from '@layouts/ComponentContent';
-import { formatCourseAddress } from '@pages/Contest/ContestSider/ContestSiderContent/Course/utils';
+import { formatCourseAddress } from './utils';
+import './Course.less';
 
 const Course: React.FunctionComponent<CourseProps> = () => {
     const dispatch = useDispatch();
     const { isInitialized, course } = useSelector(selectData);
-    // Possibly move this out to participant active
+    const isDataInitialized = useSelector(selectDataIsInitialized);
+    const [isDataInitializing, setIsDataInitializing] = useState(true);
+
     useEffect(() => {
-        dispatch(ContestPageSiderContentCourseActions.init());
         return () => {
             dispatch(ContestPageSiderContentCourseActions.terminate());
         };
     }, []);
+
+    useEffect(() => {
+        if (isDataInitialized && isDataInitializing) {
+            dispatch(ContestPageSiderContentCourseActions.init());
+            setIsDataInitializing(false);
+        }
+    }, [isDataInitialized]);
 
     const name = _get(course, ['name'], '');
     const address = formatCourseAddress(
@@ -26,7 +35,7 @@ const Course: React.FunctionComponent<CourseProps> = () => {
     return (
         <ComponentContent
             className="course-component-content space"
-            showSpinner={!isInitialized}
+            showSpinner={!isInitialized || !isDataInitialized}
             title={'Course'}
         >
             <div className="course">

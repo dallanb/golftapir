@@ -5,34 +5,50 @@ import { ContestLeaderboardProps } from './types';
 import ComponentContent from '@layouts/ComponentContent';
 import ContestPageContentContestLeaderboardActions from './actions';
 import { selectIsInitialized, selectIsRefreshing } from './selector';
-import { selectIsRefreshing as selectIsBaseRefreshing } from '@pages/Contest/selector';
+import {
+    selectIsRefreshing as selectIsDataRefreshing,
+    selectIsInitialized as selectIsDataInitialized,
+} from '@pages/Contest/selector';
 import './ContestLeaderboard.less';
 import CONSTANTS from '@locale/en-CA';
 
 const ContestLeaderboard: React.FunctionComponent<ContestLeaderboardProps> = ({}) => {
     const dispatch = useDispatch();
-    const isBaseRefreshing = useSelector(selectIsBaseRefreshing);
+    const isDataRefreshing = useSelector(selectIsDataRefreshing);
+    const isDataInitialized = useSelector(selectIsDataInitialized);
     const isInitialized = useSelector(selectIsInitialized);
     const isRefreshing = useSelector(selectIsRefreshing);
-    const showSpinner = !isInitialized || isRefreshing || isBaseRefreshing;
+    const showSpinner =
+        !isInitialized ||
+        !isDataInitialized ||
+        isRefreshing ||
+        isDataRefreshing;
     const [triggerRefresh, setTriggerRefresh] = useState(false);
+    const [isDataInitializing, setIsDataInitializing] = useState(true);
 
     useEffect(() => {
-        dispatch(ContestPageContentContestLeaderboardActions.init());
+        // dispatch(ContestPageContentContestLeaderboardActions.init());
         return () => {
             dispatch(ContestPageContentContestLeaderboardActions.terminate());
         };
     }, []);
 
-    React.useEffect(() => {
-        if (isBaseRefreshing) {
+    useEffect(() => {
+        if (isDataInitialized && isDataInitializing) {
+            dispatch(ContestPageContentContestLeaderboardActions.init());
+            setIsDataInitializing(false);
+        }
+    }, [isDataInitialized]);
+
+    useEffect(() => {
+        if (isDataRefreshing) {
             setTriggerRefresh(true);
         }
-        if (!isBaseRefreshing && triggerRefresh) {
+        if (!isDataRefreshing && triggerRefresh) {
             dispatch(ContestPageContentContestLeaderboardActions.refresh());
             setTriggerRefresh(false);
         }
-    }, [isBaseRefreshing]);
+    }, [isDataRefreshing]);
 
     return (
         <ComponentContent

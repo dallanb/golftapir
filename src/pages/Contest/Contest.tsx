@@ -4,9 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { get as _get } from 'lodash';
 import { ContentLayout } from '@layouts';
 import { ContestProps } from './types';
-import { selectData } from './selector';
 import ContestPageActions from './actions';
-import ContestHeader from './ContestHeader';
 import ContestSider from './ContestSider';
 import ContestContent from './ContestContent';
 import './Contest.less';
@@ -15,7 +13,6 @@ const Contest: React.FunctionComponent<ContestProps> = () => {
     const dispatch = useDispatch();
     const history = useHistory();
     const state = _get(history, ['location', 'state'], null);
-    const { isInitialized } = useSelector(selectData);
 
     useEffect(() => {
         dispatch(ContestPageActions.preInit(state));
@@ -27,10 +24,8 @@ const Contest: React.FunctionComponent<ContestProps> = () => {
 
     return (
         <ContentLayout
-            // header={<ContestHeader />}
             sider={<ContestSider />}
             content={<ContestContent />}
-            // showSpinner={!isInitialized}
             className="contest-view"
         />
     );

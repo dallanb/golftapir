@@ -1,6 +1,6 @@
 import { AnyAction } from 'redux';
 import { all, call, put, select, takeLatest } from 'redux-saga/effects';
-import { MemberService } from '@services';
+import { LeagueService, MemberService } from '@services';
 import { selectMyLeagueUUID } from '@selectors/BaseSelector';
 import ContestsCreatePageContentContestSearchParticipantActions, {
     ContestsCreatePageContentContestSearchParticipantTypes,
@@ -10,11 +10,11 @@ import ContestsCreatePageContentContestSearchParticipantActions, {
 function* search({ key: search }: AnyAction) {
     try {
         // update this to use LeagueService (need to add search to members materialized)
-        const { members } = yield call(MemberService.fetchMembers, {
+        const { members } = yield call(LeagueService.fetchMembersMaterialized, {
             page: 1,
             per_page: 10,
             league_uuid: yield select(selectMyLeagueUUID),
-            include: 'avatar',
+            status: 'active',
             search,
         });
         yield put(

@@ -1,4 +1,4 @@
-import { all, call, put, takeLatest } from 'redux-saga/effects';
+import { all, call, put, putResolve, takeLatest } from 'redux-saga/effects';
 import MemberAppActions, { MemberAppTypes } from './actions';
 import { BaseActions } from '@actions';
 import { ClientProxy } from '@services';
@@ -9,9 +9,9 @@ import { socketEventHandlers } from './utils';
 function* init() {
     try {
         if (!ClientProxy.accessToken) yield call(refreshAuth);
+        yield put(BaseActions.initSockets(socketEventHandlers));
         yield put(BaseActions.initMe());
         yield put(BaseActions.initLeagues());
-        yield put(BaseActions.initSockets(socketEventHandlers));
         yield put(BaseActions.initNotifications());
 
         yield put(MemberAppActions.initSuccess());

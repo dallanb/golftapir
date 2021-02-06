@@ -43,7 +43,11 @@ const Member: React.FunctionComponent<MemberProps> = ({}) => {
     const { isInitialized } = useSelector(selectData);
 
     return (
-        <ComponentContent showSpinner={!isInitialized} className="member-component-content">
+        <ComponentContent
+            showSpinner={!isInitialized}
+            className="members-create-member-component-content"
+            title={'Invite Member'}
+        >
             <MemberForm />
             <OverlaySpin visible={isSubmitting} />
         </ComponentContent>

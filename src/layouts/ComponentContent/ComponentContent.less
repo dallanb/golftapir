@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     .component-content-title {
-        border-bottom: 1px fade(@primary-color, 10%) solid;
+        border-bottom: 1px fade(@primary-color, 5%) solid;
         padding: 6px;
         font-weight: bold;
         font-size: 12px;
@@ -10,8 +10,13 @@
     .component-content-content {
         height: 100%;
         margin-top: 6px;
+        &.spin {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
     }
     &.space {
-        margin-top: 16px;
+        margin-top: 24px;
     }
 }

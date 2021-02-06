@@ -34,15 +34,16 @@ export const participantSearchSelectOptionRenderer = (
         [...participantSearch, ...permanentParticipants],
         'uuid'
     );
+
     return Object.values(participants).map(
-        (participant: { uuid: string; display_name: string }) => (
+        (participant: { member: string; display_name: string }) => (
             <Select.Option
-                key={participant.uuid}
-                value={participant.uuid}
+                key={participant.member}
+                value={participant.member}
                 disabled={
                     permanentParticipants.findIndex(
                         ({ uuid }: { uuid: string }) =>
-                            uuid === participant.uuid
+                            uuid === participant.member
                     ) > -1
                 }
             >
@@ -80,7 +81,6 @@ export const contestPayoutButtonsRenderer = ({
     formik,
     arrayHelpers,
 }: any) => {
-
     const participants = _get(formik, ['values', 'participants'], []);
     return (
         <div className="contest-form-payout-dynamic-input-buttons">

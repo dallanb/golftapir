@@ -33,11 +33,10 @@ function* write({ data }: AnyAction) {
 function* init({ data, options }: AnyAction) {
     try {
         // maybe notify the server that the user has logged in?
-        yield WebSocketTopicClient.init(data.uuid);
-        if (!WebSocketTopicClient.status()) {
+        const status = yield WebSocketTopicClient.init(data.uuid);
+        if (!status) {
             throw new Error();
         }
-        WebSocketTopicClient.send('Thank you for the invite');
         yield fork(read, options);
         yield put(TopicSocketActions.initSuccess());
     } catch (err) {

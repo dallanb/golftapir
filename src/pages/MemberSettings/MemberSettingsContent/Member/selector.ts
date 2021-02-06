@@ -1,4 +1,5 @@
 import { createSelector } from 'reselect';
+import { get as _get } from 'lodash';
 
 const getMemberSettingsPageContentMember = (state: any) =>
     state.memberSettingsPage.ui.content.member;
@@ -6,4 +7,16 @@ const getMemberSettingsPageContentMember = (state: any) =>
 export const selectData = createSelector(
     [getMemberSettingsPageContentMember],
     (memberSettingsPageContentMember) => memberSettingsPageContentMember
+);
+
+export const selectIsInitialized = createSelector(
+    [getMemberSettingsPageContentMember],
+    (memberSettingsPageContentMember) =>
+        _get(memberSettingsPageContentMember, ['isInitialized'], false)
+);
+
+export const selectIsSubmitting = createSelector(
+    [getMemberSettingsPageContentMember],
+    (memberSettingsPageContentMember) =>
+        _get(memberSettingsPageContentMember, ['isSubmitting'], false)
 );

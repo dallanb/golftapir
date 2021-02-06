@@ -55,7 +55,6 @@ const NotificationsList: React.FunctionComponent<NotificationsListProps> = ({
             );
             state.league = memberLeague?.league;
             state.member = memberLeague?.member;
-            console.log(state);
             history.push(route, state);
             dispatch(
                 NotificationActions.updateNotification(item._id, { read: true })
@@ -95,6 +94,7 @@ const NotificationsList: React.FunctionComponent<NotificationsListProps> = ({
             rowRenderer={(props) =>
                 NotificationsListTile({ props, onClick: tileOnClick, actions })
             }
+            emptyDescription={'No Notifications'}
         />
     );
 };

@@ -1,0 +1,45 @@
+.wallet-component-content {
+    height: 82px;
+    .component-content-content {
+        display: flex;
+        justify-content: space-evenly;
+        .wallet-main {
+            display: flex;
+            align-items: center;
+            margin: 4px 0;
+            overflow: hidden;
+            .wallet-balance {
+                display: flex;
+                flex-direction: column;
+                margin-right: 12px;
+                margin-bottom: 0;
+                color: fade(@primary-color, 85%);
+                font-weight: 600;
+                font-size: 20px;
+                line-height: 32px;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                .wallet-balance-label {
+                    font-size: 12px;
+                    line-height: 1;
+                    color: rgba(0, 0, 0, 0.5);
+                    font-weight: 400;
+                }
+                .wallet-balance-amount {
+                    font-size: 16px;
+                    line-height: 1;
+                    max-width: 160px;
+                    margin-top: 6px;
+                    .wallet-balance-amount-icon {
+                        margin-right: 4px;
+                    }
+                }
+            }
+        }
+        .wallet-side {
+            margin: 4px 0;
+            white-space: nowrap;
+        }
+    }
+}

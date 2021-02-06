@@ -25,7 +25,7 @@ const MemberResults: React.FunctionComponent<MemberResultsProps> = ({}) => {
         <ComponentContent
             componentRef={ref}
             showSpinner={!isInitialized}
-            className="member-results"
+            className="member-results space"
             title={CONSTANTS.PAGES.MEMBER.TABS.RECENT}
         >
             <MemberResultsList containerRef={ref} />

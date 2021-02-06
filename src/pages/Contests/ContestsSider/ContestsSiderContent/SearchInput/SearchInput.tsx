@@ -18,7 +18,7 @@ const SearchInput: React.FunctionComponent<SearchInputProps> = () => {
     return (
         <ComponentContent
             title={'Search'}
-            className="search-input-component-content space"
+            className="search-input-component-content"
             bodyClassName={'search-input-component-content-body'}
         >
             <Search

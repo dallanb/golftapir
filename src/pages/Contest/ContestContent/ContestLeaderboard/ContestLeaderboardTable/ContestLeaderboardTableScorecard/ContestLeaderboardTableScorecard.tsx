@@ -1,17 +1,16 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { get as _get } from 'lodash';
-import ComponentContent from '@layouts/ComponentContent';
+import { Spin } from 'antd';
 import { Table } from '@components';
 import { ContestLeaderboardTableScorecardProps } from './types';
 import { columnsSchemaGenerator } from './schema';
 import { selectData } from './selector';
 import renderRow from './renderRow';
 import ContestPageContentContestLeaderboardScorecardActions from './actions';
+import ScorecardParticipant from './ScorecardParticipant';
 import HoleScoreInfo from './HoleScoreInfo';
 import { selectContestUUID } from '@pages/Contest/selector';
 import './ContestLeaderboardTableScorecard.less';
-import ScorecardParticipant from '@pages/Contest/ContestContent/ContestLeaderboard/ContestLeaderboardTable/ContestLeaderboardTableScorecard/ScorecardParticipant';
 
 const ContestLeaderboardTableScorecard: React.FunctionComponent<ContestLeaderboardTableScorecardProps> = ({
     row,
@@ -38,11 +37,11 @@ const ContestLeaderboardTableScorecard: React.FunctionComponent<ContestLeaderboa
     }, []);
 
     const columnsSchema = columnsSchemaGenerator(19);
+    if (!isInitialized) return <Spin />;
     return (
-        <ComponentContent
-            showSpinner={!isInitialized}
+        <div
             className="contest-leaderboard-table-scorecard"
-            bodyClassName="contest-leaderboard-table-scorecard-body"
+            // bodyClassName="contest-leaderboard-table-scorecard-body"
         >
             <div className="contest-leaderboard-table-scorecard-participant-wrapper">
                 <ScorecardParticipant user={user} />
@@ -57,7 +56,7 @@ const ContestLeaderboardTableScorecard: React.FunctionComponent<ContestLeaderboa
                 />
                 <HoleScoreInfo />
             </div>
-        </ComponentContent>
+        </div>
     );
 };
 

@@ -1,14 +1,14 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import memoize from 'memoize-one';
 import { Button } from 'antd';
-import { renderAction } from '@pages/Competitor/utils';
+import { renderAction } from './utils';
 import { mapActionLabel } from '@utils';
 import { memberActionRendererProps } from './types';
 
-export const memberActionRenderer: React.FunctionComponent<memberActionRendererProps> = ({
+export const memberActionRenderer = ({
     actions,
     isMe,
-}) =>
+}: memberActionRendererProps): ReactElement[] =>
     actions.reduce((accumulatedActions: any[], { key, onClick }: any) => {
         const { show, enabled } = renderAction(key, {
             status,

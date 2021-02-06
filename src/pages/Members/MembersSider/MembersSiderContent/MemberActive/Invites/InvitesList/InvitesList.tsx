@@ -1,15 +1,18 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import { get as _get } from 'lodash';
 import { InvitesListProps } from './types';
 import { FixedSizeList } from '@components';
 import MembersPageSiderContentInvitesActions from '../actions';
 import InvitesListTile from './InvitesListTile';
+import InvitesListEmpty from './InvitesListEmpty';
 import { getRefHeight } from '@utils';
 import './InvitesList.less';
 
 const InvitesList: React.FunctionComponent<InvitesListProps> = ({
     containerRef,
+    containerDimensions,
     data,
     metadata,
     options,
@@ -17,10 +20,15 @@ const InvitesList: React.FunctionComponent<InvitesListProps> = ({
 }) => {
     const dispatch = useDispatch();
     const history = useHistory();
+
     const tableDimensions = {
         size: 50,
         width: '100%',
-        height: getRefHeight(containerRef, 200),
+        height: _get(
+            containerDimensions,
+            ['height'],
+            getRefHeight(containerRef, 200)
+        ),
     };
 
     const loadMore = (start: number, stop: number) => {
@@ -48,6 +56,7 @@ const InvitesList: React.FunctionComponent<InvitesListProps> = ({
             isNextPageLoading={isFetching}
             minimumBatchSize={10}
             rowRenderer={(props) => InvitesListTile({ props, history })}
+            empty={<InvitesListEmpty />}
         />
     );
 };

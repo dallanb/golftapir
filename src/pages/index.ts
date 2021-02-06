@@ -7,21 +7,6 @@ export {
 } from './Account';
 
 export {
-    default as Competitor,
-    reducer as competitorPage,
-    CompetitorPageSaga,
-    CompetitorPageContentCompetitorResultsSaga,
-    CompetitorPageRoutes,
-} from './Competitor';
-
-export {
-    default as Competitors,
-    reducer as competitorsPage,
-    CompetitorsPageSaga,
-    CompetitorsPageContentCompetitorsSaga,
-    CompetitorsPageRoutes,
-} from './Competitors';
-export {
     default as Contest,
     reducer as contestPage,
     ContestPageSaga,
@@ -78,7 +63,7 @@ export {
     LeagueHomePageSaga,
     LeagueHomePageSiderContentMemberStatsSaga,
     LeagueHomePageContentMemberStandingsSaga,
-    LeagueHomePageSiderContentCalendarSaga,
+    // LeagueHomePageSiderContentCalendarSaga,
     LeagueHomePageRoutes,
 } from './LeagueHome';
 export {
