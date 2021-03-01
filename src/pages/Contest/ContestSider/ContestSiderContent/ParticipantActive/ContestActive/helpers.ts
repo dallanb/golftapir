@@ -26,7 +26,7 @@ export function* debouncedHoleStrokeUpdate(
     yield delay(1000);
     cb(holeId);
     try {
-        const { uuid, holes }: any = yield select(selectSheet);
+        const { uuid, holes } = yield select(selectSheet);
         yield fork(ScoreService.updateHole, uuid, holeId, { strokes });
         yield put(
             ContestPageSiderContentParticipantActiveContestActiveActions.holeStrokeUpdateSuccess(

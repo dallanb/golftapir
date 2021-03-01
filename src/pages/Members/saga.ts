@@ -33,7 +33,7 @@ function* refresh({ uuid }: AnyAction) {
 function* updateMemberStatus({ uuid, status }: AnyAction) {
     try {
         yield call(LeagueService.updateMember, uuid, { status });
-        const leagueUUID: any = yield select(selectLeagueUUID);
+        const leagueUUID = yield select(selectLeagueUUID);
         yield put(MembersPageActions.refresh(leagueUUID)); // this feels weird
         yield put(
             MembersPageActions.updateMemberStatusSuccess(leagueUUID, status)

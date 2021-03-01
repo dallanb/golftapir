@@ -23,7 +23,7 @@ function* search({ key }: AnyAction) {
 
 function* invite({ uuid: user_uuid, email }: AnyAction) {
     try {
-        const uuid: any = yield select(selectLeagueUUID);
+        const uuid = yield select(selectLeagueUUID);
         yield call(LeagueService.createMember, uuid, { user_uuid, email }); // Trigger an api error that says this person cant be added since they already exist
         // yield delay(1000); // TODO: fix this
         yield put(MembersPageContentMembersActions.refresh());

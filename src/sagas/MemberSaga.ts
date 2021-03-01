@@ -81,7 +81,7 @@ function* assignAvatar({ uuid, avatar }: AnyAction) {
 
 function* refreshMyMemberStats({}) {
     try {
-        const stat: any = yield select(selectMyStat);
+        const stat = yield select(selectMyStat);
         const { stats }: any = yield call(MemberService.fetchStat, stat.uuid);
         yield put(MemberActions.refreshMyMemberStatsSuccess(stats));
     } catch (err) {

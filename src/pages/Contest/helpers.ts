@@ -36,7 +36,7 @@ export function* initContest(uuid: string) {
 }
 
 function* initContestParticipant(uuid: string) {
-    const leagueMember: any = yield select(selectLeagueMemberData);
+    const leagueMember = yield select(selectLeagueMemberData);
     const { participants: participant }: any = yield call(
         ContestService.fetchContestParticipantMember,
         uuid,

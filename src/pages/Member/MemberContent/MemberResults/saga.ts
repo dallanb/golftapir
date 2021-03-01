@@ -26,9 +26,9 @@ function* fetchData({
     },
 }: AnyAction) {
     try {
-        const memberData: any = yield select(selectData);
+        const memberData = yield select(selectData);
         const member_uuid = _get(memberData, ['member', 'member'], null);
-        const league_uuid: any = yield select(selectLeagueUUID);
+        const league_uuid = yield select(selectLeagueUUID);
         const { contests, _metadata: metadata }: any = yield call(
             ContestService.fetchContestsMaterialized,
             {

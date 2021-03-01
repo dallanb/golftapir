@@ -15,8 +15,8 @@ import { BaseActions } from '@actions';
 
 function* init() {
     try {
-        const account: any = yield select(selectAccount);
-        const avatar: any = yield select(selectMyAvatar);
+        const account = yield select(selectAccount);
+        const avatar = yield select(selectMyAvatar);
         const initialValues = prepareInitialValues(account);
         yield put(
             AccountPageContentAccountActions.setInitialValues({
@@ -39,7 +39,7 @@ function* submit({ data }: AnyAction) {
         }
         const avatarData = _pick(data, ['avatar']);
         if (!_isEmpty(avatarData)) {
-            const me: any = yield select(selectMeData);
+            const me = yield select(selectMeData);
             yield call(MemberService.assignAvatar, me.uuid, avatarData.avatar);
             message.success(CONSTANTS.ACCOUNT.SUCCESS.ASSIGN_AVATAR);
         }

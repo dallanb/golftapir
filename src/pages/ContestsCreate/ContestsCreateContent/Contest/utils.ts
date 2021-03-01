@@ -2,16 +2,19 @@ import { pick as _pick } from 'lodash';
 import config from 'config';
 
 export const prepareInitialValues = (contestData: {
-    league_uuid: string;
+    me: any;
     members: any[];
 }) => {
-    const { league_uuid, members } = contestData;
+    const { me, members } = contestData;
     return {
-        league_uuid,
+        league_uuid: me.league,
         sport_uuid: config.GOLF_UUID,
         buy_in: 0,
         payout: [100],
-        participants: [...members.map((member: any) => member.member)],
-        permanent_participants: [...members],
+        participants: [
+            me.member,
+            ...members.map((member: any) => member.member),
+        ],
+        permanent_participants: [me, ...members],
     };
 };

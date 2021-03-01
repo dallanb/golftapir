@@ -48,8 +48,8 @@ function* terminate() {
 
 function* refresh() {
     try {
-        const leagueUUID: any = yield select(selectLeagueUUID);
-        const { uuid }: any = yield select(selectContest);
+        const leagueUUID = yield select(selectLeagueUUID);
+        const { uuid } = yield select(selectContest);
         yield call(initContest, uuid);
         yield put(BaseActions.refreshMe(leagueUUID));
         yield put(ContestPageActions.refreshSuccess());

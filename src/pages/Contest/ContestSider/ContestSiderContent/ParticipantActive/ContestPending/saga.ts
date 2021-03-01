@@ -53,7 +53,7 @@ function* refresh() {
 
 function* fetchData({ options = { page: 1, per_page: 10 } }: AnyAction) {
     try {
-        const uuid: any = yield select(selectContestUUID);
+        const uuid = yield select(selectContestUUID);
         const { participants, metadata }: any = yield call(
             ContestService.fetchContestParticipants,
             uuid,
@@ -102,7 +102,7 @@ function* basePageRefresh() {
         failure: ContestPageTypes.REFRESH_FAILURE,
     });
     if (success) {
-        const status: any = yield select(selectContestStatus);
+        const status = yield select(selectContestStatus);
         if (status === constants.STATUS.PENDING.KEY)
             yield put(
                 ContestPageSiderContentParticipantActiveContestPendingActions.refresh()

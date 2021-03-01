@@ -11,7 +11,7 @@ import { selectContest } from '@pages/ContestUpdate/selector';
 
 function* init() {
     try {
-        const contest: any = yield select(selectContest);
+        const contest = yield select(selectContest);
         const initialValues = prepareInitialValues(contest);
         yield put(
             ContestUpdatePageContentContestActions.setInitialValues(
@@ -27,7 +27,7 @@ function* init() {
 
 function* submit({ data }: AnyAction) {
     try {
-        const uuid: any = yield select(selectUUID);
+        const uuid = yield select(selectUUID);
         const contestData = _omit(data, ['avatar']);
         if (!_isEmpty(contestData)) {
             yield call(ContestService.updateContest, uuid, contestData);
