@@ -14,7 +14,7 @@ import { selectLeagueMemberData } from '@apps/LeagueApp/selector';
 
 export function* initContest(uuid: string) {
     yield fork(initContestParticipant, uuid);
-    const { contests: contest } = yield call(
+    const { contests: contest }: any = yield call(
         ContestService.fetchContestMaterialized,
         uuid
     );
@@ -25,7 +25,7 @@ export function* initContest(uuid: string) {
     const members = Object.keys(participants);
 
     if (members.length) {
-        const { members: memberParticipants } = yield call(
+        const { members: memberParticipants }: any = yield call(
             MemberService.bulkFetchMembers,
             { within: { key: 'uuid', value: members } },
             { include: 'avatar' }
@@ -36,8 +36,8 @@ export function* initContest(uuid: string) {
 }
 
 function* initContestParticipant(uuid: string) {
-    const leagueMember = yield select(selectLeagueMemberData);
-    const { participants: participant } = yield call(
+    const leagueMember: any = yield select(selectLeagueMemberData);
+    const { participants: participant }: any = yield call(
         ContestService.fetchContestParticipantMember,
         uuid,
         leagueMember.member
@@ -46,9 +46,12 @@ function* initContestParticipant(uuid: string) {
 }
 
 export function* initSubscribed(uuid: string) {
-    const { subscribed } = yield call(NotificationService.subscriptionExists, {
-        uuid,
-    });
+    const { subscribed }: any = yield call(
+        NotificationService.subscriptionExists,
+        {
+            uuid,
+        }
+    );
     yield put(ContestPageActions.set({ subscribed }));
 }
 
@@ -63,7 +66,7 @@ export function* terminateSocket() {
 }
 
 export function* initPayout(uuid: string) {
-    const { contest: payout } = yield call(
+    const { contest: payout }: any = yield call(
         WagerService.fetchContestsComplete,
         uuid
     );

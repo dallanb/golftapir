@@ -7,7 +7,7 @@ import { initCourse } from './helpers';
 
 function* init() {
     try {
-        const uuid = yield select(selectContestUUID);
+        const uuid: any = yield select(selectContestUUID);
         yield call(initCourse, uuid);
         yield put(ContestPageSiderContentCourseActions.initSuccess());
     } catch (err) {

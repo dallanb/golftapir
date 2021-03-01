@@ -4,7 +4,7 @@ import { message } from 'antd';
 import { omit as _omit, pick as _pick, isEmpty as _isEmpty } from 'lodash';
 import CONSTANTS from '@locale/en-CA';
 import { ContestService, LeagueService } from '@services';
-import { selectLeagueMemberData } from '@selectors/AppSelector';
+import { selectLeagueUUID } from '@selectors/AppSelector';
 import ContestsCreatePageContentContestActions, {
     ContestsCreatePageContentContestTypes,
 } from './actions';
@@ -12,17 +12,19 @@ import { prepareInitialValues } from './utils';
 
 function* init({ options = { member_uuid: null } }: AnyAction) {
     try {
-        const me = yield select(selectLeagueMemberData);
         const members = [];
         if (options.member_uuid) {
-            const { members: member } = yield call(
+            const { members: member }: any = yield call(
                 LeagueService.fetchMemberMaterialized,
                 options.member_uuid,
                 {}
             );
             members.push(member);
         }
-        const initialValues = prepareInitialValues({ me, members });
+        const initialValues = prepareInitialValues({
+            league_uuid: yield select(selectLeagueUUID),
+            members,
+        });
         yield put(
             ContestsCreatePageContentContestActions.setInitialValues(
                 initialValues
@@ -40,7 +42,7 @@ function* submit({ data }: AnyAction) {
         const {
             contests: { uuid },
             contests: result,
-        } = yield call(ContestService.createContest, contestData);
+        }: any = yield call(ContestService.createContest, contestData);
         const avatarData = _pick(data, ['avatar']);
         if (!_isEmpty(avatarData)) {
             yield call(ContestService.assignAvatar, uuid, avatarData.avatar);

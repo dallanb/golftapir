@@ -10,7 +10,7 @@ import MembersPageContentMembersActions from '@pages/Members/MembersContent/Memb
 function* search({ key }: AnyAction) {
     try {
         // yield call(refreshMembersList, key);
-        const { members } = yield call(MemberService.fetchMembers, {
+        const { members }: any = yield call(MemberService.fetchMembers, {
             page: 1,
             per_page: 10,
             search: key,
@@ -23,7 +23,7 @@ function* search({ key }: AnyAction) {
 
 function* invite({ uuid: user_uuid, email }: AnyAction) {
     try {
-        const uuid = yield select(selectLeagueUUID);
+        const uuid: any = yield select(selectLeagueUUID);
         yield call(LeagueService.createMember, uuid, { user_uuid, email }); // Trigger an api error that says this person cant be added since they already exist
         // yield delay(1000); // TODO: fix this
         yield put(MembersPageContentMembersActions.refresh());

@@ -7,7 +7,7 @@ import CONSTANTS from '@locale/en-CA';
 
 function* fetchLeague({ uuid, options }: AnyAction) {
     try {
-        const res = yield call(LeagueService.fetchLeague, uuid, options);
+        const res: any = yield call(LeagueService.fetchLeague, uuid, options);
         const { leagues } = res;
         yield put(LeagueActions.fetchLeagueSuccess(leagues));
     } catch (err) {
@@ -18,7 +18,7 @@ function* fetchLeague({ uuid, options }: AnyAction) {
 
 function* fetchLeagues({ options }: AnyAction) {
     try {
-        const res = yield call(LeagueService.fetchLeagues, options);
+        const res: any = yield call(LeagueService.fetchLeagues, options);
         const { leagues } = res;
         yield put(LeagueActions.fetchLeaguesSuccess(leagues));
     } catch (err) {
@@ -29,9 +29,13 @@ function* fetchLeagues({ options }: AnyAction) {
 
 function* fetchMyLeagues({ options }: AnyAction) {
     try {
-        const res = yield call(LeagueService.fetchUserMemberLeagues, 'me', {
-            ...options,
-        });
+        const res: any = yield call(
+            LeagueService.fetchUserMemberLeagues,
+            'me',
+            {
+                ...options,
+            }
+        );
         const { leagues } = res;
         yield put(LeagueActions.fetchMyLeaguesSuccess(leagues));
     } catch (err) {
@@ -42,7 +46,7 @@ function* fetchMyLeagues({ options }: AnyAction) {
 
 function* updateLeague({ uuid, values }: AnyAction) {
     try {
-        const res = yield call(LeagueService.updateLeague, uuid, values);
+        const res: any = yield call(LeagueService.updateLeague, uuid, values);
         const { leagues } = res;
         yield put(LeagueActions.updateLeagueSuccess(leagues));
     } catch (err) {
@@ -53,7 +57,7 @@ function* updateLeague({ uuid, values }: AnyAction) {
 
 function* fetchMyMembersMaterializedUser({ options }: AnyAction) {
     try {
-        const res = yield call(
+        const res: any = yield call(
             LeagueService.fetchMembersMaterializedUser,
             'me',
             options

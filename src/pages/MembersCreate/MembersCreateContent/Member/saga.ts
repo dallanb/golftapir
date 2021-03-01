@@ -32,7 +32,7 @@ function* submit({ data }: AnyAction) {
     try {
         const memberData = _omit(data, ['league_uuid']); // TODO: will have to handle a country update in members
         const uuid = _get(data, ['league_uuid']);
-        const { members: result } = yield call(
+        const { members: result }: any = yield call(
             LeagueService.createMember,
             uuid,
             memberData

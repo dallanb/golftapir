@@ -48,8 +48,8 @@ function* terminate() {
 
 function* refresh() {
     try {
-        const leagueUUID = yield select(selectLeagueUUID);
-        const { uuid } = yield select(selectContest);
+        const leagueUUID: any = yield select(selectLeagueUUID);
+        const { uuid }: any = yield select(selectContest);
         yield call(initContest, uuid);
         yield put(BaseActions.refreshMe(leagueUUID));
         yield put(ContestPageActions.refreshSuccess());
@@ -96,7 +96,7 @@ function* updateContestParticipantStatus({ uuid, status }: AnyAction) {
 
 function* fetchPayout({ uuid }: AnyAction) {
     try {
-        const { contest: payout } = yield call(
+        const { contest: payout }: any = yield call(
             WagerService.fetchContestsComplete,
             uuid
         );

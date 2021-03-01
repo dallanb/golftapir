@@ -7,7 +7,7 @@ import CONSTANTS from '@locale/en-CA';
 
 function* fetchAccount({ uuid, options }: AnyAction) {
     try {
-        const res = yield call(AccountService.fetchAccount, uuid, options);
+        const res: any = yield call(AccountService.fetchAccount, uuid, options);
         const { accounts } = res;
         yield put(AccountActions.fetchAccountSuccess(accounts));
     } catch (err) {
@@ -18,7 +18,7 @@ function* fetchAccount({ uuid, options }: AnyAction) {
 
 function* fetchMyAccount({ options }: AnyAction) {
     try {
-        const res = yield call(AccountService.fetchAccount, 'me', options);
+        const res: any = yield call(AccountService.fetchAccount, 'me', options);
         const { accounts } = res;
         yield put(AccountActions.fetchMyAccountSuccess(accounts));
     } catch (err) {
@@ -29,7 +29,7 @@ function* fetchMyAccount({ options }: AnyAction) {
 
 function* fetchAccountMembership({ uuid, options }: AnyAction) {
     try {
-        const res = yield call(
+        const res: any = yield call(
             AccountService.fetchAccountMembership,
             uuid,
             options
@@ -44,7 +44,7 @@ function* fetchAccountMembership({ uuid, options }: AnyAction) {
 
 function* fetchAccounts({ options }: AnyAction) {
     try {
-        const res = yield call(AccountService.fetchAccounts, options);
+        const res: any = yield call(AccountService.fetchAccounts, options);
         const { accounts } = res;
         yield put(AccountActions.fetchAccountsSuccess(accounts));
     } catch (err) {
@@ -55,7 +55,7 @@ function* fetchAccounts({ options }: AnyAction) {
 
 function* updateAccount({ uuid, values }: AnyAction) {
     try {
-        const res = yield call(AccountService.updateAccount, uuid, values);
+        const res: any = yield call(AccountService.updateAccount, uuid, values);
         const { accounts } = res;
         yield put(AccountActions.updateAccountSuccess(accounts));
     } catch (err) {

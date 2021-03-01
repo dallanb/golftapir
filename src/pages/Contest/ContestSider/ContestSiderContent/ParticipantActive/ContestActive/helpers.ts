@@ -5,7 +5,7 @@ import ContestPageSiderContentParticipantActiveContestActiveActions from './acti
 import { selectSheet } from './selector';
 
 export function* initSheet(uuid: string) {
-    const { sheets: sheet, _metadata: metadata } = yield call(
+    const { sheets: sheet, _metadata: metadata }: any = yield call(
         ScoreService.fetchScoreContestParticipantSheet,
         uuid,
         yield select(selectMyUUID)
@@ -26,7 +26,7 @@ export function* debouncedHoleStrokeUpdate(
     yield delay(1000);
     cb(holeId);
     try {
-        const { uuid, holes } = yield select(selectSheet);
+        const { uuid, holes }: any = yield select(selectSheet);
         yield fork(ScoreService.updateHole, uuid, holeId, { strokes });
         yield put(
             ContestPageSiderContentParticipantActiveContestActiveActions.holeStrokeUpdateSuccess(

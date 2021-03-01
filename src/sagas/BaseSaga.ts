@@ -12,7 +12,7 @@ import { LeagueService, MemberService } from '@services';
 
 function* initMe({ league_uuid }: any) {
     try {
-        const { members: me } = yield call(
+        const { members: me }: any = yield call(
             MemberService.fetchMemberUser,
             'me',
             {
@@ -28,7 +28,7 @@ function* initMe({ league_uuid }: any) {
 
 function* refreshMe({ league_uuid }: any) {
     try {
-        const { members: me } = yield call(
+        const { members: me }: any = yield call(
             MemberService.fetchMemberUser,
             'me',
             {
@@ -44,7 +44,7 @@ function* refreshMe({ league_uuid }: any) {
 
 function* initLeagues() {
     try {
-        const { leagues } = yield call(
+        const { leagues }: any = yield call(
             LeagueService.fetchUserMemberLeagues,
             'me',
             {
@@ -61,7 +61,7 @@ function* initLeagues() {
 
 function* refreshLeagues() {
     try {
-        const { leagues } = yield call(
+        const { leagues }: any = yield call(
             LeagueService.fetchUserMemberLeagues,
             'me',
             {
@@ -101,7 +101,7 @@ function* terminateSockets() {
 // TODO: NOTIFICATIONS SHOULD BECOME PART OF BASE
 function* initNotifications() {
     // prepare notifications
-    const token = yield call(requestToken);
+    const token: any = yield call(requestToken);
 
     yield put(NotificationActions.setToken(token));
     const { success, failure } = yield race({

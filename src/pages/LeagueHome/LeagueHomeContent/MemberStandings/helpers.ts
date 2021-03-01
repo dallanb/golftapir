@@ -10,8 +10,8 @@ export function* initMemberStandings(
         sort_by: 'win_count.desc',
     }
 ) {
-    const uuid = yield select(selectLeagueUUID);
-    const { members } = yield call(MemberService.fetchMemberStandings, {
+    const uuid: any = yield select(selectLeagueUUID);
+    const { members }: any = yield call(MemberService.fetchMemberStandings, {
         ...options,
         league_uuid: uuid,
     });

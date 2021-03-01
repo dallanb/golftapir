@@ -32,8 +32,8 @@ function* fetchData({
     },
 }: AnyAction) {
     try {
-        const uuid = yield select(selectLeagueUUID);
-        const { members, metadata } = yield call(
+        const uuid: any = yield select(selectLeagueUUID);
+        const { members, metadata }: any = yield call(
             LeagueService.fetchMembersMaterialized,
             {
                 ...options,

@@ -4,7 +4,7 @@ import LeagueAppActions from '@apps/LeagueApp/actions';
 import { selectLeagueData, selectLeagueMemberData } from './selector';
 
 export function* initLeague(uuid: string) {
-    const data = yield select(selectLeagueData);
+    const data: any = yield select(selectLeagueData);
     if (_isNil(data)) {
         yield put(
             LeagueAppActions.fetchLeague(uuid, {
@@ -19,7 +19,7 @@ export function* refreshLeague(uuid: string) {
 }
 
 export function* initLeagueMember(uuid: string) {
-    const data = yield select(selectLeagueMemberData);
+    const data: any = yield select(selectLeagueMemberData);
     if (_isNil(data)) {
         yield put(
             LeagueAppActions.fetchLeagueMember('me', {

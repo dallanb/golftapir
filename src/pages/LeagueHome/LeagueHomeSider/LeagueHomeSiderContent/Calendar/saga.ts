@@ -18,7 +18,7 @@ function* init({ options }: AnyAction) {
 
 function* fetchData({ options }: AnyAction) {
     try {
-        const { contests, _metadata: metadata } = yield call(
+        const { contests, _metadata: metadata }: any = yield call(
             ContestService.fetchContestsCalendar,
             {
                 ...options,

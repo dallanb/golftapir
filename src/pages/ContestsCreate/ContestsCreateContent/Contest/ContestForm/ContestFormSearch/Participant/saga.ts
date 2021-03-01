@@ -10,13 +10,16 @@ import ContestsCreatePageContentContestSearchParticipantActions, {
 function* search({ key: search }: AnyAction) {
     try {
         // update this to use LeagueService (need to add search to members materialized)
-        const { members } = yield call(LeagueService.fetchMembersMaterialized, {
-            page: 1,
-            per_page: 10,
-            league_uuid: yield select(selectMyLeagueUUID),
-            status: 'active',
-            search,
-        });
+        const { members }: any = yield call(
+            LeagueService.fetchMembersMaterialized,
+            {
+                page: 1,
+                per_page: 10,
+                league_uuid: yield select(selectMyLeagueUUID),
+                status: 'active',
+                search,
+            }
+        );
         yield put(
             ContestsCreatePageContentContestSearchParticipantActions.searchSuccess(
                 members

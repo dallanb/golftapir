@@ -7,7 +7,7 @@ import { AuthService } from '@services';
 function* init({ token }: AnyAction) {
     try {
         if (token) {
-            const { invites: invite } = yield call(
+            const { invites: invite }: any = yield call(
                 AuthService.fetchInvite,
                 token
             );

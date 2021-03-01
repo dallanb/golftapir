@@ -10,7 +10,7 @@ import { normalizeData } from './utils';
 
 function* init({ uuid, member_uuid, options }: AnyAction) {
     try {
-        const res = yield call(
+        const res: any = yield call(
             ScoreService.fetchScoreContestParticipantSheet,
             uuid,
             member_uuid,

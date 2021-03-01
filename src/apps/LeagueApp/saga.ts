@@ -78,7 +78,7 @@ function* terminate() {
 
 function* fetchLeague({ uuid, options }: AnyAction) {
     try {
-        const { leagues: league } = yield call(
+        const { leagues: league }: any = yield call(
             LeagueService.fetchLeague,
             uuid,
             options
@@ -91,7 +91,7 @@ function* fetchLeague({ uuid, options }: AnyAction) {
 
 function* fetchLeagueMember({ uuid, options }: AnyAction) {
     try {
-        const { members: leagueMember } = yield call(
+        const { members: leagueMember }: any = yield call(
             LeagueService.fetchMembersMaterializedUser,
             uuid,
             options

@@ -14,7 +14,7 @@ function subscribe(options: any) {
 }
 
 function* read(options: any) {
-    const channel = yield call(subscribe, options);
+    const channel: any = yield call(subscribe, options);
     while (true) {
         let action = yield take(channel);
         yield put(action);

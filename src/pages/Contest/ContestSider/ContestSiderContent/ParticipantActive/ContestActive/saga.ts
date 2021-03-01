@@ -19,7 +19,7 @@ import { initSheet, debouncedHoleStrokeUpdate } from './helpers';
 
 function* init() {
     try {
-        const uuid = yield select(selectContestUUID);
+        const uuid: any = yield select(selectContestUUID);
         yield call(initSheet, uuid);
         yield put(
             ContestPageSiderContentParticipantActiveContestActiveActions.initSuccess()

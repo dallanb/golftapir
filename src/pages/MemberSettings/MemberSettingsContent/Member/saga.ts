@@ -13,7 +13,7 @@ import { BaseActions } from '@actions';
 
 function* init() {
     try {
-        const member = yield select(selectMember);
+        const member: any = yield select(selectMember);
         const initialValues = prepareInitialValues(member);
         yield put(
             MemberSettingsPageContentMemberActions.setInitialValues({

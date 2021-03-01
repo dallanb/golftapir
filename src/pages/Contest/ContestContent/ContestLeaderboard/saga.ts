@@ -24,7 +24,7 @@ import {
 
 function* init() {
     try {
-        const sheets = yield select(selectContestParticipants);
+        const sheets: any = yield select(selectContestParticipants);
         yield put(ContestPageContentContestLeaderboardActions.set({ sheets }));
         const lookup = initLookup(Object.values(sheets));
         yield put(
@@ -38,7 +38,7 @@ function* init() {
 
 function* refresh() {
     try {
-        const sheets = yield select(selectContestParticipants);
+        const sheets: any = yield select(selectContestParticipants);
         yield put(ContestPageContentContestLeaderboardActions.set({ sheets }));
         const lookup = initLookup(Object.values(sheets));
         yield put(
@@ -76,14 +76,14 @@ export function* ContestLeaderboardScoreChannel() {
                 continue;
             }
 
-            const isInitialized = yield select(selectIsInitialized);
+            const isInitialized: any = yield select(selectIsInitialized);
             if (!isInitialized) {
                 continue;
             }
 
             const results = yield flush(resChan);
-            let rankingLookup = yield select(selectRankingLookup);
-            let sheets = yield select(selectSheets);
+            let rankingLookup: any = yield select(selectRankingLookup);
+            let sheets: any = yield select(selectSheets);
             for (let result of results) {
                 const { lookup, sheet } = handleScoreUpdate(
                     sheets,

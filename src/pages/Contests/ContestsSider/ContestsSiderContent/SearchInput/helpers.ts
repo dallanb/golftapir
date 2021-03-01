@@ -6,7 +6,7 @@ import CONSTANTS from '@locale/en-CA';
 import { selectLeagueUUID } from '@selectors/AppSelector';
 
 export function* refreshContestsList(search: string) {
-    const league_uuid = yield select(selectLeagueUUID);
+    const league_uuid: any = yield select(selectLeagueUUID);
     const options = Object.assign(
         { page: 1, per_page: 10, league_uuid },
         search && { search }
