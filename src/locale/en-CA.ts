@@ -342,6 +342,8 @@ const CONSTANTS = {
                     START_TIME_REQUIRED: 'Start Time is a required field',
                     COURSE_REQUIRED: 'Course is a required field',
                     BUY_IN_REQUIRED: 'Buy in required',
+                    BUY_IN_WALLET_LIMIT:
+                        'Buy in may not be greater than balance of Wallet',
                     PAYOUT_REQUIRED: 'Payout required',
                     PAYOUT_100: 'Payout must equal 100%',
                 },

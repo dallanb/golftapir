@@ -371,6 +371,7 @@ const fieldRenderer = (
 };
 
 const defaultFieldsRenderer: FieldsRendererProps = (formik, schema) => {
+    console.log(formik);
     return schema.map((field: any) => {
         const fields = _get(field, ['fields'], undefined);
         if (fields) {

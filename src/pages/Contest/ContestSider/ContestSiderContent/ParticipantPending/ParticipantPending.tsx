@@ -37,7 +37,12 @@ const ParticipantPending: React.FunctionComponent<ParticipantPendingProps> = () 
         >
             <div className="participant-pending-buttons">
                 <div className="participant-pending-buttons-button active">
-                    <Button block type="primary" onClick={handleAcceptClick}>
+                    <Button
+                        block
+                        type="primary"
+                        // disabled={} I will need to disable this button when the buy in for the contest is greater than the balance of your wallet
+                        onClick={handleAcceptClick}
+                    >
                         Accept Contest Invite
                     </Button>
                 </div>

@@ -170,31 +170,35 @@ export const fieldSchema = [
     },
 ];
 
-export const validationSchema = Yup.object({
-    sport_uuid: Yup.string(),
-    name: Yup.string().required(FORM.VALIDATION.NAME_REQUIRED),
-    avatar: Yup.string(),
-    start_time: Yup.string()
-        .required(FORM.VALIDATION.START_TIME_REQUIRED)
-        .nullable(),
-    location_uuid: Yup.string().required(FORM.VALIDATION.COURSE_REQUIRED),
-    participants: Yup.array(),
-    buy_in: Yup.string().required(FORM.VALIDATION.BUY_IN_REQUIRED),
-    payout: Yup.array()
-        .required(FORM.VALIDATION.PAYOUT_REQUIRED)
-        .of(
-            Yup.number().test(
-                'payout-100',
-                FORM.VALIDATION.PAYOUT_100,
-                function () {
-                    const values = _get(this, ['parent']);
-                    if (!_isNil(values)) {
-                        return (
-                            values.reduce((a: any, b: any) => a + b, 0) === 100
-                        );
+export const validationSchema = (walletBalance: number) =>
+    Yup.object({
+        sport_uuid: Yup.string(),
+        name: Yup.string().required(FORM.VALIDATION.NAME_REQUIRED),
+        avatar: Yup.string(),
+        start_time: Yup.string()
+            .required(FORM.VALIDATION.START_TIME_REQUIRED)
+            .nullable(),
+        location_uuid: Yup.string().required(FORM.VALIDATION.COURSE_REQUIRED),
+        participants: Yup.array(),
+        buy_in: Yup.number()
+            .required(FORM.VALIDATION.BUY_IN_REQUIRED)
+            .max(walletBalance, FORM.VALIDATION.BUY_IN_WALLET_LIMIT),
+        payout: Yup.array()
+            .required(FORM.VALIDATION.PAYOUT_REQUIRED)
+            .of(
+                Yup.number().test(
+                    'payout-100',
+                    FORM.VALIDATION.PAYOUT_100,
+                    function () {
+                        const values = _get(this, ['parent']);
+                        if (!_isNil(values)) {
+                            return (
+                                values.reduce((a: any, b: any) => a + b, 0) ===
+                                100
+                            );
+                        }
+                        return false;
                     }
-                    return false;
-                }
-            )
-        ),
-});
+                )
+            ),
+    });
