@@ -42,7 +42,7 @@ const Register: React.FunctionComponent<RegisterProps> = () => {
     return (
         <ComponentContent
             showSpinner={!isInitialized}
-            className="register-view"
+            className="register-view content-view"
         >
             <>
                 <RegisterForm />
