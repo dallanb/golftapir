@@ -64,6 +64,8 @@ module.exports = {
                                 modifyVars: {
                                     'primary-color': 'black',
                                     'link-color': '#1890ff',
+                                    'input-placeholder-color':
+                                        'fade(@primary-color, 30%)',
                                 },
                                 javascriptEnabled: true,
                             },
