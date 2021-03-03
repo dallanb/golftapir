@@ -64,6 +64,7 @@ module.exports = {
                                 modifyVars: {
                                     'primary-color': 'black',
                                     'link-color': '#1890ff',
+                                    'select-clear-background': 'transparent',
                                 },
                                 javascriptEnabled: true,
                             },
