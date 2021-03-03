@@ -70,6 +70,7 @@ module.exports = {
                                     'disabled-color': 'white',
                                     'disabled-bg': '@normal-color',
                                     'border-color-base': '@normal-color',
+                                    'select-clear-background': 'transparent',
                                 },
                                 javascriptEnabled: true,
                             },
