@@ -38,7 +38,7 @@ const ContentLayout: React.FunctionComponent<ContentLayoutProps> = ({
     }
 
     return (
-        <Layout className="content-layout">
+        <Layout className="content-layout glassmorphic">
             <Layout className="content-layout-body content-layout-background">
                 <Layout className="content-layout-main">
                     {renderHeader()}

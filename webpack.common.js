@@ -63,7 +63,13 @@ module.exports = {
                                 // If you are using less-loader@5 please spread the lessOptions to options directly
                                 modifyVars: {
                                     'primary-color': 'black',
+                                    'normal-color': 'rgba(0,0,0,0.2)',
                                     'link-color': '#1890ff',
+                                    'input-placeholder-color':
+                                        'fade(@primary-color, 30%)',
+                                    'disabled-color': 'white',
+                                    'disabled-bg': '@normal-color',
+                                    'border-color-base': '@normal-color',
                                     'select-clear-background': 'transparent',
                                 },
                                 javascriptEnabled: true,
