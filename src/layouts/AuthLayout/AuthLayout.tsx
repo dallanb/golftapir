@@ -8,7 +8,7 @@ class AuthLayout extends React.Component<AuthLayoutProps, AuthLayoutState> {
     render() {
         const { children } = this.props;
         return (
-            <Layout className="auth-layout-view">
+            <Layout className="auth-layout-view glassmorphic">
                 <div className="auth-layout-title" />
                 {children}
             </Layout>

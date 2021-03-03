@@ -34,7 +34,7 @@ const Login: React.FunctionComponent<LoginProps> = () => {
     }, [isLoggedIn]);
 
     return (
-        <div className="login-view">
+        <div className="login-view content-view">
             <LoginForm />
             <LoginButtons />
         </div>
