@@ -44,7 +44,7 @@ const ResetPassword: React.FunctionComponent<ResetPasswordProps> = () => {
     return (
         <ComponentContent
             showSpinner={!isInitialized}
-            className="reset-password-view"
+            className="reset-password-view content-view"
         >
             <ResetPasswordForm />
             <OverlaySpin visible={isSubmitting} />
