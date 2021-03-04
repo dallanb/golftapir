@@ -23,6 +23,22 @@ export const fieldSchema = memoize((initialValues: any) => [
             ),
         },
     },
+
+    {
+        name: 'confirm_email',
+        wrapper: FloatLabelInputWrapper,
+        options: {
+            disabled: _get(initialValues, ['email'], false),
+
+        },
+        wrapperOptions: {
+            label: (
+                <>
+                    <UserOutlined /> {FORM.LABELS.CONFIRM_EMAIL}
+                </>
+            ),
+        },
+    },
     {
         name: 'username',
         wrapper: FloatLabelInputWrapper,
@@ -92,11 +108,14 @@ export const validationSchema = Yup.object({
     email: Yup.string()
         .required(FORM.VALIDATION.EMAIL_REQUIRED)
         .email(FORM.VALIDATION.EMAIL_TYPE),
+    confirm_email: Yup.string()
+        .required(FORM.VALIDATION.CONFIRM_EMAIL_REQUIRED)
+        .oneOf([Yup.ref('email'), ''], FORM.VALIDATION.CONFIRM_EMAIL_MISMATCH),
     username: Yup.string().required(FORM.VALIDATION.USERNAME_REQUIRED),
     password: Yup.string().required(FORM.VALIDATION.PASSWORD_REQUIRED),
     confirm_password: Yup.string()
         .required(FORM.VALIDATION.CONFIRM_PASSWORD_REQUIRED)
-        .oneOf([Yup.ref('password'), ''], 'Passwords must match'),
+        .oneOf([Yup.ref('password'), ''], FORM.VALIDATION.CONFIRM_PASSWORD_MISMATCH),
     display_name: Yup.string()
         .required(FORM.VALIDATION.DISPLAY_NAME_REQUIRED)
         .max(100, FORM.VALIDATION.DISPLAY_NAME_MAX_LENGTH),
