@@ -28,7 +28,7 @@ const UserTileExtra: React.FunctionComponent<UserTileExtraProps> = ({
                 onClick={() =>
                     navigate(
                         history,
-                        withAppRoute(routes.ROUTES.HOME.ROUTE, {
+                        withAppRoute(routes.ROUTES.LEAGUE_HOME.ROUTE, {
                             app: constants.APPS.LEAGUE_APP,
                             routeProps: { league_uuid: league.uuid },
                         }),

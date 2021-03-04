@@ -15,8 +15,3 @@ export interface RegisterPageInterface {
     readonly description: string;
     readonly formInitialValues: any;
 }
-
-export interface StateProps {
-    auth: AuthInterface;
-    registerPage: RegisterPageInterface;
-}

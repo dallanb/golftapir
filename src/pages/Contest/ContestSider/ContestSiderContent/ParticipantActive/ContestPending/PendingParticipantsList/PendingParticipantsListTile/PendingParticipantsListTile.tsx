@@ -26,7 +26,7 @@ const PendingParticipantsListTile: React.FunctionComponent<PendingParticipantsLi
         useSelector(selectMembersHash)
     );
     const Country = _get(Flags, [country], null);
-    const cardCx = classnames('pending-participants-card', { filled: !isEven });
+    const cardCx = classnames('pending-participants-card', { filled: isEven });
     return (
         //     <div className="pending-participants-list-tile-remind-button">
         //         <RemindButton uuid={uuid} />

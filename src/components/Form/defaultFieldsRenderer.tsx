@@ -127,11 +127,10 @@ const fieldRenderer = (
             break;
         case 'password':
             field = (
-                <Input
+                <Input.Password
                     key={name}
                     name={name}
                     ref={fieldRef}
-                    type="password"
                     onChange={formik.handleChange}
                     onBlur={(e) => {
                         formik.handleBlur(e);
@@ -140,6 +139,7 @@ const fieldRenderer = (
                     readOnly={_get(options, ['readonly'], false)}
                     bordered={!_get(options, ['readonly'], false)}
                     placeholder={_get(options, ['placeholder'], undefined)}
+                    visibilityToggle={_get(options, ['visibilityToggle'], true)}
                     prefix={
                         _get(options, ['prefixRenderer'], undefined) &&
                         options.prefixRenderer()

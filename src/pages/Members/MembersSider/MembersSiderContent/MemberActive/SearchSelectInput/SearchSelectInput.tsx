@@ -60,6 +60,7 @@ const SearchSelectInput: React.FunctionComponent<SearchInputProps> = () => {
             <div className="search-select-input-wrapper">
                 <Select
                     showSearch
+                    allowClear
                     value={value}
                     placeholder={CONSTANTS.PAGES.MEMBERS.SEARCH}
                     notFoundContent={isSearching ? <Spin size="small" /> : null}

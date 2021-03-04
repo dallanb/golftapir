@@ -52,12 +52,19 @@ function set(state: any, { data }: any) {
     });
 }
 
+function setFormInitialValues(state: any, { formInitialValues }: any) {
+    return Immutable.merge(state, {
+        formInitialValues,
+    });
+}
+
 const HANDLERS = {
     [LoginPageTypes.INIT]: init,
     [LoginPageTypes.INIT_SUCCESS]: initSuccess,
     [LoginPageTypes.INIT_FAILURE]: initFailure,
     [LoginPageTypes.TERMINATE]: terminate,
     [LoginPageTypes.SET]: set,
+    [LoginPageTypes.SET_FORM_INITIAL_VALUES]: setFormInitialValues,
 };
 
 export const reducer = createReducer(INITIAL_STATE, HANDLERS);

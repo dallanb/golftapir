@@ -21,7 +21,7 @@ const LeaguesListTile: React.FunctionComponent<LeaguesListTileProps> = ({
     const handleClick = (options: any) => {
         navigate(
             history,
-            withAppRoute(routes.ROUTES.HOME.ROUTE, {
+            withAppRoute(routes.ROUTES.LEAGUE_HOME.ROUTE, {
                 app: constants.APPS.LEAGUE_APP,
                 routeProps: { league_uuid: uuid },
             }),
@@ -35,7 +35,7 @@ const LeaguesListTile: React.FunctionComponent<LeaguesListTileProps> = ({
     const src = avatar && withS3URL(avatar, constants.S3_FOLDERS.LEAGUE.AVATAR);
     const status = _get(league, ['status'], undefined);
     const participants = _get(league, ['participants'], {});
-    const cardCx = classnames('leagues-list-tile-card', { filled: !isEven });
+    const cardCx = classnames('leagues-list-tile-card', { filled: isEven });
     return (
         <div key={index} style={style} className="leagues-list-tile-view">
             <Card

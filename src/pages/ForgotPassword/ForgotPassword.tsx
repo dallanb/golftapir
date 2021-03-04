@@ -46,7 +46,7 @@ const ForgotPassword: React.FunctionComponent<ForgotPasswordProps> = () => {
     return (
         <ComponentContent
             showSpinner={!isInitialized}
-            className="forgot-password-view"
+            className="forgot-password-view content-view"
         >
             <ForgotPasswordForm />
             <ForgotPasswordButtons />

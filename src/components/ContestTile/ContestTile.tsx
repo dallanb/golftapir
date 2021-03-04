@@ -37,7 +37,7 @@ const ContestTile: React.FunctionComponent<ContestTileProps> = ({
     const course = _get(item, ['location'], '');
     const time = _get(item, ['start_time'], undefined);
     const participants = _get(item, ['participants'], {});
-    const cardCx = classnames('contest-list-tile-card', { filled: !isEven });
+    const cardCx = classnames('contest-list-tile-card', { filled: isEven });
     return (
         <div key={index} style={style} className="contest-list-tile-view">
             <Card

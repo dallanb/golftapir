@@ -1,7 +1,5 @@
-import { AnyAction } from 'redux';
-import { all, call, put, takeLatest } from 'redux-saga/effects';
+import { all, put, takeLatest } from 'redux-saga/effects';
 import ForgotPasswordPageActions, { ForgotPasswordPageTypes } from './actions';
-import { AuthActions } from '@actions';
 
 function* init() {
     try {

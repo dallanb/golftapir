@@ -24,7 +24,7 @@ const NotificationsListTile: React.FunctionComponent<NotificationsListTileProps>
 
     const cx = classnames({ unread: !read });
     const cardCx = classnames('notifications-list-tile-card', {
-        filled: !isEven,
+        filled: isEven,
     });
 
     const markAsRead = (_id: string) => {

@@ -45,7 +45,7 @@ const MembersListTile: React.FunctionComponent<MembersListTileProps> = ({
     const status = _get(item, ['status'], undefined);
     const ctime = _get(item, ['ctime'], undefined);
     const cardCx = classnames('members-list-tile-card', {
-        filled: !isEven,
+        filled: isEven,
     });
 
     return (

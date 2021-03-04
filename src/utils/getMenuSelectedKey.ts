@@ -11,10 +11,14 @@ export const getMenuSelectedKey = (
     let cleanSnippets: string[] = [];
     switch (app) {
         case constants.APPS.MEMBER_APP:
-            cleanSnippets = routeSnippets.slice(2);
+            cleanSnippets = routeSnippets.slice(2).length
+                ? routeSnippets.slice(2)
+                : [routes.ROUTES.HOME.ROUTE];
             break;
         case constants.APPS.LEAGUE_APP:
-            cleanSnippets = routeSnippets.slice(3);
+            cleanSnippets = routeSnippets.slice(3).length
+                ? routeSnippets.slice(3)
+                : [routes.ROUTES.LEAGUE_HOME.ROUTE];
             break;
     }
     const match = Object.values(routes.ROUTES).find((constantRoute: any) => {

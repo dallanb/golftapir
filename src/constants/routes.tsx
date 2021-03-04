@@ -121,7 +121,7 @@ const routes = {
             ICON: HomeFilled,
         },
         LEAGUE_HOME: {
-            ROUTE: '/home',
+            ROUTE: '/league_home',
             BASE_KEY: 'league_home',
             KEY: 'league_home',
             LABEL: CONSTANTS.PAGES.HOME.TITLE,
