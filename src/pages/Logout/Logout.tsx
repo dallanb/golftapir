@@ -5,7 +5,7 @@ import { Spin } from 'antd';
 import LogoutPageActions from './actions';
 import { LogoutProps } from './types';
 import routes from '@constants/routes';
-import { withAppRoute } from '@utils';
+import { withAppRoute, navigate } from '@utils';
 import constants from '@constants';
 import { selectData } from './selector';
 import { selectIsLoggedIn, selectIsSubmitting } from '@selectors/AuthSelectors';
@@ -28,7 +28,7 @@ const Logout: React.FunctionComponent<LogoutProps> = () => {
 
     useEffect(() => {
         if (isInitialized && !isLoggedIn && !isSubmitting) {
-            history.push(
+            navigate(history,
                 withAppRoute(routes.ROUTES.LOGIN.ROUTE, {
                     app: constants.APPS.AUTH_APP,
                 })

@@ -7,7 +7,7 @@ import RegisterFormActions from './actions';
 import RegisterForm from './RegisterForm';
 import { selectIsInitialized, selectIsRegistered } from './selector';
 import { selectIsSubmitting } from '@selectors/AuthSelectors';
-import { withAppRoute } from '@utils';
+import { navigate, withAppRoute } from '@utils';
 import routes from '@constants/routes';
 import constants from '@constants';
 import ComponentContent from '@layouts/ComponentContent';
@@ -34,7 +34,8 @@ const Register: React.FunctionComponent<RegisterProps> = () => {
 
     useEffect(() => {
         if (isRegistered) {
-            history.push(
+            navigate(
+                history,
                 withAppRoute(routes.ROUTES.LOGIN.ROUTE, {
                     app: constants.APPS.AUTH_APP,
                 })

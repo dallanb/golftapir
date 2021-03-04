@@ -20,7 +20,7 @@ import { AuthActions } from '@actions';
 import LeagueAppActions from './actions';
 import statics from '@apps/LeagueApp/statics';
 import { FirebaseClient } from '@libs';
-import { withAppRoute, withS3URL } from '@utils';
+import { withAppRoute, withS3URL, navigate, } from '@utils';
 import { selectData as selectAppData } from '@selectors/AppSelector';
 import { selectData as selectBaseData } from '@selectors/BaseSelector';
 
@@ -58,7 +58,7 @@ const LeagueAppView: React.FunctionComponent<LeagueAppViewProps> = () => {
 
     useEffect(() => {
         if (!paramLeagueUUID) {
-            history.push(
+            navigate(history,
                 withAppRoute(constantRoutes.ROUTES.HOME.ROUTE, {
                     app: constants.APPS.MEMBER_APP,
                     routeProps: {},

@@ -5,7 +5,13 @@ import classnames from 'classnames';
 import { MembersListTileProps } from './types';
 import constants from '@constants';
 import routes from '@constants/routes';
-import { getName, mapStatusColour, withAppRoute, withS3URL } from '@utils';
+import {
+    getName,
+    mapStatusColour,
+    navigate,
+    withAppRoute,
+    withS3URL,
+} from '@utils';
 import { Avatar } from '@components';
 import MembersListTileCreatedAt from './MembersListTileCreatedAt';
 import MembersListTileCountry from './MembersListTileCountry';
@@ -20,7 +26,8 @@ const MembersListTile: React.FunctionComponent<MembersListTileProps> = ({
     const item = _get(data, [index], undefined);
     const member_uuid = _get(item, ['uuid'], null);
     const handleClick = (options: any) => {
-        history.push(
+        navigate(
+            history,
             withAppRoute(routes.ROUTES.MEMBER.ROUTE, {
                 routeProps: {
                     ...params,

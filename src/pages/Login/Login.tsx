@@ -9,6 +9,7 @@ import { selectIsLoggedIn, selectIsSubmitting } from '@selectors/AuthSelectors';
 import LoginButtons from './LoginButtons';
 import { OverlaySpin } from '@components';
 import './Login.less';
+import { navigate } from '@utils';
 
 const Login: React.FunctionComponent<LoginProps> = () => {
     const dispatch = useDispatch();
@@ -18,20 +19,20 @@ const Login: React.FunctionComponent<LoginProps> = () => {
 
     useEffect(() => {
         if (isLoggedIn) {
-            history.push(routes.APPS.MEMBER_APP.ROUTE);
+            navigate(history, routes.APPS.MEMBER_APP.ROUTE);
         } else {
             dispatch(LoginPageActions.init());
         }
         return () => {
             if (isLoggedIn) {
-                history.push(routes.APPS.MEMBER_APP.ROUTE, {});
+                navigate(history, routes.APPS.MEMBER_APP.ROUTE, {});
             }
         };
     }, []);
 
     useEffect(() => {
         if (isLoggedIn) {
-            history.push(routes.APPS.MEMBER_APP.ROUTE, {});
+            navigate(history, routes.APPS.MEMBER_APP.ROUTE, {});
         }
     }, [isLoggedIn]);
 

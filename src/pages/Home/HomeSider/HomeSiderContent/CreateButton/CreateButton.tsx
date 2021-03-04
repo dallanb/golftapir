@@ -4,7 +4,7 @@ import { Button } from 'antd';
 import { PlusCircleOutlined } from '@ant-design/icons';
 import routes from '@constants/routes';
 import { CreateButtonProps } from './types';
-import { withAppRoute } from '@utils';
+import { navigate, withAppRoute } from '@utils';
 import constants from '@constants';
 import ComponentContent from '@layouts/ComponentContent';
 import './CreateButton.less';
@@ -13,7 +13,8 @@ const CreateButton: React.FunctionComponent<CreateButtonProps> = () => {
     const history = useHistory();
 
     const handleClick = () => {
-        history.push(
+        navigate(
+            history,
             withAppRoute(routes.ROUTES.LEAGUES_CREATE.ROUTE, {
                 app: constants.APPS.MEMBER_APP,
             })

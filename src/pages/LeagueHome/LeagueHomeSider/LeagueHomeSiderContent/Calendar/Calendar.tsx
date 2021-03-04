@@ -7,7 +7,7 @@ import { CalendarProps } from './types';
 import ComponentContent from '@layouts/ComponentContent';
 import LeagueHomePageSiderContestCalendarSaga from './actions';
 import { selectData } from './selector';
-import { withAppRoute } from '@utils';
+import { navigate, withAppRoute } from '@utils';
 import routes from '@constants/routes';
 import './Calendar.less';
 
@@ -47,7 +47,8 @@ const Calendar: React.FunctionComponent<CalendarProps> = () => {
     };
 
     const handleContestClick = (contest: any) => {
-        history.push(
+        navigate(
+            history,
             withAppRoute(routes.ROUTES.CONTEST.ROUTE, {
                 routeProps: {
                     contest_uuid: contest.uuid,

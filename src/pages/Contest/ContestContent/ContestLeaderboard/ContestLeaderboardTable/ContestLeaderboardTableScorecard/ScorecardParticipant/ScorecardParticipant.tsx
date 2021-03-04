@@ -6,7 +6,7 @@ import { Button } from 'antd';
 import { ScorecardParticipantProps } from './types';
 import { Avatar } from '@components';
 import { selectMembersHash } from '@pages/Contest/selector';
-import { getName, withAppRoute, withS3URL } from '@utils';
+import { getName, navigate, withAppRoute, withS3URL } from '@utils';
 import routes from '@constants/routes';
 import './ScorecardParticipant.less';
 import { selectMyLeagueUUID } from '@selectors/BaseSelector';
@@ -47,7 +47,8 @@ const ScorecardParticipant: React.FunctionComponent<ScorecardParticipantProps> =
                         key="profile"
                         onClick={() =>
                             // TODO: competitor or league member?
-                            history.push(
+                            navigate(
+                                history,
                                 withAppRoute(routes.ROUTES.MEMBER.ROUTE, {
                                     routeProps: {
                                         league_uuid: leagueUUID,

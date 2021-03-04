@@ -10,7 +10,7 @@ import ComponentContent from '@layouts/ComponentContent';
 import routes from '@constants/routes';
 import { OverlaySpin } from '@components';
 import './Contest.less';
-import { withAppRoute } from '@utils';
+import { navigate, withAppRoute } from '@utils';
 
 const Contest: React.FunctionComponent<ContestProps> = ({}) => {
     const dispatch = useDispatch();
@@ -23,7 +23,8 @@ const Contest: React.FunctionComponent<ContestProps> = ({}) => {
 
     useEffect(() => {
         if (isSubmitted && result) {
-            history.push(
+            navigate(
+                history,
                 withAppRoute(routes.ROUTES.CONTEST.ROUTE, {
                     routeProps: {
                         ...params,

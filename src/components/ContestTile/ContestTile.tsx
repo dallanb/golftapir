@@ -8,7 +8,7 @@ import ContestTileCourse from './ContestTileCourse';
 import ContestTileDate from './ContestTileDate';
 import constants from '@constants';
 import routes from '@constants/routes';
-import { mapStatusColour, withAppRoute, withS3URL } from '@utils';
+import { mapStatusColour, navigate, withAppRoute, withS3URL } from '@utils';
 import { Avatar } from '@components';
 import './ContestTile.less';
 
@@ -21,7 +21,8 @@ const ContestTile: React.FunctionComponent<ContestTileProps> = ({
     const item = _get(data, [index], undefined);
     const uuid = _get(item, ['uuid'], undefined);
     const handleClick = (options: any) => {
-        history.push(
+        navigate(
+            history,
             withAppRoute(routes.ROUTES.CONTEST.ROUTE, {
                 routeProps: { ...params, contest_uuid: uuid },
             }),
