@@ -1,13 +1,7 @@
 import { AuthInterface } from '@reducers/AuthReducer';
 import { RouteComponentProps } from 'react-router-dom';
 
-export interface LogoutProps extends RouteComponentProps {
-    isInitialized: boolean;
-    isLoggedIn: boolean;
-    init: () => void;
-    terminate: () => void;
-    history: any;
-}
+export interface LogoutProps {}
 
 export interface LogoutPageInterface {
     readonly isFetching: boolean;
