@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Layout, Menu } from 'antd';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { AppLayoutProps } from './types';
 import defaultMenuItemRenderer from './defaultMenuItemRenderer';
 import { getMenuSelectedKey, withAppRoute } from '@utils';
@@ -22,17 +22,14 @@ const AppLayout: React.FunctionComponent<AppLayoutProps> = ({
     children,
 }) => {
     const history = useHistory();
-    const [selectedKeys, setSelectedKeys] = useState(['0']);
+    const location = useLocation(); // this is necessary to ensure that updated location result in a rerender of the component
 
+    const [selectedKeys, setSelectedKeys] = useState(['0']);
     useEffect(() => {
         setSelectedKeys(
-            getMenuSelectedKey(
-                history.location.pathname,
-                app,
-                _map(menuRoutes, 'key')
-            )
+            getMenuSelectedKey(location.pathname, app, _map(menuRoutes, 'key'))
         );
-    }, [history.location.pathname]);
+    }, [location.pathname]);
 
     const menuItemRenderer = menuItemRendererProp || defaultMenuItemRenderer;
 

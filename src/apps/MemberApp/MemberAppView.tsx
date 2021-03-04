@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Redirect, Route, Switch, useHistory } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 import { get as _get, map as _map } from 'lodash';
 import { message } from 'antd';
 import { AppLayout } from '@layouts';
