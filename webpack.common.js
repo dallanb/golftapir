@@ -71,6 +71,7 @@ module.exports = {
                                     'disabled-bg': '@normal-color',
                                     'border-color-base': '@normal-color',
                                     'select-clear-background': 'transparent',
+                                    'outline-fade': '10%',
                                 },
                                 javascriptEnabled: true,
                             },
