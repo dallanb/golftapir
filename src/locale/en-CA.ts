@@ -178,6 +178,7 @@ const CONSTANTS = {
                 LABELS: {
                     USERNAME: 'Username',
                     EMAIL: 'Email',
+                    CONFIRM_EMAIL: 'Confirm Email',
                     PASSWORD: 'Password',
                     CONFIRM_PASSWORD: 'Confirm Password',
                     DISPLAY_NAME: 'Display Name',
@@ -187,6 +188,10 @@ const CONSTANTS = {
                     USERNAME_REQUIRED: 'Please input your username!',
                     EMAIL_REQUIRED: 'Please input your email address!',
                     EMAIL_TYPE: 'Please input a valid email address',
+                    CONFIRM_EMAIL_REQUIRED:
+                        'Please confirm your email address!',
+                    CONFIRM_EMAIL_MISMATCH:
+                        'The two emails that you entered do not match!',
                     PASSWORD_REQUIRED: 'Please input your password!',
                     CONFIRM_PASSWORD_REQUIRED: 'Please confirm your password!',
                     CONFIRM_PASSWORD_MISMATCH:
