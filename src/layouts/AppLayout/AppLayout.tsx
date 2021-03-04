@@ -44,7 +44,7 @@ const AppLayout: React.FunctionComponent<AppLayoutProps> = ({
     };
 
     return (
-        <Layout className="member-app-layout-view">
+        <Layout className="member-app-layout-view glassmorphic">
             <Sider className="member-app-sider-layout">
                 <div
                     className="member-app-sider-layout-title"
@@ -57,7 +57,7 @@ const AppLayout: React.FunctionComponent<AppLayoutProps> = ({
                     }
                 />
                 <Menu
-                    theme="dark"
+                    theme="light"
                     defaultSelectedKeys={['0']}
                     selectedKeys={selectedKeys}
                     className="member-app-sider-layout-menu"

@@ -1,5 +1,3 @@
-@import '~antd/lib/style/themes/default.less';
-
 .member-app-layout-view {
     min-height: 100vh !important;
 
@@ -8,7 +6,11 @@
     }
 
     .member-app-sider-layout {
-        background: @primary-color !important;
+        &.ant-layout-sider {
+            background-color: fade(white, 25%) !important;
+            backdrop-filter: blur(6px) !important;
+            box-shadow: 0 0 1rem 0 fade(@primary-color, 20%) !important;
+        }
         .member-app-sider-layout-title {
             cursor: pointer;
             height: 32px;
@@ -16,14 +18,15 @@
             background-size: cover;
             margin: 16px;
             display: flex;
-            color: white;
-            filter: invert(1);
             .member-app-sider-layout-title-text {
                 align-content: end;
             }
         }
         .member-app-sider-layout-menu {
-            background: @primary-color;
+            //background-color: rgba(255, 255, 255, 0.35) !important;
+            //backdrop-filter: blur(6px) !important;
+            background: transparent !important;
+            color: @text-color !important;
         }
         .member-app-sider-layout-footer {
             width: 100%;
@@ -37,10 +40,10 @@
         .menu-item {
             display: flex;
             &.ant-menu-item-selected {
-                background-color: @link-active-color !important;
+                background-color: fade(@primary-color, 10%) !important;
             }
             &.ant-menu-item-active {
-                background-color: @link-hover-color !important;
+                background-color: fade(@primary-color, 5%) !important;
             }
             .menu-item-icon {
                 span {
