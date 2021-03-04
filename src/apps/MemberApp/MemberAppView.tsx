@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import { get as _get, map as _map } from 'lodash';
-import { message, Spin } from 'antd';
+import { message } from 'antd';
 import { AppLayout } from '@layouts';
 import {
     ComponentRoute,
