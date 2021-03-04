@@ -3,16 +3,26 @@
     background: transparent !important;
 
     &.glassmorphic {
-        //background: @primary-color !important;
-        //background: linear-gradient(
-        //    90deg,
-        //    #000000 0%,
-        //    #096dd9 15%,
-        //    #40a9ff 45%,
-        //    #096dd9 65%,
-        //    #40a9ff 100%
-        //) !important;
-        background: #096dd9 radial-gradient(circle, #40a9ff 0%, black 85%) !important;
+        background: hsla(277, 79%, 84%, 1) !important;
+
+        background: linear-gradient(
+            90deg,
+            hsla(277, 79%, 84%, 1) 0%,
+            hsla(204, 95%, 77%, 1) 100%
+        ) !important;
+
+        background: -moz-linear-gradient(
+            90deg,
+            hsla(277, 79%, 84%, 1) 0%,
+            hsla(204, 95%, 77%, 1) 100%
+        ) !important;
+
+        background: -webkit-linear-gradient(
+            90deg,
+            hsla(277, 79%, 84%, 1) 0%,
+            hsla(204, 95%, 77%, 1) 100%
+        ) !important;
+        //background: #096dd9 radial-gradient(circle, #40a9ff 0%, black 85%) !important;
     }
 }
 
