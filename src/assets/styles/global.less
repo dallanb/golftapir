@@ -11,8 +11,7 @@
         //    #096dd9 65%,
         //    #40a9ff 100%
         //) !important;
-        background: #096dd9 !important;
-        background: radial-gradient(circle, #40a9ff 0%, black 85%) !important;
+        background: #096dd9 radial-gradient(circle, #40a9ff 0%, black 85%) !important;
     }
 }
 //
@@ -36,6 +35,21 @@
 
 .ant-btn::before {
     background: black !important;
+}
+
+.ant-popover-arrow {
+    border-top-color: rgba(255, 255, 255, 0.75) !important;
+    border-left-color: rgba(255, 255, 255, 0.75) !important;
+}
+
+.ant-popover-inner {
+    box-shadow: 0 0 1rem 0 rgb(0 0 0 / 20%) !important;
+    border-radius: 5px !important;
+    background-color: rgba(255, 255, 255, 0.75) !important;
+    backdrop-filter: blur(5px) !important;
+    .ant-menu-light {
+        background: transparent !important;
+    }
 }
 
 // background: rgba(0, 0, 0, 0.2);
