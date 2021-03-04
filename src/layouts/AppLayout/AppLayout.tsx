@@ -8,6 +8,8 @@ import routes from '@constants/routes';
 import './AppLayout.less';
 import constants from '@constants';
 import { map as _map } from 'lodash';
+import { Simulate } from 'react-dom/test-utils';
+import click = Simulate.click;
 
 const { Sider } = Layout;
 
@@ -25,10 +27,20 @@ const AppLayout: React.FunctionComponent<AppLayoutProps> = ({
     const location = useLocation(); // this is necessary to ensure that updated location result in a rerender of the component
 
     const [selectedKeys, setSelectedKeys] = useState(['0']);
+    const [clickedPath, setClickedPath] = useState(false); // this flag will help us avoid extra work when finding the selectedKeys
+
     useEffect(() => {
-        setSelectedKeys(
-            getMenuSelectedKey(location.pathname, app, _map(menuRoutes, 'key'))
-        );
+        if (clickedPath) {
+            setClickedPath(false);
+        } else {
+            setSelectedKeys(
+                getMenuSelectedKey(
+                    location.pathname,
+                    app,
+                    _map(menuRoutes, 'key')
+                )
+            );
+        }
     }, [location.pathname]);
 
     const menuItemRenderer = menuItemRendererProp || defaultMenuItemRenderer;
@@ -36,6 +48,7 @@ const AppLayout: React.FunctionComponent<AppLayoutProps> = ({
     const menuItemOnClick = ({ key }: { key: any }, path: string) => {
         onClick && onClick({ key }, path);
         setSelectedKeys(key);
+        setClickedPath(true);
         history.push(path);
     };
 
