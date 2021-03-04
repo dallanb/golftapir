@@ -1,69 +1,44 @@
-import React from 'react';
-import { compose } from 'redux';
-import { withRouter } from 'react-router-dom';
-import { connect } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { Spin } from 'antd';
 import LogoutPageActions from './actions';
-import { LogoutProps, StateProps } from './types';
-import './Logout.less';
+import { LogoutProps } from './types';
 import routes from '@constants/routes';
 import { withAppRoute } from '@utils';
 import constants from '@constants';
+import { selectData } from './selector';
+import { selectIsLoggedIn, selectIsSubmitting } from '@selectors/AuthSelectors';
+import { AppLoading } from '@components';
+import './Logout.less';
 
-class Logout extends React.PureComponent<LogoutProps> {
-    componentDidMount() {
-        const { init, isLoggedIn, history } = this.props;
-        // if (isLoggedIn) {
-        init();
-        // } else {
-        //     history.push('/auth/login');
-        // }
-    }
+const Logout: React.FunctionComponent<LogoutProps> = () => {
+    const dispatch = useDispatch();
+    const history = useHistory();
+    const { isInitialized } = useSelector(selectData);
+    const isLoggedIn = useSelector(selectIsLoggedIn);
+    const isSubmitting = useSelector(selectIsSubmitting);
 
-    componentDidUpdate(prevProps: Readonly<LogoutProps>) {
-        // const { isLoggedIn, history } = this.props;
-        // if (!isLoggedIn) {
-        //     history.push('/auth/login');
-        // }
-        const { isInitialized, isLoggedIn, history } = this.props;
-        if (isInitialized && !isLoggedIn) {
+    useEffect(() => {
+        dispatch(LogoutPageActions.init());
+        return () => {
+            dispatch(LogoutPageActions.terminate());
+        };
+    }, []);
+
+    useEffect(() => {
+        if (isInitialized && !isLoggedIn && !isSubmitting) {
             history.push(
                 withAppRoute(routes.ROUTES.LOGIN.ROUTE, {
                     app: constants.APPS.AUTH_APP,
                 })
             );
         }
-    }
+    }, [isInitialized, isLoggedIn, isSubmitting]);
 
-    componentWillUnmount() {
-        const { terminate } = this.props;
-        terminate();
-    }
-
-    render() {
-        const { isInitialized } = this.props;
-        if (!isInitialized) return <Spin />;
-        return null;
-    }
-}
-
-const mapStateToProps = ({ logoutPage, auth }: StateProps) => {
-    const { isInitialized } = logoutPage;
-    const { isLoggedIn } = auth;
-    return { isInitialized, isLoggedIn };
-};
-const mapDispatchToProps = (dispatch: any) => {
-    return {
-        init() {
-            return dispatch(LogoutPageActions.init());
-        },
-        terminate() {
-            return dispatch(LogoutPageActions.terminate());
-        },
-    };
+    if (!isInitialized) return <Spin />;
+    if (isSubmitting) return <AppLoading />;
+    return null;
 };
 
-export default compose(
-    withRouter,
-    connect(mapStateToProps, mapDispatchToProps)
-)(Logout);
+export default Logout;
