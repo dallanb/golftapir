@@ -1,15 +1,17 @@
-import React from 'react';
-import { compose } from 'redux';
-import { connect } from 'react-redux';
-import { Redirect, Route, Switch, withRouter } from 'react-router-dom';
-import { get as _get, map as _map } from 'lodash';
-import { message, Spin } from 'antd';
-import { AppLayout } from '@layouts';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import {
-    ComponentRoute,
-    LeagueAppViewProps,
-    LeagueAppViewState,
-} from './types';
+    Redirect,
+    Route,
+    Switch,
+    useHistory,
+    useLocation,
+    useParams,
+} from 'react-router-dom';
+import { get as _get } from 'lodash';
+import { message } from 'antd';
+import { AppLayout } from '@layouts';
+import { ComponentRoute, LeagueAppViewProps } from './types';
 import { AppLoading, ProtectedRoute } from '@components';
 import { routes, protectedRoutes } from './routes';
 import constants from '@constants';
@@ -18,149 +20,29 @@ import { AuthActions } from '@actions';
 import LeagueAppActions from './actions';
 import statics from '@apps/LeagueApp/statics';
 import { FirebaseClient } from '@libs';
-import { getMenuSelectedKey, withAppRoute, withS3URL } from '@utils';
+import { withAppRoute, withS3URL } from '@utils';
+import { selectData as selectAppData } from '@selectors/AppSelector';
+import { selectData as selectBaseData } from '@selectors/BaseSelector';
 
-class LeagueAppView extends React.Component<
-    LeagueAppViewProps,
-    LeagueAppViewState
-> {
-    constructor(props: LeagueAppViewProps) {
-        super(props);
-        this.state = {
-            selectedKeys: getMenuSelectedKey(
-                location.pathname,
-                constants.APPS.LEAGUE_APP,
-                _map(statics, 'key')
-            ),
-        };
-    }
+const LeagueAppView: React.FunctionComponent<LeagueAppViewProps> = () => {
+    const dispatch = useDispatch();
+    const history = useHistory();
+    const location = useLocation();
+    const params = useParams();
 
-    componentDidMount() {
-        const { preInit, init, history, location, match } = this.props;
-        const state = _get(location, ['state'], null);
-        const prevUUID = _get(match, ['params', 'league_uuid'], null);
-        if (!prevUUID) {
-            history.push(
-                withAppRoute(constantRoutes.ROUTES.HOME.ROUTE, {
-                    app: constants.APPS.MEMBER_APP,
-                    routeProps: {},
-                })
-            );
-        } else {
-            preInit(state);
-            init(prevUUID);
-            FirebaseClient.onMessageListener()
-                .then((payload) => {
-                    const { title, body } = payload.data;
-                    message.success(`${title}; ${body}`);
-                })
-                .catch((err) => {
-                    message.error(JSON.stringify(err));
-                });
-        }
-    }
+    const state = _get(location, ['state'], null);
+    const paramLeagueUUID = _get(params, ['league_uuid'], null);
 
-    componentWillUnmount() {
-        const { terminate } = this.props;
-        terminate();
-    }
-
-    componentDidUpdate(prevProps: LeagueAppViewProps) {
-        const { leagueUUID: prevLeagueUUID } = prevProps;
-        const { isReady, isFetching, refresh, match } = this.props;
-        const leagueUUID = _get(match, ['params', 'league_uuid'], null);
-        if (
-            isReady &&
-            !isFetching &&
-            prevLeagueUUID &&
-            prevLeagueUUID !== leagueUUID
-        ) {
-            refresh(leagueUUID);
-        }
-    }
-
-    render() {
-        const {
-            leagueUUID,
-            isReady,
-            isFetching,
-            isLoggedIn,
-            forceLogout,
-            refreshAuth,
-            name,
-            avatar,
-            menuProps,
-        } = this.props;
-        const { selectedKeys } = this.state;
-
-        if (!isReady || isFetching) return <AppLoading />;
-        return (
-            <AppLayout
-                app={constants.APPS.LEAGUE_APP}
-                name={name}
-                avatar={avatar}
-                menuProps={menuProps}
-                menuRoutes={statics}
-                menuItemOnClick={({ key }: { key: any }, path: string) => {
-                    this.setState({ selectedKeys: key });
-                }}
-                selectedKeys={selectedKeys}
-            >
-                <Switch>
-                    {routes.map(
-                        ({ path, component, exact }: ComponentRoute) => (
-                            <Route
-                                key={path}
-                                path={`${constantRoutes.APPS.LEAGUE_APP.ROUTE}${path}`}
-                                component={component}
-                                exact={exact}
-                            />
-                        )
-                    )}
-                    {protectedRoutes.map(
-                        ({ path, component, exact }: ComponentRoute) => (
-                            <ProtectedRoute
-                                key={path}
-                                path={`${constantRoutes.APPS.LEAGUE_APP.ROUTE}${path}`}
-                                component={component}
-                                exact={exact}
-                                isLoggedIn={isLoggedIn}
-                                forceLogout={forceLogout}
-                                refresh={() => refreshAuth()}
-                            />
-                        )
-                    )}
-                    <Route
-                        render={() => (
-                            <Redirect
-                                to={withAppRoute(
-                                    constantRoutes.ROUTES.HOME.ROUTE,
-                                    {
-                                        app: constants.APPS.LEAGUE_APP,
-                                        routeProps: { league_uuid: leagueUUID },
-                                    }
-                                )}
-                            />
-                        )}
-                    />
-                </Switch>
-            </AppLayout>
-        );
-    }
-}
-
-const mapStateToProps = ({ app, base }: any) => {
     const {
         isInitialized,
         isRefreshing,
-        isFetching,
+        isFetching: _isFetching,
         league,
         leagueMember,
-        uuid,
-    } = app;
-    const { me, isLoggedIn, forceLogout } = base;
+        uuid: leagueUUID,
+    } = useSelector(selectAppData);
+    const { me, isLoggedIn, forceLogout } = useSelector(selectBaseData);
 
-    const leagueUUID = uuid;
     const name = _get(me, ['display_name'], '');
     const avatar = _get(me, ['avatar', 's3_filename'], '');
     const leagueName = _get(league, ['data', 'name'], '');
@@ -170,6 +52,46 @@ const mapStateToProps = ({ app, base }: any) => {
     );
     const leagueIsFetching = _get(league, ['isFetching'], false);
     const leagueMemberIsFetching = _get(leagueMember, ['isFetching'], false);
+    const isFetching =
+        _isFetching || leagueIsFetching || leagueMemberIsFetching;
+    const isReady = isInitialized && !isRefreshing;
+
+    useEffect(() => {
+        if (!paramLeagueUUID) {
+            history.push(
+                withAppRoute(constantRoutes.ROUTES.HOME.ROUTE, {
+                    app: constants.APPS.MEMBER_APP,
+                    routeProps: {},
+                })
+            );
+        } else {
+            dispatch(LeagueAppActions.preInit(state));
+            dispatch(LeagueAppActions.init(paramLeagueUUID));
+            FirebaseClient.onMessageListener()
+                .then((payload) => {
+                    const { title, body } = payload.data;
+                    message.success(`${title}; ${body}`);
+                })
+                .catch((err) => {
+                    message.error(JSON.stringify(err));
+                });
+        }
+        return () => {
+            dispatch(LeagueAppActions.terminate());
+        };
+    }, []);
+
+    useEffect(() => {
+        if (
+            isReady &&
+            !isFetching &&
+            leagueUUID &&
+            leagueUUID !== paramLeagueUUID
+        ) {
+            dispatch(LeagueAppActions.refresh(paramLeagueUUID));
+        }
+    }, [isReady, isFetching, paramLeagueUUID]);
+
     const menuProps = {
         paths: {
             [constantRoutes.ROUTES.LEAGUE_HOME.KEY]: {
@@ -193,38 +115,53 @@ const mapStateToProps = ({ app, base }: any) => {
         },
     };
 
-    return {
-        name,
-        avatar,
-        leagueUUID,
-        isFetching: isFetching || leagueIsFetching || leagueMemberIsFetching,
-        isReady: isInitialized && !isRefreshing,
-        isLoggedIn,
-        forceLogout,
-        menuProps,
-    };
+    if (!isReady || isFetching) return <AppLoading />;
+    return (
+        <AppLayout
+            app={constants.APPS.LEAGUE_APP}
+            name={name}
+            avatar={avatar}
+            menuProps={menuProps}
+            menuRoutes={statics}
+        >
+            <Switch>
+                {routes.map(({ path, component, exact }: ComponentRoute) => (
+                    <Route
+                        key={path}
+                        path={`${constantRoutes.APPS.LEAGUE_APP.ROUTE}${path}`}
+                        component={component}
+                        exact={exact}
+                    />
+                ))}
+                {protectedRoutes.map(
+                    ({ path, component, exact }: ComponentRoute) => (
+                        <ProtectedRoute
+                            key={path}
+                            path={`${constantRoutes.APPS.LEAGUE_APP.ROUTE}${path}`}
+                            component={component}
+                            exact={exact}
+                            isLoggedIn={isLoggedIn}
+                            forceLogout={forceLogout}
+                            refresh={() => dispatch(AuthActions.refresh())}
+                        />
+                    )
+                )}
+                <Route
+                    render={() => (
+                        <Redirect
+                            to={withAppRoute(
+                                constantRoutes.ROUTES.LEAGUE_HOME.ROUTE,
+                                {
+                                    app: constants.APPS.LEAGUE_APP,
+                                    routeProps: { league_uuid: leagueUUID },
+                                }
+                            )}
+                        />
+                    )}
+                />
+            </Switch>
+        </AppLayout>
+    );
 };
 
-const mapDispatchToProps = (dispatch: any) => {
-    return {
-        preInit(league: any) {
-            dispatch(LeagueAppActions.preInit(league));
-        },
-        init(uuid: string) {
-            dispatch(LeagueAppActions.init(uuid));
-        },
-        terminate() {
-            dispatch(LeagueAppActions.terminate());
-        },
-        refresh(uuid: string) {
-            dispatch(LeagueAppActions.refresh(uuid));
-        },
-        refreshAuth() {
-            dispatch(AuthActions.refresh());
-        },
-    };
-};
-
-export default withRouter(
-    connect(mapStateToProps, mapDispatchToProps)(LeagueAppView)
-);
+export default LeagueAppView;

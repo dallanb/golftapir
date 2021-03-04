@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Layout, Menu } from 'antd';
-import { withRouter } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { AppLayoutProps } from './types';
 import defaultMenuItemRenderer from './defaultMenuItemRenderer';
-import { withAppRoute } from '@utils';
+import { getMenuSelectedKey, withAppRoute } from '@utils';
 import routes from '@constants/routes';
 import './AppLayout.less';
 import constants from '@constants';
+import { map as _map } from 'lodash';
 
 const { Sider } = Layout;
 
@@ -17,15 +18,27 @@ const AppLayout: React.FunctionComponent<AppLayoutProps> = ({
     menuRoutes,
     menuProps,
     menuItemRenderer: menuItemRendererProp,
-    history,
     menuItemOnClick: onClick,
-    selectedKeys,
     children,
 }) => {
+    const history = useHistory();
+    const [selectedKeys, setSelectedKeys] = useState(['0']);
+
+    useEffect(() => {
+        setSelectedKeys(
+            getMenuSelectedKey(
+                history.location.pathname,
+                app,
+                _map(menuRoutes, 'key')
+            )
+        );
+    }, [history.location.pathname]);
+
     const menuItemRenderer = menuItemRendererProp || defaultMenuItemRenderer;
 
     const menuItemOnClick = ({ key }: { key: any }, path: string) => {
         onClick && onClick({ key }, path);
+        setSelectedKeys(key);
         history.push(path);
     };
 
@@ -71,4 +84,4 @@ const AppLayout: React.FunctionComponent<AppLayoutProps> = ({
     );
 };
 
-export default withRouter(AppLayout);
+export default AppLayout;
