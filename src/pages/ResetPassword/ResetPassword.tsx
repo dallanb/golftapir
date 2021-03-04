@@ -10,7 +10,7 @@ import {
     selectIsSubmitting,
 } from './selector';
 import ComponentContent from '@layouts/ComponentContent';
-import { withAppRoute } from '@utils';
+import { navigate, withAppRoute } from '@utils';
 import routes from '@constants/routes';
 import constants from '@constants';
 import { OverlaySpin } from '@components';
@@ -33,7 +33,8 @@ const ResetPassword: React.FunctionComponent<ResetPasswordProps> = () => {
 
     useEffect(() => {
         if (isSubmitted) {
-            history.push(
+            navigate(
+                history,
                 withAppRoute(routes.ROUTES.LOGIN.ROUTE, {
                     app: constants.APPS.AUTH_APP,
                 })

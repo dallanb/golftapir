@@ -8,6 +8,7 @@ import constants from '@constants';
 import routes from '@constants/routes';
 import {
     mapStatusColour,
+    navigate,
     withAppRoute,
     withDynamicRoute,
     withS3URL,
@@ -24,7 +25,8 @@ const LeaguesListTile: React.FunctionComponent<LeaguesListTileProps> = ({
     const uuid = _get(item, ['uuid'], undefined);
 
     const handleClick = (options: any) => {
-        history.push(
+        navigate(
+            history,
             withAppRoute(routes.ROUTES.HOME.ROUTE, {
                 app: constants.APPS.LEAGUE_APP,
                 routeProps: { league_uuid: uuid },

@@ -18,7 +18,7 @@ import { AuthActions } from '@actions';
 import LeagueAppActions from './actions';
 import statics from '@apps/LeagueApp/statics';
 import { FirebaseClient } from '@libs';
-import { getMenuSelectedKey, withAppRoute, withS3URL } from '@utils';
+import { getMenuSelectedKey, navigate, withAppRoute, withS3URL } from '@utils';
 
 class LeagueAppView extends React.Component<
     LeagueAppViewProps,
@@ -40,7 +40,8 @@ class LeagueAppView extends React.Component<
         const state = _get(location, ['state'], null);
         const prevUUID = _get(match, ['params', 'league_uuid'], null);
         if (!prevUUID) {
-            history.push(
+            navigate(
+                history,
                 withAppRoute(constantRoutes.ROUTES.HOME.ROUTE, {
                     app: constants.APPS.MEMBER_APP,
                     routeProps: {},

@@ -11,7 +11,7 @@ const Member: React.FunctionComponent<MemberProps> = ({ name }) => {
         <div
             className="member"
             // onClick={() =>
-            //     history.push(
+            //     navigate(history,
             //         withAppRoute(routes.ROUTES.MEMBER.ROUTE, {
             //             routeProps: { ...params, member_uuid: uuid },
             //         }),

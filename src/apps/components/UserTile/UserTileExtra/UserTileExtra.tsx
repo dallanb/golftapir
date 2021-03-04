@@ -9,7 +9,7 @@ import routes from '@constants/routes';
 import { Avatar, PendingBadge, UserTile } from '@components';
 import { selectPending, selectLeagues } from '@selectors/BaseSelector';
 import { selectLeagueUUID } from '@selectors/AppSelector';
-import { withAppRoute, withS3URL } from '@utils';
+import { navigate, withAppRoute, withS3URL } from '@utils';
 import constants from '@constants';
 import './UserTileExtra.less';
 
@@ -26,7 +26,8 @@ const UserTileExtra: React.FunctionComponent<UserTileExtraProps> = ({
             <Menu.Item
                 key={league.uuid}
                 onClick={() =>
-                    history.push(
+                    navigate(
+                        history,
                         withAppRoute(routes.ROUTES.HOME.ROUTE, {
                             app: constants.APPS.LEAGUE_APP,
                             routeProps: { league_uuid: league.uuid },
@@ -60,7 +61,8 @@ const UserTileExtra: React.FunctionComponent<UserTileExtraProps> = ({
             <Menu.Item
                 key="logout"
                 onClick={() =>
-                    history.push(
+                    navigate(
+                        history,
                         withAppRoute(routes.ROUTES.LOGOUT.ROUTE, {
                             app: constants.APPS.AUTH_APP,
                         })
@@ -81,7 +83,8 @@ const UserTileExtra: React.FunctionComponent<UserTileExtraProps> = ({
             <div className="user-tile-extra-notification">
                 <Button
                     onClick={() =>
-                        history.push(
+                        navigate(
+                            history,
                             withAppRoute(routes.ROUTES.NOTIFICATIONS.ROUTE, {
                                 app: constants.APPS.MEMBER_APP,
                             })

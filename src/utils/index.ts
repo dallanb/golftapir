@@ -12,7 +12,7 @@ export { default as mapActionColour } from './mapActionColour';
 export { default as mapActionLabel } from './mapActionLabel';
 export { default as mapStatusColour } from './mapStatusColour';
 export { default as mergeRefs } from './mergeRefs';
-export { default as navigator } from './navigator';
+export { default as navigate } from './navigate';
 export { default as normalizeImage } from './normalizeImage';
 export { default as ordinalSuffix } from './ordinalSuffix';
 export { default as randomColourGenerator } from './randomColourGenerator';

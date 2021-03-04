@@ -7,7 +7,7 @@ import LogoutPageActions from './actions';
 import { LogoutProps, StateProps } from './types';
 import './Logout.less';
 import routes from '@constants/routes';
-import { withAppRoute } from '@utils';
+import { navigate, withAppRoute } from '@utils';
 import constants from '@constants';
 
 class Logout extends React.PureComponent<LogoutProps> {
@@ -16,18 +16,19 @@ class Logout extends React.PureComponent<LogoutProps> {
         // if (isLoggedIn) {
         init();
         // } else {
-        //     history.push('/auth/login');
+        //     navigate(history, '/auth/login');
         // }
     }
 
     componentDidUpdate(prevProps: Readonly<LogoutProps>) {
         // const { isLoggedIn, history } = this.props;
         // if (!isLoggedIn) {
-        //     history.push('/auth/login');
+        //     navigate(history, '/auth/login');
         // }
         const { isInitialized, isLoggedIn, history } = this.props;
         if (isInitialized && !isLoggedIn) {
-            history.push(
+            navigate(
+                history,
                 withAppRoute(routes.ROUTES.LOGIN.ROUTE, {
                     app: constants.APPS.AUTH_APP,
                 })

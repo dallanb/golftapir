@@ -5,7 +5,7 @@ import { Button } from 'antd';
 import { PlusCircleOutlined } from '@ant-design/icons';
 import routes from '@constants/routes';
 import { CreateButtonProps } from './types';
-import { withAppRoute } from '@utils';
+import { navigate, withAppRoute } from '@utils';
 import { selectMyLeagueUUID } from '@selectors/BaseSelector';
 import ComponentContent from '@layouts/ComponentContent';
 import './CreateButton.less';
@@ -15,7 +15,8 @@ const CreateButton: React.FunctionComponent<CreateButtonProps> = () => {
     const leagueUUID = useSelector(selectMyLeagueUUID);
 
     const handleClick = () => {
-        history.push(
+        navigate(
+            history,
             withAppRoute(routes.ROUTES.CONTESTS_CREATE.ROUTE, {
                 routeProps: { league_uuid: leagueUUID },
             })

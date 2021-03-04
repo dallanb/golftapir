@@ -2,7 +2,7 @@ import { useHistory, useParams } from 'react-router-dom';
 import memoize from 'memoize-one';
 import constants from '@constants';
 import routes from '@constants/routes';
-import { withAppRoute } from '@utils';
+import { navigate, withAppRoute } from '@utils';
 
 export const renderAction = (
     key: string,
@@ -28,7 +28,8 @@ export const generateActions = (uuid?: string) => {
         actions.push({
             key: constants.ACTION.CHALLENGE.KEY,
             onClick: () =>
-                history.push(
+                navigate(
+                    history,
                     withAppRoute(routes.ROUTES.CONTESTS_CREATE.ROUTE, {
                         routeProps: params,
                     }),
