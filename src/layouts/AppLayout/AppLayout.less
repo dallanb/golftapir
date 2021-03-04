@@ -8,7 +8,10 @@
     }
 
     .member-app-sider-layout {
-        background: @primary-color !important;
+        &.ant-layout-sider {
+            background-color: rgba(255, 255, 255, 0.35) !important;
+            backdrop-filter: blur(6px) !important;
+        }
         .member-app-sider-layout-title {
             cursor: pointer;
             height: 32px;
@@ -16,14 +19,15 @@
             background-size: cover;
             margin: 16px;
             display: flex;
-            color: white;
-            filter: invert(1);
             .member-app-sider-layout-title-text {
                 align-content: end;
             }
         }
         .member-app-sider-layout-menu {
-            background: @primary-color;
+            //background-color: rgba(255, 255, 255, 0.35) !important;
+            //backdrop-filter: blur(6px) !important;
+            background: transparent !important;
+            color: @text-color !important;
         }
         .member-app-sider-layout-footer {
             width: 100%;
