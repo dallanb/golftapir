@@ -7,3 +7,7 @@ export const selectData = createSelector(
     [getLoginPage],
     (loginPage) => loginPage
 );
+
+export const selectFormInitialValues = createSelector(
+    [getLoginPage],
+    (loginPage) => _get(loginPage, ['formInitialValues'], undefined)
