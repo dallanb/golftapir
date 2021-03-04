@@ -1,6 +1,7 @@
 // Colours
 .ant-layout {
     background: transparent !important;
+
     &.glassmorphic {
         //background: @primary-color !important;
         //background: linear-gradient(
@@ -14,6 +15,7 @@
         background: #096dd9 radial-gradient(circle, #40a9ff 0%, black 85%) !important;
     }
 }
+
 //
 //.ant-layout-header {
 //    background: fade(#d0d0d0, 20%) !important;
@@ -47,6 +49,7 @@
     border-radius: 5px !important;
     background-color: rgba(255, 255, 255, 0.75) !important;
     backdrop-filter: blur(6px) !important;
+
     .ant-menu-light {
         background: transparent !important;
     }
@@ -56,6 +59,7 @@
     box-shadow: 0 0 1rem 0 rgb(0 0 0 / 20%) !important;
     background-color: rgba(255, 255, 255, 0.75) !important;
     backdrop-filter: blur(6px) !important;
+
     .ant-select-item {
         background: transparent !important;
     }
@@ -65,13 +69,41 @@
     box-shadow: 0 0 1rem 0 rgb(0 0 0 / 20%) !important;
     background-color: rgba(255, 255, 255, 0.75) !important;
     backdrop-filter: blur(6px) !important;
+
     .ant-picker-panel-container {
         background: transparent !important;
     }
 }
 
-.ant-pick-header button {
+.ant-picker-header button {
     color: @text-color !important;
+}
+
+.ant-picker-cell {
+    color: rgba(0, 0, 0, 0.3) !important;
+}
+
+.ant-picker-cell-in-view {
+    color: rgba(0, 0, 0, 0.85) !important;
+}
+
+.ant-picker-cell-disabled::before {
+    background: rgba(0, 0, 0, 0.03) !important;
+}
+
+.ant-picker-cell-disabled .ant-picker-cell-inner {
+    color: rgba(0, 0, 0, 0.3) !important;
+}
+
+.ant-picker-dropdown {
+    table tr {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
+    }
+}
+
+.ant-picker-clear {
+    color: black !important;
+    background: transparent !important;
 }
 
 // background: rgba(0, 0, 0, 0.2);
@@ -85,20 +117,25 @@
     background-color: fade(@primary-color, 20%) !important;
     border: 1px solid fade(@primary-color, 20%) !important;
 }
+
 .ant-input {
     background-color: transparent !important;
     border: 1px solid fade(@primary-color, 20%) !important;
+
     &.ant-input-borderless {
         border: none !important;
     }
 }
+
 .ant-input-affix-wrapper {
     background-color: transparent !important;
     border: 1px solid fade(@primary-color, 20%) !important;
+
     &.ant-input-affix-wrapper-readonly {
         border: none !important;
     }
 }
+
 .ant-select .ant-select-selector {
     background-color: transparent !important;
     border: 1px solid fade(@primary-color, 20%) !important;
@@ -122,6 +159,7 @@
     background-color: transparent !important;
     border: 1px solid fade(@primary-color, 20%) !important;
 }
+
 .ant-upload-select-picture-card {
     background-color: transparent !important;
     border: 1px solid fade(@primary-color, 20%) !important;
