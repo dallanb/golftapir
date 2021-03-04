@@ -5,8 +5,9 @@ import { AppLayoutProps } from './types';
 import defaultMenuItemRenderer from './defaultMenuItemRenderer';
 import { withAppRoute } from '@utils';
 import routes from '@constants/routes';
-import './AppLayout.less';
 import constants from '@constants';
+import { navigator } from '@utils';
+import './AppLayout.less';
 
 const { Sider } = Layout;
 
@@ -26,7 +27,7 @@ const AppLayout: React.FunctionComponent<AppLayoutProps> = ({
 
     const menuItemOnClick = ({ key }: { key: any }, path: string) => {
         onClick && onClick({ key }, path);
-        history.push(path);
+        navigator(history, path);
     };
 
     const menuItemsRenderer = (
@@ -49,7 +50,8 @@ const AppLayout: React.FunctionComponent<AppLayoutProps> = ({
                 <div
                     className="member-app-sider-layout-title"
                     onClick={() =>
-                        history.push(
+                        navigator(
+                            history,
                             withAppRoute(routes.ROUTES.HOME.ROUTE, {
                                 app: constants.APPS.MEMBER_APP,
                             })
