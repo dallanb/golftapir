@@ -1,12 +1,15 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Layout, Menu } from 'antd';
-import { withRouter } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { AppLayoutProps } from './types';
 import defaultMenuItemRenderer from './defaultMenuItemRenderer';
-import { withAppRoute } from '@utils';
+import { getMenuSelectedKey, withAppRoute } from '@utils';
 import routes from '@constants/routes';
 import './AppLayout.less';
 import constants from '@constants';
+import { map as _map } from 'lodash';
+import { Simulate } from 'react-dom/test-utils';
+import click = Simulate.click;
 
 const { Sider } = Layout;
 
@@ -17,15 +20,35 @@ const AppLayout: React.FunctionComponent<AppLayoutProps> = ({
     menuRoutes,
     menuProps,
     menuItemRenderer: menuItemRendererProp,
-    history,
     menuItemOnClick: onClick,
-    selectedKeys,
     children,
 }) => {
+    const history = useHistory();
+    const location = useLocation(); // this is necessary to ensure that updated location result in a rerender of the component
+
+    const [selectedKeys, setSelectedKeys] = useState(['0']);
+    const [clickedPath, setClickedPath] = useState(false); // this flag will help us avoid extra work when finding the selectedKeys
+
+    useEffect(() => {
+        if (clickedPath) {
+            setClickedPath(false);
+        } else {
+            setSelectedKeys(
+                getMenuSelectedKey(
+                    location.pathname,
+                    app,
+                    _map(menuRoutes, 'key')
+                )
+            );
+        }
+    }, [location.pathname]);
+
     const menuItemRenderer = menuItemRendererProp || defaultMenuItemRenderer;
 
     const menuItemOnClick = ({ key }: { key: any }, path: string) => {
         onClick && onClick({ key }, path);
+        setSelectedKeys(key);
+        setClickedPath(true);
         history.push(path);
     };
 
@@ -71,4 +94,4 @@ const AppLayout: React.FunctionComponent<AppLayoutProps> = ({
     );
 };
 
-export default withRouter(AppLayout);
+export default AppLayout;
