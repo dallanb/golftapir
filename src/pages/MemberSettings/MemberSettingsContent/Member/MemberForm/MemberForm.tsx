@@ -17,7 +17,6 @@ import './MemberForm.less';
 const MemberSettingsForm: React.FunctionComponent<MemberSettingsFormProps> = () => {
     const dispatch = useDispatch();
     const { initialValues } = useSelector(selectMemberFormData);
-    console.log('HERE');
 
     const handleSubmit = (values: FormikValues) => {
         const uuid = _get(values, ['uuid'], undefined);
