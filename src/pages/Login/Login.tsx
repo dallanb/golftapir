@@ -5,14 +5,16 @@ import LoginForm from './LoginForm';
 import { LoginProps } from './types';
 import LoginPageActions from './actions';
 import routes from '@constants/routes';
-import { selectIsLoggedIn } from '@selectors/AuthSelectors';
+import { selectIsLoggedIn, selectIsSubmitting } from '@selectors/AuthSelectors';
 import LoginButtons from './LoginButtons';
+import { OverlaySpin } from '@components';
 import './Login.less';
 
 const Login: React.FunctionComponent<LoginProps> = () => {
     const dispatch = useDispatch();
     const history = useHistory();
     const isLoggedIn = useSelector(selectIsLoggedIn);
+    const isSubmitting = useSelector(selectIsSubmitting);
 
     useEffect(() => {
         if (isLoggedIn) {
@@ -37,6 +39,7 @@ const Login: React.FunctionComponent<LoginProps> = () => {
         <div className="login-view">
             <LoginForm />
             <LoginButtons />
+            <OverlaySpin visible={isSubmitting} />
         </div>
     );
 };
