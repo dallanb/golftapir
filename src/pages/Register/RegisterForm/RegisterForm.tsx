@@ -24,15 +24,14 @@ const RegisterForm: React.FunctionComponent<RegisterFormProps> = () => {
             token,
         } = values;
         dispatch(
-            AuthActions
-                .register
-                // email,
-                // username,
-                // password,
-                // display_name,
-                // country,
-                // token
-                ()
+            AuthActions.register(
+                email,
+                username,
+                password,
+                display_name,
+                country,
+                token
+            )
         );
     };
 
