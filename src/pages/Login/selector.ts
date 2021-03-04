@@ -11,3 +11,4 @@ export const selectData = createSelector(
 export const selectFormInitialValues = createSelector(
     [getLoginPage],
     (loginPage) => _get(loginPage, ['formInitialValues'], undefined)
+);
