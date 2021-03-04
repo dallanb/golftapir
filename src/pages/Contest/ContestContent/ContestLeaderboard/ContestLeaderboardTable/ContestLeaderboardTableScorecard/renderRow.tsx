@@ -5,7 +5,7 @@ import { RowRendererProps } from '@components/Table/types';
 
 const renderRow: React.FunctionComponent<RowRendererProps> = ({ row }) => {
     const isEven = _get(row, ['index'], 1) % 2;
-    const rowCx = classnames({ filled: !isEven });
+    const rowCx = classnames({ filled: isEven });
     return (
         <tr
             {...row.getRowProps({
