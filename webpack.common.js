@@ -72,6 +72,9 @@ module.exports = {
                                     'border-color-base': '@normal-color',
                                     'select-clear-background': 'transparent',
                                     'outline-fade': '10%',
+                                    // 'component-background': 'fade(white, 35%)',
+                                    // 'popover-background':
+                                    //     '@component-background',
                                 },
                                 javascriptEnabled: true,
                             },
