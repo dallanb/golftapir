@@ -55,7 +55,9 @@ export const fieldSchema = memoize((initialValues: any) => [
         name: 'password',
         type: 'password',
         wrapper: FloatLabelInputWrapper,
-        options: {},
+        options: {
+            visibilityToggle: true,
+        },
         wrapperOptions: {
             label: (
                 <>
@@ -68,7 +70,9 @@ export const fieldSchema = memoize((initialValues: any) => [
         name: 'confirm_password',
         type: 'password',
         wrapper: FloatLabelInputWrapper,
-        options: {},
+        options: {
+            visibilityToggle: true,
+        },
         wrapperOptions: {
             label: (
                 <>
