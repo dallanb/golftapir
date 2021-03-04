@@ -14,15 +14,11 @@ const InvitesListTile: React.FunctionComponent<InvitesListTileProps> = ({
     const isEven = index % 2;
     const item = _get(data, [index], undefined);
 
-
     const email = _get(item, ['email'], 'Loading...');
-    const cardCx = classnames('invites-list-tile-card', { filled: !isEven });
+    const cardCx = classnames('invites-list-tile-card', { filled: isEven });
     return (
         <div key={index} style={style} className="invites-list-tile-view">
-            <Card
-                bordered={false}
-                className={cardCx}
-            >
+            <Card bordered={false} className={cardCx}>
                 <div className="invites-list-tile-content">
                     <div className="invites-list-tile-content-main">
                         <div className="invites-list-tile-content-main-info">

@@ -19,7 +19,7 @@ const PayoutProportionListTile: React.FunctionComponent<PayoutProportionsListTil
     const payout = _get(item, ['payout'], null);
 
     const cardCx = classnames('payout-proportions-tile-card', {
-        filled: !isEven,
+        filled: isEven,
     });
 
     return (

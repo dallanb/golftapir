@@ -34,7 +34,7 @@ const LeaguesListTile: React.FunctionComponent<LeaguesListTileProps> = ({
     const src = avatar && withS3URL(avatar, constants.S3_FOLDERS.LEAGUE.AVATAR);
     const status = _get(league, ['status'], undefined);
     const participants = _get(league, ['participants'], {});
-    const cardCx = classnames('leagues-list-tile-card', { filled: !isEven });
+    const cardCx = classnames('leagues-list-tile-card', { filled: isEven });
     return (
         <div key={index} style={style} className="leagues-list-tile-view">
             <Card
