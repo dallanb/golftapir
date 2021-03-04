@@ -1,8 +1,13 @@
 import { all, put, takeLatest } from 'redux-saga/effects';
 import LoginPageActions, { LoginPageTypes } from './actions';
-
 function* init() {
     try {
+        yield put(
+            LoginPageActions.setFormInitialValues({
+                email: undefined,
+                password: undefined,
+            })
+        );
         yield put(LoginPageActions.initSuccess());
     } catch (err) {
         yield put(LoginPageActions.initFailure(err));

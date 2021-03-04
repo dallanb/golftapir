@@ -63,6 +63,7 @@ module.exports = {
                                 // If you are using less-loader@5 please spread the lessOptions to options directly
                                 modifyVars: {
                                     'primary-color': 'black',
+                                    'text-color': 'fade(black, 85%)',
                                     'normal-color': 'rgba(0,0,0,0.2)',
                                     'link-color': '#1890ff',
                                     'input-placeholder-color':
@@ -71,6 +72,16 @@ module.exports = {
                                     'disabled-bg': '@normal-color',
                                     'border-color-base': '@normal-color',
                                     'select-clear-background': 'transparent',
+                                    'outline-fade': '10%',
+                                    'table-border-color': 'rgba(0,0,0,0.05)',
+                                    'border-color-split': 'rgba(0,0,0,0.05)',
+                                    'picker-basic-cell-hover-with-range-color':
+                                        'lighten(@primary-color, 35%)',
+                                    'picker-border-color': 'rgba(0,0,0,0.05)',
+                                    'picker-date-hover-range-border-color':
+                                        'lighten(@primary-color, 20%)',
+                                    '@calendar-border-color':
+                                        'rgba(0,0,0,0.05)',
                                 },
                                 javascriptEnabled: true,
                             },

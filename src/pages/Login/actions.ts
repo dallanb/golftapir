@@ -7,6 +7,7 @@ const { Types, Creators } = createActions(
         initFailure: ['err'],
         terminate: null,
         set: ['data'],
+        setFormInitialValues: ['formInitialValues'],
     },
     {
         prefix: 'LOGIN_PAGE_',
