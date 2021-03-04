@@ -63,8 +63,7 @@ function* register({
             token && { token }
         );
         const res: any = yield call(AuthService.register, payload);
-        const { user, access_token } = res;
-        ClientProxy.accessToken = access_token;
+        const { user } = res;
         yield put(AuthActions.registerSuccess(user));
         message.success(CONSTANTS.AUTH.SUCCESS.REGISTER);
     } catch (err) {

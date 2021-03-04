@@ -7,6 +7,11 @@ export const selectData = createSelector([getRegisterPage], (registerPage) =>
     _get(registerPage, ['data'], false)
 );
 
+export const selectFormInitialValues = createSelector(
+    [getRegisterPage],
+    (registerPage) => _get(registerPage, ['formInitialValues'], undefined)
+);
+
 export const selectIsInitialized = createSelector(
     [getRegisterPage],
     (registerPage) => _get(registerPage, ['isInitialized'], false)

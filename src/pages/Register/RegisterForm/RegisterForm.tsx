@@ -1,17 +1,20 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { FormikValues } from 'formik';
-import AuthActions from '@actions/AuthActions';
 import { Form } from '@components';
 import { RegisterFormProps } from './types';
-import { StateProps } from '../types';
 import { fieldSchema, validationSchema } from './schema';
-import './RegisterForm.less';
 import CONSTANTS from '@locale/en-CA';
+import { selectFormInitialValues } from '../selector';
+import { AuthActions } from '@actions';
+import './RegisterForm.less';
 
-class RegisterForm extends React.PureComponent<RegisterFormProps> {
-    handleSubmit = (values: FormikValues) => {
-        const { register } = this.props;
+const RegisterForm: React.FunctionComponent<RegisterFormProps> = () => {
+    const dispatch = useDispatch();
+    const initialValues = useSelector(selectFormInitialValues);
+    const fieldsSchema = fieldSchema(initialValues);
+
+    const handleSubmit = (values: FormikValues) => {
         const {
             email,
             username,
@@ -20,54 +23,28 @@ class RegisterForm extends React.PureComponent<RegisterFormProps> {
             country,
             token,
         } = values;
-        register(email, username, password, display_name, country, token);
-    };
-
-    render() {
-        const { initialValues } = this.props;
-        const fieldsSchema = fieldSchema(initialValues);
-        return (
-            <Form
-                initialValues={initialValues}
-                validationSchema={validationSchema}
-                fieldSchema={fieldsSchema}
-                onSubmit={this.handleSubmit}
-                submitButtonText={CONSTANTS.PAGES.REGISTER.FORM.SUBMIT}
-                submitButtonProps={{ block: true }}
-            />
+        dispatch(
+            AuthActions.register(
+                email,
+                username,
+                password,
+                display_name,
+                country,
+                token
+            )
         );
-    }
-}
-
-const mapStateToProps = ({ registerPage }: StateProps) => {
-    const { formInitialValues: initialValues } = registerPage;
-    return {
-        initialValues,
     };
+
+    return (
+        <Form
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            fieldSchema={fieldsSchema}
+            onSubmit={handleSubmit}
+            submitButtonText={CONSTANTS.PAGES.REGISTER.FORM.SUBMIT}
+            submitButtonProps={{ block: true }}
+        />
+    );
 };
 
-const mapDispatchToProps = (dispatch: any) => {
-    return {
-        register(
-            email: string,
-            username: string,
-            password: string,
-            display_name: string,
-            country: string,
-            token?: string
-        ) {
-            return dispatch(
-                AuthActions.register(
-                    email,
-                    username,
-                    password,
-                    display_name,
-                    country,
-                    token
-                )
-            );
-        },
-    };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(RegisterForm);
+export default RegisterForm;
