@@ -61,7 +61,6 @@ const SearchSelectInput: React.FunctionComponent<SearchInputProps> = () => {
                     showSearch
                     allowClear
                     value={value}
-                    defaultOpen={true}
                     placeholder={CONSTANTS.PAGES.MEMBERS.SEARCH}
                     notFoundContent={isSearching ? <Spin size="small" /> : null}
                     filterOption={false}
