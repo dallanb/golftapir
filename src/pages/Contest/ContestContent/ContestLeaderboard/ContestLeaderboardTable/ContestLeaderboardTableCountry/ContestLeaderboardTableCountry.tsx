@@ -13,7 +13,11 @@ const ContestLeaderboardTableCountry: React.FunctionComponent<ContestLeaderboard
     const membersHash = useSelector(selectMembersHash);
     const country = _get(membersHash, [uuid, 'country'], undefined);
     const Country = _get(Flags, [country], null);
-    return <Country className="contest-leaderboard-table-country-flag" />;
+    return Country ? (
+        <Country className="contest-leaderboard-table-country-flag" />
+    ) : (
+        Country
+    );
 };
 
 export default ContestLeaderboardTableCountry;
