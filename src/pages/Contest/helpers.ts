@@ -9,8 +9,10 @@ import {
 } from '@services';
 import ContestPageActions from './actions';
 import { socketEventHandlers } from './utils';
-import { selectLeagueMember } from '@selectors/AppSelector';
-import { selectLeagueMemberData } from '@apps/LeagueApp/selector';
+import {
+    selectLeagueMemberData,
+    selectLeagueMembersData,
+} from '@selectors/AppSelector';
 
 export function* initContest(uuid: string) {
     yield fork(initContestParticipant, uuid);
@@ -24,13 +26,10 @@ export function* initContest(uuid: string) {
 
     const members = Object.keys(participants);
 
-    if (members.length) { // replace this with leagueMember from the app selector
-        const { members: memberParticipants }: any = yield call(
-            MemberService.bulkFetchMembers,
-            { within: { key: 'uuid', value: members } },
-            { include: 'avatar' }
-        );
-        const membersHash = _keyBy(memberParticipants, 'uuid');
+    if (members.length) {
+        // replace this with leagueMember from the app selector
+        const memberParticipants = yield select(selectLeagueMembersData);
+        const membersHash = _keyBy(memberParticipants, 'member'); // TODO: this can be improved
         yield put(ContestPageActions.set({ membersHash }));
     }
 }
