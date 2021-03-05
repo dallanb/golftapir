@@ -106,7 +106,6 @@ function initLeague(state: any) {
         league: {
             ...state.league,
             isInitialized: false,
-            data: undefined,
             err: undefined,
         },
     });
@@ -167,7 +166,6 @@ function initLeagueMember(state: any) {
         leagueMember: {
             ...state.leagueMember,
             isInitialized: false,
-            data: undefined,
             err: undefined,
         },
     });
@@ -231,8 +229,6 @@ function initLeagueMembers(state: any) {
         leagueMembers: {
             ...state.leagueMembers,
             isInitialized: false,
-            data: undefined,
-            metadata: undefined,
             err: undefined,
         },
     });
