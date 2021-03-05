@@ -6,9 +6,10 @@ import { MembersProps } from './types';
 import MembersPageContentMembersActions from './actions';
 import { selectData } from './selector';
 import ComponentContent from '@layouts/ComponentContent';
+import { selectMyUUID } from '@selectors/BaseSelector';
 import { selectLeagueMembers } from '@selectors/AppSelector';
+import { organizeMembers } from '@pages/Members/utils';
 import './Members.less';
-import { organizeMembersByStatus } from '@pages/Members/utils';
 
 const Members: React.FunctionComponent<MembersProps> = ({}) => {
     const dispatch = useDispatch();
@@ -33,7 +34,8 @@ const Members: React.FunctionComponent<MembersProps> = ({}) => {
         isInitialized: leagueMembersIsInitialized,
         isRefreshing: leagueMembersIsRefreshing,
     } = useSelector(selectLeagueMembers);
-    const members = organizeMembersByStatus(data);
+    const uuid = useSelector(selectMyUUID);
+    const members = organizeMembers(uuid, data);
     const activeParticipants = _get(members, ['active'], []);
 
     return (
