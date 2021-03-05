@@ -1,5 +1,10 @@
 import { createSelector } from 'reselect';
-import { get as _get, isNil as _isNil, keyBy as _keyBy } from 'lodash';
+import {
+    get as _get,
+    groupBy as _groupBy,
+    isNil as _isNil,
+    keyBy as _keyBy,
+} from 'lodash';
 import { withS3URL } from '@utils';
 import constants from '@constants';
 
@@ -96,6 +101,14 @@ export const selectLeagueMembers = createSelector([getApp], (app) =>
 
 export const selectLeagueMembersData = createSelector([getApp], (app) =>
     _get(app, ['leagueMembers', 'data'], undefined)
+);
+
+export const selectLeagueMembersDataByStatus = createSelector(
+    [getApp],
+    (app) => {
+        const members = _get(app, ['leagueMembers', 'data'], []);
+        return _groupBy(members, 'status');
+    }
 );
 
 export const selectLeagueMembersDataHashByMember = createSelector(

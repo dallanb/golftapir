@@ -1,14 +1,20 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { get as _get } from 'lodash';
+import { get as _get, intersectionWith as _intersectionWith } from 'lodash';
 import { MemberStandingsTableProps } from './types';
 import { VirtualTable } from '@components';
 import columnsSchema from './schema';
 import { selectMembers } from '../selector';
+import { selectLeagueMembersDataByStatus } from '@selectors/AppSelector';
+import { intersectMembers } from './utils';
 import './MemberStandingsTable.less';
 
 const MemberStandingsTable: React.FunctionComponent<MemberStandingsTableProps> = ({}) => {
-    const items = useSelector(selectMembers);
+    const members = useSelector(selectMembers);
+    const leagueMembers = useSelector(selectLeagueMembersDataByStatus);
+    const activeLeagueMembers = _get(leagueMembers, ['active'], []);
+
+    const items = intersectMembers(members, activeLeagueMembers);
     const bodyStyle = { height: items.length * 50 };
 
     const initialState = {

@@ -6,9 +6,11 @@ import { InvitesProps } from './types';
 import MembersPageSiderContentInvitesActions from './actions';
 import { selectData } from './selector';
 import ComponentContent from '@layouts/ComponentContent';
+import {
+    selectLeagueMembers,
+    selectLeagueMembersDataByStatus,
+} from '@selectors/AppSelector';
 import './Invites.less';
-import { selectLeagueMembers } from '@selectors/AppSelector';
-import { organizeMembersByStatus } from '@pages/Members/utils';
 
 const Invites: React.FunctionComponent<InvitesProps> = ({}) => {
     const dispatch = useDispatch();
@@ -21,16 +23,12 @@ const Invites: React.FunctionComponent<InvitesProps> = ({}) => {
         };
     }, []);
 
-    const { isInitialized, isFetching, options = undefined } = useSelector(
-        selectData
-    );
+    const { isInitialized, isFetching } = useSelector(selectData);
     const {
-        data,
-        metadata,
         isInitialized: leagueMembersIsInitialized,
         isRefreshing: leagueMembersIsRefreshing,
     } = useSelector(selectLeagueMembers);
-    const members = organizeMembersByStatus(data);
+    const members = useSelector(selectLeagueMembersDataByStatus);
     const activeParticipants = _get(members, ['invited'], []);
 
     const dataHeight = Math.min(400, activeParticipants.length * 50);
@@ -57,8 +55,6 @@ const Invites: React.FunctionComponent<InvitesProps> = ({}) => {
                 containerRef={ref}
                 containerDimensions={dimensions}
                 data={activeParticipants}
-                metadata={metadata}
-                options={options}
                 isFetching={isFetching}
             />
         </ComponentContent>
