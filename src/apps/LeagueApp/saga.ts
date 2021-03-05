@@ -109,7 +109,7 @@ function* fetchLeagueMember({ uuid, options }: AnyAction) {
 
 function* fetchLeagueMembers({ uuid, options = {} }: AnyAction) {
     try {
-        const { members: leagueMembers, metadata }: any = yield call(
+        const { members: leagueMembers, _metadata: metadata }: any = yield call(
             LeagueService.fetchMembersMaterialized,
             {
                 league_uuid: uuid,
