@@ -64,6 +64,10 @@ export const selectLeagueMembersData = createSelector([getApp], (app) =>
     _get(app, ['leagueMembers', 'data'], undefined)
 );
 
+export const selectLeagueMembersIsFetching = createSelector([getApp], (app) =>
+    _get(app, ['leagueMembers', 'isFetching'], false)
+);
+
 export const selectLeagueMembersDataHashByMember = createSelector(
     [getApp],
     (app) => {
