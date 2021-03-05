@@ -11,8 +11,6 @@ import './MembersList.less';
 const MembersList: React.FunctionComponent<MembersListProps> = ({
     containerRef,
     data,
-    metadata,
-    options,
     isFetching,
 }) => {
     const history = useHistory();

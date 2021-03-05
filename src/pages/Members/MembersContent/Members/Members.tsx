@@ -7,7 +7,10 @@ import MembersPageContentMembersActions from './actions';
 import { selectData } from './selector';
 import ComponentContent from '@layouts/ComponentContent';
 import { selectMyUUID } from '@selectors/BaseSelector';
-import { selectLeagueMembers } from '@selectors/AppSelector';
+import {
+    selectLeagueMembers,
+    selectLeagueMembersDataByStatus,
+} from '@selectors/AppSelector';
 import { organizeMembers } from '@pages/Members/utils';
 import './Members.less';
 
@@ -22,21 +25,15 @@ const Members: React.FunctionComponent<MembersProps> = ({}) => {
         };
     }, []);
 
+    const { isInitialized, isRefreshing, isFetching } = useSelector(selectData);
     const {
-        isInitialized,
-        isRefreshing,
-        isFetching,
-        options = undefined,
-    } = useSelector(selectData);
-    const {
-        data,
-        metadata,
         isInitialized: leagueMembersIsInitialized,
         isRefreshing: leagueMembersIsRefreshing,
     } = useSelector(selectLeagueMembers);
+    const members = useSelector(selectLeagueMembersDataByStatus);
+    const activeMembers = _get(members, ['active'], []);
     const uuid = useSelector(selectMyUUID);
-    const members = organizeMembers(uuid, data);
-    const activeParticipants = _get(members, ['active'], []);
+    const data = organizeMembers(uuid, activeMembers);
 
     return (
         <ComponentContent
@@ -52,9 +49,7 @@ const Members: React.FunctionComponent<MembersProps> = ({}) => {
         >
             <MembersList
                 containerRef={ref}
-                data={activeParticipants}
-                metadata={metadata}
-                options={options}
+                data={data}
                 isFetching={isFetching}
             />
         </ComponentContent>

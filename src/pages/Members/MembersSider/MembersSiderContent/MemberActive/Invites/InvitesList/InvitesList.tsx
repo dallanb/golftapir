@@ -14,8 +14,6 @@ const InvitesList: React.FunctionComponent<InvitesListProps> = ({
     containerRef,
     containerDimensions,
     data,
-    metadata,
-    options,
     isFetching,
 }) => {
     const history = useHistory();
