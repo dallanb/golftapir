@@ -20,8 +20,12 @@ import { AuthActions } from '@actions';
 import LeagueAppActions from './actions';
 import statics from '@apps/LeagueApp/statics';
 import { FirebaseClient } from '@libs';
-import { withAppRoute, withS3URL, navigate, } from '@utils';
-import { selectData as selectAppData } from '@selectors/AppSelector';
+import { withAppRoute, withS3URL, navigate } from '@utils';
+import {
+    selectData as selectAppData,
+    selectLeagueIsFetching,
+    selectLeagueMemberIsFetching,
+} from '@selectors/AppSelector';
 import { selectData as selectBaseData } from '@selectors/BaseSelector';
 
 const LeagueAppView: React.FunctionComponent<LeagueAppViewProps> = () => {
@@ -38,7 +42,6 @@ const LeagueAppView: React.FunctionComponent<LeagueAppViewProps> = () => {
         isRefreshing,
         isFetching: _isFetching,
         league,
-        leagueMember,
         uuid: leagueUUID,
     } = useSelector(selectAppData);
     const { me, isLoggedIn, forceLogout } = useSelector(selectBaseData);
@@ -50,15 +53,16 @@ const LeagueAppView: React.FunctionComponent<LeagueAppViewProps> = () => {
         _get(league, ['data', 'avatar', 's3_filename'], null),
         constants.S3_FOLDERS.LEAGUE.AVATAR
     );
-    const leagueIsFetching = _get(league, ['isFetching'], false);
-    const leagueMemberIsFetching = _get(leagueMember, ['isFetching'], false);
+    const leagueIsFetching = useSelector(selectLeagueIsFetching);
+    const leagueMemberIsFetching = useSelector(selectLeagueMemberIsFetching);
     const isFetching =
         _isFetching || leagueIsFetching || leagueMemberIsFetching;
     const isReady = isInitialized && !isRefreshing;
 
     useEffect(() => {
         if (!paramLeagueUUID) {
-            navigate(history,
+            navigate(
+                history,
                 withAppRoute(constantRoutes.ROUTES.HOME.ROUTE, {
                     app: constants.APPS.MEMBER_APP,
                     routeProps: {},

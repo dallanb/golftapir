@@ -8,6 +8,10 @@ const getBase = (state: any) => state.base;
 
 export const selectData = createSelector([getApp], (app) => app);
 
+export const selectIsInitialized = createSelector([getApp], (app) =>
+    _get(app, ['isInitialized'], false)
+);
+
 export const selectLeagueUUID = createSelector([getApp], (app) =>
     _get(app, ['uuid'], undefined)
 );
@@ -44,6 +48,21 @@ export const selectIsLeagueOwner = createSelector(
         _get(base, ['me', 'data', 'user_uuid'], null)
 );
 
+export const selectLeagueIsFetching = createSelector(
+    [getApp],
+    (app) =>
+        !_get(app, ['league', 'isInitialized'], false) ||
+        _get(app, ['league', 'isRefreshing'], true)
+);
+
+export const selectLeagueIsInitialized = createSelector([getApp], (app) =>
+    _get(app, ['league', 'isInitialized'], false)
+);
+
+export const selectLeagueIsRefreshing = createSelector([getApp], (app) =>
+    _get(app, ['league', 'isRefreshing'], true)
+);
+
 export const selectLeagueMember = createSelector([getApp], (app) =>
     _get(app, ['leagueMember'], undefined)
 );
@@ -56,16 +75,27 @@ export const selectLeagueMemberStatus = createSelector([getApp], (app) =>
     _get(app, ['leagueMember', 'data', 'status'], undefined)
 );
 
+export const selectLeagueMemberIsFetching = createSelector(
+    [getApp],
+    (app) =>
+        !_get(app, ['leagueMember', 'isInitialized'], false) ||
+        _get(app, ['leagueMember', 'isRefreshing'], true)
+);
+
+export const selectLeagueMemberIsInitialized = createSelector([getApp], (app) =>
+    _get(app, ['leagueMember', 'isInitialized'], false)
+);
+
+export const selectLeagueMemberIsRefreshing = createSelector([getApp], (app) =>
+    _get(app, ['leagueMember', 'isRefreshing'], true)
+);
+
 export const selectLeagueMembers = createSelector([getApp], (app) =>
     _get(app, ['leagueMembers'], undefined)
 );
 
 export const selectLeagueMembersData = createSelector([getApp], (app) =>
     _get(app, ['leagueMembers', 'data'], undefined)
-);
-
-export const selectLeagueMembersIsFetching = createSelector([getApp], (app) =>
-    _get(app, ['leagueMembers', 'isFetching'], false)
 );
 
 export const selectLeagueMembersDataHashByMember = createSelector(
@@ -79,10 +109,18 @@ export const selectLeagueMembersDataHashByMember = createSelector(
     }
 );
 
-export const selectIsInitialized = createSelector([getApp], (app) =>
-    _get(app, ['isInitialized'], false)
+export const selectLeagueMembersIsFetching = createSelector(
+    [getApp],
+    (app) =>
+        !_get(app, ['leagueMembers', 'isInitialized'], false) ||
+        _get(app, ['leagueMembers', 'isRefreshing'], true)
 );
 
-export const selectIsLeagueFetching = createSelector([getApp], (app) =>
-    _get(app, ['league', 'isFetching'], true)
+export const selectLeagueMembersIsInitialized = createSelector(
+    [getApp],
+    (app) => _get(app, ['leagueMembers', 'isInitialized'], false)
+);
+
+export const selectLeagueMembersIsRefreshing = createSelector([getApp], (app) =>
+    _get(app, ['leagueMembers', 'isRefreshing'], true)
 );

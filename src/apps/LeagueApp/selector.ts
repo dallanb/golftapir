@@ -76,7 +76,7 @@ export const selectIsInitialized = createSelector([getLeagueApp], (leagueApp) =>
     _get(leagueApp, ['isInitialized'], false)
 );
 
-export const selectIsLeagueFetching = createSelector(
+export const selectIsLeagueInitialized = createSelector(
     [getLeagueApp],
-    (leagueApp) => _get(leagueApp, ['league', 'isFetching'], true)
+    (leagueApp) => _get(leagueApp, ['league', 'isInitialized'], true)
 );
