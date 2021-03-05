@@ -8,7 +8,7 @@ import { selectMyStat } from '@selectors/BaseSelector';
 
 function* fetchMember({ uuid, options }: AnyAction) {
     try {
-        const res = yield call(MemberService.fetchMember, uuid, options);
+        const res: any = yield call(MemberService.fetchMember, uuid, options);
         const { members } = res;
         yield put(MemberActions.fetchMemberSuccess(members));
     } catch (err) {
@@ -19,7 +19,7 @@ function* fetchMember({ uuid, options }: AnyAction) {
 
 function* fetchMemberUser({ user_uuid, options }: AnyAction) {
     try {
-        const res = yield call(
+        const res: any = yield call(
             MemberService.fetchMemberUser,
             user_uuid,
             options
@@ -34,7 +34,11 @@ function* fetchMemberUser({ user_uuid, options }: AnyAction) {
 
 function* fetchMyMemberUser({ options }: AnyAction) {
     try {
-        const res = yield call(MemberService.fetchMemberUser, 'me', options);
+        const res: any = yield call(
+            MemberService.fetchMemberUser,
+            'me',
+            options
+        );
         const { members } = res;
         yield put(MemberActions.fetchMyMemberUserSuccess(members));
     } catch (err) {
@@ -45,7 +49,7 @@ function* fetchMyMemberUser({ options }: AnyAction) {
 
 function* fetchMembers({ options }: AnyAction) {
     try {
-        const res = yield call(MemberService.fetchMembers, options);
+        const res: any = yield call(MemberService.fetchMembers, options);
         const { leagues } = res;
         yield put(MemberActions.fetchMembersSuccess(leagues));
     } catch (err) {
@@ -56,7 +60,7 @@ function* fetchMembers({ options }: AnyAction) {
 
 function* updateMember({ uuid, values }: AnyAction) {
     try {
-        const res = yield call(MemberService.updateMember, uuid, values);
+        const res: any = yield call(MemberService.updateMember, uuid, values);
         const { leagues } = res;
         yield put(MemberActions.updateMemberSuccess(leagues));
     } catch (err) {
@@ -78,7 +82,7 @@ function* assignAvatar({ uuid, avatar }: AnyAction) {
 function* refreshMyMemberStats({}) {
     try {
         const stat = yield select(selectMyStat);
-        const { stats } = yield call(MemberService.fetchStat, stat.uuid);
+        const { stats }: any = yield call(MemberService.fetchStat, stat.uuid);
         yield put(MemberActions.refreshMyMemberStatsSuccess(stats));
     } catch (err) {
         yield put(MemberActions.refreshMyMemberStatsFailure(err));

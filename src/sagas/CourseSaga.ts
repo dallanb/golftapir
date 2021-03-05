@@ -7,7 +7,7 @@ import CONSTANTS from '@locale/en-CA';
 
 function* fetchCourse({ uuid, options }: AnyAction) {
     try {
-        const res = yield call(CourseService.fetchCourse, uuid, options);
+        const res: any = yield call(CourseService.fetchCourse, uuid, options);
         const { courses, _metadata: metadata } = res;
         yield put(CourseActions.fetchCourseSuccess(courses, metadata));
     } catch (err) {
@@ -18,7 +18,7 @@ function* fetchCourse({ uuid, options }: AnyAction) {
 
 function* fetchCourses({ options }: AnyAction) {
     try {
-        const res = yield call(CourseService.fetchCourses, options);
+        const res: any = yield call(CourseService.fetchCourses, options);
         const { courses, _metadata: metadata } = res;
         yield put(CourseActions.fetchCoursesSuccess(courses, metadata));
     } catch (err) {

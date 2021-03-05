@@ -24,3 +24,7 @@ export const selectIsVerified = createSelector([getAuth], (auth) =>
 export const selectIsVerifying = createSelector([getAuth], (auth) =>
     _get(auth, ['isVerifying'], undefined)
 );
+
+export const selectIsSubmitting = createSelector([getAuth], (auth) =>
+    _get(auth, ['isSubmitting'], undefined)
+);

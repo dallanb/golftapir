@@ -1,8 +1,7 @@
 import { FirebaseClient } from '@libs';
 
 function* requestToken() {
-    const token = yield FirebaseClient.requestNotificationPermissions();
-    return token;
+    return yield FirebaseClient.requestNotificationPermissions();
 }
 
 export default requestToken;

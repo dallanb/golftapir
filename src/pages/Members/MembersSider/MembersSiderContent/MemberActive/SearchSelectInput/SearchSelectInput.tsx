@@ -8,7 +8,7 @@ import { SearchInputProps } from './types';
 import MembersPageSiderContentSearchActions from './actions';
 import { selectIsSearching, selectKey, selectSearchData } from './selector';
 import CONSTANTS from '@locale/en-CA';
-import { withAppRoute } from '@utils';
+import { navigate, withAppRoute } from '@utils';
 import routes from '@constants/routes';
 import './SearchSelectInput.less';
 import ComponentContent from '@layouts/ComponentContent';
@@ -39,7 +39,8 @@ const SearchSelectInput: React.FunctionComponent<SearchInputProps> = () => {
     };
     const onChange = (newValue: any) => {
         if (newValue === newMemberKey) {
-            history.push(
+            navigate(
+                history,
                 withAppRoute(routes.ROUTES.MEMBERS_CREATE.ROUTE, {
                     routeProps: { ...params },
                 }),
@@ -59,6 +60,7 @@ const SearchSelectInput: React.FunctionComponent<SearchInputProps> = () => {
             <div className="search-select-input-wrapper">
                 <Select
                     showSearch
+                    allowClear
                     value={value}
                     placeholder={CONSTANTS.PAGES.MEMBERS.SEARCH}
                     notFoundContent={isSearching ? <Spin size="small" /> : null}

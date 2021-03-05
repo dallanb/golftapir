@@ -10,7 +10,7 @@ import {
     selectIsSubmitting,
 } from './selector';
 import ComponentContent from '@layouts/ComponentContent';
-import { withAppRoute } from '@utils';
+import { navigate, withAppRoute } from '@utils';
 import routes from '@constants/routes';
 import constants from '@constants';
 import { OverlaySpin } from '@components';
@@ -34,7 +34,8 @@ const ForgotPassword: React.FunctionComponent<ForgotPasswordProps> = () => {
 
     useEffect(() => {
         if (isSubmitted) {
-            history.push(
+            navigate(
+                history,
                 withAppRoute(routes.ROUTES.LOGIN.ROUTE, {
                     app: constants.APPS.AUTH_APP,
                 })
@@ -45,7 +46,7 @@ const ForgotPassword: React.FunctionComponent<ForgotPasswordProps> = () => {
     return (
         <ComponentContent
             showSpinner={!isInitialized}
-            className="forgot-password-view"
+            className="forgot-password-view content-view"
         >
             <ForgotPasswordForm />
             <ForgotPasswordButtons />

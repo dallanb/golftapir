@@ -13,7 +13,7 @@ function* preInit({ data: member }: AnyAction) {
 
 function* init({ uuid }: AnyAction) {
     try {
-        const { members: member } = yield call(
+        const { members: member }: any = yield call(
             LeagueService.fetchMemberMaterialized,
             uuid,
             {

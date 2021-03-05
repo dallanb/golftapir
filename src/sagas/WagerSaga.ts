@@ -7,7 +7,7 @@ import CONSTANTS from '@locale/en-CA';
 
 function* fetchWager({ uuid, options }: AnyAction) {
     try {
-        const res = yield call(WagerService.fetchWager, uuid, options);
+        const res: any = yield call(WagerService.fetchWager, uuid, options);
         const { wagers, _metadata: metadata } = res;
         yield put(WagerActions.fetchWagerSuccess(wagers, metadata));
     } catch (err) {
@@ -17,7 +17,7 @@ function* fetchWager({ uuid, options }: AnyAction) {
 }
 function* fetchWagers({ options }: AnyAction) {
     try {
-        const res = yield call(WagerService.fetchWagers, options);
+        const res: any = yield call(WagerService.fetchWagers, options);
         const { wagers, _metadata: metadata } = res;
         yield put(WagerActions.fetchWagersSuccess(wagers, metadata));
     } catch (err) {

@@ -15,7 +15,7 @@ function* init({ options = { member_uuid: null } }: AnyAction) {
         const me = yield select(selectLeagueMemberData);
         const members = [];
         if (options.member_uuid) {
-            const { members: member } = yield call(
+            const { members: member }: any = yield call(
                 LeagueService.fetchMemberMaterialized,
                 options.member_uuid,
                 {}
@@ -40,7 +40,7 @@ function* submit({ data }: AnyAction) {
         const {
             contests: { uuid },
             contests: result,
-        } = yield call(ContestService.createContest, contestData);
+        }: any = yield call(ContestService.createContest, contestData);
         const avatarData = _pick(data, ['avatar']);
         if (!_isEmpty(avatarData)) {
             yield call(ContestService.assignAvatar, uuid, avatarData.avatar);

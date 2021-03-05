@@ -16,7 +16,10 @@ function* setToken({ token }: AnyAction) {
 
 function* fetchNotifications({ options }: AnyAction) {
     try {
-        const res = yield call(NotificationService.fetchNotifications, options);
+        const res: any = yield call(
+            NotificationService.fetchNotifications,
+            options
+        );
         const { notifications, _metadata: metadata } = res;
         yield put(
             NotificationActions.fetchNotificationsSuccess(
@@ -32,7 +35,7 @@ function* fetchNotifications({ options }: AnyAction) {
 
 function* fetchPending() {
     try {
-        const res = yield call(NotificationService.fetchPending);
+        const res: any = yield call(NotificationService.fetchPending);
         yield put(NotificationActions.fetchPendingSuccess(res.count));
     } catch (err) {
         yield put(NotificationActions.fetchPendingFailure(err));
@@ -41,7 +44,7 @@ function* fetchPending() {
 
 function* updateNotification({ id, values }: AnyAction) {
     try {
-        const res = yield call(
+        const res: any = yield call(
             NotificationService.updateNotification,
             id,
             values
@@ -56,7 +59,10 @@ function* updateNotification({ id, values }: AnyAction) {
 
 function* subscriptionExists({ options }: AnyAction) {
     try {
-        const res = yield call(NotificationService.subscriptionExists, options);
+        const res: any = yield call(
+            NotificationService.subscriptionExists,
+            options
+        );
         const { subscribed } = res;
         yield put(NotificationActions.subscriptionExistsSuccess(subscribed));
     } catch (err) {

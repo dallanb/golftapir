@@ -3,7 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Button } from 'antd';
 import { ParticipantPendingProps } from './types';
 import ContestPageActions from '@pages/Contest/actions';
-import { selectMyParticipant } from '@pages/Contest/selector';
+import {
+    selectPayoutBuyIn,
+    selectMyParticipant,
+} from '@pages/Contest/selector';
+import { selectMyWalletBalance } from '@selectors/BaseSelector';
 import constants from '@constants';
 import ComponentContent from '@layouts/ComponentContent';
 import './ParticipantPending.less';
@@ -11,6 +15,9 @@ import './ParticipantPending.less';
 const ParticipantPending: React.FunctionComponent<ParticipantPendingProps> = () => {
     const dispatch = useDispatch();
     const { uuid } = useSelector(selectMyParticipant);
+    const balance = useSelector(selectMyWalletBalance);
+    const buyIn = useSelector(selectPayoutBuyIn);
+
     const handleAcceptClick = () => {
         dispatch(
             ContestPageActions.updateContestParticipantStatus(
@@ -37,7 +44,12 @@ const ParticipantPending: React.FunctionComponent<ParticipantPendingProps> = () 
         >
             <div className="participant-pending-buttons">
                 <div className="participant-pending-buttons-button active">
-                    <Button block type="primary" onClick={handleAcceptClick}>
+                    <Button
+                        block
+                        type="primary"
+                        disabled={buyIn > balance}
+                        onClick={handleAcceptClick}
+                    >
                         Accept Contest Invite
                     </Button>
                 </div>

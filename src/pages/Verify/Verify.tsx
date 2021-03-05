@@ -6,7 +6,7 @@ import { VerifyProps } from './types';
 import VerifyFormActions from './actions';
 import { selectIsInitialized } from './selector';
 import { selectIsVerified, selectIsVerifying } from '@selectors/AuthSelectors';
-import { withAppRoute } from '@utils';
+import { navigate, withAppRoute } from '@utils';
 import routes from '@constants/routes';
 import constants from '@constants';
 import { Spin } from 'antd';
@@ -31,7 +31,8 @@ const Verify: React.FunctionComponent<VerifyProps> = () => {
 
     useEffect(() => {
         if (isVerified) {
-            history.push(
+            navigate(
+                history,
                 withAppRoute(routes.ROUTES.LOGIN.ROUTE, {
                     app: constants.APPS.AUTH_APP,
                 })

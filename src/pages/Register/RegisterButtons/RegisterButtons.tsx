@@ -1,8 +1,8 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { RegisterButtonsProps } from './types';
-import {LinkButton} from '@components';
-import { withAppRoute } from '@utils';
+import { LinkButton } from '@components';
+import { navigate, withAppRoute } from '@utils';
 import routes from '@constants/routes';
 import constants from '@constants';
 import CONSTANTS from '@locale/en-CA';
@@ -14,7 +14,8 @@ const RegisterButtons: React.FunctionComponent<RegisterButtonsProps> = () => {
         <div className="register-buttons">
             <LinkButton
                 onClick={() =>
-                    history.push(
+                    navigate(
+                        history,
                         withAppRoute(routes.ROUTES.LOGIN.ROUTE, {
                             app: constants.APPS.AUTH_APP,
                         })

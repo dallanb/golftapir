@@ -7,7 +7,7 @@ import CONSTANTS from '@locale/en-CA';
 
 function* fetchScore({ uuid, options }: AnyAction) {
     try {
-        const res = yield call(ScoreService.fetchScore, uuid, options);
+        const res: any = yield call(ScoreService.fetchScore, uuid, options);
         const { scores, _metadata: metadata } = res;
         yield put(ScoreActions.fetchScoreSuccess(scores, metadata));
     } catch (err) {
@@ -17,7 +17,11 @@ function* fetchScore({ uuid, options }: AnyAction) {
 }
 function* fetchScoreContest({ uuid, options }: AnyAction) {
     try {
-        const res = yield call(ScoreService.fetchScoreContest, uuid, options);
+        const res: any = yield call(
+            ScoreService.fetchScoreContest,
+            uuid,
+            options
+        );
         const { scores, _metadata: metadata } = res;
         yield put(ScoreActions.fetchScoreContestSuccess(scores, metadata));
     } catch (err) {
@@ -31,7 +35,7 @@ function* fetchScoreContestParticipantSheet({
     options,
 }: AnyAction) {
     try {
-        const res = yield call(
+        const res: any = yield call(
             ScoreService.fetchScoreContestParticipantSheet,
             uuid,
             member_uuid,
@@ -52,7 +56,7 @@ function* fetchScoreContestParticipantSheet({
 
 function* updateScore({ uuid, data }: AnyAction) {
     try {
-        const res = yield call(ScoreService.updateScore, uuid, data);
+        const res: any = yield call(ScoreService.updateScore, uuid, data);
         const { scores } = res;
         yield put(ScoreActions.updateScoreSuccess(scores));
     } catch (err) {
@@ -63,7 +67,7 @@ function* updateScore({ uuid, data }: AnyAction) {
 
 function* updateSheet({ uuid, data }: AnyAction) {
     try {
-        const res = yield call(ScoreService.updateSheet, uuid, data);
+        const res: any = yield call(ScoreService.updateSheet, uuid, data);
         const { scores } = res;
         yield put(ScoreActions.updateSheetSuccess(scores));
     } catch (err) {
@@ -74,7 +78,12 @@ function* updateSheet({ uuid, data }: AnyAction) {
 
 function* updateHole({ uuid, holeId, data }: AnyAction) {
     try {
-        const res = yield call(ScoreService.updateHole, uuid, holeId, data);
+        const res: any = yield call(
+            ScoreService.updateHole,
+            uuid,
+            holeId,
+            data
+        );
         const { scores } = res;
         yield put(ScoreActions.updateHoleSuccess(scores));
     } catch (err) {

@@ -10,7 +10,7 @@ import MembersPageContentMembersActions from '@pages/Members/MembersContent/Memb
 function* search({ key }: AnyAction) {
     try {
         // yield call(refreshMembersList, key);
-        const { members } = yield call(MemberService.fetchMembers, {
+        const { members }: any = yield call(MemberService.fetchMembers, {
             page: 1,
             per_page: 10,
             search: key,

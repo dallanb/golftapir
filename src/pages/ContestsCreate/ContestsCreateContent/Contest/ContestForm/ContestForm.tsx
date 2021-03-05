@@ -7,12 +7,14 @@ import { Form } from '@components';
 import ContestsCreatePageContentContestActions from '../actions';
 import { fieldSchema, validationSchema } from './schema';
 import { selectData as selectContestFormData } from '../selector';
+import { selectMyWalletBalance } from '@selectors/BaseSelector';
 import './ContestForm.less';
 
 const ContestForm: React.FunctionComponent<ContestFormProps> = () => {
     const dispatch = useDispatch();
     const { initialValues } = useSelector(selectContestFormData);
-
+    const balance = useSelector(selectMyWalletBalance);
+    const validatedSchema = validationSchema(balance);
     const handleSubmit = (values: FormikValues) => {
         const contest = _pick(values, [
             'league_uuid',
@@ -33,7 +35,7 @@ const ContestForm: React.FunctionComponent<ContestFormProps> = () => {
         <div className="contest-form">
             <Form
                 fieldSchema={fieldSchema}
-                validationSchema={validationSchema}
+                validationSchema={validatedSchema}
                 initialValues={initialValues}
                 onSubmit={handleSubmit}
             />

@@ -96,7 +96,7 @@ function* updateContestParticipantStatus({ uuid, status }: AnyAction) {
 
 function* fetchPayout({ uuid }: AnyAction) {
     try {
-        const { contest: payout } = yield call(
+        const { contest: payout }: any = yield call(
             WagerService.fetchContestsComplete,
             uuid
         );

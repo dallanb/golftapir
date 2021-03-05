@@ -9,7 +9,7 @@ import { selectData } from './selector';
 import ComponentContent from '@layouts/ComponentContent';
 import routes from '@constants/routes';
 import { OverlaySpin } from '@components';
-import { withAppRoute } from '@utils';
+import { navigate, withAppRoute } from '@utils';
 import './Member.less';
 
 const Member: React.FunctionComponent<MemberProps> = ({}) => {
@@ -23,7 +23,8 @@ const Member: React.FunctionComponent<MemberProps> = ({}) => {
 
     useEffect(() => {
         if (isSubmitted && result) {
-            history.push(
+            navigate(
+                history,
                 withAppRoute(routes.ROUTES.MEMBERS.ROUTE, {
                     routeProps: {
                         ...params,

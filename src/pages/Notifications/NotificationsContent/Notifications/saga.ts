@@ -19,7 +19,7 @@ function* init() {
 
 function* fetchData({ options = { page: 1, per_page: 10 } }: AnyAction) {
     try {
-        const { notifications, _metadata: metadata } = yield call(
+        const { notifications, _metadata: metadata }: any = yield call(
             NotificationService.fetchNotifications,
             options
         );
@@ -37,7 +37,7 @@ function* fetchData({ options = { page: 1, per_page: 10 } }: AnyAction) {
 }
 function* markNotificationAsRead({ _id }: AnyAction) {
     try {
-        const { notifications } = yield call(
+        const { notifications }: any = yield call(
             NotificationService.updateNotification,
             _id,
             {
@@ -62,7 +62,7 @@ function* markNotificationAsRead({ _id }: AnyAction) {
 
 function* markNotificationAsUnread({ _id }: AnyAction) {
     try {
-        const { notifications } = yield call(
+        const { notifications }: any = yield call(
             NotificationService.updateNotification,
             _id,
             {
@@ -88,7 +88,7 @@ function* markNotificationAsUnread({ _id }: AnyAction) {
 // TODO:HAVE TO PLAY AROUND WITH METADATA A BIT AS WELL
 function* markNotificationAsArchived({ _id }: AnyAction) {
     try {
-        const { notifications } = yield call(
+        const { notifications }: any = yield call(
             NotificationService.updateNotification,
             _id,
             {

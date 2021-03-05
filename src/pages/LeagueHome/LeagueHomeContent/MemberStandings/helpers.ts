@@ -11,7 +11,7 @@ export function* initMemberStandings(
     }
 ) {
     const uuid = yield select(selectLeagueUUID);
-    const { members } = yield call(MemberService.fetchMemberStandings, {
+    const { members }: any = yield call(MemberService.fetchMemberStandings, {
         ...options,
         league_uuid: uuid,
     });

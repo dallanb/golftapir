@@ -6,11 +6,13 @@ import { RegisterProps } from './types';
 import RegisterFormActions from './actions';
 import RegisterForm from './RegisterForm';
 import { selectIsInitialized, selectIsRegistered } from './selector';
-import { withAppRoute } from '@utils';
+import { selectIsSubmitting } from '@selectors/AuthSelectors';
+import { navigate, withAppRoute } from '@utils';
 import routes from '@constants/routes';
 import constants from '@constants';
 import ComponentContent from '@layouts/ComponentContent';
 import RegisterButtons from './RegisterButtons';
+import { OverlaySpin } from '@components';
 import './Register.less';
 
 const Register: React.FunctionComponent<RegisterProps> = () => {
@@ -21,6 +23,7 @@ const Register: React.FunctionComponent<RegisterProps> = () => {
     const token = params.get('token');
     const isRegistered = useSelector(selectIsRegistered);
     const isInitialized = useSelector(selectIsInitialized);
+    const isSubmitting = useSelector(selectIsSubmitting);
 
     useEffect(() => {
         dispatch(RegisterFormActions.init(token));
@@ -31,7 +34,8 @@ const Register: React.FunctionComponent<RegisterProps> = () => {
 
     useEffect(() => {
         if (isRegistered) {
-            history.push(
+            navigate(
+                history,
                 withAppRoute(routes.ROUTES.LOGIN.ROUTE, {
                     app: constants.APPS.AUTH_APP,
                 })
@@ -42,12 +46,11 @@ const Register: React.FunctionComponent<RegisterProps> = () => {
     return (
         <ComponentContent
             showSpinner={!isInitialized}
-            className="register-view"
+            className="register-view content-view"
         >
-            <>
-                <RegisterForm />
-                <RegisterButtons />
-            </>
+            <RegisterForm />
+            <RegisterButtons />
+            <OverlaySpin visible={isSubmitting} />
         </ComponentContent>
     );
 };

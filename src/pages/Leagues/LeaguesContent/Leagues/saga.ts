@@ -21,7 +21,7 @@ function* init() {
 
 function* fetchData({ options = { page: 1, per_page: 10 } }: AnyAction) {
     try {
-        const { leagues, _metadata: metadata } = yield call(
+        const { leagues, _metadata: metadata }: any = yield call(
             LeagueService.fetchLeagues,
             options
         );

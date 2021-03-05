@@ -5,7 +5,12 @@ import { NotificationsListProps } from './types';
 import { FixedSizeList } from '@components';
 import NotificationsPageContentNotificationsActions from '../actions';
 import NotificationsListTile from './NotificationsListTile';
-import { getRefHeight, topicToRouteMapper, withAppRoute } from '@utils';
+import {
+    getRefHeight,
+    navigate,
+    topicToRouteMapper,
+    withAppRoute,
+} from '@utils';
 import { NotificationActions } from '@actions';
 import { selectLeagues } from '@selectors/BaseSelector';
 import './NotificationsList.less';
@@ -55,7 +60,7 @@ const NotificationsList: React.FunctionComponent<NotificationsListProps> = ({
             );
             state.league = memberLeague?.league;
             state.member = memberLeague?.member;
-            history.push(route, state);
+            navigate(history, route, state);
             dispatch(
                 NotificationActions.updateNotification(item._id, { read: true })
             );

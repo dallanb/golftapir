@@ -7,7 +7,7 @@ import CONSTANTS from '@locale/en-CA';
 
 function* fetchContest({ uuid, options }: AnyAction) {
     try {
-        const res = yield call(ContestService.fetchContest, uuid, options);
+        const res: any = yield call(ContestService.fetchContest, uuid, options);
         const { contests, _metadata: metadata } = res;
         yield put(ContestActions.fetchContestSuccess(contests, metadata));
     } catch (err) {
@@ -18,7 +18,7 @@ function* fetchContest({ uuid, options }: AnyAction) {
 
 function* fetchContests({ options, append }: AnyAction) {
     try {
-        const res = yield call(ContestService.fetchContests, options);
+        const res: any = yield call(ContestService.fetchContests, options);
         const { contests, _metadata: metadata } = res;
         yield put(
             ContestActions.fetchContestsSuccess(contests, metadata, append)
@@ -31,7 +31,7 @@ function* fetchContests({ options, append }: AnyAction) {
 
 function* fetchContestMaterialized({ uuid, options }: AnyAction) {
     try {
-        const res = yield call(
+        const res: any = yield call(
             ContestService.fetchContestMaterialized,
             uuid,
             options
@@ -48,7 +48,7 @@ function* fetchContestMaterialized({ uuid, options }: AnyAction) {
 
 function* fetchContestsMaterialized({ options, append }: AnyAction) {
     try {
-        const res = yield call(
+        const res: any = yield call(
             ContestService.fetchContestsMaterialized,
             options
         );
@@ -68,7 +68,7 @@ function* fetchContestsMaterialized({ options, append }: AnyAction) {
 
 function* createContest({ data }: AnyAction) {
     try {
-        const res = yield call(ContestService.createContest, data);
+        const res: any = yield call(ContestService.createContest, data);
         const { contests } = res;
 
         yield put(ContestActions.createContestSuccess(contests));
@@ -81,7 +81,7 @@ function* createContest({ data }: AnyAction) {
 
 function* updateContest({ uuid, data }: AnyAction) {
     try {
-        const res = yield call(ContestService.updateContest, uuid, data);
+        const res: any = yield call(ContestService.updateContest, uuid, data);
         const { contests } = res;
         yield put(ContestActions.updateContestSuccess(contests));
         message.success(CONSTANTS.CONTEST.SUCCESS.UPDATE);
@@ -103,7 +103,7 @@ function* assignAvatar({ uuid, avatar }: AnyAction) {
 
 function* fetchContestParticipantUser({ contest_uuid, member_uuid }: any) {
     try {
-        const res = yield call(
+        const res: any = yield call(
             ContestService.fetchContestParticipantMember,
             contest_uuid,
             member_uuid
@@ -120,7 +120,7 @@ function* fetchContestParticipantUser({ contest_uuid, member_uuid }: any) {
 
 function* updateContestParticipant({ uuid, data }: any) {
     try {
-        const res = yield call(
+        const res: any = yield call(
             ContestService.updateContestParticipant,
             uuid,
             data
@@ -136,7 +136,7 @@ function* updateContestParticipant({ uuid, data }: any) {
 
 function* fetchContestParticipants({ uuid, options }: any) {
     try {
-        const res = yield call(
+        const res: any = yield call(
             ContestService.fetchContestParticipants,
             uuid,
             options

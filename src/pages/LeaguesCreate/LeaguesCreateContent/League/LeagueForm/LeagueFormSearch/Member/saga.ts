@@ -8,7 +8,7 @@ import LeaguesCreatePageContentLeagueSearchMemberActions, {
 // need to add search more somehow
 function* search({ key: search }: AnyAction) {
     try {
-        const { members } = yield call(MemberService.fetchMembers, {
+        const { members }: any = yield call(MemberService.fetchMembers, {
             page: 1,
             per_page: 10,
             search,

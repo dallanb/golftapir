@@ -31,7 +31,7 @@ function* submit({ data }: AnyAction) {
         const {
             leagues: { uuid },
             leagues: result,
-        } = yield call(LeagueService.createLeague, leagueData);
+        }: any = yield call(LeagueService.createLeague, leagueData);
         const avatarData = _pick(data, ['avatar']);
         if (!_isEmpty(avatarData)) {
             yield call(LeagueService.assignAvatar, uuid, avatarData.avatar);

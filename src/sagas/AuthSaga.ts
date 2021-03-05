@@ -24,7 +24,7 @@ function* ping() {
 function* login({ email, password }: AnyAction) {
     try {
         yield tokenWatchTask && cancel(tokenWatchTask);
-        const res = yield call(AuthService.login, { email, password });
+        const res: any = yield call(AuthService.login, { email, password });
         const { user, access_token, expiry } = res;
         ClientProxy.accessToken = access_token;
         tokenWatchTask = yield fork(tokenCheck, expiry);
@@ -62,9 +62,8 @@ function* register({
             },
             token && { token }
         );
-        const res = yield call(AuthService.register, payload);
-        const { user, access_token } = res;
-        ClientProxy.accessToken = access_token;
+        const res: any = yield call(AuthService.register, payload);
+        const { user } = res;
         yield put(AuthActions.registerSuccess(user));
         message.success(CONSTANTS.AUTH.SUCCESS.REGISTER);
     } catch (err) {
@@ -87,7 +86,7 @@ function* verify({ token }: AnyAction) {
 function* refresh() {
     try {
         yield tokenWatchTask && cancel(tokenWatchTask);
-        const res = yield call(AuthService.refresh);
+        const res: any = yield call(AuthService.refresh);
         const { access_token, user, expiry } = res;
         ClientProxy.accessToken = access_token;
         tokenWatchTask = yield fork(tokenCheck, expiry);
@@ -101,7 +100,7 @@ function* refresh() {
 function* logout() {
     try {
         yield tokenWatchTask && cancel(tokenWatchTask);
-        const res = yield call(AuthService.logout);
+        const res: any = yield call(AuthService.logout);
         ClientProxy.accessToken = null;
         yield put(AuthActions.logoutSuccess());
         message.success(CONSTANTS.AUTH.SUCCESS.LOGOUT);
@@ -134,7 +133,7 @@ function* resetPassword({ password, token }: AnyAction) {
 }
 
 export function* tokenCheck(expiry: number) {
-    const chan = yield call(countdown, expiry);
+    const chan: any = yield call(countdown, expiry);
     try {
         while (true) {
             let seconds = yield take(chan);

@@ -4,7 +4,7 @@ import { AccountService } from '@services';
 
 function* init() {
     try {
-        const { accounts: account } = yield call(
+        const { accounts: account }: any = yield call(
             AccountService.fetchAccount,
             'me',
             {

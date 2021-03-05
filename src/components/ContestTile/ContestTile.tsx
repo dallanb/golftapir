@@ -8,7 +8,7 @@ import ContestTileCourse from './ContestTileCourse';
 import ContestTileDate from './ContestTileDate';
 import constants from '@constants';
 import routes from '@constants/routes';
-import { mapStatusColour, withAppRoute, withS3URL } from '@utils';
+import { mapStatusColour, navigate, withAppRoute, withS3URL } from '@utils';
 import { Avatar } from '@components';
 import './ContestTile.less';
 
@@ -21,7 +21,8 @@ const ContestTile: React.FunctionComponent<ContestTileProps> = ({
     const item = _get(data, [index], undefined);
     const uuid = _get(item, ['uuid'], undefined);
     const handleClick = (options: any) => {
-        history.push(
+        navigate(
+            history,
             withAppRoute(routes.ROUTES.CONTEST.ROUTE, {
                 routeProps: { ...params, contest_uuid: uuid },
             }),
@@ -36,7 +37,7 @@ const ContestTile: React.FunctionComponent<ContestTileProps> = ({
     const course = _get(item, ['location'], '');
     const time = _get(item, ['start_time'], undefined);
     const participants = _get(item, ['participants'], {});
-    const cardCx = classnames('contest-list-tile-card', { filled: !isEven });
+    const cardCx = classnames('contest-list-tile-card', { filled: isEven });
     return (
         <div key={index} style={style} className="contest-list-tile-view">
             <Card
@@ -73,10 +74,7 @@ const ContestTile: React.FunctionComponent<ContestTileProps> = ({
                         {status === constants.STATUS.PENDING.KEY ||
                         status === constants.STATUS.READY.KEY ? (
                             <div className="contest-list-tile-content-side-leaderboard">
-                                <ContestTileDate
-                                    status={status}
-                                    date={time}
-                                />
+                                <ContestTileDate status={status} date={time} />
                             </div>
                         ) : (
                             <div className="contest-list-tile-content-side-leaderboard">

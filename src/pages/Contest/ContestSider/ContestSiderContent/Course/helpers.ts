@@ -3,8 +3,11 @@ import { ContestService, CourseService } from '@services';
 import ContestPageSiderContentCourseActions from './actions';
 
 export function* initCourse(uuid: string) {
-    const { contests: contest } = yield call(ContestService.fetchContest, uuid);
-    const { courses: course } = yield call(
+    const { contests: contest }: any = yield call(
+        ContestService.fetchContest,
+        uuid
+    );
+    const { courses: course }: any = yield call(
         CourseService.fetchCourse,
         contest.location_uuid
     );

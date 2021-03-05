@@ -5,7 +5,7 @@ import routes from '@constants/routes';
 import { selectContest, selectMembersHash } from '@pages/Contest/selector';
 import { ContestParticipantsTableParticipantProps } from './types';
 import { prepareParticipant } from '@pages/Contest/utils';
-import { mapStatusColour, withAppRoute } from '@utils';
+import { mapStatusColour, navigate, withAppRoute } from '@utils';
 import './ContestLeaderboardTableParticipant.less';
 import constants from '@constants';
 import { Tag } from 'antd';
@@ -25,7 +25,8 @@ const ContestLeaderboardTableParticipant: React.FunctionComponent<ContestPartici
         <div
             className="contest-leaderboard-table-participant"
             onClick={() =>
-                history.push(
+                navigate(
+                    history,
                     withAppRoute(routes.ROUTES.MEMBER.ROUTE, {
                         routeProps: { ...params, member_uuid: uuid },
                     }),

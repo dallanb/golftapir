@@ -54,7 +54,7 @@ function* refresh() {
 function* fetchData({ options = { page: 1, per_page: 10 } }: AnyAction) {
     try {
         const uuid = yield select(selectContestUUID);
-        const { participants, metadata } = yield call(
+        const { participants, metadata }: any = yield call(
             ContestService.fetchContestParticipants,
             uuid,
             {
@@ -68,7 +68,7 @@ function* fetchData({ options = { page: 1, per_page: 10 } }: AnyAction) {
             ({ member_uuid }: { member_uuid: string }) => member_uuid
         );
         if (members.length) {
-            const { members: memberParticipants } = yield call(
+            const { members: memberParticipants }: any = yield call(
                 MemberService.bulkFetchMembers,
                 {
                     within: { key: 'uuid', value: members },

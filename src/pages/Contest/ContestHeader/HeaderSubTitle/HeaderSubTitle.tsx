@@ -13,7 +13,7 @@ import constants from '@constants';
 import routes from '@constants/routes';
 import { useHistory } from 'react-router-dom';
 import './HeaderSubTitle.less';
-import { withAppRoute } from '@utils';
+import { navigate, withAppRoute } from '@utils';
 import { selectMyLeagueUUID } from '@selectors/BaseSelector';
 
 const HeaderSubTitle: React.FunctionComponent<HeaderSubTitleProps> = () => {
@@ -32,7 +32,8 @@ const HeaderSubTitle: React.FunctionComponent<HeaderSubTitleProps> = () => {
             <Button
                 icon={<EditOutlined />}
                 onClick={() =>
-                    history.push(
+                    navigate(
+                        history,
                         withAppRoute(routes.ROUTES.CONTEST_UPDATE.ROUTE, {
                             routeProps: {
                                 league_uuid: leagueUUID,

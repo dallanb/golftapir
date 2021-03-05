@@ -8,6 +8,7 @@ import constants from '@constants';
 import routes from '@constants/routes';
 import {
     mapStatusColour,
+    navigate,
     withAppRoute,
     withDynamicRoute,
     withS3URL,
@@ -24,7 +25,8 @@ const LeaguesListTile: React.FunctionComponent<LeaguesListTileProps> = ({
     const uuid = _get(item, ['uuid'], undefined);
 
     const handleClick = (options: any) => {
-        history.push(
+        navigate(
+            history,
             withAppRoute(routes.ROUTES.HOME.ROUTE, {
                 app: constants.APPS.LEAGUE_APP,
                 routeProps: { league_uuid: uuid },
@@ -40,7 +42,7 @@ const LeaguesListTile: React.FunctionComponent<LeaguesListTileProps> = ({
     const course = _get(item, ['location'], '');
     const time = _get(item, ['start_time'], undefined);
     const participants = _get(item, ['participants'], {});
-    const cardCx = classnames('contest-list-tile-card', { filled: !isEven });
+    const cardCx = classnames('contest-list-tile-card', { filled: isEven });
     return (
         <div key={index} style={style} className="contest-list-tile-view">
             <Card

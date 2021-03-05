@@ -17,7 +17,7 @@ function* init({ options }: AnyAction) {
 
 function* fetchData({ options = { page: 1, per_page: 10 } }: AnyAction) {
     try {
-        const { contests, _metadata: metadata } = yield call(
+        const { contests, _metadata: metadata }: any = yield call(
             ContestService.fetchContestsMaterialized,
             options
         );

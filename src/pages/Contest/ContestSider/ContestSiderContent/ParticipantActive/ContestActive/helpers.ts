@@ -5,7 +5,7 @@ import ContestPageSiderContentParticipantActiveContestActiveActions from './acti
 import { selectSheet } from './selector';
 
 export function* initSheet(uuid: string) {
-    const { sheets: sheet, _metadata: metadata } = yield call(
+    const { sheets: sheet, _metadata: metadata }: any = yield call(
         ScoreService.fetchScoreContestParticipantSheet,
         uuid,
         yield select(selectMyUUID)
