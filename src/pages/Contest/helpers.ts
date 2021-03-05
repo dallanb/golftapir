@@ -24,7 +24,7 @@ export function* initContest(uuid: string) {
 
     const members = Object.keys(participants);
 
-    if (members.length) {
+    if (members.length) { // replace this with leagueMember from the app selector
         const { members: memberParticipants }: any = yield call(
             MemberService.bulkFetchMembers,
             { within: { key: 'uuid', value: members } },

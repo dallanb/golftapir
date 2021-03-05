@@ -16,8 +16,10 @@ import { refreshAuth } from '@helpers';
 import {
     initLeague,
     initLeagueMember,
+    initLeagueMembers,
     refreshLeague,
     refreshLeagueMember,
+    refreshLeagueMembers,
 } from './helpers';
 
 // Action Handlers
@@ -41,6 +43,7 @@ function* init({ uuid }: AnyAction) {
         yield put(BaseActions.initNotifications());
         yield fork(initLeague, uuid);
         yield fork(initLeagueMember, uuid);
+        yield fork(initLeagueMembers, uuid);
         yield put(LeagueAppActions.initSuccess());
     } catch (err) {
         yield put(LeagueAppActions.initFailure(err));
@@ -102,6 +105,23 @@ function* fetchLeagueMember({ uuid, options }: AnyAction) {
     }
 }
 
+function* fetchLeagueMembers({ uuid, options = {} }: AnyAction) {
+    try {
+        const { members: leagueMembers, metadata }: any = yield call(
+            LeagueService.fetchMembersMaterialized,
+            {
+                league_uuid: uuid,
+                ...options,
+            }
+        );
+        yield put(
+            LeagueAppActions.fetchLeagueMembersSuccess(leagueMembers, metadata)
+        );
+    } catch (err) {
+        yield put(LeagueAppActions.fetchLeagueMembersFailure(err));
+    }
+}
+
 function* appRefreshLeague({ uuid }: AnyAction) {
     try {
         yield fork(refreshLeague, uuid);
@@ -120,6 +140,15 @@ function* appRefreshLeagueMember({ uuid }: AnyAction) {
     }
 }
 
+function* appRefreshLeagueMembers({ uuid }: AnyAction) {
+    try {
+        yield fork(refreshLeagueMembers, uuid);
+        yield put(AppActions.refreshLeagueMembersSuccess());
+    } catch (err) {
+        yield put(AppActions.refreshLeagueMembersFailure(err));
+    }
+}
+
 export default function* LeagueAppSaga() {
     yield all([
         takeLatest(LeagueAppTypes.PRE_INIT, preInit),
@@ -128,7 +157,9 @@ export default function* LeagueAppSaga() {
         takeLatest(LeagueAppTypes.TERMINATE, terminate),
         takeLatest(LeagueAppTypes.FETCH_LEAGUE, fetchLeague),
         takeLatest(LeagueAppTypes.FETCH_LEAGUE_MEMBER, fetchLeagueMember),
+        takeLatest(LeagueAppTypes.FETCH_LEAGUE_MEMBERS, fetchLeagueMembers),
         takeLatest(AppTypes.REFRESH_LEAGUE, appRefreshLeague),
         takeLatest(AppTypes.REFRESH_LEAGUE_MEMBER, appRefreshLeagueMember),
+        takeLatest(AppTypes.REFRESH_LEAGUE_MEMBERS, appRefreshLeagueMembers),
     ]);
 }
