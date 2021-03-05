@@ -7,9 +7,6 @@ const { Types, Creators } = createActions(
         initFailure: ['err'],
         terminate: null,
         set: ['data'],
-        fetchData: ['options', 'append'],
-        fetchDataSuccess: ['data', 'metadata'],
-        fetchDataFailure: ['err'],
     },
     {
         prefix: 'MEMBERS_PAGE_SIDER_CONTENT_INVITES_',

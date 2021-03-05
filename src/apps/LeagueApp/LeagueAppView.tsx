@@ -55,8 +55,6 @@ const LeagueAppView: React.FunctionComponent<LeagueAppViewProps> = () => {
     );
     const leagueIsFetching = useSelector(selectLeagueIsFetching);
     const leagueMemberIsFetching = useSelector(selectLeagueMemberIsFetching);
-    console.log(leagueIsFetching);
-    console.log(leagueMemberIsFetching);
     const isFetching =
         _isFetching || leagueIsFetching || leagueMemberIsFetching;
     const isReady = isInitialized && !isRefreshing;
