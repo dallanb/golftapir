@@ -7,12 +7,15 @@ import LeagueHomePageContentMemberStandingsActions from './actions';
 import MemberStandingsTable from './MemberStandingsTable';
 import './MemberStandings.less';
 import CONSTANTS from '@locale/en-CA';
+import { selectLeagueMembersIsFetching } from '@selectors/AppSelector';
 
 const MemberStandings: React.FunctionComponent<MemberStandingsProps> = () => {
     const dispatch = useDispatch();
     const isInitialized = useSelector(selectIsInitialized);
     const isRefreshing = useSelector(selectIsRefreshing);
-    const showSpinner = !isInitialized || isRefreshing;
+    const leagueMembersIsFetching = useSelector(selectLeagueMembersIsFetching);
+    const showSpinner =
+        !isInitialized || isRefreshing || leagueMembersIsFetching;
     const [triggerRefresh, setTriggerRefresh] = useState(false);
 
     useEffect(() => {
