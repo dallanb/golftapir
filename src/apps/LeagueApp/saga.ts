@@ -65,6 +65,8 @@ function* refresh({ uuid }: AnyAction) {
                 league_uuid: uuid,
             })
         );
+
+        yield put(LeagueAppActions.fetchLeagueMembers(uuid));
         yield put(LeagueAppActions.refreshSuccess());
     } catch (err) {
         yield put(LeagueAppActions.refreshFailure(err));
