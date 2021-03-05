@@ -18,7 +18,6 @@ const InvitesList: React.FunctionComponent<InvitesListProps> = ({
     options,
     isFetching,
 }) => {
-    const dispatch = useDispatch();
     const history = useHistory();
 
     const tableDimensions = {
@@ -31,21 +30,9 @@ const InvitesList: React.FunctionComponent<InvitesListProps> = ({
         ),
     };
 
-    const loadMore = (start: number, stop: number) => {
-        dispatch(
-            MembersPageSiderContentInvitesActions.fetchData(
-                {
-                    ...options,
-                    page: Math.floor(stop / 10) + 1,
-                    per_page: 10,
-                },
-                true
-            )
-        );
-    };
+    const loadMore = (start: number, stop: number) => null;
 
-    const hasNextPage =
-        metadata && metadata.page * metadata.per_page < metadata.total_count;
+    const hasNextPage = false;
 
     return (
         <FixedSizeList

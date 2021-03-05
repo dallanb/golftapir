@@ -7,13 +7,13 @@ import './LeagueInfo.less';
 import CONSTANTS from '@locale/en-CA';
 import {
     selectIsInitialized,
-    selectIsLeagueFetching,
+    selectLeagueIsFetching,
 } from '@selectors/AppSelector';
 
 const LeagueInfo: React.FunctionComponent<LeagueInfoProps> = () => {
     const ref = useRef(null);
     const isInitialized = useSelector(selectIsInitialized);
-    const isLeagueFetching = useSelector(selectIsLeagueFetching);
+    const isLeagueFetching = useSelector(selectLeagueIsFetching);
     return (
         <ComponentContent
             componentRef={ref}

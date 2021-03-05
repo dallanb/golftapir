@@ -10,9 +10,6 @@ const INITIAL_STATE: MembersPageContentMembersInterface = {
     isRefreshing: false,
     isInitialized: false,
     err: undefined,
-    data: undefined,
-    metadata: undefined,
-    append: false,
 };
 
 /* ------------- Reducers ------------- */
@@ -47,32 +44,6 @@ function set(state: any, { data }: any) {
         ...data,
     });
 }
-
-function fetchData(state: any, { append = false }: any) {
-    return Immutable.merge(state, {
-        isFetching: true,
-        append,
-    });
-}
-
-function fetchDataSuccess(
-    state: any,
-    { data, metadata, isFetching = false }: any
-) {
-    return Immutable.merge(state, {
-        isFetching,
-        data: state.append ? [...state.data, ...data] : data,
-        metadata,
-    });
-}
-
-function fetchDataFailure(state: any, { err }: any) {
-    return Immutable.merge(state, {
-        isFetching: false,
-        err,
-    });
-}
-
 function refresh(state = INITIAL_STATE) {
     return Immutable.merge(state, {
         isRefreshing: true,
@@ -99,9 +70,6 @@ const HANDLERS = {
     [MembersPageContentMembersTypes.INIT_FAILURE]: initFailure,
     [MembersPageContentMembersTypes.TERMINATE]: terminate,
     [MembersPageContentMembersTypes.SET]: set,
-    [MembersPageContentMembersTypes.FETCH_DATA]: fetchData,
-    [MembersPageContentMembersTypes.FETCH_DATA_SUCCESS]: fetchDataSuccess,
-    [MembersPageContentMembersTypes.FETCH_DATA_FAILURE]: fetchDataFailure,
     [MembersPageContentMembersTypes.REFRESH]: refresh,
     [MembersPageContentMembersTypes.REFRESH_SUCCESS]: refreshSuccess,
     [MembersPageContentMembersTypes.REFRESH_FAILURE]: refreshFailure,

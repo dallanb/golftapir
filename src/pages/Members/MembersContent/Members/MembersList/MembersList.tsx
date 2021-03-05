@@ -24,30 +24,15 @@ const MembersList: React.FunctionComponent<MembersListProps> = ({
         height: getRefHeight(containerRef, 200) - 61,
     };
 
-    const dispatch = useDispatch();
-    const loadMore = (start: number, stop: number) => {
-        dispatch(
-            MembersPageContentMembersActions.fetchData(
-                {
-                    page: Math.floor(stop / 10) + 1,
-                    per_page: 10,
-                },
-                true
-            )
-        );
-    };
+    const loadMore = (start: number, stop: number) => null;
 
-    const hasNextPage = () => {
-        return (
-            metadata && metadata.page * metadata.per_page < metadata.total_count
-        );
-    };
+    const hasNextPage = false;
 
     return (
         <FixedSizeList
             {...tableDimensions}
             items={data}
-            hasNextPage={hasNextPage()}
+            hasNextPage={hasNextPage}
             loadNextPage={loadMore}
             isNextPageLoading={isFetching}
             minimumBatchSize={10}

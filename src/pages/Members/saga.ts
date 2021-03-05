@@ -23,6 +23,7 @@ function* refresh({ uuid }: AnyAction) {
     try {
         yield put(BaseActions.refreshMe(uuid));
         yield put(AppActions.refreshLeagueMember(uuid));
+        yield put(AppActions.refreshLeagueMembers(uuid));
         yield put(MembersPageContentMembersActions.refresh());
         yield put(MembersPageActions.refreshSuccess());
     } catch (err) {
