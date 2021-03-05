@@ -13,7 +13,6 @@ const INITIAL_STATE: ContestPageInterface = {
     subscribed: false,
     contest: undefined,
     participant: undefined,
-    membersHash: undefined,
     rankingLookup: undefined,
     payout: {
         isFetching: false,

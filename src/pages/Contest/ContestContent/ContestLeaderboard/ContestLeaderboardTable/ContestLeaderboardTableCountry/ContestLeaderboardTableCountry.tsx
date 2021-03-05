@@ -4,13 +4,13 @@ import { get as _get } from 'lodash';
 // @ts-ignore
 import Flags from 'country-flag-icons/react/3x2';
 import { ContestLeaderboardTableCountryProps } from './types';
-import { selectMembersHash } from '@pages/Contest/selector';
+import { selectLeagueMembersDataHashByMember } from '@selectors/AppSelector';
 import './ContestLeaderboardTableCountry.less';
 
 const ContestLeaderboardTableCountry: React.FunctionComponent<ContestLeaderboardTableCountryProps> = ({
     uuid,
 }) => {
-    const membersHash = useSelector(selectMembersHash);
+    const membersHash = useSelector(selectLeagueMembersDataHashByMember);
     const country = _get(membersHash, [uuid, 'country'], undefined);
     const Country = _get(Flags, [country], null);
     return Country ? (

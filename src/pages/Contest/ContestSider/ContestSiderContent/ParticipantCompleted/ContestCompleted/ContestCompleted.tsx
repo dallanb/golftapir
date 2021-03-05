@@ -9,14 +9,14 @@ import Flags from 'country-flag-icons/react/3x2';
 import {
     selectContestParticipants,
     selectIsInitialized,
-    selectMembersHash,
 } from '@pages/Contest/selector';
+import { selectLeagueMembersDataHashByMember } from '@selectors/AppSelector';
 import './ContestCompleted.less';
 
 const ContestCompleted: React.FunctionComponent<ContestCompletedProps> = () => {
     const isInitialized = useSelector(selectIsInitialized);
     const participants = useSelector(selectContestParticipants);
-    const membersHash = useSelector(selectMembersHash);
+    const membersHash = useSelector(selectLeagueMembersDataHashByMember);
     const winner = findLowestScoringParticipant(participants);
     const name = _get(winner, ['display_name'], '');
     const uuid = _get(winner, ['member_uuid'], '');

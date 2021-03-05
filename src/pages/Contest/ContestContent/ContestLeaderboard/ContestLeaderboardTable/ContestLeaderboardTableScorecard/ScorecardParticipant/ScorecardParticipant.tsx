@@ -5,7 +5,7 @@ import { get as _get } from 'lodash';
 import { Button } from 'antd';
 import { ScorecardParticipantProps } from './types';
 import { Avatar } from '@components';
-import { selectMembersHash } from '@pages/Contest/selector';
+import { selectLeagueMembersDataHashByMember } from '@selectors/AppSelector';
 import { getName, navigate, withAppRoute, withS3URL } from '@utils';
 import routes from '@constants/routes';
 import './ScorecardParticipant.less';
@@ -16,7 +16,7 @@ const ScorecardParticipant: React.FunctionComponent<ScorecardParticipantProps> =
 }) => {
     const history = useHistory();
     const leagueUUID = useSelector(selectMyLeagueUUID);
-    const membersHash = useSelector(selectMembersHash);
+    const membersHash = useSelector(selectLeagueMembersDataHashByMember);
     const member = _get(membersHash, [user], null);
     const avatar = _get(member, ['avatar'], null);
     const memberUUID = _get(member, ['uuid'], null);
