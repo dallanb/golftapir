@@ -30,7 +30,10 @@ const MemberPending: React.FunctionComponent<MemberPendingProps> = () => {
     };
 
     return (
-        <ComponentContent title={'Actions'} className="member-pending space"   bodyClassName="member-pending-body"
+        <ComponentContent
+            title={'Actions'}
+            className="member-pending"
+            bodyClassName="member-pending-body"
         >
             <div className="member-pending-buttons">
                 <div className="member-pending-buttons-button active">

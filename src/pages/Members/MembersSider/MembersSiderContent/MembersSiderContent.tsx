@@ -12,14 +12,14 @@ const MembersSiderContent: React.FunctionComponent<MembersSiderContentProps> = (
     const { isInitialized } = useSelector(selectData);
     const memberStatus = useSelector(selectLeagueMemberStatus);
     const contentRenderer = (status: string) => {
-        switch (status) {
-            case constants.STATUS.PENDING.KEY:
-                return <MemberPending />;
-            case constants.STATUS.ACTIVE.KEY:
-                return <MemberActive />;
-            default:
-                return null;
-        }
+        // switch (status) {
+        // case constants.STATUS.PENDING.KEY:
+        return <MemberPending />;
+        // case constants.STATUS.ACTIVE.KEY:
+        //     return <MemberActive />;
+        // default:
+        //     return null;
+        // }
     };
     return (
         <SiderLayoutContent showSpinner={!isInitialized}>
