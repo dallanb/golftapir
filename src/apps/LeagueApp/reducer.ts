@@ -2,7 +2,6 @@
 import { static as Immutable } from 'seamless-immutable';
 import { createReducer } from 'reduxsauce';
 import { LeagueAppTypes } from './actions';
-import { AccountTypes, LeagueTypes } from '@actions';
 
 /* ------------- Interface ------------- */
 export interface LeagueAppInterface {
@@ -13,6 +12,7 @@ export interface LeagueAppInterface {
     readonly uuid?: string;
     readonly league: any;
     readonly leagueMember: any;
+    readonly leagueMembers: any;
 }
 
 /* ------------- Initial State ------------- */
@@ -30,6 +30,12 @@ const INITIAL_STATE: LeagueAppInterface = {
     leagueMember: {
         isFetching: false,
         data: undefined,
+        err: undefined,
+    },
+    leagueMembers: {
+        isFetching: false,
+        data: undefined,
+        metadata: undefined,
         err: undefined,
     },
 };
@@ -149,6 +155,40 @@ function fetchLeagueMemberFailure(state: any, { err }: any) {
         },
     });
 }
+function fetchLeagueMembers(state: any) {
+    return Immutable.merge(state, {
+        leagueMembers: {
+            ...state.leagueMembers,
+            isFetching: true,
+            data: undefined,
+            metadata: undefined,
+            err: undefined,
+        },
+    });
+}
+
+function fetchLeagueMembersSuccess(state: any, { data, metadata }: any) {
+    return Immutable.merge(state, {
+        leagueMembers: {
+            ...state.leagueMembers,
+            isFetching: false,
+            data,
+            metadata,
+        },
+    });
+}
+
+function fetchLeagueMembersFailure(state: any, { err }: any) {
+    return Immutable.merge(state, {
+        leagueMember: {
+            ...state.leagueMember,
+            isFetching: false,
+            data: undefined,
+            metadata: undefined,
+            err,
+        },
+    });
+}
 const HANDLERS = {
     [LeagueAppTypes.INIT]: init,
     [LeagueAppTypes.INIT_SUCCESS]: initSuccess,
@@ -164,6 +204,9 @@ const HANDLERS = {
     [LeagueAppTypes.FETCH_LEAGUE_MEMBER]: fetchLeagueMember,
     [LeagueAppTypes.FETCH_LEAGUE_MEMBER_SUCCESS]: fetchLeagueMemberSuccess,
     [LeagueAppTypes.FETCH_LEAGUE_MEMBER_FAILURE]: fetchLeagueMemberFailure,
+    [LeagueAppTypes.FETCH_LEAGUE_MEMBERS]: fetchLeagueMembers,
+    [LeagueAppTypes.FETCH_LEAGUE_MEMBERS_SUCCESS]: fetchLeagueMembersSuccess,
+    [LeagueAppTypes.FETCH_LEAGUE_MEMBERS_FAILURE]: fetchLeagueMembersFailure,
 };
 
 export const reducer = createReducer(INITIAL_STATE, HANDLERS);

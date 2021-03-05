@@ -8,6 +8,9 @@ const { Types, Creators } = createActions(
         refreshLeagueMember: ['uuid'],
         refreshLeagueMemberSuccess: null,
         refreshLeagueMemberFailure: ['err'],
+        refreshLeagueMembers: ['uuid'],
+        refreshLeagueMembersSuccess: null,
+        refreshLeagueMembersFailure: ['err'],
     },
     {
         prefix: 'APP_',

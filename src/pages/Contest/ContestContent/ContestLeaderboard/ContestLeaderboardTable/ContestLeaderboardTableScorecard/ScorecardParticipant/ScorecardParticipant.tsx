@@ -18,7 +18,7 @@ const ScorecardParticipant: React.FunctionComponent<ScorecardParticipantProps> =
     const leagueUUID = useSelector(selectMyLeagueUUID);
     const membersHash = useSelector(selectMembersHash);
     const member = _get(membersHash, [user], null);
-    const avatar = _get(member, ['avatar', 's3_filename'], null);
+    const avatar = _get(member, ['avatar'], null);
     const memberUUID = _get(member, ['uuid'], null);
     const name = getName(member, '');
     return (
