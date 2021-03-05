@@ -1,11 +1,7 @@
 import { put, select } from 'redux-saga/effects';
 import { isNil as _isNil } from 'lodash';
 import LeagueAppActions from '@apps/LeagueApp/actions';
-import {
-    selectLeagueData,
-    selectLeagueMemberData,
-    selectLeagueMembersData,
-} from './selector';
+import { selectLeagueData, selectLeagueMemberData } from './selector';
 
 export function* initLeague(uuid: string) {
     const data = yield select(selectLeagueData);
@@ -42,10 +38,7 @@ export function* refreshLeagueMember(uuid: string) {
 }
 
 export function* initLeagueMembers(uuid: string) {
-    const data = yield select(selectLeagueMembersData);
-    if (_isNil(data)) {
-        yield put(LeagueAppActions.fetchLeagueMembers(uuid));
-    }
+    yield put(LeagueAppActions.fetchLeagueMembers(uuid));
 }
 
 export function* refreshLeagueMembers(uuid: string) {

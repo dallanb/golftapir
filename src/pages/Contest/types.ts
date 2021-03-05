@@ -19,7 +19,6 @@ export interface ContestPageInterface {
     readonly subscribed: boolean;
     readonly contest: any;
     readonly participant: any;
-    readonly membersHash: any;
     readonly rankingLookup: any;
     readonly payout: {
         isFetching: boolean;

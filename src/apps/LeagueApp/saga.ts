@@ -1,6 +1,7 @@
 import {
     all,
     call,
+    delay,
     fork,
     put,
     putResolve,
@@ -65,6 +66,8 @@ function* refresh({ uuid }: AnyAction) {
                 league_uuid: uuid,
             })
         );
+
+        yield put(LeagueAppActions.fetchLeagueMembers(uuid));
         yield put(LeagueAppActions.refreshSuccess());
     } catch (err) {
         yield put(LeagueAppActions.refreshFailure(err));
@@ -107,7 +110,7 @@ function* fetchLeagueMember({ uuid, options }: AnyAction) {
 
 function* fetchLeagueMembers({ uuid, options = {} }: AnyAction) {
     try {
-        const { members: leagueMembers, metadata }: any = yield call(
+        const { members: leagueMembers, _metadata: metadata }: any = yield call(
             LeagueService.fetchMembersMaterialized,
             {
                 league_uuid: uuid,

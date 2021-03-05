@@ -16,11 +16,6 @@ export const selectIsInitialized = createSelector(
     (contestPage) => _get(contestPage, ['isInitialized'], false)
 );
 
-export const selectMembersHash = createSelector(
-    [getContestPage],
-    (contestPage) => _get(contestPage, ['membersHash'], {})
-);
-
 export const selectContest = createSelector([getContestPage], (contestPage) =>
     _get(contestPage, ['contest'], {})
 );

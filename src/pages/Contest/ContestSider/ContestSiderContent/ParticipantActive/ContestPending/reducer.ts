@@ -13,7 +13,6 @@ const INITIAL_STATE: ContestPageSiderContentParticipantActiveContestPendingInter
     data: undefined,
     metadata: undefined,
     append: false,
-    membersHash: undefined,
 };
 
 /* ------------- Reducers ------------- */
