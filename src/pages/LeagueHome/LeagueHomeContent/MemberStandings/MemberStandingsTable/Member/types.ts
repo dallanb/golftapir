@@ -1,3 +1,3 @@
 export interface MemberProps {
-    name: string;
+    uuid: string;
 }

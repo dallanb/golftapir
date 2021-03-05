@@ -11,8 +11,9 @@ const columnsSchema = [
     },
     {
         Header: 'Member',
-        accessor: 'display_name',
-        Cell: ({ value }: any) => <Member name={value} />,
+        id: 'member',
+        accessor: 'uuid',
+        Cell: ({ value }: any) => <Member uuid={value} />,
         className: 'display-name',
     },
     {
