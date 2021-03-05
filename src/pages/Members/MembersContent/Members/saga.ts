@@ -6,6 +6,8 @@ import MembersPageContentMembersActions, {
 } from './actions';
 import { fetchMembersList } from './helpers';
 import { selectLeagueUUID } from '@selectors/AppSelector';
+import { normalizeMembers } from '@pages/Members/MembersContent/Members/utils';
+import { selectMeData } from '@selectors/BaseSelector';
 
 function* init() {
     try {
@@ -41,8 +43,13 @@ function* fetchData({
                 status: 'active',
             }
         );
+        const me = yield select(selectMeData);
+        const normalizedMembers = normalizeMembers(me, members);
         yield put(
-            MembersPageContentMembersActions.fetchDataSuccess(members, metadata)
+            MembersPageContentMembersActions.fetchDataSuccess(
+                normalizedMembers,
+                metadata
+            )
         );
     } catch (err) {
         yield put(MembersPageContentMembersActions.fetchDataFailure(err));
