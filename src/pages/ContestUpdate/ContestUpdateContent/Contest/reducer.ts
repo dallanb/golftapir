@@ -67,6 +67,7 @@ function submit(state: any) {
 function submitSuccess(state: any) {
     return Immutable.merge(state, {
         isSubmitting: false,
+        isSubmitted: true,
     });
 }
 
