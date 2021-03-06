@@ -1,6 +1,6 @@
 import { AnyAction } from 'redux';
 import { all, call, put, select, takeLatest } from 'redux-saga/effects';
-import { message } from 'antd';
+import { message } from '@utils';
 import CourseActions, { CourseTypes } from '@actions/CourseActions';
 import { CourseService } from '@services';
 import CONSTANTS from '@locale/en-CA';

@@ -9,7 +9,7 @@ import {
     useParams,
 } from 'react-router-dom';
 import { get as _get } from 'lodash';
-import { message } from 'antd';
+import { message } from '@utils';
 import { AppLayout } from '@layouts';
 import { ComponentRoute, LeagueAppViewProps } from './types';
 import { AppLoading, ProtectedRoute } from '@components';
@@ -74,7 +74,7 @@ const LeagueAppView: React.FunctionComponent<LeagueAppViewProps> = () => {
             FirebaseClient.onMessageListener()
                 .then((payload) => {
                     const { title, body } = payload.data;
-                    message.success(`${title}; ${body}`);
+                    message.success(`${body}`);
                 })
                 .catch((err) => {
                     message.error(JSON.stringify(err));

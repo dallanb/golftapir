@@ -1,6 +1,6 @@
 import { AnyAction } from 'redux';
 import { all, call, put, select, takeLatest } from 'redux-saga/effects';
-import { message } from 'antd';
+import { message } from '@utils';
 import WagerActions, { WagerTypes } from '@actions/WagerActions';
 import { WagerService } from '@services';
 import CONSTANTS from '@locale/en-CA';

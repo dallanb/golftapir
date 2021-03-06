@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import { get as _get, map as _map } from 'lodash';
-import { message } from 'antd';
+import { message } from '@utils';
 import { AppLayout } from '@layouts';
 import { ComponentRoute, MemberAppViewProps } from './types';
 import { AppLoading, ProtectedRoute } from '@components';
@@ -25,7 +25,7 @@ const MemberAppView: React.FunctionComponent<MemberAppViewProps> = () => {
         FirebaseClient.onMessageListener()
             .then((payload) => {
                 const { title, body } = payload.data;
-                message.success(`${title}; ${body}`);
+                message.success(`${body}`);
             })
             .catch((err) => {
                 message.error(JSON.stringify(err));

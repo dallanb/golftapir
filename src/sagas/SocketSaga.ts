@@ -4,7 +4,7 @@ import { all, fork, take, call, put, takeLatest } from 'redux-saga/effects';
 import { isNil as _isNil } from 'lodash';
 import { WebSocketNotificationClient } from '@libs';
 import { SocketActions, SocketTypes } from '@actions';
-import { message } from 'antd';
+import { message } from '@utils';
 import CONSTANTS from '@locale/en-CA';
 
 function subscribe(options: any) {
