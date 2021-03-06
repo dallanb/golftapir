@@ -7,4 +7,5 @@ export interface MemberPageContentMemberResultsInterface {
     readonly data: any;
     readonly metadata: any;
     readonly append: boolean;
+    readonly options: any;
 }

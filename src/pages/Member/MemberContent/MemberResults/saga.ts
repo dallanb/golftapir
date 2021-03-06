@@ -21,7 +21,7 @@ function* init() {
 function* fetchData({
     options = {
         page: 1,
-        per_page: 3,
+        per_page: 10,
         sort_by: 'mtime.desc',
     },
 }: AnyAction) {

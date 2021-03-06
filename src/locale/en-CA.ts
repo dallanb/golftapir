@@ -416,7 +416,7 @@ const CONSTANTS = {
             DESCRIPTION: 'View Member',
             TABS: {
                 INFO: 'Info',
-                RECENT: 'Recent Contests',
+                CONTESTS: 'Contests',
             },
             FORM: {
                 LABELS: {
