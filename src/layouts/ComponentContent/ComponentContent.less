@@ -1,11 +1,19 @@
 .component-content {
     display: flex;
     flex-direction: column;
-    .component-content-title {
-        border-bottom: 1px fade(@primary-color, 5%) solid;
-        padding: 6px;
-        font-weight: bold;
-        font-size: 12px;
+    .component-content-header {
+        display: flex;
+        .component-content-title {
+            flex: 1;
+            font-weight: bold;
+            font-size: 12px;
+            border-bottom: 1px fade(@primary-color, 5%) solid;
+            padding: 6px;
+        }
+        .component-content-extra {
+            border-bottom: 1px fade(@primary-color, 5%) solid;
+            padding: 6px;
+        }
     }
     .component-content-content {
         height: 100%;
