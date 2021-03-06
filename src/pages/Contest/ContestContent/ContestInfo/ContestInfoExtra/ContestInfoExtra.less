@@ -1,0 +1,15 @@
+.component-content .component-content-header .component-content-extra {
+    padding: 4px;
+    .contest-info-extra {
+        display: flex;
+        .contest-info-extra-update {
+            margin-right: 8px;
+            .update-button {
+                &.disabled {
+                    cursor: not-allowed;
+                    color: fade(@primary-color, 25%);
+                }
+            }
+        }
+    }
+}
