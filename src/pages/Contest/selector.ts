@@ -4,7 +4,7 @@ import { withS3URL } from '@utils';
 import constants from '@constants';
 
 const getContestPage = (state: any) => state.contestPage.data;
-const getBase = (state: any) => state.base;
+const getApp = (state: any) => state.app;
 
 export const selectData = createSelector(
     [getContestPage],
@@ -56,10 +56,10 @@ export const selectContestParticipants = createSelector(
 );
 
 export const selectIsOwner = createSelector(
-    [getContestPage, getBase],
-    (contestPage, base) =>
+    [getContestPage, getApp],
+    (contestPage, app) =>
         _get(contestPage, ['contest', 'owner'], undefined) ===
-        _get(base, ['me', 'data', 'user_uuid'], undefined)
+        _get(app, ['leagueMember', 'data', 'user'], undefined)
 );
 
 export const selectIsRefreshing = createSelector(
