@@ -26,10 +26,13 @@ const topicToRouteMapper = (
             mapping.route += routes.ROUTES.CONTEST.ROUTE;
             switch (key) {
                 case constants.EVENTS.CONTESTS.PARTICIPANT_INVITED:
+                case constants.EVENTS.CONTESTS.PARTICIPANT_INACTIVE:
                 case constants.EVENTS.CONTESTS.PARTICIPANT_ACTIVE:
                 case constants.EVENTS.CONTESTS.PARTICIPANT_COMPLETED:
                 case constants.EVENTS.CONTESTS.CONTEST_READY:
+                case constants.EVENTS.CONTESTS.CONTEST_INACTIVE:
                 case constants.EVENTS.CONTESTS.CONTEST_ACTIVE:
+                case constants.EVENTS.CONTESTS.CONTEST_COMPLETED:
                     mapping.route = withAppRoute(mapping.route, {
                         routeProps: {
                             contest_uuid: _get(

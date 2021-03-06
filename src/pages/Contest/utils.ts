@@ -77,6 +77,9 @@ export const socketEventHandlers = (socket: WebSocket, emitter: any) => {
                     case constants.EVENTS.CONTESTS.PARTICIPANT_ACTIVE:
                         emitter(ContestPageActions.refresh());
                         break;
+                    case constants.EVENTS.CONTESTS.PARTICIPANT_INACTIVE:
+                        emitter(ContestPageActions.refresh());
+                        break;
                     case constants.EVENTS.CONTESTS.PARTICIPANT_COMPLETED:
                         emitter(ContestPageActions.refresh());
                         break;
@@ -84,6 +87,9 @@ export const socketEventHandlers = (socket: WebSocket, emitter: any) => {
                         emitter(ContestPageActions.refresh());
                         break;
                     case constants.EVENTS.CONTESTS.CONTEST_ACTIVE:
+                        emitter(ContestPageActions.refresh());
+                        break;
+                    case constants.EVENTS.CONTESTS.CONTEST_INACTIVE:
                         emitter(ContestPageActions.refresh());
                         break;
                     case constants.EVENTS.CONTESTS.CONTEST_COMPLETED:
