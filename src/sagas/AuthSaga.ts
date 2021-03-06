@@ -9,7 +9,7 @@ import {
     take,
     takeLatest,
 } from 'redux-saga/effects';
-import { message } from 'antd';
+import { message } from '@utils';
 import AuthActions, { AuthTypes } from '@actions/AuthActions';
 import { ClientProxy, AuthService } from '@services';
 import CONSTANTS from '@locale/en-CA';

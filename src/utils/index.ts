@@ -11,6 +11,7 @@ export { default as localStorageSave } from './localStorageSave';
 export { default as mapActionColour } from './mapActionColour';
 export { default as mapActionLabel } from './mapActionLabel';
 export { default as mapStatusColour } from './mapStatusColour';
+export { default as message } from './message';
 export { default as mergeRefs } from './mergeRefs';
 export { default as navigate } from './navigate';
 export { default as normalizeImage } from './normalizeImage';

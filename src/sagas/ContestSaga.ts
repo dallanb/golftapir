@@ -1,6 +1,6 @@
 import { AnyAction } from 'redux';
 import { all, call, fork, put, takeLatest } from 'redux-saga/effects';
-import { message } from 'antd';
+import { message } from '@utils';
 import ContestActions, { ContestTypes } from '@actions/ContestActions';
 import { ContestService } from '@services';
 import CONSTANTS from '@locale/en-CA';

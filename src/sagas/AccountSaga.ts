@@ -1,6 +1,6 @@
 import { AnyAction } from 'redux';
 import { all, call, fork, put, takeLatest } from 'redux-saga/effects';
-import { message } from 'antd';
+import { message } from '@utils';
 import AccountActions, { AccountTypes } from '@actions/AccountActions';
 import { AccountService } from '@services';
 import CONSTANTS from '@locale/en-CA';

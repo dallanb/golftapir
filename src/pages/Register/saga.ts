@@ -3,7 +3,7 @@ import { all, call, put, takeLatest } from 'redux-saga/effects';
 import { omit as _omit, pick as _pick } from 'lodash';
 import RegisterPageActions, { RegisterPageTypes } from './actions';
 import { AuthService, MemberService } from '@services';
-import { message } from 'antd';
+import { message } from '@utils';
 import CONSTANTS from '@locale/en-CA';
 import MemberSettingsPageContentMemberActions from '@pages/MemberSettings/MemberSettingsContent/Member/actions';
 import { BaseActions } from '@actions';

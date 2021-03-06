@@ -3,7 +3,7 @@ import { eventChannel } from 'redux-saga';
 import { all, fork, take, call, put, takeLatest } from 'redux-saga/effects';
 import { WebSocketTopicClient } from '@libs';
 import { TopicSocketActions, TopicSocketTypes } from '@actions';
-import { message } from 'antd';
+import { message } from '@utils';
 import CONSTANTS from '@locale/en-CA';
 
 function subscribe(options: any) {

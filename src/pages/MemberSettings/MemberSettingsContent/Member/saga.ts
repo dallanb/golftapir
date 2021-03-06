@@ -1,6 +1,6 @@
 import { AnyAction } from 'redux';
 import { all, call, put, select, takeLatest } from 'redux-saga/effects';
-import { message } from 'antd';
+import { message } from '@utils';
 import { MemberService } from '@services';
 import { isEmpty as _isEmpty, pick as _pick, omit as _omit } from 'lodash';
 import MemberSettingsPageContentMemberActions, {

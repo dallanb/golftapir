@@ -9,7 +9,7 @@ import { prepareInitialValues } from './utils';
 import { selectAccount } from '@pages/Account/selector';
 import { omit as _omit } from 'lodash';
 import { selectMeData, selectMyAvatar } from '@selectors/BaseSelector';
-import { message } from 'antd';
+import { message } from '@utils';
 import CONSTANTS from '@locale/en-CA';
 import { BaseActions } from '@actions';
 
