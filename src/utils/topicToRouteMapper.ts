@@ -61,6 +61,7 @@ const topicToRouteMapper = (
             switch (key) {
                 case constants.EVENTS.LEAGUES.MEMBER_PENDING:
                 case constants.EVENTS.LEAGUES.MEMBER_ACTIVE:
+                case constants.EVENTS.LEAGUES.MEMBER_INACTIVE:
                     mapping.route = withAppRoute(mapping.route, {
                         app: constants.APPS.LEAGUE_APP,
                         routeProps: {
