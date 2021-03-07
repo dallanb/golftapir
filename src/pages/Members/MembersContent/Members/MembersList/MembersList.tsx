@@ -19,7 +19,7 @@ const MembersList: React.FunctionComponent<MembersListProps> = ({
     const tableDimensions = {
         size: 100,
         width: '100%',
-        height: getRefHeight(containerRef, 200) - 61,
+        height: getRefHeight(containerRef, 200),
     };
 
     const loadMore = (start: number, stop: number) => null;
