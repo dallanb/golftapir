@@ -51,7 +51,12 @@ export const topicSocketEventHandlers = (socket: WebSocket, emitter: any) => {
                         emitter(AppActions.refreshLeagueMembers(leagueUUID));
                         break;
                     case constants.EVENTS.LEAGUES.MEMBER_INACTIVE:
-                        emitter(AppActions.refreshLeagueMembers(leagueUUID));
+                        emitter(
+                            AppActions.leagueMemberInactiveEvent(
+                                leagueUUID,
+                                data
+                            )
+                        );
                         break;
                     default:
                         break;

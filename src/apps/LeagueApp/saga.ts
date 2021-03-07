@@ -23,6 +23,7 @@ import { ClientProxy } from '@services';
 import { refreshAuth } from '@helpers';
 import { fetchLeague, fetchLeagueMember, fetchLeagueMembers } from './helpers';
 import { selectLeagueData } from '@apps/LeagueApp/selector';
+import { selectMyUserUUID } from '@selectors/BaseSelector';
 
 // Action Handlers
 function* preInit({ data }: AnyAction) {
@@ -113,6 +114,16 @@ function* initLeagueMembers({ uuid }: AnyAction) {
     }
 }
 
+function* leagueMemberInactiveEvent({ uuid, payload }: AnyAction) {
+    const { sender } = payload;
+    const myUserUUID = yield select(selectMyUserUUID);
+    if (myUserUUID == sender) {
+        yield put(AppActions.refreshLeagueMember(uuid));
+    } else {
+        yield put(AppActions.refreshLeagueMembers(uuid));
+    }
+}
+
 function* appRefreshLeague({ uuid }: AnyAction) {
     try {
         yield call(fetchLeague, uuid);
@@ -149,6 +160,10 @@ export default function* LeagueAppSaga() {
         takeLatest(LeagueAppTypes.INIT_LEAGUE, initLeague),
         takeLatest(LeagueAppTypes.INIT_LEAGUE_MEMBER, initLeagueMember),
         takeLatest(LeagueAppTypes.INIT_LEAGUE_MEMBERS, initLeagueMembers),
+        takeLatest(
+            LeagueAppTypes.LEAGUE_MEMBER_INACTIVE_EVENT,
+            leagueMemberInactiveEvent
+        ),
         takeLatest(AppTypes.REFRESH_LEAGUE, appRefreshLeague),
         takeLatest(AppTypes.REFRESH_LEAGUE_MEMBER, appRefreshLeagueMember),
         takeLatest(AppTypes.REFRESH_LEAGUE_MEMBERS, appRefreshLeagueMembers),
