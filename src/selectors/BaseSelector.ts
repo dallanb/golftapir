@@ -23,6 +23,11 @@ export const selectMyUUID = createSelector([getBase], (base) =>
     _get(base, ['me', 'data', 'uuid'], undefined)
 );
 
+
+export const selectMyUserUUID = createSelector([getBase], (base) =>
+    _get(base, ['me', 'data', 'user_uuid'], undefined)
+);
+
 export const selectMyDisplayName = createSelector([getBase], (base) =>
     _get(base, ['me', 'data', 'display_name'], '')
 );

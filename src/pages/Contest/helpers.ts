@@ -1,6 +1,6 @@
 import { call, fork, put, select } from 'redux-saga/effects';
 import { keyBy as _keyBy } from 'lodash';
-import { TopicSocketActions } from '@actions';
+import { ContestTopicSocketActions } from '@actions';
 import {
     ContestService,
     MemberService,
@@ -42,12 +42,15 @@ export function* initSubscribed(uuid: string) {
 
 export function* initSocket(uuid: string) {
     yield put(
-        TopicSocketActions.init({ uuid }, { eventHandler: socketEventHandlers })
+        ContestTopicSocketActions.init(
+            { uuid },
+            { eventHandler: socketEventHandlers }
+        )
     );
 }
 
 export function* terminateSocket() {
-    yield put(TopicSocketActions.terminate());
+    yield put(ContestTopicSocketActions.terminate());
 }
 
 export function* initPayout(uuid: string) {

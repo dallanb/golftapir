@@ -1,5 +1,4 @@
-import { MemberActions, NotificationActions } from '@actions';
-import LeagueAppActions from './actions';
+import { AppActions, MemberActions, NotificationActions } from '@actions';
 import constants from '@constants';
 
 export const socketEventHandlers = (socket: WebSocket, emitter: any) => {
@@ -26,6 +25,44 @@ export const socketEventHandlers = (socket: WebSocket, emitter: any) => {
                         break;
                 }
                 break;
+            default:
+                break;
+        }
+    };
+    return () => {};
+};
+
+export const topicSocketEventHandlers = (socket: WebSocket, emitter: any) => {
+    socket.onmessage = (evt: MessageEvent) => {
+        const data = JSON.parse(evt.data);
+        console.info(data);
+        const [topic, event] = data.event.split(':');
+        switch (topic) {
+            case constants.TOPICS.LEAGUES: {
+                const leagueUUID = data.league_uuid;
+                switch (event) {
+                    case constants.EVENTS.LEAGUES.MEMBER_CREATED:
+                        emitter(AppActions.refreshLeagueMembers(leagueUUID));
+                        break;
+                    case constants.EVENTS.LEAGUES.MEMBER_PENDING:
+                        emitter(AppActions.refreshLeagueMembers(leagueUUID));
+                        break;
+                    case constants.EVENTS.LEAGUES.MEMBER_ACTIVE:
+                        emitter(AppActions.refreshLeagueMembers(leagueUUID));
+                        break;
+                    case constants.EVENTS.LEAGUES.MEMBER_INACTIVE:
+                        emitter(
+                            AppActions.leagueMemberInactiveEvent(
+                                leagueUUID,
+                                data
+                            )
+                        );
+                        break;
+                    default:
+                        break;
+                }
+                break;
+            }
             default:
                 break;
         }

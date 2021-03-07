@@ -42,6 +42,7 @@ const LeagueAppView: React.FunctionComponent<LeagueAppViewProps> = () => {
         isRefreshing,
         isFetching: _isFetching,
         league,
+        leagueMember,
         uuid: leagueUUID,
     } = useSelector(selectAppData);
     const { me, isLoggedIn, forceLogout } = useSelector(selectBaseData);
@@ -52,6 +53,11 @@ const LeagueAppView: React.FunctionComponent<LeagueAppViewProps> = () => {
     const leagueAvatar = withS3URL(
         _get(league, ['data', 'avatar', 's3_filename'], null),
         constants.S3_FOLDERS.LEAGUE.AVATAR
+    );
+    const memberStatus = _get(
+        leagueMember,
+        ['data', 'status'],
+        constants.STATUS.INACTIVE.KEY
     );
     const leagueIsFetching = useSelector(selectLeagueIsFetching);
     const leagueMemberIsFetching = useSelector(selectLeagueMemberIsFetching);
@@ -95,6 +101,17 @@ const LeagueAppView: React.FunctionComponent<LeagueAppViewProps> = () => {
             dispatch(LeagueAppActions.refresh(paramLeagueUUID));
         }
     }, [isReady, isFetching, paramLeagueUUID]);
+
+    useEffect(() => {
+        console.log(leagueMemberIsFetching);
+        console.log(memberStatus);
+        if (
+            !leagueMemberIsFetching &&
+            memberStatus === constants.STATUS.INACTIVE.KEY
+        ) {
+            navigate(history, constantRoutes.ROUTES.HOME.ROUTE);
+        }
+    }, [leagueMemberIsFetching, memberStatus]);
 
     const menuProps = {
         paths: {

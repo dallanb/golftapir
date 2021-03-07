@@ -23,6 +23,7 @@ const { Types, Creators } = createActions(
         initLeagueMembersSuccess: null,
         initLeagueMembersFailure: ['err'],
         setLeagueMembers: ['data', 'metadata'],
+        leagueMemberInactiveEvent: ['uuid', 'payload'], // this is the handler for constants.EVENTS.LEAGUES.MEMBER_INACTIVE event
     },
     {
         prefix: 'LEAGUE_APP_',
