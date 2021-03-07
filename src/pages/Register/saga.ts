@@ -16,11 +16,12 @@ function* init({ token }: AnyAction) {
                 AuthService.fetchInvite,
                 token
             );
-            yield put(
-                RegisterPageActions.setFormInitialValues(
-                    _pick(invite, ['email', 'token'])
-                )
+            let props = _pick(invite, ['email', 'token']);
+            props = Object.assign(
+                props,
+                props.email && { confirm_email: props.email }
             );
+            yield put(RegisterPageActions.setFormInitialValues(props));
         }
         yield put(RegisterPageActions.initSuccess());
     } catch (err) {

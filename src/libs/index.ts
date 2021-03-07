@@ -2,5 +2,6 @@ export { FirebaseClient } from './firebase';
 export {
     WebSocketClient,
     WebSocketNotificationClient,
-    WebSocketTopicClient,
+    WebSocketContestTopicClient,
+    WebSocketLeagueTopicClient,
 } from './ws';

@@ -32,3 +32,26 @@ export const socketEventHandlers = (socket: WebSocket, emitter: any) => {
     };
     return () => {};
 };
+
+export const topicSocketEventHandlers = (socket: WebSocket, emitter: any) => {
+    socket.onmessage = (evt: MessageEvent) => {
+        const data = JSON.parse(evt.data);
+        console.info(data);
+        const [topic, event] = data.event.split(':');
+        switch (topic) {
+            case constants.TOPICS.LEAGUES:
+                switch (event) {
+                    case constants.EVENTS.LEAGUES.MEMBER_PENDING:
+                        break;
+                    case constants.EVENTS.LEAGUES.MEMBER_ACTIVE:
+                        break;
+                    default:
+                        break;
+                }
+                break;
+            default:
+                break;
+        }
+    };
+    return () => {};
+};

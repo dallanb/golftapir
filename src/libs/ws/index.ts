@@ -1,3 +1,4 @@
 export { default as WebSocketClient } from './client';
 export { default as WebSocketNotificationClient } from './notificationClient';
-export { default as WebSocketTopicClient } from './topicClient';
+export { default as WebSocketContestTopicClient } from './contestTopicClient';
+export { default as WebSocketLeagueTopicClient } from './leagueTopicClient';

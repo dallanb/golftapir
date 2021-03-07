@@ -51,4 +51,4 @@ export default function* MembersPageSaga() {
         takeLatest(MembersPageTypes.REFRESH, refresh),
         takeLatest(MembersPageTypes.UPDATE_MEMBER_STATUS, updateMemberStatus),
     ]);
-}
+} 

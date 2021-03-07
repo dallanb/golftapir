@@ -12,9 +12,14 @@ import { isNil as _isNil } from 'lodash';
 import { AnyAction } from 'redux';
 import { get as _get, isObject as _isObject } from 'lodash';
 import LeagueAppActions, { LeagueAppTypes } from './actions';
-import { AppActions, AppTypes, BaseActions, SocketActions } from '@actions';
-import { socketEventHandlers } from './utils';
-import { ClientProxy, LeagueService } from '@services';
+import {
+    AppActions,
+    AppTypes,
+    BaseActions,
+    LeagueTopicSocketActions,
+} from '@actions';
+import { socketEventHandlers, topicSocketEventHandlers } from './utils';
+import { ClientProxy } from '@services';
 import { refreshAuth } from '@helpers';
 import { fetchLeague, fetchLeagueMember, fetchLeagueMembers } from './helpers';
 import { selectLeagueData } from '@apps/LeagueApp/selector';
@@ -35,6 +40,12 @@ function* init({ uuid }: AnyAction) {
     try {
         if (!ClientProxy.accessToken) yield call(refreshAuth);
         yield put(BaseActions.initSockets(socketEventHandlers));
+        yield put(
+            LeagueTopicSocketActions.init(
+                { uuid },
+                { eventHandler: topicSocketEventHandlers }
+            )
+        );
         yield put(BaseActions.initMe(uuid));
         yield put(BaseActions.initLeagues());
         yield put(BaseActions.initNotifications());
@@ -65,6 +76,7 @@ function* refresh({ uuid }: AnyAction) {
 function* terminate() {
     try {
         yield put(BaseActions.terminateSockets());
+        yield put(LeagueTopicSocketActions.terminate());
     } catch (err) {
         console.error(err);
     }

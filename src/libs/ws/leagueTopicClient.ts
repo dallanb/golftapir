@@ -1,10 +1,10 @@
 import Client from './client';
 import config from 'config';
 
-class TopicClient extends Client {
+class LeagueTopicClient extends Client {
     constructor() {
         super(config.WS_TOPIC_URL);
     }
 }
 
-export default new TopicClient();
+export default new LeagueTopicClient();

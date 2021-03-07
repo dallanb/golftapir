@@ -1,15 +1,15 @@
 import { AnyAction } from 'redux';
 import { eventChannel } from 'redux-saga';
 import { all, fork, take, call, put, takeLatest } from 'redux-saga/effects';
-import { WebSocketTopicClient } from '@libs';
-import { TopicSocketActions, TopicSocketTypes } from '@actions';
+import { WebSocketContestTopicClient } from '@libs';
+import { ContestTopicSocketActions, ContestTopicSocketTypes } from '@actions';
 import { message } from '@utils';
 import CONSTANTS from '@locale/en-CA';
 
 function subscribe(options: any) {
     const { eventHandler } = options;
     return eventChannel((emitter) =>
-        eventHandler(WebSocketTopicClient.socket, emitter)
+        eventHandler(WebSocketContestTopicClient.socket, emitter)
     );
 }
 
@@ -23,22 +23,22 @@ function* read(options: any) {
 
 function* write({ data }: AnyAction) {
     try {
-        WebSocketTopicClient.socket?.send(data);
-        yield put(TopicSocketActions.writeSuccess());
+        WebSocketContestTopicClient.socket?.send(data);
+        yield put(ContestTopicSocketActions.writeSuccess());
     } catch (err) {
-        yield put(TopicSocketActions.writeFailure());
+        yield put(ContestTopicSocketActions.writeFailure());
     }
 }
 
 function* init({ data, options }: AnyAction) {
     try {
         // maybe notify the server that the user has logged in?
-        const status = yield WebSocketTopicClient.init(data.uuid);
+        const status = yield WebSocketContestTopicClient.init(data.uuid);
         if (!status) {
             throw new Error();
         }
         yield fork(read, options);
-        yield put(TopicSocketActions.initSuccess());
+        yield put(ContestTopicSocketActions.initSuccess());
     } catch (err) {
         console.error(err);
         message.error(CONSTANTS.SOCKET.ERROR.INIT);
@@ -47,18 +47,18 @@ function* init({ data, options }: AnyAction) {
 
 function* terminate({}: AnyAction) {
     try {
-        yield WebSocketTopicClient.terminate();
-        yield put(TopicSocketActions.terminateSuccess());
+        yield WebSocketContestTopicClient.terminate();
+        yield put(ContestTopicSocketActions.terminateSuccess());
     } catch (err) {
         message.error(CONSTANTS.SOCKET.ERROR.TERMINATE);
-        yield put(TopicSocketActions.terminateFailure(err));
+        yield put(ContestTopicSocketActions.terminateFailure(err));
     }
 }
 
-export default function* TopicSocketSaga() {
+export default function* ContestTopicSocketSaga() {
     yield all([
-        takeLatest(TopicSocketTypes.INIT, init),
-        takeLatest(TopicSocketTypes.TERMINATE, terminate),
-        takeLatest(TopicSocketTypes.WRITE, write),
+        takeLatest(ContestTopicSocketTypes.INIT, init),
+        takeLatest(ContestTopicSocketTypes.TERMINATE, terminate),
+        takeLatest(ContestTopicSocketTypes.WRITE, write),
     ]);
 }

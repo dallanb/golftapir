@@ -13,8 +13,8 @@ const { Types, Creators } = createActions(
         writeFailure: ['err'],
     },
     {
-        prefix: 'TOPIC_SOCKET_',
+        prefix: 'CONTEST_TOPIC_SOCKET_',
     }
 );
-export const TopicSocketTypes = Types;
+export const ContestTopicSocketTypes = Types;
 export default Creators;
