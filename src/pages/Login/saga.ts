@@ -10,7 +10,7 @@ function* init() {
         );
         yield put(LoginPageActions.initSuccess());
     } catch (err) {
-        yield put(LoginPageActions.initFailure(err));
+        yield put(LoginPageActions.initFailure(err.toJSON()));
     }
 }
 

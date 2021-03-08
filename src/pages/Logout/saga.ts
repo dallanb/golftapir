@@ -7,7 +7,7 @@ function* init() {
         yield put(AuthActions.logout());
         yield put(LogoutPageActions.initSuccess());
     } catch (err) {
-        yield put(LogoutPageActions.initFailure(err));
+        yield put(LogoutPageActions.initFailure(err.toJSON()));
     }
 }
 

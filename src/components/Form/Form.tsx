@@ -56,6 +56,7 @@ class Form extends React.Component<FormProps> {
             onSubmit,
             validateOnBlur = false,
             validateOnChange = false,
+            formRef = undefined,
         } = this.props;
         return (
             <Formik
@@ -64,6 +65,7 @@ class Form extends React.Component<FormProps> {
                 onSubmit={onSubmit}
                 validateOnBlur={validateOnBlur}
                 validateOnChange={validateOnChange}
+                innerRef={formRef}
             >
                 {(formik: FormikProps<FormikValues>) =>
                     this.prepareForm(formik)

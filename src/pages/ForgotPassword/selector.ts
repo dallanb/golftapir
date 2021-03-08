@@ -28,3 +28,8 @@ export const selectFormInitialValues = createSelector(
     (forgotPasswordPage) =>
         _get(forgotPasswordPage, ['formInitialValues'], false)
 );
+
+export const selectErr = createSelector(
+    [getForgotPasswordPage],
+    (forgotPasswordPage) => _get(forgotPasswordPage, ['err'], false)
+);

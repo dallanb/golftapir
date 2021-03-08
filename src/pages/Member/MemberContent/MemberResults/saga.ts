@@ -14,7 +14,9 @@ function* init() {
         yield call(fetchMemberResults);
         yield put(MemberPageContentMemberResultsActions.initSuccess());
     } catch (err) {
-        yield put(MemberPageContentMemberResultsActions.initFailure(err));
+        yield put(
+            MemberPageContentMemberResultsActions.initFailure(err.toJSON())
+        );
     }
 }
 
@@ -44,7 +46,9 @@ function* fetchData({
             )
         );
     } catch (err) {
-        yield put(MemberPageContentMemberResultsActions.fetchDataFailure(err));
+        yield put(
+            MemberPageContentMemberResultsActions.fetchDataFailure(err.toJSON())
+        );
     }
 }
 

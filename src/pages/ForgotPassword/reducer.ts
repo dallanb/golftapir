@@ -70,10 +70,11 @@ function submitSuccess(state: any) {
     });
 }
 
-function submitFailure(state: any) {
+function submitFailure(state: any, { err }: any) {
     return Immutable.merge(state, {
         isSubmitting: false,
         isSubmitted: false,
+        err,
     });
 }
 

@@ -9,7 +9,7 @@ function* init() {
     try {
         yield put(MembersPageContentMembersActions.initSuccess());
     } catch (err) {
-        yield put(MembersPageContentMembersActions.initFailure(err));
+        yield put(MembersPageContentMembersActions.initFailure(err.toJSON()));
     }
 }
 
@@ -19,7 +19,9 @@ function* refresh() {
         yield put(AppActions.refreshLeagueMembers(uuid));
         yield put(MembersPageContentMembersActions.refreshSuccess());
     } catch (err) {
-        yield put(MembersPageContentMembersActions.refreshFailure(err));
+        yield put(
+            MembersPageContentMembersActions.refreshFailure(err.toJSON())
+        );
     }
 }
 
