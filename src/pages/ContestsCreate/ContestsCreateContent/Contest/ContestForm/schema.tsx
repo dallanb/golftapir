@@ -179,7 +179,7 @@ export const validationSchema = (walletBalance: number) =>
             .required(FORM.VALIDATION.START_TIME_REQUIRED)
             .nullable(),
         location_uuid: Yup.string().required(FORM.VALIDATION.COURSE_REQUIRED),
-        participants: Yup.array(),
+        participants: Yup.array().min(2, FORM.VALIDATION.PARTICIPANT_MINIMUM),
         buy_in: Yup.number().when('participants', {
             is: (val) => val.length == 1,
             then: Yup.number().max(
