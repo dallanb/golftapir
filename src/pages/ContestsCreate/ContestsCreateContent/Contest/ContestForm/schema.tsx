@@ -180,9 +180,16 @@ export const validationSchema = (walletBalance: number) =>
             .nullable(),
         location_uuid: Yup.string().required(FORM.VALIDATION.COURSE_REQUIRED),
         participants: Yup.array(),
-        buy_in: Yup.number()
-            .required(FORM.VALIDATION.BUY_IN_REQUIRED)
-            .max(walletBalance, FORM.VALIDATION.BUY_IN_WALLET_LIMIT),
+        buy_in: Yup.number().when('participants', {
+            is: (val) => val.length == 1,
+            then: Yup.number().max(
+                0,
+                FORM.VALIDATION.BUY_IN_SINGLE_PARTICIPANT
+            ),
+            otherwise: Yup.number()
+                .required(FORM.VALIDATION.BUY_IN_REQUIRED)
+                .max(walletBalance, FORM.VALIDATION.BUY_IN_WALLET_LIMIT),
+        }),
         payout: Yup.array()
             .required(FORM.VALIDATION.PAYOUT_REQUIRED)
             .of(
