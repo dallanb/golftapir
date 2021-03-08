@@ -1,3 +1,4 @@
+export { default as authErrorMessage } from './authErrorMessage';
 export { default as countdown } from './countdown';
 export { default as formatTimeStamp } from './formatTimeStamp';
 export { default as getMenuSelectedKey } from './getMenuSelectedKey';

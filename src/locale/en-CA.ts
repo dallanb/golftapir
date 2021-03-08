@@ -29,6 +29,8 @@ const CONSTANTS = {
         },
         ERROR: {
             LOGIN: 'Login unsuccessful',
+            LOGIN_CONFIRM_EMAIL:
+                'Login unsuccessful. Check you email address for account activation instructions.',
             LOGOUT: 'Logout unsuccessful',
             REGISTER: 'Registration unsuccessful',
             SESSION: 'Session expired',

@@ -9,7 +9,7 @@ import {
     take,
     takeLatest,
 } from 'redux-saga/effects';
-import { message } from '@utils';
+import { authErrorMessage, message } from '@utils';
 import AuthActions, { AuthTypes } from '@actions/AuthActions';
 import { ClientProxy, AuthService } from '@services';
 import CONSTANTS from '@locale/en-CA';
@@ -38,7 +38,9 @@ function* login({ email, password }: AnyAction) {
             },
         } = err;
         yield put(AuthActions.loginFailure(err));
-        message.error(status === 401 ? msg : CONSTANTS.AUTH.ERROR.LOGIN);
+        message.error(
+            status === 401 ? authErrorMessage(msg) : CONSTANTS.AUTH.ERROR.LOGIN
+        );
     }
 }
 
