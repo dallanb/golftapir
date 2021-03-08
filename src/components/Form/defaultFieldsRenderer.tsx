@@ -107,6 +107,7 @@ const fieldRenderer = (
                         formik.handleBlur(e);
                         formik.validateField(name);
                     }}
+                    disabled={_get(options, ['disabled'], false)}
                     readOnly={_get(options, ['readonly'], false)}
                     placeholder={_get(options, ['placeholder'], undefined)}
                     prefix={
