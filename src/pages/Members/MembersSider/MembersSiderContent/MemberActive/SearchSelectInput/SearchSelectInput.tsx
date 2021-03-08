@@ -9,9 +9,11 @@ import MembersPageSiderContentSearchActions from './actions';
 import { selectIsSearching, selectKey, selectSearchData } from './selector';
 import CONSTANTS from '@locale/en-CA';
 import { navigate, withAppRoute } from '@utils';
+import { selectLeagueMembersDataByStatus } from '@selectors/AppSelector';
+import ComponentContent from '@layouts/ComponentContent';
 import routes from '@constants/routes';
 import './SearchSelectInput.less';
-import ComponentContent from '@layouts/ComponentContent';
+import { checkMemberLimit } from '@pages/Members/MembersSider/MembersSiderContent/MemberActive/SearchSelectInput/utils';
 
 const { Option } = Select;
 
@@ -20,6 +22,8 @@ const SearchSelectInput: React.FunctionComponent<SearchInputProps> = () => {
     const history = useHistory();
     const params = useParams();
     const [value, setValue] = useState<any>();
+    const members = useSelector(selectLeagueMembersDataByStatus);
+    const disabled = checkMemberLimit(members);
     const data = useSelector(selectSearchData) || [];
     const isSearching = useSelector(selectIsSearching);
     const searchKey = useSelector(selectKey);
@@ -61,6 +65,7 @@ const SearchSelectInput: React.FunctionComponent<SearchInputProps> = () => {
                 <Select
                     showSearch
                     allowClear
+                    disabled={disabled}
                     value={value}
                     placeholder={CONSTANTS.PAGES.MEMBERS.SEARCH}
                     notFoundContent={isSearching ? <Spin size="small" /> : null}
