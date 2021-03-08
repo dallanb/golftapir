@@ -103,8 +103,6 @@ const LeagueAppView: React.FunctionComponent<LeagueAppViewProps> = () => {
     }, [isReady, isFetching, paramLeagueUUID]);
 
     useEffect(() => {
-        console.log(leagueMemberIsFetching);
-        console.log(memberStatus);
         if (
             !leagueMemberIsFetching &&
             memberStatus === constants.STATUS.INACTIVE.KEY
