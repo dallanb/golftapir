@@ -21,13 +21,17 @@ export function* initContest(uuid: string) {
 }
 
 function* initContestParticipant(uuid: string) {
-    const leagueMember = yield select(selectLeagueMemberData);
-    const { participants: participant }: any = yield call(
-        ContestService.fetchContestParticipantMember,
-        uuid,
-        leagueMember.member
-    );
-    yield put(ContestPageActions.set({ participant }));
+    try {
+        const leagueMember = yield select(selectLeagueMemberData);
+        const { participants: participant }: any = yield call(
+            ContestService.fetchContestParticipantMember,
+            uuid,
+            leagueMember.member
+        );
+        yield put(ContestPageActions.set({ participant }));
+    } catch (err) {
+        console.error('Not a participant');
+    }
 }
 
 export function* initSubscribed(uuid: string) {
