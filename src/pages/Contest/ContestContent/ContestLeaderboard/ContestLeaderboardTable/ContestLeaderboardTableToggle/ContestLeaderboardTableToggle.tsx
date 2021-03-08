@@ -13,7 +13,9 @@ const ContestLeaderboardTableToggle: React.FunctionComponent<ContestLeaderboardT
 }) => {
     // try and maybe pass this in as a prop from the ultimate parent component (ContestLeaderboardTable)
     const contestStatus = useSelector(selectContestStatus);
-    const disabled = contestStatus === constants.STATUS.PENDING.KEY;
+    const disabled =
+        contestStatus === constants.STATUS.PENDING.KEY ||
+        contestStatus === constants.STATUS.INACTIVE.KEY;
     return (
         <Button
             type="text"
