@@ -28,7 +28,7 @@ const MemberAppView: React.FunctionComponent<MemberAppViewProps> = () => {
                 message.success(body);
             })
             .catch((err) => {
-                message.error(JSON.stringify(err));
+                message.error(JSON.stringify(err.toJSON()));
             });
         return () => {
             dispatch(MemberAppActions.terminate());

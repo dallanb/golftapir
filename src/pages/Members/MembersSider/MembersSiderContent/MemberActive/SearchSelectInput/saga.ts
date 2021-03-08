@@ -19,7 +19,9 @@ function* search({ key }: AnyAction) {
         });
         yield put(MembersPageSiderContentSearchActions.searchSuccess(members));
     } catch (err) {
-        yield put(MembersPageSiderContentSearchActions.searchFailure(err));
+        yield put(
+            MembersPageSiderContentSearchActions.searchFailure(err.toJSON())
+        );
     }
 }
 
@@ -35,7 +37,9 @@ function* invite({ uuid: user_uuid, email }: AnyAction) {
         } else {
             message.error(CONSTANTS.LEAGUE.ERROR.MEMBER_INVITE);
         }
-        yield put(MembersPageSiderContentSearchActions.inviteFailure(err));
+        yield put(
+            MembersPageSiderContentSearchActions.inviteFailure(err.toJSON())
+        );
     }
 }
 

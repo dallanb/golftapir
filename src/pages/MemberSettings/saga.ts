@@ -5,17 +5,19 @@ import { selectLeagueUUID } from '@selectors/AppSelector';
 
 function* init() {
     try {
-        const {
-            members: member,
-        }: any = yield call(MemberService.fetchMemberUser, 'me', {
-            include: 'avatar',
-            league_uuid: yield select(selectLeagueUUID),
-        });
+        const { members: member }: any = yield call(
+            MemberService.fetchMemberUser,
+            'me',
+            {
+                include: 'avatar',
+                league_uuid: yield select(selectLeagueUUID),
+            }
+        );
         yield put(MemberSettingsPageActions.set({ member }));
 
         yield put(MemberSettingsPageActions.initSuccess());
     } catch (err) {
-        yield put(MemberSettingsPageActions.initFailure(err));
+        yield put(MemberSettingsPageActions.initFailure(err.toJSON()));
     }
 }
 

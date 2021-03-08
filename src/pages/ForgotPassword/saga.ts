@@ -8,7 +8,7 @@ function* init() {
         );
         yield put(ForgotPasswordPageActions.initSuccess());
     } catch (err) {
-        yield put(ForgotPasswordPageActions.initFailure(err));
+        yield put(ForgotPasswordPageActions.initFailure(err.toJSON()));
     }
 }
 

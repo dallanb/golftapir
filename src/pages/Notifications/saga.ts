@@ -5,7 +5,7 @@ function* init() {
     try {
         yield put(NotificationsPageActions.initSuccess());
     } catch (err) {
-        yield put(NotificationsPageActions.initFailure(err));
+        yield put(NotificationsPageActions.initFailure(err.toJSON()));
     }
 }
 

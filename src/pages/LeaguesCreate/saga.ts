@@ -6,7 +6,7 @@ function* init() {
     try {
         yield put(LeaguesCreatePageActions.initSuccess());
     } catch (err) {
-        yield put(LeaguesCreatePageActions.initFailure(err));
+        yield put(LeaguesCreatePageActions.initFailure(err.toJSON()));
     }
 }
 

@@ -22,7 +22,7 @@ function* initMe({ league_uuid }: any) {
         );
         yield put(BaseActions.initMeSuccess(me));
     } catch (err) {
-        yield put(BaseActions.initMeFailure(err));
+        yield put(BaseActions.initMeFailure(err.toJSON()));
     }
 }
 
@@ -38,7 +38,7 @@ function* refreshMe({ league_uuid }: any) {
         );
         yield put(BaseActions.refreshMeSuccess(me));
     } catch (err) {
-        yield put(BaseActions.refreshMeFailure(err));
+        yield put(BaseActions.refreshMeFailure(err.toJSON()));
     }
 }
 
@@ -55,7 +55,7 @@ function* initLeagues() {
         );
         yield put(BaseActions.initLeaguesSuccess(leagues));
     } catch (err) {
-        yield put(BaseActions.initLeaguesFailure(err));
+        yield put(BaseActions.initLeaguesFailure(err.toJSON()));
     }
 }
 
@@ -72,7 +72,7 @@ function* refreshLeagues() {
         );
         yield put(BaseActions.refreshLeaguesSuccess(leagues));
     } catch (err) {
-        yield put(BaseActions.refreshLeaguesFailure(err));
+        yield put(BaseActions.refreshLeaguesFailure(err.toJSON()));
     }
 }
 
@@ -85,7 +85,7 @@ function* initSockets({ handlers }: AnyAction) {
         );
         yield put(BaseActions.initSocketsSuccess());
     } catch (err) {
-        yield put(BaseActions.initSocketsFailure(err));
+        yield put(BaseActions.initSocketsFailure(err.toJSON()));
     }
 }
 
@@ -94,7 +94,7 @@ function* terminateSockets() {
         yield put(SocketActions.terminate());
         yield put(BaseActions.terminateSocketsSuccess());
     } catch (err) {
-        yield put(BaseActions.terminateSocketsFailure(err));
+        yield put(BaseActions.terminateSocketsFailure(err.toJSON()));
     }
 }
 

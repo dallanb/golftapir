@@ -13,7 +13,7 @@ function* init() {
         );
         yield put(ResetPasswordPageActions.initSuccess());
     } catch (err) {
-        yield put(ResetPasswordPageActions.initFailure(err));
+        yield put(ResetPasswordPageActions.initFailure(err.toJSON()));
     }
 }
 

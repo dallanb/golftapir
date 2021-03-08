@@ -6,7 +6,7 @@ function* init() {
     try {
         yield put(ContestsPageActions.initSuccess());
     } catch (err) {
-        yield put(ContestsPageActions.initFailure(err));
+        yield put(ContestsPageActions.initFailure(err.toJSON()));
     }
 }
 

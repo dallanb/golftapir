@@ -11,7 +11,7 @@ function* fetchScore({ uuid, options }: AnyAction) {
         const { scores, _metadata: metadata } = res;
         yield put(ScoreActions.fetchScoreSuccess(scores, metadata));
     } catch (err) {
-        yield put(ScoreActions.fetchScoreFailure(err));
+        yield put(ScoreActions.fetchScoreFailure(err.toJSON()));
         message.error(CONSTANTS.SCORE.ERROR.FETCH);
     }
 }
@@ -25,7 +25,7 @@ function* fetchScoreContest({ uuid, options }: AnyAction) {
         const { scores, _metadata: metadata } = res;
         yield put(ScoreActions.fetchScoreContestSuccess(scores, metadata));
     } catch (err) {
-        yield put(ScoreActions.fetchScoreContestFailure(err));
+        yield put(ScoreActions.fetchScoreContestFailure(err.toJSON()));
         message.error(CONSTANTS.SCORE.ERROR.FETCH_CONTEST);
     }
 }
@@ -49,7 +49,9 @@ function* fetchScoreContestParticipantSheet({
             )
         );
     } catch (err) {
-        yield put(ScoreActions.fetchScoreContestParticipantSheetFailure(err));
+        yield put(
+            ScoreActions.fetchScoreContestParticipantSheetFailure(err.toJSON())
+        );
         message.error(CONSTANTS.SCORE.ERROR.FETCH_CONTEST);
     }
 }
@@ -60,7 +62,7 @@ function* updateScore({ uuid, data }: AnyAction) {
         const { scores } = res;
         yield put(ScoreActions.updateScoreSuccess(scores));
     } catch (err) {
-        yield put(ScoreActions.updateScoreFailure(err));
+        yield put(ScoreActions.updateScoreFailure(err.toJSON()));
         message.error(CONSTANTS.SCORE.ERROR.UPDATE);
     }
 }
@@ -71,7 +73,7 @@ function* updateSheet({ uuid, data }: AnyAction) {
         const { scores } = res;
         yield put(ScoreActions.updateSheetSuccess(scores));
     } catch (err) {
-        yield put(ScoreActions.updateSheetFailure(err));
+        yield put(ScoreActions.updateSheetFailure(err.toJSON()));
         message.error(CONSTANTS.SCORE.ERROR.UPDATE_SHEET);
     }
 }
@@ -87,7 +89,7 @@ function* updateHole({ uuid, holeId, data }: AnyAction) {
         const { scores } = res;
         yield put(ScoreActions.updateHoleSuccess(scores));
     } catch (err) {
-        yield put(ScoreActions.updateHoleFailure(err));
+        yield put(ScoreActions.updateHoleFailure(err.toJSON()));
         message.error(CONSTANTS.SCORE.ERROR.UPDATE_SCORE);
     }
 }

@@ -37,7 +37,7 @@ function* login({ email, password }: AnyAction) {
                 status,
             },
         } = err;
-        yield put(AuthActions.loginFailure(err));
+        yield put(AuthActions.loginFailure(err.toJSON()));
         message.error(
             status === 401 ? authErrorMessage(msg) : CONSTANTS.AUTH.ERROR.LOGIN
         );
@@ -69,7 +69,7 @@ function* register({
         yield put(AuthActions.registerSuccess(user));
         message.success(CONSTANTS.AUTH.SUCCESS.REGISTER);
     } catch (err) {
-        yield put(AuthActions.registerFailure(err));
+        yield put(AuthActions.registerFailure(err.toJSON()));
         message.error(CONSTANTS.AUTH.ERROR.REGISTER);
     }
 }
@@ -80,7 +80,7 @@ function* verify({ token }: AnyAction) {
         yield put(AuthActions.verifySuccess());
         message.success(CONSTANTS.AUTH.SUCCESS.VERIFY);
     } catch (err) {
-        yield put(AuthActions.verifyFailure(err));
+        yield put(AuthActions.verifyFailure(err.toJSON()));
         message.error(CONSTANTS.AUTH.ERROR.VERIFY);
     }
 }
@@ -94,7 +94,7 @@ function* refresh() {
         tokenWatchTask = yield fork(tokenCheck, expiry);
         yield put(AuthActions.refreshSuccess(user, expiry));
     } catch (err) {
-        yield put(AuthActions.refreshFailure(err));
+        yield put(AuthActions.refreshFailure(err.toJSON()));
         message.error(CONSTANTS.AUTH.ERROR.SESSION);
     }
 }
@@ -107,7 +107,7 @@ function* logout() {
         yield put(AuthActions.logoutSuccess());
         message.success(CONSTANTS.AUTH.SUCCESS.LOGOUT);
     } catch (err) {
-        yield put(AuthActions.logoutFailure(err));
+        yield put(AuthActions.logoutFailure(err.toJSON()));
         message.error(CONSTANTS.AUTH.ERROR.LOGOUT);
     }
 }
@@ -118,7 +118,7 @@ function* forgotPassword({ email }: AnyAction) {
         yield put(AuthActions.forgotPasswordSuccess());
         message.success(CONSTANTS.AUTH.SUCCESS.FORGOT_PASSWORD);
     } catch (err) {
-        yield put(AuthActions.forgotPasswordFailure(err));
+        yield put(AuthActions.forgotPasswordFailure(err.toJSON()));
         message.error(CONSTANTS.AUTH.ERROR.FORGOT_PASSWORD);
     }
 }
@@ -129,7 +129,7 @@ function* resetPassword({ password, token }: AnyAction) {
         yield put(AuthActions.resetPasswordSuccess());
         message.success(CONSTANTS.AUTH.SUCCESS.RESET_PASSWORD);
     } catch (err) {
-        yield put(AuthActions.resetPasswordFailure(err));
+        yield put(AuthActions.resetPasswordFailure(err.toJSON()));
         message.error(CONSTANTS.AUTH.ERROR.RESET_PASSWORD);
     }
 }

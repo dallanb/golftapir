@@ -11,7 +11,11 @@ function* init() {
         yield call(initMemberStandings);
         yield put(LeagueHomePageContentMemberStandingsActions.initSuccess());
     } catch (err) {
-        yield put(LeagueHomePageContentMemberStandingsActions.initFailure(err));
+        yield put(
+            LeagueHomePageContentMemberStandingsActions.initFailure(
+                err.toJSON()
+            )
+        );
     }
 }
 

@@ -10,12 +10,10 @@ function* init({ uuid }: AnyAction) {
         yield call(initLeague, uuid);
         yield put(LeaguePageActions.initSuccess());
     } catch (err) {
-        yield put(LeaguePageActions.initFailure(err));
+        yield put(LeaguePageActions.initFailure(err.toJSON()));
     }
 }
 
 export default function* LeaguePageSaga() {
-    yield all([
-        takeLatest(LeaguePageTypes.INIT, init),
-    ]);
+    yield all([takeLatest(LeaguePageTypes.INIT, init)]);
 }

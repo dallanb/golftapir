@@ -11,7 +11,7 @@ function* fetchWager({ uuid, options }: AnyAction) {
         const { wagers, _metadata: metadata } = res;
         yield put(WagerActions.fetchWagerSuccess(wagers, metadata));
     } catch (err) {
-        yield put(WagerActions.fetchWagerFailure(err));
+        yield put(WagerActions.fetchWagerFailure(err.toJSON()));
         message.error(CONSTANTS.WAGER.ERROR.FETCH);
     }
 }
@@ -21,7 +21,7 @@ function* fetchWagers({ options }: AnyAction) {
         const { wagers, _metadata: metadata } = res;
         yield put(WagerActions.fetchWagersSuccess(wagers, metadata));
     } catch (err) {
-        yield put(WagerActions.fetchWagersFailure(err));
+        yield put(WagerActions.fetchWagersFailure(err.toJSON()));
         message.error(CONSTANTS.WAGER.ERROR.FETCH);
     }
 }

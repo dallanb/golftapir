@@ -55,7 +55,7 @@ function* init({ uuid }: AnyAction) {
         yield put(LeagueAppActions.initLeagueMembers(uuid));
         yield put(LeagueAppActions.initSuccess());
     } catch (err) {
-        yield put(LeagueAppActions.initFailure(err));
+        yield put(LeagueAppActions.initFailure(err.toJSON()));
     }
 }
 
@@ -70,7 +70,7 @@ function* refresh({ uuid }: AnyAction) {
         yield put(AppActions.refreshLeagueMembers(uuid));
         yield put(LeagueAppActions.refreshSuccess());
     } catch (err) {
-        yield put(LeagueAppActions.refreshFailure(err));
+        yield put(LeagueAppActions.refreshFailure(err.toJSON()));
     }
 }
 
@@ -90,7 +90,7 @@ function* initLeague({ uuid }: AnyAction) {
         }
         yield put(LeagueAppActions.initLeagueSuccess());
     } catch (err) {
-        yield put(LeagueAppActions.initLeagueFailure(err));
+        yield put(LeagueAppActions.initLeagueFailure(err.toJSON()));
     }
 }
 
@@ -101,7 +101,7 @@ function* initLeagueMember({ uuid }: AnyAction) {
         }
         yield put(LeagueAppActions.initLeagueMemberSuccess());
     } catch (err) {
-        yield put(LeagueAppActions.initLeagueMemberFailure(err));
+        yield put(LeagueAppActions.initLeagueMemberFailure(err.toJSON()));
     }
 }
 
@@ -110,7 +110,7 @@ function* initLeagueMembers({ uuid }: AnyAction) {
         yield call(fetchLeagueMembers, uuid);
         yield put(LeagueAppActions.initLeagueMembersSuccess());
     } catch (err) {
-        yield put(LeagueAppActions.fetchLeagueMembersFailure(err));
+        yield put(LeagueAppActions.fetchLeagueMembersFailure(err.toJSON()));
     }
 }
 
@@ -129,7 +129,7 @@ function* appRefreshLeague({ uuid }: AnyAction) {
         yield call(fetchLeague, uuid);
         yield put(AppActions.refreshLeagueSuccess());
     } catch (err) {
-        yield put(AppActions.refreshLeagueFailure(err));
+        yield put(AppActions.refreshLeagueFailure(err.toJSON()));
     }
 }
 
@@ -138,7 +138,7 @@ function* appRefreshLeagueMember({ uuid }: AnyAction) {
         yield call(fetchLeagueMember, uuid);
         yield put(AppActions.refreshLeagueMemberSuccess());
     } catch (err) {
-        yield put(AppActions.refreshLeagueMemberFailure(err));
+        yield put(AppActions.refreshLeagueMemberFailure(err.toJSON()));
     }
 }
 
@@ -147,7 +147,7 @@ function* appRefreshLeagueMembers({ uuid }: AnyAction) {
         yield call(fetchLeagueMembers, uuid);
         yield put(AppActions.refreshLeagueMembersSuccess());
     } catch (err) {
-        yield put(AppActions.refreshLeagueMembersFailure(err));
+        yield put(AppActions.refreshLeagueMembersFailure(err.toJSON()));
     }
 }
 

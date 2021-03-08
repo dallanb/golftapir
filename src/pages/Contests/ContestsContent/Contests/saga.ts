@@ -11,7 +11,7 @@ function* init({ options }: AnyAction) {
         yield call(fetchContestsList, { page: 1, per_page: 10, ...options });
         yield put(ContestsPageContentContestsActions.initSuccess());
     } catch (err) {
-        yield put(ContestsPageContentContestsActions.initFailure(err));
+        yield put(ContestsPageContentContestsActions.initFailure(err.toJSON()));
     }
 }
 
@@ -28,7 +28,9 @@ function* fetchData({ options = { page: 1, per_page: 10 } }: AnyAction) {
             )
         );
     } catch (err) {
-        yield put(ContestsPageContentContestsActions.fetchDataFailure(err));
+        yield put(
+            ContestsPageContentContestsActions.fetchDataFailure(err.toJSON())
+        );
     }
 }
 
