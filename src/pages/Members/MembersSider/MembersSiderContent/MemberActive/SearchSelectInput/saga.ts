@@ -11,7 +11,6 @@ import CONSTANTS from '@locale/en-CA';
 
 function* search({ key }: AnyAction) {
     try {
-        // yield call(refreshMembersList, key);
         const { members }: any = yield call(MemberService.fetchMembers, {
             page: 1,
             per_page: 10,
