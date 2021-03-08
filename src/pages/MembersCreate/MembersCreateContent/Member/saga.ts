@@ -41,8 +41,12 @@ function* submit({ data }: AnyAction) {
         yield put(MembersCreatePageContentMemberActions.submitSuccess());
         message.success(CONSTANTS.MEMBER.SUCCESS.INVITE);
     } catch (err) {
+        if (err.response.status == 400) {
+            message.error(CONSTANTS.LEAGUE.ERROR.MEMBER_INVITE_DUPLICATE);
+        } else {
+            message.error(CONSTANTS.LEAGUE.ERROR.MEMBER_INVITE);
+        }
         yield put(MembersCreatePageContentMemberActions.submitFailure());
-        message.error(CONSTANTS.MEMBER.ERROR.INVITE);
     }
 }
 

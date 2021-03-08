@@ -82,6 +82,8 @@ const CONSTANTS = {
             FETCH_ALL: 'Error fetching League information',
             CREATE: 'League creation unsuccessful',
             UPDATE: 'League update unsuccessful',
+            MEMBER_INVITE: 'Error sending invitation',
+            MEMBER_INVITE_DUPLICATE: 'Member already invited',
         },
     },
     MEMBER: {
