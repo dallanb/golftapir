@@ -204,6 +204,11 @@ const CONSTANTS = {
                     COUNTRY_REQUIRED: 'Country is required',
                 },
             },
+            EMAIL_MODAL: {
+                TITLE: "You're almost done!",
+                DESCRIPTION:
+                    'Your account was successfully created! Thank you for choosing Golf Tapir. Please check you email inbox for account activation instructions.',
+            },
         },
         VERIFY: {
             TITLE: 'Account Verification',

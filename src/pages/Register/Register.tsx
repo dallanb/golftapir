@@ -13,6 +13,8 @@ import constants from '@constants';
 import ComponentContent from '@layouts/ComponentContent';
 import RegisterButtons from './RegisterButtons';
 import { OverlaySpin } from '@components';
+import { ModalActions } from '@actions';
+import { bodyRenderer, headerRenderer } from './VerifyEmailModal';
 import './Register.less';
 
 const Register: React.FunctionComponent<RegisterProps> = () => {
@@ -40,6 +42,9 @@ const Register: React.FunctionComponent<RegisterProps> = () => {
                     app: constants.APPS.AUTH_APP,
                 })
             );
+            if (!token) {
+                dispatch(ModalActions.openModal(headerRenderer, bodyRenderer));
+            }
         }
     }, [isRegistered]);
 

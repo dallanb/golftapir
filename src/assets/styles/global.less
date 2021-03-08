@@ -103,6 +103,34 @@
     }
 }
 
+.ant-modal-content {
+    box-shadow: 0 0 1rem 0 fade(white, 20%) !important;
+    background-color: rgba(255, 255, 255, 0.85) !important;
+    backdrop-filter: blur(6px) !important;
+    border-radius: 4px !important;
+    padding: 16px !important;
+    .ant-modal-header {
+        border-radius: 4px !important;
+        background: none !important;
+        padding: 6px !important;
+        border-bottom: 1px fade(@primary-color, 5%) solid !important;
+        .ant-modal-title {
+            font-weight: bold !important;
+            font-size: 12px !important;
+        }
+    }
+    .ant-modal-body {
+        margin-top: 16px !important;
+        padding: 0 !important;
+
+    }
+    .ant-modal-close-x {
+        width: 50px !important;
+        height: 50px !important;
+        font-size: 12px !important;
+    }
+}
+
 .ant-picker-header button {
     color: @text-color !important;
 }
