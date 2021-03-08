@@ -348,6 +348,7 @@ const CONSTANTS = {
                     NAME_REQUIRED: 'Name is a required field',
                     START_TIME_REQUIRED: 'Start Time is a required field',
                     COURSE_REQUIRED: 'Course is a required field',
+                    PARTICIPANT_MINIMUM: 'At least 2 Participants required',
                     BUY_IN_REQUIRED: 'Buy in required',
                     BUY_IN_SINGLE_PARTICIPANT:
                         'Buy in cannot be set in a single participant content',
