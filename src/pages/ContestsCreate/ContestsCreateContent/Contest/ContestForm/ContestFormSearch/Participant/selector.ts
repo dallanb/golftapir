@@ -19,3 +19,13 @@ export const selectSearchData = createSelector(
             undefined
         )
 );
+
+export const selectSearchIsSearching = createSelector(
+    [getContestsCreatePageContentContestSearchParticipant],
+    (contestsCreatePageContentContestSearchParticipant) =>
+        _get(
+            contestsCreatePageContentContestSearchParticipant,
+            ['isSearching'],
+            undefined
+        )
+);

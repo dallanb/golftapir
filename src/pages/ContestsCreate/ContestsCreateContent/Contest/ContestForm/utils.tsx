@@ -4,7 +4,8 @@ import { useSelector } from 'react-redux';
 import { Button, Select, Spin } from 'antd';
 import { keyBy as _keyBy, get as _get, isNil as _isNil } from 'lodash';
 import { MinusCircleTwoTone, PlusCircleTwoTone } from '@ant-design/icons';
-import { selectSearchData as selectParticipantSearchData } from './ContestFormSearch/Participant/selector';
+import { selectSearchData as selectParticipantSearchData,    selectSearchIsSearching as selectParticipantSearchIsSearching,
+} from './ContestFormSearch/Participant/selector';
 import {
     selectSearchData as selectCourseSearchData,
     selectSearchIsSearching as selectCourseSearchIsSearching,
@@ -21,10 +22,8 @@ export const courseSearchSelectOptionRenderer = () => {
         </Select.Option>
     ));
 };
-export const courseNotFoundRenderer = (formik: FormikProps<FormikValues>) => {
-    const isSearching = useSelector(selectCourseSearchIsSearching);
-    return isSearching ? <Spin size="small" /> : null;
-};
+export const courseLoadingRenderer = (formik: FormikProps<FormikValues>) =>
+    useSelector(selectCourseSearchIsSearching);
 
 export const participantSearchSelectOptionRenderer = (
     formik: FormikProps<FormikValues>
@@ -57,6 +56,10 @@ export const participantSearchSelectOptionRenderer = (
         )
     );
 };
+
+export const participantLoadingRenderer = (formik: FormikProps<FormikValues>) =>
+    useSelector(selectParticipantSearchIsSearching);
+
 
 export const contestBuyInParser = (value: string) => {
     if (value === '$') {
