@@ -15,7 +15,7 @@ function* init() {
         });
         yield put(LeaguesPageContentLeaguesActions.initSuccess());
     } catch (err) {
-        yield put(LeaguesPageContentLeaguesActions.initFailure(err.toJSON()));
+        yield put(LeaguesPageContentLeaguesActions.initFailure(err));
     }
 }
 
@@ -30,7 +30,7 @@ function* fetchData({ options = { page: 1, per_page: 10 } }: AnyAction) {
         );
     } catch (err) {
         yield put(
-            LeaguesPageContentLeaguesActions.fetchDataFailure(err.toJSON())
+            LeaguesPageContentLeaguesActions.fetchDataFailure(err)
         );
     }
 }

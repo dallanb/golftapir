@@ -51,7 +51,7 @@ function* terminate({}: AnyAction) {
         yield put(LeagueTopicSocketActions.terminateSuccess());
     } catch (err) {
         message.error(CONSTANTS.SOCKET.ERROR.TERMINATE);
-        yield put(LeagueTopicSocketActions.terminateFailure(err.toJSON()));
+        yield put(LeagueTopicSocketActions.terminateFailure(err));
     }
 }
 

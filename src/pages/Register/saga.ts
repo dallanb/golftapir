@@ -25,7 +25,7 @@ function* init({ token }: AnyAction) {
         }
         yield put(RegisterPageActions.initSuccess());
     } catch (err) {
-        yield put(RegisterPageActions.initFailure(err.toJSON()));
+        yield put(RegisterPageActions.initFailure(err));
     }
 }
 

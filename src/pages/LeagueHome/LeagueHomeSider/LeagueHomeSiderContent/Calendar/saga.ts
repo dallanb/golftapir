@@ -13,7 +13,7 @@ function* init({ options }: AnyAction) {
         yield put(LeagueHomePageSiderContentCalendarActions.initSuccess());
     } catch (err) {
         yield put(
-            LeagueHomePageSiderContentCalendarActions.initFailure(err.toJSON())
+            LeagueHomePageSiderContentCalendarActions.initFailure(err)
         );
     }
 }

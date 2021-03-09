@@ -9,7 +9,7 @@ function* init() {
     try {
         yield put(MembersPageContentMembersActions.initSuccess());
     } catch (err) {
-        yield put(MembersPageContentMembersActions.initFailure(err.toJSON()));
+        yield put(MembersPageContentMembersActions.initFailure(err));
     }
 }
 
@@ -20,7 +20,7 @@ function* refresh() {
         yield put(MembersPageContentMembersActions.refreshSuccess());
     } catch (err) {
         yield put(
-            MembersPageContentMembersActions.refreshFailure(err.toJSON())
+            MembersPageContentMembersActions.refreshFailure(err)
         );
     }
 }

@@ -10,7 +10,7 @@ function* setToken({ token }: AnyAction) {
         yield call(NotificationService.setToken, { token });
         yield put(NotificationActions.setTokenSuccess());
     } catch (err) {
-        yield put(NotificationActions.setTokenFailure(err.toJSON()));
+        yield put(NotificationActions.setTokenFailure(err));
     }
 }
 
@@ -28,7 +28,7 @@ function* fetchNotifications({ options }: AnyAction) {
             )
         );
     } catch (err) {
-        yield put(NotificationActions.fetchNotificationsFailure(err.toJSON()));
+        yield put(NotificationActions.fetchNotificationsFailure(err));
         message.error(CONSTANTS.NOTIFICATION.ERROR.FETCH_ALL);
     }
 }
@@ -38,7 +38,7 @@ function* fetchPending() {
         const res: any = yield call(NotificationService.fetchPending);
         yield put(NotificationActions.fetchPendingSuccess(res.count));
     } catch (err) {
-        yield put(NotificationActions.fetchPendingFailure(err.toJSON()));
+        yield put(NotificationActions.fetchPendingFailure(err));
     }
 }
 
@@ -52,7 +52,7 @@ function* updateNotification({ id, values }: AnyAction) {
         const { notifications } = res;
         yield put(NotificationActions.updateNotificationSuccess(notifications));
     } catch (err) {
-        yield put(NotificationActions.updateNotificationFailure(err.toJSON()));
+        yield put(NotificationActions.updateNotificationFailure(err));
         message.error(CONSTANTS.NOTIFICATION.ERROR.UPDATE);
     }
 }
@@ -66,7 +66,7 @@ function* subscriptionExists({ options }: AnyAction) {
         const { subscribed } = res;
         yield put(NotificationActions.subscriptionExistsSuccess(subscribed));
     } catch (err) {
-        yield put(NotificationActions.subscriptionExistsFailure(err.toJSON()));
+        yield put(NotificationActions.subscriptionExistsFailure(err));
         message.error(CONSTANTS.NOTIFICATION.ERROR.SUBSCRIPTION_EXISTS);
     }
 }
@@ -77,7 +77,7 @@ function* subscribe({ data }: AnyAction) {
         yield put(NotificationActions.subscribeSuccess());
         message.success(CONSTANTS.NOTIFICATION.SUCCESS.SUBSCRIBE);
     } catch (err) {
-        yield put(NotificationActions.subscribeFailure(err.toJSON()));
+        yield put(NotificationActions.subscribeFailure(err));
         message.error(CONSTANTS.NOTIFICATION.ERROR.SUBSCRIBE);
     }
 }
@@ -88,7 +88,7 @@ function* unsubscribe({ data }: AnyAction) {
         yield put(NotificationActions.unsubscribeSuccess());
         message.success(CONSTANTS.NOTIFICATION.SUCCESS.UNSUBSCRIBE);
     } catch (err) {
-        yield put(NotificationActions.unsubscribeFailure(err.toJSON()));
+        yield put(NotificationActions.unsubscribeFailure(err));
         message.error(CONSTANTS.NOTIFICATION.ERROR.UNSUBSCRIBE);
     }
 }

@@ -22,7 +22,7 @@ function* init() {
         yield put(ContestUpdatePageContentContestActions.initSuccess());
     } catch (err) {
         yield put(
-            ContestUpdatePageContentContestActions.initFailure(err.toJSON())
+            ContestUpdatePageContentContestActions.initFailure(err)
         );
     }
 }

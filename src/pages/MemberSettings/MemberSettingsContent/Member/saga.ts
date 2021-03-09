@@ -23,7 +23,7 @@ function* init() {
         yield put(MemberSettingsPageContentMemberActions.initSuccess());
     } catch (err) {
         yield put(
-            MemberSettingsPageContentMemberActions.initFailure(err.toJSON())
+            MemberSettingsPageContentMemberActions.initFailure(err)
         );
     }
 }

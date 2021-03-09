@@ -12,7 +12,7 @@ function* fetchMember({ uuid, options }: AnyAction) {
         const { members } = res;
         yield put(MemberActions.fetchMemberSuccess(members));
     } catch (err) {
-        yield put(MemberActions.fetchMemberFailure(err.toJSON()));
+        yield put(MemberActions.fetchMemberFailure(err));
         message.error(CONSTANTS.MEMBER.ERROR.FETCH);
     }
 }
@@ -27,7 +27,7 @@ function* fetchMemberUser({ user_uuid, options }: AnyAction) {
         const { members } = res;
         yield put(MemberActions.fetchMemberUserSuccess(members));
     } catch (err) {
-        yield put(MemberActions.fetchMemberUserFailure(err.toJSON()));
+        yield put(MemberActions.fetchMemberUserFailure(err));
         message.error(CONSTANTS.MEMBER.ERROR.FETCH);
     }
 }
@@ -42,7 +42,7 @@ function* fetchMyMemberUser({ options }: AnyAction) {
         const { members } = res;
         yield put(MemberActions.fetchMyMemberUserSuccess(members));
     } catch (err) {
-        yield put(MemberActions.fetchMyMemberUserFailure(err.toJSON()));
+        yield put(MemberActions.fetchMyMemberUserFailure(err));
         message.error(CONSTANTS.MEMBER.ERROR.FETCH);
     }
 }
@@ -53,7 +53,7 @@ function* fetchMembers({ options }: AnyAction) {
         const { leagues } = res;
         yield put(MemberActions.fetchMembersSuccess(leagues));
     } catch (err) {
-        yield put(MemberActions.fetchMembersFailure(err.toJSON()));
+        yield put(MemberActions.fetchMembersFailure(err));
         message.error(CONSTANTS.MEMBER.ERROR.FETCH_ALL);
     }
 }
@@ -64,7 +64,7 @@ function* updateMember({ uuid, values }: AnyAction) {
         const { leagues } = res;
         yield put(MemberActions.updateMemberSuccess(leagues));
     } catch (err) {
-        yield put(MemberActions.updateMemberFailure(err.toJSON()));
+        yield put(MemberActions.updateMemberFailure(err));
         message.error(CONSTANTS.MEMBER.ERROR.UPDATE);
     }
 }
@@ -74,7 +74,7 @@ function* assignAvatar({ uuid, avatar }: AnyAction) {
         yield call(MemberService.assignAvatar, uuid, avatar);
         yield put(MemberActions.assignAvatarSuccess());
     } catch (err) {
-        yield put(MemberActions.assignAvatarFailure(err.toJSON()));
+        yield put(MemberActions.assignAvatarFailure(err));
         message.error(CONSTANTS.MEMBER.ERROR.ASSIGN_AVATAR);
     }
 }
@@ -85,7 +85,7 @@ function* refreshMyMemberStats({}) {
         const { stats }: any = yield call(MemberService.fetchStat, stat.uuid);
         yield put(MemberActions.refreshMyMemberStatsSuccess(stats));
     } catch (err) {
-        yield put(MemberActions.refreshMyMemberStatsFailure(err.toJSON()));
+        yield put(MemberActions.refreshMyMemberStatsFailure(err));
     }
 }
 

@@ -17,7 +17,7 @@ function* init() {
 
         yield put(MemberSettingsPageActions.initSuccess());
     } catch (err) {
-        yield put(MemberSettingsPageActions.initFailure(err.toJSON()));
+        yield put(MemberSettingsPageActions.initFailure(err));
     }
 }
 

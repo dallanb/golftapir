@@ -6,7 +6,7 @@ function* init() {
     try {
         yield put(MembersCreatePageActions.initSuccess());
     } catch (err) {
-        yield put(MembersCreatePageActions.initFailure(err.toJSON()));
+        yield put(MembersCreatePageActions.initFailure(err));
     }
 }
 

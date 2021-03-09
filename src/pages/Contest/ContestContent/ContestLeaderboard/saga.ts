@@ -34,7 +34,7 @@ function* init() {
     } catch (err) {
         yield put(
             ContestPageContentContestLeaderboardActions.initFailure(
-                err.toJSON()
+                err
             )
         );
     }

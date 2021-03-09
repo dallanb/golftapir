@@ -83,7 +83,7 @@ const LeagueAppView: React.FunctionComponent<LeagueAppViewProps> = () => {
                     message.success(`${body}`);
                 })
                 .catch((err) => {
-                    message.error(JSON.stringify(err.toJSON()));
+                    message.error(JSON.stringify(err));
                 });
         }
         return () => {

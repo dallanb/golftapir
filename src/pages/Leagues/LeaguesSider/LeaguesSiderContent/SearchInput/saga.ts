@@ -11,7 +11,7 @@ function* search({ key }: AnyAction) {
         yield put(LeaguesPageSiderContentSearchActions.searchSuccess());
     } catch (err) {
         yield put(
-            LeaguesPageSiderContentSearchActions.searchFailure(err.toJSON())
+            LeaguesPageSiderContentSearchActions.searchFailure(err)
         );
     }
 }

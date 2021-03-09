@@ -11,7 +11,7 @@ function* fetchAccount({ uuid, options }: AnyAction) {
         const { accounts } = res;
         yield put(AccountActions.fetchAccountSuccess(accounts));
     } catch (err) {
-        yield put(AccountActions.fetchAccountFailure(err.toJSON()));
+        yield put(AccountActions.fetchAccountFailure(err));
         message.error(CONSTANTS.ACCOUNT.ERROR.FETCH);
     }
 }
@@ -22,7 +22,7 @@ function* fetchMyAccount({ options }: AnyAction) {
         const { accounts } = res;
         yield put(AccountActions.fetchMyAccountSuccess(accounts));
     } catch (err) {
-        yield put(AccountActions.fetchMyAccountFailure(err.toJSON()));
+        yield put(AccountActions.fetchMyAccountFailure(err));
         message.error(CONSTANTS.ACCOUNT.ERROR.FETCH);
     }
 }
@@ -37,7 +37,7 @@ function* fetchAccountMembership({ uuid, options }: AnyAction) {
         const { membership } = res;
         yield put(AccountActions.fetchAccountMembershipSuccess(membership));
     } catch (err) {
-        yield put(AccountActions.fetchAccountMembershipFailure(err.toJSON()));
+        yield put(AccountActions.fetchAccountMembershipFailure(err));
         message.error(CONSTANTS.ACCOUNT.ERROR.FETCH_MEMBERSHIP);
     }
 }
@@ -48,7 +48,7 @@ function* fetchAccounts({ options }: AnyAction) {
         const { accounts } = res;
         yield put(AccountActions.fetchAccountsSuccess(accounts));
     } catch (err) {
-        yield put(AccountActions.fetchAccountsFailure(err.toJSON()));
+        yield put(AccountActions.fetchAccountsFailure(err));
         message.error(CONSTANTS.ACCOUNT.ERROR.FETCH_ALL);
     }
 }
@@ -59,7 +59,7 @@ function* updateAccount({ uuid, values }: AnyAction) {
         const { accounts } = res;
         yield put(AccountActions.updateAccountSuccess(accounts));
     } catch (err) {
-        yield put(AccountActions.updateAccountFailure(err.toJSON()));
+        yield put(AccountActions.updateAccountFailure(err));
         message.error(CONSTANTS.ACCOUNT.ERROR.UPDATE);
     }
 }
