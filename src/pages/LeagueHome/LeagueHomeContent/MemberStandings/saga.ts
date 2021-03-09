@@ -13,7 +13,7 @@ function* init() {
     } catch (err) {
         yield put(
             LeagueHomePageContentMemberStandingsActions.initFailure(
-                err.toJSON()
+                err
             )
         );
     }

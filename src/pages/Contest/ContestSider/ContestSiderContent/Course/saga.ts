@@ -12,7 +12,7 @@ function* init() {
         yield put(ContestPageSiderContentCourseActions.initSuccess());
     } catch (err) {
         yield put(
-            ContestPageSiderContentCourseActions.initFailure(err.toJSON())
+            ContestPageSiderContentCourseActions.initFailure(err)
         );
     }
 }

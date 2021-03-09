@@ -22,7 +22,7 @@ function* init({ options }: AnyAction) {
         yield put(LeaguesCreatePageContentLeagueActions.initSuccess());
     } catch (err) {
         yield put(
-            LeaguesCreatePageContentLeagueActions.initFailure(err.toJSON())
+            LeaguesCreatePageContentLeagueActions.initFailure(err)
         );
     }
 }

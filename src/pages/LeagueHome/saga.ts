@@ -10,7 +10,7 @@ function* init({ uuid }: AnyAction) {
         yield call(initLeagueHome, uuid);
         yield put(LeagueHomePageActions.initSuccess());
     } catch (err) {
-        yield put(LeagueHomePageActions.initFailure(err.toJSON()));
+        yield put(LeagueHomePageActions.initFailure(err));
     }
 }
 

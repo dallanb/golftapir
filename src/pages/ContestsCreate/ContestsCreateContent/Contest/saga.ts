@@ -31,7 +31,7 @@ function* init({ options = { member_uuid: null } }: AnyAction) {
         yield put(ContestsCreatePageContentContestActions.initSuccess());
     } catch (err) {
         yield put(
-            ContestsCreatePageContentContestActions.initFailure(err.toJSON())
+            ContestsCreatePageContentContestActions.initFailure(err)
         );
     }
 }

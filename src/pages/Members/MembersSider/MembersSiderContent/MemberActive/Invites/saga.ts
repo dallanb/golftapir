@@ -8,7 +8,7 @@ function* init() {
         yield put(MembersPageSiderContentInvitesActions.initSuccess());
     } catch (err) {
         yield put(
-            MembersPageSiderContentInvitesActions.initFailure(err.toJSON())
+            MembersPageSiderContentInvitesActions.initFailure(err)
         );
     }
 }

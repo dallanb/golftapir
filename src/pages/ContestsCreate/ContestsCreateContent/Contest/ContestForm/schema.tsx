@@ -16,7 +16,8 @@ import {
     contestPayoutButtonsRenderer,
     contestPayoutInParser,
     contestPayoutLabelMaker,
-    courseSearchSelectOptionRenderer,
+    courseLoadingRenderer,
+    courseSearchSelectOptionRenderer, participantLoadingRenderer,
     participantSearchSelectOptionRenderer,
 } from './utils';
 import { searchSelectTagRenderer } from '@utils';
@@ -102,11 +103,14 @@ export const fieldSchema = [
         options: {
             ref: React.createRef<any>(),
             onSearch: (value: string) =>
-                ContestsCreatePageContentContestSearchCourseActions.search(
-                    value
-                ),
+                value
+                    ? ContestsCreatePageContentContestSearchCourseActions.search(
+                          value
+                      )
+                    : ContestsCreatePageContentContestSearchCourseActions.clearSearch(),
             mode: '',
-            debounce: 500,
+            debounce: 300,
+            loadingRenderer: courseLoadingRenderer,
             optionRenderer: courseSearchSelectOptionRenderer,
             tagRenderer: searchSelectTagRenderer,
         },
@@ -122,11 +126,14 @@ export const fieldSchema = [
         options: {
             ref: React.createRef<any>(),
             onSearch: (value: string) =>
-                ContestsCreatePageContentContestSearchParticipantActions.search(
-                    value
-                ),
+                value
+                    ? ContestsCreatePageContentContestSearchParticipantActions.search(
+                          value
+                      )
+                    : ContestsCreatePageContentContestSearchParticipantActions.clearSearch(),
             mode: 'multiple',
-            debounce: 500,
+            debounce: 300,
+            loadingRenderer: participantLoadingRenderer,
             optionRenderer: participantSearchSelectOptionRenderer,
             tagRenderer: searchSelectTagRenderer,
         },

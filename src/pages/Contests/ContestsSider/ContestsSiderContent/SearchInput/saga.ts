@@ -11,7 +11,7 @@ function* search({ key }: AnyAction) {
         yield put(ContestsPageSiderContentSearchActions.searchSuccess());
     } catch (err) {
         yield put(
-            ContestsPageSiderContentSearchActions.searchFailure(err.toJSON())
+            ContestsPageSiderContentSearchActions.searchFailure(err)
         );
     }
 }

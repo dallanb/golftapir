@@ -22,7 +22,7 @@ function* init({ uuid }: AnyAction) {
         yield put(MemberPageActions.set({ member }));
         yield put(MemberPageActions.initSuccess());
     } catch (err) {
-        yield put(MemberPageActions.initFailure(err.toJSON()));
+        yield put(MemberPageActions.initFailure(err));
     }
 }
 
@@ -34,7 +34,7 @@ function* refresh({ uuid }: AnyAction) {
         });
         yield put(MemberPageActions.refreshSuccess());
     } catch (err) {
-        yield put(MemberPageActions.refreshFailure(err.toJSON()));
+        yield put(MemberPageActions.refreshFailure(err));
     }
 }
 

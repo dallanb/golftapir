@@ -5,7 +5,7 @@ function* init() {
     try {
         yield put(HomePageActions.initSuccess());
     } catch (err) {
-        yield put(HomePageActions.initFailure(err.toJSON()));
+        yield put(HomePageActions.initFailure(err));
     }
 }
 

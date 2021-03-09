@@ -20,7 +20,7 @@ function* search({ key }: AnyAction) {
         yield put(MembersPageSiderContentSearchActions.searchSuccess(members));
     } catch (err) {
         yield put(
-            MembersPageSiderContentSearchActions.searchFailure(err.toJSON())
+            MembersPageSiderContentSearchActions.searchFailure(err)
         );
     }
 }
@@ -38,7 +38,7 @@ function* invite({ uuid: user_uuid, email }: AnyAction) {
             message.error(CONSTANTS.LEAGUE.ERROR.MEMBER_INVITE);
         }
         yield put(
-            MembersPageSiderContentSearchActions.inviteFailure(err.toJSON())
+            MembersPageSiderContentSearchActions.inviteFailure(err)
         );
     }
 }

@@ -8,7 +8,7 @@ function* init({ token }: AnyAction) {
         yield put(AuthActions.verify(token));
         yield put(VerifyPageActions.initSuccess());
     } catch (err) {
-        yield put(VerifyPageActions.initFailure(err.toJSON()));
+        yield put(VerifyPageActions.initFailure(err));
     }
 }
 

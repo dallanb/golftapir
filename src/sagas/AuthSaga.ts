@@ -37,7 +37,7 @@ function* login({ email, password }: AnyAction) {
                 status,
             },
         } = err;
-        yield put(AuthActions.loginFailure(err.toJSON()));
+        yield put(AuthActions.loginFailure(err));
         message.error(
             status === 401 ? authErrorMessage(msg) : CONSTANTS.AUTH.ERROR.LOGIN
         );
@@ -69,7 +69,7 @@ function* register({
         yield put(AuthActions.registerSuccess(user));
         message.success(CONSTANTS.AUTH.SUCCESS.REGISTER);
     } catch (err) {
-        yield put(AuthActions.registerFailure(err.toJSON()));
+        yield put(AuthActions.registerFailure(err));
         message.error(CONSTANTS.AUTH.ERROR.REGISTER);
     }
 }
@@ -80,7 +80,7 @@ function* verify({ token }: AnyAction) {
         yield put(AuthActions.verifySuccess());
         message.success(CONSTANTS.AUTH.SUCCESS.VERIFY);
     } catch (err) {
-        yield put(AuthActions.verifyFailure(err.toJSON()));
+        yield put(AuthActions.verifyFailure(err));
         message.error(CONSTANTS.AUTH.ERROR.VERIFY);
     }
 }
@@ -94,7 +94,7 @@ function* refresh() {
         tokenWatchTask = yield fork(tokenCheck, expiry);
         yield put(AuthActions.refreshSuccess(user, expiry));
     } catch (err) {
-        yield put(AuthActions.refreshFailure(err.toJSON()));
+        yield put(AuthActions.refreshFailure(err.toJSON ? err: err));
         message.error(CONSTANTS.AUTH.ERROR.SESSION);
     }
 }
@@ -107,7 +107,7 @@ function* logout() {
         yield put(AuthActions.logoutSuccess());
         message.success(CONSTANTS.AUTH.SUCCESS.LOGOUT);
     } catch (err) {
-        yield put(AuthActions.logoutFailure(err.toJSON()));
+        yield put(AuthActions.logoutFailure(err));
         message.error(CONSTANTS.AUTH.ERROR.LOGOUT);
     }
 }

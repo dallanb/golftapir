@@ -16,7 +16,7 @@ function* init() {
         );
         yield put(MemberPageContentMemberInfoActions.initSuccess());
     } catch (err) {
-        yield put(MemberPageContentMemberInfoActions.initFailure(err.toJSON()));
+        yield put(MemberPageContentMemberInfoActions.initFailure(err));
     }
 }
 

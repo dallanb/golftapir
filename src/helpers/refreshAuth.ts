@@ -9,12 +9,10 @@ function* refreshAuth() {
         timeout: delay(5000),
     });
     if (timeout) {
-        yield put(AuthActions.refreshFailure());
-        throw new Error('refresh timeout');
+        throw new Error(timeout);
     }
     if (failure) {
-        yield put(AuthActions.refreshFailure());
-        throw new Error('refresh failure');
+        throw new Error(failure);
     }
 }
 

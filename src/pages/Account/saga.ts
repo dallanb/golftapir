@@ -15,7 +15,7 @@ function* init() {
 
         yield put(AccountPageActions.initSuccess());
     } catch (err) {
-        yield put(AccountPageActions.initFailure(err.toJSON()));
+        yield put(AccountPageActions.initFailure(err));
     }
 }
 

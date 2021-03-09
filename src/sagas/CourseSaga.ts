@@ -11,7 +11,7 @@ function* fetchCourse({ uuid, options }: AnyAction) {
         const { courses, _metadata: metadata } = res;
         yield put(CourseActions.fetchCourseSuccess(courses, metadata));
     } catch (err) {
-        yield put(CourseActions.fetchCourseFailure(err.toJSON()));
+        yield put(CourseActions.fetchCourseFailure(err));
         message.error(CONSTANTS.COURSE.ERROR.FETCH);
     }
 }
@@ -22,7 +22,7 @@ function* fetchCourses({ options }: AnyAction) {
         const { courses, _metadata: metadata } = res;
         yield put(CourseActions.fetchCoursesSuccess(courses, metadata));
     } catch (err) {
-        yield put(CourseActions.fetchCoursesFailure(err.toJSON()));
+        yield put(CourseActions.fetchCoursesFailure(err));
         message.error(CONSTANTS.COURSE.ERROR.FETCH);
     }
 }

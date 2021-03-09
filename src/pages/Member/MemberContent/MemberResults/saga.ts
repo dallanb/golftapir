@@ -15,7 +15,7 @@ function* init() {
         yield put(MemberPageContentMemberResultsActions.initSuccess());
     } catch (err) {
         yield put(
-            MemberPageContentMemberResultsActions.initFailure(err.toJSON())
+            MemberPageContentMemberResultsActions.initFailure(err)
         );
     }
 }
@@ -47,7 +47,7 @@ function* fetchData({
         );
     } catch (err) {
         yield put(
-            MemberPageContentMemberResultsActions.fetchDataFailure(err.toJSON())
+            MemberPageContentMemberResultsActions.fetchDataFailure(err)
         );
     }
 }

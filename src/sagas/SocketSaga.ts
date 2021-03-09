@@ -51,7 +51,7 @@ function* terminate({}: AnyAction) {
         yield put(SocketActions.terminateSuccess());
     } catch (err) {
         message.error(CONSTANTS.SOCKET.ERROR.TERMINATE);
-        yield put(SocketActions.terminateFailure(err.toJSON()));
+        yield put(SocketActions.terminateFailure(err));
     }
 }
 

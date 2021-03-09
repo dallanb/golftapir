@@ -11,7 +11,7 @@ function* fetchScore({ uuid, options }: AnyAction) {
         const { scores, _metadata: metadata } = res;
         yield put(ScoreActions.fetchScoreSuccess(scores, metadata));
     } catch (err) {
-        yield put(ScoreActions.fetchScoreFailure(err.toJSON()));
+        yield put(ScoreActions.fetchScoreFailure(err));
         message.error(CONSTANTS.SCORE.ERROR.FETCH);
     }
 }
@@ -25,7 +25,7 @@ function* fetchScoreContest({ uuid, options }: AnyAction) {
         const { scores, _metadata: metadata } = res;
         yield put(ScoreActions.fetchScoreContestSuccess(scores, metadata));
     } catch (err) {
-        yield put(ScoreActions.fetchScoreContestFailure(err.toJSON()));
+        yield put(ScoreActions.fetchScoreContestFailure(err));
         message.error(CONSTANTS.SCORE.ERROR.FETCH_CONTEST);
     }
 }
@@ -50,7 +50,7 @@ function* fetchScoreContestParticipantSheet({
         );
     } catch (err) {
         yield put(
-            ScoreActions.fetchScoreContestParticipantSheetFailure(err.toJSON())
+            ScoreActions.fetchScoreContestParticipantSheetFailure(err)
         );
         message.error(CONSTANTS.SCORE.ERROR.FETCH_CONTEST);
     }
@@ -62,7 +62,7 @@ function* updateScore({ uuid, data }: AnyAction) {
         const { scores } = res;
         yield put(ScoreActions.updateScoreSuccess(scores));
     } catch (err) {
-        yield put(ScoreActions.updateScoreFailure(err.toJSON()));
+        yield put(ScoreActions.updateScoreFailure(err));
         message.error(CONSTANTS.SCORE.ERROR.UPDATE);
     }
 }
@@ -73,7 +73,7 @@ function* updateSheet({ uuid, data }: AnyAction) {
         const { scores } = res;
         yield put(ScoreActions.updateSheetSuccess(scores));
     } catch (err) {
-        yield put(ScoreActions.updateSheetFailure(err.toJSON()));
+        yield put(ScoreActions.updateSheetFailure(err));
         message.error(CONSTANTS.SCORE.ERROR.UPDATE_SHEET);
     }
 }
@@ -89,7 +89,7 @@ function* updateHole({ uuid, holeId, data }: AnyAction) {
         const { scores } = res;
         yield put(ScoreActions.updateHoleSuccess(scores));
     } catch (err) {
-        yield put(ScoreActions.updateHoleFailure(err.toJSON()));
+        yield put(ScoreActions.updateHoleFailure(err));
         message.error(CONSTANTS.SCORE.ERROR.UPDATE_SCORE);
     }
 }

@@ -168,6 +168,11 @@ const fieldRenderer = (
                     onSearch={_debounce((value) => {
                         dispatch(options.onSearch(value));
                     }, _get(options, ['debounce']))}
+                    loading={_get(
+                        options,
+                        ['loadingRenderer'],
+                        () => false
+                    )()}
                     filterOption={false}
                     tagRender={_get(options, ['tagRenderer'], undefined)}
                 >

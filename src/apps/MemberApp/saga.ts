@@ -16,7 +16,7 @@ function* init() {
 
         yield put(MemberAppActions.initSuccess());
     } catch (err) {
-        yield put(MemberAppActions.initFailure(err.toJSON()));
+        yield put(MemberAppActions.initFailure(err));
     }
 }
 

@@ -15,7 +15,7 @@ function* init({ uuid }: AnyAction) {
         yield call(initMembers, uuid);
         yield put(MembersPageActions.initSuccess());
     } catch (err) {
-        yield put(MembersPageActions.initFailure(err.toJSON()));
+        yield put(MembersPageActions.initFailure(err));
     }
 }
 
@@ -27,7 +27,7 @@ function* refresh({ uuid }: AnyAction) {
         yield put(MembersPageContentMembersActions.refresh());
         yield put(MembersPageActions.refreshSuccess());
     } catch (err) {
-        yield put(MembersPageActions.refreshFailure(err.toJSON()));
+        yield put(MembersPageActions.refreshFailure(err));
     }
 }
 
@@ -40,7 +40,7 @@ function* updateMemberStatus({ uuid, status }: AnyAction) {
             MembersPageActions.updateMemberStatusSuccess(leagueUUID, status)
         );
     } catch (err) {
-        yield put(MembersPageActions.updateMemberStatusFailure(err.toJSON()));
+        yield put(MembersPageActions.updateMemberStatusFailure(err));
     }
 }
 

@@ -24,7 +24,7 @@ function* init({ options = { email: null } }: AnyAction) {
         yield put(MembersCreatePageContentMemberActions.initSuccess());
     } catch (err) {
         yield put(
-            MembersCreatePageContentMemberActions.initFailure(err.toJSON())
+            MembersCreatePageContentMemberActions.initFailure(err)
         );
     }
 }

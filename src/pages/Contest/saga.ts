@@ -34,7 +34,7 @@ function* init({ uuid }: AnyAction) {
         yield call(initContest, uuid);
         yield put(ContestPageActions.initSuccess());
     } catch (err) {
-        yield put(ContestPageActions.initFailure(err.toJSON()));
+        yield put(ContestPageActions.initFailure(err));
     }
 }
 
@@ -54,7 +54,7 @@ function* refresh() {
         yield put(BaseActions.refreshMe(leagueUUID));
         yield put(ContestPageActions.refreshSuccess());
     } catch (err) {
-        yield put(ContestPageActions.refreshFailure(err.toJSON()));
+        yield put(ContestPageActions.refreshFailure(err));
     }
 }
 
@@ -102,7 +102,7 @@ function* fetchPayout({ uuid }: AnyAction) {
         );
         yield put(ContestPageActions.fetchPayoutSuccess(payout));
     } catch (err) {
-        yield put(ContestPageActions.fetchPayoutFailure(err.toJSON()));
+        yield put(ContestPageActions.fetchPayoutFailure(err));
     }
 }
 

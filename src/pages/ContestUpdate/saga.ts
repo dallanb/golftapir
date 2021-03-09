@@ -7,7 +7,7 @@ function* init({ data: contest }: AnyAction) {
         yield put(ContestUpdatePageActions.set({ contest }));
         yield put(ContestUpdatePageActions.initSuccess());
     } catch (err) {
-        yield put(ContestUpdatePageActions.initFailure(err.toJSON()));
+        yield put(ContestUpdatePageActions.initFailure(err));
     }
 }
 

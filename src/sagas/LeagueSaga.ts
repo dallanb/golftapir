@@ -11,7 +11,7 @@ function* fetchLeague({ uuid, options }: AnyAction) {
         const { leagues } = res;
         yield put(LeagueActions.fetchLeagueSuccess(leagues));
     } catch (err) {
-        yield put(LeagueActions.fetchLeagueFailure(err.toJSON()));
+        yield put(LeagueActions.fetchLeagueFailure(err));
         message.error(CONSTANTS.ACCOUNT.ERROR.FETCH);
     }
 }
@@ -22,7 +22,7 @@ function* fetchLeagues({ options }: AnyAction) {
         const { leagues } = res;
         yield put(LeagueActions.fetchLeaguesSuccess(leagues));
     } catch (err) {
-        yield put(LeagueActions.fetchLeaguesFailure(err.toJSON()));
+        yield put(LeagueActions.fetchLeaguesFailure(err));
         message.error(CONSTANTS.ACCOUNT.ERROR.FETCH_ALL);
     }
 }
@@ -39,7 +39,7 @@ function* fetchMyLeagues({ options }: AnyAction) {
         const { leagues } = res;
         yield put(LeagueActions.fetchMyLeaguesSuccess(leagues));
     } catch (err) {
-        yield put(LeagueActions.fetchMyLeaguesFailure(err.toJSON()));
+        yield put(LeagueActions.fetchMyLeaguesFailure(err));
         message.error(CONSTANTS.ACCOUNT.ERROR.FETCH_ALL);
     }
 }
@@ -50,7 +50,7 @@ function* updateLeague({ uuid, values }: AnyAction) {
         const { leagues } = res;
         yield put(LeagueActions.updateLeagueSuccess(leagues));
     } catch (err) {
-        yield put(LeagueActions.updateLeagueFailure(err.toJSON()));
+        yield put(LeagueActions.updateLeagueFailure(err));
         message.error(CONSTANTS.ACCOUNT.ERROR.UPDATE);
     }
 }
@@ -66,7 +66,7 @@ function* fetchMyMembersMaterializedUser({ options }: AnyAction) {
         yield put(LeagueActions.fetchMyMembersMaterializedUserSuccess(members));
     } catch (err) {
         yield put(
-            LeagueActions.fetchMyMembersMaterializedUserFailure(err.toJSON())
+            LeagueActions.fetchMyMembersMaterializedUserFailure(err)
         );
     }
 }

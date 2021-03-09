@@ -3,7 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { Button, Select, Spin } from 'antd';
 import { debounce as _debounce, isNil as _isNil } from 'lodash';
-import { PlusCircleOutlined, UserAddOutlined } from '@ant-design/icons/lib';
+import {
+    CloseOutlined,
+    PlusCircleOutlined,
+    UserAddOutlined,
+} from '@ant-design/icons/lib';
 import { SearchInputProps } from './types';
 import MembersPageSiderContentSearchActions from './actions';
 import { selectIsSearching, selectKey, selectSearchData } from './selector';
@@ -30,7 +34,11 @@ const SearchSelectInput: React.FunctionComponent<SearchInputProps> = () => {
     const newMemberKey = 'new';
 
     const onSearch = (val: string) => {
-        dispatch(MembersPageSiderContentSearchActions.search(val));
+        if (val) {
+            dispatch(MembersPageSiderContentSearchActions.search(val));
+        } else {
+            dispatch(MembersPageSiderContentSearchActions.clearSearch(val));
+        }
     };
     const onClick = () => {
         dispatch(
@@ -64,13 +72,12 @@ const SearchSelectInput: React.FunctionComponent<SearchInputProps> = () => {
             <div className="search-select-input-wrapper">
                 <Select
                     showSearch
-                    allowClear
                     disabled={disabled}
                     value={value}
                     placeholder={CONSTANTS.PAGES.MEMBERS.SEARCH}
-                    notFoundContent={isSearching ? <Spin size="small" /> : null}
+                    loading={isSearching}
                     filterOption={false}
-                    onSearch={_debounce(onSearch, 500, { maxWait: 1000 })}
+                    onSearch={_debounce(onSearch, 300, { maxWait: 1000 })}
                     onChange={onChange}
                     className="search-select-input"
                 >

@@ -11,7 +11,7 @@ function* fetchContest({ uuid, options }: AnyAction) {
         const { contests, _metadata: metadata } = res;
         yield put(ContestActions.fetchContestSuccess(contests, metadata));
     } catch (err) {
-        yield put(ContestActions.fetchContestFailure(err.toJSON()));
+        yield put(ContestActions.fetchContestFailure(err));
         message.error(CONSTANTS.CONTEST.ERROR.FETCH);
     }
 }
@@ -24,7 +24,7 @@ function* fetchContests({ options, append }: AnyAction) {
             ContestActions.fetchContestsSuccess(contests, metadata, append)
         );
     } catch (err) {
-        yield put(ContestActions.fetchContestsFailure(err.toJSON()));
+        yield put(ContestActions.fetchContestsFailure(err));
         message.error(CONSTANTS.CONTEST.ERROR.FETCH);
     }
 }
@@ -41,7 +41,7 @@ function* fetchContestMaterialized({ uuid, options }: AnyAction) {
             ContestActions.fetchContestMaterializedSuccess(contests, metadata)
         );
     } catch (err) {
-        yield put(ContestActions.fetchContestMaterializedFailure(err.toJSON()));
+        yield put(ContestActions.fetchContestMaterializedFailure(err));
         message.error(CONSTANTS.CONTEST.ERROR.FETCH);
     }
 }
@@ -62,7 +62,7 @@ function* fetchContestsMaterialized({ options, append }: AnyAction) {
         );
     } catch (err) {
         yield put(
-            ContestActions.fetchContestsMaterializedFailure(err.toJSON())
+            ContestActions.fetchContestsMaterializedFailure(err)
         );
         message.error(CONSTANTS.CONTEST.ERROR.FETCH);
     }
@@ -76,7 +76,7 @@ function* createContest({ data }: AnyAction) {
         yield put(ContestActions.createContestSuccess(contests));
         message.success(CONSTANTS.CONTEST.SUCCESS.CREATE);
     } catch (err) {
-        yield put(ContestActions.createContestFailure(err.toJSON()));
+        yield put(ContestActions.createContestFailure(err));
         message.error(CONSTANTS.CONTEST.ERROR.CREATE);
     }
 }
@@ -88,7 +88,7 @@ function* updateContest({ uuid, data }: AnyAction) {
         yield put(ContestActions.updateContestSuccess(contests));
         message.success(CONSTANTS.CONTEST.SUCCESS.UPDATE);
     } catch (err) {
-        yield put(ContestActions.updateContestFailure(err.toJSON()));
+        yield put(ContestActions.updateContestFailure(err));
         message.error(CONSTANTS.CONTEST.ERROR.UPDATE);
     }
 }
@@ -98,7 +98,7 @@ function* assignAvatar({ uuid, avatar }: AnyAction) {
         yield call(ContestService.assignAvatar, uuid, avatar);
         yield put(ContestActions.assignAvatarSuccess());
     } catch (err) {
-        yield put(ContestActions.assignAvatarFailure(err.toJSON()));
+        yield put(ContestActions.assignAvatarFailure(err));
         message.error(CONSTANTS.ACCOUNT.ERROR.ASSIGN_AVATAR);
     }
 }
@@ -116,7 +116,7 @@ function* fetchContestParticipantUser({ contest_uuid, member_uuid }: any) {
         );
     } catch (err) {
         yield put(
-            ContestActions.fetchContestParticipantUserFailure(err.toJSON())
+            ContestActions.fetchContestParticipantUserFailure(err)
         );
         message.error(CONSTANTS.CONTEST.ERROR.FETCH_PARTICIPANT);
     }
@@ -133,7 +133,7 @@ function* updateContestParticipant({ uuid, data }: any) {
         yield put(ContestActions.updateContestParticipantSuccess(participants));
         message.success(CONSTANTS.CONTEST.SUCCESS.UPDATE_PARTICIPANT);
     } catch (err) {
-        yield put(ContestActions.updateContestParticipantFailure(err.toJSON()));
+        yield put(ContestActions.updateContestParticipantFailure(err));
         message.error(CONSTANTS.CONTEST.ERROR.UPDATE_PARTICIPANT);
     }
 }
@@ -148,7 +148,7 @@ function* fetchContestParticipants({ uuid, options }: any) {
         const { participants } = res;
         yield put(ContestActions.fetchContestParticipantsSuccess(participants));
     } catch (err) {
-        yield put(ContestActions.updateContestParticipantFailure(err.toJSON()));
+        yield put(ContestActions.updateContestParticipantFailure(err));
         message.error(CONSTANTS.CONTEST.ERROR.FETCH_PARTICIPANTS);
     }
 }
