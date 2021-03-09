@@ -74,7 +74,7 @@ const SearchSelectInput: React.FunctionComponent<SearchInputProps> = () => {
                     placeholder={CONSTANTS.PAGES.MEMBERS.SEARCH}
                     notFoundContent={isSearching ? <Spin size="small" /> : null}
                     filterOption={false}
-                    onSearch={_debounce(onSearch, 500, { maxWait: 1000 })}
+                    onSearch={_debounce(onSearch, 300, { maxWait: 1000 })}
                     onChange={onChange}
                     className="search-select-input"
                 >

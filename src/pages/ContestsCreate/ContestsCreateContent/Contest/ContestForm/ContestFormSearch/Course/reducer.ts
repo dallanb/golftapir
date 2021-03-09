@@ -31,10 +31,17 @@ function searchFailure(state = INITIAL_STATE, { err }: any) {
     });
 }
 
+function clearSearch(state = INITIAL_STATE) {
+    return Immutable.merge(state, {
+        data: INITIAL_STATE.data,
+    });
+}
+
 const HANDLERS = {
     [ContestsCreatePageContentContestSearchCourseTypes.SEARCH]: search,
     [ContestsCreatePageContentContestSearchCourseTypes.SEARCH_SUCCESS]: searchSuccess,
     [ContestsCreatePageContentContestSearchCourseTypes.SEARCH_FAILURE]: searchFailure,
+    [ContestsCreatePageContentContestSearchCourseTypes.CLEAR_SEARCH]: clearSearch,
 };
 
 export const reducer = createReducer(INITIAL_STATE, HANDLERS);
