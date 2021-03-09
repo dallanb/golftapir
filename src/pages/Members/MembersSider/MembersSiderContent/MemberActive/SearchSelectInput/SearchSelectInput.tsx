@@ -30,7 +30,11 @@ const SearchSelectInput: React.FunctionComponent<SearchInputProps> = () => {
     const newMemberKey = 'new';
 
     const onSearch = (val: string) => {
-        dispatch(MembersPageSiderContentSearchActions.search(val));
+        if (val) {
+            dispatch(MembersPageSiderContentSearchActions.search(val));
+        } else {
+            dispatch(MembersPageSiderContentSearchActions.clearSearch(val));
+        }
     };
     const onClick = () => {
         dispatch(
