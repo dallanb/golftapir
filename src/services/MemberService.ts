@@ -58,6 +58,12 @@ export default {
             },
         });
     },
+    deleteAvatar(uuid: string) {
+        return ClientProxy.del({
+            url: config.MEMBER_URL,
+            endpoint: `/avatars/${uuid}`,
+        });
+    },
     fetchStats(query: any = {}) {
         return ClientProxy.get({
             url: config.MEMBER_URL,

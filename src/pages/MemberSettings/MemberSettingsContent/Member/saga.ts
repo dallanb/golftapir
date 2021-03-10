@@ -10,6 +10,7 @@ import { prepareInitialValues } from './utils';
 import { selectMember } from '@pages/MemberSettings/selector';
 import CONSTANTS from '@locale/en-CA';
 import { BaseActions } from '@actions';
+import { selectMeData } from '@selectors/BaseSelector';
 
 function* init() {
     try {
@@ -22,9 +23,7 @@ function* init() {
         );
         yield put(MemberSettingsPageContentMemberActions.initSuccess());
     } catch (err) {
-        yield put(
-            MemberSettingsPageContentMemberActions.initFailure(err)
-        );
+        yield put(MemberSettingsPageContentMemberActions.initFailure(err));
     }
 }
 
@@ -37,8 +36,14 @@ function* submit({ uuid, data }: AnyAction) {
         }
         const avatarData = _pick(data, ['avatar']);
         if (!_isEmpty(avatarData)) {
-            yield call(MemberService.assignAvatar, uuid, avatarData.avatar);
-            message.success(CONSTANTS.MEMBER.SUCCESS.ASSIGN_AVATAR);
+            if (avatarData.avatar) {
+                yield call(MemberService.assignAvatar, uuid, avatarData.avatar);
+                message.success(CONSTANTS.MEMBER.SUCCESS.ASSIGN_AVATAR);
+            } else {
+                const me = yield select(selectMeData);
+                yield call(MemberService.deleteAvatar, me.avatar.uuid);
+                message.success(CONSTANTS.MEMBER.SUCCESS.DELETE_AVATAR);
+            }
         }
         yield put(MemberSettingsPageContentMemberActions.submitSuccess());
         yield put(BaseActions.refreshMe());

@@ -20,11 +20,20 @@ export const socketEventHandlers = (socket: WebSocket, emitter: any) => {
                 break;
             case constants.TOPICS.MEMBERS:
                 switch (event) {
+                    case constants.EVENTS.MEMBERS.AVATAR_CREATED:
+                        emitter(BaseActions.refreshMeDebounce(null, 1000));
+                        break;
+                    case constants.EVENTS.MEMBERS.AVATAR_UPDATED:
+                        emitter(BaseActions.refreshMeDebounce(null, 1000));
+                        break;
+                    case constants.EVENTS.MEMBERS.AVATAR_DELETED:
+                        emitter(BaseActions.refreshMeDebounce(null, 1000));
+                        break;
                     case constants.EVENTS.MEMBERS.DISPLAY_NAME_UPDATED:
-                        emitter(BaseActions.refreshMe());
+                        emitter(BaseActions.refreshMeDebounce(null, 1000));
                         break;
                     case constants.EVENTS.MEMBERS.COUNTRY_UPDATED:
-                        emitter(BaseActions.refreshMe());
+                        emitter(BaseActions.refreshMeDebounce(null, 1000));
                         break;
                 }
                 break;
