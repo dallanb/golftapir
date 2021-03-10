@@ -33,26 +33,48 @@ export const socketEventHandlers = (socket: WebSocket, emitter: any) => {
             case constants.TOPICS.MEMBERS:
                 switch (event) {
                     case constants.EVENTS.MEMBERS.AVATAR_CREATED:
-                        // TODO: UPDATE AVATAR?
-                        emitter(BaseActions.refreshMe(data.league_uuid));
+                        emitter(
+                            BaseActions.refreshMeDebounce(
+                                data.league_uuid,
+                                1000
+                            )
+                        );
                         break;
                     case constants.EVENTS.MEMBERS.AVATAR_UPDATED:
-                        // TODO: UPDATE AVATAR?
-                        emitter(BaseActions.refreshMe(data.league_uuid));
+                        emitter(
+                            BaseActions.refreshMeDebounce(
+                                data.league_uuid,
+                                1000
+                            )
+                        );
                         break;
                     case constants.EVENTS.MEMBERS.AVATAR_DELETED:
-                        // TODO: UPDATE AVATAR?
-                        emitter(BaseActions.refreshMe(data.league_uuid));
+                        emitter(
+                            BaseActions.refreshMeDebounce(
+                                data.league_uuid,
+                                1000
+                            )
+                        );
                         break;
                     case constants.EVENTS.MEMBERS.DISPLAY_NAME_UPDATED:
-                        emitter(BaseActions.refreshMe(data.league_uuid));
+                        emitter(
+                            BaseActions.refreshMeDebounce(
+                                data.league_uuid,
+                                1000
+                            )
+                        );
                         emitter(
                             AppActions.refreshLeagueMembers(data.league_uuid)
                         );
                         // think about emitting league refresh as well
                         break;
                     case constants.EVENTS.MEMBERS.COUNTRY_UPDATED:
-                        emitter(BaseActions.refreshMe(data.league_uuid));
+                        emitter(
+                            BaseActions.refreshMeDebounce(
+                                data.league_uuid,
+                                1000
+                            )
+                        );
                         break;
                 }
                 break;

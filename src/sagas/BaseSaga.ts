@@ -1,4 +1,13 @@
-import { all, call, put, race, take, takeLatest } from 'redux-saga/effects';
+import {
+    all,
+    call,
+    debounce,
+    delay,
+    put,
+    race,
+    take,
+    takeLatest,
+} from 'redux-saga/effects';
 import {
     BaseActions,
     BaseTypes,
@@ -40,6 +49,11 @@ function* refreshMe({ league_uuid }: any) {
     } catch (err) {
         yield put(BaseActions.refreshMeFailure(err));
     }
+}
+
+function* refreshMeDebounce({ league_uuid, ms }: any) {
+    yield delay(ms);
+    yield put(BaseActions.refreshMe(league_uuid));
 }
 
 function* initLeagues() {
@@ -120,6 +134,7 @@ export default function* BaseSaga() {
     yield all([
         takeLatest(BaseTypes.INIT_ME, initMe),
         takeLatest(BaseTypes.REFRESH_ME, refreshMe),
+        takeLatest(BaseTypes.REFRESH_ME_DEBOUNCE, refreshMeDebounce),
         takeLatest(BaseTypes.INIT_LEAGUES, initLeagues),
         takeLatest(BaseTypes.REFRESH_LEAGUES, refreshLeagues),
         takeLatest(BaseTypes.INIT_SOCKETS, initSockets),
