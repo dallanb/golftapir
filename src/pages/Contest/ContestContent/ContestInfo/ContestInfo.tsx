@@ -8,6 +8,7 @@ import CONSTANTS from '@locale/en-CA';
 import {
     selectIsInitialized,
     selectIsRefreshing,
+    selectPayoutIsFetching,
 } from '@pages/Contest/selector';
 import './ContestInfo.less';
 import ContestInfoExtra from '@pages/Contest/ContestContent/ContestInfo/ContestInfoExtra';
@@ -15,11 +16,12 @@ import ContestInfoExtra from '@pages/Contest/ContestContent/ContestInfo/ContestI
 const ContestInfo: React.FunctionComponent<ContestInfoProps> = () => {
     const ref = useRef(null);
     const isInitialized = useSelector(selectIsInitialized);
+    const payoutIsFetching = useSelector(selectPayoutIsFetching);
     const isRefreshing = useSelector(selectIsRefreshing);
     return (
         <ComponentContent
             componentRef={ref}
-            showSpinner={!isInitialized || isRefreshing}
+            showSpinner={!isInitialized || payoutIsFetching || isRefreshing}
             className="contest-info-component-content"
             title={CONSTANTS.PAGES.CONTEST.INFO}
             extra={<ContestInfoExtra />}
