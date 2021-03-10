@@ -135,7 +135,7 @@ class ClientProxy {
     }: {
         url: string;
         endpoint: string;
-        data: any;
+        data?: any;
         headers?: any;
     }) => {
         return this.ajax({

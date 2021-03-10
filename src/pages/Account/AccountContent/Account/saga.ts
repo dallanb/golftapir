@@ -40,13 +40,22 @@ function* submit({ data }: AnyAction) {
         const avatarData = _pick(data, ['avatar']);
         if (!_isEmpty(avatarData)) {
             const me = yield select(selectMeData);
-            yield call(MemberService.assignAvatar, me.uuid, avatarData.avatar);
-            message.success(CONSTANTS.ACCOUNT.SUCCESS.ASSIGN_AVATAR);
+            if (avatarData.avatar) {
+                yield call(
+                    MemberService.assignAvatar,
+                    me.uuid,
+                    avatarData.avatar
+                );
+                message.success(CONSTANTS.ACCOUNT.SUCCESS.ASSIGN_AVATAR);
+            } else {
+                yield call(MemberService.deleteAvatar, me.avatar.uuid);
+                message.success(CONSTANTS.ACCOUNT.SUCCESS.DELETE_AVATAR);
+            }
         }
         yield put(AccountPageContentAccountActions.submitSuccess());
         // yield put(BaseActions.refreshMe()); I will instead be refreshing in socketEventHandlers
     } catch (err) {
-        yield put(AccountPageContentAccountActions.submitFailure());
+        yield put(AccountPageContentAccountActions.submitFailure(err));
         message.error(CONSTANTS.ACCOUNT.ERROR.UPDATE);
     }
 }

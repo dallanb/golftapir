@@ -14,7 +14,10 @@ const Avatar: React.FunctionComponent<AvatarProps> = ({
     const [localSrc, setLocalSrc] = useState(src);
 
     useEffect(() => {
-        if (localSrc === undefined && src) {
+        if (
+            (localSrc === undefined && src) ||
+            (src === undefined && localSrc)
+        ) {
             setLocalSrc(src);
         }
     }, [src]);

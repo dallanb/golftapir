@@ -7,6 +7,7 @@ const CONSTANTS = {
         SUCCESS: {
             UPDATE: 'Account update successful!',
             ASSIGN_AVATAR: 'Avatar update successful!',
+            DELETE_AVATAR: 'Avatar deletion successful!',
         },
         ERROR: {
             UPDATE: 'Error updating League information',
@@ -93,6 +94,7 @@ const CONSTANTS = {
             INVITE: 'Invitation sent!',
             UPDATE: 'Member update successful!',
             ASSIGN_AVATAR: 'Member avatar update successful!',
+            DELETE_AVATAR: 'Member avatar deletion successful!',
         },
         ERROR: {
             FETCH: 'Error fetching Member information',

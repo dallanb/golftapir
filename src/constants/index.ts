@@ -110,6 +110,9 @@ const constants = {
             CONTEST_COMPLETED: 'contest_completed',
         },
         MEMBERS: {
+            AVATAR_CREATED: 'avatar_created',
+            AVATAR_UPDATED: 'avatar_updated',
+            AVATAR_DELETED: 'avatar_deleted',
             DISPLAY_NAME_UPDATED: 'display_name_updated',
             COUNTRY_UPDATED: 'country_updated',
         },

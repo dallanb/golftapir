@@ -32,6 +32,18 @@ export const socketEventHandlers = (socket: WebSocket, emitter: any) => {
                 break;
             case constants.TOPICS.MEMBERS:
                 switch (event) {
+                    case constants.EVENTS.MEMBERS.AVATAR_CREATED:
+                        // TODO: UPDATE AVATAR?
+                        emitter(BaseActions.refreshMe(data.league_uuid));
+                        break;
+                    case constants.EVENTS.MEMBERS.AVATAR_UPDATED:
+                        // TODO: UPDATE AVATAR?
+                        emitter(BaseActions.refreshMe(data.league_uuid));
+                        break;
+                    case constants.EVENTS.MEMBERS.AVATAR_DELETED:
+                        // TODO: UPDATE AVATAR?
+                        emitter(BaseActions.refreshMe(data.league_uuid));
+                        break;
                     case constants.EVENTS.MEMBERS.DISPLAY_NAME_UPDATED:
                         emitter(BaseActions.refreshMe(data.league_uuid));
                         emitter(
