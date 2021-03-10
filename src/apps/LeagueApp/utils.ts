@@ -4,6 +4,7 @@ import {
     MemberActions,
     NotificationActions,
 } from '@actions';
+import LeagueAppActions from './actions';
 import constants from '@constants';
 
 export const socketEventHandlers = (socket: WebSocket, emitter: any) => {
@@ -101,11 +102,16 @@ export const topicSocketEventHandlers = (socket: WebSocket, emitter: any) => {
                         emitter(AppActions.refreshLeagueMembers(leagueUUID));
                         break;
                     case constants.EVENTS.LEAGUES.MEMBER_ACTIVE:
-                        emitter(AppActions.refreshLeagueMembers(leagueUUID));
+                        emitter(
+                            LeagueAppActions.leagueMemberActiveEvent(
+                                leagueUUID,
+                                data
+                            )
+                        );
                         break;
                     case constants.EVENTS.LEAGUES.MEMBER_INACTIVE:
                         emitter(
-                            AppActions.leagueMemberInactiveEvent(
+                            LeagueAppActions.leagueMemberInactiveEvent(
                                 leagueUUID,
                                 data
                             )

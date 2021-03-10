@@ -114,6 +114,18 @@ function* initLeagueMembers({ uuid }: AnyAction) {
     }
 }
 
+function* leagueMemberActiveEvent({ uuid, payload }: AnyAction) {
+    const { sender } = payload;
+    const myUserUUID = yield select(selectMyUserUUID);
+    if (myUserUUID == sender) {
+        yield put(BaseActions.refreshMe(uuid));
+        yield put(AppActions.refreshLeagueMember(uuid));
+        yield put(AppActions.refreshLeagueMembers(uuid));
+    } else {
+        yield put(AppActions.refreshLeagueMembers(uuid));
+    }
+}
+
 function* leagueMemberInactiveEvent({ uuid, payload }: AnyAction) {
     const { sender } = payload;
     const myUserUUID = yield select(selectMyUserUUID);
@@ -160,6 +172,10 @@ export default function* LeagueAppSaga() {
         takeLatest(LeagueAppTypes.INIT_LEAGUE, initLeague),
         takeLatest(LeagueAppTypes.INIT_LEAGUE_MEMBER, initLeagueMember),
         takeLatest(LeagueAppTypes.INIT_LEAGUE_MEMBERS, initLeagueMembers),
+        takeLatest(
+            LeagueAppTypes.LEAGUE_MEMBER_ACTIVE_EVENT,
+            leagueMemberActiveEvent
+        ),
         takeLatest(
             LeagueAppTypes.LEAGUE_MEMBER_INACTIVE_EVENT,
             leagueMemberInactiveEvent
