@@ -44,7 +44,7 @@ function* submit({ data }: AnyAction) {
             message.success(CONSTANTS.ACCOUNT.SUCCESS.ASSIGN_AVATAR);
         }
         yield put(AccountPageContentAccountActions.submitSuccess());
-        yield put(BaseActions.refreshMe());
+        // yield put(BaseActions.refreshMe()); I will instead be refreshing in socketEventHandlers
     } catch (err) {
         yield put(AccountPageContentAccountActions.submitFailure());
         message.error(CONSTANTS.ACCOUNT.ERROR.UPDATE);

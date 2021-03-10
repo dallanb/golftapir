@@ -109,6 +109,10 @@ const constants = {
             CONTEST_ACTIVE: 'contest_active',
             CONTEST_COMPLETED: 'contest_completed',
         },
+        MEMBERS: {
+            DISPLAY_NAME_UPDATED: 'display_name_updated',
+            COUNTRY_UPDATED: 'country_updated',
+        },
         LEAGUES: {
             MEMBER_CREATED: 'member_created',
             MEMBER_PENDING: 'member_pending',

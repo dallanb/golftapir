@@ -1,4 +1,9 @@
-import { AppActions, MemberActions, NotificationActions } from '@actions';
+import {
+    AppActions,
+    BaseActions,
+    MemberActions,
+    NotificationActions,
+} from '@actions';
 import constants from '@constants';
 
 export const socketEventHandlers = (socket: WebSocket, emitter: any) => {
@@ -22,6 +27,16 @@ export const socketEventHandlers = (socket: WebSocket, emitter: any) => {
                 switch (event) {
                     case constants.EVENTS.CONTESTS.CONTEST_COMPLETED:
                         emitter(MemberActions.refreshMyMemberStats());
+                        break;
+                }
+                break;
+            case constants.TOPICS.MEMBERS:
+                switch (event) {
+                    case constants.EVENTS.MEMBERS.DISPLAY_NAME_UPDATED:
+                        emitter(BaseActions.refreshMe());
+                        break;
+                    case constants.EVENTS.MEMBERS.COUNTRY_UPDATED:
+                        emitter(BaseActions.refreshMe());
                         break;
                 }
                 break;
