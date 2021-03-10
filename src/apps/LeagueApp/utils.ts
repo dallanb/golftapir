@@ -33,10 +33,14 @@ export const socketEventHandlers = (socket: WebSocket, emitter: any) => {
             case constants.TOPICS.MEMBERS:
                 switch (event) {
                     case constants.EVENTS.MEMBERS.DISPLAY_NAME_UPDATED:
-                        emitter(BaseActions.refreshMe());
+                        emitter(BaseActions.refreshMe(data.league_uuid));
+                        emitter(
+                            AppActions.refreshLeagueMembers(data.league_uuid)
+                        );
+                        // think about emitting league refresh as well
                         break;
                     case constants.EVENTS.MEMBERS.COUNTRY_UPDATED:
-                        emitter(BaseActions.refreshMe());
+                        emitter(BaseActions.refreshMe(data.league_uuid));
                         break;
                 }
                 break;
