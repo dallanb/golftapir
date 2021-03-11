@@ -50,6 +50,7 @@ function* refresh() {
     try {
         const leagueUUID = yield select(selectLeagueUUID);
         const { uuid } = yield select(selectContest);
+        yield put(ContestPageActions.fetchPayout(uuid));
         yield call(initContest, uuid);
         yield put(BaseActions.refreshMe(leagueUUID));
         yield put(ContestPageActions.refreshSuccess());
