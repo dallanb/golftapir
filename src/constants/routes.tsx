@@ -8,6 +8,7 @@ import {
     SettingFilled,
     TeamOutlined,
 } from '@ant-design/icons';
+import constants from '@constants/index';
 
 const routes = {
     APPS: {

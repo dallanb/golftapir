@@ -154,6 +154,12 @@ const constants = {
         BIRDIE: -1,
         EAGLE: -2,
     },
+    ROLE: {
+        INACTIVE: 0,
+        INVITED: 1,
+        PENDING: 2,
+        ACTIVE: 3,
+    },
 };
 
 export default constants;

@@ -1,12 +1,13 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { MembersListProps } from './types';
 import { FixedSizeList } from '@components';
-import MembersPageContentMembersActions from '../actions';
+import { selectLeagueMemberStatus } from '@selectors/AppSelector';
 import MembersListTile from './MembersListTile';
-import { getRefHeight } from '@utils';
+import { getRefHeight, statusToRole } from '@utils';
 import './MembersList.less';
+import constants from '@constants';
 
 const MembersList: React.FunctionComponent<MembersListProps> = ({
     containerRef,
@@ -15,6 +16,9 @@ const MembersList: React.FunctionComponent<MembersListProps> = ({
 }) => {
     const history = useHistory();
     const params = useParams();
+    const memberStatus = useSelector(selectLeagueMemberStatus);
+    const role = statusToRole(memberStatus);
+    const readOnly = role < constants.ROLE.ACTIVE;
 
     const tableDimensions = {
         size: 100,
@@ -34,7 +38,9 @@ const MembersList: React.FunctionComponent<MembersListProps> = ({
             loadNextPage={loadMore}
             isNextPageLoading={isFetching}
             minimumBatchSize={10}
-            rowRenderer={(props) => MembersListTile({ props, history, params })}
+            rowRenderer={(props) =>
+                MembersListTile({ props, history, params, readOnly })
+            }
         />
     );
 };
