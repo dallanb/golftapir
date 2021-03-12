@@ -6,7 +6,7 @@ export { default } from './CoursesCreateContent';
 // Reducer
 import { reducer as courseReducer } from './Course';
 export const reducer = combineReducers({
-    contest: courseReducer,
+    course: courseReducer,
 });
 
 // Saga

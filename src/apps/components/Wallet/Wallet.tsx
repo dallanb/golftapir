@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { Button } from 'antd';
 import { DollarTwoTone, PlusOutlined } from '@ant-design/icons';
@@ -10,10 +11,13 @@ import {
 } from '@selectors/BaseSelector';
 import { selectLeagueMemberStatus } from '@selectors/AppSelector';
 import './Wallet.less';
-import { statusToRole } from '@utils';
+import { navigate, statusToRole, withAppRoute } from '@utils';
 import constants from '@constants';
+import routes from '@constants/routes';
 
 const Wallet: React.FunctionComponent<WalletProps> = () => {
+    const history = useHistory();
+    const params = useParams();
     const isInitialized = useSelector(selectMeIsInitialized);
     const balance = useSelector(selectMyWalletBalance);
     const memberStatus = useSelector(selectLeagueMemberStatus);
@@ -38,7 +42,18 @@ const Wallet: React.FunctionComponent<WalletProps> = () => {
             <div className="wallet-side">
                 <div className="wallet-button">
                     <Button
-                        onClick={() => null}
+                        onClick={() =>
+                            navigate(
+                                history,
+                                withAppRoute(
+                                    routes.ROUTES.COURSES_CREATE.ROUTE,
+                                    {
+                                        app: constants.APPS.LEAGUE_APP,
+                                        routeProps: params,
+                                    }
+                                )
+                            )
+                        }
                         type="primary"
                         shape="round"
                         disabled={role < constants.ROLE.ACTIVE}

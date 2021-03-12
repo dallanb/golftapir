@@ -15,7 +15,7 @@ const CourseForm: React.FunctionComponent<CourseFormProps> = () => {
         dispatch(CoursesCreatePageContentCourseActions.submit(values));
     };
     return (
-        <div className="contest-form">
+        <div className="course-form">
             <Form
                 fieldSchema={fieldSchema}
                 validationSchema={validationSchema}
