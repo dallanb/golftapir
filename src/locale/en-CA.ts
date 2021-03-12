@@ -391,7 +391,24 @@ const CONSTANTS = {
         },
         COURSES_CREATE: {
             TITLE: 'Create Course',
-            FORM: { LABELS: {}, VALIDATION: {} },
+            FORM: {
+                LABELS: {
+                    NAME: 'Name',
+                    ADDRESS_LINE_1: 'Address Line 1',
+                    ADDRESS_LINE_2: 'Address Line 2',
+                    CITY: 'City',
+                    PROVINCE: 'Province/State',
+                    COUNTRY: 'Country',
+                },
+                VALIDATION: {
+                    NAME_REQUIRED: 'Name is required',
+                    NAME_MAX_LENGTH: 'Name must be less than 50 characters',
+                    LINE_1_REQUIRED: 'Address is required',
+                    CITY_REQUIRED: 'City is required',
+                    PROVINCE_REQUIRED: 'Province is required',
+                    COUNTRY_REQUIRED: 'Country is required',
+                },
+            },
         },
         ACCOUNT: {
             TITLE: 'Account',
