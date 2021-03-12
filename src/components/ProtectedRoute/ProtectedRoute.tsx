@@ -15,16 +15,28 @@ const ProtectedRoute = ({
 }: ProtectedRouteProps) => {
     const protect = (props: any) => {
         if (forceLogout) {
-            return <Redirect to={routes.ROUTES.LOGIN} />;
+            return (
+                <Redirect
+                    to={`${routes.APPS.AUTH_APP.ROUTE}${routes.ROUTES.LOGIN.ROUTE}`}
+                />
+            );
         }
         if (!roleAccess) {
-            return <Redirect to={routes.ROUTES.HOME.ROUTE} />;
+            return (
+                <Redirect
+                    to={`${routes.APPS.MEMBER_APP.ROUTE}${routes.ROUTES.HOME.ROUTE}`}
+                />
+            );
         }
         if (isLoggedIn) {
             // // TODO: maybe try to pass in props like league here!
             return <Component {...props} {...componentProps} />;
         }
-        return <Redirect to={routes.ROUTES.HOME.ROUTE} />;
+        return (
+            <Redirect
+                to={`${routes.APPS.MEMBER_APP.ROUTE}${routes.ROUTES.HOME.ROUTE}`}
+            />
+        );
     };
     return <Route {...restProps} render={protect} />;
 };
