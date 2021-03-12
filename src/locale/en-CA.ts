@@ -68,11 +68,14 @@ const CONSTANTS = {
         },
     },
     COURSE: {
-        SUCCESS: {},
+        SUCCESS: {
+            CREATE: 'Course creation successful!',
+        },
         ERROR: {
             FETCH: 'Error fetching Course information',
             FETCH_ALL: 'Error fetching Courses information',
             SEARCH_ALL: 'Error searching Courses information',
+            CREATE: 'Course creation unsuccessful',
         },
     },
     LEAGUE: {
@@ -385,6 +388,10 @@ const CONSTANTS = {
                     START_TIME_REQUIRED: 'Start Time is a required field',
                 },
             },
+        },
+        COURSES_CREATE: {
+            TITLE: 'Create Course',
+            FORM: { LABELS: {}, VALIDATION: {} },
         },
         ACCOUNT: {
             TITLE: 'Account',
