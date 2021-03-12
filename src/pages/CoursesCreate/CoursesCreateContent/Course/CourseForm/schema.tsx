@@ -1,7 +1,8 @@
 import React from 'react';
 import * as Yup from 'yup';
-import { BasicInputWrapper, FloatLabelInputWrapper } from '@components';
+import { FloatLabelInputWrapper, NestedInputWrapper } from '@components';
 import CONSTANTS from '@locale/en-CA';
+import { courseHoleLabelMaker, courseHolesButtonsRenderer } from './utils';
 
 const FORM = CONSTANTS.PAGES.COURSES_CREATE.FORM;
 export const fieldSchema = [
@@ -54,6 +55,62 @@ export const fieldSchema = [
             className: 'course-form-country-input',
         },
         options: {},
+    },
+    {
+        name: 'holes',
+        type: 'dynamic-input',
+        options: {
+            fieldWrapper: NestedInputWrapper,
+            fieldWrapperOptions: {
+                className: 'course-form-input-group',
+            },
+            fieldFields: [
+                {
+                    name: 'hole',
+                    wrapper: FloatLabelInputWrapper,
+                    wrapperOptions: {
+                        label: courseHoleLabelMaker,
+                        className: 'course-form-hole-input',
+                    },
+                    type: 'number',
+                    options: {
+                        formatter: (value: number) => value,
+                        className: 'course-hole-input',
+                    },
+                    className: '',
+                },
+                {
+                    name: 'par',
+                    wrapper: FloatLabelInputWrapper,
+                    wrapperOptions: {
+                        label: courseHoleLabelMaker,
+                        className: 'course-form-hole-input',
+                    },
+                    type: 'number',
+                    options: {
+                        formatter: (value: number) => value,
+                        className: 'course-hole-input',
+                    },
+                    className: '',
+                },
+                {
+                    name: 'distance',
+                    wrapper: FloatLabelInputWrapper,
+                    wrapperOptions: {
+                        label: courseHoleLabelMaker,
+                        className: 'course-form-hole-input',
+                    },
+                    type: 'number',
+                    options: {
+                        formatter: (value: number) => value,
+                        className: 'course-hole-input',
+                    },
+                    className: '',
+                },
+            ],
+            buttonsRenderer: courseHolesButtonsRenderer,
+            className: 'course-dynamic-hole-input',
+        },
     },
 ];
 

@@ -399,6 +399,7 @@ const CONSTANTS = {
                     CITY: 'City',
                     PROVINCE: 'Province/State',
                     COUNTRY: 'Country',
+                    HOLE: 'Hole',
                 },
                 VALIDATION: {
                     NAME_REQUIRED: 'Name is required',

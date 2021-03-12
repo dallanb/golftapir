@@ -6,9 +6,16 @@ import { CourseService } from '@services';
 import CoursesCreatePageContentCourseActions, {
     CoursesCreatePageContentCourseTypes,
 } from './actions';
+import { prepareInitialValues } from './utils';
 
 function* init({ options }: AnyAction) {
     try {
+        const initialValues = prepareInitialValues();
+        yield put(
+            CoursesCreatePageContentCourseActions.setInitialValues(
+                initialValues
+            )
+        );
         yield put(CoursesCreatePageContentCourseActions.initSuccess());
     } catch (err) {
         yield put(CoursesCreatePageContentCourseActions.initFailure(err));

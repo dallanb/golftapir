@@ -64,6 +64,8 @@ const fieldRenderer = (
         childRef: fieldRef,
         ...wrapperOptions,
     };
+    console.log(formattedName);
+    console.log(name);
     switch (type) {
         case 'input':
             field = (
@@ -168,11 +170,7 @@ const fieldRenderer = (
                     onSearch={_debounce((value) => {
                         dispatch(options.onSearch(value));
                     }, _get(options, ['debounce']))}
-                    loading={_get(
-                        options,
-                        ['loadingRenderer'],
-                        () => false
-                    )()}
+                    loading={_get(options, ['loadingRenderer'], () => false)()}
                     filterOption={false}
                     tagRender={_get(options, ['tagRenderer'], undefined)}
                 >
@@ -309,6 +307,7 @@ const fieldRenderer = (
             }
             break;
         case 'dynamic-input':
+            console.log(value);
             field = (
                 <FieldArray
                     name={name}
@@ -322,8 +321,26 @@ const fieldRenderer = (
                                     name={`${name}.${index}`}
                                     key={`${name}.${index}`}
                                 >
-                                    {({ field, form, meta }: any) =>
-                                        fieldRenderer(formik, {
+                                    {({ field, form, meta }: any) => {
+                                        const fields = _get(
+                                            options,
+                                            ['fieldFields'],
+                                            undefined
+                                        );
+                                        if (fields) {
+                                            return wrap(
+                                                options.fieldWrapper,
+                                                defaultFieldsRenderer(
+                                                    formik,
+                                                    fields
+                                                ),
+                                                {
+                                                    name: `${name}.${index}`,
+                                                    ...options.fieldWrapperOptions,
+                                                }
+                                            );
+                                        }
+                                        return fieldRenderer(formik, {
                                             name: field.name,
                                             type: _get(
                                                 options,
@@ -345,8 +362,8 @@ const fieldRenderer = (
                                                 ['fieldWrapperOptions'],
                                                 undefined
                                             ),
-                                        })
-                                    }
+                                        });
+                                    }}
                                 </Field>
                             ))}
                             {_get(
