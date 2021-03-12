@@ -120,4 +120,4 @@ export const socketEventHandlers = (socket: WebSocket, emitter: any) => {
 };
 
 export const formatTimeStamp = (timestamp: number) =>
-    timestamp ? moment(timestamp).format('LLLL') : 'NA';
+    timestamp ? moment(timestamp).format('LLL') : 'NA';
