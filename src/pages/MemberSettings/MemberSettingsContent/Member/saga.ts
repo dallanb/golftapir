@@ -46,7 +46,6 @@ function* submit({ uuid, data }: AnyAction) {
             }
         }
         yield put(MemberSettingsPageContentMemberActions.submitSuccess());
-        yield put(BaseActions.refreshMe());
     } catch (err) {
         yield put(MemberSettingsPageContentMemberActions.submitFailure());
         message.error(CONSTANTS.MEMBER.ERROR.UPDATE);
