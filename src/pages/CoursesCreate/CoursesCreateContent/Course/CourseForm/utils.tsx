@@ -1,4 +1,4 @@
-import { get as _get } from 'lodash';
+import { toLower as _toLower, startCase as _startCase } from 'lodash';
 import { Button } from 'antd';
 import React from 'react';
 import { MinusCircleTwoTone, PlusCircleTwoTone } from '@ant-design/icons/lib';
@@ -6,12 +6,14 @@ import { ordinalSuffix } from '@utils';
 import CONSTANTS from '@locale/en-CA';
 
 export const courseHoleLabelMaker = ({ name, value }: any) => {
-    console.log(name);
-    console.log(value);
     const place = parseInt(name[1]) + 1;
-    return `${ordinalSuffix(place)} ${
-        CONSTANTS.PAGES.COURSES_CREATE.FORM.LABELS.HOLE
-    } ${name}`;
+    return _startCase(
+        _toLower(
+            `${ordinalSuffix(place)} ${
+                CONSTANTS.PAGES.COURSES_CREATE.FORM.LABELS.HOLE
+            } ${name[2]}`
+        )
+    );
 };
 
 export const courseHolesButtonsRenderer = ({

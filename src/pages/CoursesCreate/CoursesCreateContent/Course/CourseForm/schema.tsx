@@ -11,6 +11,7 @@ export const fieldSchema = [
         wrapper: FloatLabelInputWrapper,
         wrapperOptions: {
             label: FORM.LABELS.NAME,
+            className: 'course-form-name-input',
         },
         options: {},
     },
@@ -19,6 +20,7 @@ export const fieldSchema = [
         wrapper: FloatLabelInputWrapper,
         wrapperOptions: {
             label: FORM.LABELS.ADDRESS_LINE_1,
+            className: 'course-form-line-1-input',
         },
         options: {},
     },
@@ -27,6 +29,7 @@ export const fieldSchema = [
         wrapper: FloatLabelInputWrapper,
         wrapperOptions: {
             label: FORM.LABELS.ADDRESS_LINE_2,
+            className: 'course-form-line-2-input',
         },
         options: {},
     },
@@ -35,6 +38,7 @@ export const fieldSchema = [
         wrapper: FloatLabelInputWrapper,
         wrapperOptions: {
             label: FORM.LABELS.CITY,
+            className: 'course-form-city-input',
         },
         options: {},
     },
@@ -43,6 +47,7 @@ export const fieldSchema = [
         wrapper: FloatLabelInputWrapper,
         wrapperOptions: {
             label: FORM.LABELS.PROVINCE,
+            className: 'course-form-province-input',
         },
         options: {},
     },
@@ -71,6 +76,7 @@ export const fieldSchema = [
                     wrapperOptions: {
                         label: courseHoleLabelMaker,
                         className: 'course-form-hole-input',
+                        hidden: true,
                     },
                     type: 'number',
                     options: {
@@ -84,12 +90,12 @@ export const fieldSchema = [
                     wrapper: FloatLabelInputWrapper,
                     wrapperOptions: {
                         label: courseHoleLabelMaker,
-                        className: 'course-form-hole-input',
+                        className: 'course-form-par-input',
                     },
                     type: 'number',
                     options: {
                         formatter: (value: number) => value,
-                        className: 'course-hole-input',
+                        className: 'course-par-input',
                     },
                     className: '',
                 },
@@ -98,12 +104,12 @@ export const fieldSchema = [
                     wrapper: FloatLabelInputWrapper,
                     wrapperOptions: {
                         label: courseHoleLabelMaker,
-                        className: 'course-form-hole-input',
+                        className: 'course-form-distance-input',
                     },
                     type: 'number',
                     options: {
                         formatter: (value: number) => value,
-                        className: 'course-hole-input',
+                        className: 'course-distance-input',
                     },
                     className: '',
                 },
@@ -123,4 +129,11 @@ export const validationSchema = Yup.object({
     city: Yup.string().nullable(),
     province: Yup.string().nullable(),
     country: Yup.string().required(FORM.VALIDATION.COUNTRY_REQUIRED),
+    holes: Yup.array().of(
+        Yup.object().shape({
+            hole: Yup.number(),
+            distance: Yup.number(),
+            par: Yup.number(),
+        })
+    ),
 });

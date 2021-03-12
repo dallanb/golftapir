@@ -4,7 +4,9 @@ import { useSelector } from 'react-redux';
 import { Button, Select, Spin } from 'antd';
 import { keyBy as _keyBy, get as _get, isNil as _isNil } from 'lodash';
 import { MinusCircleTwoTone, PlusCircleTwoTone } from '@ant-design/icons';
-import { selectSearchData as selectParticipantSearchData,    selectSearchIsSearching as selectParticipantSearchIsSearching,
+import {
+    selectSearchData as selectParticipantSearchData,
+    selectSearchIsSearching as selectParticipantSearchIsSearching,
 } from './ContestFormSearch/Participant/selector';
 import {
     selectSearchData as selectCourseSearchData,
@@ -60,7 +62,6 @@ export const participantSearchSelectOptionRenderer = (
 export const participantLoadingRenderer = (formik: FormikProps<FormikValues>) =>
     useSelector(selectParticipantSearchIsSearching);
 
-
 export const contestBuyInParser = (value: string) => {
     if (value === '$') {
         return 0;
@@ -78,6 +79,8 @@ export const contestPayoutInParser = (value: string) => {
 };
 
 export const contestPayoutLabelMaker = ({ name, value }: any) => {
+    console.log(name);
+    console.log(value);
     const place = parseInt(name[1]) + 1;
     return `${ordinalSuffix(place)} place ${
         CONSTANTS.PAGES.CONTESTS_CREATE.FORM.LABELS.PAYOUT
