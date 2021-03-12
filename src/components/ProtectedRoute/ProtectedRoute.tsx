@@ -15,7 +15,7 @@ const ProtectedRoute = ({
 }: ProtectedRouteProps) => {
     const protect = (props: any) => {
         if (forceLogout) {
-            return <Redirect to={routes.ROUTES.LOGIN} />;
+            return <Redirect to={routes.ROUTES.LOGIN.ROUTE} />;
         }
         if (!roleAccess) {
             return <Redirect to={routes.ROUTES.HOME.ROUTE} />;
