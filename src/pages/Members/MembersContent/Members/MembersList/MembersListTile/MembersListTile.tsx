@@ -21,21 +21,24 @@ const MembersListTile: React.FunctionComponent<MembersListTileProps> = ({
     props: { index, style, data },
     history,
     params,
+    readOnly,
 }) => {
     const isEven = index % 2;
     const item = _get(data, [index], undefined);
     const member_uuid = _get(item, ['uuid'], null);
     const handleClick = (options: any) => {
-        navigate(
-            history,
-            withAppRoute(routes.ROUTES.MEMBER.ROUTE, {
-                routeProps: {
-                    ...params,
-                    member_uuid,
-                },
-            }),
-            options
-        );
+        if (!readOnly) {
+            navigate(
+                history,
+                withAppRoute(routes.ROUTES.MEMBER.ROUTE, {
+                    routeProps: {
+                        ...params,
+                        member_uuid,
+                    },
+                }),
+                options
+            );
+        }
     };
 
     const name = getName(item, 'Loading...');
@@ -44,9 +47,13 @@ const MembersListTile: React.FunctionComponent<MembersListTileProps> = ({
     const country = _get(item, ['country'], undefined);
     const status = _get(item, ['status'], undefined);
     const ctime = _get(item, ['ctime'], undefined);
-    const cardCx = classnames('members-list-tile-card', {
-        filled: isEven,
-    });
+    const cardCx = classnames(
+        'members-list-tile-card',
+        {
+            filled: isEven,
+        },
+        { disabled: readOnly }
+    );
 
     return (
         <div style={style} className="members-list-tile-view" key={index}>

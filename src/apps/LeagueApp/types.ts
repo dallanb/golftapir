@@ -7,5 +7,6 @@ export interface LeagueAppProps {}
 export interface ComponentRoute {
     path: string;
     component: any;
+    role?: number;
     exact?: boolean;
 }

@@ -21,6 +21,7 @@ export { default as randomColourGenerator } from './randomColourGenerator';
 export { default as remove } from './remove';
 export { default as searchSelectTagRenderer } from './searchSelectTagRenderer';
 export { default as scrollbarWidth } from './scrollbarWidth';
+export { default as statusToRole } from './statusToRole';
 export { default as topicToRouteMapper } from './topicToRouteMapper';
 export { default as totalStrokeCalculator } from './totalStrokeCalculator';
 export { default as upsert } from './upsert';

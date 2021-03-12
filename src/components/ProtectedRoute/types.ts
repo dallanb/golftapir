@@ -5,6 +5,7 @@ export interface ProtectedRouteProps {
     componentProps?: any;
     isLoggedIn: boolean;
     forceLogout: boolean;
+    roleAccess?: boolean;
     path: string;
     exact: boolean | undefined;
     refresh?: () => void;

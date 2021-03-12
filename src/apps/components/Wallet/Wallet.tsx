@@ -8,11 +8,16 @@ import {
     selectMeIsInitialized,
     selectMyWalletBalance,
 } from '@selectors/BaseSelector';
+import { selectLeagueMemberStatus } from '@selectors/AppSelector';
 import './Wallet.less';
+import { statusToRole } from '@utils';
+import constants from '@constants';
 
 const Wallet: React.FunctionComponent<WalletProps> = () => {
     const isInitialized = useSelector(selectMeIsInitialized);
     const balance = useSelector(selectMyWalletBalance);
+    const memberStatus = useSelector(selectLeagueMemberStatus);
+    const role = statusToRole(memberStatus);
     return (
         <ComponentContent
             className="wallet-component-content space"
@@ -36,6 +41,7 @@ const Wallet: React.FunctionComponent<WalletProps> = () => {
                         onClick={() => null}
                         type="primary"
                         shape="round"
+                        disabled={role < constants.ROLE.ACTIVE}
                         icon={<PlusOutlined />}
                     >
                         Add

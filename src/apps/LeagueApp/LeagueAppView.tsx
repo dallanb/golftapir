@@ -9,7 +9,7 @@ import {
     useParams,
 } from 'react-router-dom';
 import { get as _get } from 'lodash';
-import { message } from '@utils';
+import { message, statusToRole } from '@utils';
 import { AppLayout } from '@layouts';
 import { ComponentRoute, LeagueAppViewProps } from './types';
 import { AppLoading, ProtectedRoute } from '@components';
@@ -59,6 +59,7 @@ const LeagueAppView: React.FunctionComponent<LeagueAppViewProps> = () => {
         ['data', 'status'],
         constants.STATUS.INACTIVE.KEY
     );
+    const memberRole = statusToRole(memberStatus);
     const leagueIsFetching = useSelector(selectLeagueIsFetching);
     const leagueMemberIsFetching = useSelector(selectLeagueMemberIsFetching);
     const isFetching =
@@ -132,6 +133,7 @@ const LeagueAppView: React.FunctionComponent<LeagueAppViewProps> = () => {
                 size: 24,
             },
         },
+        role: memberRole,
     };
 
     if (!isReady || isFetching) return <AppLoading />;
@@ -153,17 +155,20 @@ const LeagueAppView: React.FunctionComponent<LeagueAppViewProps> = () => {
                     />
                 ))}
                 {protectedRoutes.map(
-                    ({ path, component, exact }: ComponentRoute) => (
-                        <ProtectedRoute
-                            key={path}
-                            path={`${constantRoutes.APPS.LEAGUE_APP.ROUTE}${path}`}
-                            component={component}
-                            exact={exact}
-                            isLoggedIn={isLoggedIn}
-                            forceLogout={forceLogout}
-                            refresh={() => dispatch(AuthActions.refresh())}
-                        />
-                    )
+                    ({ path, component, role = -1, exact }: ComponentRoute) => {
+                        return (
+                            <ProtectedRoute
+                                key={path}
+                                path={`${constantRoutes.APPS.LEAGUE_APP.ROUTE}${path}`}
+                                component={component}
+                                exact={exact}
+                                roleAccess={memberRole >= role}
+                                isLoggedIn={isLoggedIn}
+                                forceLogout={forceLogout}
+                                refresh={() => dispatch(AuthActions.refresh())}
+                            />
+                        );
+                    }
                 )}
                 <Route
                     render={() => (
