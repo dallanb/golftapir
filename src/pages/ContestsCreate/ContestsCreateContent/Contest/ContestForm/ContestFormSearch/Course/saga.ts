@@ -11,6 +11,7 @@ function* search({ key }: AnyAction) {
             page: 1,
             per_page: 10,
             search: key,
+            status: 'active',
         });
         yield put(
             ContestsCreatePageContentContestSearchCourseActions.searchSuccess(
