@@ -16,4 +16,11 @@ export default {
             query,
         });
     },
+    createCourse(data: any = {}) {
+        return ClientProxy.post({
+            url: config.COURSE_URL,
+            endpoint: `/courses`,
+            data,
+        });
+    },
 };

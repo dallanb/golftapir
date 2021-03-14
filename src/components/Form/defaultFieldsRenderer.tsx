@@ -15,7 +15,7 @@ import constants from '@constants';
 // @ts-ignore
 import Flags from 'country-flag-icons/react/3x2';
 import { FieldsRendererProps } from './types';
-import { Field, FieldArray } from 'formik';
+import { Field, FieldArray, useField } from 'formik';
 
 const wrap = (Wrapper: any, field: any, options: any) => (
     <Wrapper key={options.name} {...options}>
@@ -67,26 +67,36 @@ const fieldRenderer = (
     switch (type) {
         case 'input':
             field = (
-                <Input
-                    key={name}
-                    name={name}
-                    ref={fieldRef}
-                    onChange={formik.handleChange}
-                    onBlur={(e) => {
-                        formik.handleBlur(e);
-                        formik.validateField(name);
-                    }}
-                    disabled={_get(options, ['disabled'], false)}
-                    readOnly={_get(options, ['readonly'], false)}
-                    bordered={_get(options, ['bordered'], true)}
-                    placeholder={_get(options, ['placeholder'], undefined)}
-                    prefix={
-                        _get(options, ['prefixRenderer'], undefined) &&
-                        options.prefixRenderer(formik, { name, value })
-                    }
-                    autoComplete="off"
-                    className={_get(options, ['className'], undefined)}
-                />
+                <Field name={name} key={name}>
+                    {({ field: formikField }: any) => (
+                        <Input
+                            {...formikField}
+                            ref={fieldRef}
+                            onChange={formik.handleChange}
+                            onBlur={(e) => {
+                                formik.handleBlur(e);
+                                formik.validateField(name);
+                            }}
+                            disabled={_get(options, ['disabled'], false)}
+                            readOnly={_get(options, ['readonly'], false)}
+                            bordered={_get(options, ['bordered'], true)}
+                            placeholder={_get(
+                                options,
+                                ['placeholder'],
+                                undefined
+                            )}
+                            prefix={
+                                _get(options, ['prefixRenderer'], undefined) &&
+                                options.prefixRenderer(formik, {
+                                    name,
+                                    value,
+                                })
+                            }
+                            autoComplete="off"
+                            className={_get(options, ['className'], undefined)}
+                        />
+                    )}
+                </Field>
             );
             if (wrapper) {
                 field = wrap(wrapper, field, wrapperProps);
@@ -94,32 +104,41 @@ const fieldRenderer = (
             break;
         case 'number':
             field = (
-                <InputNumber
-                    key={name}
-                    name={name}
-                    ref={fieldRef}
-                    onChange={(value) => {
-                        value =
-                            typeof value === 'string' ? parseInt(value) : value;
-                        return formik.setFieldValue(name, value);
-                    }}
-                    onBlur={(e) => {
-                        formik.handleBlur(e);
-                        formik.validateField(name);
-                    }}
-                    disabled={_get(options, ['disabled'], false)}
-                    readOnly={_get(options, ['readonly'], false)}
-                    placeholder={_get(options, ['placeholder'], undefined)}
-                    prefix={
-                        _get(options, ['prefixRenderer'], undefined) &&
-                        options.prefixRenderer()
-                    }
-                    className={_get(options, ['className'], undefined)}
-                    formatter={_get(options, ['formatter'], undefined)}
-                    parser={_get(options, ['parser'], undefined)}
-                    max={_get(options, ['max'], undefined)}
-                    min={_get(options, ['min'], undefined)}
-                />
+                <Field name={name} key={name}>
+                    {({ field }: any) => (
+                        <InputNumber
+                            {...field}
+                            ref={fieldRef}
+                            onChange={(value) => {
+                                value =
+                                    typeof value === 'string'
+                                        ? parseInt(value)
+                                        : value;
+                                return formik.setFieldValue(name, value);
+                            }}
+                            onBlur={(e) => {
+                                formik.handleBlur(e);
+                                formik.validateField(name);
+                            }}
+                            disabled={_get(options, ['disabled'], false)}
+                            readOnly={_get(options, ['readonly'], false)}
+                            placeholder={_get(
+                                options,
+                                ['placeholder'],
+                                undefined
+                            )}
+                            prefix={
+                                _get(options, ['prefixRenderer'], undefined) &&
+                                options.prefixRenderer()
+                            }
+                            className={_get(options, ['className'], undefined)}
+                            formatter={_get(options, ['formatter'], undefined)}
+                            parser={_get(options, ['parser'], undefined)}
+                            max={_get(options, ['max'], undefined)}
+                            min={_get(options, ['min'], undefined)}
+                        />
+                    )}
+                </Field>
             );
 
             if (wrapper) {
@@ -168,11 +187,7 @@ const fieldRenderer = (
                     onSearch={_debounce((value) => {
                         dispatch(options.onSearch(value));
                     }, _get(options, ['debounce']))}
-                    loading={_get(
-                        options,
-                        ['loadingRenderer'],
-                        () => false
-                    )()}
+                    loading={_get(options, ['loadingRenderer'], () => false)()}
                     filterOption={false}
                     tagRender={_get(options, ['tagRenderer'], undefined)}
                 >
@@ -317,38 +332,68 @@ const fieldRenderer = (
                         <div
                             className={_get(options, ['className'], undefined)}
                         >
-                            {value.map((item: any, index: number) => (
-                                <Field
-                                    name={`${name}.${index}`}
-                                    key={`${name}.${index}`}
-                                >
-                                    {({ field, form, meta }: any) =>
-                                        fieldRenderer(formik, {
-                                            name: field.name,
-                                            type: _get(
-                                                options,
-                                                ['fieldType'],
-                                                undefined
-                                            ),
-                                            wrapper: _get(
-                                                options,
-                                                ['fieldWrapper'],
-                                                undefined
-                                            ),
-                                            options: _get(
-                                                options,
-                                                ['fieldOptions'],
-                                                undefined
-                                            ),
-                                            wrapperOptions: _get(
-                                                options,
-                                                ['fieldWrapperOptions'],
-                                                undefined
-                                            ),
-                                        })
-                                    }
-                                </Field>
-                            ))}
+                            {value.map((item: any, index: number) => {
+                                const fields = _get(
+                                    options,
+                                    ['fieldFields'],
+                                    undefined
+                                );
+                                if (fields) {
+                                    return wrap(
+                                        options.fieldWrapper,
+                                        fields.map((nestedField: any) => (
+                                            <Field
+                                                name={`${name}.${index}.${nestedField.name}`}
+                                                key={`${name}.${index}.${nestedField.name}`}
+                                            >
+                                                {({ field }: any) =>
+                                                    fieldRenderer(formik, {
+                                                        ...nestedField,
+                                                        name: field.name,
+                                                    })
+                                                }
+                                            </Field>
+                                        )),
+                                        {
+                                            name: `${name}.${index}`,
+                                            ...options.fieldWrapperOptions,
+                                        }
+                                    );
+                                }
+
+                                return (
+                                    <Field
+                                        name={`${name}.${index}`}
+                                        key={`${name}.${index}`}
+                                    >
+                                        {({ field, form, meta }: any) =>
+                                            fieldRenderer(formik, {
+                                                name: field.name,
+                                                type: _get(
+                                                    options,
+                                                    ['fieldType'],
+                                                    undefined
+                                                ),
+                                                wrapper: _get(
+                                                    options,
+                                                    ['fieldWrapper'],
+                                                    undefined
+                                                ),
+                                                options: _get(
+                                                    options,
+                                                    ['fieldOptions'],
+                                                    undefined
+                                                ),
+                                                wrapperOptions: _get(
+                                                    options,
+                                                    ['fieldWrapperOptions'],
+                                                    undefined
+                                                ),
+                                            })
+                                        }
+                                    </Field>
+                                );
+                            })}
                             {_get(
                                 options,
                                 ['buttonsRenderer'],

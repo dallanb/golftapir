@@ -45,6 +45,13 @@ export {
     ContestUpdatePageRoutes,
 } from './ContestUpdate';
 export {
+    default as CoursesCreate,
+    reducer as coursesCreatePage,
+    CoursesCreatePageSaga,
+    CoursesCreatePageContentCourseSaga,
+    CoursesCreatePageRoutes,
+} from './CoursesCreate';
+export {
     default as ForgotPassword,
     reducer as forgotPasswordPage,
     ForgotPasswordPageSaga,

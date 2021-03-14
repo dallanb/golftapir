@@ -68,11 +68,14 @@ const CONSTANTS = {
         },
     },
     COURSE: {
-        SUCCESS: {},
+        SUCCESS: {
+            CREATE: 'Course creation successful!',
+        },
         ERROR: {
             FETCH: 'Error fetching Course information',
             FETCH_ALL: 'Error fetching Courses information',
             SEARCH_ALL: 'Error searching Courses information',
+            CREATE: 'Course creation unsuccessful',
         },
     },
     LEAGUE: {
@@ -386,6 +389,28 @@ const CONSTANTS = {
                 },
             },
         },
+        COURSES_CREATE: {
+            TITLE: 'Create Course',
+            FORM: {
+                LABELS: {
+                    NAME: 'Name',
+                    ADDRESS_LINE_1: 'Address Line 1',
+                    ADDRESS_LINE_2: 'Address Line 2',
+                    CITY: 'City',
+                    PROVINCE: 'Province/State',
+                    COUNTRY: 'Country',
+                    HOLE: 'Hole',
+                },
+                VALIDATION: {
+                    NAME_REQUIRED: 'Name is required',
+                    NAME_MAX_LENGTH: 'Name must be less than 50 characters',
+                    LINE_1_REQUIRED: 'Address is required',
+                    CITY_REQUIRED: 'City is required',
+                    PROVINCE_REQUIRED: 'Province is required',
+                    COUNTRY_REQUIRED: 'Country is required',
+                },
+            },
+        },
         ACCOUNT: {
             TITLE: 'Account',
             DESCRIPTION: 'Update League Settings',
@@ -505,6 +530,15 @@ const CONSTANTS = {
         WAGERS: {
             TITLE: 'Wagers',
             DESCRIPTION: 'View Wagers',
+        },
+    },
+    COMPONENTS: {
+        WALLET: {
+            ADD_MODAL: {
+                TITLE: 'Add Funds',
+                DESCRIPTION:
+                    'Would you like to add a course to Golf Tapir for $100',
+            },
         },
     },
 };

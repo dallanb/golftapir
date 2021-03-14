@@ -114,6 +114,13 @@ const routes = {
             LABEL: CONSTANTS.PAGES.CONTEST_UPDATE.TITLE,
             ICON: null,
         },
+        COURSES_CREATE: {
+            ROUTE: '/courses/create',
+            BASE_KEY: 'course',
+            KEY: 'courses_create',
+            LABEL: CONSTANTS.PAGES.COURSES_CREATE.TITLE,
+            ICON: null,
+        },
         HOME: {
             ROUTE: '/home',
             BASE_KEY: 'home',

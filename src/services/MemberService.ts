@@ -78,6 +78,13 @@ export default {
             query,
         });
     },
+    fetchWallet(uuid: string, query: any = {}) {
+        return ClientProxy.get({
+            url: config.MEMBER_URL,
+            endpoint: `/wallets/${uuid}`,
+            query,
+        });
+    },
     createMember(data: any, query: any = {}) {
         return ClientProxy.post({
             url: config.MEMBER_URL,

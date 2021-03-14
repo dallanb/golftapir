@@ -80,6 +80,19 @@ const topicToRouteMapper = (
                     console.error('key not found');
             }
             break;
+        case constants.TOPICS.COURSES:
+            mapping.route += routes.ROUTES.HOME.ROUTE;
+            switch (key) {
+                case constants.EVENTS.COURSES.COURSE_APPROVED:
+                    mapping.route = withAppRoute(mapping.route, {
+                        app: constants.APPS.MEMBER_APP,
+                        routeProps: {},
+                    });
+                    break;
+                default:
+                    console.error('key not found');
+            }
+            break;
         default:
             throw new Error(`Invalid topic: ${topic}`);
     }
