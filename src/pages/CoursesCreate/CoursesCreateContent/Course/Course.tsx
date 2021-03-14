@@ -23,6 +23,7 @@ const Course: React.FunctionComponent<CourseProps> = ({}) => {
 
     useEffect(() => {
         if (isSubmitted && result) {
+            // TODO: tell the user that tokens will be added to there balance after the course is approved
             navigate(
                 history,
                 withAppRoute(routes.ROUTES.LEAGUE_HOME.ROUTE, {

@@ -537,7 +537,7 @@ const CONSTANTS = {
             ADD_MODAL: {
                 TITLE: 'Add Funds',
                 DESCRIPTION:
-                    'Would you like to add a course to Golf Tapir for $100',
+                    'Would you like to add a course to Golf Tapir for ',
             },
         },
     },
