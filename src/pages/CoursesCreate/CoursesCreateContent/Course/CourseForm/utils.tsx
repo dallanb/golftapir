@@ -7,13 +7,9 @@ import CONSTANTS from '@locale/en-CA';
 
 export const courseHoleLabelMaker = ({ name, value }: any) => {
     const place = parseInt(name[1]) + 1;
-    return _startCase(
-        _toLower(
-            `${ordinalSuffix(place)} ${
-                CONSTANTS.PAGES.COURSES_CREATE.FORM.LABELS.HOLE
-            } ${name[2]}`
-        )
-    );
+    return `${ordinalSuffix(place)} ${
+        CONSTANTS.PAGES.COURSES_CREATE.FORM.LABELS.HOLE
+    } ${_startCase(_toLower(name[2]))}`;
 };
 
 export const courseHolesButtonsRenderer = ({
@@ -21,7 +17,6 @@ export const courseHolesButtonsRenderer = ({
     formik,
     arrayHelpers,
 }: any) => {
-    console.log(formik);
     return (
         <div className="course-form-hole-dynamic-input-buttons">
             <Button
@@ -34,7 +29,7 @@ export const courseHolesButtonsRenderer = ({
             <Button
                 onClick={() =>
                     arrayHelpers.insert(value.length, {
-                        hole: value.length + 1,
+                        number: value.length + 1,
                         par: 0,
                         distance: 0,
                     })

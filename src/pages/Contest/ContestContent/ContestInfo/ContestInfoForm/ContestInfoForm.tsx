@@ -10,7 +10,6 @@ import './ContestInfoForm.less';
 const ContestInfoForm: React.FunctionComponent<ContestInfoFormProps> = () => {
     const contestData = useSelector(selectContest);
     const payoutData = useSelector(selectPayoutData);
-    console.log(payoutData);
     const initialValues = prepareInitialValues(contestData, payoutData);
     return (
         <div className="contest-info-form">

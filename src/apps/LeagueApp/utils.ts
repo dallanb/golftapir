@@ -34,22 +34,11 @@ export const socketEventHandlers = (socket: WebSocket, emitter: any) => {
             case constants.TOPICS.MEMBERS:
                 switch (event) {
                     case constants.EVENTS.MEMBERS.AVATAR_CREATED:
-                        emitter(
-                            BaseActions.refreshMeDebounce(
-                                data.league_uuid,
-                                1000
-                            )
-                        );
-                        break;
                     case constants.EVENTS.MEMBERS.AVATAR_UPDATED:
-                        emitter(
-                            BaseActions.refreshMeDebounce(
-                                data.league_uuid,
-                                1000
-                            )
-                        );
-                        break;
                     case constants.EVENTS.MEMBERS.AVATAR_DELETED:
+                    case constants.EVENTS.MEMBERS.COUNTRY_UPDATED:
+                    case constants.EVENTS.MEMBERS.STAT_UPDATED:
+                    case constants.EVENTS.MEMBERS.WALLET_UPDATED:
                         emitter(
                             BaseActions.refreshMeDebounce(
                                 data.league_uuid,
@@ -68,14 +57,6 @@ export const socketEventHandlers = (socket: WebSocket, emitter: any) => {
                             AppActions.refreshLeagueMembers(data.league_uuid)
                         );
                         // think about emitting league refresh as well
-                        break;
-                    case constants.EVENTS.MEMBERS.COUNTRY_UPDATED:
-                        emitter(
-                            BaseActions.refreshMeDebounce(
-                                data.league_uuid,
-                                1000
-                            )
-                        );
                         break;
                 }
                 break;

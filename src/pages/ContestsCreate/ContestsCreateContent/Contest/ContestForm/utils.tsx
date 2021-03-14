@@ -79,8 +79,6 @@ export const contestPayoutInParser = (value: string) => {
 };
 
 export const contestPayoutLabelMaker = ({ name, value }: any) => {
-    console.log(name);
-    console.log(value);
     const place = parseInt(name[1]) + 1;
     return `${ordinalSuffix(place)} place ${
         CONSTANTS.PAGES.CONTESTS_CREATE.FORM.LABELS.PAYOUT

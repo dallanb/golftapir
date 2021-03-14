@@ -71,7 +71,7 @@ export const fieldSchema = [
             },
             fieldFields: [
                 {
-                    name: 'hole',
+                    name: 'number',
                     wrapper: FloatLabelInputWrapper,
                     wrapperOptions: {
                         label: courseHoleLabelMaker,
@@ -131,7 +131,7 @@ export const validationSchema = Yup.object({
     country: Yup.string().required(FORM.VALIDATION.COUNTRY_REQUIRED),
     holes: Yup.array().of(
         Yup.object().shape({
-            hole: Yup.number(),
+            number: Yup.number(),
             distance: Yup.number(),
             par: Yup.number(),
         })

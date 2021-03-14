@@ -88,6 +88,7 @@ const constants = {
         AUTH: 'auth',
         ACCOUNTS: 'accounts',
         CONTESTS: 'contests',
+        COURSES: 'courses',
         LEAGUES: 'leagues',
         MEMBERS: 'members',
         SCORES: 'scores',
@@ -109,12 +110,17 @@ const constants = {
             CONTEST_ACTIVE: 'contest_active',
             CONTEST_COMPLETED: 'contest_completed',
         },
+        COURSES: {
+            COURSE_APPROVED: 'course_approved',
+        },
         MEMBERS: {
             AVATAR_CREATED: 'avatar_created',
             AVATAR_UPDATED: 'avatar_updated',
             AVATAR_DELETED: 'avatar_deleted',
             DISPLAY_NAME_UPDATED: 'display_name_updated',
             COUNTRY_UPDATED: 'country_updated',
+            STAT_UPDATED: 'stat_updated',
+            WALLET_UPDATED: 'wallet_updated',
         },
         LEAGUES: {
             MEMBER_CREATED: 'member_created',

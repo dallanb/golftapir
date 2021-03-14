@@ -532,6 +532,15 @@ const CONSTANTS = {
             DESCRIPTION: 'View Wagers',
         },
     },
+    COMPONENTS: {
+        WALLET: {
+            ADD_MODAL: {
+                TITLE: 'Add Funds',
+                DESCRIPTION:
+                    'Would you like to add a course to Golf Tapir for $100',
+            },
+        },
+    },
 };
 
 export default CONSTANTS;
