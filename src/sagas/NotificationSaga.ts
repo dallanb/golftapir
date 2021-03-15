@@ -1,5 +1,5 @@
 import { AnyAction } from 'redux';
-import { message } from 'antd';
+import { message } from '@utils';
 import { all, call, put, select, takeLatest } from 'redux-saga/effects';
 import { NotificationActions, NotificationTypes } from '@actions';
 import { NotificationService } from '@services';

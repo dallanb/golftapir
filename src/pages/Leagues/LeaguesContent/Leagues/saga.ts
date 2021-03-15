@@ -29,7 +29,9 @@ function* fetchData({ options = { page: 1, per_page: 10 } }: AnyAction) {
             LeaguesPageContentLeaguesActions.fetchDataSuccess(leagues, metadata)
         );
     } catch (err) {
-        yield put(LeaguesPageContentLeaguesActions.fetchDataFailure(err));
+        yield put(
+            LeaguesPageContentLeaguesActions.fetchDataFailure(err)
+        );
     }
 }
 

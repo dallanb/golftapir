@@ -5,4 +5,5 @@ export interface MembersListTileProps {
     props: PropsWithChildren<ListChildComponentProps>;
     history: any;
     params: any;
+    readOnly: boolean;
 }

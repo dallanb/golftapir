@@ -11,6 +11,7 @@ function* search({ key: search }: AnyAction) {
         const { members }: any = yield call(MemberService.fetchMembers, {
             page: 1,
             per_page: 10,
+            league_uuid: null,
             search,
         });
         yield put(

@@ -15,7 +15,5 @@ function* init({ uuid }: AnyAction) {
 }
 
 export default function* LeaguePageSaga() {
-    yield all([
-        takeLatest(LeaguePageTypes.INIT, init),
-    ]);
+    yield all([takeLatest(LeaguePageTypes.INIT, init)]);
 }

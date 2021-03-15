@@ -1,5 +1,5 @@
 import { FormikProps, FormikValues } from 'formik';
-import { FormEvent, ReactElement, ReactText } from 'react';
+import { FormEvent, ReactElement, ReactText, Ref } from 'react';
 
 export interface FormProps {
     initialValues: any;
@@ -13,6 +13,7 @@ export interface FormProps {
     fieldsRenderer?: () => any;
     validateOnChange?: boolean;
     validateOnBlur?: boolean;
+    formRef?: Ref<any>;
 }
 
 export interface FormRendererProps {

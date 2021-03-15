@@ -88,6 +88,7 @@ const constants = {
         AUTH: 'auth',
         ACCOUNTS: 'accounts',
         CONTESTS: 'contests',
+        COURSES: 'courses',
         LEAGUES: 'leagues',
         MEMBERS: 'members',
         SCORES: 'scores',
@@ -101,15 +102,31 @@ const constants = {
         },
         CONTESTS: {
             PARTICIPANT_INVITED: 'participant_invited',
+            PARTICIPANT_INACTIVE: 'participant_inactive',
             PARTICIPANT_ACTIVE: 'participant_active',
             PARTICIPANT_COMPLETED: 'participant_completed',
             CONTEST_READY: 'contest_ready',
+            CONTEST_INACTIVE: 'contest_inactive',
             CONTEST_ACTIVE: 'contest_active',
             CONTEST_COMPLETED: 'contest_completed',
         },
+        COURSES: {
+            COURSE_APPROVED: 'course_approved',
+        },
+        MEMBERS: {
+            AVATAR_CREATED: 'avatar_created',
+            AVATAR_UPDATED: 'avatar_updated',
+            AVATAR_DELETED: 'avatar_deleted',
+            DISPLAY_NAME_UPDATED: 'display_name_updated',
+            COUNTRY_UPDATED: 'country_updated',
+            STAT_UPDATED: 'stat_updated',
+            WALLET_UPDATED: 'wallet_updated',
+        },
         LEAGUES: {
+            MEMBER_CREATED: 'member_created',
             MEMBER_PENDING: 'member_pending',
             MEMBER_ACTIVE: 'member_active',
+            MEMBER_INACTIVE: 'member_inactive',
         },
         SCORES: {
             STROKE_UPDATE: 'stroke_update',
@@ -142,6 +159,12 @@ const constants = {
         PAR: 0,
         BIRDIE: -1,
         EAGLE: -2,
+    },
+    ROLE: {
+        INACTIVE: 0,
+        INVITED: 1,
+        PENDING: 2,
+        ACTIVE: 3,
     },
 };
 

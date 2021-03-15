@@ -1,6 +1,6 @@
 import { call, fork, put, select } from 'redux-saga/effects';
 import { keyBy as _keyBy } from 'lodash';
-import { TopicSocketActions } from '@actions';
+import { ContestTopicSocketActions } from '@actions';
 import {
     ContestService,
     MemberService,
@@ -9,8 +9,7 @@ import {
 } from '@services';
 import ContestPageActions from './actions';
 import { socketEventHandlers } from './utils';
-import { selectLeagueMember } from '@selectors/AppSelector';
-import { selectLeagueMemberData } from '@apps/LeagueApp/selector';
+import { selectLeagueMemberData } from '@selectors/AppSelector';
 
 export function* initContest(uuid: string) {
     yield fork(initContestParticipant, uuid);
@@ -19,30 +18,20 @@ export function* initContest(uuid: string) {
         uuid
     );
     yield put(ContestPageActions.set({ contest }));
-
-    const { participants } = contest;
-
-    const members = Object.keys(participants);
-
-    if (members.length) {
-        const { members: memberParticipants }: any = yield call(
-            MemberService.bulkFetchMembers,
-            { within: { key: 'uuid', value: members } },
-            { include: 'avatar' }
-        );
-        const membersHash = _keyBy(memberParticipants, 'uuid');
-        yield put(ContestPageActions.set({ membersHash }));
-    }
 }
 
 function* initContestParticipant(uuid: string) {
-    const leagueMember = yield select(selectLeagueMemberData);
-    const { participants: participant }: any = yield call(
-        ContestService.fetchContestParticipantMember,
-        uuid,
-        leagueMember.member
-    );
-    yield put(ContestPageActions.set({ participant }));
+    try {
+        const leagueMember = yield select(selectLeagueMemberData);
+        const { participants: participant }: any = yield call(
+            ContestService.fetchContestParticipantMember,
+            uuid,
+            leagueMember.member
+        );
+        yield put(ContestPageActions.set({ participant }));
+    } catch (err) {
+        console.error('Not a participant');
+    }
 }
 
 export function* initSubscribed(uuid: string) {
@@ -57,12 +46,15 @@ export function* initSubscribed(uuid: string) {
 
 export function* initSocket(uuid: string) {
     yield put(
-        TopicSocketActions.init({ uuid }, { eventHandler: socketEventHandlers })
+        ContestTopicSocketActions.init(
+            { uuid },
+            { eventHandler: socketEventHandlers }
+        )
     );
 }
 
 export function* terminateSocket() {
-    yield put(TopicSocketActions.terminate());
+    yield put(ContestTopicSocketActions.terminate());
 }
 
 export function* initPayout(uuid: string) {

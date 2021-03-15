@@ -28,6 +28,7 @@ const config = {
     },
     WS_NOTIFICATION_URL: 'wss://notification.techtapir.com/notification',
     WS_TOPIC_URL: 'wss://notification.techtapir.com/topic',
+    MAX_LEAGUE_MEMBERS: 10,
 };
 
 export default config;

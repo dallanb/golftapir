@@ -2,7 +2,7 @@
 import { static as Immutable } from 'seamless-immutable';
 import { createReducer } from 'reduxsauce';
 import { LeagueAppTypes } from './actions';
-import { AccountTypes, LeagueTypes } from '@actions';
+import { AppTypes } from '@actions';
 
 /* ------------- Interface ------------- */
 export interface LeagueAppInterface {
@@ -13,6 +13,7 @@ export interface LeagueAppInterface {
     readonly uuid?: string;
     readonly league: any;
     readonly leagueMember: any;
+    readonly leagueMembers: any;
 }
 
 /* ------------- Initial State ------------- */
@@ -23,13 +24,22 @@ const INITIAL_STATE: LeagueAppInterface = {
     err: undefined,
     uuid: undefined,
     league: {
-        isFetching: false,
+        isInitialized: false,
+        isRefreshing: false,
         data: undefined,
         err: undefined,
     },
     leagueMember: {
-        isFetching: false,
+        isInitialized: false,
+        isRefreshing: false,
         data: undefined,
+        err: undefined,
+    },
+    leagueMembers: {
+        isInitialized: false,
+        isRefreshing: false,
+        data: undefined,
+        metadata: undefined,
         err: undefined,
     },
 };
@@ -91,64 +101,193 @@ function set(state: any, { data }: any) {
     });
 }
 
-function fetchLeague(state: any) {
+function initLeague(state: any) {
     return Immutable.merge(state, {
         league: {
             ...state.league,
-            isFetching: true,
+            isInitialized: false,
             err: undefined,
         },
     });
 }
 
-function fetchLeagueSuccess(state: any, { league: data }: any) {
+function initLeagueSuccess(state: any) {
     return Immutable.merge(state, {
-        league: { ...state.league, isFetching: false, data },
+        league: { ...state.league, isInitialized: true },
     });
 }
 
-function fetchLeagueFailure(state: any, { err }: any) {
+function initLeagueFailure(state: any, { err }: any) {
     return Immutable.merge(state, {
         league: {
             ...state.league,
-            isFetching: false,
-            data: undefined,
+            isInitialized: true,
             err,
         },
     });
 }
 
-function fetchLeagueMember(state: any) {
+function refreshLeague(state: any) {
     return Immutable.merge(state, {
-        leagueMember: {
-            ...state.leagueMember,
-            isFetching: true,
-            data: undefined,
-            err: undefined,
+        league: {
+            ...state.league,
+            isRefreshing: true,
         },
     });
 }
 
-function fetchLeagueMemberSuccess(state: any, { leagueMember: data }: any) {
+function refreshLeagueSuccess(state: any) {
     return Immutable.merge(state, {
-        leagueMember: {
-            ...state.leagueMember,
-            isFetching: false,
+        league: { ...state.league, isRefreshing: false },
+    });
+}
+
+function refreshLeagueFailure(state: any, { err }: any) {
+    return Immutable.merge(state, {
+        league: {
+            ...state.league,
+            isRefreshing: false,
+            err,
+        },
+    });
+}
+
+function setLeague(state: any, { data }: any) {
+    return Immutable.merge(state, {
+        league: {
+            ...state.league,
             data,
         },
     });
 }
 
-function fetchLeagueMemberFailure(state: any, { err }: any) {
+function initLeagueMember(state: any) {
     return Immutable.merge(state, {
         leagueMember: {
             ...state.leagueMember,
-            isFetching: false,
-            data: undefined,
+            isInitialized: false,
+            err: undefined,
+        },
+    });
+}
+
+function initLeagueMemberSuccess(state: any) {
+    return Immutable.merge(state, {
+        leagueMember: {
+            ...state.leagueMember,
+            isInitialized: true,
+        },
+    });
+}
+
+function initLeagueMemberFailure(state: any, { err }: any) {
+    return Immutable.merge(state, {
+        leagueMember: {
+            ...state.leagueMember,
+            isInitialized: true,
             err,
         },
     });
 }
+
+function refreshLeagueMember(state: any) {
+    return Immutable.merge(state, {
+        leagueMember: {
+            ...state.leagueMember,
+            isRefreshing: true,
+        },
+    });
+}
+
+function refreshLeagueMemberSuccess(state: any) {
+    return Immutable.merge(state, {
+        leagueMember: { ...state.leagueMember, isRefreshing: false },
+    });
+}
+
+function refreshLeagueMemberFailure(state: any, { err }: any) {
+    return Immutable.merge(state, {
+        leagueMember: {
+            ...state.leagueMember,
+            isRefreshing: false,
+            err,
+        },
+    });
+}
+
+function setLeagueMember(state: any, { data }: any) {
+    return Immutable.merge(state, {
+        leagueMember: {
+            ...state.leagueMember,
+            data,
+        },
+    });
+}
+
+function initLeagueMembers(state: any) {
+    return Immutable.merge(state, {
+        leagueMembers: {
+            ...state.leagueMembers,
+            isInitialized: false,
+            err: undefined,
+        },
+    });
+}
+
+function initLeagueMembersSuccess(state: any) {
+    return Immutable.merge(state, {
+        leagueMembers: {
+            ...state.leagueMembers,
+            isInitialized: true,
+        },
+    });
+}
+
+function initLeagueMembersFailure(state: any, { err }: any) {
+    return Immutable.merge(state, {
+        leagueMembers: {
+            ...state.leagueMembers,
+            isInitialized: true,
+            err,
+        },
+    });
+}
+
+function refreshLeagueMembers(state: any) {
+    return Immutable.merge(state, {
+        leagueMembers: {
+            ...state.leagueMembers,
+            isRefreshing: true,
+        },
+    });
+}
+
+function refreshLeagueMembersSuccess(state: any) {
+    return Immutable.merge(state, {
+        leagueMembers: { ...state.leagueMembers, isRefreshing: false },
+    });
+}
+
+function refreshLeagueMembersFailure(state: any, { err }: any) {
+    return Immutable.merge(state, {
+        leagueMembers: {
+            ...state.leagueMembers,
+            isRefreshing: false,
+            err,
+        },
+    });
+}
+
+function setLeagueMembers(state: any, { data, metadata }: any) {
+    return Immutable.merge(state, {
+        leagueMembers: {
+            ...state.leagueMembers,
+            data,
+            metadata,
+        },
+    });
+}
+
 const HANDLERS = {
     [LeagueAppTypes.INIT]: init,
     [LeagueAppTypes.INIT_SUCCESS]: initSuccess,
@@ -158,12 +297,30 @@ const HANDLERS = {
     [LeagueAppTypes.REFRESH_FAILURE]: refreshFailure,
     [LeagueAppTypes.TERMINATE]: terminate,
     [LeagueAppTypes.SET]: set,
-    [LeagueAppTypes.FETCH_LEAGUE]: fetchLeague,
-    [LeagueAppTypes.FETCH_LEAGUE_SUCCESS]: fetchLeagueSuccess,
-    [LeagueAppTypes.FETCH_LEAGUE_FAILURE]: fetchLeagueFailure,
-    [LeagueAppTypes.FETCH_LEAGUE_MEMBER]: fetchLeagueMember,
-    [LeagueAppTypes.FETCH_LEAGUE_MEMBER_SUCCESS]: fetchLeagueMemberSuccess,
-    [LeagueAppTypes.FETCH_LEAGUE_MEMBER_FAILURE]: fetchLeagueMemberFailure,
+    // League
+    [LeagueAppTypes.INIT_LEAGUE]: initLeague,
+    [LeagueAppTypes.INIT_LEAGUE_SUCCESS]: initLeagueSuccess,
+    [LeagueAppTypes.INIT_LEAGUE_FAILURE]: initLeagueFailure,
+    [AppTypes.REFRESH_LEAGUE]: refreshLeague,
+    [AppTypes.REFRESH_LEAGUE_SUCCESS]: refreshLeagueSuccess,
+    [AppTypes.REFRESH_LEAGUE_FAILURE]: refreshLeagueFailure,
+    [LeagueAppTypes.SET_LEAGUE]: setLeague,
+    // League Member
+    [LeagueAppTypes.INIT_LEAGUE_MEMBER]: initLeagueMember,
+    [LeagueAppTypes.INIT_LEAGUE_MEMBER_SUCCESS]: initLeagueMemberSuccess,
+    [LeagueAppTypes.INIT_LEAGUE_MEMBER_FAILURE]: initLeagueMemberFailure,
+    [AppTypes.REFRESH_LEAGUE_MEMBER]: refreshLeagueMember,
+    [AppTypes.REFRESH_LEAGUE_MEMBER_SUCCESS]: refreshLeagueMemberSuccess,
+    [AppTypes.REFRESH_LEAGUE_MEMBER_FAILURE]: refreshLeagueMemberFailure,
+    [LeagueAppTypes.SET_LEAGUE_MEMBER]: setLeagueMember,
+    // League Members
+    [LeagueAppTypes.INIT_LEAGUE_MEMBERS]: initLeagueMembers,
+    [LeagueAppTypes.INIT_LEAGUE_MEMBERS_SUCCESS]: initLeagueMembersSuccess,
+    [LeagueAppTypes.INIT_LEAGUE_MEMBERS_FAILURE]: initLeagueMembersFailure,
+    [AppTypes.REFRESH_LEAGUE_MEMBERS]: refreshLeagueMembers,
+    [AppTypes.REFRESH_LEAGUE_MEMBERS_SUCCESS]: refreshLeagueMembersSuccess,
+    [AppTypes.REFRESH_LEAGUE_MEMBERS_FAILURE]: refreshLeagueMembersFailure,
+    [LeagueAppTypes.SET_LEAGUE_MEMBERS]: setLeagueMembers,
 };
 
 export const reducer = createReducer(INITIAL_STATE, HANDLERS);

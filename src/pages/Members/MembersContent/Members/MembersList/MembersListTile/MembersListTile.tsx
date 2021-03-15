@@ -13,7 +13,7 @@ import {
     withS3URL,
 } from '@utils';
 import { Avatar } from '@components';
-import MembersListTileCreatedAt from './MembersListTileCreatedAt';
+import MembersListTileActivatedOn from './MembersListTileActivatedOn';
 import MembersListTileCountry from './MembersListTileCountry';
 import './MembersListTile.less';
 
@@ -21,21 +21,24 @@ const MembersListTile: React.FunctionComponent<MembersListTileProps> = ({
     props: { index, style, data },
     history,
     params,
+    readOnly,
 }) => {
     const isEven = index % 2;
     const item = _get(data, [index], undefined);
     const member_uuid = _get(item, ['uuid'], null);
     const handleClick = (options: any) => {
-        navigate(
-            history,
-            withAppRoute(routes.ROUTES.MEMBER.ROUTE, {
-                routeProps: {
-                    ...params,
-                    member_uuid,
-                },
-            }),
-            options
-        );
+        if (!readOnly) {
+            navigate(
+                history,
+                withAppRoute(routes.ROUTES.MEMBER.ROUTE, {
+                    routeProps: {
+                        ...params,
+                        member_uuid,
+                    },
+                }),
+                options
+            );
+        }
     };
 
     const name = getName(item, 'Loading...');
@@ -43,10 +46,14 @@ const MembersListTile: React.FunctionComponent<MembersListTileProps> = ({
     const src = avatar && withS3URL(avatar, constants.S3_FOLDERS.MEMBER.AVATAR);
     const country = _get(item, ['country'], undefined);
     const status = _get(item, ['status'], undefined);
-    const ctime = _get(item, ['ctime'], undefined);
-    const cardCx = classnames('members-list-tile-card', {
-        filled: isEven,
-    });
+    const activationTime = _get(item, ['activation_time'], undefined);
+    const cardCx = classnames(
+        'members-list-tile-card',
+        {
+            filled: isEven,
+        },
+        { disabled: readOnly }
+    );
 
     return (
         <div style={style} className="members-list-tile-view" key={index}>
@@ -81,8 +88,10 @@ const MembersListTile: React.FunctionComponent<MembersListTileProps> = ({
                         <div className="members-list-tile-content-side-country">
                             <MembersListTileCountry country={country} />
                         </div>
-                        <div className="members-list-tile-content-side-created-at">
-                            <MembersListTileCreatedAt ctime={ctime} />
+                        <div className="members-list-tile-content-side-activated-on">
+                            <MembersListTileActivatedOn
+                                activatedOn={activationTime}
+                            />
                         </div>
                     </div>
                 </div>

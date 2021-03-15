@@ -14,6 +14,8 @@ export default [
         name: (leagueName: string) => leagueName,
         icon: (props: any) => <Avatar {...props.value} />,
         key: routes.ROUTES.LEAGUE_HOME.KEY,
+        disabled: constants.ROLE.ACTIVE,
+        hidden: constants.ROLE.PENDING,
     },
     {
         path: (props: any) =>
@@ -24,6 +26,8 @@ export default [
         name: routes.ROUTES.MEMBERS.LABEL,
         icon: routes.ROUTES.MEMBERS.ICON,
         key: routes.ROUTES.MEMBERS.KEY,
+        disabled: constants.ROLE.PENDING,
+        hidden: constants.ROLE.PENDING,
     },
     {
         path: (props: any) => {
@@ -35,6 +39,8 @@ export default [
         name: routes.ROUTES.CONTESTS.LABEL,
         icon: routes.ROUTES.CONTESTS.ICON,
         key: routes.ROUTES.CONTESTS.KEY,
+        disabled: constants.ROLE.ACTIVE,
+        hidden: constants.ROLE.PENDING,
     },
     {
         path: (props: any) => {
@@ -46,5 +52,7 @@ export default [
         name: routes.ROUTES.MEMBER_SETTINGS.LABEL,
         icon: routes.ROUTES.MEMBER_SETTINGS.ICON,
         key: routes.ROUTES.MEMBER_SETTINGS.KEY,
+        disabled: constants.ROLE.ACTIVE,
+        hidden: constants.ROLE.PENDING,
     },
 ];

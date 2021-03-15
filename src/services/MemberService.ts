@@ -58,6 +58,12 @@ export default {
             },
         });
     },
+    deleteAvatar(uuid: string) {
+        return ClientProxy.del({
+            url: config.MEMBER_URL,
+            endpoint: `/avatars/${uuid}`,
+        });
+    },
     fetchStats(query: any = {}) {
         return ClientProxy.get({
             url: config.MEMBER_URL,
@@ -69,6 +75,13 @@ export default {
         return ClientProxy.get({
             url: config.MEMBER_URL,
             endpoint: `/stats/${uuid}`,
+            query,
+        });
+    },
+    fetchWallet(uuid: string, query: any = {}) {
+        return ClientProxy.get({
+            url: config.MEMBER_URL,
+            endpoint: `/wallets/${uuid}`,
             query,
         });
     },

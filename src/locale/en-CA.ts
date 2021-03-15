@@ -7,6 +7,7 @@ const CONSTANTS = {
         SUCCESS: {
             UPDATE: 'Account update successful!',
             ASSIGN_AVATAR: 'Avatar update successful!',
+            DELETE_AVATAR: 'Avatar deletion successful!',
         },
         ERROR: {
             UPDATE: 'Error updating League information',
@@ -29,6 +30,8 @@ const CONSTANTS = {
         },
         ERROR: {
             LOGIN: 'Login unsuccessful',
+            LOGIN_CONFIRM_EMAIL:
+                'Login unsuccessful. Check you email address for account activation instructions.',
             LOGOUT: 'Logout unsuccessful',
             REGISTER: 'Registration unsuccessful',
             SESSION: 'Session expired',
@@ -65,11 +68,14 @@ const CONSTANTS = {
         },
     },
     COURSE: {
-        SUCCESS: {},
+        SUCCESS: {
+            CREATE: 'Course creation successful!',
+        },
         ERROR: {
             FETCH: 'Error fetching Course information',
             FETCH_ALL: 'Error fetching Courses information',
             SEARCH_ALL: 'Error searching Courses information',
+            CREATE: 'Course creation unsuccessful',
         },
     },
     LEAGUE: {
@@ -82,6 +88,8 @@ const CONSTANTS = {
             FETCH_ALL: 'Error fetching League information',
             CREATE: 'League creation unsuccessful',
             UPDATE: 'League update unsuccessful',
+            MEMBER_INVITE: 'Error sending invitation',
+            MEMBER_INVITE_DUPLICATE: 'Member already invited',
         },
     },
     MEMBER: {
@@ -89,6 +97,7 @@ const CONSTANTS = {
             INVITE: 'Invitation sent!',
             UPDATE: 'Member update successful!',
             ASSIGN_AVATAR: 'Member avatar update successful!',
+            DELETE_AVATAR: 'Member avatar deletion successful!',
         },
         ERROR: {
             FETCH: 'Error fetching Member information',
@@ -201,6 +210,11 @@ const CONSTANTS = {
                     DISPLAY_NAME_REQUIRED: 'Display Name is required',
                     COUNTRY_REQUIRED: 'Country is required',
                 },
+            },
+            EMAIL_MODAL: {
+                TITLE: "You're almost done!",
+                DESCRIPTION:
+                    'Your account was successfully created! Thank you for choosing Golf Tapir. Please check you email inbox for account activation instructions.',
             },
         },
         VERIFY: {
@@ -346,7 +360,10 @@ const CONSTANTS = {
                     NAME_REQUIRED: 'Name is a required field',
                     START_TIME_REQUIRED: 'Start Time is a required field',
                     COURSE_REQUIRED: 'Course is a required field',
+                    PARTICIPANT_MINIMUM: 'At least 2 Participants required',
                     BUY_IN_REQUIRED: 'Buy in required',
+                    BUY_IN_SINGLE_PARTICIPANT:
+                        'Buy in cannot be set in a single participant content',
                     BUY_IN_WALLET_LIMIT:
                         'Buy in may not be greater than balance of Wallet',
                     PAYOUT_REQUIRED: 'Payout required',
@@ -369,6 +386,28 @@ const CONSTANTS = {
                 VALIDATION: {
                     NAME_REQUIRED: 'Name is a required field',
                     START_TIME_REQUIRED: 'Start Time is a required field',
+                },
+            },
+        },
+        COURSES_CREATE: {
+            TITLE: 'Create Course',
+            FORM: {
+                LABELS: {
+                    NAME: 'Name',
+                    ADDRESS_LINE_1: 'Address Line 1',
+                    ADDRESS_LINE_2: 'Address Line 2',
+                    CITY: 'City',
+                    PROVINCE: 'Province/State',
+                    COUNTRY: 'Country',
+                    HOLE: 'Hole',
+                },
+                VALIDATION: {
+                    NAME_REQUIRED: 'Name is required',
+                    NAME_MAX_LENGTH: 'Name must be less than 50 characters',
+                    LINE_1_REQUIRED: 'Address is required',
+                    CITY_REQUIRED: 'City is required',
+                    PROVINCE_REQUIRED: 'Province is required',
+                    COUNTRY_REQUIRED: 'Country is required',
                 },
             },
         },
@@ -416,7 +455,7 @@ const CONSTANTS = {
             DESCRIPTION: 'View Member',
             TABS: {
                 INFO: 'Info',
-                RECENT: 'Recent Contests',
+                CONTESTS: 'Contests',
             },
             FORM: {
                 LABELS: {
@@ -491,6 +530,15 @@ const CONSTANTS = {
         WAGERS: {
             TITLE: 'Wagers',
             DESCRIPTION: 'View Wagers',
+        },
+    },
+    COMPONENTS: {
+        WALLET: {
+            ADD_MODAL: {
+                TITLE: 'Add Funds',
+                DESCRIPTION:
+                    'Would you like to add a course to Golf Tapir for ',
+            },
         },
     },
 };

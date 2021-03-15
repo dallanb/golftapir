@@ -32,7 +32,11 @@ function* init() {
         );
         yield put(ContestPageContentContestLeaderboardActions.initSuccess());
     } catch (err) {
-        yield put(ContestPageContentContestLeaderboardActions.initFailure(err));
+        yield put(
+            ContestPageContentContestLeaderboardActions.initFailure(
+                err
+            )
+        );
     }
 }
 

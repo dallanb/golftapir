@@ -16,7 +16,8 @@ import {
     contestPayoutButtonsRenderer,
     contestPayoutInParser,
     contestPayoutLabelMaker,
-    courseSearchSelectOptionRenderer,
+    courseLoadingRenderer,
+    courseSearchSelectOptionRenderer, participantLoadingRenderer,
     participantSearchSelectOptionRenderer,
 } from './utils';
 import { searchSelectTagRenderer } from '@utils';
@@ -102,11 +103,14 @@ export const fieldSchema = [
         options: {
             ref: React.createRef<any>(),
             onSearch: (value: string) =>
-                ContestsCreatePageContentContestSearchCourseActions.search(
-                    value
-                ),
+                value
+                    ? ContestsCreatePageContentContestSearchCourseActions.search(
+                          value
+                      )
+                    : ContestsCreatePageContentContestSearchCourseActions.clearSearch(),
             mode: '',
-            debounce: 500,
+            debounce: 300,
+            loadingRenderer: courseLoadingRenderer,
             optionRenderer: courseSearchSelectOptionRenderer,
             tagRenderer: searchSelectTagRenderer,
         },
@@ -122,11 +126,14 @@ export const fieldSchema = [
         options: {
             ref: React.createRef<any>(),
             onSearch: (value: string) =>
-                ContestsCreatePageContentContestSearchParticipantActions.search(
-                    value
-                ),
+                value
+                    ? ContestsCreatePageContentContestSearchParticipantActions.search(
+                          value
+                      )
+                    : ContestsCreatePageContentContestSearchParticipantActions.clearSearch(),
             mode: 'multiple',
-            debounce: 500,
+            debounce: 300,
+            loadingRenderer: participantLoadingRenderer,
             optionRenderer: participantSearchSelectOptionRenderer,
             tagRenderer: searchSelectTagRenderer,
         },
@@ -179,10 +186,17 @@ export const validationSchema = (walletBalance: number) =>
             .required(FORM.VALIDATION.START_TIME_REQUIRED)
             .nullable(),
         location_uuid: Yup.string().required(FORM.VALIDATION.COURSE_REQUIRED),
-        participants: Yup.array(),
-        buy_in: Yup.number()
-            .required(FORM.VALIDATION.BUY_IN_REQUIRED)
-            .max(walletBalance, FORM.VALIDATION.BUY_IN_WALLET_LIMIT),
+        participants: Yup.array().min(2, FORM.VALIDATION.PARTICIPANT_MINIMUM),
+        buy_in: Yup.number().when('participants', {
+            is: (val) => val.length == 1,
+            then: Yup.number().max(
+                0,
+                FORM.VALIDATION.BUY_IN_SINGLE_PARTICIPANT
+            ),
+            otherwise: Yup.number()
+                .required(FORM.VALIDATION.BUY_IN_REQUIRED)
+                .max(walletBalance, FORM.VALIDATION.BUY_IN_WALLET_LIMIT),
+        }),
         payout: Yup.array()
             .required(FORM.VALIDATION.PAYOUT_REQUIRED)
             .of(

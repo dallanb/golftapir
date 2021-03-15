@@ -1,5 +1,5 @@
 import { get as _get, pick as _pick } from 'lodash';
-import { formatTimeStamp } from '@utils';
+import moment from 'moment';
 
 export const prepareInitialValues = (leagueData: any) => {
     const ctime = _get(leagueData, ['ctime'], null);
@@ -8,3 +8,6 @@ export const prepareInitialValues = (leagueData: any) => {
         ctime: formatTimeStamp(ctime),
     };
 };
+
+export const formatTimeStamp = (timestamp: number) =>
+    timestamp ? moment(timestamp).format('LL') : 'NA';

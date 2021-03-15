@@ -10,7 +10,9 @@ function* search({ key }: AnyAction) {
         yield call(refreshLeaguesList, key);
         yield put(LeaguesPageSiderContentSearchActions.searchSuccess());
     } catch (err) {
-        yield put(LeaguesPageSiderContentSearchActions.searchFailure(err));
+        yield put(
+            LeaguesPageSiderContentSearchActions.searchFailure(err)
+        );
     }
 }
 

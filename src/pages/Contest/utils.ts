@@ -12,6 +12,7 @@ export const prepareParticipant = (
     country: string;
     s3_filename: string;
     member: any;
+    leagueMemberUUID: any;
     tags: string[];
 } => {
     const participant: {
@@ -19,13 +20,22 @@ export const prepareParticipant = (
         s3_filename: string;
         country: string;
         member: any;
+        leagueMemberUUID: string;
         tags: string[];
-    } = { name: '', s3_filename: '', country: '', member: null, tags: [] };
+    } = {
+        name: '',
+        s3_filename: '',
+        country: '',
+        leagueMemberUUID: '',
+        member: null,
+        tags: [],
+    };
     const { participants: participantsHash, owner } = contest;
     const member = _get(membersHash, [uuid], {
         display_name: '',
         country: '',
-        avatar: { s3_filename: '' },
+        avatar: '',
+        uuid: null,
         user_uuid: null,
     });
     const status: string = _get(
@@ -34,9 +44,10 @@ export const prepareParticipant = (
         constants.STATUS.ACTIVE.KEY
     );
     participant.member = member;
+    participant.leagueMemberUUID = member.uuid;
     participant.name = member.display_name;
     participant.country = member.country;
-    participant.s3_filename = _get(member, ['avatar', 's3_filename'], '');
+    participant.s3_filename = _get(member, ['avatar'], '');
     participant.tags.push(status);
     if (owner === member.user_uuid) {
         participant.tags.push(constants.STATUS.OWNER.KEY);
@@ -66,6 +77,9 @@ export const socketEventHandlers = (socket: WebSocket, emitter: any) => {
                     case constants.EVENTS.CONTESTS.PARTICIPANT_ACTIVE:
                         emitter(ContestPageActions.refresh());
                         break;
+                    case constants.EVENTS.CONTESTS.PARTICIPANT_INACTIVE:
+                        emitter(ContestPageActions.refresh());
+                        break;
                     case constants.EVENTS.CONTESTS.PARTICIPANT_COMPLETED:
                         emitter(ContestPageActions.refresh());
                         break;
@@ -73,6 +87,9 @@ export const socketEventHandlers = (socket: WebSocket, emitter: any) => {
                         emitter(ContestPageActions.refresh());
                         break;
                     case constants.EVENTS.CONTESTS.CONTEST_ACTIVE:
+                        emitter(ContestPageActions.refresh());
+                        break;
+                    case constants.EVENTS.CONTESTS.CONTEST_INACTIVE:
                         emitter(ContestPageActions.refresh());
                         break;
                     case constants.EVENTS.CONTESTS.CONTEST_COMPLETED:
@@ -103,4 +120,4 @@ export const socketEventHandlers = (socket: WebSocket, emitter: any) => {
 };
 
 export const formatTimeStamp = (timestamp: number) =>
-    timestamp ? moment(timestamp).format('LLLL') : 'NA';
+    timestamp ? moment(timestamp).format('LLL') : 'NA';

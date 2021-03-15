@@ -62,25 +62,6 @@ function* fetchData({ options = { page: 1, per_page: 10 } }: AnyAction) {
                 status: constants.STATUS.PENDING.KEY,
             }
         );
-
-        // fetch account mappings from the account api
-        const members = participants.map(
-            ({ member_uuid }: { member_uuid: string }) => member_uuid
-        );
-        if (members.length) {
-            const { members: memberParticipants }: any = yield call(
-                MemberService.bulkFetchMembers,
-                {
-                    within: { key: 'uuid', value: members },
-                }
-            );
-            const membersHash = _keyBy(memberParticipants, 'uuid');
-            yield put(
-                ContestPageSiderContentParticipantActiveContestPendingActions.set(
-                    { membersHash }
-                )
-            );
-        }
         yield put(
             ContestPageSiderContentParticipantActiveContestPendingActions.fetchDataSuccess(
                 participants,

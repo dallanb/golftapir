@@ -33,6 +33,7 @@ const VirtualTable: React.FunctionComponent<VirtualTableProps> = ({
             data: items,
             columns: columnsSchema,
             initialState,
+            autoResetExpanded: false,
         },
         useFlexLayout,
         useSortBy,

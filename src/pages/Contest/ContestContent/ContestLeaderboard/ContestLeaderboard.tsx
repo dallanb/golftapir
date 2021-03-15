@@ -9,8 +9,9 @@ import {
     selectIsRefreshing as selectIsDataRefreshing,
     selectIsInitialized as selectIsDataInitialized,
 } from '@pages/Contest/selector';
-import './ContestLeaderboard.less';
 import CONSTANTS from '@locale/en-CA';
+import { selectLeagueMembersIsFetching } from '@selectors/AppSelector';
+import './ContestLeaderboard.less';
 
 const ContestLeaderboard: React.FunctionComponent<ContestLeaderboardProps> = ({}) => {
     const dispatch = useDispatch();
@@ -18,11 +19,13 @@ const ContestLeaderboard: React.FunctionComponent<ContestLeaderboardProps> = ({}
     const isDataInitialized = useSelector(selectIsDataInitialized);
     const isInitialized = useSelector(selectIsInitialized);
     const isRefreshing = useSelector(selectIsRefreshing);
+    const leagueMembersIsFetching = useSelector(selectLeagueMembersIsFetching); // since we need membersHash we need this to be ready
     const showSpinner =
         !isInitialized ||
         !isDataInitialized ||
         isRefreshing ||
-        isDataRefreshing;
+        isDataRefreshing ||
+        leagueMembersIsFetching;
     const [triggerRefresh, setTriggerRefresh] = useState(false);
     const [isDataInitializing, setIsDataInitializing] = useState(true);
 

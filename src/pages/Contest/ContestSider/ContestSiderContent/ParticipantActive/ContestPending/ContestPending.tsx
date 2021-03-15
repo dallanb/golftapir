@@ -7,6 +7,7 @@ import PendingParticipantsList from './PendingParticipantsList';
 import { selectData } from './selector';
 import ContestPageSiderContentParticipantActiveContestPendingActions from './actions';
 import './ContestPending.less';
+import { selectLeagueMembersIsFetching } from '@selectors/AppSelector';
 
 const ContestPending: React.FunctionComponent<ContestPendingProps> = () => {
     const dispatch = useDispatch();
@@ -30,6 +31,7 @@ const ContestPending: React.FunctionComponent<ContestPendingProps> = () => {
         data = [],
         metadata = [],
     } = useSelector(selectData);
+    const leagueMembersIsFetching = useSelector(selectLeagueMembersIsFetching); // since we need membersHash we need this to be ready
     const dataHeight = Math.min(400, data.length * 50);
     const emptyHeight = 124;
     const dimensions = {};
@@ -40,7 +42,9 @@ const ContestPending: React.FunctionComponent<ContestPendingProps> = () => {
     return (
         <ComponentContent
             componentRef={ref}
-            showSpinner={!isInitialized || isRefreshing}
+            showSpinner={
+                !isInitialized || isRefreshing || leagueMembersIsFetching
+            }
             className="contest-pending-component-content space"
             bodyClassName="invites-component-content-body"
             bodyStyle={dimensions}

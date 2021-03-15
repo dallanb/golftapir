@@ -1,4 +1,4 @@
-import { NotificationActions } from '@actions';
+import { BaseActions, NotificationActions } from '@actions';
 import constants from '@constants';
 
 export const socketEventHandlers = (socket: WebSocket, emitter: any) => {
@@ -15,6 +15,25 @@ export const socketEventHandlers = (socket: WebSocket, emitter: any) => {
                         );
                         break;
                     default:
+                        break;
+                }
+                break;
+            case constants.TOPICS.MEMBERS:
+                switch (event) {
+                    case constants.EVENTS.MEMBERS.AVATAR_CREATED:
+                        emitter(BaseActions.refreshMeDebounce(null, 1000));
+                        break;
+                    case constants.EVENTS.MEMBERS.AVATAR_UPDATED:
+                        emitter(BaseActions.refreshMeDebounce(null, 1000));
+                        break;
+                    case constants.EVENTS.MEMBERS.AVATAR_DELETED:
+                        emitter(BaseActions.refreshMeDebounce(null, 1000));
+                        break;
+                    case constants.EVENTS.MEMBERS.DISPLAY_NAME_UPDATED:
+                        emitter(BaseActions.refreshMeDebounce(null, 1000));
+                        break;
+                    case constants.EVENTS.MEMBERS.COUNTRY_UPDATED:
+                        emitter(BaseActions.refreshMeDebounce(null, 1000));
                         break;
                 }
                 break;

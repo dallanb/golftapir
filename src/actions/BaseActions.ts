@@ -6,6 +6,7 @@ const { Types, Creators } = createActions(
         initMeSuccess: ['data'],
         initMeFailure: ['err'],
         refreshMe: ['league_uuid'],
+        refreshMeDebounce: ['league_uuid', 'ms'], // will still be handled the same as refreshMe but will be run after the given time
         refreshMeSuccess: ['data'],
         refreshMeFailure: ['err'],
         initLeagues: null,

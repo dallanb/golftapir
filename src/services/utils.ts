@@ -1,5 +1,5 @@
 import qs from 'querystring';
-import { omitBy as _omitBy, isNil as _isNil } from 'lodash';
+import { omitBy as _omitBy, isUndefined as _isUndefined } from 'lodash';
 
 export const getFormData = (data: any) => {
     const formData = new FormData();
@@ -15,4 +15,4 @@ export const setCoreApiHeaders = (headers: any) => {
 };
 
 export const cleanQuery = (query: any = {}): string =>
-    qs.stringify(_omitBy(query, _isNil));
+    qs.stringify(_omitBy(query, _isUndefined));

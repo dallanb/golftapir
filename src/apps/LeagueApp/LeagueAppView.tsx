@@ -9,7 +9,7 @@ import {
     useParams,
 } from 'react-router-dom';
 import { get as _get } from 'lodash';
-import { message } from 'antd';
+import { message, statusToRole } from '@utils';
 import { AppLayout } from '@layouts';
 import { ComponentRoute, LeagueAppViewProps } from './types';
 import { AppLoading, ProtectedRoute } from '@components';
@@ -20,8 +20,12 @@ import { AuthActions } from '@actions';
 import LeagueAppActions from './actions';
 import statics from '@apps/LeagueApp/statics';
 import { FirebaseClient } from '@libs';
-import { withAppRoute, withS3URL, navigate, } from '@utils';
-import { selectData as selectAppData } from '@selectors/AppSelector';
+import { withAppRoute, withS3URL, navigate } from '@utils';
+import {
+    selectData as selectAppData,
+    selectLeagueIsFetching,
+    selectLeagueMemberIsFetching,
+} from '@selectors/AppSelector';
 import { selectData as selectBaseData } from '@selectors/BaseSelector';
 
 const LeagueAppView: React.FunctionComponent<LeagueAppViewProps> = () => {
@@ -50,15 +54,22 @@ const LeagueAppView: React.FunctionComponent<LeagueAppViewProps> = () => {
         _get(league, ['data', 'avatar', 's3_filename'], null),
         constants.S3_FOLDERS.LEAGUE.AVATAR
     );
-    const leagueIsFetching = _get(league, ['isFetching'], false);
-    const leagueMemberIsFetching = _get(leagueMember, ['isFetching'], false);
+    const memberStatus = _get(
+        leagueMember,
+        ['data', 'status'],
+        constants.STATUS.INACTIVE.KEY
+    );
+    const memberRole = statusToRole(memberStatus);
+    const leagueIsFetching = useSelector(selectLeagueIsFetching);
+    const leagueMemberIsFetching = useSelector(selectLeagueMemberIsFetching);
     const isFetching =
         _isFetching || leagueIsFetching || leagueMemberIsFetching;
     const isReady = isInitialized && !isRefreshing;
 
     useEffect(() => {
         if (!paramLeagueUUID) {
-            navigate(history,
+            navigate(
+                history,
                 withAppRoute(constantRoutes.ROUTES.HOME.ROUTE, {
                     app: constants.APPS.MEMBER_APP,
                     routeProps: {},
@@ -70,7 +81,7 @@ const LeagueAppView: React.FunctionComponent<LeagueAppViewProps> = () => {
             FirebaseClient.onMessageListener()
                 .then((payload) => {
                     const { title, body } = payload.data;
-                    message.success(`${title}; ${body}`);
+                    message.success(`${body}`);
                 })
                 .catch((err) => {
                     message.error(JSON.stringify(err));
@@ -91,6 +102,15 @@ const LeagueAppView: React.FunctionComponent<LeagueAppViewProps> = () => {
             dispatch(LeagueAppActions.refresh(paramLeagueUUID));
         }
     }, [isReady, isFetching, paramLeagueUUID]);
+
+    useEffect(() => {
+        if (
+            !leagueMemberIsFetching &&
+            memberStatus === constants.STATUS.INACTIVE.KEY
+        ) {
+            navigate(history, constantRoutes.ROUTES.HOME.ROUTE);
+        }
+    }, [leagueMemberIsFetching, memberStatus]);
 
     const menuProps = {
         paths: {
@@ -113,6 +133,7 @@ const LeagueAppView: React.FunctionComponent<LeagueAppViewProps> = () => {
                 size: 24,
             },
         },
+        role: memberRole,
     };
 
     if (!isReady || isFetching) return <AppLoading />;
@@ -134,17 +155,20 @@ const LeagueAppView: React.FunctionComponent<LeagueAppViewProps> = () => {
                     />
                 ))}
                 {protectedRoutes.map(
-                    ({ path, component, exact }: ComponentRoute) => (
-                        <ProtectedRoute
-                            key={path}
-                            path={`${constantRoutes.APPS.LEAGUE_APP.ROUTE}${path}`}
-                            component={component}
-                            exact={exact}
-                            isLoggedIn={isLoggedIn}
-                            forceLogout={forceLogout}
-                            refresh={() => dispatch(AuthActions.refresh())}
-                        />
-                    )
+                    ({ path, component, role = -1, exact }: ComponentRoute) => {
+                        return (
+                            <ProtectedRoute
+                                key={path}
+                                path={`${constantRoutes.APPS.LEAGUE_APP.ROUTE}${path}`}
+                                component={component}
+                                exact={exact}
+                                roleAccess={memberRole >= role}
+                                isLoggedIn={isLoggedIn}
+                                forceLogout={forceLogout}
+                                refresh={() => dispatch(AuthActions.refresh())}
+                            />
+                        );
+                    }
                 )}
                 <Route
                     render={() => (

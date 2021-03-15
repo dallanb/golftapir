@@ -32,6 +32,7 @@ import {
     AccountSaga,
     BaseSaga,
     AuthSaga,
+    ContestTopicSocketSaga,
     CourseSaga,
     LeagueSaga,
     MemberSaga,
@@ -39,7 +40,6 @@ import {
     NotificationSaga,
     ScoreSaga,
     SocketSaga,
-    TopicSocketSaga,
 } from '@sagas';
 
 function configStore(options?: { preloadedState: any }): any {
@@ -84,6 +84,7 @@ function configStore(options?: { preloadedState: any }): any {
             fork(MemberAppSaga),
             fork(AccountSaga),
             fork(AuthSaga),
+            fork(ContestTopicSocketSaga),
             fork(CourseSaga),
             fork(LeagueSaga),
             fork(MemberSaga),
@@ -91,7 +92,6 @@ function configStore(options?: { preloadedState: any }): any {
             fork(NotificationSaga),
             fork(ScoreSaga),
             fork(SocketSaga),
-            fork(TopicSocketSaga),
             fork(AccountPageSaga),
             fork(AccountPageContentAccountSaga),
             fork(HomePageSaga),

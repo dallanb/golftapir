@@ -3,7 +3,11 @@ import createSagaMiddleware from 'redux-saga';
 import { all, fork } from 'redux-saga/effects';
 import { createLogger } from 'redux-logger';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import { authReducer as auth, baseReducer as base } from '@reducers';
+import {
+    authReducer as auth,
+    baseReducer as base,
+    modalReducer as modal,
+} from '@reducers';
 import {
     forgotPasswordPage,
     ForgotPasswordPageSaga,
@@ -18,7 +22,7 @@ import {
     verifyPage,
     VerifyPageSaga,
 } from '@pages';
-import { AuthSaga } from '@sagas';
+import { AuthSaga, ModalSaga } from '@sagas';
 import { get as _get } from 'lodash';
 
 function configStore(options?: { preloadedState: any }): any {
@@ -44,6 +48,7 @@ function configStore(options?: { preloadedState: any }): any {
         combineReducers({
             auth,
             base,
+            modal,
             forgotPasswordPage,
             loginPage,
             logoutPage,
@@ -58,6 +63,7 @@ function configStore(options?: { preloadedState: any }): any {
     function* memberAppSaga() {
         yield all([
             fork(AuthSaga),
+            fork(ModalSaga),
             fork(ForgotPasswordPageSaga),
             fork(LoginPageSaga),
             fork(LogoutPageSaga),

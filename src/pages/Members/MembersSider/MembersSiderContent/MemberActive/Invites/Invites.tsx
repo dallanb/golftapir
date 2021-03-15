@@ -1,11 +1,15 @@
 import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { set as _set } from 'lodash';
+import { get as _get, set as _set } from 'lodash';
 import InvitesList from './InvitesList';
 import { InvitesProps } from './types';
 import MembersPageSiderContentInvitesActions from './actions';
 import { selectData } from './selector';
 import ComponentContent from '@layouts/ComponentContent';
+import {
+    selectLeagueMembers,
+    selectLeagueMembersDataByStatus,
+} from '@selectors/AppSelector';
 import './Invites.less';
 
 const Invites: React.FunctionComponent<InvitesProps> = ({}) => {
@@ -19,14 +23,15 @@ const Invites: React.FunctionComponent<InvitesProps> = ({}) => {
         };
     }, []);
 
+    const { isInitialized, isFetching } = useSelector(selectData);
     const {
-        isInitialized,
-        isFetching,
-        data = [],
-        metadata = [],
-        options = undefined,
-    } = useSelector(selectData);
-    const dataHeight = Math.min(400, data.length * 50);
+        isInitialized: leagueMembersIsInitialized,
+        isRefreshing: leagueMembersIsRefreshing,
+    } = useSelector(selectLeagueMembers);
+    const members = useSelector(selectLeagueMembersDataByStatus);
+    const activeParticipants = _get(members, ['invited'], []);
+
+    const dataHeight = Math.min(400, activeParticipants.length * 50);
     const emptyHeight = 124;
     const dimensions = {};
     if (isInitialized) {
@@ -36,7 +41,11 @@ const Invites: React.FunctionComponent<InvitesProps> = ({}) => {
     return (
         <ComponentContent
             componentRef={ref}
-            showSpinner={!isInitialized}
+            showSpinner={
+                !isInitialized ||
+                !leagueMembersIsInitialized ||
+                leagueMembersIsRefreshing
+            }
             className="invites space"
             bodyClassName="invites-component-content-body"
             bodyStyle={dimensions}
@@ -45,9 +54,7 @@ const Invites: React.FunctionComponent<InvitesProps> = ({}) => {
             <InvitesList
                 containerRef={ref}
                 containerDimensions={dimensions}
-                data={data}
-                metadata={metadata}
-                options={options}
+                data={activeParticipants}
                 isFetching={isFetching}
             />
         </ComponentContent>

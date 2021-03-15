@@ -40,13 +40,3 @@ export const selectListIsFetching = createSelector(
             false
         )
 );
-
-export const selectMembersHash = createSelector(
-    [getContestPageSiderContentParticipantActiveContestPending],
-    (contestPageSiderContentParticipantActiveContestPending) =>
-        _get(
-            contestPageSiderContentParticipantActiveContestPending,
-            ['membersHash'],
-            {}
-        )
-);

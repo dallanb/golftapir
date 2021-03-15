@@ -5,10 +5,9 @@ import { Card, Tag } from 'antd';
 import classnames from 'classnames';
 // @ts-ignore
 import Flags from 'country-flag-icons/react/3x2';
-import { selectMembersHash } from '../../selector';
+import { selectLeagueMembersDataHashByMember } from '@selectors/AppSelector';
 import { PendingParticipantsListTileProps } from './types';
 import { prepareParticipant } from '@pages/Contest/utils';
-import RemindButton from './RemindButton';
 import { selectContest } from '@pages/Contest/selector';
 import constants from '@constants';
 import './PendingParticipantsListTile.less';
@@ -23,7 +22,7 @@ const PendingParticipantsListTile: React.FunctionComponent<PendingParticipantsLi
     const { name, country } = prepareParticipant(
         member_uuid,
         useSelector(selectContest),
-        useSelector(selectMembersHash)
+        useSelector(selectLeagueMembersDataHashByMember)
     );
     const Country = _get(Flags, [country], null);
     const cardCx = classnames('pending-participants-card', { filled: isEven });

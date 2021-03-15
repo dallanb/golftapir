@@ -12,7 +12,9 @@ function* init({ options }: AnyAction) {
         yield call(fetchContestsCalendarList, options);
         yield put(LeagueHomePageSiderContentCalendarActions.initSuccess());
     } catch (err) {
-        yield put(LeagueHomePageSiderContentCalendarActions.initFailure(err));
+        yield put(
+            LeagueHomePageSiderContentCalendarActions.initFailure(err)
+        );
     }
 }
 

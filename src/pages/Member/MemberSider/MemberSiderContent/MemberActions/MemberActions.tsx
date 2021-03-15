@@ -16,7 +16,7 @@ const MemberActions: React.FunctionComponent<MemberActionsProps> = () => {
     const isInitialized = useSelector(selectIsInitialized);
     const isMe = useSelector(selectIsMe);
     const { member } = useSelector(selectData);
-    const uuid = _get(member, ['member'], null);
+    const uuid = _get(member, ['uuid'], null);
     const actions = memoizedGenerateActions(uuid);
 
     const Actions = memoizedMemberActionRenderer({

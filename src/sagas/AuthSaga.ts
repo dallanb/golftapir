@@ -9,7 +9,7 @@ import {
     take,
     takeLatest,
 } from 'redux-saga/effects';
-import { message } from 'antd';
+import { authErrorMessage, message } from '@utils';
 import AuthActions, { AuthTypes } from '@actions/AuthActions';
 import { ClientProxy, AuthService } from '@services';
 import CONSTANTS from '@locale/en-CA';
@@ -38,7 +38,9 @@ function* login({ email, password }: AnyAction) {
             },
         } = err;
         yield put(AuthActions.loginFailure(err));
-        message.error(status === 401 ? msg : CONSTANTS.AUTH.ERROR.LOGIN);
+        message.error(
+            status === 401 ? authErrorMessage(msg) : CONSTANTS.AUTH.ERROR.LOGIN
+        );
     }
 }
 
@@ -92,7 +94,7 @@ function* refresh() {
         tokenWatchTask = yield fork(tokenCheck, expiry);
         yield put(AuthActions.refreshSuccess(user, expiry));
     } catch (err) {
-        yield put(AuthActions.refreshFailure(err));
+        yield put(AuthActions.refreshFailure(err.toJSON ? err: err));
         message.error(CONSTANTS.AUTH.ERROR.SESSION);
     }
 }
@@ -116,7 +118,7 @@ function* forgotPassword({ email }: AnyAction) {
         yield put(AuthActions.forgotPasswordSuccess());
         message.success(CONSTANTS.AUTH.SUCCESS.FORGOT_PASSWORD);
     } catch (err) {
-        yield put(AuthActions.forgotPasswordFailure(err));
+        yield put(AuthActions.forgotPasswordFailure(err.toJSON()));
         message.error(CONSTANTS.AUTH.ERROR.FORGOT_PASSWORD);
     }
 }
@@ -127,7 +129,7 @@ function* resetPassword({ password, token }: AnyAction) {
         yield put(AuthActions.resetPasswordSuccess());
         message.success(CONSTANTS.AUTH.SUCCESS.RESET_PASSWORD);
     } catch (err) {
-        yield put(AuthActions.resetPasswordFailure(err));
+        yield put(AuthActions.resetPasswordFailure(err.toJSON()));
         message.error(CONSTANTS.AUTH.ERROR.RESET_PASSWORD);
     }
 }

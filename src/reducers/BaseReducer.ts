@@ -1,14 +1,8 @@
 // @ts-ignore
 import { static as Immutable } from 'seamless-immutable';
 import { createReducer } from 'reduxsauce';
-import { get as _get, set as _set } from 'lodash';
-import {
-    AuthTypes,
-    BaseTypes,
-    LeagueTypes,
-    MemberTypes,
-    NotificationTypes,
-} from '@actions';
+import { isEmpty as _isEmpty, set as _set } from 'lodash';
+import { AuthTypes, BaseTypes, MemberTypes, NotificationTypes } from '@actions';
 import { localStorageSave } from '@utils';
 import { NotificationInterface } from '@reducers/NotificationReducer';
 
@@ -128,8 +122,10 @@ const refreshMe = localStorageSave((state: any) =>
 );
 
 const refreshMeSuccess = localStorageSave((state: any, { data }: any) => {
-    // set timestamp to ensure we pull the latest avatar
-    _set(data, ['avatar', 'timestamp'], new Date().getTime());
+    if (!_isEmpty(data.avatar)) {
+        // set timestamp to ensure we pull the latest avatar
+        _set(data, ['avatar', 'timestamp'], new Date().getTime());
+    }
     return Immutable.merge(state, {
         me: {
             ...state.me,
@@ -209,6 +205,52 @@ const refreshLeaguesFailure = localStorageSave((state: any, { err }: any) =>
     })
 );
 
+const refreshMyMemberStatsSuccess = localStorageSave(
+    (state: any, { stats }: any) =>
+        Immutable.merge(state, {
+            me: {
+                ...state.me,
+                data: {
+                    ...state.me.data,
+                    stats,
+                },
+            },
+        })
+);
+
+const refreshMyMemberStatsFailure = localStorageSave(
+    (state: any, { err }: any) =>
+        Immutable.merge(state, {
+            me: {
+                ...state.me,
+                err,
+            },
+        })
+);
+
+const refreshMyMemberWalletSuccess = localStorageSave(
+    (state: any, { wallet }: any) =>
+        Immutable.merge(state, {
+            me: {
+                ...state.me,
+                data: {
+                    ...state.me.data,
+                    wallet,
+                },
+            },
+        })
+);
+
+const refreshMyMemberWalletFailure = localStorageSave(
+    (state: any, { err }: any) =>
+        Immutable.merge(state, {
+            me: {
+                ...state.me,
+                err,
+            },
+        })
+);
+
 const fetchNotificationPendingSuccess = localStorageSave(
     (state: any, { pending }: NotificationInterface) =>
         Immutable.merge(state, {
@@ -239,6 +281,10 @@ const HANDLERS = {
     [BaseTypes.REFRESH_LEAGUES]: refreshLeagues,
     [BaseTypes.REFRESH_LEAGUES_SUCCESS]: refreshLeaguesSuccess,
     [BaseTypes.REFRESH_LEAGUES_FAILURE]: refreshLeaguesFailure,
+    [MemberTypes.REFRESH_MY_MEMBER_STATS_SUCCESS]: refreshMyMemberStatsSuccess,
+    [MemberTypes.REFRESH_MY_MEMBER_STATS_FAILURE]: refreshMyMemberStatsFailure,
+    [MemberTypes.REFRESH_MY_MEMBER_WALLET_SUCCESS]: refreshMyMemberWalletSuccess,
+    [MemberTypes.REFRESH_MY_MEMBER_WALLET_FAILURE]: refreshMyMemberWalletFailure,
     [NotificationTypes.FETCH_PENDING_SUCCESS]: fetchNotificationPendingSuccess,
     [NotificationTypes.FETCH_PENDING_FAILURE]: fetchNotificationPendingFailure,
 };

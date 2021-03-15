@@ -1,6 +1,6 @@
 import { AnyAction } from 'redux';
 import { all, call, put, select, takeLatest } from 'redux-saga/effects';
-import { message } from 'antd';
+import { message } from '@utils';
 import ScoreActions, { ScoreTypes } from '@actions/ScoreActions';
 import { ScoreService } from '@services';
 import CONSTANTS from '@locale/en-CA';
@@ -49,7 +49,9 @@ function* fetchScoreContestParticipantSheet({
             )
         );
     } catch (err) {
-        yield put(ScoreActions.fetchScoreContestParticipantSheetFailure(err));
+        yield put(
+            ScoreActions.fetchScoreContestParticipantSheetFailure(err)
+        );
         message.error(CONSTANTS.SCORE.ERROR.FETCH_CONTEST);
     }
 }

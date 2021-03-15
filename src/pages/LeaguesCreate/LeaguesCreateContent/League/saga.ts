@@ -1,6 +1,6 @@
 import { AnyAction } from 'redux';
 import { all, call, put, select, takeLatest } from 'redux-saga/effects';
-import { message } from 'antd';
+import { message } from '@utils';
 import { omit as _omit, pick as _pick, isEmpty as _isEmpty } from 'lodash';
 import CONSTANTS from '@locale/en-CA';
 import { AccountService, LeagueService } from '@services';
@@ -21,7 +21,9 @@ function* init({ options }: AnyAction) {
         );
         yield put(LeaguesCreatePageContentLeagueActions.initSuccess());
     } catch (err) {
-        yield put(LeaguesCreatePageContentLeagueActions.initFailure(err));
+        yield put(
+            LeaguesCreatePageContentLeagueActions.initFailure(err)
+        );
     }
 }
 

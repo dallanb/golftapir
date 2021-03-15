@@ -1,6 +1,6 @@
 import { AnyAction } from 'redux';
 import { all, call, put, select, takeLatest } from 'redux-saga/effects';
-import { message } from 'antd';
+import { message } from '@utils';
 import CONSTANTS from '@locale/en-CA';
 import { LeagueService } from '@services';
 import MembersCreatePageContentMemberActions, {
@@ -23,7 +23,9 @@ function* init({ options = { email: null } }: AnyAction) {
         );
         yield put(MembersCreatePageContentMemberActions.initSuccess());
     } catch (err) {
-        yield put(MembersCreatePageContentMemberActions.initFailure(err));
+        yield put(
+            MembersCreatePageContentMemberActions.initFailure(err)
+        );
     }
 }
 
@@ -41,8 +43,12 @@ function* submit({ data }: AnyAction) {
         yield put(MembersCreatePageContentMemberActions.submitSuccess());
         message.success(CONSTANTS.MEMBER.SUCCESS.INVITE);
     } catch (err) {
+        if (err.response.status == 400) {
+            message.error(CONSTANTS.LEAGUE.ERROR.MEMBER_INVITE_DUPLICATE);
+        } else {
+            message.error(CONSTANTS.LEAGUE.ERROR.MEMBER_INVITE);
+        }
         yield put(MembersCreatePageContentMemberActions.submitFailure());
-        message.error(CONSTANTS.MEMBER.ERROR.INVITE);
     }
 }
 

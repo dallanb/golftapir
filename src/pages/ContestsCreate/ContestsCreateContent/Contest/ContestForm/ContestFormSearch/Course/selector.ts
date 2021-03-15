@@ -15,3 +15,8 @@ export const selectSearchData = createSelector(
     (contestsCreatePageContentContestSearchCourse) =>
         _get(contestsCreatePageContentContestSearchCourse, ['data'], undefined)
 );
+export const selectSearchIsSearching = createSelector(
+    [getContestsCreatePageContentContestSearchCourse],
+    (contestsCreatePageContentContestSearchCourse) =>
+        _get(contestsCreatePageContentContestSearchCourse, ['isSearching'], undefined)
+);

@@ -23,3 +23,8 @@ export const selectContestUUID = createSelector(
     (contestUpdatePage) =>
         _get(contestUpdatePage, ['contest', 'uuid'], undefined)
 );
+
+export const selectIsInitialized = createSelector(
+    [getContestUpdatePage],
+    (contestUpdatePage) => _get(contestUpdatePage, ['isInitialized'], false)
+);

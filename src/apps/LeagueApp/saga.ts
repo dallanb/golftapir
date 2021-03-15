@@ -1,34 +1,39 @@
 import {
     all,
     call,
+    delay,
     fork,
     put,
     putResolve,
+    select,
     takeLatest,
 } from 'redux-saga/effects';
+import { isNil as _isNil } from 'lodash';
 import { AnyAction } from 'redux';
 import { get as _get, isObject as _isObject } from 'lodash';
 import LeagueAppActions, { LeagueAppTypes } from './actions';
-import { AppActions, AppTypes, BaseActions, SocketActions } from '@actions';
-import { socketEventHandlers } from './utils';
-import { ClientProxy, LeagueService } from '@services';
-import { refreshAuth } from '@helpers';
 import {
-    initLeague,
-    initLeagueMember,
-    refreshLeague,
-    refreshLeagueMember,
-} from './helpers';
+    AppActions,
+    AppTypes,
+    BaseActions,
+    LeagueTopicSocketActions,
+} from '@actions';
+import { socketEventHandlers, topicSocketEventHandlers } from './utils';
+import { ClientProxy } from '@services';
+import { refreshAuth } from '@helpers';
+import { fetchLeague, fetchLeagueMember, fetchLeagueMembers } from './helpers';
+import { selectLeagueData } from '@apps/LeagueApp/selector';
+import { selectMyUserUUID } from '@selectors/BaseSelector';
 
 // Action Handlers
 function* preInit({ data }: AnyAction) {
     const league = _get(data, ['league'], undefined);
     const member = _get(data, ['member'], undefined);
     if (league && _isObject(league)) {
-        yield put(LeagueAppActions.fetchLeagueSuccess(league));
+        yield put(LeagueAppActions.setLeague(league));
     }
     if (member && _isObject(member)) {
-        yield put(LeagueAppActions.fetchLeagueMemberSuccess(member));
+        yield put(LeagueAppActions.setLeagueMember(member));
     }
 }
 
@@ -36,11 +41,18 @@ function* init({ uuid }: AnyAction) {
     try {
         if (!ClientProxy.accessToken) yield call(refreshAuth);
         yield put(BaseActions.initSockets(socketEventHandlers));
+        yield put(
+            LeagueTopicSocketActions.init(
+                { uuid },
+                { eventHandler: topicSocketEventHandlers }
+            )
+        );
         yield put(BaseActions.initMe(uuid));
         yield put(BaseActions.initLeagues());
         yield put(BaseActions.initNotifications());
-        yield fork(initLeague, uuid);
-        yield fork(initLeagueMember, uuid);
+        yield put(LeagueAppActions.initLeague(uuid));
+        yield put(LeagueAppActions.initLeagueMember(uuid));
+        yield put(LeagueAppActions.initLeagueMembers(uuid));
         yield put(LeagueAppActions.initSuccess());
     } catch (err) {
         yield put(LeagueAppActions.initFailure(err));
@@ -51,17 +63,11 @@ function* refresh({ uuid }: AnyAction) {
     try {
         yield put(BaseActions.refreshMe(uuid));
 
-        yield put(
-            LeagueAppActions.fetchLeague(uuid, {
-                include: 'avatar',
-            })
-        );
+        yield put(AppActions.refreshLeague(uuid));
 
-        yield put(
-            LeagueAppActions.fetchLeagueMember('me', {
-                league_uuid: uuid,
-            })
-        );
+        yield put(AppActions.refreshLeagueMember(uuid));
+
+        yield put(AppActions.refreshLeagueMembers(uuid));
         yield put(LeagueAppActions.refreshSuccess());
     } catch (err) {
         yield put(LeagueAppActions.refreshFailure(err));
@@ -71,40 +77,68 @@ function* refresh({ uuid }: AnyAction) {
 function* terminate() {
     try {
         yield put(BaseActions.terminateSockets());
+        yield put(LeagueTopicSocketActions.terminate());
     } catch (err) {
         console.error(err);
     }
 }
 
-function* fetchLeague({ uuid, options }: AnyAction) {
+function* initLeague({ uuid }: AnyAction) {
     try {
-        const { leagues: league }: any = yield call(
-            LeagueService.fetchLeague,
-            uuid,
-            options
-        );
-        yield put(LeagueAppActions.fetchLeagueSuccess(league));
+        if (_isNil(yield select(selectLeagueData))) {
+            yield call(fetchLeague, uuid);
+        }
+        yield put(LeagueAppActions.initLeagueSuccess());
     } catch (err) {
-        yield put(LeagueAppActions.fetchLeagueFailure(err));
+        yield put(LeagueAppActions.initLeagueFailure(err));
     }
 }
 
-function* fetchLeagueMember({ uuid, options }: AnyAction) {
+function* initLeagueMember({ uuid }: AnyAction) {
     try {
-        const { members: leagueMember }: any = yield call(
-            LeagueService.fetchMembersMaterializedUser,
-            uuid,
-            options
-        );
-        yield put(LeagueAppActions.fetchLeagueMemberSuccess(leagueMember));
+        if (_isNil(yield select(selectLeagueData))) {
+            yield call(fetchLeagueMember, uuid);
+        }
+        yield put(LeagueAppActions.initLeagueMemberSuccess());
     } catch (err) {
-        yield put(LeagueAppActions.fetchLeagueMemberFailure(err));
+        yield put(LeagueAppActions.initLeagueMemberFailure(err));
+    }
+}
+
+function* initLeagueMembers({ uuid }: AnyAction) {
+    try {
+        yield call(fetchLeagueMembers, uuid);
+        yield put(LeagueAppActions.initLeagueMembersSuccess());
+    } catch (err) {
+        yield put(LeagueAppActions.fetchLeagueMembersFailure(err));
+    }
+}
+
+function* leagueMemberActiveEvent({ uuid, payload }: AnyAction) {
+    const { sender } = payload;
+    const myUserUUID = yield select(selectMyUserUUID);
+    if (myUserUUID == sender) {
+        yield put(BaseActions.refreshMe(uuid));
+        yield put(AppActions.refreshLeagueMember(uuid));
+        yield put(AppActions.refreshLeagueMembers(uuid));
+    } else {
+        yield put(AppActions.refreshLeagueMembers(uuid));
+    }
+}
+
+function* leagueMemberInactiveEvent({ uuid, payload }: AnyAction) {
+    const { sender } = payload;
+    const myUserUUID = yield select(selectMyUserUUID);
+    if (myUserUUID == sender) {
+        yield put(AppActions.refreshLeagueMember(uuid));
+    } else {
+        yield put(AppActions.refreshLeagueMembers(uuid));
     }
 }
 
 function* appRefreshLeague({ uuid }: AnyAction) {
     try {
-        yield fork(refreshLeague, uuid);
+        yield call(fetchLeague, uuid);
         yield put(AppActions.refreshLeagueSuccess());
     } catch (err) {
         yield put(AppActions.refreshLeagueFailure(err));
@@ -113,10 +147,19 @@ function* appRefreshLeague({ uuid }: AnyAction) {
 
 function* appRefreshLeagueMember({ uuid }: AnyAction) {
     try {
-        yield fork(refreshLeagueMember, uuid);
+        yield call(fetchLeagueMember, uuid);
         yield put(AppActions.refreshLeagueMemberSuccess());
     } catch (err) {
         yield put(AppActions.refreshLeagueMemberFailure(err));
+    }
+}
+
+function* appRefreshLeagueMembers({ uuid }: AnyAction) {
+    try {
+        yield call(fetchLeagueMembers, uuid);
+        yield put(AppActions.refreshLeagueMembersSuccess());
+    } catch (err) {
+        yield put(AppActions.refreshLeagueMembersFailure(err));
     }
 }
 
@@ -126,9 +169,19 @@ export default function* LeagueAppSaga() {
         takeLatest(LeagueAppTypes.INIT, init),
         takeLatest(LeagueAppTypes.REFRESH, refresh),
         takeLatest(LeagueAppTypes.TERMINATE, terminate),
-        takeLatest(LeagueAppTypes.FETCH_LEAGUE, fetchLeague),
-        takeLatest(LeagueAppTypes.FETCH_LEAGUE_MEMBER, fetchLeagueMember),
+        takeLatest(LeagueAppTypes.INIT_LEAGUE, initLeague),
+        takeLatest(LeagueAppTypes.INIT_LEAGUE_MEMBER, initLeagueMember),
+        takeLatest(LeagueAppTypes.INIT_LEAGUE_MEMBERS, initLeagueMembers),
+        takeLatest(
+            LeagueAppTypes.LEAGUE_MEMBER_ACTIVE_EVENT,
+            leagueMemberActiveEvent
+        ),
+        takeLatest(
+            LeagueAppTypes.LEAGUE_MEMBER_INACTIVE_EVENT,
+            leagueMemberInactiveEvent
+        ),
         takeLatest(AppTypes.REFRESH_LEAGUE, appRefreshLeague),
         takeLatest(AppTypes.REFRESH_LEAGUE_MEMBER, appRefreshLeagueMember),
+        takeLatest(AppTypes.REFRESH_LEAGUE_MEMBERS, appRefreshLeagueMembers),
     ]);
 }

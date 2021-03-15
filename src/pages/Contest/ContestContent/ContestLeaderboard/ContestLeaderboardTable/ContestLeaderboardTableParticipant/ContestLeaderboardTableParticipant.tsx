@@ -1,24 +1,30 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
+import { Tag } from 'antd';
 import routes from '@constants/routes';
-import { selectContest, selectMembersHash } from '@pages/Contest/selector';
+import { selectContest } from '@pages/Contest/selector';
+import { selectLeagueMembersDataHashByMember } from '@selectors/AppSelector';
 import { ContestParticipantsTableParticipantProps } from './types';
 import { prepareParticipant } from '@pages/Contest/utils';
 import { mapStatusColour, navigate, withAppRoute } from '@utils';
 import './ContestLeaderboardTableParticipant.less';
-import constants from '@constants';
-import { Tag } from 'antd';
 
 const ContestLeaderboardTableParticipant: React.FunctionComponent<ContestParticipantsTableParticipantProps> = ({
     uuid,
 }) => {
     const history = useHistory();
     const params = useParams();
-    const { name, s3_filename, member, tags } = prepareParticipant(
+    const {
+        name,
+        leagueMemberUUID,
+        s3_filename,
+        member,
+        tags,
+    } = prepareParticipant(
         uuid,
         useSelector(selectContest),
-        useSelector(selectMembersHash)
+        useSelector(selectLeagueMembersDataHashByMember)
     );
 
     return (
@@ -28,7 +34,10 @@ const ContestLeaderboardTableParticipant: React.FunctionComponent<ContestPartici
                 navigate(
                     history,
                     withAppRoute(routes.ROUTES.MEMBER.ROUTE, {
-                        routeProps: { ...params, member_uuid: uuid },
+                        routeProps: {
+                            ...params,
+                            member_uuid: leagueMemberUUID,
+                        },
                     }),
                     member
                 )

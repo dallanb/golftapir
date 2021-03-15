@@ -1,6 +1,6 @@
 import { AnyAction } from 'redux';
 import { all, call, fork, put, takeLatest } from 'redux-saga/effects';
-import { message } from 'antd';
+import { message } from '@utils';
 import ContestActions, { ContestTypes } from '@actions/ContestActions';
 import { ContestService } from '@services';
 import CONSTANTS from '@locale/en-CA';
@@ -61,7 +61,9 @@ function* fetchContestsMaterialized({ options, append }: AnyAction) {
             )
         );
     } catch (err) {
-        yield put(ContestActions.fetchContestsMaterializedFailure(err));
+        yield put(
+            ContestActions.fetchContestsMaterializedFailure(err)
+        );
         message.error(CONSTANTS.CONTEST.ERROR.FETCH);
     }
 }
@@ -113,7 +115,9 @@ function* fetchContestParticipantUser({ contest_uuid, member_uuid }: any) {
             ContestActions.fetchContestParticipantUserSuccess(participants)
         );
     } catch (err) {
-        yield put(ContestActions.fetchContestParticipantUserFailure(err));
+        yield put(
+            ContestActions.fetchContestParticipantUserFailure(err)
+        );
         message.error(CONSTANTS.CONTEST.ERROR.FETCH_PARTICIPANT);
     }
 }

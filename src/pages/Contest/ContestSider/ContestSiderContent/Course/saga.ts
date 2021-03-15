@@ -11,7 +11,9 @@ function* init() {
         yield call(initCourse, uuid);
         yield put(ContestPageSiderContentCourseActions.initSuccess());
     } catch (err) {
-        yield put(ContestPageSiderContentCourseActions.initFailure(err));
+        yield put(
+            ContestPageSiderContentCourseActions.initFailure(err)
+        );
     }
 }
 

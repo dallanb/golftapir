@@ -5,7 +5,7 @@ import { get as _get } from 'lodash';
 import { Button } from 'antd';
 import { ScorecardParticipantProps } from './types';
 import { Avatar } from '@components';
-import { selectMembersHash } from '@pages/Contest/selector';
+import { selectLeagueMembersDataHashByMember } from '@selectors/AppSelector';
 import { getName, navigate, withAppRoute, withS3URL } from '@utils';
 import routes from '@constants/routes';
 import './ScorecardParticipant.less';
@@ -16,9 +16,9 @@ const ScorecardParticipant: React.FunctionComponent<ScorecardParticipantProps> =
 }) => {
     const history = useHistory();
     const leagueUUID = useSelector(selectMyLeagueUUID);
-    const membersHash = useSelector(selectMembersHash);
+    const membersHash = useSelector(selectLeagueMembersDataHashByMember);
     const member = _get(membersHash, [user], null);
-    const avatar = _get(member, ['avatar', 's3_filename'], null);
+    const avatar = _get(member, ['avatar'], null);
     const memberUUID = _get(member, ['uuid'], null);
     const name = getName(member, '');
     return (
@@ -35,7 +35,13 @@ const ScorecardParticipant: React.FunctionComponent<ScorecardParticipantProps> =
             </div>
             <div className="scorecard-participant-buttons">
                 <div className="scorecard-participant-button message">
-                    <Button block size={'small'} type="primary" key="message">
+                    <Button
+                        block
+                        disabled
+                        size={'small'}
+                        type="primary"
+                        key="message"
+                    >
                         Message
                     </Button>
                 </div>

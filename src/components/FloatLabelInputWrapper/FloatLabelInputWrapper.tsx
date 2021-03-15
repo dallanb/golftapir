@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
+import { Form } from 'antd';
 import classnames from 'classnames';
 import { isNil as _isNil } from 'lodash';
 import { FloatLabelInputWrapperProps } from './types';
 import './FloatLabelInputWrapper.less';
-import { Form } from 'antd';
 
 const FloatLabelInputWrapper: React.FunctionComponent<FloatLabelInputWrapperProps> = (
     props

@@ -1,8 +1,11 @@
 import React from 'react';
 import { Modal } from 'antd';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory, useParams } from 'react-router-dom';
 import { MessageModalProps } from './types';
 import { selectModalData } from '@selectors/ModalSelector';
+import defaultFooterRenderer from './defaultFooterRenderer';
+import { ModalActions } from '@actions';
 import './MessageModal.less';
 
 const MessageModal: React.FunctionComponent<MessageModalProps> = () => {
@@ -10,26 +13,28 @@ const MessageModal: React.FunctionComponent<MessageModalProps> = () => {
         isOpen,
         headerRenderer,
         bodyRenderer,
-        footerRenderer,
+        footerRenderer = defaultFooterRenderer,
         onCancel,
     } = useSelector(selectModalData);
+    const dispatch = useDispatch();
+    const history = useHistory();
+    const params = useParams();
 
-    const Title = headerRenderer();
-    const Body = bodyRenderer();
-    const Footer = footerRenderer();
+    const Title = headerRenderer({ dispatch, history, params });
+    const Body = bodyRenderer({ dispatch, history, params });
+    const Footer = footerRenderer({ dispatch, history, params });
 
-    // const dispatch = useDispatch();
-    // const acknowledgeModal = () => {
-    //     dispatch(ModalActions.closeModal());
-    //     dispatch(ModalActions.confirmModal());
-    // };
+    const handleCancel = () => {
+        onCancel && onCancel();
+        dispatch(ModalActions.closeModal());
+    };
 
     return (
         <Modal
             visible={isOpen}
             title={Title}
             footer={Footer}
-            onCancel={onCancel}
+            onCancel={handleCancel}
         >
             {Body}
         </Modal>

@@ -14,14 +14,16 @@ function* init() {
         yield call(fetchMemberResults);
         yield put(MemberPageContentMemberResultsActions.initSuccess());
     } catch (err) {
-        yield put(MemberPageContentMemberResultsActions.initFailure(err));
+        yield put(
+            MemberPageContentMemberResultsActions.initFailure(err)
+        );
     }
 }
 
 function* fetchData({
     options = {
         page: 1,
-        per_page: 3,
+        per_page: 10,
         sort_by: 'mtime.desc',
     },
 }: AnyAction) {
@@ -44,7 +46,9 @@ function* fetchData({
             )
         );
     } catch (err) {
-        yield put(MemberPageContentMemberResultsActions.fetchDataFailure(err));
+        yield put(
+            MemberPageContentMemberResultsActions.fetchDataFailure(err)
+        );
     }
 }
 

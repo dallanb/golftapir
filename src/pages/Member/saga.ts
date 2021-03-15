@@ -1,7 +1,6 @@
 import { all, call, put, select, takeLatest } from 'redux-saga/effects';
 import { AnyAction } from 'redux';
 import MemberPageActions, { MemberPageTypes } from './actions';
-import { initMember } from './helpers';
 import { selectLeagueUUID } from '@selectors/AppSelector';
 import { fetchMyMemberUser } from '@helpers';
 import { LeagueService } from '@services';

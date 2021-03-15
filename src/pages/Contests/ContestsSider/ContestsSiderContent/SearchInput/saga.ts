@@ -10,7 +10,9 @@ function* search({ key }: AnyAction) {
         yield call(refreshContestsList, key);
         yield put(ContestsPageSiderContentSearchActions.searchSuccess());
     } catch (err) {
-        yield put(ContestsPageSiderContentSearchActions.searchFailure(err));
+        yield put(
+            ContestsPageSiderContentSearchActions.searchFailure(err)
+        );
     }
 }
 

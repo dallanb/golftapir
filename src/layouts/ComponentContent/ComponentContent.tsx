@@ -8,6 +8,7 @@ import './ComponentContent.less';
 const ComponentContent: React.FunctionComponent<ComponentContentProps> = ({
     showSpinner,
     title,
+    extra,
     children,
     componentRef,
     className,
@@ -18,6 +19,11 @@ const ComponentContent: React.FunctionComponent<ComponentContentProps> = ({
     const renderTitle = () => {
         if (title) {
             return <div className="component-content-title">{title}</div>;
+        }
+    };
+    const renderExtra = () => {
+        if (extra) {
+            return <div className="component-content-extra">{extra}</div>;
         }
     };
     const renderComponent = (showSpin?: boolean) => {
@@ -34,7 +40,10 @@ const ComponentContent: React.FunctionComponent<ComponentContentProps> = ({
 
     return (
         <div className={cx} style={style}>
-            {renderTitle()}
+            <div className="component-content-header">
+                {renderTitle()}
+                {renderExtra()}
+            </div>
             <div ref={componentRef} className={bodyCx} style={bodyStyle}>
                 {renderComponent(showSpinner)}
             </div>

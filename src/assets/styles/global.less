@@ -1,3 +1,6 @@
+body {
+    overflow: hidden; // to prevent viewport drag
+}
 // Colours
 .ant-layout {
     background: transparent !important;
@@ -55,7 +58,7 @@
 }
 
 .ant-popover-inner {
-    box-shadow: 0 0 1rem 0 rgb(0 0 0 / 20%) !important;
+    box-shadow: 0 0 1rem 0 fade(white, 20%) !important;
     border-radius: 5px !important;
     background-color: rgba(255, 255, 255, 0.75) !important;
     backdrop-filter: blur(6px) !important;
@@ -66,7 +69,7 @@
 }
 
 .ant-select-dropdown {
-    box-shadow: 0 0 1rem 0 rgb(0 0 0 / 20%) !important;
+    box-shadow: 0 0 1rem 0 fade(white, 20%) !important;
     background-color: rgba(255, 255, 255, 0.75) !important;
     backdrop-filter: blur(6px) !important;
 
@@ -76,13 +79,62 @@
 }
 
 .ant-picker-dropdown {
-    box-shadow: 0 0 1rem 0 rgb(0 0 0 / 20%) !important;
-    background-color: rgba(255, 255, 255, 0.75) !important;
+    box-shadow: 0 0 1rem 0 fade(white, 20%) !important;
+    background-color: rgba(255, 255, 255, 0.25) !important;
     backdrop-filter: blur(6px) !important;
 
     .ant-picker-panel-container {
         background: transparent !important;
     }
+}
+
+.ant-message-notice {
+    .ant-message-notice-content {
+        box-shadow: 0 0 1rem 0 fade(white, 20%) !important;
+        border-radius: 5px !important;
+        backdrop-filter: blur(6px) !important;
+    }
+    &.success {
+        .ant-message-notice-content {
+            background-color: tint(#52c41a, 80%) !important;
+        }
+    }
+    &.error {
+        .ant-message-notice-content {
+            background-color: tint(#f5222d, 80%) !important;
+        }
+    }
+}
+
+.ant-modal-content {
+    box-shadow: 0 0 1rem 0 fade(white, 20%) !important;
+    background-color: rgba(255, 255, 255, 0.85) !important;
+    backdrop-filter: blur(6px) !important;
+    border-radius: 4px !important;
+    padding: 16px !important;
+    .ant-modal-header {
+        border-radius: 4px !important;
+        background: none !important;
+        padding: 6px !important;
+        border-bottom: 1px fade(@primary-color, 5%) solid !important;
+        .ant-modal-title {
+            font-weight: bold !important;
+            font-size: 12px !important;
+        }
+    }
+    .ant-modal-body {
+        margin-top: 16px !important;
+        padding: 0 !important;
+    }
+    .ant-modal-close-x {
+        width: 50px !important;
+        height: 50px !important;
+        font-size: 12px !important;
+    }
+    .ant-modal-footer {
+        border: none !important;
+    }
+
 }
 
 .ant-picker-header button {

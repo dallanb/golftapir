@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 import { LeagueInfoFormProps } from './types';
 import { Form } from '@components';
 import { fieldSchema, validationSchema } from './schema';
-import { selectMeData } from '@selectors/BaseSelector';
 import { prepareInitialValues } from '../utils';
 import { selectLeagueData } from '@selectors/AppSelector';
 import './LeagueInfoForm.less';

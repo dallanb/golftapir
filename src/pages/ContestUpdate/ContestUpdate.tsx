@@ -5,10 +5,8 @@ import { get as _get } from 'lodash';
 import { ContentLayout } from '@layouts';
 import { ContestUpdateProps } from './types';
 import ContestUpdatePageActions from './actions';
-import ContestUpdateHeader from './ContestUpdateHeader';
 import ContestUpdateContent from './ContestUpdateContent';
 import ContestUpdateSider from './ContestUpdateSider';
-import { selectData } from './selector';
 import './ContestUpdate.less';
 
 const ContestUpdate: React.FunctionComponent<ContestUpdateProps> = () => {
@@ -16,8 +14,6 @@ const ContestUpdate: React.FunctionComponent<ContestUpdateProps> = () => {
 
     const history = useHistory();
     const contest = _get(history, ['location', 'state'], null);
-
-    const { isInitialized } = useSelector(selectData);
 
     useEffect(() => {
         dispatch(ContestUpdatePageActions.init(contest));
@@ -28,7 +24,7 @@ const ContestUpdate: React.FunctionComponent<ContestUpdateProps> = () => {
 
     return (
         <ContentLayout
-            header={<ContestUpdateHeader />}
+            // header={<ContestUpdateHeader />}
             content={<ContestUpdateContent />}
             sider={<ContestUpdateSider />}
             // showSpinner={!isInitialized}

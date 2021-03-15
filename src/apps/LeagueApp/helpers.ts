@@ -1,38 +1,31 @@
-import { put, select } from 'redux-saga/effects';
-import { isNil as _isNil } from 'lodash';
+import { call, put } from 'redux-saga/effects';
 import LeagueAppActions from '@apps/LeagueApp/actions';
-import { selectLeagueData, selectLeagueMemberData } from './selector';
+import { LeagueService } from '@services';
 
-export function* initLeague(uuid: string) {
-    const data = yield select(selectLeagueData);
-    if (_isNil(data)) {
-        yield put(
-            LeagueAppActions.fetchLeague(uuid, {
-                include: 'avatar',
-            })
-        );
-    }
+export function* fetchLeague(uuid: string) {
+    const { leagues: league } = yield call(LeagueService.fetchLeague, uuid, {
+        include: 'avatar',
+    });
+    yield put(LeagueAppActions.setLeague(league));
 }
 
-export function* refreshLeague(uuid: string) {
-    yield put(LeagueAppActions.fetchLeague(uuid, { include: 'avatar' }));
-}
-
-export function* initLeagueMember(uuid: string) {
-    const data = yield select(selectLeagueMemberData);
-    if (_isNil(data)) {
-        yield put(
-            LeagueAppActions.fetchLeagueMember('me', {
-                league_uuid: uuid,
-            })
-        );
-    }
-}
-
-export function* refreshLeagueMember(uuid: string) {
-    yield put(
-        LeagueAppActions.fetchLeagueMember('me', {
-            league_uuid: uuid,
-        })
+export function* fetchLeagueMember(league_uuid: string) {
+    const { members: leagueMember }: any = yield call(
+        LeagueService.fetchMembersMaterializedUser,
+        'me',
+        {
+            league_uuid,
+        }
     );
+    yield put(LeagueAppActions.setLeagueMember(leagueMember));
+}
+
+export function* fetchLeagueMembers(league_uuid: string) {
+    const { members: leagueMembers, _metadata: metadata }: any = yield call(
+        LeagueService.fetchMembersMaterialized,
+        {
+            league_uuid,
+        }
+    );
+    yield put(LeagueAppActions.setLeagueMembers(leagueMembers, metadata));
 }

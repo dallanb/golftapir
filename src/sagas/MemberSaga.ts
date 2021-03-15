@@ -1,10 +1,10 @@
 import { AnyAction } from 'redux';
 import { all, call, put, select, takeLatest } from 'redux-saga/effects';
-import { message } from 'antd';
+import { message } from '@utils';
 import MemberActions, { MemberTypes } from '@actions/MemberActions';
 import { MemberService } from '@services';
 import CONSTANTS from '@locale/en-CA';
-import { selectMyStat } from '@selectors/BaseSelector';
+import { selectMyStat, selectMyWallet } from '@selectors/BaseSelector';
 
 function* fetchMember({ uuid, options }: AnyAction) {
     try {
@@ -88,6 +88,18 @@ function* refreshMyMemberStats({}) {
         yield put(MemberActions.refreshMyMemberStatsFailure(err));
     }
 }
+function* refreshMyMemberWallet({}) {
+    try {
+        const wallet = yield select(selectMyWallet);
+        const { wallets }: any = yield call(
+            MemberService.fetchWallet,
+            wallet.uuid
+        );
+        yield put(MemberActions.refreshMyMemberWalletSuccess(wallets));
+    } catch (err) {
+        yield put(MemberActions.refreshMyMemberWalletFailure(err));
+    }
+}
 
 export default function* MemberSaga() {
     yield all([
@@ -98,5 +110,6 @@ export default function* MemberSaga() {
         takeLatest(MemberTypes.UPDATE_MEMBER, updateMember),
         takeLatest(MemberTypes.ASSIGN_AVATAR, assignAvatar),
         takeLatest(MemberTypes.REFRESH_MY_MEMBER_STATS, refreshMyMemberStats),
+        takeLatest(MemberTypes.REFRESH_MY_MEMBER_WALLET, refreshMyMemberWallet),
     ]);
 }

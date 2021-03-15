@@ -3,7 +3,7 @@ import { all, call, put, takeLatest } from 'redux-saga/effects';
 import { omit as _omit, pick as _pick } from 'lodash';
 import RegisterPageActions, { RegisterPageTypes } from './actions';
 import { AuthService, MemberService } from '@services';
-import { message } from 'antd';
+import { message } from '@utils';
 import CONSTANTS from '@locale/en-CA';
 import MemberSettingsPageContentMemberActions from '@pages/MemberSettings/MemberSettingsContent/Member/actions';
 import { BaseActions } from '@actions';
@@ -16,11 +16,12 @@ function* init({ token }: AnyAction) {
                 AuthService.fetchInvite,
                 token
             );
-            yield put(
-                RegisterPageActions.setFormInitialValues(
-                    _pick(invite, ['email', 'token'])
-                )
+            let props = _pick(invite, ['email', 'token']);
+            props = Object.assign(
+                props,
+                props.email && { confirm_email: props.email }
             );
+            yield put(RegisterPageActions.setFormInitialValues(props));
         }
         yield put(RegisterPageActions.initSuccess());
     } catch (err) {

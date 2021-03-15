@@ -8,6 +8,7 @@ import {
     SettingFilled,
     TeamOutlined,
 } from '@ant-design/icons';
+import constants from '@constants/index';
 
 const routes = {
     APPS: {
@@ -111,6 +112,13 @@ const routes = {
             BASE_KEY: 'contest',
             KEY: 'contest_update',
             LABEL: CONSTANTS.PAGES.CONTEST_UPDATE.TITLE,
+            ICON: null,
+        },
+        COURSES_CREATE: {
+            ROUTE: '/courses/create',
+            BASE_KEY: 'course',
+            KEY: 'courses_create',
+            LABEL: CONSTANTS.PAGES.COURSES_CREATE.TITLE,
             ICON: null,
         },
         HOME: {
