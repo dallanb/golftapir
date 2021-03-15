@@ -35,7 +35,13 @@ const ScorecardParticipant: React.FunctionComponent<ScorecardParticipantProps> =
             </div>
             <div className="scorecard-participant-buttons">
                 <div className="scorecard-participant-button message">
-                    <Button block size={'small'} type="primary" key="message">
+                    <Button
+                        block
+                        disabled
+                        size={'small'}
+                        type="primary"
+                        key="message"
+                    >
                         Message
                     </Button>
                 </div>
