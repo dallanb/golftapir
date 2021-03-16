@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 const CompressionWebpackPlugin = require('compression-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
     entry: path.resolve(__dirname, 'src', 'index.tsx'),
@@ -51,9 +52,9 @@ module.exports = {
                     {
                         loader: 'css-loader',
                         options: {
-                            modules: true,
-                            importLoaders: 1,
-                            localIdentName: '[sha1:hash:hex:4]',
+                            modules: {
+                                localIdentName: '[local]',
+                            },
                         },
                     },
                     {
@@ -114,6 +115,7 @@ module.exports = {
         new Dotenv(),
         new LodashModuleReplacementPlugin(),
         new CompressionWebpackPlugin(),
+        // new CopyWebpackPlugin({ patterns: [{ from: 'public' }] }),
     ],
     optimization: {
         splitChunks: {
