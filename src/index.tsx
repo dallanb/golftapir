@@ -8,6 +8,12 @@ import './index.less';
 import 'antd/dist/antd.less';
 
 FirebaseClient.init();
+
+const spinner = document.getElementById('spinner');
+
+if (spinner && !spinner.hasAttribute('hidden')) {
+    spinner.setAttribute('hidden', 'true');
+}
 ReactDOM.render(<App />, document.getElementById('root'));
 
 // If you want your Routes to work offline and load faster, you can change

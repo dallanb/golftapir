@@ -51,10 +51,10 @@ module.exports = {
                     {
                         loader: 'css-loader',
                         options: {
-                            modules: {
-                                localIdentName: '[local]',
-                            },
-                        },
+                            modules: true,
+                            importLoaders: 1,
+                            localIdentName: '[sha1:hash:hex:4]'
+                        }
                     },
                     {
                         loader: 'less-loader', // compiles Less to CSS
