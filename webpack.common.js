@@ -53,8 +53,8 @@ module.exports = {
                         options: {
                             modules: true,
                             importLoaders: 1,
-                            localIdentName: '[sha1:hash:hex:4]'
-                        }
+                            localIdentName: '[sha1:hash:hex:4]',
+                        },
                     },
                     {
                         loader: 'less-loader', // compiles Less to CSS
