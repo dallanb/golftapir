@@ -1,5 +1,4 @@
 import React from 'react';
-import UserCard from './UserCard';
 import UserMenu from './UserMenu';
 import UserPopover from './UserPopover';
 import { UserTileProps } from './types';
