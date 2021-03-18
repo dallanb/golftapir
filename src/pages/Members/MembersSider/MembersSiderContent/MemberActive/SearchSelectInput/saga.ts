@@ -16,12 +16,11 @@ function* search({ key }: AnyAction) {
             per_page: 10,
             league_uuid: null,
             search: key,
+            include: 'avatar',
         });
         yield put(MembersPageSiderContentSearchActions.searchSuccess(members));
     } catch (err) {
-        yield put(
-            MembersPageSiderContentSearchActions.searchFailure(err)
-        );
+        yield put(MembersPageSiderContentSearchActions.searchFailure(err));
     }
 }
 
@@ -37,9 +36,7 @@ function* invite({ uuid: user_uuid, email }: AnyAction) {
         } else {
             message.error(CONSTANTS.LEAGUE.ERROR.MEMBER_INVITE);
         }
-        yield put(
-            MembersPageSiderContentSearchActions.inviteFailure(err)
-        );
+        yield put(MembersPageSiderContentSearchActions.inviteFailure(err));
     }
 }
 

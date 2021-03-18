@@ -1,9 +1,21 @@
 .member-tile {
     display: flex;
     padding: 4px;
+    max-width: 100%;
     .member-tile-avatar {
         padding-right: 4px;
     }
     .member-tile-name {
+        font-weight: 500;
+        padding-right: 4px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .member-tile-username {
+        color: fade(@primary-color, 50%);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 }
