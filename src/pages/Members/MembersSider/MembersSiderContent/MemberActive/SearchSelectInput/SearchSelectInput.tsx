@@ -18,6 +18,7 @@ import ComponentContent from '@layouts/ComponentContent';
 import routes from '@constants/routes';
 import './SearchSelectInput.less';
 import { checkMemberLimit } from '@pages/Members/MembersSider/MembersSiderContent/MemberActive/SearchSelectInput/utils';
+import optionRenderer from '@pages/Members/MembersSider/MembersSiderContent/MemberActive/SearchSelectInput/optionRenderer';
 
 const { Option } = Select;
 
@@ -81,11 +82,7 @@ const SearchSelectInput: React.FunctionComponent<SearchInputProps> = () => {
                     onChange={onChange}
                     className="search-select-input"
                 >
-                    {data.map((d: any, index: number) => (
-                        <Option key={index} value={index}>
-                            {d.display_name}
-                        </Option>
-                    ))}
+                    {data.map(optionRenderer)}
                     <Option
                         key={newMemberKey}
                         value={newMemberKey}

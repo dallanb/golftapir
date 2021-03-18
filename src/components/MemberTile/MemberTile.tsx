@@ -16,6 +16,7 @@ const MemberTile: React.FunctionComponent<MemberTileProps> = ({ member }) => {
                 <Avatar name={name} src={src} size={20} shape={'square'} />
             </div>
             <div className="member-tile-name">{name}</div>
+            <div className="member-tile-username">{username}</div>
         </div>
     );
 };
