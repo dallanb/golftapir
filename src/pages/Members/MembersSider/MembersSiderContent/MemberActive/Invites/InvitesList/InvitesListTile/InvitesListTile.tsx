@@ -4,8 +4,7 @@ import { get as _get } from 'lodash';
 import classnames from 'classnames';
 import { InvitesListTileProps } from './types';
 import constants from '@constants';
-import routes from '@constants/routes';
-import { mapStatusColour, withAppRoute } from '@utils';
+import { mapStatusColour } from '@utils';
 import './InvitesListTile.less';
 
 const InvitesListTile: React.FunctionComponent<InvitesListTileProps> = ({
@@ -15,6 +14,9 @@ const InvitesListTile: React.FunctionComponent<InvitesListTileProps> = ({
     const item = _get(data, [index], undefined);
 
     const email = _get(item, ['email'], 'Loading...');
+    const username = _get(item, ['username']);
+    const displayName = _get(item, ['display_name']);
+    const status = _get(item, ['status'], constants.STATUS.INVITED.KEY);
     const cardCx = classnames('invites-list-tile-card', { filled: isEven });
     return (
         <div key={index} style={style} className="invites-list-tile-view">
@@ -23,14 +25,23 @@ const InvitesListTile: React.FunctionComponent<InvitesListTileProps> = ({
                     <div className="invites-list-tile-content-main">
                         <div className="invites-list-tile-content-main-info">
                             <div className="invites-list-tile-content-main-name">
-                                {email}
+                                {username ? (
+                                    <>
+                                        <div className="invites-list-tile-content-main-display-name">
+                                            {displayName}
+                                        </div>
+                                        <div className="invites-list-tile-content-main-username">
+                                            {username}
+                                        </div>
+                                    </>
+                                ) : (
+                                    email
+                                )}
                             </div>
                         </div>
                     </div>
                     <div className="invites-list-tile-content-side">
-                        <Tag color={constants.STATUS.PENDING.COLOUR}>
-                            {constants.STATUS.PENDING.KEY}
-                        </Tag>
+                        <Tag color={mapStatusColour(status)}>{status}</Tag>
                     </div>
                 </div>
             </Card>

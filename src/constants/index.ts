@@ -19,6 +19,10 @@ const constants = {
         WAGERS_PAGE: 'WAGERS_PAGE',
     },
     STATUS: {
+        INVITED: {
+            COLOUR: 'magenta',
+            KEY: 'pending',
+        },
         PENDING: {
             COLOUR: 'orange',
             KEY: 'pending',

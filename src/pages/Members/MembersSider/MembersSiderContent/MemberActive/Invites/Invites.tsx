@@ -29,9 +29,13 @@ const Invites: React.FunctionComponent<InvitesProps> = ({}) => {
         isRefreshing: leagueMembersIsRefreshing,
     } = useSelector(selectLeagueMembers);
     const members = useSelector(selectLeagueMembersDataByStatus);
-    const activeParticipants = _get(members, ['invited'], []);
+    const pendingParticipants = _get(members, ['invited'], []);
+    const invitedParticipants = _get(members, ['pending'], []);
 
-    const dataHeight = Math.min(400, activeParticipants.length * 50);
+    const dataHeight = Math.min(
+        400,
+        (pendingParticipants.length + invitedParticipants.length) * 50
+    );
     const emptyHeight = 124;
     const dimensions = {};
     if (isInitialized) {
@@ -54,7 +58,7 @@ const Invites: React.FunctionComponent<InvitesProps> = ({}) => {
             <InvitesList
                 containerRef={ref}
                 containerDimensions={dimensions}
-                data={activeParticipants}
+                data={[...pendingParticipants, ...invitedParticipants]}
                 isFetching={isFetching}
             />
         </ComponentContent>
