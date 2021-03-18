@@ -103,7 +103,7 @@ const UserTileExtra: React.FunctionComponent<UserTileExtraProps> = ({
             <div className="user-tile-extra-drop-down">
                 <UserTile
                     menu={getUserTileMenuItems}
-                    popoverOverlayClassName="user-tile-extra-popover"
+                    overlayClassName="user-tile-extra-overlay"
                 />
             </div>
         </div>
