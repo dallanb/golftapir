@@ -17,7 +17,8 @@ import {
     contestPayoutInParser,
     contestPayoutLabelMaker,
     courseLoadingRenderer,
-    courseSearchSelectOptionRenderer, participantLoadingRenderer,
+    courseSearchSelectOptionRenderer,
+    participantLoadingRenderer,
     participantSearchSelectOptionRenderer,
 } from './utils';
 import { searchSelectTagRenderer } from '@utils';
@@ -197,22 +198,38 @@ export const validationSchema = (walletBalance: number) =>
                 .required(FORM.VALIDATION.BUY_IN_REQUIRED)
                 .max(walletBalance, FORM.VALIDATION.BUY_IN_WALLET_LIMIT),
         }),
-        payout: Yup.array()
-            .required(FORM.VALIDATION.PAYOUT_REQUIRED)
-            .of(
+        payout: Yup.array().when('buy_in', {
+            is: (val) => val == 0,
+            then: Yup.array().of(
                 Yup.number().test(
-                    'payout-100',
-                    FORM.VALIDATION.PAYOUT_100,
+                    'buy-in-required',
+                    FORM.VALIDATION.PAYOUT_BUY_IN_REQUIRED,
                     function () {
                         const values = _get(this, ['parent']);
-                        if (!_isNil(values)) {
-                            return (
-                                values.reduce((a: any, b: any) => a + b, 0) ===
-                                100
-                            );
-                        }
-                        return false;
+                        console.log(values);
+                        return values.length === 1 && values[0] === 100;
                     }
                 )
             ),
+            otherwise: Yup.array()
+                .required(FORM.VALIDATION.PAYOUT_REQUIRED)
+                .of(
+                    Yup.number().test(
+                        'payout-100',
+                        FORM.VALIDATION.PAYOUT_100,
+                        function () {
+                            const values = _get(this, ['parent']);
+                            if (!_isNil(values)) {
+                                return (
+                                    values.reduce(
+                                        (a: any, b: any) => a + b,
+                                        0
+                                    ) === 100
+                                );
+                            }
+                            return false;
+                        }
+                    )
+                ),
+        }),
     });
