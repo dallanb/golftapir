@@ -5,6 +5,6 @@ import config from 'config';
 export const checkMemberLimit = (membersData: any) =>
     Object.entries(membersData).reduce(
         (total: number, [k, v]: any) =>
-            k !== constants.STATUS.INACTIVE ? total + v.length : total,
+            k !== constants.STATUS.INACTIVE.KEY ? total + v.length : total,
         0
     ) >= config.MAX_LEAGUE_MEMBERS;
