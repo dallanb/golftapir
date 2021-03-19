@@ -35,18 +35,17 @@ const ContestInfoExtra: React.FunctionComponent<ContestInfoExtraProps> = () => {
         return (
             <EditOutlined
                 onClick={() =>
-                    disabled
-                        ? null
-                        : navigate(
-                              history,
-                              withAppRoute(routes.ROUTES.CONTEST_UPDATE.ROUTE, {
-                                  routeProps: {
-                                      league_uuid: leagueUUID,
-                                      contest_uuid: contest.uuid,
-                                  },
-                              }),
-                              contest
-                          )
+                    !disabled &&
+                    navigate(
+                        history,
+                        withAppRoute(routes.ROUTES.CONTEST_UPDATE.ROUTE, {
+                            routeProps: {
+                                league_uuid: leagueUUID,
+                                contest_uuid: contest.uuid,
+                            },
+                        }),
+                        contest
+                    )
                 }
                 className={cx}
             />
