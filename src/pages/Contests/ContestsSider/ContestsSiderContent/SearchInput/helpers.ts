@@ -8,7 +8,7 @@ import { selectLeagueUUID } from '@selectors/AppSelector';
 export function* refreshContestsList(search: string) {
     const league_uuid = yield select(selectLeagueUUID);
     const options = Object.assign(
-        { page: 1, per_page: 10, league_uuid },
+        { page: 1, per_page: 10, sort_by: 'ctime.desc', league_uuid },
         search && { search }
     );
     yield put(ContestsPageContentContestsActions.fetchData(options));
