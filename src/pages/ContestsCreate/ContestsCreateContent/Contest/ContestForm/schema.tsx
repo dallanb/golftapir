@@ -202,7 +202,7 @@ export const validationSchema = (walletBalance: number) =>
             is: (val) => val == 0,
             then: Yup.array().of(
                 Yup.number().test(
-                    'buy_in_required',
+                    'buy-in-required',
                     FORM.VALIDATION.PAYOUT_BUY_IN_REQUIRED,
                     function () {
                         const values = _get(this, ['parent']);
