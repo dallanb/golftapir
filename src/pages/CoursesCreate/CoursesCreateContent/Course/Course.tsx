@@ -34,12 +34,12 @@ const Course: React.FunctionComponent<CourseProps> = ({}) => {
                 }),
                 result
             );
+            dispatch(ModalActions.openModal(headerRenderer, bodyRenderer));
         }
     });
 
     useEffect(() => {
         dispatch(CoursesCreatePageContentCourseActions.init(options));
-        dispatch(ModalActions.openModal(headerRenderer, bodyRenderer));
         return () => {
             dispatch(CoursesCreatePageContentCourseActions.terminate());
         };
