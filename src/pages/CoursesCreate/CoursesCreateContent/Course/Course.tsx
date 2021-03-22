@@ -34,7 +34,6 @@ const Course: React.FunctionComponent<CourseProps> = ({}) => {
                 }),
                 result
             );
-            dispatch(ModalActions.openModal(headerRenderer, bodyRenderer));
         }
     });
 
