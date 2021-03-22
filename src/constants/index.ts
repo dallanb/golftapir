@@ -77,6 +77,11 @@ const constants = {
             KEY: 'challenge',
             LABEL: 'Challenge',
         },
+        MESSAGE: {
+            TWO_TONE_COLOUR: '#1E8793',
+            KEY: 'message',
+            LABEL: 'Message',
+        },
         COMPLETE: {
             TWO_TONE_COLOUR: '#6E7115',
             KEY: 'complete',
