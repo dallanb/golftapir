@@ -412,6 +412,10 @@ const CONSTANTS = {
                     COUNTRY_REQUIRED: 'Country is required',
                 },
             },
+            SUCCESS_MODAL: {
+                TITLE: 'Thank you for adding a course',
+                DESCRIPTION: ' will be added to your balance after the course has been approved by an administrator'
+            },
         },
         ACCOUNT: {
             TITLE: 'Account',
