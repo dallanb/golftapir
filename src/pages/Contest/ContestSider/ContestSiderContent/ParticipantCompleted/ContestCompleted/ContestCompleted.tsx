@@ -18,7 +18,7 @@ const ContestCompleted: React.FunctionComponent<ContestCompletedProps> = () => {
     const participants = useSelector(selectContestParticipants);
     const membersHash = useSelector(selectLeagueMembersDataHashByMember);
     const winner = findLowestScoringParticipant(participants);
-    const name = _get(winner, ['display_name'], '');
+    const name = _get(winner, ['display_name'], 'NA');
     const uuid = _get(winner, ['member_uuid'], '');
     const country = _get(membersHash, [uuid, 'country'], undefined);
     const Country = _get(Flags, [country], null);
