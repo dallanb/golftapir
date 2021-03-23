@@ -1,7 +1,7 @@
 import React from 'react';
 import { Menu } from 'antd';
 import { get as _get } from 'lodash';
-import { MenuItemRendererProps } from './types';
+import { MenuItemRendererProps } from '../types';
 import { type } from 'os';
 
 const defaultFormRenderer: React.FunctionComponent<MenuItemRendererProps> = ({
@@ -14,10 +14,6 @@ const defaultFormRenderer: React.FunctionComponent<MenuItemRendererProps> = ({
         data: menuProps,
         value: _get(menuProps, ['icons', key], null),
     });
-    let Name = name;
-    if (typeof name === 'function') {
-        Name = name(_get(menuProps, ['names', key], null));
-    }
     let Path = path;
     if (typeof path === 'function') {
         Path = path(_get(menuProps, ['paths', key], null));
@@ -36,11 +32,9 @@ const defaultFormRenderer: React.FunctionComponent<MenuItemRendererProps> = ({
             className="menu-item"
             key={index}
             onClick={(item) => onClick(item, Path)}
+            icon={Icon}
             {...rbacProps}
-        >
-            <div className="menu-item-icon"> {Icon}</div>
-            <div className="menu-item-name">{Name}</div>
-        </Menu.Item>
+        />
     );
 };
 

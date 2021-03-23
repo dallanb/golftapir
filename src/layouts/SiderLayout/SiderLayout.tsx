@@ -29,14 +29,9 @@ const SiderLayout: React.FunctionComponent<SiderLayoutProps> = ({
         <Sider
             width={350}
             className={cx}
-            breakpoint={'xl'}
+            breakpoint={'lg'}
             collapsedWidth="0"
-            onBreakpoint={(broken) => {
-                console.log(broken);
-            }}
-            onCollapse={(collapsed, type) => {
-                console.log(collapsed, type);
-            }}
+            trigger={null}
         >
             <Layout className="sider-layout-background">
                 {renderHeader()}

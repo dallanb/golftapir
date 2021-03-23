@@ -7,7 +7,6 @@ export interface AppLayoutProps {
     avatar?: string;
     menuProps?: any;
     menuRoutes: any;
-    menuItemRenderer?: React.FunctionComponent<MenuItemRendererProps>;
     menuItemOnClick?: ({ key }: { key: any }, path: string) => void;
 }
 export interface AppLayoutState {
