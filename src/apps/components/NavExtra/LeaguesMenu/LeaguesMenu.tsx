@@ -1,9 +1,9 @@
 import React from 'react';
 import { Menu } from 'antd';
-import { UserMenuProps } from './types';
-import './UserMenu.less';
+import { LeaguesMenuProps } from './types';
+import './LeaguesMenu.less';
 
-const UserMenu: React.FunctionComponent<UserMenuProps> = ({ items }) => {
+const LeaguesMenu: React.FunctionComponent<LeaguesMenuProps> = ({ items }) => {
     const renderMenuItems = (
         items: string | JSX.Element | (() => JSX.Element)
     ) => {
@@ -14,7 +14,7 @@ const UserMenu: React.FunctionComponent<UserMenuProps> = ({ items }) => {
         return items;
     };
 
-    return <Menu className="user-menu">{renderMenuItems(items)}</Menu>;
+    return <Menu className="leagues-menu">{renderMenuItems(items)}</Menu>;
 };
 
-export default UserMenu;
+export default LeaguesMenu;

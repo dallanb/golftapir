@@ -1,7 +1,7 @@
 import React from 'react';
 import { Menu } from 'antd';
 import { get as _get } from 'lodash';
-import { MenuItemRendererProps } from '../../types';
+import { MenuItemRendererProps } from '../types';
 import { type } from 'os';
 
 const defaultFormRenderer: React.FunctionComponent<MenuItemRendererProps> = ({

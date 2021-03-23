@@ -5,4 +5,5 @@ export interface AppLayoutMenuProps {
     menuProps?: any;
     menuRoutes: any;
     menuItemOnClick?: ({ key }: { key: any }, path: string) => void;
+    extra?: any;
 }

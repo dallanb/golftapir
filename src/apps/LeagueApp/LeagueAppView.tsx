@@ -27,6 +27,8 @@ import {
     selectLeagueMemberIsFetching,
 } from '@selectors/AppSelector';
 import { selectData as selectBaseData } from '@selectors/BaseSelector';
+import { AppLayoutNav } from '@layouts/AppLayout';
+import { NavExtra } from '@apps/components';
 
 const LeagueAppView: React.FunctionComponent<LeagueAppViewProps> = () => {
     const dispatch = useDispatch();
@@ -138,13 +140,15 @@ const LeagueAppView: React.FunctionComponent<LeagueAppViewProps> = () => {
 
     if (!isReady || isFetching) return <AppLoading />;
     return (
-        <AppLayout
-            app={constants.APPS.LEAGUE_APP}
-            name={name}
-            avatar={avatar}
-            menuProps={menuProps}
-            menuRoutes={statics}
-        >
+        <AppLayout>
+            <AppLayoutNav
+                app={constants.APPS.LEAGUE_APP}
+                name={name}
+                avatar={avatar}
+                menuProps={menuProps}
+                menuRoutes={statics}
+                extra={<NavExtra />}
+            />
             <Switch>
                 {routes.map(({ path, component, exact }: ComponentRoute) => (
                     <Route
