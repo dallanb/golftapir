@@ -6,9 +6,7 @@ import {
     HomeFilled,
     NotificationFilled,
     SettingFilled,
-    TeamOutlined,
 } from '@ant-design/icons';
-import constants from '@constants/index';
 
 const routes = {
     APPS: {
@@ -84,7 +82,7 @@ const routes = {
             BASE_KEY: 'competitors',
             KEY: 'competitors',
             LABEL: CONSTANTS.PAGES.COMPETITORS.TITLE,
-            ICON: TeamOutlined,
+            ICON: CrownFilled,
         },
         CONTEST: {
             ROUTE: '/contests/:contest_uuid',
@@ -190,7 +188,7 @@ const routes = {
             BASE_KEY: 'members',
             KEY: 'members',
             LABEL: CONSTANTS.PAGES.MEMBERS.TITLE,
-            ICON: TeamOutlined,
+            ICON: CrownFilled,
         },
         MEMBERS_CREATE: {
             ROUTE: '/members/create',
