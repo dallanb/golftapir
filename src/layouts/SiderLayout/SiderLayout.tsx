@@ -7,23 +7,16 @@ import classnames from 'classnames';
 const { Content, Sider } = Layout;
 
 const SiderLayout: React.FunctionComponent<SiderLayoutProps> = ({
-    header,
     content,
     className,
 }) => {
-    const renderHeader = () => {
-        if (!header) {
-            return null;
-        }
-        return header;
-    };
-
     const renderContent = () => {
         if (!content) {
             return null;
         }
         return content;
     };
+
     const cx = classnames('sider-layout', className);
     return (
         <Sider
@@ -34,7 +27,6 @@ const SiderLayout: React.FunctionComponent<SiderLayoutProps> = ({
             trigger={null}
         >
             <Layout className="sider-layout-background">
-                {renderHeader()}
                 <Content className="sider-layout-content">
                     {renderContent()}
                 </Content>
