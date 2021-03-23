@@ -1,22 +1,25 @@
 import React from 'react';
-import { Layout, Menu } from 'antd';
 import { useHistory } from 'react-router-dom';
-import { AppLayoutMenuNavProps } from './types';
-import menuItemRenderer from './defaultMenuItemRenderer';
+import { Layout, Menu } from 'antd';
 import { navigate, withAppRoute } from '@utils';
 import routes from '@constants/routes';
 import constants from '@constants';
-import './AppLayoutMenuNav.less';
+import { AppLayoutMenuSiderProps } from './types';
+import menuItemRenderer from './defaultMenuItemRenderer';
+import './AppLayoutMenuSider.less';
+import classnames from 'classnames';
 
-const { Header } = Layout;
+const { Sider } = Layout;
 
-const AppLayoutMenuNav: React.FunctionComponent<AppLayoutMenuNavProps> = ({
+const AppLayoutMenuSider: React.FunctionComponent<AppLayoutMenuSiderProps> = ({
     selectedKeys,
     menuRoutes,
     menuProps,
     menuItemOnClick,
+    className,
 }) => {
     const history = useHistory();
+
     const menuItemsRenderer = (
         rendererMenuRoutes: any,
         rendererMenuProps: any
@@ -31,10 +34,17 @@ const AppLayoutMenuNav: React.FunctionComponent<AppLayoutMenuNavProps> = ({
         );
     };
 
+    const cx = classnames('member-app-sider-layout', className);
+
     return (
-        <Header className="member-app-nav-header">
+        <Sider
+            className={cx}
+            breakpoint={'xl'}
+            collapsedWidth={0}
+            trigger={null}
+        >
             <div
-                className="member-app-nav-title"
+                className="member-app-sider-layout-title"
                 onClick={() =>
                     navigate(
                         history,
@@ -45,14 +55,16 @@ const AppLayoutMenuNav: React.FunctionComponent<AppLayoutMenuNavProps> = ({
                 }
             />
             <Menu
+                theme="light"
+                defaultSelectedKeys={['0']}
                 selectedKeys={selectedKeys}
-                mode="horizontal"
-                className="member-app-nav-menu"
+                className="member-app-sider-layout-menu"
+                mode="inline"
             >
                 {menuItemsRenderer(menuRoutes, menuProps)}
             </Menu>
-        </Header>
+        </Sider>
     );
 };
 
-export default AppLayoutMenuNav;
+export default AppLayoutMenuSider;

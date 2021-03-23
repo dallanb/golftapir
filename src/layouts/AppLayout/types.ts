@@ -9,6 +9,7 @@ export interface AppLayoutProps {
     menuRoutes: any;
     menuItemOnClick?: ({ key }: { key: any }, path: string) => void;
 }
+
 export interface AppLayoutState {
     selectedKeys: string[];
 }

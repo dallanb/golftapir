@@ -1,4 +1,5 @@
-export interface AppLayoutMenuNavProps {
+export interface AppLayoutMenuSiderProps {
+    className?: string;
     selectedKeys: any;
     menuProps: any;
     menuRoutes: any;
