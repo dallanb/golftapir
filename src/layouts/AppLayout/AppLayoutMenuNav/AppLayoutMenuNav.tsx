@@ -1,11 +1,12 @@
 import React from 'react';
 import { Layout, Menu } from 'antd';
+import { useHistory } from 'react-router-dom';
 import { AppLayoutMenuNavProps } from './types';
 import menuItemRenderer from './defaultMenuItemRenderer';
-import './AppLayoutMenuNav.less';
 import { navigate, withAppRoute } from '@utils';
 import routes from '@constants/routes';
 import constants from '@constants';
+import './AppLayoutMenuNav.less';
 
 const { Header } = Layout;
 
@@ -15,6 +16,7 @@ const AppLayoutMenuNav: React.FunctionComponent<AppLayoutMenuNavProps> = ({
     menuProps,
     menuItemOnClick,
 }) => {
+    const history = useHistory();
     const menuItemsRenderer = (
         rendererMenuRoutes: any,
         rendererMenuProps: any
