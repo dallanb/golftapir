@@ -40,14 +40,15 @@ const defaultFormRenderer: React.FunctionComponent<MenuItemRendererProps> = ({
             className="menu-item"
             key={index}
             onClick={(item) => onClick(item, Path)}
+            icon={
+                isSelected && IconSelected ? (
+                    <div className="menu-item-icon">{IconSelected}</div>
+                ) : (
+                    <div className="menu-item-icon">{Icon}</div>
+                )
+            }
             {...rbacProps}
         >
-            {isSelected && IconSelected ? (
-                <div className="menu-item-icon">{IconSelected}</div>
-            ) : (
-                <div className="menu-item-icon">{Icon}</div>
-            )}
-
             {/*<div className="menu-item-name">{Name}</div>*/}
         </Menu.Item>
     );

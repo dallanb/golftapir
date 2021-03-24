@@ -27,11 +27,16 @@
     }
     .nav-extra-user {
         display: flex;
-        flex-grow: 1;
         align-items: center;
         justify-content: flex-end;
         overflow: hidden;
         margin-right: 12px;
+        @media (min-width: 577px) {
+            flex-grow: 1;
+        }
+        @media (max-width: 576px) {
+            flex-grow: unset;
+        }
         .nav-extra-user-avatar-wrapper {
             margin-right: 12px;
             .nav-extra-user-avatar {
@@ -41,7 +46,6 @@
             }
         }
         .nav-extra-user-name {
-            display: flex;
             flex-direction: column;
             margin-right: 12px;
             margin-bottom: 0;
@@ -52,6 +56,12 @@
             overflow: hidden;
             white-space: nowrap;
             text-overflow: ellipsis;
+            @media (min-width: 577px) {
+                display: flex;
+            }
+            @media (max-width: 576px) {
+                display: none;
+            }
 
             .nav-extra-user-name-display-name {
                 font-size: 14px;
@@ -70,7 +80,6 @@
     }
     .nav-extra-wallet {
         display: flex;
-        flex-grow: 1;
         justify-content: flex-end;
         align-items: center;
         overflow: hidden;
@@ -79,11 +88,16 @@
         &.disabled {
             cursor: default;
         }
+        @media (min-width: 577px) {
+            flex-grow: 1;
+        }
+        @media (max-width: 576px) {
+            flex-grow: unset;
+        }
 
         .nav-extra-wallet-balance {
             display: flex;
             flex-direction: column;
-            margin-right: 12px;
             margin-bottom: 0;
             color: fade(@primary-color, 85%);
             font-weight: 600;
@@ -93,18 +107,25 @@
             white-space: nowrap;
             text-overflow: ellipsis;
 
+            @media (min-width: 577px) {
+                margin-right: 12px;
+            }
+
             .nav-extra-wallet-balance-label {
                 font-size: 12px;
                 line-height: 1;
                 color: rgba(0, 0, 0, 0.5);
                 font-weight: 400;
+                margin-bottom: 6px;
+                @media (max-width: 576px) {
+                    display: none;
+                }
             }
 
             .nav-extra-wallet-balance-amount {
                 font-size: 14px;
                 line-height: 1;
                 max-width: 160px;
-                margin-top: 6px;
 
                 .nav-extra-wallet-balance-amount-icon {
                     margin-right: 4px;

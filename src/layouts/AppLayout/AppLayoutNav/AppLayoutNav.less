@@ -27,14 +27,20 @@
     .app-nav-menu {
         background: transparent !important;
         color: @text-color !important;
-        width: 100%;
-        display: flex !important;
-        justify-content: center;
+        @media (min-width: 769px) {
+            display: flex !important;
+            width: 100%;
+            justify-content: space-evenly;
+        }
+        @media (max-width: 768px) {
+            display: table !important;
+            justify-content: flex-start;
+        }
     }
     .menu-item {
         display: flex !important;
         align-items: center;
-        padding: 0 32px !important;
+        //padding: 0 32px !important;
         &.ant-menu-item-selected {
             border-bottom: 2px solid fade(@primary-color, 30%) !important;
         }
@@ -62,8 +68,15 @@
         }
     }
     .app-nav-extra {
-        width: 350px;
-        min-width: 350px;
-        padding: 0 12px;
+        @media (min-width: 577px) {
+            width: 350px;
+            min-width: 350px;
+            padding: 0 12px;
+        }
+        @media (max-width: 576px) {
+            width: 250px;
+            min-width: 250px;
+            padding: 0 12px;
+        }
     }
 }
