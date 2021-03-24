@@ -27,6 +27,7 @@ import constants from '@constants';
 import { Avatar, PendingBadge } from '@components';
 import ExtraMenu from './ExtraMenu';
 import './NavExtra.less';
+import ExtraWallet from '@apps/components/NavExtra/ExtraWallet';
 
 const NavExtra: React.FunctionComponent<NavExtraProps> = () => {
     const history = useHistory();
@@ -114,20 +115,7 @@ const NavExtra: React.FunctionComponent<NavExtraProps> = () => {
                     </div>
                 </div>
             </div>
-            <div className="nav-extra-wallet">
-                <div className="nav-extra-wallet-balance">
-                    <div className="nav-extra-wallet-balance-label">
-                        Your Balance
-                    </div>
-                    <div className="nav-extra-wallet-balance-amount">
-                        <DollarTwoTone
-                            twoToneColor={'orange'}
-                            className="nav-extra-wallet-balance-amount-icon"
-                        />
-                        {balance}
-                    </div>
-                </div>
-            </div>
+            <ExtraWallet />
             <div className="nav-extra-buttons">
                 <div className="nav-extra-notification">
                     <Button
