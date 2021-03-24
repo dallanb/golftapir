@@ -1,22 +1,27 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { get as _get } from 'lodash';
+import { get as _get, takeRight as _takeRight } from 'lodash';
 import { Button, Dropdown, Menu } from 'antd';
 import {
     CheckOutlined,
     NotificationFilled,
     TrophyFilled,
 } from '@ant-design/icons';
+import { DollarTwoTone } from '@ant-design/icons/lib';
 import {
     selectLeagues,
     selectMe,
     selectMyAvatarSrc,
+    selectMyWalletBalance,
     selectPending,
 } from '@selectors/BaseSelector';
 import { NavExtraProps } from './types';
-import { selectLeagueUUID } from '@selectors/AppSelector';
-import { navigate, withAppRoute, withS3URL } from '@utils';
+import {
+    selectLeagueMemberStatus,
+    selectLeagueUUID,
+} from '@selectors/AppSelector';
+import { navigate, statusToRole, withAppRoute, withS3URL } from '@utils';
 import routes from '@constants/routes';
 import constants from '@constants';
 import { Avatar, PendingBadge } from '@components';
@@ -32,6 +37,9 @@ const NavExtra: React.FunctionComponent<NavExtraProps> = () => {
     const displayName = _get(user, ['display_name'], '');
     const username = _get(user, ['username'], '');
     const src = useSelector(selectMyAvatarSrc);
+    const balance = useSelector(selectMyWalletBalance);
+    const memberStatus = useSelector(selectLeagueMemberStatus);
+    const role = statusToRole(memberStatus);
 
     const getLeaguesMenuItems: any = () =>
         leagues.map(({ league, member }: any) => (
@@ -110,7 +118,7 @@ const NavExtra: React.FunctionComponent<NavExtraProps> = () => {
                         name={displayName}
                         src={src}
                         shape={'square'}
-                        size={48}
+                        size={36}
                         className="nav-extra-user-avatar"
                     />
                 </div>
@@ -120,6 +128,20 @@ const NavExtra: React.FunctionComponent<NavExtraProps> = () => {
                     </div>
                     <div className="nav-extra-user-name-username">
                         {username}
+                    </div>
+                </div>
+            </div>
+            <div className="nav-extra-wallet">
+                <div className="nav-extra-wallet-balance">
+                    <div className="nav-extra-wallet-balance-label">
+                        Your Balance
+                    </div>
+                    <div className="nav-extra-wallet-balance-amount">
+                        <DollarTwoTone
+                            twoToneColor={'orange'}
+                            className="nav-extra-wallet-balance-amount-icon"
+                        />
+                        {balance}
                     </div>
                 </div>
             </div>
