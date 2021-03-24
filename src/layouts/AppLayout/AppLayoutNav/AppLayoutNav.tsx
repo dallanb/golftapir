@@ -24,7 +24,8 @@ const AppLayoutNav: React.FunctionComponent<AppLayoutMenuProps> = ({
 
     const menuItemsRenderer = (
         rendererMenuRoutes: any,
-        rendererMenuProps: any
+        rendererMenuProps: any,
+        selectedKeys: string[]
     ) => {
         return rendererMenuRoutes.map((route: any, index: number) =>
             menuItemRenderer({
@@ -32,6 +33,7 @@ const AppLayoutNav: React.FunctionComponent<AppLayoutMenuProps> = ({
                 onClick: menuItemOnClick,
                 route,
                 menuProps: rendererMenuProps,
+                selectedKeys,
             })
         );
     };
@@ -79,7 +81,7 @@ const AppLayoutNav: React.FunctionComponent<AppLayoutMenuProps> = ({
                 mode="horizontal"
                 className="app-nav-menu"
             >
-                {menuItemsRenderer(menuRoutes, menuProps)}
+                {menuItemsRenderer(menuRoutes, menuProps, selectedKeys)}
             </Menu>
             <div className="app-nav-extra">{extra}</div>
         </Header>

@@ -1,5 +1,6 @@
 .app-nav-header {
     display: flex;
+    justify-content: space-between;
     padding: 0 !important;
     position: fixed;
     z-index: 1;
@@ -28,10 +29,12 @@
         color: @text-color !important;
         width: 100%;
         display: flex !important;
+        justify-content: center;
     }
     .menu-item {
         display: flex !important;
         align-items: center;
+        padding: 0 32px !important;
         &.ant-menu-item-selected {
             border-bottom: 2px solid fade(@primary-color, 30%) !important;
         }
@@ -42,8 +45,9 @@
             color: fade(@primary-color, 30%) !important;
         }
         .menu-item-icon {
-            padding-left: 4px;
+            //padding-left: 4px;
             span {
+                font-size: 20px;
                 margin-right: 0;
             }
             .ant-badge {
@@ -51,7 +55,7 @@
             }
         }
         .menu-item-name {
-            padding-right: 4px;
+            //padding-right: 4px;
             margin-left: 10px;
             text-overflow: ellipsis;
             overflow: hidden;

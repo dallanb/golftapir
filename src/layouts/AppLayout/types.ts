@@ -12,4 +12,5 @@ export interface MenuItemRendererProps {
     onClick: (item: any, path: string) => void;
     menuProps: any;
     route: any;
+    selectedKeys: string[];
 }

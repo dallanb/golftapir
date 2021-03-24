@@ -11,6 +11,7 @@ export default [
         component: Home,
         name: routes.ROUTES.HOME.LABEL,
         icon: routes.ROUTES.HOME.ICON,
+        iconSelected: routes.ROUTES.HOME.ICON_SELECTED,
         key: routes.ROUTES.HOME.KEY,
     },
     // {
@@ -53,6 +54,7 @@ export default [
         }),
         name: routes.ROUTES.ACCOUNT.LABEL,
         icon: routes.ROUTES.ACCOUNT.ICON,
+        iconSelected: routes.ROUTES.ACCOUNT.ICON_SELECTED,
         key: routes.ROUTES.ACCOUNT.KEY,
     },
 ];

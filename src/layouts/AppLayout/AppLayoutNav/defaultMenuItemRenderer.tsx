@@ -6,18 +6,22 @@ import { type } from 'os';
 
 const defaultFormRenderer: React.FunctionComponent<MenuItemRendererProps> = ({
     index,
-    route: { name, icon, key, path, disabled = -1, hidden = -1 },
+    route: { name, icon, iconSelected, key, path, disabled = -1, hidden = -1 },
     onClick,
     menuProps,
+    selectedKeys,
 }) => {
+    const isSelected = selectedKeys.includes(index.toString());
+
     const Icon = React.createElement(icon, {
         data: menuProps,
         value: _get(menuProps, ['icons', key], null),
     });
-    let Name = name;
-    if (typeof name === 'function') {
-        Name = name(_get(menuProps, ['names', key], null));
-    }
+    const IconSelected = iconSelected && React.createElement(iconSelected);
+    // let Name = name;
+    // if (typeof name === 'function') {
+    //     Name = name(_get(menuProps, ['names', key], null));
+    // }
     let Path = path;
     if (typeof path === 'function') {
         Path = path(_get(menuProps, ['paths', key], null));
@@ -38,8 +42,13 @@ const defaultFormRenderer: React.FunctionComponent<MenuItemRendererProps> = ({
             onClick={(item) => onClick(item, Path)}
             {...rbacProps}
         >
-            <div className="menu-item-icon">{Icon}</div>
-            <div className="menu-item-name">{Name}</div>
+            {isSelected && IconSelected ? (
+                <div className="menu-item-icon">{IconSelected}</div>
+            ) : (
+                <div className="menu-item-icon">{Icon}</div>
+            )}
+
+            {/*<div className="menu-item-name">{Name}</div>*/}
         </Menu.Item>
     );
 };
