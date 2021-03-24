@@ -2,6 +2,10 @@
     display: flex;
     margin: 0;
     justify-content: space-evenly;
+    .ant-divider-vertical {
+        height: 32px;
+        top: 16px;
+    }
     .nav-extra-buttons {
         display: flex;
         .nav-extra-notification {
@@ -23,8 +27,11 @@
     }
     .nav-extra-user {
         display: flex;
+        flex-grow: 1;
         align-items: center;
+        justify-content: flex-end;
         overflow: hidden;
+        margin-right: 12px;
         .nav-extra-user-avatar-wrapper {
             margin-right: 12px;
             .nav-extra-user-avatar {
@@ -63,9 +70,15 @@
     }
     .nav-extra-wallet {
         display: flex;
-        justify-content: space-evenly;
+        flex-grow: 1;
+        justify-content: flex-end;
         align-items: center;
         overflow: hidden;
+        text-align: end;
+        cursor: pointer;
+        &.disabled {
+            cursor: default;
+        }
 
         .nav-extra-wallet-balance {
             display: flex;

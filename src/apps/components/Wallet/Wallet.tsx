@@ -21,8 +21,6 @@ import routes from '@constants/routes';
 const Wallet: React.FunctionComponent<WalletProps> = () => {
     const dispatch = useDispatch();
     const location = useLocation();
-    const params = useParams();
-    const isLeagueApp = _get(params, ['league_uuid'], undefined);
     const isWalletCreatePage =
         _takeRight(location.pathname.split('/'), 2).join('') ==
         _takeRight(routes.ROUTES.COURSES_CREATE.ROUTE.split('/'), 2).join('');
@@ -30,9 +28,6 @@ const Wallet: React.FunctionComponent<WalletProps> = () => {
     const balance = useSelector(selectMyWalletBalance);
     const memberStatus = useSelector(selectLeagueMemberStatus);
     const role = statusToRole(memberStatus);
-    if (!isLeagueApp) {
-        return null;
-    }
     return (
         <ComponentContent
             className="wallet-component-content space"

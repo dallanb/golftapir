@@ -2,18 +2,16 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { get as _get } from 'lodash';
-import { Button, Dropdown, Menu } from 'antd';
+import { Button, Divider, Dropdown, Menu } from 'antd';
 import {
     CaretDownFilled,
     CheckOutlined,
     NotificationFilled,
 } from '@ant-design/icons';
-import { DollarTwoTone } from '@ant-design/icons/lib';
 import {
     selectLeagues,
     selectMe,
     selectMyAvatarSrc,
-    selectMyWalletBalance,
     selectPending,
 } from '@selectors/BaseSelector';
 import { NavExtraProps } from './types';
@@ -26,19 +24,18 @@ import routes from '@constants/routes';
 import constants from '@constants';
 import { Avatar, PendingBadge } from '@components';
 import ExtraMenu from './ExtraMenu';
+import ExtraWallet from './ExtraWallet';
 import './NavExtra.less';
-import ExtraWallet from '@apps/components/NavExtra/ExtraWallet';
 
 const NavExtra: React.FunctionComponent<NavExtraProps> = () => {
     const history = useHistory();
     const pending = useSelector(selectPending);
     const uuid = useSelector(selectLeagueUUID);
     const leagues = useSelector(selectLeagues) || [];
-    const { data: user, isInitialized } = useSelector(selectMe);
+    const { data: user } = useSelector(selectMe);
     const displayName = _get(user, ['display_name'], '');
     const username = _get(user, ['username'], '');
     const src = useSelector(selectMyAvatarSrc);
-    const balance = useSelector(selectMyWalletBalance);
     const memberStatus = useSelector(selectLeagueMemberStatus);
     const role = statusToRole(memberStatus);
 
@@ -96,6 +93,7 @@ const NavExtra: React.FunctionComponent<NavExtraProps> = () => {
 
     return (
         <div className="nav-extra">
+            <ExtraWallet />
             <div className="nav-extra-user">
                 <div className="nav-extra-user-avatar-wrapper">
                     <Avatar
@@ -115,7 +113,6 @@ const NavExtra: React.FunctionComponent<NavExtraProps> = () => {
                     </div>
                 </div>
             </div>
-            <ExtraWallet />
             <div className="nav-extra-buttons">
                 <div className="nav-extra-notification">
                     <Button
