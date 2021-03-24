@@ -1,29 +1,37 @@
 import React from 'react';
-import { NavExtraProps } from './types';
 import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { selectLeagues, selectPending } from '@selectors/BaseSelector';
-import { selectLeagueUUID } from '@selectors/AppSelector';
-import './NavExtra.less';
+import { get as _get } from 'lodash';
 import { Button, Dropdown, Menu } from 'antd';
-import { navigate, withAppRoute, withS3URL } from '@utils';
-import routes from '@constants/routes';
-import constants from '@constants';
-import { Avatar, PendingBadge } from '@components';
 import {
     CheckOutlined,
     NotificationFilled,
     TrophyFilled,
 } from '@ant-design/icons';
-import UserMenu from '@components/UserTile/UserMenu';
-import { get as _get } from 'lodash';
-import LeaguesMenu from '@apps/components/NavExtra/LeaguesMenu';
+import {
+    selectLeagues,
+    selectMe,
+    selectMyAvatarSrc,
+    selectPending,
+} from '@selectors/BaseSelector';
+import { NavExtraProps } from './types';
+import { selectLeagueUUID } from '@selectors/AppSelector';
+import { navigate, withAppRoute, withS3URL } from '@utils';
+import routes from '@constants/routes';
+import constants from '@constants';
+import { Avatar, PendingBadge } from '@components';
+import LeaguesMenu from './LeaguesMenu';
+import './NavExtra.less';
 
 const NavExtra: React.FunctionComponent<NavExtraProps> = () => {
     const history = useHistory();
     const pending = useSelector(selectPending);
     const uuid = useSelector(selectLeagueUUID);
     const leagues = useSelector(selectLeagues) || [];
+    const { data: user, isInitialized } = useSelector(selectMe);
+    const displayName = _get(user, ['display_name'], '');
+    const username = _get(user, ['username'], '');
+    const src = useSelector(selectMyAvatarSrc);
 
     const getLeaguesMenuItems: any = () =>
         leagues.map(({ league, member }: any) => (
@@ -95,6 +103,25 @@ const NavExtra: React.FunctionComponent<NavExtraProps> = () => {
                         className="leagues-button"
                     />
                 </Dropdown>
+            </div>
+            <div className="nav-extra-user">
+                <div className="nav-extra-user-avatar-wrapper">
+                    <Avatar
+                        name={displayName}
+                        src={src}
+                        shape={'square'}
+                        size={48}
+                        className="nav-extra-user-avatar"
+                    />
+                </div>
+                <div className="nav-extra-user-name">
+                    <div className="nav-extra-user-name-display-name">
+                        {displayName}
+                    </div>
+                    <div className="nav-extra-user-name-username">
+                        {username}
+                    </div>
+                </div>
             </div>
         </div>
     );
