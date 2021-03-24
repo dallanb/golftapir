@@ -1,7 +1,12 @@
 .nav-extra {
     display: flex;
     margin: 0;
-    justify-content: space-evenly;
+    @media (min-width: 577px) {
+        justify-content: space-evenly;
+    }
+    @media (max-width: 576px) {
+        justify-content: flex-end;
+    }
     .ant-divider-vertical {
         height: 32px;
         top: 16px;
@@ -31,12 +36,6 @@
         justify-content: flex-end;
         overflow: hidden;
         margin-right: 12px;
-        @media (min-width: 577px) {
-            flex-grow: 1;
-        }
-        @media (max-width: 576px) {
-            flex-grow: unset;
-        }
         .nav-extra-user-avatar-wrapper {
             margin-right: 12px;
             .nav-extra-user-avatar {
