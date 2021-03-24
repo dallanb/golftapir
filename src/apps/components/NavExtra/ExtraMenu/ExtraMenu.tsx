@@ -1,9 +1,9 @@
 import React from 'react';
 import { Menu } from 'antd';
-import { LeaguesMenuProps } from './types';
-import './LeaguesMenu.less';
+import { ExtraMenuProps } from './types';
+import './ExtraMenu.less';
 
-const LeaguesMenu: React.FunctionComponent<LeaguesMenuProps> = ({ items }) => {
+const ExtraMenu: React.FunctionComponent<ExtraMenuProps> = ({ items }) => {
     const renderMenuItems = (
         items: string | JSX.Element | (() => JSX.Element)
     ) => {
@@ -14,7 +14,7 @@ const LeaguesMenu: React.FunctionComponent<LeaguesMenuProps> = ({ items }) => {
         return items;
     };
 
-    return <Menu className="leagues-menu">{renderMenuItems(items)}</Menu>;
+    return <Menu className="extra-menu">{renderMenuItems(items)}</Menu>;
 };
 
-export default LeaguesMenu;
+export default ExtraMenu;

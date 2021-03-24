@@ -1,12 +1,12 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { get as _get, takeRight as _takeRight } from 'lodash';
+import { get as _get } from 'lodash';
 import { Button, Dropdown, Menu } from 'antd';
 import {
+    CaretDownFilled,
     CheckOutlined,
     NotificationFilled,
-    TrophyFilled,
 } from '@ant-design/icons';
 import { DollarTwoTone } from '@ant-design/icons/lib';
 import {
@@ -25,7 +25,7 @@ import { navigate, statusToRole, withAppRoute, withS3URL } from '@utils';
 import routes from '@constants/routes';
 import constants from '@constants';
 import { Avatar, PendingBadge } from '@components';
-import LeaguesMenu from './LeaguesMenu';
+import ExtraMenu from './ExtraMenu';
 import './NavExtra.less';
 
 const NavExtra: React.FunctionComponent<NavExtraProps> = () => {
@@ -41,8 +41,8 @@ const NavExtra: React.FunctionComponent<NavExtraProps> = () => {
     const memberStatus = useSelector(selectLeagueMemberStatus);
     const role = statusToRole(memberStatus);
 
-    const getLeaguesMenuItems: any = () =>
-        leagues.map(({ league, member }: any) => (
+    const getExtraMenuItems: any = () => {
+        const leagueMenuItems = leagues.map(({ league, member }: any) => (
             <Menu.Item
                 key={league.uuid}
                 onClick={() =>
@@ -75,43 +75,26 @@ const NavExtra: React.FunctionComponent<NavExtraProps> = () => {
                 </div>
             </Menu.Item>
         ));
+        const authMenuItems = [
+            <Menu.Item
+                key="logout"
+                onClick={() =>
+                    navigate(
+                        history,
+                        withAppRoute(routes.ROUTES.LOGOUT.ROUTE, {
+                            app: constants.APPS.AUTH_APP,
+                        })
+                    )
+                }
+            >
+                Log out <span className="nav-extra-username">{username}</span>
+            </Menu.Item>,
+        ];
+        return [...leagueMenuItems, ...authMenuItems];
+    };
 
     return (
         <div className="nav-extra">
-            <div className="nav-extra-notification">
-                <Button
-                    onClick={() =>
-                        navigate(
-                            history,
-                            withAppRoute(routes.ROUTES.NOTIFICATIONS.ROUTE, {
-                                app: constants.APPS.MEMBER_APP,
-                            })
-                        )
-                    }
-                    type="text"
-                    icon={
-                        <PendingBadge
-                            value={{ pending }}
-                            icon={NotificationFilled}
-                        />
-                    }
-                    className="notification-button"
-                />
-            </div>
-            <div className="nav-extra-leagues-drop-down">
-                <Dropdown
-                    overlay={<LeaguesMenu items={getLeaguesMenuItems()} />}
-                    // overlay={<UserMenu items={getLeaguesMenuItems()} />}
-                    trigger={['click']}
-                    overlayClassName="leagues-drop-down-overlay"
-                >
-                    <Button
-                        type="text"
-                        icon={<TrophyFilled />}
-                        className="leagues-button"
-                    />
-                </Dropdown>
-            </div>
             <div className="nav-extra-user">
                 <div className="nav-extra-user-avatar-wrapper">
                     <Avatar
@@ -143,6 +126,45 @@ const NavExtra: React.FunctionComponent<NavExtraProps> = () => {
                         />
                         {balance}
                     </div>
+                </div>
+            </div>
+            <div className="nav-extra-buttons">
+                <div className="nav-extra-notification">
+                    <Button
+                        onClick={() =>
+                            navigate(
+                                history,
+                                withAppRoute(
+                                    routes.ROUTES.NOTIFICATIONS.ROUTE,
+                                    {
+                                        app: constants.APPS.MEMBER_APP,
+                                    }
+                                )
+                            )
+                        }
+                        type="text"
+                        icon={
+                            <PendingBadge
+                                value={{ pending }}
+                                icon={NotificationFilled}
+                            />
+                        }
+                        className="notification-button"
+                    />
+                </div>
+                <div className="nav-extra-drop-down">
+                    <Dropdown
+                        overlay={<ExtraMenu items={getExtraMenuItems()} />}
+                        // overlay={<UserMenu items={getLeaguesMenuItems()} />}
+                        trigger={['click']}
+                        overlayClassName="extra-drop-down-overlay"
+                    >
+                        <Button
+                            type="text"
+                            icon={<CaretDownFilled />}
+                            className="extra-button"
+                        />
+                    </Dropdown>
                 </div>
             </div>
         </div>

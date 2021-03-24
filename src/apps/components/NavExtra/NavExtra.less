@@ -1,61 +1,107 @@
 .nav-extra {
     display: flex;
     margin: 0;
-    .nav-extra-notification {
-        .notification-button {
-            height: 24px;
-            width: 24px;
+    justify-content: space-evenly;
+    .nav-extra-buttons {
+        display: flex;
+        .nav-extra-notification {
+            padding-right: 8px;
+            .notification-button {
+                height: 24px;
+                width: 24px;
+            }
+        }
+        .nav-extra-drop-down {
+            .extra-button {
+                height: 24px;
+                width: 24px;
+            }
+        }
+        .anticon {
+            font-size: 20px;
         }
     }
-    .nav-extra-leagues-drop-down {
-        .leagues-button {
-            height: 24px;
-            width: 24px;
+    .nav-extra-user {
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+        .nav-extra-user-avatar-wrapper {
+            margin-right: 12px;
+            .nav-extra-user-avatar {
+                &.ant-avatar-square {
+                    border-radius: 4px;
+                }
+            }
         }
-    }
-}
-.nav-extra-user {
-    display: flex;
-    align-items: center;
-    margin: 4px 0;
-    overflow: hidden;
-    .nav-extra-user-avatar-wrapper {
-        margin-right: 12px;
-        .nav-extra-user-avatar {
-            &.ant-avatar-square {
-                border-radius: 4px;
+        .nav-extra-user-name {
+            display: flex;
+            flex-direction: column;
+            margin-right: 12px;
+            margin-bottom: 0;
+            color: fade(@primary-color, 85%);
+            font-weight: 600;
+            font-size: 20px;
+            line-height: 32px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+
+            .nav-extra-user-name-display-name {
+                font-size: 14px;
+                line-height: 1;
+                max-width: 160px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            .nav-extra-user-name-username {
+                font-size: 12px;
+                line-height: 1;
+                color: fade(@primary-color, 50%);
             }
         }
     }
-    .nav-extra-user-name {
+    .nav-extra-wallet {
         display: flex;
-        flex-direction: column;
-        margin-right: 12px;
-        margin-bottom: 0;
-        color: fade(@primary-color, 85%);
-        font-weight: 600;
-        font-size: 20px;
-        line-height: 32px;
+        justify-content: space-evenly;
+        align-items: center;
         overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
 
-        .nav-extra-user-name-display-name {
-            font-size: 14px;
-            line-height: 1;
-            max-width: 160px;
-            white-space: nowrap;
+        .nav-extra-wallet-balance {
+            display: flex;
+            flex-direction: column;
+            margin-right: 12px;
+            margin-bottom: 0;
+            color: fade(@primary-color, 85%);
+            font-weight: 600;
+            font-size: 20px;
+            line-height: 32px;
             overflow: hidden;
+            white-space: nowrap;
             text-overflow: ellipsis;
-        }
-        .nav-extra-user-name-username {
-            font-size: 12px;
-            line-height: 1;
-            color: fade(@primary-color, 50%);
+
+            .nav-extra-wallet-balance-label {
+                font-size: 12px;
+                line-height: 1;
+                color: rgba(0, 0, 0, 0.5);
+                font-weight: 400;
+            }
+
+            .nav-extra-wallet-balance-amount {
+                font-size: 14px;
+                line-height: 1;
+                max-width: 160px;
+                margin-top: 6px;
+
+                .nav-extra-wallet-balance-amount-icon {
+                    margin-right: 4px;
+                }
+            }
         }
     }
 }
-.leagues-drop-down-overlay {
+
+.extra-drop-down-overlay {
     max-width: 300px;
     .nav-extra-league {
         display: flex;
@@ -73,49 +119,15 @@
             width: 20px;
         }
     }
-    .leagues-menu {
+    .nav-extra-username {
+        font-size: 14px;
+        line-height: 1;
+        color: fade(@primary-color, 50%);
+        font-weight: bold;
+    }
+    .extra-menu {
         .ant-menu-item-selected {
             background: none !important;
-        }
-    }
-}
-
-.nav-extra-wallet {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    margin: 4px 0;
-    overflow: hidden;
-
-    .nav-extra-wallet-balance {
-        display: flex;
-        flex-direction: column;
-        margin-right: 12px;
-        margin-bottom: 0;
-        color: fade(@primary-color, 85%);
-        font-weight: 600;
-        font-size: 20px;
-        line-height: 32px;
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-
-        .nav-extra-wallet-balance-label {
-            font-size: 12px;
-            line-height: 1;
-            color: rgba(0, 0, 0, 0.5);
-            font-weight: 400;
-        }
-
-        .nav-extra-wallet-balance-amount {
-            font-size: 14px;
-            line-height: 1;
-            max-width: 160px;
-            margin-top: 6px;
-
-            .nav-extra-wallet-balance-amount-icon {
-                margin-right: 4px;
-            }
         }
     }
 }
