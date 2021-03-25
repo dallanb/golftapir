@@ -36,6 +36,28 @@
     .app-nav-menu {
         background: transparent !important;
         color: @text-color !important;
+        .ant-menu-item {
+            display: flex !important;
+            align-items: center;
+            padding: 0 24px !important;
+            margin: 0 !important;
+            &.ant-menu-item-selected {
+                border-bottom: 2px solid fade(@primary-color, 30%) !important;
+            }
+            &.ant-menu-item-active {
+                border-bottom: 2px solid fade(@primary-color, 20%) !important;
+            }
+            &.ant-menu-item-disabled {
+                color: fade(@primary-color, 30%) !important;
+            }
+            .menu-item-name {
+                display: none;
+            }
+        }
+        .anticon {
+            font-size: 20px;
+            margin-right: 0;
+        }
         @media (min-width: 769px) {
             display: flex !important;
             width: 100%;
@@ -46,37 +68,31 @@
             justify-content: flex-start;
         }
     }
-    .menu-item {
-        display: flex !important;
-        align-items: center;
-        //padding: 0 32px !important;
-        &.ant-menu-item-selected {
-            border-bottom: 2px solid fade(@primary-color, 30%) !important;
-        }
-        &.ant-menu-item-active {
-            border-bottom: 2px solid fade(@primary-color, 20%) !important;
-        }
-        &.ant-menu-item-disabled {
-            color: fade(@primary-color, 30%) !important;
-        }
-        .menu-item-icon {
-            //padding-left: 4px;
-            span {
-                font-size: 20px;
-                margin-right: 0;
-            }
-            .ant-badge {
-                color: inherit;
-            }
-        }
-        .menu-item-name {
-            //padding-right: 4px;
-            margin-left: 10px;
-            text-overflow: ellipsis;
-            overflow: hidden;
-        }
-    }
     .app-nav-extra {
         flex-grow: 1;
+    }
+}
+.ant-menu-submenu {
+    &.ant-menu-submenu-popup {
+        top: 55px !important;
+    }
+    .ant-menu-item {
+        .ant-avatar {
+            width: 18px !important;
+            height: 18px !important;
+            margin-right: 10px;
+        }
+
+        .menu-item-name {
+            //padding-right: 4px;
+            //margin-left: 10px;
+            //text-overflow: ellipsis;
+            //overflow: hidden;
+        }
+    }
+    &.ant-menu-hidden {
+        .menu-item-name {
+            display: none;
+        }
     }
 }

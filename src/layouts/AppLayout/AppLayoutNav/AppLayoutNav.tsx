@@ -1,8 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
-import { Layout, Menu } from 'antd';
-import classnames from 'classnames';
 import { map as _map } from 'lodash';
+import classnames from 'classnames';
+import { Layout, Menu } from 'antd';
+import {
+    EllipsisOutlined,
+    MenuOutlined,
+    MoreOutlined,
+} from '@ant-design/icons';
 import { AppLayoutMenuProps } from './types';
 import { getMenuSelectedKey, navigate, withAppRoute } from '@utils';
 import routes from '@constants/routes';
@@ -79,6 +84,11 @@ const AppLayoutNav: React.FunctionComponent<AppLayoutMenuProps> = ({
             <Menu
                 selectedKeys={selectedKeys}
                 mode="horizontal"
+                overflowedIndicator={<MenuOutlined />}
+                // getPopupContainer={(node) => {
+                //     console.log(node);
+                //     return node;
+                // }}
                 className="app-nav-menu"
             >
                 {menuItemsRenderer(menuRoutes, menuProps, selectedKeys)}

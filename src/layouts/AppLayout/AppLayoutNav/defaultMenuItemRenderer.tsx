@@ -18,10 +18,10 @@ const defaultFormRenderer: React.FunctionComponent<MenuItemRendererProps> = ({
         value: _get(menuProps, ['icons', key], null),
     });
     const IconSelected = iconSelected && React.createElement(iconSelected);
-    // let Name = name;
-    // if (typeof name === 'function') {
-    //     Name = name(_get(menuProps, ['names', key], null));
-    // }
+    let Name = name;
+    if (typeof name === 'function') {
+        Name = name(_get(menuProps, ['names', key], null));
+    }
     let Path = path;
     if (typeof path === 'function') {
         Path = path(_get(menuProps, ['paths', key], null));
@@ -40,16 +40,10 @@ const defaultFormRenderer: React.FunctionComponent<MenuItemRendererProps> = ({
             className="menu-item"
             key={index}
             onClick={(item) => onClick(item, Path)}
-            icon={
-                isSelected && IconSelected ? (
-                    <div className="menu-item-icon">{IconSelected}</div>
-                ) : (
-                    <div className="menu-item-icon">{Icon}</div>
-                )
-            }
+            icon={isSelected && IconSelected ? IconSelected : Icon}
             {...rbacProps}
         >
-            {/*<div className="menu-item-name">{Name}</div>*/}
+            <span className="menu-item-name">{Name}</span>
         </Menu.Item>
     );
 };
