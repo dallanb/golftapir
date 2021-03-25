@@ -4,7 +4,7 @@ import { get as _get } from 'lodash';
 import { MenuItemRendererProps } from '@layouts/AppLayout/types';
 import { type } from 'os';
 
-const collapsedMenuItemRenderer: React.FunctionComponent<MenuItemRendererProps> = ({
+const defaultMenuItemRenderer: React.FunctionComponent<MenuItemRendererProps> = ({
     index,
     route: { name, icon, iconSelected, key, path, disabled = -1, hidden = -1 },
     onClick,
@@ -18,10 +18,7 @@ const collapsedMenuItemRenderer: React.FunctionComponent<MenuItemRendererProps> 
         value: _get(menuProps, ['icons', key], null),
     });
     const IconSelected = iconSelected && React.createElement(iconSelected);
-    let Name = name;
-    if (typeof name === 'function') {
-        Name = name(_get(menuProps, ['names', key], null));
-    }
+
     let Path = path;
     if (typeof path === 'function') {
         Path = path(_get(menuProps, ['paths', key], null));
@@ -42,10 +39,8 @@ const collapsedMenuItemRenderer: React.FunctionComponent<MenuItemRendererProps> 
             onClick={(item) => onClick(item, Path)}
             icon={isSelected && IconSelected ? IconSelected : Icon}
             {...rbacProps}
-        >
-            <span className="menu-item-name">{Name}</span>
-        </Menu.Item>
+        />
     );
 };
 
-export default collapsedMenuItemRenderer;
+export default defaultMenuItemRenderer;

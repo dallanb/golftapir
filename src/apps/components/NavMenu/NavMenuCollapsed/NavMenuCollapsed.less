@@ -1,0 +1,24 @@
+.menu-drop-down-overlay {
+    max-width: 300px;
+    .collapsed-menu-item {
+        display: flex;
+        align-items: center;
+
+        .collapsed-menu-item-avatar {
+            .ant-avatar {
+                height: 18px !important;
+                width: 18px !important;
+                margin-right: 10px;
+            }
+        }
+        .collapsed-menu-item-name {
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .collapsed-menu-item-selected {
+            color: @primary-color;
+            padding-left: 12px;
+            width: 20px;
+        }
+    }
+}

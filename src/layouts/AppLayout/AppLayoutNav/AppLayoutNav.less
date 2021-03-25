@@ -64,63 +64,17 @@
                     }
                 }
             }
-            .app-nav-menu-collapsed {
-                display: flex !important;
-                width: 100%;
-                justify-content: flex-start;
-                align-items: center;
-            }
             .anticon {
                 font-size: 20px;
                 margin-right: 0;
             }
-
-            //@media (min-width: 769px) {
-            //    display: flex !important;
-            //    width: 100%;
-            //    justify-content: space-evenly;
-            //}
-            //@media (max-width: 768px) {
-            //    display: table !important;
-            //    justify-content: flex-start;
-            //}
+            @media (max-width: 768px) {
+                align-items: center;
+            }
         }
 
         .app-layout-nav-extra {
             flex-grow: 1;
-        }
-    }
-}
-.ant-menu-submenu {
-    &.ant-menu-submenu-popup {
-        top: 55px !important;
-        box-shadow: 0 0 1rem 0 fade(white, 20%) !important;
-        border-radius: 5px !important;
-        background-color: rgba(255, 255, 255, 0.75) !important;
-        backdrop-filter: blur(6px) !important;
-        padding: 16px !important;
-        .ant-menu-sub {
-            background: transparent !important;
-            box-shadow: none !important;
-        }
-    }
-    .ant-menu-item {
-        .ant-avatar {
-            width: 18px !important;
-            height: 18px !important;
-            margin-right: 10px;
-        }
-
-        .menu-item-name {
-            //padding-right: 4px;
-            //margin-left: 10px;
-            //text-overflow: ellipsis;
-            //overflow: hidden;
-        }
-    }
-    &.ant-menu-hidden {
-        .menu-item-name {
-            display: none;
         }
     }
 }

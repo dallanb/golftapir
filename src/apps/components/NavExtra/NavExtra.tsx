@@ -23,8 +23,8 @@ import { navigate, statusToRole, withAppRoute, withS3URL } from '@utils';
 import routes from '@constants/routes';
 import constants from '@constants';
 import { Avatar, PendingBadge } from '@components';
-import ExtraMenu from './ExtraMenu';
 import ExtraWallet from './ExtraWallet';
+import OverlayMenu from '@apps/components/OverlayMenu';
 import './NavExtra.less';
 
 const NavExtra: React.FunctionComponent<NavExtraProps> = () => {
@@ -139,7 +139,12 @@ const NavExtra: React.FunctionComponent<NavExtraProps> = () => {
                 </div>
                 <div className="nav-extra-drop-down">
                     <Dropdown
-                        overlay={<ExtraMenu items={getExtraMenuItems()} />}
+                        overlay={
+                            <OverlayMenu
+                                items={getExtraMenuItems()}
+                                className="extra-menu"
+                            />
+                        }
                         // overlay={<UserMenu items={getLeaguesMenuItems()} />}
                         trigger={['click']}
                         overlayClassName="extra-drop-down-overlay"

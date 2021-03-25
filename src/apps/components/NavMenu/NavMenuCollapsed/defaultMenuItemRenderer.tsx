@@ -2,9 +2,9 @@ import React from 'react';
 import { Menu } from 'antd';
 import { get as _get } from 'lodash';
 import { MenuItemRendererProps } from '@layouts/AppLayout/types';
-import { type } from 'os';
+import { CheckOutlined } from '@ant-design/icons';
 
-const fullMenuItemRenderer: React.FunctionComponent<MenuItemRendererProps> = ({
+const defaultMenuItemRenderer: React.FunctionComponent<MenuItemRendererProps> = ({
     index,
     route: { name, icon, iconSelected, key, path, disabled = -1, hidden = -1 },
     onClick,
@@ -18,7 +18,10 @@ const fullMenuItemRenderer: React.FunctionComponent<MenuItemRendererProps> = ({
         value: _get(menuProps, ['icons', key], null),
     });
     const IconSelected = iconSelected && React.createElement(iconSelected);
-
+    let Name = name;
+    if (typeof name === 'function') {
+        Name = name(_get(menuProps, ['names', key], null));
+    }
     let Path = path;
     if (typeof path === 'function') {
         Path = path(_get(menuProps, ['paths', key], null));
@@ -34,13 +37,21 @@ const fullMenuItemRenderer: React.FunctionComponent<MenuItemRendererProps> = ({
 
     return (
         <Menu.Item
-            className="menu-item"
             key={index}
             onClick={(item) => onClick(item, Path)}
-            icon={isSelected && IconSelected ? IconSelected : Icon}
             {...rbacProps}
-        />
+        >
+            <div className="collapsed-menu-item">
+                <div className="collapsed-menu-item-avatar">
+                    {isSelected && IconSelected ? IconSelected : Icon}
+                </div>
+                <div className="collapsed-menu-item-name">{Name}</div>
+                <div className="collapsed-menu-item-selected">
+                    {isSelected && <CheckOutlined />}
+                </div>
+            </div>
+        </Menu.Item>
     );
 };
 
-export default fullMenuItemRenderer;
+export default defaultMenuItemRenderer;
