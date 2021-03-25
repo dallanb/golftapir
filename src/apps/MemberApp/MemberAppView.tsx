@@ -17,7 +17,7 @@ import constants from '@constants';
 import { selectData as selectAppData } from '@selectors/AppSelector';
 import { selectData as selectBaseData } from '@selectors/BaseSelector';
 import { AppLayoutNav } from '@layouts/AppLayout';
-import { NavExtra } from '@apps/components';
+import { NavExtra, NavMenu } from '@apps/components';
 
 const MemberAppView: React.FunctionComponent<MemberAppViewProps> = () => {
     const dispatch = useDispatch();
@@ -52,8 +52,13 @@ const MemberAppView: React.FunctionComponent<MemberAppViewProps> = () => {
                 app={constants.APPS.MEMBER_APP}
                 name={name}
                 avatar={avatar}
-                menuProps={menuProps}
-                menuRoutes={statics}
+                menu={
+                    <NavMenu
+                        app={constants.APPS.LEAGUE_APP}
+                        menuProps={menuProps}
+                        menuRoutes={statics}
+                    />
+                }
                 extra={<NavExtra />}
             />
             <Switch>
