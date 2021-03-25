@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Menu } from 'antd';
+import { Dropdown, Menu } from 'antd';
 import { MenuOutlined } from '@ant-design/icons/lib';
 import { useHistory, useLocation } from 'react-router-dom';
 import { map as _map } from 'lodash';
 import { NavMenuProps } from './types';
-import menuItemRenderer from './defaultMenuItemRenderer';
+import fullMenuItemRenderer from './fullMenuItemRenderer';
+import collapsedMenuItemRenderer from './collapsedMenuItemRenderer';
 import { getMenuSelectedKey, navigate } from '@utils';
 import './NavMenu.less';
 
@@ -13,22 +14,22 @@ const NavMenu: React.FunctionComponent<NavMenuProps> = ({
     menuRoutes,
     menuProps,
     menuItemOnClick: onClick,
+    dimensions = { width: 0 },
 }) => {
-    const mql = window.matchMedia('(max-width: 768px)');
-    console.log(mql);
-    const popOver = mql.matches;
-    console.log(popOver);
-
     const history = useHistory();
     const location = useLocation(); // this is necessary to ensure that updated location result in a rerender of the component
+    const { width = 0 } = dimensions;
+    console.log(width);
+    const isDropdown = width <= 768; // our breakpoint for dropdown will be antd layout 'md'
 
     const menuItemsRenderer = (
+        func: (props: any) => any,
         rendererMenuRoutes: any,
         rendererMenuProps: any,
         selectedKeys: string[]
     ) => {
         return rendererMenuRoutes.map((route: any, index: number) =>
-            menuItemRenderer({
+            func({
                 index,
                 onClick: menuItemOnClick,
                 route,
@@ -62,18 +63,37 @@ const NavMenu: React.FunctionComponent<NavMenuProps> = ({
         navigate(history, path);
     };
 
-    return (
+    const CollapsedMenu = (
+        <Menu>
+            {menuItemsRenderer(
+                collapsedMenuItemRenderer,
+                menuRoutes,
+                menuProps,
+                selectedKeys
+            )}
+        </Menu>
+    );
+
+    return isDropdown ? (
+        <Dropdown
+            overlay={CollapsedMenu}
+            trigger={['click']}
+            className="app-nav-menu-collapsed"
+        >
+            <MenuOutlined />
+        </Dropdown>
+    ) : (
         <Menu
             selectedKeys={selectedKeys}
             mode="horizontal"
-            overflowedIndicator={<MenuOutlined />}
-            // getPopupContainer={(node) => {
-            //     console.log(node);
-            //     return node;
-            // }}
-            className="app-nav-menu"
+            className="app-nav-menu-full"
         >
-            {menuItemsRenderer(menuRoutes, menuProps, selectedKeys)}
+            {menuItemsRenderer(
+                fullMenuItemRenderer,
+                menuRoutes,
+                menuProps,
+                selectedKeys
+            )}
         </Menu>
     );
 };

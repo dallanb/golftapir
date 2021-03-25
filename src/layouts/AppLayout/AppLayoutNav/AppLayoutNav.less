@@ -1,6 +1,4 @@
-.app-nav-header {
-    display: flex;
-    justify-content: space-between;
+.app-layout-nav-header {
     padding: 0 !important;
     position: fixed;
     z-index: 1;
@@ -11,68 +9,86 @@
     background: fade(white, 25%) !important;
     backdrop-filter: blur(6px) !important;
     box-shadow: 0 0 1rem 0 fade(@primary-color, 20%) !important;
-    .app-nav-title {
-        cursor: pointer;
-        height: 32px;
-        margin: 16px;
+    .app-layout-nav-container {
         display: flex;
-        //.app-sider-layout-title-text {
-        //    align-content: end;
-        //}
-        @media (min-width: 481px) {
-            background: url(../../../assets/images/tapir_white.png);
-            background-size: cover;
-            width: 165px;
-            min-width: 165px;
+        justify-content: space-between;
+
+        .app-layout-nav-title {
+            cursor: pointer;
+            height: 32px;
+            margin: 16px;
+            display: flex;
+            //.app-sider-layout-title-text {
+            //    align-content: end;
+            //}
+            @media (min-width: 481px) {
+                background: url(../../../assets/images/tapir_white.png);
+                background-size: cover;
+                width: 165px;
+                min-width: 165px;
+            }
+
+            @media (max-width: 480px) and (min-width: 300px) {
+                background: url(../../../assets/images/tapir.png);
+                background-size: cover;
+                width: 48px;
+                min-width: 48px;
+            }
         }
 
-        @media (max-width: 480px) and (min-width: 300px) {
-            background: url(../../../assets/images/tapir.png);
-            background-size: cover;
-            width: 48px;
-            min-width: 48px;
-        }
-    }
-    .app-nav-menu {
-        background: transparent !important;
-        color: @text-color !important;
-        .ant-menu-item {
+        .app-layout-nav-menu {
             display: flex !important;
-            align-items: center;
-            padding: 0 24px !important;
-            margin: 0 !important;
-            &.ant-menu-item-selected {
-                border-bottom: 2px solid fade(@primary-color, 30%) !important;
+            width: 100%;
+            .app-nav-menu-full {
+                display: flex !important;
+                width: 100%;
+                justify-content: space-evenly;
+                background: transparent !important;
+                color: @text-color !important;
+                .ant-menu-item {
+                    display: flex !important;
+                    align-items: center;
+                    padding: 0 24px !important;
+                    margin: 0 !important;
+
+                    &.ant-menu-item-selected {
+                        border-bottom: 2px solid fade(@primary-color, 30%) !important;
+                    }
+
+                    &.ant-menu-item-active {
+                        border-bottom: 2px solid fade(@primary-color, 20%) !important;
+                    }
+
+                    &.ant-menu-item-disabled {
+                        color: fade(@primary-color, 30%) !important;
+                    }
+                }
             }
-            &.ant-menu-item-active {
-                border-bottom: 2px solid fade(@primary-color, 20%) !important;
+            .app-nav-menu-collapsed {
+                display: flex !important;
+                width: 100%;
+                justify-content: flex-start;
+                align-items: center;
             }
-            &.ant-menu-item-disabled {
-                color: fade(@primary-color, 30%) !important;
+            .anticon {
+                font-size: 20px;
+                margin-right: 0;
             }
-            .menu-item-name {
-                display: none;
-            }
+
+            //@media (min-width: 769px) {
+            //    display: flex !important;
+            //    width: 100%;
+            //    justify-content: space-evenly;
+            //}
+            //@media (max-width: 768px) {
+            //    display: table !important;
+            //    justify-content: flex-start;
+            //}
         }
-        .anticon {
-            font-size: 20px;
-            margin-right: 0;
+
+        .app-layout-nav-extra {
+            flex-grow: 1;
         }
-        display: flex !important;
-        width: 100%;
-        justify-content: space-evenly;
-        //@media (min-width: 769px) {
-        //    display: flex !important;
-        //    width: 100%;
-        //    justify-content: space-evenly;
-        //}
-        //@media (max-width: 768px) {
-        //    display: table !important;
-        //    justify-content: flex-start;
-        //}
-    }
-    .app-nav-extra {
-        flex-grow: 1;
     }
 }
 .ant-menu-submenu {

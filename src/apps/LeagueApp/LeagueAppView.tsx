@@ -9,6 +9,7 @@ import {
     useParams,
 } from 'react-router-dom';
 import { get as _get } from 'lodash';
+import { useResizeDetector } from 'react-resize-detector';
 import { message, statusToRole } from '@utils';
 import { AppLayout } from '@layouts';
 import { ComponentRoute, LeagueAppViewProps } from './types';
@@ -35,6 +36,7 @@ const LeagueAppView: React.FunctionComponent<LeagueAppViewProps> = () => {
     const history = useHistory();
     const location = useLocation();
     const params = useParams();
+    const { width, height, ref } = useResizeDetector();
 
     const state = _get(location, ['state'], null);
     const paramLeagueUUID = _get(params, ['league_uuid'], null);
@@ -150,9 +152,11 @@ const LeagueAppView: React.FunctionComponent<LeagueAppViewProps> = () => {
                         app={constants.APPS.LEAGUE_APP}
                         menuProps={menuProps}
                         menuRoutes={statics}
+                        dimensions={{ height, width }}
                     />
                 }
                 extra={<NavExtra />}
+                containerRef={ref}
             />
             <Switch>
                 {routes.map(({ path, component, exact }: ComponentRoute) => (

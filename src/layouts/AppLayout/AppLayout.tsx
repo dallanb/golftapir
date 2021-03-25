@@ -1,6 +1,5 @@
 import React from 'react';
 import { Layout } from 'antd';
-import AppLayoutNav from './AppLayoutNav';
 import { AppLayoutProps } from './types';
 import './AppLayout.less';
 

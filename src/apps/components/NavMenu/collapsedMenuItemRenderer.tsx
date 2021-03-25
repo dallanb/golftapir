@@ -4,7 +4,7 @@ import { get as _get } from 'lodash';
 import { MenuItemRendererProps } from '@layouts/AppLayout/types';
 import { type } from 'os';
 
-const defaultFormRenderer: React.FunctionComponent<MenuItemRendererProps> = ({
+const collapsedMenuItemRenderer: React.FunctionComponent<MenuItemRendererProps> = ({
     index,
     route: { name, icon, iconSelected, key, path, disabled = -1, hidden = -1 },
     onClick,
@@ -48,4 +48,4 @@ const defaultFormRenderer: React.FunctionComponent<MenuItemRendererProps> = ({
     );
 };
 
-export default defaultFormRenderer;
+export default collapsedMenuItemRenderer;

@@ -3,4 +3,5 @@ export interface NavMenuProps {
     menuProps?: any;
     menuRoutes: any;
     menuItemOnClick?: ({ key }: { key: any }, path: string) => void;
+    dimensions?: { height?: number; width?: number };
 }
