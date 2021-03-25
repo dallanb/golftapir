@@ -75,6 +75,15 @@
 .ant-menu-submenu {
     &.ant-menu-submenu-popup {
         top: 55px !important;
+        box-shadow: 0 0 1rem 0 fade(white, 20%) !important;
+        border-radius: 5px !important;
+        background-color: rgba(255, 255, 255, 0.75) !important;
+        backdrop-filter: blur(6px) !important;
+        padding: 16px !important;
+        .ant-menu-sub {
+            background: transparent !important;
+            box-shadow: none !important;
+        }
     }
     .ant-menu-item {
         .ant-avatar {
