@@ -1,8 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import { get as _get } from 'lodash';
-import { useResizeDetector } from 'react-resize-detector';
 import { message } from '@utils';
 import { AppLayout } from '@layouts';
 import { ComponentRoute, MemberAppViewProps } from './types';
@@ -19,10 +18,11 @@ import { selectData as selectAppData } from '@selectors/AppSelector';
 import { selectData as selectBaseData } from '@selectors/BaseSelector';
 import { AppLayoutNav } from '@layouts/AppLayout';
 import { NavExtra, NavMenu } from '@apps/components';
+import { ResizeContext } from '@contexts';
 
 const MemberAppView: React.FunctionComponent<MemberAppViewProps> = () => {
     const dispatch = useDispatch();
-    const { width, height, ref } = useResizeDetector();
+    const dimensions = useContext(ResizeContext);
 
     useEffect(() => {
         dispatch(MemberAppActions.init());
@@ -59,11 +59,10 @@ const MemberAppView: React.FunctionComponent<MemberAppViewProps> = () => {
                         app={constants.APPS.LEAGUE_APP}
                         menuProps={menuProps}
                         menuRoutes={statics}
-                        dimensions={{ height, width }}
+                        dimensions={dimensions}
                     />
                 }
                 extra={<NavExtra />}
-                containerRef={ref}
             />
             <Switch>
                 {routes.map(({ path, component, exact }: ComponentRoute) => (

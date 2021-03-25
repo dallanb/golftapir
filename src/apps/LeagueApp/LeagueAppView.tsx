@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
     Redirect,
@@ -9,7 +9,6 @@ import {
     useParams,
 } from 'react-router-dom';
 import { get as _get } from 'lodash';
-import { useResizeDetector } from 'react-resize-detector';
 import { message, statusToRole } from '@utils';
 import { AppLayout } from '@layouts';
 import { ComponentRoute, LeagueAppViewProps } from './types';
@@ -30,13 +29,14 @@ import {
 import { selectData as selectBaseData } from '@selectors/BaseSelector';
 import { AppLayoutNav } from '@layouts/AppLayout';
 import { NavExtra, NavMenu } from '@apps/components';
+import { ResizeContext } from '@contexts';
 
 const LeagueAppView: React.FunctionComponent<LeagueAppViewProps> = () => {
     const dispatch = useDispatch();
     const history = useHistory();
     const location = useLocation();
     const params = useParams();
-    const { width, height, ref } = useResizeDetector();
+    const dimensions = useContext(ResizeContext);
 
     const state = _get(location, ['state'], null);
     const paramLeagueUUID = _get(params, ['league_uuid'], null);
@@ -152,11 +152,10 @@ const LeagueAppView: React.FunctionComponent<LeagueAppViewProps> = () => {
                         app={constants.APPS.LEAGUE_APP}
                         menuProps={menuProps}
                         menuRoutes={statics}
-                        dimensions={{ height, width }}
+                        dimensions={dimensions}
                     />
                 }
                 extra={<NavExtra />}
-                containerRef={ref}
             />
             <Switch>
                 {routes.map(({ path, component, exact }: ComponentRoute) => (

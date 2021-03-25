@@ -6,5 +6,4 @@ export interface AppLayoutMenuProps {
     avatar?: string;
     menu: any;
     extra?: any;
-    containerRef?: Ref<any>;
 }

@@ -17,7 +17,7 @@ const NavMenu: React.FunctionComponent<NavMenuProps> = ({
     const history = useHistory();
     const location = useLocation(); // this is necessary to ensure that updated location result in a rerender of the component
     const { width = 0 } = dimensions;
-    const isDropdown = width <= 768; // our breakpoint for dropdown will be antd layout 'md'
+    const isDropdown = width <= 768; // our breakpoint for dropdown will be antd layout 'md' // TODO: Maybe use state?
 
     const [selectedKeys, setSelectedKeys] = useState(['0']);
     const [clickedPath, setClickedPath] = useState(false); // this flag will help us avoid extra work when finding the selectedKeys
@@ -43,6 +43,9 @@ const NavMenu: React.FunctionComponent<NavMenuProps> = ({
         navigate(history, path);
     };
 
+    // if (!width) {
+    //     return null;
+    // }
     return isDropdown ? (
         <NavMenuCollapsed
             menuRoutes={menuRoutes}

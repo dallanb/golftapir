@@ -13,7 +13,6 @@ const { Header } = Layout;
 const AppLayoutNav: React.FunctionComponent<AppLayoutMenuProps> = ({
     menu,
     extra,
-    containerRef,
 }) => {
     const history = useHistory();
     const _ = useLocation(); // this is necessary to ensure that updated location result in a rerender of the component
@@ -21,7 +20,7 @@ const AppLayoutNav: React.FunctionComponent<AppLayoutMenuProps> = ({
 
     return (
         <Header className={cx}>
-            <div ref={containerRef} className="app-layout-nav-container">
+            <div className="app-layout-nav-container">
                 <div
                     className="app-layout-nav-title"
                     onClick={() =>
