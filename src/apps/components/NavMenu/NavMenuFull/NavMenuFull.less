@@ -1,0 +1,25 @@
+.app-nav-menu-full {
+    display: flex !important;
+    width: 100%;
+    justify-content: space-evenly;
+    background: transparent !important;
+    color: @text-color !important;
+    .ant-menu-item {
+        display: flex !important;
+        align-items: center;
+        padding: 0 24px !important;
+        margin: 0 !important;
+
+        &.ant-menu-item-selected {
+            border-bottom: 2px solid fade(@primary-color, 30%) !important;
+        }
+
+        &.ant-menu-item-active {
+            border-bottom: 2px solid fade(@primary-color, 20%) !important;
+        }
+
+        &.ant-menu-item-disabled {
+            color: fade(@primary-color, 30%) !important;
+        }
+    }
+}

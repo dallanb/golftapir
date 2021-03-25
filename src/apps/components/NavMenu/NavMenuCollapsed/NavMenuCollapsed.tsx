@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button, Dropdown } from 'antd';
 import OverlayMenu from '@apps/components/OverlayMenu';
 import { MenuOutlined } from '@ant-design/icons';
@@ -12,6 +12,8 @@ const NavMenuCollapsed: React.FunctionComponent<NavMenuCollapsedProps> = ({
     menuItemOnClick,
     selectedKeys,
 }) => {
+    const [visible, setVisible] = useState(false);
+
     const menuItemsRenderer = (
         rendererMenuRoutes: any,
         rendererMenuProps: any,
@@ -20,7 +22,10 @@ const NavMenuCollapsed: React.FunctionComponent<NavMenuCollapsedProps> = ({
         return rendererMenuRoutes.map((route: any, index: number) =>
             defaultMenuItemRenderer({
                 index,
-                onClick: menuItemOnClick,
+                onClick: (...props) => {
+                    menuItemOnClick(...props);
+                    setVisible(false);
+                },
                 route,
                 menuProps: rendererMenuProps,
                 selectedKeys,
@@ -39,9 +44,15 @@ const NavMenuCollapsed: React.FunctionComponent<NavMenuCollapsedProps> = ({
                 />
             }
             trigger={['click']}
+            visible={visible}
             overlayClassName="menu-drop-down-overlay"
         >
-            <Button type="text" icon={<MenuOutlined />} className="" />
+            <Button
+                type="text"
+                icon={<MenuOutlined />}
+                onClick={() => setVisible(!visible)}
+                className=""
+            />
         </Dropdown>
     );
 };
