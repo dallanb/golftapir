@@ -34,6 +34,7 @@ const MemberInfo: React.FunctionComponent<MemberInfoProps> = () => {
             componentRef={ref}
             showSpinner={!isInitialized || !isDataInitialized}
             className="member-info"
+            bodyClassName="member-info-content"
             title={CONSTANTS.PAGES.MEMBER.TABS.INFO}
         >
             <MemberInfoForm />
