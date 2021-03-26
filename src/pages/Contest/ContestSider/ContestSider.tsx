@@ -1,10 +1,10 @@
 import React from 'react';
-import LeagueAppLayoutSider from '@layouts/AppLayout/LeagueAppLayoutSider';
+import AppLayoutSider from '@layouts/AppLayout/AppLayoutSider';
 import ContestSiderContent from './ContestSiderContent';
 import { ContestSiderProps } from './types';
 
 const ContestSider: React.FunctionComponent<ContestSiderProps> = () => {
-    return <LeagueAppLayoutSider content={<ContestSiderContent />} />;
+    return <AppLayoutSider content={<ContestSiderContent />} />;
 };
 
 export default ContestSider;

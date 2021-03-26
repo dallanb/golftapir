@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { set as _set } from 'lodash';
 import { PayoutProportionsProps } from './types';
 import PayoutProportionsList from './PayoutProportionsList';
+import PayoutProportionsExtra from './PayoutProportionsExtra';
 import ComponentContent from '@layouts/ComponentContent';
 import { formatPayoutProportions } from './utils';
 import {
@@ -28,6 +29,7 @@ const PayoutProportions: React.FunctionComponent<PayoutProportionsProps> = () =>
         <ComponentContent
             componentRef={ref}
             title={'Payout'}
+            extra={<PayoutProportionsExtra />}
             showSpinner={isFetching}
             bodyStyle={dimensions}
             className="payout-proportions-component-content"

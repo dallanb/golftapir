@@ -1,10 +1,10 @@
 import React from 'react';
-import LeagueAppLayoutSider from '@layouts/AppLayout/LeagueAppLayoutSider';
+import AppLayoutSider from '@layouts/AppLayout/AppLayoutSider';
 import MemberSettingsSiderContent from './MemberSettingsSiderContent';
 import { MemberSettingsSiderProps } from './types';
 
 const MemberSettingsSider: React.FunctionComponent<MemberSettingsSiderProps> = () => {
-    return <LeagueAppLayoutSider content={<MemberSettingsSiderContent />} />;
+    return <AppLayoutSider content={<MemberSettingsSiderContent />} />;
 };
 
 export default MemberSettingsSider;

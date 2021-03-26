@@ -14,6 +14,10 @@ export const renderAction = (
             renderAction.show = !options.isMe;
             renderAction.enabled = true;
             break;
+        case constants.ACTION.MESSAGE.KEY:
+            renderAction.show = !options.isMe;
+            renderAction.enabled = false;
+            break;
         default:
             console.error('Invalid key: ', key);
     }
@@ -25,19 +29,24 @@ export const generateActions = (uuid?: string) => {
     const history = useHistory();
     const params = useParams();
     if (uuid) {
-        actions.push({
-            key: constants.ACTION.CHALLENGE.KEY,
-            onClick: () =>
-                navigate(
-                    history,
-                    withAppRoute(routes.ROUTES.CONTESTS_CREATE.ROUTE, {
-                        routeProps: params,
-                    }),
-                    {
-                        member_uuid: uuid,
-                    }
-                ),
-        });
+        actions.push(
+            {
+                key: constants.ACTION.CHALLENGE.KEY,
+                onClick: () =>
+                    navigate(
+                        history,
+                        withAppRoute(routes.ROUTES.CONTESTS_CREATE.ROUTE, {
+                            routeProps: params,
+                        }),
+                        {
+                            member_uuid: uuid,
+                        }
+                    ),
+            },
+            {
+                key: constants.ACTION.MESSAGE.KEY,
+            }
+        );
     }
     return actions;
 };

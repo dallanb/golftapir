@@ -19,6 +19,7 @@ const LeagueInfo: React.FunctionComponent<LeagueInfoProps> = () => {
             componentRef={ref}
             showSpinner={!isInitialized || isLeagueFetching}
             className="league-info"
+            bodyClassName="league-info-content"
             title={CONSTANTS.PAGES.LEAGUE_HOME.LEAGUE}
         >
             <LeagueInfoForm />

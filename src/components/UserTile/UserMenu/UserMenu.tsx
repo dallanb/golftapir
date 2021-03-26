@@ -10,6 +10,7 @@ const UserMenu: React.FunctionComponent<UserMenuProps> = ({ items }) => {
         if (typeof items === 'function') {
             return items();
         }
+
         return items;
     };
 

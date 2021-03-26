@@ -8,14 +8,21 @@ import { fetchContestsList } from './helpers';
 
 function* init({ options }: AnyAction) {
     try {
-        yield call(fetchContestsList, { page: 1, per_page: 10, ...options });
+        yield call(fetchContestsList, {
+            page: 1,
+            per_page: 10,
+            sort_by: 'ctime.desc',
+            ...options,
+        });
         yield put(ContestsPageContentContestsActions.initSuccess());
     } catch (err) {
         yield put(ContestsPageContentContestsActions.initFailure(err));
     }
 }
 
-function* fetchData({ options = { page: 1, per_page: 10 } }: AnyAction) {
+function* fetchData({
+    options = { page: 1, per_page: 10, sort_by: 'ctime.desc' },
+}: AnyAction) {
     try {
         const { contests, _metadata: metadata }: any = yield call(
             ContestService.fetchContestsMaterialized,
@@ -28,9 +35,7 @@ function* fetchData({ options = { page: 1, per_page: 10 } }: AnyAction) {
             )
         );
     } catch (err) {
-        yield put(
-            ContestsPageContentContestsActions.fetchDataFailure(err)
-        );
+        yield put(ContestsPageContentContestsActions.fetchDataFailure(err));
     }
 }
 

@@ -57,6 +57,7 @@ const ContestLeaderboard: React.FunctionComponent<ContestLeaderboardProps> = ({}
         <ComponentContent
             showSpinner={showSpinner}
             className="contest-leaderboard space"
+            bodyClassName="contest-leaderboard-content"
             title={CONSTANTS.PAGES.CONTEST.LEADERBOARD}
         >
             <ContestLeaderboardTable />

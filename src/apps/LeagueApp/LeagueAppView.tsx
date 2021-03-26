@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
     Redirect,
@@ -27,12 +27,16 @@ import {
     selectLeagueMemberIsFetching,
 } from '@selectors/AppSelector';
 import { selectData as selectBaseData } from '@selectors/BaseSelector';
+import { AppLayoutNav } from '@layouts/AppLayout';
+import { NavExtra, NavMenu } from '@apps/components';
+import { ResizeContext } from '@contexts';
 
 const LeagueAppView: React.FunctionComponent<LeagueAppViewProps> = () => {
     const dispatch = useDispatch();
     const history = useHistory();
     const location = useLocation();
     const params = useParams();
+    const dimensions = useContext(ResizeContext);
 
     const state = _get(location, ['state'], null);
     const paramLeagueUUID = _get(params, ['league_uuid'], null);
@@ -138,13 +142,21 @@ const LeagueAppView: React.FunctionComponent<LeagueAppViewProps> = () => {
 
     if (!isReady || isFetching) return <AppLoading />;
     return (
-        <AppLayout
-            app={constants.APPS.LEAGUE_APP}
-            name={name}
-            avatar={avatar}
-            menuProps={menuProps}
-            menuRoutes={statics}
-        >
+        <AppLayout>
+            <AppLayoutNav
+                app={constants.APPS.LEAGUE_APP}
+                name={name}
+                avatar={avatar}
+                menu={
+                    <NavMenu
+                        app={constants.APPS.LEAGUE_APP}
+                        menuProps={menuProps}
+                        menuRoutes={statics}
+                        dimensions={dimensions}
+                    />
+                }
+                extra={<NavExtra />}
+            />
             <Switch>
                 {routes.map(({ path, component, exact }: ComponentRoute) => (
                     <Route

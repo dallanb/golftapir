@@ -19,6 +19,10 @@ const constants = {
         WAGERS_PAGE: 'WAGERS_PAGE',
     },
     STATUS: {
+        INVITED: {
+            COLOUR: 'magenta',
+            KEY: 'pending',
+        },
         PENDING: {
             COLOUR: 'orange',
             KEY: 'pending',
@@ -72,6 +76,11 @@ const constants = {
             TWO_TONE_COLOUR: '#1E8793',
             KEY: 'challenge',
             LABEL: 'Challenge',
+        },
+        MESSAGE: {
+            TWO_TONE_COLOUR: '#1E8793',
+            KEY: 'message',
+            LABEL: 'Message',
         },
         COMPLETE: {
             TWO_TONE_COLOUR: '#6E7115',

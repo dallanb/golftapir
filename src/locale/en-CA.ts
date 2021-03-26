@@ -368,6 +368,8 @@ const CONSTANTS = {
                         'Buy in may not be greater than balance of Wallet',
                     PAYOUT_REQUIRED: 'Payout required',
                     PAYOUT_100: 'Payout must equal 100%',
+                    PAYOUT_BUY_IN_REQUIRED:
+                        'Buy in must be set to apply payout',
                 },
             },
         },
@@ -409,6 +411,10 @@ const CONSTANTS = {
                     PROVINCE_REQUIRED: 'Province is required',
                     COUNTRY_REQUIRED: 'Country is required',
                 },
+            },
+            SUCCESS_MODAL: {
+                TITLE: 'Thank you for adding a course',
+                DESCRIPTION: ' will be added to your balance after the course has been approved by an administrator'
             },
         },
         ACCOUNT: {

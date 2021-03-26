@@ -9,8 +9,10 @@ import { selectData } from './selector';
 import ComponentContent from '@layouts/ComponentContent';
 import routes from '@constants/routes';
 import { OverlaySpin } from '@components';
-import './Course.less';
 import { navigate, withAppRoute } from '@utils';
+import { ModalActions } from '@actions';
+import { headerRenderer, bodyRenderer } from './CourseSuccessModal';
+import './Course.less';
 
 const Course: React.FunctionComponent<CourseProps> = ({}) => {
     const dispatch = useDispatch();
@@ -23,7 +25,6 @@ const Course: React.FunctionComponent<CourseProps> = ({}) => {
 
     useEffect(() => {
         if (isSubmitted && result) {
-            // TODO: tell the user that tokens will be added to there balance after the course is approved
             navigate(
                 history,
                 withAppRoute(routes.ROUTES.LEAGUE_HOME.ROUTE, {
@@ -33,6 +34,7 @@ const Course: React.FunctionComponent<CourseProps> = ({}) => {
                 }),
                 result
             );
+            dispatch(ModalActions.openModal(headerRenderer, bodyRenderer));
         }
     });
 

@@ -18,6 +18,17 @@ const Members: React.FunctionComponent<MembersProps> = ({}) => {
     const dispatch = useDispatch();
     const ref = useRef(null);
 
+    const { isInitialized, isRefreshing, isFetching } = useSelector(selectData);
+    const {
+        isInitialized: leagueMembersIsInitialized,
+        isRefreshing: leagueMembersIsRefreshing,
+    } = useSelector(selectLeagueMembers);
+    const showSpinner =
+        !isInitialized ||
+        !leagueMembersIsInitialized ||
+        isRefreshing ||
+        leagueMembersIsRefreshing;
+
     useEffect(() => {
         dispatch(MembersPageContentMembersActions.init());
         return () => {
@@ -25,25 +36,14 @@ const Members: React.FunctionComponent<MembersProps> = ({}) => {
         };
     }, []);
 
-    const { isInitialized, isRefreshing, isFetching } = useSelector(selectData);
-    const {
-        isInitialized: leagueMembersIsInitialized,
-        isRefreshing: leagueMembersIsRefreshing,
-    } = useSelector(selectLeagueMembers);
     const members = useSelector(selectLeagueMembersDataByStatus);
     const activeMembers = _get(members, ['active'], []);
     const uuid = useSelector(selectMyUUID);
     const data = organizeMembers(uuid, activeMembers);
-
     return (
         <ComponentContent
             componentRef={ref}
-            showSpinner={
-                !isInitialized ||
-                !leagueMembersIsInitialized ||
-                isRefreshing ||
-                leagueMembersIsRefreshing
-            }
+            showSpinner={showSpinner}
             className="members-component-content"
             title={'Members List'}
         >

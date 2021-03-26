@@ -1,31 +1,26 @@
 import React from 'react';
-import UserCard from './UserCard';
 import UserMenu from './UserMenu';
-import UserPopover from './UserPopover';
+import { Button, Dropdown } from 'antd';
+import { CaretDownFilled } from '@ant-design/icons';
 import { UserTileProps } from './types';
 import './UserTile.less';
-import { Button } from 'antd';
-import { CaretDownFilled } from '@ant-design/icons';
 
 const UserTile: React.FunctionComponent<UserTileProps> = ({
     menu,
-    popoverClassName,
-    popoverOverlayClassName,
+    overlayClassName,
 }) => {
     return (
-        <UserPopover
-            title=""
-            content={<UserMenu items={menu} />}
-            trigger="click"
-            className={popoverClassName}
-            overlayClassName={popoverOverlayClassName}
+        <Dropdown
+            overlay={<UserMenu items={menu} />}
+            trigger={['click']}
+            overlayClassName={overlayClassName}
         >
             <Button
                 type="text"
                 icon={<CaretDownFilled />}
                 className="drop-down-button"
             />
-        </UserPopover>
+        </Dropdown>
     );
 };
 

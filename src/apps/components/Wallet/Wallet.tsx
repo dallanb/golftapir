@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation } from 'react-router-dom';
-import { takeRight as _takeRight } from 'lodash';
+import { useLocation, useParams } from 'react-router-dom';
+import { get as _get, takeRight as _takeRight } from 'lodash';
 import { Button } from 'antd';
 import { DollarTwoTone, PlusOutlined } from '@ant-design/icons';
 import { WalletProps } from './types';

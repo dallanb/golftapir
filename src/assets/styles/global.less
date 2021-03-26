@@ -40,16 +40,23 @@ body {
 
 // this is applied to the invite search select at the moment
 .ant-select-clear {
-    color: black !important;
+    color: fade(@primary-color, 45%) !important;
+}
+
+.ant-select-arrow {
+    color: fade(@primary-color, 45%) !important;
 }
 
 // this is applied to the contests search at the moment
 .ant-input-clear-icon {
-    color: black !important;
+    color: fade(@primary-color, 45%) !important;
 }
 
 .ant-btn::before {
     background: black !important;
+}
+.ant-btn {
+    border-radius: 4px !important;
 }
 
 .ant-popover-arrow {
@@ -65,6 +72,16 @@ body {
 
     .ant-menu-light {
         background: transparent !important;
+    }
+}
+
+.ant-dropdown {
+    .ant-menu {
+        box-shadow: 0 0 1rem 0 fade(white, 20%) !important;
+        border-radius: 5px !important;
+        background-color: rgba(255, 255, 255, 0.75) !important;
+        backdrop-filter: blur(6px) !important;
+        padding: 16px !important;
     }
 }
 
@@ -134,7 +151,6 @@ body {
     .ant-modal-footer {
         border: none !important;
     }
-
 }
 
 .ant-picker-header button {

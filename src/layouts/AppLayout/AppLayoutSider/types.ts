@@ -1,5 +1,5 @@
 import { ReactElement } from 'react';
 
-export interface MemberAppLayoutSiderProps {
+export interface AppLayoutSiderProps {
     content?: ReactElement;
 }

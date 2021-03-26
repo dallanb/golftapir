@@ -1,11 +1,11 @@
 import React from 'react';
-import MemberAppLayoutSider from '@layouts/AppLayout/MemberAppLayoutSider';
+import AppLayoutSider from '@layouts/AppLayout/AppLayoutSider';
 import { NotificationsSiderProps } from './types';
 import NotificationsSiderContent from './NotificationsSiderContent';
 import './NotificationsSider.less';
 
 const NotificationsSider: React.FunctionComponent<NotificationsSiderProps> = () => {
-    return <MemberAppLayoutSider content={<NotificationsSiderContent />} />;
+    return <AppLayoutSider content={<NotificationsSiderContent />} />;
 };
 
 export default NotificationsSider;

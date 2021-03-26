@@ -1,7 +1,7 @@
-import { keyBy as _keyBy } from 'lodash';
+import { get as _get, groupBy as _groupBy } from 'lodash';
 
 export const findLowestScoringParticipant = (participants: any[]) => {
-    const participantsHash = _keyBy(participants, 'score');
+    const participantsHash = _groupBy(participants, 'score');
     const lowestParticipant = Math.min(
         ...Object.keys(participantsHash).reduce(
             (accum: number[], key: string) => {
@@ -14,5 +14,6 @@ export const findLowestScoringParticipant = (participants: any[]) => {
             []
         )
     );
-    return participantsHash[lowestParticipant];
+    const leaders = _get(participantsHash, [lowestParticipant], []);
+    return leaders.length === 1 ? leaders[0] : false;
 };
