@@ -4,7 +4,7 @@ import { MemberInfoFormProps } from './types';
 import { Form } from '@components';
 import { fieldSchema, validationSchema } from './schema';
 import { selectData } from '../selector';
-import './MemberInfoForm.less';
+import '@pages/Home/HomeContent/MemberInfo/MemberInfoForm/MemberInfoForm.less';
 
 const MemberInfoForm: React.FunctionComponent<MemberInfoFormProps> = () => {
     const { initialValues } = useSelector(selectData);

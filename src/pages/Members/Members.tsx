@@ -21,7 +21,6 @@ const Members: React.FunctionComponent<MembersProps> = () => {
             dispatch(MembersPageActions.terminate());
         };
     }, []);
-
     return (
         <ContentLayout
             // header={<MembersHeader />}
