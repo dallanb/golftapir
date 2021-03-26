@@ -1,39 +1,30 @@
 .auth-layout-view {
     min-height: 100vh !important;
-    .logo {
-        color: white;
-    }
     .auth-layout-view-content {
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
         @media (max-width: 480px) {
-            justify-content: stretch;
             margin: 12px;
         }
         .auth-layout-title {
             @media (min-width: 481px) {
                 height: 50px;
                 width: 275px;
+                margin: 12px;
             }
             @media (max-width: 480px) {
                 height: 40px;
                 width: 220px;
+                margin: 24px;
             }
             background: url(../../assets/images/tapir_white.png);
             background-size: cover;
         }
         .auth-layout-content {
-            padding: 24px;
-            // this is the same as ContentLayout.less, see if there is a way to combine these
-            box-shadow: 0 0 1rem 0 fade(@primary-color, 20%);
-            border-radius: 5px;
-            background-color: fade(white, 25%);
-
             display: flex;
             flex-direction: column;
-            //backdrop-filter: blur(5px);
             @media (min-width: 769px) {
                 width: 70vw;
                 max-width: 512px;
@@ -45,7 +36,7 @@
             }
             @media (max-width: 480px) {
                 width: 100%;
-                flex-grow: 1;
+                //flex-grow: 1;
             }
         }
     }
