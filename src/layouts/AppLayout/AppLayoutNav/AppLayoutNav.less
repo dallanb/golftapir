@@ -1,0 +1,55 @@
+.app-layout-nav-header {
+    padding: 0 !important;
+    position: fixed;
+    z-index: 1;
+    width: 100%;
+    height: 64px;
+    max-height: 64px;
+    overflow: hidden;
+    background: fade(white, 25%) !important;
+    backdrop-filter: blur(6px) !important;
+    box-shadow: 0 0 1rem 0 fade(@primary-color, 20%) !important;
+    .app-layout-nav-container {
+        display: flex;
+        justify-content: space-between;
+
+        .app-layout-nav-title {
+            cursor: pointer;
+            height: 32px;
+            margin: 16px;
+            display: flex;
+            //.app-sider-layout-title-text {
+            //    align-content: end;
+            //}
+            @media (min-width: 481px) {
+                background: url(../../../assets/images/tapir_white.png);
+                background-size: cover;
+                width: 165px;
+                min-width: 165px;
+            }
+
+            @media (max-width: 480px) and (min-width: 300px) {
+                background: url(../../../assets/images/tapir.png);
+                background-size: cover;
+                width: 48px;
+                min-width: 48px;
+            }
+        }
+
+        .app-layout-nav-menu {
+            display: flex !important;
+            width: 100%;
+            .anticon {
+                font-size: 20px;
+                margin-right: 0;
+            }
+            @media (max-width: 768px) {
+                align-items: center;
+            }
+        }
+
+        .app-layout-nav-extra {
+            flex-grow: 1;
+        }
+    }
+}

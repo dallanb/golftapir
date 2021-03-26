@@ -7,7 +7,7 @@ import { selectIsInitialized } from './selector';
 import { selectIsInitialized as selectDataIsInitialized } from '@pages/Member/selector';
 import ComponentContent from '@layouts/ComponentContent';
 import CONSTANTS from '@locale/en-CA';
-import './MemberInfo.less';
+import '@pages/Home/HomeContent/MemberInfo/MemberInfo.less';
 
 const MemberInfo: React.FunctionComponent<MemberInfoProps> = () => {
     const dispatch = useDispatch();
@@ -34,6 +34,7 @@ const MemberInfo: React.FunctionComponent<MemberInfoProps> = () => {
             componentRef={ref}
             showSpinner={!isInitialized || !isDataInitialized}
             className="member-info"
+            bodyClassName="member-info-content"
             title={CONSTANTS.PAGES.MEMBER.TABS.INFO}
         >
             <MemberInfoForm />

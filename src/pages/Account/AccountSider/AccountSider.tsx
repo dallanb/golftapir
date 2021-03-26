@@ -1,10 +1,10 @@
 import React from 'react';
-import MemberAppLayoutSider from '@layouts/AppLayout/MemberAppLayoutSider';
+import AppLayoutSider from '@layouts/AppLayout/AppLayoutSider';
 import AccountSiderContent from './AccountSiderContent';
 import { AccountSiderProps } from './types';
 
 const AccountSider: React.FunctionComponent<AccountSiderProps> = () => {
-    return <MemberAppLayoutSider content={<AccountSiderContent />} />;
+    return <AppLayoutSider content={<AccountSiderContent />} />;
 };
 
 export default AccountSider;

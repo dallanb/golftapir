@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import { get as _get } from 'lodash';
@@ -16,9 +16,13 @@ import { withAppRoute } from '@utils';
 import constants from '@constants';
 import { selectData as selectAppData } from '@selectors/AppSelector';
 import { selectData as selectBaseData } from '@selectors/BaseSelector';
+import { AppLayoutNav } from '@layouts/AppLayout';
+import { NavExtra, NavMenu } from '@apps/components';
+import { ResizeContext } from '@contexts';
 
 const MemberAppView: React.FunctionComponent<MemberAppViewProps> = () => {
     const dispatch = useDispatch();
+    const dimensions = useContext(ResizeContext);
 
     useEffect(() => {
         dispatch(MemberAppActions.init());
@@ -45,13 +49,21 @@ const MemberAppView: React.FunctionComponent<MemberAppViewProps> = () => {
 
     if (!isInitialized) return <AppLoading />;
     return (
-        <AppLayout
-            app={constants.APPS.MEMBER_APP}
-            name={name}
-            avatar={avatar}
-            menuProps={menuProps}
-            menuRoutes={statics}
-        >
+        <AppLayout>
+            <AppLayoutNav
+                app={constants.APPS.MEMBER_APP}
+                name={name}
+                avatar={avatar}
+                menu={
+                    <NavMenu
+                        app={constants.APPS.LEAGUE_APP}
+                        menuProps={menuProps}
+                        menuRoutes={statics}
+                        dimensions={dimensions}
+                    />
+                }
+                extra={<NavExtra />}
+            />
             <Switch>
                 {routes.map(({ path, component, exact }: ComponentRoute) => (
                     <Route

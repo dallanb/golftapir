@@ -1,29 +1,29 @@
 @import 'src/assets/styles/statics';
 .table-wrap {
-  display: block;
-  max-width: 100%;
+    display: block;
+    max-width: 100%;
 
-  .member-standings-table-table {
-    border-radius: 4px;
-    overflow: hidden;
-    min-width: unset !important;
+    .member-standings-table-table {
+        border-radius: 4px;
+        overflow: hidden;
+        min-width: 576px !important;
 
-    .member-standings-table-header {
-      font-weight: 600;
-      color: fade(@primary-color, 50%);
-      font-size: 12px;
-    }
-    .member-standings-table-body {
-      .tr {
-        &.cell {
-          height: 50px;
-          align-items: center;
-          //border-bottom: 1px solid @table-border;
+        .member-standings-table-header {
+            font-weight: 600;
+            color: fade(@primary-color, 50%);
+            font-size: 12px;
         }
-      }
+        .member-standings-table-body {
+            .tr {
+                &.cell {
+                    height: 50px;
+                    align-items: center;
+                    //border-bottom: 1px solid @table-border;
+                }
+            }
+        }
+        .tr-group:nth-child(even) .cell {
+            background: @tile-fill;
+        }
     }
-    .tr-group:nth-child(even) .cell {
-      background: @tile-fill;
-    }
-  }
 }

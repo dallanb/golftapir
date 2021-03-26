@@ -20,6 +20,7 @@ module.exports = {
             config: path.resolve(__dirname, 'src/config'),
             '@components': path.resolve(__dirname, 'src/components'),
             '@constants': path.resolve(__dirname, 'src/constants'),
+            '@contexts': path.resolve(__dirname, 'src/contexts'),
             '@helpers': path.resolve(__dirname, 'src/helpers'),
             '@layouts': path.resolve(__dirname, 'src/layouts'),
             '@libs': path.resolve(__dirname, 'src/libs'),

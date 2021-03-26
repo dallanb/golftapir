@@ -28,7 +28,8 @@ const Logout: React.FunctionComponent<LogoutProps> = () => {
 
     useEffect(() => {
         if (isInitialized && !isLoggedIn && !isSubmitting) {
-            navigate(history,
+            navigate(
+                history,
                 withAppRoute(routes.ROUTES.LOGIN.ROUTE, {
                     app: constants.APPS.AUTH_APP,
                 })

@@ -2,10 +2,14 @@
     > form {
         display: flex;
         flex-wrap: wrap;
+        justify-content: center;
         .league-form-avatar-upload {
             //flex-grow: 1;
             margin-bottom: 0;
             margin-right: 24px;
+            @media (max-width: 480px) {
+                margin-right: 0;
+            }
             .ant-upload-select-picture-card {
                 height: 130px;
                 width: 130px;

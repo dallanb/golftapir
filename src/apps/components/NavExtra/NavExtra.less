@@ -1,0 +1,161 @@
+.nav-extra {
+    display: flex;
+    margin: 0;
+    @media (min-width: 769px) {
+        justify-content: space-evenly;
+    }
+    @media (max-width: 768px) {
+        justify-content: flex-end;
+    }
+    .ant-divider-vertical {
+        height: 32px;
+        top: 16px;
+    }
+    .nav-extra-buttons {
+        display: flex;
+        .nav-extra-notification {
+            padding-right: 8px;
+            .notification-button {
+                height: 24px;
+                width: 24px;
+            }
+        }
+        .nav-extra-drop-down {
+            .extra-button {
+                height: 24px;
+                width: 24px;
+            }
+        }
+        .anticon {
+            font-size: 16px;
+        }
+    }
+    .nav-extra-user {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        overflow: hidden;
+        margin-right: 12px;
+        .nav-extra-user-avatar-wrapper {
+            margin-right: 12px;
+            .nav-extra-user-avatar {
+                &.ant-avatar-square {
+                    border-radius: 4px;
+                }
+            }
+        }
+        .nav-extra-user-name {
+            flex-direction: column;
+            margin-right: 12px;
+            margin-bottom: 0;
+            color: fade(@primary-color, 85%);
+            font-weight: 600;
+            font-size: 20px;
+            line-height: 32px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            @media (min-width: 577px) {
+                display: flex;
+            }
+            @media (max-width: 576px) {
+                display: none;
+            }
+
+            .nav-extra-user-name-display-name {
+                font-size: 14px;
+                line-height: 1;
+                max-width: 160px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            .nav-extra-user-name-username {
+                font-size: 12px;
+                line-height: 1;
+                color: fade(@primary-color, 50%);
+            }
+        }
+    }
+    .nav-extra-wallet {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        overflow: hidden;
+        text-align: end;
+        cursor: pointer;
+        &.disabled {
+            cursor: default;
+        }
+        @media (min-width: 577px) {
+            flex-grow: 1;
+        }
+        @media (max-width: 576px) {
+            flex-grow: unset;
+        }
+
+        .nav-extra-wallet-balance {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 0;
+            color: fade(@primary-color, 85%);
+            font-weight: 600;
+            font-size: 20px;
+            line-height: 32px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+
+            @media (min-width: 577px) {
+                margin-right: 12px;
+            }
+
+            .nav-extra-wallet-balance-label {
+                font-size: 12px;
+                line-height: 1;
+                color: rgba(0, 0, 0, 0.5);
+                font-weight: 400;
+                margin-bottom: 6px;
+                @media (max-width: 576px) {
+                    display: none;
+                }
+            }
+
+            .nav-extra-wallet-balance-amount {
+                font-size: 14px;
+                line-height: 1;
+                max-width: 160px;
+
+                .nav-extra-wallet-balance-amount-icon {
+                    margin-right: 4px;
+                }
+            }
+        }
+    }
+}
+
+.extra-drop-down-overlay {
+    max-width: 300px;
+    .nav-extra-league {
+        display: flex;
+        .nav-extra-league-avatar {
+            border-radius: 4px;
+        }
+        .nav-extra-league-name {
+            padding-left: 12px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .nav-extra-league-selected {
+            color: @primary-color;
+            padding-left: 12px;
+            width: 20px;
+        }
+    }
+    .nav-extra-username {
+        font-size: 14px;
+        line-height: 1;
+        color: fade(@primary-color, 50%);
+        font-weight: bold;
+    }
+}

@@ -28,6 +28,7 @@ const MemberStandings: React.FunctionComponent<MemberStandingsProps> = () => {
     return (
         <ComponentContent
             className="member-standings space"
+            bodyClassName="member-standings-content"
             showSpinner={showSpinner}
             title={CONSTANTS.PAGES.LEAGUE_HOME.STANDINGS}
         >

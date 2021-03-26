@@ -15,6 +15,7 @@ const MemberInfo: React.FunctionComponent<MemberInfoProps> = () => {
             componentRef={ref}
             showSpinner={!isInitialized}
             className="member-info"
+            bodyClassName="member-info-content"
             title={CONSTANTS.PAGES.HOME.MEMBER}
         >
             <MemberInfoForm />
