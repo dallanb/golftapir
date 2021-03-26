@@ -1,19 +1,20 @@
 import React from 'react';
 import { Layout } from 'antd';
 import { withRouter } from 'react-router-dom';
-import { AuthLayoutProps, AuthLayoutState } from './types';
+import { AuthLayoutProps } from './types';
 import './AuthLayout.less';
 
-class AuthLayout extends React.Component<AuthLayoutProps, AuthLayoutState> {
-    render() {
-        const { children } = this.props;
-        return (
-            <Layout className="auth-layout-view glassmorphic">
+const { Content } = Layout;
+
+const AuthLayout: React.FunctionComponent<AuthLayoutProps> = ({ children }) => {
+    return (
+        <Layout className="auth-layout-view glassmorphic">
+            <Content className="auth-layout-view-content">
                 <div className="auth-layout-title" />
-                {children}
-            </Layout>
-        );
-    }
-}
+                <div className="auth-layout-content">{children}</div>
+            </Content>
+        </Layout>
+    );
+};
 
 export default withRouter(AuthLayout);
