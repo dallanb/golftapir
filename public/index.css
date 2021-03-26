@@ -1,29 +1,35 @@
+html,
 body {
+    height: 100%;
     overflow: hidden;
     margin: 0;
+}
+#root,
+#app {
+    height: 100%;
 }
 .spinner {
     position: absolute;
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100vh;
+    height: 100%;
     width: 100%;
     background: rgba(222, 182, 246, 1);
     background: linear-gradient(
-            90deg,
-            rgba(222, 182, 246, 1) 0%,
-            rgba(141, 207, 252, 1) 100%
+        90deg,
+        rgba(222, 182, 246, 1) 0%,
+        rgba(141, 207, 252, 1) 100%
     );
     background: -moz-linear-gradient(
-            90deg,
-            rgba(222, 182, 246, 1) 0%,
-            rgba(141, 207, 252, 1) 100%
+        90deg,
+        rgba(222, 182, 246, 1) 0%,
+        rgba(141, 207, 252, 1) 100%
     );
     background: -webkit-linear-gradient(
-            90deg,
-            rgba(222, 182, 246, 1) 0%,
-            rgba(141, 207, 252, 1) 100%
+        90deg,
+        rgba(222, 182, 246, 1) 0%,
+        rgba(141, 207, 252, 1) 100%
     );
 }
 
