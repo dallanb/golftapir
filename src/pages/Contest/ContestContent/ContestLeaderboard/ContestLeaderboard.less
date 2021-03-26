@@ -1,25 +1,29 @@
 .contest-leaderboard {
     display: block;
     max-width: 100%;
-    .expander {
-        width: 5% !important;
-    }
-    .pos {
-        width: 10% !important;
-    }
-    .country {
-        width: 10% !important;
-    }
-    .participant {
-        width: 55% !important;
-    }
-    .score {
-        width: 10% !important;
-        &.td {
-            font-weight: bold;
+    overflow: hidden;
+    .contest-leaderboard-content {
+        overflow: auto;
+        .expander {
+            width: 5% !important;
         }
-    }
-    .strokes {
-        width: 10% !important;
+        .pos {
+            width: 10% !important;
+        }
+        .country {
+            width: 10% !important;
+        }
+        .participant {
+            width: 55% !important;
+        }
+        .score {
+            width: 10% !important;
+            &.td {
+                font-weight: bold;
+            }
+        }
+        .strokes {
+            width: 10% !important;
+        }
     }
 }
