@@ -1,5 +1,5 @@
 .content-layout {
-    max-height: 100vh;
+    max-height: 100%;
     overflow: hidden;
     .content-layout-background {
         .content-layout-header {
@@ -11,8 +11,9 @@
             }
         }
         .content-layout-main {
-            min-height: 100vh;
-            @media (max-width: 991px) { // TODO: this is a backup plan as it does not look very nice from a transition stand point
+            min-height: 100%;
+            @media (max-width: 991px) {
+                // TODO: this is a backup plan as it does not look very nice from a transition stand point
                 min-width: 100vw;
             }
         }
@@ -59,7 +60,7 @@
 
     .sider-layout {
         background: none;
-        height: 100vh;
+        height: 100%;
         .ant-layout-sider-children {
             display: flex;
             flex-direction: column;
