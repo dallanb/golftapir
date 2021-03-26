@@ -22,7 +22,8 @@ const ContestInfo: React.FunctionComponent<ContestInfoProps> = () => {
         <ComponentContent
             componentRef={ref}
             showSpinner={!isInitialized || payoutIsFetching || isRefreshing}
-            className="contest-info-component-content"
+            className="contest-info"
+            bodyClassName="contest-info-content"
             title={CONSTANTS.PAGES.CONTEST.INFO}
             extra={<ContestInfoExtra />}
         >
