@@ -1,22 +1,26 @@
 .member-standings {
     display: block;
     max-width: 100%;
-    .country {
-        width: 10% !important;
-    }
-    .display-name {
-        width: 60% !important;
-    }
-    .event-count {
-        width: 10% !important;
-    }
-    .win-count {
-        width: 10% !important;
-        &.td {
-            font-weight: bold;
+    overflow: hidden;
+    .member-standings-content {
+        overflow: auto;
+        .country {
+            width: 10% !important;
         }
-    }
-    .winning-total {
-        width: 10% !important;
+        .display-name {
+            width: 60% !important;
+        }
+        .event-count {
+            width: 10% !important;
+        }
+        .win-count {
+            width: 10% !important;
+            &.td {
+                font-weight: bold;
+            }
+        }
+        .winning-total {
+            width: 10% !important;
+        }
     }
 }
