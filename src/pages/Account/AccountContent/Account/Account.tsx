@@ -34,6 +34,7 @@ const Account: React.FunctionComponent<AccountProps> = ({}) => {
         <ComponentContent
             showSpinner={!isInitialized || !isDataInitialized}
             className="account"
+            bodyClassName="account-content"
             title={'Account Settings'}
         >
             <AccountForm />
