@@ -12,6 +12,9 @@
         }
         .content-layout-main {
             min-height: 100vh;
+            @media (max-width: 991px) { // TODO: this is a backup plan as it does not look very nice from a transition stand point
+                min-width: 100vw;
+            }
         }
         .content-layout-content {
             .component-content {
