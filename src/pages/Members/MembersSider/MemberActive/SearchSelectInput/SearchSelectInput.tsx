@@ -9,12 +9,12 @@ import {
     UserAddOutlined,
 } from '@ant-design/icons/lib';
 import { SearchInputProps } from './types';
-import MembersPageSiderContentSearchActions from './actions';
+import MembersPageSiderSearchActions from './actions';
 import { selectIsSearching, selectKey, selectSearchData } from './selector';
 import CONSTANTS from '@locale/en-CA';
 import { navigate, withAppRoute } from '@utils';
 import { selectLeagueMembersDataByStatus } from '@selectors/AppSelector';
-import ComponentContent from '@layouts/ComponentContent';
+import { SiderComponentContent } from '@layouts/ComponentContent';
 import routes from '@constants/routes';
 import './SearchSelectInput.less';
 import { checkMemberLimit } from '@pages/Members/MembersSider/MemberActive/SearchSelectInput/utils';
@@ -36,14 +36,14 @@ const SearchSelectInput: React.FunctionComponent<SearchInputProps> = () => {
 
     const onSearch = (val: string) => {
         if (val) {
-            dispatch(MembersPageSiderContentSearchActions.search(val));
+            dispatch(MembersPageSiderSearchActions.search(val));
         } else {
-            dispatch(MembersPageSiderContentSearchActions.clearSearch(val));
+            dispatch(MembersPageSiderSearchActions.clearSearch(val));
         }
     };
     const onClick = () => {
         dispatch(
-            MembersPageSiderContentSearchActions.invite(
+            MembersPageSiderSearchActions.invite(
                 data[value].user_uuid,
                 data[value].email
             )
@@ -65,7 +65,7 @@ const SearchSelectInput: React.FunctionComponent<SearchInputProps> = () => {
     };
 
     return (
-        <ComponentContent
+        <SiderComponentContent
             className="search-input-component-content"
             bodyClassName={'search-input-component-content-body'}
             title={'Invite'}
@@ -99,7 +99,7 @@ const SearchSelectInput: React.FunctionComponent<SearchInputProps> = () => {
                     onClick={onClick}
                 />
             </div>
-        </ComponentContent>
+        </SiderComponentContent>
     );
 };
 

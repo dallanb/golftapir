@@ -1,11 +1,11 @@
 // @ts-ignore
 import { static as Immutable } from 'seamless-immutable';
 import { createReducer } from 'reduxsauce';
-import { LeagueHomePageSiderContentMemberStatsTypes } from './actions';
-import { LeagueHomePageSiderContentMemberStatsInterface } from './types';
+import { LeagueHomePageSiderMemberStatsTypes } from './actions';
+import { LeagueHomePageSiderMemberStatsInterface } from './types';
 
 /* ------------- Initial State ------------- */
-const INITIAL_STATE: LeagueHomePageSiderContentMemberStatsInterface = {
+const INITIAL_STATE: LeagueHomePageSiderMemberStatsInterface = {
     isInitialized: false,
     err: undefined,
     stat: undefined,
@@ -45,11 +45,11 @@ function set(state: any, { data }: any) {
 }
 
 const HANDLERS = {
-    [LeagueHomePageSiderContentMemberStatsTypes.INIT]: init,
-    [LeagueHomePageSiderContentMemberStatsTypes.INIT_SUCCESS]: initSuccess,
-    [LeagueHomePageSiderContentMemberStatsTypes.INIT_FAILURE]: initFailure,
-    [LeagueHomePageSiderContentMemberStatsTypes.TERMINATE]: terminate,
-    [LeagueHomePageSiderContentMemberStatsTypes.SET]: set,
+    [LeagueHomePageSiderMemberStatsTypes.INIT]: init,
+    [LeagueHomePageSiderMemberStatsTypes.INIT_SUCCESS]: initSuccess,
+    [LeagueHomePageSiderMemberStatsTypes.INIT_FAILURE]: initFailure,
+    [LeagueHomePageSiderMemberStatsTypes.TERMINATE]: terminate,
+    [LeagueHomePageSiderMemberStatsTypes.SET]: set,
 };
 
 export const reducer = createReducer(INITIAL_STATE, HANDLERS);

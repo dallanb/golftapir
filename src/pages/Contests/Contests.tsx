@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ContestsProps } from './types';
-import { ContentLayout } from '@layouts';
+import { AppLayoutContent } from '@layouts/AppLayout';
 import { selectData } from './selector';
 import ContestsPageActions from './actions';
 import ContestsSider from './ContestsSider';
@@ -21,7 +21,7 @@ const Contests: React.FunctionComponent<ContestsProps> = () => {
     }, []);
 
     return (
-        <ContentLayout
+        <AppLayoutContent
             // header={<ContestsHeader />}
             sider={<ContestsSider />}
             content={<ContestsContent />}

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { get as _get } from 'lodash';
-import { ContentLayout } from '@layouts';
+import { AppLayoutContent } from '@layouts/AppLayout';
 import { AccountProps } from './types';
 import AccountPageActions from './actions';
 import AccountHeader from './AccountHeader';
@@ -23,7 +23,7 @@ const Account: React.FunctionComponent<AccountProps> = () => {
     }, []);
 
     return (
-        <ContentLayout
+        <AppLayoutContent
             // header={<AccountHeader />}
             content={<AccountContent />}
             sider={<AccountSider />}

@@ -1,11 +1,11 @@
 // @ts-ignore
 import { static as Immutable } from 'seamless-immutable';
 import { createReducer } from 'reduxsauce';
-import { MembersPageSiderContentInvitesTypes } from './actions';
-import { MembersPageSiderContentInvitesInterface } from './types';
+import { MembersPageSiderInvitesTypes } from './actions';
+import { MembersPageSiderInvitesInterface } from './types';
 
 /* ------------- Initial State ------------- */
-const INITIAL_STATE: MembersPageSiderContentInvitesInterface = {
+const INITIAL_STATE: MembersPageSiderInvitesInterface = {
     isFetching: false,
     isInitialized: false,
     err: undefined,
@@ -45,11 +45,11 @@ function set(state: any, { data }: any) {
 }
 
 const HANDLERS = {
-    [MembersPageSiderContentInvitesTypes.INIT]: init,
-    [MembersPageSiderContentInvitesTypes.INIT_SUCCESS]: initSuccess,
-    [MembersPageSiderContentInvitesTypes.INIT_FAILURE]: initFailure,
-    [MembersPageSiderContentInvitesTypes.TERMINATE]: terminate,
-    [MembersPageSiderContentInvitesTypes.SET]: set,
+    [MembersPageSiderInvitesTypes.INIT]: init,
+    [MembersPageSiderInvitesTypes.INIT_SUCCESS]: initSuccess,
+    [MembersPageSiderInvitesTypes.INIT_FAILURE]: initFailure,
+    [MembersPageSiderInvitesTypes.TERMINATE]: terminate,
+    [MembersPageSiderInvitesTypes.SET]: set,
 };
 
 export const reducer = createReducer(INITIAL_STATE, HANDLERS);

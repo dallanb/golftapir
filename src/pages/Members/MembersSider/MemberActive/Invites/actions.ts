@@ -9,8 +9,8 @@ const { Types, Creators } = createActions(
         set: ['data'],
     },
     {
-        prefix: 'MEMBERS_PAGE_SIDER_CONTENT_INVITES_',
+        prefix: 'MEMBERS_PAGE_SIDER_INVITES_',
     }
 );
-export const MembersPageSiderContentInvitesTypes = Types;
+export const MembersPageSiderInvitesTypes = Types;
 export default Creators;

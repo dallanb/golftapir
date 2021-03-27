@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { ContentLayout } from '@layouts';
+import { AppLayoutContent } from '@layouts/AppLayout';
 import { MembersProps } from './types';
 import MembersPageActions from './actions';
 import MembersHeader from './MembersHeader';
@@ -22,7 +22,7 @@ const Members: React.FunctionComponent<MembersProps> = () => {
         };
     }, []);
     return (
-        <ContentLayout
+        <AppLayoutContent
             // header={<MembersHeader />}
             content={<MembersContent />}
             sider={<MembersSider />}

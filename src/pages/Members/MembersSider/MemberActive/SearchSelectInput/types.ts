@@ -1,5 +1,5 @@
 export interface SearchInputProps {}
-export interface MembersPageSiderContentSearchInterface {
+export interface MembersPageSiderSearchInterface {
     key?: string;
     isSearching: boolean;
     err: any;

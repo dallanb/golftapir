@@ -9,8 +9,8 @@ const { Types, Creators } = createActions(
         set: ['data'],
     },
     {
-        prefix: 'LEAGUE_HOME_PAGE_CONTENT_MEMBER_STATS_',
+        prefix: 'LEAGUE_HOME_PAGE_MEMBER_STATS_',
     }
 );
-export const LeagueHomePageSiderContentMemberStatsTypes = Types;
+export const LeagueHomePageSiderMemberStatsTypes = Types;
 export default Creators;

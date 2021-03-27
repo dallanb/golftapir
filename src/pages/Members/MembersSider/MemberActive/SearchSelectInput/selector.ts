@@ -1,28 +1,27 @@
 import { createSelector } from 'reselect';
 import { get as _get } from 'lodash';
 
-const getMembersSiderContentSearchPage = (state: any) =>
-    state.membersPage.ui.sider.content.memberActive.search;
+const getMembersSiderSearchPage = (state: any) =>
+    state.membersPage.ui.sider.memberActive.search;
 
 export const selectData = createSelector(
-    [getMembersSiderContentSearchPage],
-    (membersSiderContentSearchPage) => membersSiderContentSearchPage
+    [getMembersSiderSearchPage],
+    (membersSiderSearchPage) => membersSiderSearchPage
 );
 
 export const selectKey = createSelector(
-    [getMembersSiderContentSearchPage],
-    (membersSiderContentSearchPage) =>
-        _get(membersSiderContentSearchPage, ['key'], undefined)
+    [getMembersSiderSearchPage],
+    (membersSiderSearchPage) => _get(membersSiderSearchPage, ['key'], undefined)
 );
 
 export const selectIsSearching = createSelector(
-    [getMembersSiderContentSearchPage],
-    (membersSiderContentSearchPage) =>
-        _get(membersSiderContentSearchPage, ['isSearching'], undefined)
+    [getMembersSiderSearchPage],
+    (membersSiderSearchPage) =>
+        _get(membersSiderSearchPage, ['isSearching'], undefined)
 );
 
 export const selectSearchData = createSelector(
-    [getMembersSiderContentSearchPage],
-    (membersSiderContentSearchPage) =>
-        _get(membersSiderContentSearchPage, ['data'], undefined)
+    [getMembersSiderSearchPage],
+    (membersSiderSearchPage) =>
+        _get(membersSiderSearchPage, ['data'], undefined)
 );

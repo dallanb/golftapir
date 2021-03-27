@@ -1,18 +1,16 @@
 import { all, put, takeLatest } from 'redux-saga/effects';
-import MembersPageSiderContentInvitesActions, {
-    MembersPageSiderContentInvitesTypes,
+import MembersPageSiderInvitesActions, {
+    MembersPageSiderInvitesTypes,
 } from './actions';
 
 function* init() {
     try {
-        yield put(MembersPageSiderContentInvitesActions.initSuccess());
+        yield put(MembersPageSiderInvitesActions.initSuccess());
     } catch (err) {
-        yield put(
-            MembersPageSiderContentInvitesActions.initFailure(err)
-        );
+        yield put(MembersPageSiderInvitesActions.initFailure(err));
     }
 }
 
-export default function* MembersPageSiderContentInvitesSaga() {
-    yield all([takeLatest(MembersPageSiderContentInvitesTypes.INIT, init)]);
+export default function* MembersPageSiderInvitesSaga() {
+    yield all([takeLatest(MembersPageSiderInvitesTypes.INIT, init)]);
 }

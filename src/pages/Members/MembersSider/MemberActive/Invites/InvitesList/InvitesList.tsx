@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { get as _get } from 'lodash';
 import { InvitesListProps } from './types';
 import { FixedSizeList } from '@components';
-import MembersPageSiderContentInvitesActions from '../actions';
+import MembersPageSiderInvitesActions from '../actions';
 import InvitesListTile from './InvitesListTile';
 import InvitesListEmpty from './InvitesListEmpty';
 import { getRefHeight } from '@utils';

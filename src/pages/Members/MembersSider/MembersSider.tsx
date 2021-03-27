@@ -1,11 +1,32 @@
 import React from 'react';
-import AppLayoutSider from '@layouts/AppLayout/AppLayoutSider';
+import { useSelector } from 'react-redux';
 import { MembersSiderProps } from './types';
-import MembersSiderContent from './MembersSiderContent';
+import SiderLayoutContent from '@layouts/SiderLayout/SiderLayoutContent';
+import { selectData } from '@pages/Members/selector';
+import { selectLeagueMemberStatus } from '@selectors/AppSelector';
+import constants from '@constants';
+import MemberPending from './MemberPending';
+import MemberActive from './MemberActive';
 import './MembersSider.less';
 
 const MembersSider: React.FunctionComponent<MembersSiderProps> = () => {
-    return <AppLayoutSider content={<MembersSiderContent />} />;
+    const { isInitialized } = useSelector(selectData);
+    const memberStatus = useSelector(selectLeagueMemberStatus);
+    const contentRenderer = (status: string) => {
+        switch (status) {
+            case constants.STATUS.PENDING.KEY:
+                return <MemberPending />;
+            case constants.STATUS.ACTIVE.KEY:
+                return <MemberActive />;
+            default:
+                return null;
+        }
+    };
+    return (
+        <SiderLayoutContent showSpinner={!isInitialized}>
+            <>{contentRenderer(memberStatus)}</>
+        </SiderLayoutContent>
+    );
 };
 
 export default MembersSider;

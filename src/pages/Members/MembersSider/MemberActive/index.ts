@@ -12,5 +12,5 @@ export const reducer = combineReducers({
 });
 
 // Saga
-export { MembersPageSiderContentSearchSaga } from './SearchSelectInput';
-export { MembersPageSiderContentInvitesSaga } from './Invites';
+export { MembersPageSiderSearchSaga } from './SearchSelectInput';
+export { MembersPageSiderInvitesSaga } from './Invites';

@@ -1,17 +1,16 @@
 import { createSelector } from 'reselect';
 import { get as _get } from 'lodash';
 
-const getLeagueHomePageSiderContentMemberStats = (state: any) =>
-    state.leagueHomePage.ui.sider.content.memberStats;
+const getLeagueHomePageSiderMemberStats = (state: any) =>
+    state.leagueHomePage.ui.sider.memberStats;
 
 export const selectData = createSelector(
-    [getLeagueHomePageSiderContentMemberStats],
-    (leagueHomePageSiderContentMemberStats) =>
-        leagueHomePageSiderContentMemberStats
+    [getLeagueHomePageSiderMemberStats],
+    (leagueHomePageSiderMemberStats) => leagueHomePageSiderMemberStats
 );
 
 export const selectStat = createSelector(
-    [getLeagueHomePageSiderContentMemberStats],
-    (leagueHomePageSiderContentMemberStats) =>
-        _get(leagueHomePageSiderContentMemberStats, ['stat'], undefined)
+    [getLeagueHomePageSiderMemberStats],
+    (leagueHomePageSiderMemberStats) =>
+        _get(leagueHomePageSiderMemberStats, ['stat'], undefined)
 );

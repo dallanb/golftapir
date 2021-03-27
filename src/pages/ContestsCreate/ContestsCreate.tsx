@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { ContentLayout } from '@layouts';
+import { AppLayoutContent } from '@layouts/AppLayout';
 import { ContestsCreateProps } from './types';
 import ContestsCreatePageActions from './actions';
 import ContestsCreateHeader from './ContestsCreateHeader';
@@ -22,7 +22,7 @@ const ContestsCreate: React.FunctionComponent<ContestsCreateProps> = () => {
     }, []);
 
     return (
-        <ContentLayout
+        <AppLayoutContent
             // header={<ContestsCreateHeader />}
             content={<ContestsCreateContent />}
             sider={<ContestsCreateSider />}

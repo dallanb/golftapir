@@ -1,5 +1,5 @@
 export interface InvitesProps {}
-export interface MembersPageSiderContentInvitesInterface {
+export interface MembersPageSiderInvitesInterface {
     isFetching: boolean;
     isInitialized: boolean;
     err: any;

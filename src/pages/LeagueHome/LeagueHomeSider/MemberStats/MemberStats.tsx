@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { get as _get } from 'lodash';
 import { MemberStatsProps } from './types';
-import LeagueHomePageSiderContentMemberStatsActions from './actions';
+import LeagueHomePageSiderMemberStatsActions from './actions';
 import { selectData, selectStat } from './selector';
 import { selectMeIsInitialized, selectMyStat } from '@selectors/BaseSelector';
 import ComponentContent from '@layouts/ComponentContent';
@@ -28,9 +28,9 @@ const MemberStats: React.FunctionComponent<MemberStatsProps> = () => {
         : (winCount / eventCount) * 100;
 
     useEffect(() => {
-        dispatch(LeagueHomePageSiderContentMemberStatsActions.init(leagueUUID));
+        dispatch(LeagueHomePageSiderMemberStatsActions.init(leagueUUID));
         return () => {
-            dispatch(LeagueHomePageSiderContentMemberStatsActions.terminate());
+            dispatch(LeagueHomePageSiderMemberStatsActions.terminate());
         };
     }, []);
 

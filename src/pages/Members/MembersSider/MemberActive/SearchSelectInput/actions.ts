@@ -11,8 +11,8 @@ const { Types, Creators } = createActions(
         inviteFailure: ['err'],
     },
     {
-        prefix: 'MEMBERS_PAGE_SIDER_CONTENT_SEARCH_',
+        prefix: 'MEMBERS_PAGE_SIDER_SEARCH_',
     }
 );
-export const MembersPageSiderContentSearchTypes = Types;
+export const MembersPageSiderSearchTypes = Types;
 export default Creators;

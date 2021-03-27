@@ -3,13 +3,10 @@ import { combineReducers } from 'redux';
 export { default } from './LeagueHomeSider';
 
 // Reducer
-import { reducer as contentReducer } from './LeagueHomeSiderContent';
+import { reducer as memberStatsReducer } from './MemberStats';
 export const reducer = combineReducers({
-    content: contentReducer,
+    memberStats: memberStatsReducer,
 });
 
 // Saga
-export {
-    LeagueHomePageSiderContentMemberStatsSaga,
-    // LeagueHomePageSiderContentCalendarSaga,
-} from './LeagueHomeSiderContent';
+export { LeagueHomePageSiderMemberStatsSaga } from './MemberStats';

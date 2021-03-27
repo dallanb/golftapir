@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NotificationsProps } from './types';
-import { ContentLayout } from '@layouts';
+import { AppLayoutContent } from '@layouts/AppLayout';
 import { selectData } from './selector';
 import NotificationsPageActions from './actions';
 import NotificationsSider from './NotificationsSider';
@@ -21,7 +21,7 @@ const Notifications: React.FunctionComponent<NotificationsProps> = () => {
     }, []);
 
     return (
-        <ContentLayout
+        <AppLayoutContent
             // header={<NotificationsHeader />}
             sider={<NotificationsSider />}
             content={<NotificationsContent />}

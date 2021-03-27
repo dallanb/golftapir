@@ -4,4 +4,4 @@ export { default } from './SearchSelectInput';
 export { reducer } from './reducer';
 
 // Saga
-export { default as MembersPageSiderContentSearchSaga } from './saga';
+export { default as MembersPageSiderSearchSaga } from './saga';

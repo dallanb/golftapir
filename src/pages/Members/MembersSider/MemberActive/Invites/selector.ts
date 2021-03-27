@@ -1,34 +1,32 @@
 import { get as _get } from 'lodash';
 import { createSelector } from 'reselect';
 
-const getMembersPageSiderContentInvites = (state: any) =>
-    state.membersPage.ui.sider.content.memberActive.invites;
+const getMembersPageSiderInvites = (state: any) =>
+    state.membersPage.ui.sider.memberActive.invites;
 
 export const selectData = createSelector(
-    [getMembersPageSiderContentInvites],
-    (membersPageSiderContentInvites) => membersPageSiderContentInvites
+    [getMembersPageSiderInvites],
+    (membersPageSiderInvites) => membersPageSiderInvites
 );
 
 export const selectListData = createSelector(
-    [getMembersPageSiderContentInvites],
-    (membersPageSiderContentInvites) =>
-        _get(membersPageSiderContentInvites, ['data'], [])
+    [getMembersPageSiderInvites],
+    (membersPageSiderInvites) => _get(membersPageSiderInvites, ['data'], [])
 );
 
 export const selectListMetadata = createSelector(
-    [getMembersPageSiderContentInvites],
-    (membersPageSiderContentInvites) =>
-        _get(membersPageSiderContentInvites, ['metadata'], [])
+    [getMembersPageSiderInvites],
+    (membersPageSiderInvites) => _get(membersPageSiderInvites, ['metadata'], [])
 );
 
 export const selectListOptions = createSelector(
-    [getMembersPageSiderContentInvites],
-    (membersPageSiderContentInvites) =>
-        _get(membersPageSiderContentInvites, ['options'], undefined)
+    [getMembersPageSiderInvites],
+    (membersPageSiderInvites) =>
+        _get(membersPageSiderInvites, ['options'], undefined)
 );
 
 export const selectListIsFetching = createSelector(
-    [getMembersPageSiderContentInvites],
-    (membersPageSiderContentInvites) =>
-        _get(membersPageSiderContentInvites, ['isFetching'], false)
+    [getMembersPageSiderInvites],
+    (membersPageSiderInvites) =>
+        _get(membersPageSiderInvites, ['isFetching'], false)
 );

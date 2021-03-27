@@ -1,11 +1,11 @@
 // @ts-ignore
 import { static as Immutable } from 'seamless-immutable';
 import { createReducer } from 'reduxsauce';
-import { MembersPageSiderContentSearchTypes } from './actions';
-import { MembersPageSiderContentSearchInterface } from './types';
+import { MembersPageSiderSearchTypes } from './actions';
+import { MembersPageSiderSearchInterface } from './types';
 
 /* ------------- Initial State ------------- */
-const INITIAL_STATE: MembersPageSiderContentSearchInterface = {
+const INITIAL_STATE: MembersPageSiderSearchInterface = {
     key: undefined,
     isSearching: false,
     err: undefined,
@@ -44,10 +44,10 @@ function clearSearch(state: any) {
 }
 
 const HANDLERS = {
-    [MembersPageSiderContentSearchTypes.SEARCH]: search,
-    [MembersPageSiderContentSearchTypes.SEARCH_SUCCESS]: searchSuccess,
-    [MembersPageSiderContentSearchTypes.SEARCH_FAILURE]: searchFailure,
-    [MembersPageSiderContentSearchTypes.CLEAR_SEARCH]: clearSearch,
+    [MembersPageSiderSearchTypes.SEARCH]: search,
+    [MembersPageSiderSearchTypes.SEARCH_SUCCESS]: searchSuccess,
+    [MembersPageSiderSearchTypes.SEARCH_FAILURE]: searchFailure,
+    [MembersPageSiderSearchTypes.CLEAR_SEARCH]: clearSearch,
 };
 
 export const reducer = createReducer(INITIAL_STATE, HANDLERS);

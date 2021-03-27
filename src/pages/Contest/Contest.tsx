@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { get as _get } from 'lodash';
-import { ContentLayout } from '@layouts';
+import { AppLayoutContent } from '@layouts/AppLayout';
 import { ContestProps } from './types';
 import ContestPageActions from './actions';
 import ContestSider from './ContestSider';
@@ -23,7 +23,7 @@ const Contest: React.FunctionComponent<ContestProps> = () => {
     }, []);
 
     return (
-        <ContentLayout
+        <AppLayoutContent
             sider={<ContestSider />}
             content={<ContestContent />}
             className="contest-view"

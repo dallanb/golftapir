@@ -19,8 +19,8 @@ export const reducer = combineReducers({
 export { default as MembersPageSaga } from './saga';
 export { MembersPageContentMembersSaga } from './MembersContent';
 export {
-    MembersPageSiderContentSearchSaga,
-    MembersPageSiderContentInvitesSaga,
+    MembersPageSiderSearchSaga,
+    MembersPageSiderInvitesSaga,
 } from './MembersSider';
 // Routes
 export { default as MembersPageRoutes } from './routes';

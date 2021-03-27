@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { get as _get, set as _set } from 'lodash';
 import InvitesList from './InvitesList';
 import { InvitesProps } from './types';
-import MembersPageSiderContentInvitesActions from './actions';
+import MembersPageSiderInvitesActions from './actions';
 import { selectData } from './selector';
-import ComponentContent from '@layouts/ComponentContent';
+import { SiderComponentContent } from '@layouts/ComponentContent';
 import {
     selectLeagueMembers,
     selectLeagueMembersDataByStatus,
@@ -17,9 +17,9 @@ const Invites: React.FunctionComponent<InvitesProps> = ({}) => {
     const ref = useRef(null);
 
     useEffect(() => {
-        dispatch(MembersPageSiderContentInvitesActions.init());
+        dispatch(MembersPageSiderInvitesActions.init());
         return () => {
-            dispatch(MembersPageSiderContentInvitesActions.terminate());
+            dispatch(MembersPageSiderInvitesActions.terminate());
         };
     }, []);
 
@@ -43,7 +43,7 @@ const Invites: React.FunctionComponent<InvitesProps> = ({}) => {
     }
 
     return (
-        <ComponentContent
+        <SiderComponentContent
             componentRef={ref}
             showSpinner={
                 !isInitialized ||
@@ -61,7 +61,7 @@ const Invites: React.FunctionComponent<InvitesProps> = ({}) => {
                 data={[...pendingParticipants, ...invitedParticipants]}
                 isFetching={isFetching}
             />
-        </ComponentContent>
+        </SiderComponentContent>
     );
 };
 

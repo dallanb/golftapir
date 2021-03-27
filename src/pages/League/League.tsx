@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { ContentLayout } from '@layouts';
+import { AppLayoutContent } from '@layouts/AppLayout';
 import { LeagueProps } from './types';
 import LeaguePageActions from './actions';
 import LeagueHeader from './LeagueHeader';
@@ -23,7 +23,7 @@ const League: React.FunctionComponent<LeagueProps> = () => {
     }, []);
 
     return (
-        <ContentLayout
+        <AppLayoutContent
             header={<LeagueHeader />}
             content={<LeagueContent />}
             sider={<LeagueSider />}

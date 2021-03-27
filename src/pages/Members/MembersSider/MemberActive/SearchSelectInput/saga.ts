@@ -1,7 +1,7 @@
 import { AnyAction } from 'redux';
 import { all, call, delay, put, select, takeLatest } from 'redux-saga/effects';
-import MembersPageSiderContentSearchActions, {
-    MembersPageSiderContentSearchTypes,
+import MembersPageSiderSearchActions, {
+    MembersPageSiderSearchTypes,
 } from './actions';
 import { LeagueService, MemberService } from '@services';
 import { selectLeagueUUID } from '@selectors/AppSelector';
@@ -18,9 +18,9 @@ function* search({ key }: AnyAction) {
             search: key,
             include: 'avatar',
         });
-        yield put(MembersPageSiderContentSearchActions.searchSuccess(members));
+        yield put(MembersPageSiderSearchActions.searchSuccess(members));
     } catch (err) {
-        yield put(MembersPageSiderContentSearchActions.searchFailure(err));
+        yield put(MembersPageSiderSearchActions.searchFailure(err));
     }
 }
 
@@ -29,20 +29,20 @@ function* invite({ uuid: user_uuid, email }: AnyAction) {
         const uuid = yield select(selectLeagueUUID);
         yield call(LeagueService.createMember, uuid, { user_uuid, email }); // Trigger an api error that says this person cant be added since they already exist
         yield put(MembersPageContentMembersActions.refresh());
-        yield put(MembersPageSiderContentSearchActions.inviteSuccess());
+        yield put(MembersPageSiderSearchActions.inviteSuccess());
     } catch (err) {
         if (err.response.status == 400) {
             message.error(CONSTANTS.LEAGUE.ERROR.MEMBER_INVITE_DUPLICATE);
         } else {
             message.error(CONSTANTS.LEAGUE.ERROR.MEMBER_INVITE);
         }
-        yield put(MembersPageSiderContentSearchActions.inviteFailure(err));
+        yield put(MembersPageSiderSearchActions.inviteFailure(err));
     }
 }
 
-export default function* MembersPageSiderContentSearchSaga() {
+export default function* MembersPageSiderSearchSaga() {
     yield all([
-        takeLatest(MembersPageSiderContentSearchTypes.SEARCH, search),
-        takeLatest(MembersPageSiderContentSearchTypes.INVITE, invite),
+        takeLatest(MembersPageSiderSearchTypes.SEARCH, search),
+        takeLatest(MembersPageSiderSearchTypes.INVITE, invite),
     ]);
 }

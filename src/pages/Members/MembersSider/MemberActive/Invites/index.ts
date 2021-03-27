@@ -4,4 +4,4 @@ export { default } from './Invites';
 export { reducer } from './reducer';
 
 // Saga
-export { default as MembersPageSiderContentInvitesSaga } from './saga';
+export { default as MembersPageSiderInvitesSaga } from './saga';
