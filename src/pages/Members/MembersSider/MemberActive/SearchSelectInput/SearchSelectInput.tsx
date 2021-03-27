@@ -17,8 +17,8 @@ import { selectLeagueMembersDataByStatus } from '@selectors/AppSelector';
 import ComponentContent from '@layouts/ComponentContent';
 import routes from '@constants/routes';
 import './SearchSelectInput.less';
-import { checkMemberLimit } from '@pages/Members/MembersSider/MembersSiderContent/MemberActive/SearchSelectInput/utils';
-import optionRenderer from '@pages/Members/MembersSider/MembersSiderContent/MemberActive/SearchSelectInput/optionRenderer';
+import { checkMemberLimit } from '@pages/Members/MembersSider/MemberActive/SearchSelectInput/utils';
+import optionRenderer from '@pages/Members/MembersSider/MemberActive/SearchSelectInput/optionRenderer';
 
 const { Option } = Select;
 
