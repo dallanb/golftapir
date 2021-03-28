@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { get as _get } from 'lodash';
 import { AppLayoutContent } from '@layouts/AppLayout';
@@ -24,10 +24,8 @@ const ContestUpdate: React.FunctionComponent<ContestUpdateProps> = () => {
 
     return (
         <AppLayoutContent
-            // header={<ContestUpdateHeader />}
             content={<ContestUpdateContent />}
             sider={<ContestUpdateSider />}
-            // showSpinner={!isInitialized}
             className="contests-update-view"
         />
     );

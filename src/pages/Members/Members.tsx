@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AppLayoutContent } from '@layouts/AppLayout';
 import { MembersProps } from './types';
 import MembersPageActions from './actions';
-import MembersHeader from './MembersHeader';
 import MembersContent from './MembersContent';
 import MembersSider from './MembersSider';
 import { selectMyLeagueUUID } from '@selectors/BaseSelector';
@@ -23,10 +22,8 @@ const Members: React.FunctionComponent<MembersProps> = () => {
     }, []);
     return (
         <AppLayoutContent
-            // header={<MembersHeader />}
             content={<MembersContent />}
             sider={<MembersSider />}
-            // showSpinner={!isInitialized}
             className="members-view"
         />
     );

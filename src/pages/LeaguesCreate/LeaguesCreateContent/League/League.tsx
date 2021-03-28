@@ -45,7 +45,7 @@ const League: React.FunctionComponent<LeagueProps> = ({}) => {
         <ComponentContent
             title={'Create League'}
             showSpinner={!isInitialized}
-            className="league"
+            className="league-component-content"
         >
             <LeagueForm />
             <OverlaySpin visible={isSubmitting} />

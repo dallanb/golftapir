@@ -25,7 +25,7 @@ export {
     reducer as contestsPage,
     ContestsPageSaga,
     ContestsPageContentContestsSaga,
-    ContestsPageSiderContentSearchSaga,
+    ContestsPageSiderSearchSaga,
     ContestsPageRoutes,
 } from './Contests';
 export {
@@ -84,7 +84,7 @@ export {
     reducer as leaguesPage,
     LeaguesPageSaga,
     LeaguesPageContentLeaguesSaga,
-    LeaguesPageSiderContentSearchSaga,
+    LeaguesPageSiderSearchSaga,
     LeaguesPageRoutes,
 } from './Leagues';
 export {

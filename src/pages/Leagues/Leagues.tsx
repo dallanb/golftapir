@@ -5,7 +5,6 @@ import { AppLayoutContent } from '@layouts/AppLayout';
 import { selectData } from './selector';
 import LeaguesPageActions from './actions';
 import LeaguesSider from './LeaguesSider';
-import LeaguesHeader from './LeaguesHeader';
 import LeaguesContent from './LeaguesContent';
 import './Leagues.less';
 
@@ -22,10 +21,8 @@ const Leagues: React.FunctionComponent<LeaguesProps> = () => {
 
     return (
         <AppLayoutContent
-            header={<LeaguesHeader />}
             sider={<LeaguesSider />}
             content={<LeaguesContent />}
-            // showSpinner={!isInitialized}
             className="leagues-view"
         />
     );

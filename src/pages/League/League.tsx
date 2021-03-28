@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AppLayoutContent } from '@layouts/AppLayout';
 import { LeagueProps } from './types';
 import LeaguePageActions from './actions';
-import LeagueHeader from './LeagueHeader';
 import LeagueContent from './LeagueContent';
 import LeagueSider from './LeagueSider';
 import { selectData } from './selector';
@@ -24,10 +23,8 @@ const League: React.FunctionComponent<LeagueProps> = () => {
 
     return (
         <AppLayoutContent
-            header={<LeagueHeader />}
             content={<LeagueContent />}
             sider={<LeagueSider />}
-            // showSpinner={!isInitialized}
             className="league-view"
         />
     );

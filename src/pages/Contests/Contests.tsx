@@ -5,7 +5,6 @@ import { AppLayoutContent } from '@layouts/AppLayout';
 import { selectData } from './selector';
 import ContestsPageActions from './actions';
 import ContestsSider from './ContestsSider';
-import ContestsHeader from './ContestsHeader';
 import ContestsContent from './ContestsContent';
 import './Contests.less';
 
@@ -22,10 +21,8 @@ const Contests: React.FunctionComponent<ContestsProps> = () => {
 
     return (
         <AppLayoutContent
-            // header={<ContestsHeader />}
             sider={<ContestsSider />}
             content={<ContestsContent />}
-            // showSpinner={!isInitialized}
             className="contests-view"
         />
     );

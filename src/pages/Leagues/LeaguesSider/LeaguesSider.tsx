@@ -1,11 +1,26 @@
 import React from 'react';
-import AppLayoutSider from '@layouts/AppLayout/AppLayoutSider';
+import ComponentContent, {
+    SiderComponentContent,
+} from '@layouts/ComponentContent';
+import SiderLayoutContent from '@layouts/SiderLayout/SiderLayoutContent';
+import CreateButton from './CreateButton';
+import SearchInput from './SearchInput';
 import { LeaguesSiderProps } from './types';
-import LeaguesSiderContent from './LeaguesSiderContent';
 import './LeaguesSider.less';
 
-const LeaguesSider: React.FunctionComponent<LeaguesSiderProps> = () => {
-    return <AppLayoutSider content={<LeaguesSiderContent />} />;
+const LeaguesSider: React.FunctionComponent<LeaguesSiderProps> = ({}) => {
+    return (
+        <SiderLayoutContent>
+            <>
+                <SiderComponentContent className="search-input-component-content">
+                    <SearchInput />
+                </SiderComponentContent>
+                <SiderComponentContent className="create-button-component-content">
+                    <CreateButton />
+                </SiderComponentContent>
+            </>
+        </SiderLayoutContent>
+    );
 };
 
 export default LeaguesSider;
