@@ -50,7 +50,6 @@ const LeagueAppView: React.FunctionComponent<LeagueAppViewProps> = () => {
         uuid: leagueUUID,
     } = useSelector(selectAppData);
     const { me, isLoggedIn, forceLogout } = useSelector(selectBaseData);
-
     const name = _get(me, ['display_name'], '');
     const avatar = _get(me, ['avatar', 's3_filename'], '');
     const leagueName = _get(league, ['data', 'name'], '');
@@ -139,7 +138,6 @@ const LeagueAppView: React.FunctionComponent<LeagueAppViewProps> = () => {
         },
         role: memberRole,
     };
-
     if (!isReady || isFetching) return <AppLoading />;
     return (
         <AppLayout>

@@ -56,6 +56,9 @@ function* init({ uuid }: AnyAction) {
         yield put(LeagueAppActions.initSuccess());
     } catch (err) {
         yield put(LeagueAppActions.initFailure(err));
+        yield put(LeagueAppActions.initLeagueFailure(err));
+        yield put(LeagueAppActions.initLeagueMemberFailure(err));
+        yield put(LeagueAppActions.initLeagueMembersFailure(err));
     }
 }
 
