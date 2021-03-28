@@ -13,11 +13,11 @@ export {
     ContestPageContentContestLeaderboardSaga,
     ContestLeaderboardScoreChannel,
     ContestPageContentContestLeaderboardScorecardSaga,
-    ContestPageSiderContentCourseSaga,
-    ContestPageSiderContentParticipantActiveContestActiveSaga,
-    ContestPageSiderContentParticipantActiveContestPendingSaga,
+    ContestPageSiderCourseSaga,
+    ContestPageSiderParticipantActiveContestActiveSaga,
+    ContestPageSiderParticipantActiveContestPendingSaga,
     ContestStrokeUpdateChannel,
-    ContestPageSiderContentParticipantCompletedContestCompletedSaga,
+    ContestPageSiderParticipantCompletedContestCompletedSaga,
     ContestPageRoutes,
 } from './Contest';
 export {
