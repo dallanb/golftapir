@@ -15,6 +15,7 @@ const AppLayoutContent: React.FunctionComponent<AppLayoutContentProps> = ({
     className,
 }) => {
     const dimensions = useContext(ResizeContext);
+    const width = _get(dimensions, ['width'], 0);
 
     const renderHeader = () => {
         if (!header) {
@@ -25,7 +26,6 @@ const AppLayoutContent: React.FunctionComponent<AppLayoutContentProps> = ({
 
     const renderContent = () => {
         const res = [];
-        const width = _get(dimensions, ['width'], 0);
         if (content) {
             res.push(content);
         }
@@ -36,7 +36,7 @@ const AppLayoutContent: React.FunctionComponent<AppLayoutContentProps> = ({
     };
 
     const renderSider = () => {
-        if (!sider) {
+        if (!sider || width < 992) {
             return null;
         }
         return <AppLayoutSider content={sider} />;
