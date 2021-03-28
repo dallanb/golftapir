@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AppLayoutContent } from '@layouts/AppLayout';
 import { HomeProps } from './types';
 import HomePageActions from './actions';
-import HomeHeader from './HomeHeader';
 import HomeContent from './HomeContent';
 import HomeSider from './HomeSider';
 import { selectData } from './selector';

@@ -6,7 +6,7 @@ import { MemberStatsProps } from './types';
 import LeagueHomePageSiderMemberStatsActions from './actions';
 import { selectData, selectStat } from './selector';
 import { selectMeIsInitialized, selectMyStat } from '@selectors/BaseSelector';
-import ComponentContent from '@layouts/ComponentContent';
+import { SiderComponentContent } from '@layouts/ComponentContent';
 import Wins from './Wins';
 import Winnings from './Winnings';
 import WinPercentage from './WinPercentage';
@@ -35,7 +35,7 @@ const MemberStats: React.FunctionComponent<MemberStatsProps> = () => {
     }, []);
 
     return (
-        <ComponentContent
+        <SiderComponentContent
             showSpinner={!isInitialized || !meIsInitialized}
             className="member-stats-wins"
             title={'My Stats'}
@@ -43,7 +43,7 @@ const MemberStats: React.FunctionComponent<MemberStatsProps> = () => {
             <Wins value={winCount} />
             <WinPercentage value={winPercentage} />
             <Winnings value={winningTotal} />
-        </ComponentContent>
+        </SiderComponentContent>
     );
 };
 

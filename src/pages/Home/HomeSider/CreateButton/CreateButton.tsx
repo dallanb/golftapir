@@ -6,7 +6,7 @@ import routes from '@constants/routes';
 import { CreateButtonProps } from './types';
 import { navigate, withAppRoute } from '@utils';
 import constants from '@constants';
-import ComponentContent from '@layouts/ComponentContent';
+import { SiderComponentContent } from '@layouts/ComponentContent';
 import './CreateButton.less';
 
 const CreateButton: React.FunctionComponent<CreateButtonProps> = () => {
@@ -22,7 +22,7 @@ const CreateButton: React.FunctionComponent<CreateButtonProps> = () => {
     };
 
     return (
-        <ComponentContent
+        <SiderComponentContent
             title={'Actions'}
             className="create-button"
             bodyClassName={'create-button-body'}
@@ -30,7 +30,7 @@ const CreateButton: React.FunctionComponent<CreateButtonProps> = () => {
             <Button block type="primary" onClick={handleClick}>
                 Create League <PlusCircleOutlined />
             </Button>
-        </ComponentContent>
+        </SiderComponentContent>
     );
 };
 
