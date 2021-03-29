@@ -1,10 +1,9 @@
 import React from 'react';
-import AppLayoutSider from '@layouts/AppLayout/AppLayoutSider';
-import CoursesCreateSiderContent from './CoursesCreateSiderContent';
 import { CoursesCreateSiderProps } from './types';
+import SiderLayoutContent from '@layouts/SiderLayout/SiderLayoutContent';
 
 const CoursesCreateSider: React.FunctionComponent<CoursesCreateSiderProps> = () => {
-    return <AppLayoutSider content={<CoursesCreateSiderContent />} />;
+    return <SiderLayoutContent>{null}</SiderLayoutContent>;
 };
 
 export default CoursesCreateSider;

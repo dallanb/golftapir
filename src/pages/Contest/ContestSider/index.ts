@@ -4,16 +4,21 @@ import { combineReducers } from 'redux';
 export { default } from './ContestSider';
 
 // Reducer
-import { reducer as contentReducer } from './ContestSiderContent';
+import { reducer as courseReducer } from './Course';
+import { reducer as participantActiveReducer } from './ParticipantActive';
+import { reducer as participantCompletedReducer } from './ParticipantCompleted';
 export const reducer = combineReducers({
-    content: contentReducer,
+    course: courseReducer,
+    participantActive: participantActiveReducer,
+    participantCompleted: participantCompletedReducer,
 });
 
 // Saga
+export { ContestPageSiderCourseSaga } from './Course';
 export {
-    ContestPageSiderContentCourseSaga,
-    ContestPageSiderContentParticipantActiveContestActiveSaga,
-    ContestPageSiderContentParticipantActiveContestPendingSaga,
+    ContestPageSiderParticipantActiveContestActiveSaga,
+    ContestPageSiderParticipantActiveContestPendingSaga,
     ContestStrokeUpdateChannel,
-    ContestPageSiderContentParticipantCompletedContestCompletedSaga,
-} from './ContestSiderContent';
+} from './ParticipantActive';
+
+export { ContestPageSiderParticipantCompletedContestCompletedSaga } from './ParticipantCompleted';

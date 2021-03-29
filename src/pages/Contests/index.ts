@@ -18,6 +18,6 @@ export const reducer = combineReducers({
 // Saga
 export { default as ContestsPageSaga } from './saga';
 export { ContestsPageContentContestsSaga } from './ContestsContent';
-export { ContestsPageSiderContentSearchSaga } from './ContestsSider';
+export { ContestsPageSiderSearchSaga } from './ContestsSider';
 // Routes
 export { default as ContestsPageRoutes } from './routes';

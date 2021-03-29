@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { ContentLayout } from '@layouts';
+import { AppLayoutContent } from '@layouts/AppLayout';
 import { MemberSettingsProps } from './types';
 import MemberSettingsPageActions from './actions';
 import MemberSettingsContent from './MemberSettingsContent';
@@ -18,7 +18,7 @@ const MemberSettings: React.FunctionComponent<MemberSettingsProps> = () => {
     }, []);
 
     return (
-        <ContentLayout
+        <AppLayoutContent
             content={<MemberSettingsContent />}
             sider={<MemberSettingsSider />}
             className="member-settings-view"

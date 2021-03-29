@@ -1,11 +1,10 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ContestsProps } from './types';
-import { ContentLayout } from '@layouts';
+import { AppLayoutContent } from '@layouts/AppLayout';
 import { selectData } from './selector';
 import ContestsPageActions from './actions';
 import ContestsSider from './ContestsSider';
-import ContestsHeader from './ContestsHeader';
 import ContestsContent from './ContestsContent';
 import './Contests.less';
 
@@ -21,11 +20,9 @@ const Contests: React.FunctionComponent<ContestsProps> = () => {
     }, []);
 
     return (
-        <ContentLayout
-            // header={<ContestsHeader />}
+        <AppLayoutContent
             sider={<ContestsSider />}
             content={<ContestsContent />}
-            // showSpinner={!isInitialized}
             className="contests-view"
         />
     );

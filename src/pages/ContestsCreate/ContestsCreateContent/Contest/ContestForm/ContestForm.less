@@ -62,7 +62,10 @@
             flex-wrap: wrap;
             .contest-form-payout-input {
                 width: 100%;
-                flex: 0 32%;
+                flex: 0 0 32%;
+                @media (max-width: 768px) {
+                    flex: 1 0 30%;
+                }
                 padding-right: 8px;
                 .ant-form-item {
                     margin-bottom: 0;

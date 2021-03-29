@@ -2,10 +2,9 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { get as _get } from 'lodash';
-import { ContentLayout } from '@layouts';
+import { AppLayoutContent } from '@layouts/AppLayout';
 import { LeagueHomeProps } from './types';
 import LeagueHomePageActions from './actions';
-import LeagueHomeHeader from './LeagueHomeHeader';
 import LeagueHomeContent from './LeagueHomeContent';
 import LeagueHomeSider from './LeagueHomeSider';
 import { selectData } from './selector';
@@ -25,11 +24,9 @@ const LeagueHome: React.FunctionComponent<LeagueHomeProps> = () => {
     }, []);
 
     return (
-        <ContentLayout
-            // header={<LeagueHomeHeader />}
+        <AppLayoutContent
             content={<LeagueHomeContent />}
             sider={<LeagueHomeSider />}
-            // showSpinner={!isInitialized}
             className="league-home-view"
         />
     );

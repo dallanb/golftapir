@@ -1,10 +1,9 @@
 import React from 'react';
-import AppLayoutSider from '@layouts/AppLayout/AppLayoutSider';
-import LeaguesCreateSiderContent from './LeaguesCreateSiderContent';
 import { LeaguesCreateSiderProps } from './types';
+import SiderLayoutContent from '@layouts/SiderLayout/SiderLayoutContent';
 
-const LeaguesCreateSider: React.FunctionComponent<LeaguesCreateSiderProps> = () => {
-    return <AppLayoutSider content={<LeaguesCreateSiderContent />} />;
+const LeaguesCreateSider: React.FunctionComponent<LeaguesCreateSiderProps> = ({}) => {
+    return <SiderLayoutContent>{null}</SiderLayoutContent>;
 };
 
 export default LeaguesCreateSider;

@@ -22,11 +22,11 @@ export {
     ContestPageContentContestLeaderboardScorecardSaga,
 } from './ContestContent';
 export {
-    ContestPageSiderContentCourseSaga,
-    ContestPageSiderContentParticipantActiveContestActiveSaga,
-    ContestPageSiderContentParticipantActiveContestPendingSaga,
+    ContestPageSiderCourseSaga,
+    ContestPageSiderParticipantActiveContestActiveSaga,
+    ContestPageSiderParticipantActiveContestPendingSaga,
     ContestStrokeUpdateChannel,
-    ContestPageSiderContentParticipantCompletedContestCompletedSaga,
+    ContestPageSiderParticipantCompletedContestCompletedSaga,
 } from './ContestSider';
 
 // Routes

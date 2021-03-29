@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { ContentLayout } from '@layouts';
+import { AppLayoutContent } from '@layouts/AppLayout';
 import { LeaguesCreateProps } from './types';
 import LeaguesCreatePageActions from './actions';
-import LeaguesCreateHeader from './LeaguesCreateHeader';
 import LeaguesCreateContent from './LeaguesCreateContent';
 import LeaguesCreateSider from './LeaguesCreateSider';
 import { selectData } from './selector';
@@ -22,11 +21,9 @@ const LeaguesCreate: React.FunctionComponent<LeaguesCreateProps> = () => {
     }, []);
 
     return (
-        <ContentLayout
-            // header={<LeaguesCreateHeader />}
+        <AppLayoutContent
             content={<LeaguesCreateContent />}
             sider={<LeaguesCreateSider />}
-            // showSpinner={!isInitialized}
             className="leagues-create-view"
         />
     );
