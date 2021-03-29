@@ -32,6 +32,9 @@ const MemberPending: React.FunctionComponent<MemberPendingProps> = () => {
                 constants.STATUS.INACTIVE.KEY
             )
         );
+        dispatch(
+            SpinnerActions.openSpinner(CONSTANTS.PAGES.MEMBERS.INVITE.WAIT)
+        );
     };
 
     return (

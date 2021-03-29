@@ -17,6 +17,7 @@ import {
     AppTypes,
     BaseActions,
     LeagueTopicSocketActions,
+    SpinnerActions,
 } from '@actions';
 import { socketEventHandlers, topicSocketEventHandlers } from './utils';
 import { ClientProxy } from '@services';
@@ -124,6 +125,7 @@ function* leagueMemberActiveEvent({ uuid, payload }: AnyAction) {
         yield put(BaseActions.refreshMe(uuid));
         yield put(AppActions.refreshLeagueMember(uuid));
         yield put(AppActions.refreshLeagueMembers(uuid));
+        yield put(SpinnerActions.closeSpinner());
     } else {
         yield put(AppActions.refreshLeagueMembers(uuid));
     }
@@ -134,6 +136,7 @@ function* leagueMemberInactiveEvent({ uuid, payload }: AnyAction) {
     const myUserUUID = yield select(selectMyUserUUID);
     if (myUserUUID == sender) {
         yield put(AppActions.refreshLeagueMember(uuid));
+        yield put(SpinnerActions.closeSpinner());
     } else {
         yield put(AppActions.refreshLeagueMembers(uuid));
     }
