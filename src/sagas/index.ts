@@ -11,4 +11,5 @@ export { default as MemberSaga } from './MemberSaga';
 export { default as NotificationSaga } from './NotificationSaga';
 export { default as ScoreSaga } from './ScoreSaga';
 export { default as SocketSaga } from './SocketSaga';
+export { default as SpinnerSaga } from './SpinnerSaga';
 export { default as WagerSaga } from './WagerSaga';

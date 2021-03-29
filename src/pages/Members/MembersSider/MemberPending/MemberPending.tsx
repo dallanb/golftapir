@@ -8,6 +8,7 @@ import constants from '@constants';
 import ComponentContent from '@layouts/ComponentContent';
 import CONSTANTS from '@locale/en-CA';
 import './MemberPending.less';
+import { SpinnerActions } from '@actions';
 
 const MemberPending: React.FunctionComponent<MemberPendingProps> = () => {
     const dispatch = useDispatch();
@@ -18,6 +19,9 @@ const MemberPending: React.FunctionComponent<MemberPendingProps> = () => {
                 member.data.uuid,
                 constants.STATUS.ACTIVE.KEY
             )
+        );
+        dispatch(
+            SpinnerActions.openSpinner(CONSTANTS.PAGES.MEMBERS.INVITE.WAIT)
         );
     };
 
