@@ -9,7 +9,7 @@ const UserCard: React.FunctionComponent<UserCardProps> = ({ name, avatar }) => {
     return (
         <div className="user-card">
             <div className="user-card-avatar">
-                <Avatar src={avatar && withS3URL(avatar)} name={name} />
+                <Avatar src={avatar && withS3URL(avatar)} name={name} border />
             </div>
             <div className="user-card-name">{name}</div>
         </div>

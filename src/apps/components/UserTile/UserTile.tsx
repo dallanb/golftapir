@@ -26,6 +26,7 @@ const UserTile: React.FunctionComponent<UserTileProps> = () => {
                         shape={'square'}
                         size={48}
                         className="user-tile-avatar"
+                        border
                     />
                 </div>
                 <div className="user-tile-user">

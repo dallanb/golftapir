@@ -13,7 +13,13 @@ const MemberTile: React.FunctionComponent<MemberTileProps> = ({ member }) => {
     return (
         <div className="member-tile">
             <div className="member-tile-avatar">
-                <Avatar name={name} src={src} size={20} shape={'square'} />
+                <Avatar
+                    name={name}
+                    src={src}
+                    size={20}
+                    shape={'square'}
+                    border
+                />
             </div>
             <div className="member-tile-name">{name}</div>
             <div className="member-tile-username">{username}</div>

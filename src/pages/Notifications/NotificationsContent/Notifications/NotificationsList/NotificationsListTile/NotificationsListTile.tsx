@@ -53,6 +53,7 @@ const NotificationsListTile: React.FunctionComponent<NotificationsListTileProps>
                                 name={name}
                                 size={48}
                                 shape="square"
+                                border
                             />
                         </div>
                         <div className="notifications-list-tile-content-info">

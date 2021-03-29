@@ -70,6 +70,7 @@ const MembersListTile: React.FunctionComponent<MembersListTileProps> = ({
                                 name={name}
                                 size={48}
                                 shape={'square'}
+                                border
                             />
                         </div>
                         <div className="members-list-tile-content-main-info">

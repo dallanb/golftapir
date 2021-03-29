@@ -253,6 +253,7 @@ const fieldRenderer = (
                     shape={_get(options, ['shape'], undefined)}
                     size={_get(options, ['size'], undefined)}
                     className={_get(options, ['className'], '')}
+                    border={_get(options, ['border'], false)}
                 />
             );
 
