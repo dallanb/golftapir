@@ -11,6 +11,7 @@ import {
     selectIsInitialized,
 } from '@pages/Contest/selector';
 import { selectLeagueMembersDataHashByMember } from '@selectors/AppSelector';
+import CONSTANTS from '@locale/en-CA';
 import './ContestCompleted.less';
 
 const ContestCompleted: React.FunctionComponent<ContestCompletedProps> = () => {
@@ -25,7 +26,7 @@ const ContestCompleted: React.FunctionComponent<ContestCompletedProps> = () => {
     return (
         <SiderComponentContent
             className="contest-completed space"
-            title="Winner"
+            title={CONSTANTS.PAGES.CONTEST.WINNER}
             showSpinner={!isInitialized}
         >
             <div className="contest-completed-value">

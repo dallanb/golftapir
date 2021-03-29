@@ -12,6 +12,7 @@ import { OverlaySpin } from '@components';
 import './League.less';
 import { navigate, withAppRoute } from '@utils';
 import constants from '@constants';
+import CONSTANTS from '@locale/en-CA';
 
 const League: React.FunctionComponent<LeagueProps> = ({}) => {
     const dispatch = useDispatch();
@@ -43,7 +44,7 @@ const League: React.FunctionComponent<LeagueProps> = ({}) => {
 
     return (
         <ComponentContent
-            title={'Create League'}
+            title={CONSTANTS.PAGES.LEAGUES_CREATE.FORM.TITLE}
             showSpinner={!isInitialized}
             className="league-component-content"
         >

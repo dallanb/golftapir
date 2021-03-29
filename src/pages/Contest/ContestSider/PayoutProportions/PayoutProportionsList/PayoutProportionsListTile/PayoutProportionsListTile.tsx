@@ -6,6 +6,7 @@ import { PayoutProportionsListTileProps } from './types';
 import { ordinalSuffix } from '@utils';
 import './PayoutProportionsListTile.less';
 import constants from '@constants';
+import CONSTANTS from '@locale/en-CA';
 
 const PayoutProportionListTile: React.FunctionComponent<PayoutProportionsListTileProps> = ({
     props: { index, style, data },
@@ -29,7 +30,9 @@ const PayoutProportionListTile: React.FunctionComponent<PayoutProportionsListTil
                     <div className="payout-proportions-tile-content-main">
                         <div className="payout-proportions-tile-content-main-info">
                             <div className="payout-proportions-tile-content-main-rank">
-                                {`${ordinalSuffix(rank)} place`}
+                                {`${ordinalSuffix(
+                                    rank
+                                )} ${CONSTANTS.COMMON.PLACE.toLowerCase()}`}
                             </div>
                         </div>
                     </div>

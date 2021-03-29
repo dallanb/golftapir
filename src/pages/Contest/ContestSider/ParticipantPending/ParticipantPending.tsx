@@ -11,6 +11,7 @@ import { selectMyWalletBalance } from '@selectors/BaseSelector';
 import constants from '@constants';
 import { SiderComponentContent } from '@layouts/ComponentContent';
 import './ParticipantPending.less';
+import CONSTANTS from '@locale/en-CA';
 
 const ParticipantPending: React.FunctionComponent<ParticipantPendingProps> = () => {
     const dispatch = useDispatch();
@@ -40,7 +41,7 @@ const ParticipantPending: React.FunctionComponent<ParticipantPendingProps> = () 
         <SiderComponentContent
             className="participant-pending space"
             bodyClassName={'participant-pending-body'}
-            title={'Actions'}
+            title={CONSTANTS.COMMON.ACTIONS}
         >
             <div className="participant-pending-buttons">
                 <div className="participant-pending-buttons-button active">

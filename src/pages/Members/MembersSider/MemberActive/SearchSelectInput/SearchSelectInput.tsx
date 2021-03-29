@@ -68,14 +68,14 @@ const SearchSelectInput: React.FunctionComponent<SearchInputProps> = () => {
         <SiderComponentContent
             className="search-input-component-content"
             bodyClassName={'search-input-component-content-body'}
-            title={'Invite'}
+            title={CONSTANTS.PAGES.MEMBERS.INVITE_FORM.TITLE}
         >
             <div className="search-select-input-wrapper">
                 <Select
                     showSearch
                     disabled={disabled}
                     value={value}
-                    placeholder={CONSTANTS.PAGES.MEMBERS.SEARCH}
+                    placeholder={CONSTANTS.PAGES.MEMBERS.INVITE_FORM.SEARCH}
                     loading={isSearching}
                     filterOption={false}
                     onSearch={_debounce(onSearch, 300, { maxWait: 1000 })}

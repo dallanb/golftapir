@@ -11,6 +11,7 @@ import {
     selectPayoutIsFetching,
 } from '@pages/Contest/selector';
 import './PayoutProportions.less';
+import CONSTANTS from '@locale/en-CA';
 
 const PayoutProportions: React.FunctionComponent<PayoutProportionsProps> = () => {
     const ref = useRef(null);
@@ -28,7 +29,7 @@ const PayoutProportions: React.FunctionComponent<PayoutProportionsProps> = () =>
     return (
         <SiderComponentContent
             componentRef={ref}
-            title={'Payout'}
+            title={CONSTANTS.PAGES.CONTEST.PAYOUT}
             extra={<PayoutProportionsExtra />}
             showSpinner={isFetching}
             bodyStyle={dimensions}

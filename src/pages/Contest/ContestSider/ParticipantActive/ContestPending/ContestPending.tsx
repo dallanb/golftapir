@@ -6,8 +6,9 @@ import { SiderComponentContent } from '@layouts/ComponentContent';
 import PendingParticipantsList from './PendingParticipantsList';
 import { selectData } from './selector';
 import ContestPageSiderParticipantActiveContestPendingActions from './actions';
-import './ContestPending.less';
 import { selectLeagueMembersIsFetching } from '@selectors/AppSelector';
+import CONSTANTS from '@locale/en-CA';
+import './ContestPending.less';
 
 const ContestPending: React.FunctionComponent<ContestPendingProps> = () => {
     const dispatch = useDispatch();
@@ -46,7 +47,7 @@ const ContestPending: React.FunctionComponent<ContestPendingProps> = () => {
             className="contest-pending-component-content space"
             bodyClassName="invites-component-content-body"
             bodyStyle={dimensions}
-            title={'Pending Participants'}
+            title={CONSTANTS.PAGES.CONTEST.PENDING_PARTICIPANTS}
         >
             <PendingParticipantsList
                 containerRef={ref}

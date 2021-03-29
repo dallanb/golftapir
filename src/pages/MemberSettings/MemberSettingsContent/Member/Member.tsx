@@ -8,6 +8,7 @@ import { selectIsInitialized, selectIsSubmitting } from './selector';
 import ComponentContent from '@layouts/ComponentContent';
 import { OverlaySpin } from '@components';
 import './Member.less';
+import CONSTANTS from '@locale/en-CA';
 
 const MemberSettings: React.FunctionComponent<MemberSettingsProps> = ({}) => {
     const dispatch = useDispatch();
@@ -34,7 +35,7 @@ const MemberSettings: React.FunctionComponent<MemberSettingsProps> = ({}) => {
         <ComponentContent
             showSpinner={!isInitialized || !isDataInitialized}
             className="member-component-content"
-            title={'Settings'}
+            title={CONSTANTS.PAGES.MEMBER_SETTINGS.FORM.TITLE}
         >
             <MemberForm />
             <OverlaySpin visible={isSubmitting} />

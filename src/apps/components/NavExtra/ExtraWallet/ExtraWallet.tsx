@@ -18,6 +18,7 @@ import {
 import constants from '@constants';
 import { statusToRole } from '@utils';
 import './ExtraWallet.less';
+import CONSTANTS from '@locale/en-CA';
 
 const ExtraWallet: React.FunctionComponent<ExtraWalletProps> = ({}) => {
     const dispatch = useDispatch();
@@ -54,7 +55,7 @@ const ExtraWallet: React.FunctionComponent<ExtraWalletProps> = ({}) => {
             >
                 <div className="nav-extra-wallet-balance">
                     <div className="nav-extra-wallet-balance-label">
-                        Total Balance
+                        {CONSTANTS.COMMON.BALANCE}
                     </div>
                     <div className="nav-extra-wallet-balance-amount">
                         <DollarTwoTone

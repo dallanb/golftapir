@@ -13,6 +13,7 @@ import {
 } from '@selectors/AppSelector';
 import { organizeMembers } from '@pages/Members/utils';
 import './Members.less';
+import CONSTANTS from '@locale/en-CA';
 
 const Members: React.FunctionComponent<MembersProps> = ({}) => {
     const dispatch = useDispatch();
@@ -45,7 +46,7 @@ const Members: React.FunctionComponent<MembersProps> = ({}) => {
             componentRef={ref}
             showSpinner={showSpinner}
             className="members-component-content"
-            title={'Members List'}
+            title={CONSTANTS.PAGES.MEMBERS.LIST.TITLE}
         >
             <MembersList
                 containerRef={ref}

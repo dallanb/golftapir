@@ -10,6 +10,7 @@ import { getName, navigate, withAppRoute, withS3URL } from '@utils';
 import routes from '@constants/routes';
 import './ScorecardParticipant.less';
 import { selectMyLeagueUUID } from '@selectors/BaseSelector';
+import CONSTANTS from '@locale/en-CA';
 
 const ScorecardParticipant: React.FunctionComponent<ScorecardParticipantProps> = ({
     user,
@@ -42,7 +43,7 @@ const ScorecardParticipant: React.FunctionComponent<ScorecardParticipantProps> =
                         type="primary"
                         key="message"
                     >
-                        Message
+                        {CONSTANTS.COMMON.MESSAGE}
                     </Button>
                 </div>
                 <div className="scorecard-participant-button profile">
@@ -67,7 +68,7 @@ const ScorecardParticipant: React.FunctionComponent<ScorecardParticipantProps> =
                             )
                         }
                     >
-                        Profile
+                        {CONSTANTS.COMMON.PROFILE}
                     </Button>
                 </div>
             </div>

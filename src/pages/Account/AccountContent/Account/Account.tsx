@@ -8,6 +8,7 @@ import { OverlaySpin } from '@components';
 import { selectIsInitialized as selectIsDataInitialized } from '@pages/Account/selector';
 import { selectIsInitialized, selectIsSubmitting } from './selector';
 import './Account.less';
+import CONSTANTS from '@locale/en-CA';
 
 const Account: React.FunctionComponent<AccountProps> = ({}) => {
     const dispatch = useDispatch();
@@ -35,7 +36,7 @@ const Account: React.FunctionComponent<AccountProps> = ({}) => {
             showSpinner={!isInitialized || !isDataInitialized}
             className="account"
             bodyClassName="account-content"
-            title={'Account Settings'}
+            title={CONSTANTS.PAGES.ACCOUNT.FORM.TITLE}
         >
             <AccountForm />
             <OverlaySpin visible={isSubmitting} />

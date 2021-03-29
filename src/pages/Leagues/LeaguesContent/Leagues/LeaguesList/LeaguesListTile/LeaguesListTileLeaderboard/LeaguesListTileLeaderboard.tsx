@@ -5,6 +5,7 @@ import { findLowestScoringParticipant } from '@pages/Leagues/utils';
 import './LeaguesListTileLeaderboard.less';
 import { withS3URL } from '@utils';
 import { Avatar } from '@components';
+import CONSTANTS from '@locale/en-CA';
 
 const LeaguesListTileLeaderboard: React.FunctionComponent<LeaguesListTileLeaderboardProps> = ({
     status,
@@ -22,7 +23,9 @@ const LeaguesListTileLeaderboard: React.FunctionComponent<LeaguesListTileLeaderb
                 const participantScore = participant.score;
                 return (
                     <div className="leaderboard-active">
-                        <div className="leaderboard-active-label">LEADER</div>
+                        <div className="leaderboard-active-label">
+                            {CONSTANTS.PAGES.CONTESTS.LIST.LEADER.toUpperCase()}
+                        </div>
                         <div className="leaderboard-active-content">
                             <div className="leaderboard-active-content-avatar">
                                 <Avatar
@@ -48,7 +51,7 @@ const LeaguesListTileLeaderboard: React.FunctionComponent<LeaguesListTileLeaderb
                 return (
                     <div className="leaderboard-completed">
                         <div className="leaderboard-completed-label">
-                            WINNER
+                            {CONSTANTS.PAGES.CONTESTS.LIST.WINNER.toUpperCase()}
                         </div>
                         <div className="leaderboard-completed-content">
                             {participantName}

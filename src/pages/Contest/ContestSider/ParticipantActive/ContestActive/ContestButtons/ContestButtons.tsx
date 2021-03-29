@@ -8,6 +8,7 @@ import constants from '@constants';
 import { SiderComponentContent } from '@layouts/ComponentContent';
 import { selectData } from '../selector';
 import './ContestButtons.less';
+import CONSTANTS from '@locale/en-CA';
 
 const ContestButtons: React.FunctionComponent<ContestButtonsProps> = () => {
     const dispatch = useDispatch();
@@ -27,7 +28,7 @@ const ContestButtons: React.FunctionComponent<ContestButtonsProps> = () => {
             showSpinner={!isInitialized}
             className="contest-buttons space"
             bodyClassName="contest-buttons-body"
-            title={'Actions'}
+            title={CONSTANTS.COMMON.ACTIONS}
         >
             <Button
                 block

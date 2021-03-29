@@ -17,6 +17,7 @@ import { ModalActions } from '@actions';
 import { bodyRenderer, footerRenderer, headerRenderer } from './WalletModal';
 import './Wallet.less';
 import routes from '@constants/routes';
+import CONSTANTS from '@locale/en-CA';
 
 const Wallet: React.FunctionComponent<WalletProps> = () => {
     const dispatch = useDispatch();
@@ -35,7 +36,9 @@ const Wallet: React.FunctionComponent<WalletProps> = () => {
         >
             <div className="wallet-main">
                 <div className="wallet-balance">
-                    <div className="wallet-balance-label">Your Balance</div>
+                    <div className="wallet-balance-label">
+                        {CONSTANTS.COMMON.BALANCE}
+                    </div>
                     <div className="wallet-balance-amount">
                         <DollarTwoTone
                             twoToneColor={'orange'}
@@ -65,7 +68,7 @@ const Wallet: React.FunctionComponent<WalletProps> = () => {
                         }
                         icon={<PlusOutlined />}
                     >
-                        Add
+                        {CONSTANTS.COMPONENTS.WALLET.ADD_MODAL.ADD}
                     </Button>
                 </div>
             </div>

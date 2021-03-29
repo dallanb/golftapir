@@ -10,6 +10,7 @@ import { selectData } from './selector';
 import { navigate, withAppRoute } from '@utils';
 import routes from '@constants/routes';
 import './Calendar.less';
+import CONSTANTS from '@locale/en-CA';
 
 const Calendar: React.FunctionComponent<CalendarProps> = () => {
     const dispatch = useDispatch();
@@ -63,7 +64,7 @@ const Calendar: React.FunctionComponent<CalendarProps> = () => {
         <ComponentContent
             showSpinner={!isInitialized || isFetching}
             className="calendar-component-content space"
-            title={'Upcoming Events'}
+            title={CONSTANTS.PAGES.LEAGUE_HOME.CALENDAR.TITLE}
         >
             <ComponentCalendar
                 date={date}

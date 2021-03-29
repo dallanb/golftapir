@@ -12,6 +12,7 @@ import { selectLeagueUUID } from '@selectors/AppSelector';
 import { navigate, withAppRoute, withS3URL } from '@utils';
 import constants from '@constants';
 import './UserTileExtra.less';
+import CONSTANTS from '@locale/en-CA';
 
 const UserTileExtra: React.FunctionComponent<UserTileExtraProps> = ({
     user,
@@ -69,7 +70,7 @@ const UserTileExtra: React.FunctionComponent<UserTileExtraProps> = ({
                     )
                 }
             >
-                Log out{' '}
+                {CONSTANTS.COMMON.LOG_OUT}{' '}
                 <span className="user-tile-extra-username">
                     {user.username}
                 </span>

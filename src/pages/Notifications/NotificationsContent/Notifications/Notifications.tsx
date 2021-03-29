@@ -6,6 +6,7 @@ import NotificationsPageContentNotificationsActions from './actions';
 import { selectData } from './selector';
 import ComponentContent from '@layouts/ComponentContent';
 import './Notifications.less';
+import CONSTANTS from '@locale/en-CA';
 
 const Notifications: React.FunctionComponent<NotificationsProps> = ({}) => {
     const dispatch = useDispatch();
@@ -31,7 +32,7 @@ const Notifications: React.FunctionComponent<NotificationsProps> = ({}) => {
             componentRef={ref}
             showSpinner={!isInitialized}
             className="notifications"
-            title={'Notifications List'}
+            title={CONSTANTS.PAGES.NOTIFICATIONS.LIST.TITLE}
         >
             <NotificationsList
                 containerRef={ref}
