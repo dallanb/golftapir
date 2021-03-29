@@ -13,6 +13,7 @@ import { navigate, withAppRoute } from '@utils';
 import { ModalActions } from '@actions';
 import { headerRenderer, bodyRenderer } from './CourseSuccessModal';
 import './Course.less';
+import CONSTANTS from '@locale/en-CA';
 
 const Course: React.FunctionComponent<CourseProps> = ({}) => {
     const dispatch = useDispatch();
@@ -49,7 +50,7 @@ const Course: React.FunctionComponent<CourseProps> = ({}) => {
 
     return (
         <ComponentContent
-            title={'Create Course'}
+            title={CONSTANTS.PAGES.COURSES_CREATE.TITLE}
             showSpinner={!isInitialized}
             className="course"
         >

@@ -1,4 +1,14 @@
 const CONSTANTS = {
+    COMMON: {
+        ACTIONS: 'Actions',
+        BALANCE: 'Total Balance',
+        LOG_OUT: 'Log out',
+        LOGOUT: 'Logout',
+        MESSAGE: 'Message',
+        PLACE: 'Place',
+        PROFILE: 'Profile',
+        SEARCH: 'Search',
+    },
     FORM: {
         UPLOAD: 'Upload',
         SUBMIT: 'Submit',
@@ -261,15 +271,29 @@ const CONSTANTS = {
         HOME: {
             TITLE: 'Home',
             DESCRIPTION: 'Home Page',
-            LEAGUES: 'Leagues List',
+            LEAGUES: {
+                TITLE: 'Leagues List',
+                EMPTY: 'No Leagues',
+            },
             MEMBER: 'Player Card',
+            CREATE_LEAGUE: 'Create League',
         },
         LEAGUE_HOME: {
             TITLE: 'League Home',
             DESCRIPTION: 'League Home Page',
-            STANDINGS: 'Member Standings',
             LEAGUE: 'League Info',
+            STANDINGS: {
+                TITLE: 'Member Standings',
+                TABLE: {
+                    COUNTRY: 'Country',
+                    MEMBER: 'Member',
+                    EVENTS: 'Contests',
+                    WINS: 'Wins',
+                    WINNINGS: 'Winnings',
+                },
+            },
             STATS: {
+                TITLE: 'My Stats',
                 WINS: 'Wins',
                 WIN_PERCENTAGE: 'Win Percentage',
                 WINNINGS: 'Winnings',
@@ -289,12 +313,18 @@ const CONSTANTS = {
                     STATUS: 'Status',
                 },
             },
+            CALENDAR: {
+                TITLE: 'Upcoming Events',
+            },
         },
         CONTEST: {
             TITLE: 'Contest',
             DESCRIPTION: 'Contest Info',
             INFO: 'Contest Info',
-            LEADERBOARD: 'Leaderboard',
+            COURSE: 'Course',
+            WINNER: 'Winner',
+            PAYOUT: 'Payout',
+            PENDING_PARTICIPANTS: 'Pending Participants',
             FORM: {
                 LABELS: {
                     NAME: 'Name',
@@ -323,15 +353,45 @@ const CONSTANTS = {
                     DESCRIPTION: 'League complete.',
                 },
             },
+            LEADERBOARD: {
+                TITLE: 'Leaderboard',
+                TABLE: {
+                    POSITION: 'Pos',
+                    COUNTRY: 'Country',
+                    PARTICIPANT: 'Member',
+                    SCORE: 'Score',
+                    STROKES: 'Strokes',
+                },
+            },
+            SCORECARD: {
+                HOLE: 'Hole',
+                PAR: 'Par',
+                DISTANCE: 'Dist',
+                EAGLE: 'Eagle',
+                BIRDIE: 'Birdie',
+                BOGEY: 'Bogey',
+                DOUBLE_BOGEY: 'Double Bogey',
+            },
         },
         CONTESTS: {
             TITLE: 'Contests',
             DESCRIPTION: 'View Contests',
             SEARCH: 'Search Contests',
+            LIST: {
+                TITLE: 'Contests List',
+                EMPTY: 'No Contests',
+                LEADER: 'Leader',
+                WINNER: 'Winner',
+            },
+            CREATE_CONTEST: 'Create Contest',
         },
         NOTIFICATIONS: {
             TITLE: 'Notifications',
             DESCRIPTION: 'View Notifications',
+            LIST: {
+                TITLE: 'Notifications List',
+                EMPTY: 'No Notifications',
+            },
         },
         COMPETITOR: {
             TITLE: 'Competitor',
@@ -345,6 +405,7 @@ const CONSTANTS = {
             TITLE: 'Contests',
             DESCRIPTION: 'Create League',
             FORM: {
+                TITLE: 'Create Contest',
                 LABELS: {
                     NAME: 'Name',
                     AVATAR: 'Avatar',
@@ -377,6 +438,7 @@ const CONSTANTS = {
             TITLE: 'Contest Update',
             DESCRIPTION: 'Update Contest',
             FORM: {
+                TITLE: 'Update Contest',
                 LABELS: {
                     NAME: 'Name',
                     AVATAR: 'Avatar',
@@ -414,13 +476,15 @@ const CONSTANTS = {
             },
             SUCCESS_MODAL: {
                 TITLE: 'Thank you for adding a course',
-                DESCRIPTION: ' will be added to your balance after the course has been approved by an administrator'
+                DESCRIPTION:
+                    ' will be added to your balance after the course has been approved by an administrator',
             },
         },
         ACCOUNT: {
             TITLE: 'Account',
             DESCRIPTION: 'Update League Settings',
             FORM: {
+                TITLE: 'Account Settings',
                 LABELS: {
                     AVATAR: 'Avatar',
                     UPLOAD_AVATAR: 'Upload Avatar',
@@ -472,16 +536,29 @@ const CONSTANTS = {
                     COUNTRY: 'Country',
                 },
             },
+            LIST: {
+                EMPTY: 'No Contests',
+            },
         },
         MEMBERS: {
             TITLE: 'Members',
             DESCRIPTION: 'View Members',
-            SEARCH: 'Invite Members',
+            INVITES: 'Invites',
+            LIST: {
+                TITLE: 'Members List',
+                EMPTY: 'No Members',
+                MEMBER_SINCE: 'Member Since',
+            },
+            INVITE_FORM: {
+                TITLE: 'Invite',
+                SEARCH: 'Invite Members',
+            },
         },
         MEMBERS_CREATE: {
             TITLE: 'Members',
             DESCRIPTION: 'Invite Member',
             FORM: {
+                TITLE: 'Invite Member',
                 LABELS: {
                     EMAIL: 'Email',
                 },
@@ -495,11 +572,13 @@ const CONSTANTS = {
             TITLE: 'Leagues',
             DESCRIPTION: 'View Leagues',
             SEARCH: 'Search League',
+            CREATE_LEAGUE: 'Create League',
         },
         LEAGUES_CREATE: {
             TITLE: 'Leagues',
             DESCRIPTION: 'Create League',
             FORM: {
+                TITLE: 'Create League',
                 LABELS: {
                     AVATAR: 'Avatar',
                     UPLOAD_AVATAR: 'Upload Avatar',
@@ -517,6 +596,7 @@ const CONSTANTS = {
             TITLE: 'Member Settings',
             DESCRIPTION: 'Update Member Settings',
             FORM: {
+                TITLE: 'Settings',
                 LABELS: {
                     AVATAR: 'Avatar',
                     UPLOAD_AVATAR: 'Upload Avatar',
@@ -544,6 +624,7 @@ const CONSTANTS = {
                 TITLE: 'Add Funds',
                 DESCRIPTION:
                     'Would you like to add a course to Golf Tapir for ',
+                ADD: 'Add',
             },
         },
     },

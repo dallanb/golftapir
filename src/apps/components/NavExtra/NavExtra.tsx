@@ -26,6 +26,7 @@ import { Avatar, PendingBadge } from '@components';
 import ExtraWallet from './ExtraWallet';
 import OverlayMenu from '@apps/components/OverlayMenu';
 import './NavExtra.less';
+import CONSTANTS from '@locale/en-CA';
 
 const NavExtra: React.FunctionComponent<NavExtraProps> = () => {
     const history = useHistory();
@@ -85,7 +86,8 @@ const NavExtra: React.FunctionComponent<NavExtraProps> = () => {
                     )
                 }
             >
-                Log out <span className="nav-extra-username">{username}</span>
+                {CONSTANTS.COMMON.LOG_OUT}{' '}
+                <span className="nav-extra-username">{username}</span>
             </Menu.Item>,
         ];
         return [...leagueMenuItems, ...authMenuItems];

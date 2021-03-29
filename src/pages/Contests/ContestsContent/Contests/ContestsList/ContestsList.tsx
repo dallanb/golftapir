@@ -6,6 +6,7 @@ import { FixedSizeList, ContestTile } from '@components';
 import ContestsPageContentContestsActions from '../actions';
 import { getRefHeight } from '@utils';
 import './ContestsList.less';
+import CONSTANTS from '@locale/en-CA';
 
 const ContestsList: React.FunctionComponent<ContestsListProps> = ({
     containerRef,
@@ -49,7 +50,7 @@ const ContestsList: React.FunctionComponent<ContestsListProps> = ({
             isNextPageLoading={isFetching}
             minimumBatchSize={10}
             rowRenderer={(props) => ContestTile({ props, history, params })}
-            emptyDescription={'No Contests'}
+            emptyDescription={CONSTANTS.PAGES.CONTESTS.LIST.EMPTY}
         />
     );
 };

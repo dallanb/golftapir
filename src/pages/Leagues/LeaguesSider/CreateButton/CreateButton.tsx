@@ -7,6 +7,7 @@ import { CreateButtonProps } from './types';
 import './CreateButton.less';
 import { navigate, withAppRoute } from '@utils';
 import constants from '@constants';
+import CONSTANTS from '@locale/en-CA';
 
 const CreateButton: React.FunctionComponent<CreateButtonProps> = () => {
     const history = useHistory();
@@ -23,7 +24,7 @@ const CreateButton: React.FunctionComponent<CreateButtonProps> = () => {
     return (
         <div className="create-button">
             <Button block type="primary" onClick={handleClick}>
-                Create League <PlusCircleOutlined />
+                {CONSTANTS.PAGES.LEAGUES.CREATE_LEAGUE} <PlusCircleOutlined />
             </Button>
         </div>
     );

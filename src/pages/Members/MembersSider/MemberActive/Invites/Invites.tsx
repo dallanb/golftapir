@@ -11,6 +11,7 @@ import {
     selectLeagueMembersDataByStatus,
 } from '@selectors/AppSelector';
 import './Invites.less';
+import CONSTANTS from '@locale/en-CA';
 
 const Invites: React.FunctionComponent<InvitesProps> = ({}) => {
     const dispatch = useDispatch();
@@ -53,7 +54,7 @@ const Invites: React.FunctionComponent<InvitesProps> = ({}) => {
             className="invites space"
             bodyClassName="invites-component-content-body"
             bodyStyle={dimensions}
-            title={'Invites'}
+            title={CONSTANTS.PAGES.MEMBERS.INVITES}
         >
             <InvitesList
                 containerRef={ref}

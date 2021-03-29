@@ -1,12 +1,13 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
+import { get as _get } from 'lodash';
 import { MemberResultsListProps } from './types';
 import { ContestTile, FixedSizeList } from '@components';
 import { getRefHeight } from '@utils';
 import MemberPageContentMemberResultsActions from '../actions';
+import CONSTANTS from '@locale/en-CA';
 import './MemberResultsList.less';
-import { get as _get } from 'lodash';
 
 const MemberResultsList: React.FunctionComponent<MemberResultsListProps> = ({
     containerRef,
@@ -29,7 +30,6 @@ const MemberResultsList: React.FunctionComponent<MemberResultsListProps> = ({
             getRefHeight(containerRef, 200)
         ),
     };
-    console.log(tableDimensions);
 
     const loadMore = (start: number, stop: number) => {
         dispatch(
@@ -56,7 +56,7 @@ const MemberResultsList: React.FunctionComponent<MemberResultsListProps> = ({
             isNextPageLoading={isFetching}
             minimumBatchSize={10}
             rowRenderer={(props) => ContestTile({ props, history, params })}
-            emptyDescription={'No Contests'}
+            emptyDescription={CONSTANTS.PAGES.MEMBER.LIST.EMPTY}
         />
     );
 };

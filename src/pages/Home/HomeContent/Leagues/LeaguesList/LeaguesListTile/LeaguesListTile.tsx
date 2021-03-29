@@ -3,7 +3,6 @@ import { Badge, Card } from 'antd';
 import { get as _get } from 'lodash';
 import classnames from 'classnames';
 import { LeaguesListTileProps } from './types';
-import LeaguesListTileLeaderboard from './LeaguesListTileLeaderboard';
 import constants from '@constants';
 import routes from '@constants/routes';
 import { mapStatusColour, navigate, withAppRoute, withS3URL } from '@utils';
@@ -65,14 +64,7 @@ const LeaguesListTile: React.FunctionComponent<LeaguesListTileProps> = ({
                             </div>
                         </div>
                     </div>
-                    <div className="leagues-list-tile-content-side">
-                        <div className="leagues-list-tile-content-side-leaderboard">
-                            <LeaguesListTileLeaderboard
-                                status={status}
-                                participants={Object.values(participants)}
-                            />
-                        </div>
-                    </div>
+                    <div className="leagues-list-tile-content-side" />
                 </div>
             </Card>
         </div>

@@ -11,6 +11,7 @@ import { memoizedGenerateActions } from './utils';
 import { memoizedMemberActionRenderer } from './memberActionRenderer';
 import { SiderComponentContent } from '@layouts/ComponentContent';
 import './MemberActions.less';
+import CONSTANTS from '@locale/en-CA';
 
 const MemberActions: React.FunctionComponent<MemberActionsProps> = () => {
     const isInitialized = useSelector(selectIsInitialized);
@@ -26,7 +27,7 @@ const MemberActions: React.FunctionComponent<MemberActionsProps> = () => {
     if (!Actions.length) return null;
     return (
         <SiderComponentContent
-            title={'Actions'}
+            title={CONSTANTS.COMMON.ACTIONS}
             className="member-actions"
             bodyClassName="member-actions-body"
             showSpinner={!isInitialized}

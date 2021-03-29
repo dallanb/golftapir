@@ -11,6 +11,7 @@ import routes from '@constants/routes';
 import { OverlaySpin } from '@components';
 import './Contest.less';
 import { navigate, withAppRoute } from '@utils';
+import CONSTANTS from '@locale/en-CA';
 
 const Contest: React.FunctionComponent<ContestProps> = ({}) => {
     const dispatch = useDispatch();
@@ -47,7 +48,7 @@ const Contest: React.FunctionComponent<ContestProps> = ({}) => {
 
     return (
         <ComponentContent
-            title={'Create Contest'}
+            title={CONSTANTS.PAGES.CONTESTS_CREATE.FORM.TITLE}
             showSpinner={!isInitialized}
             className="contest"
         >

@@ -6,6 +6,7 @@ import { Button, Divider } from 'antd';
 import { ContestScorecardHoleProps } from './types';
 import { selectSheet } from '../../selector';
 import './ContestScorecardHole.less';
+import CONSTANTS from '@locale/en-CA';
 
 const ContestScorecardHole: React.FunctionComponent<ContestScorecardHoleProps> = ({
     hole,
@@ -22,7 +23,9 @@ const ContestScorecardHole: React.FunctionComponent<ContestScorecardHoleProps> =
     const renderHole = (hole: number) => {
         return (
             <div className="contest-scorecard-hole-hole">
-                <div className="contest-scorecard-hole-hole-label">Hole</div>
+                <div className="contest-scorecard-hole-hole-label">
+                    {CONSTANTS.PAGES.CONTEST.SCORECARD.HOLE}
+                </div>
                 <div className="contest-scorecard-hole-hole-value">{hole}</div>
             </div>
         );
@@ -32,7 +35,9 @@ const ContestScorecardHole: React.FunctionComponent<ContestScorecardHoleProps> =
         const par = _get(holes, [hole, 'par'], 3);
         return (
             <div className="contest-scorecard-hole-par">
-                <div className="contest-scorecard-hole-par-label">Par</div>
+                <div className="contest-scorecard-hole-par-label">
+                    {CONSTANTS.PAGES.CONTEST.SCORECARD.PAR}
+                </div>
                 <div className="contest-scorecard-hole-par-value">{par}</div>
             </div>
         );
@@ -43,7 +48,7 @@ const ContestScorecardHole: React.FunctionComponent<ContestScorecardHoleProps> =
         return (
             <div className="contest-scorecard-hole-distance">
                 <div className="contest-scorecard-hole-distance-label">
-                    Dist
+                    {CONSTANTS.PAGES.CONTEST.SCORECARD.DISTANCE}
                 </div>
                 <div className="contest-scorecard-hole-distance-value">
                     {distance}

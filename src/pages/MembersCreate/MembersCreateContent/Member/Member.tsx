@@ -11,6 +11,7 @@ import routes from '@constants/routes';
 import { OverlaySpin } from '@components';
 import { navigate, withAppRoute } from '@utils';
 import './Member.less';
+import CONSTANTS from '@locale/en-CA';
 
 const Member: React.FunctionComponent<MemberProps> = ({}) => {
     const dispatch = useDispatch();
@@ -47,7 +48,7 @@ const Member: React.FunctionComponent<MemberProps> = ({}) => {
         <ComponentContent
             showSpinner={!isInitialized}
             className="members-create-member-component-content"
-            title={'Invite Member'}
+            title={CONSTANTS.PAGES.MEMBERS_CREATE.FORM.TITLE}
         >
             <MemberForm />
             <OverlaySpin visible={isSubmitting} />

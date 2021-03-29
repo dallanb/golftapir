@@ -11,6 +11,7 @@ import { withAppRoute, navigate } from '@utils';
 import { OverlaySpin } from '@components';
 import { selectIsInitialized as selectIsDataInitialized } from '@pages/ContestUpdate/selector';
 import './Contest.less';
+import CONSTANTS from '@locale/en-CA';
 
 const Contest: React.FunctionComponent<ContestProps> = ({}) => {
     const dispatch = useDispatch();
@@ -51,7 +52,7 @@ const Contest: React.FunctionComponent<ContestProps> = ({}) => {
 
     return (
         <ComponentContent
-            title="Update Contest"
+            title={CONSTANTS.PAGES.CONTEST_UPDATE.FORM.TITLE}
             showSpinner={!isInitialized}
             className="contest"
         >

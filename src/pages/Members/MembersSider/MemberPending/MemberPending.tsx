@@ -5,8 +5,9 @@ import { MemberPendingProps } from './types';
 import MembersPageActions from '@pages/Members/actions';
 import { selectLeagueMember } from '@selectors/AppSelector';
 import constants from '@constants';
-import './MemberPending.less';
 import ComponentContent from '@layouts/ComponentContent';
+import CONSTANTS from '@locale/en-CA';
+import './MemberPending.less';
 
 const MemberPending: React.FunctionComponent<MemberPendingProps> = () => {
     const dispatch = useDispatch();
@@ -31,7 +32,7 @@ const MemberPending: React.FunctionComponent<MemberPendingProps> = () => {
 
     return (
         <ComponentContent
-            title={'Actions'}
+            title={CONSTANTS.COMMON.ACTIONS}
             className="member-pending"
             bodyClassName="member-pending-body"
         >
