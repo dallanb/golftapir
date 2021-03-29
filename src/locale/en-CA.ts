@@ -553,6 +553,9 @@ const CONSTANTS = {
                 TITLE: 'Invite',
                 SEARCH: 'Invite Members',
             },
+            INVITE: {
+                WAIT: 'Updating League Member...This may take a few moments...',
+            },
         },
         MEMBERS_CREATE: {
             TITLE: 'Members',

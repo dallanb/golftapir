@@ -1,7 +1,7 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import { MemberAppProps } from './types';
-import { MessageModal } from '@components';
+import { MessageModal, MessageSpinner } from '../components';
 import configStore from './store';
 import MemberAppView from './MemberAppView';
 import { loadState } from '../../localStorage';
@@ -12,6 +12,7 @@ const MemberApp: React.FunctionComponent<MemberAppProps> = () => {
     return (
         <Provider store={store}>
             <MessageModal />
+            <MessageSpinner />
             <MemberAppView />
         </Provider>
     );

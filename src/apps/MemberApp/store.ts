@@ -10,6 +10,7 @@ import {
     baseReducer as base,
     modalReducer as modal,
     notificationReducer as notification,
+    spinnerReducer as spinner,
 } from '@reducers';
 import {
     accountPage,
@@ -40,6 +41,7 @@ import {
     NotificationSaga,
     ScoreSaga,
     SocketSaga,
+    SpinnerSaga,
 } from '@sagas';
 
 function configStore(options?: { preloadedState: any }): any {
@@ -68,6 +70,7 @@ function configStore(options?: { preloadedState: any }): any {
             auth,
             modal,
             notification,
+            spinner,
             accountPage,
             homePage,
             leaguesCreatePage,
@@ -92,6 +95,7 @@ function configStore(options?: { preloadedState: any }): any {
             fork(NotificationSaga),
             fork(ScoreSaga),
             fork(SocketSaga),
+            fork(SpinnerSaga),
             fork(AccountPageSaga),
             fork(AccountPageContentAccountSaga),
             fork(HomePageSaga),
