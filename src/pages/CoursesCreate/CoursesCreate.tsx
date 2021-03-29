@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { ContentLayout } from '@layouts';
+import { AppLayoutContent } from '@layouts/AppLayout';
 import { CoursesCreateProps } from './types';
 import CoursesCreatePageActions from './actions';
 import CoursesCreateContent from './CoursesCreateContent';
@@ -21,7 +21,7 @@ const CoursesCreate: React.FunctionComponent<CoursesCreateProps> = () => {
     }, []);
 
     return (
-        <ContentLayout
+        <AppLayoutContent
             content={<CoursesCreateContent />}
             sider={<CoursesCreateSider />}
             className="courses-create-view"

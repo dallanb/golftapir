@@ -13,11 +13,11 @@ export {
     ContestPageContentContestLeaderboardSaga,
     ContestLeaderboardScoreChannel,
     ContestPageContentContestLeaderboardScorecardSaga,
-    ContestPageSiderContentCourseSaga,
-    ContestPageSiderContentParticipantActiveContestActiveSaga,
-    ContestPageSiderContentParticipantActiveContestPendingSaga,
+    ContestPageSiderCourseSaga,
+    ContestPageSiderParticipantActiveContestActiveSaga,
+    ContestPageSiderParticipantActiveContestPendingSaga,
     ContestStrokeUpdateChannel,
-    ContestPageSiderContentParticipantCompletedContestCompletedSaga,
+    ContestPageSiderParticipantCompletedContestCompletedSaga,
     ContestPageRoutes,
 } from './Contest';
 export {
@@ -25,7 +25,7 @@ export {
     reducer as contestsPage,
     ContestsPageSaga,
     ContestsPageContentContestsSaga,
-    ContestsPageSiderContentSearchSaga,
+    ContestsPageSiderSearchSaga,
     ContestsPageRoutes,
 } from './Contests';
 export {
@@ -68,7 +68,7 @@ export {
     default as LeagueHome,
     reducer as leagueHomePage,
     LeagueHomePageSaga,
-    LeagueHomePageSiderContentMemberStatsSaga,
+    LeagueHomePageSiderMemberStatsSaga,
     LeagueHomePageContentMemberStandingsSaga,
     // LeagueHomePageSiderContentCalendarSaga,
     LeagueHomePageRoutes,
@@ -84,7 +84,7 @@ export {
     reducer as leaguesPage,
     LeaguesPageSaga,
     LeaguesPageContentLeaguesSaga,
-    LeaguesPageSiderContentSearchSaga,
+    LeaguesPageSiderSearchSaga,
     LeaguesPageRoutes,
 } from './Leagues';
 export {
@@ -127,8 +127,8 @@ export {
     reducer as membersPage,
     MembersPageSaga,
     MembersPageContentMembersSaga,
-    MembersPageSiderContentSearchSaga,
-    MembersPageSiderContentInvitesSaga,
+    MembersPageSiderSearchSaga,
+    MembersPageSiderInvitesSaga,
     MembersPageRoutes,
 } from './Members';
 export {

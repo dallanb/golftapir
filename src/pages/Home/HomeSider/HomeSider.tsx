@@ -1,10 +1,14 @@
 import React from 'react';
-import AppLayoutSider from '@layouts/AppLayout/AppLayoutSider';
-import HomeSiderContent from './HomeSiderContent';
+import SiderLayoutContent from '@layouts/SiderLayout/SiderLayoutContent';
 import { HomeSiderProps } from './types';
+import CreateButton from './CreateButton';
 
-const HomeSider: React.FunctionComponent<HomeSiderProps> = () => {
-    return <AppLayoutSider content={<HomeSiderContent />} />;
+const HomeSiderContent: React.FunctionComponent<HomeSiderProps> = ({}) => {
+    return (
+        <SiderLayoutContent>
+            <CreateButton />
+        </SiderLayoutContent>
+    );
 };
 
-export default HomeSider;
+export default HomeSiderContent;

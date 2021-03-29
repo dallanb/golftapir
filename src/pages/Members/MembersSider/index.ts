@@ -4,12 +4,12 @@ import { combineReducers } from 'redux';
 export { default } from './MembersSider';
 
 // Reducer
-import { reducer as contentReducer } from './MembersSiderContent';
+import { reducer as memberActiveReducer } from './MemberActive';
 export const reducer = combineReducers({
-    content: contentReducer,
+    memberActive: memberActiveReducer,
 });
 // Saga
 export {
-    MembersPageSiderContentSearchSaga,
-    MembersPageSiderContentInvitesSaga,
-} from './MembersSiderContent';
+    MembersPageSiderSearchSaga,
+    MembersPageSiderInvitesSaga,
+} from './MemberActive';

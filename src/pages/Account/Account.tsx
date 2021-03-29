@@ -1,10 +1,8 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { get as _get } from 'lodash';
-import { ContentLayout } from '@layouts';
+import { AppLayoutContent } from '@layouts/AppLayout';
 import { AccountProps } from './types';
 import AccountPageActions from './actions';
-import AccountHeader from './AccountHeader';
 import AccountContent from './AccountContent';
 import AccountSider from './AccountSider';
 import { selectData } from './selector';
@@ -23,11 +21,9 @@ const Account: React.FunctionComponent<AccountProps> = () => {
     }, []);
 
     return (
-        <ContentLayout
-            // header={<AccountHeader />}
+        <AppLayoutContent
             content={<AccountContent />}
             sider={<AccountSider />}
-            // showSpinner={!isInitialized}
             className="account-view"
         />
     );

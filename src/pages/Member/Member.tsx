@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { get as _get } from 'lodash';
-import { ContentLayout } from '@layouts';
+import { AppLayoutContent } from '@layouts/AppLayout';
 import { MemberProps } from './types';
 import MemberPageActions from './actions';
 import MemberContent from './MemberContent';
@@ -26,7 +26,7 @@ const Member: React.FunctionComponent<MemberProps> = () => {
     }, []);
 
     return (
-        <ContentLayout
+        <AppLayoutContent
             content={<MemberContent />}
             sider={<MemberSider />}
             className="member-view"

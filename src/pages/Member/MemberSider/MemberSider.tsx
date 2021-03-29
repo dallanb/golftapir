@@ -1,11 +1,14 @@
 import React from 'react';
-import AppLayoutSider from '@layouts/AppLayout/AppLayoutSider';
+import SiderLayoutContent from '@layouts/SiderLayout/SiderLayoutContent';
 import { MemberSiderProps } from './types';
-import MemberSiderContent from './MemberSiderContent';
-import './MemberSider.less';
+import MemberActions from './MemberActions';
 
-const MemberSider: React.FunctionComponent<MemberSiderProps> = () => {
-    return <AppLayoutSider content={<MemberSiderContent />} />;
+const MemberSider: React.FunctionComponent<MemberSiderProps> = ({}) => {
+    return (
+        <SiderLayoutContent>
+            <MemberActions />
+        </SiderLayoutContent>
+    );
 };
 
 export default MemberSider;

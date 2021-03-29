@@ -1,0 +1,59 @@
+@import '../../../../../../../assets/styles/statics';
+.pending-participants-view {
+    .pending-participants-card {
+        display: flex;
+        height: 100%;
+        background: inherit;
+        &.filled {
+            background: @tile-fill;
+        }
+
+        .ant-card-body {
+            width: 100%;
+            padding: 6px 12px;
+        }
+
+        .pending-participants-content {
+            display: flex;
+            align-items: center;
+            height: 100%;
+            .pending-participants-content-main {
+                display: flex;
+                width: 80%;
+
+                .pending-participants-content-main-avatar {
+                    margin-right: 10px;
+                    .ant-avatar-square {
+                        border-radius: 4px;
+                    }
+                }
+
+                .pending-participants-content-main-info {
+                    display: flex;
+                    align-items: center;
+                    .pending-participants-content-main-country {
+                        .pending-participants-content-main-country-flag {
+                            width: 18px;
+                            padding-right: 4px;
+                        }
+                    }
+                    .pending-participants-content-main-name {
+                        font-weight: bold;
+                        font-size: 12px;
+                    }
+
+                    .pending-participants-content-main-status {
+                    }
+                }
+            }
+            .pending-participants-content-side {
+                display: flex;
+                justify-content: flex-end;
+                width: 20%;
+            }
+        }
+
+        .pending-participants-button {
+        }
+    }
+}

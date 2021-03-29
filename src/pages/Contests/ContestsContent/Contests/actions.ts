@@ -12,7 +12,7 @@ const { Types, Creators } = createActions(
         fetchDataFailure: ['err'],
     },
     {
-        prefix: 'CONTESTS_PAGE_CONTENT_CONTESTS_',
+        prefix: 'CONTESTS_PAGE_CONTESTS_',
     }
 );
 export const ContestsPageContentContestsTypes = Types;

@@ -22,9 +22,9 @@ const SiderLayout: React.FunctionComponent<SiderLayoutProps> = ({
         <Sider
             width={350}
             className={cx}
-            breakpoint={'lg'}
-            collapsedWidth="0"
-            trigger={null}
+            // breakpoint={'lg'}
+            // collapsedWidth="0"
+            // trigger={null}
         >
             <Layout className="sider-layout-background">
                 <Content className="sider-layout-content">

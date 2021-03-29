@@ -1,15 +1,17 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
+import { get as _get } from 'lodash';
 import { MemberResultsListProps } from './types';
 import { ContestTile, FixedSizeList } from '@components';
 import { getRefHeight } from '@utils';
 import MemberPageContentMemberResultsActions from '../actions';
-import './MemberResultsList.less';
 import CONSTANTS from '@locale/en-CA';
+import './MemberResultsList.less';
 
 const MemberResultsList: React.FunctionComponent<MemberResultsListProps> = ({
     containerRef,
+    containerDimensions,
     data,
     metadata,
     options,
@@ -22,7 +24,11 @@ const MemberResultsList: React.FunctionComponent<MemberResultsListProps> = ({
     const tableDimensions = {
         size: 100,
         width: '100%',
-        height: getRefHeight(containerRef, 200),
+        height: _get(
+            containerDimensions,
+            ['height'],
+            getRefHeight(containerRef, 200)
+        ),
     };
 
     const loadMore = (start: number, stop: number) => {

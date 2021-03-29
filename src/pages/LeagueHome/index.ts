@@ -18,10 +18,8 @@ export const reducer = combineReducers({
 // Saga
 export { default as LeagueHomePageSaga } from './saga';
 export { LeagueHomePageContentMemberStandingsSaga } from './LeagueHomeContent';
-export {
-    LeagueHomePageSiderContentMemberStatsSaga,
-    // LeagueHomePageSiderContentCalendarSaga,
-} from './LeagueHomeSider';
+export { LeagueHomePageSiderMemberStatsSaga } from // LeagueHomePageSiderContentCalendarSaga,
+'./LeagueHomeSider';
 
 // Routes
 export { default as LeagueHomePageRoutes } from './routes';
