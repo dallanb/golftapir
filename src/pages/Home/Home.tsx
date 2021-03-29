@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { ContentLayout } from '@layouts';
+import { AppLayoutContent } from '@layouts/AppLayout';
 import { HomeProps } from './types';
 import HomePageActions from './actions';
-import HomeHeader from './HomeHeader';
 import HomeContent from './HomeContent';
 import HomeSider from './HomeSider';
 import { selectData } from './selector';
@@ -21,7 +20,7 @@ const Home: React.FunctionComponent<HomeProps> = () => {
     }, []);
 
     return (
-        <ContentLayout
+        <AppLayoutContent
             content={<HomeContent />}
             sider={<HomeSider />}
             className="home-view"

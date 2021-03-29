@@ -3,12 +3,11 @@ import { Layout, Spin } from 'antd';
 import { ContentLayoutProps } from './types';
 import './ContentLayout.less';
 
-const { Content, Footer } = Layout;
+const { Content } = Layout;
 
 const ContentLayout: React.FunctionComponent<ContentLayoutProps> = ({
     header,
     content,
-    sider,
     showSpinner,
     className,
 }) => {
@@ -26,32 +25,16 @@ const ContentLayout: React.FunctionComponent<ContentLayoutProps> = ({
         return content;
     };
 
-    const renderSider = () => {
-        if (!sider) {
-            return null;
-        }
-        return sider;
-    };
-
     if (showSpinner) {
         return <Spin />;
     }
 
     return (
-        <Layout className="content-layout">
-            <Layout className="content-layout-body content-layout-background">
-                <Layout className="content-layout-main">
-                    {renderHeader()}
-                    <Content className={`content-layout-content ${className}`}>
-                        {renderContent()}
-                    </Content>
-                </Layout>
-                {renderSider()}
-            </Layout>
-
-            {/*<Footer className="footer">*/}
-            {/*    Tech Tapir ©2021 Created by Dallan Bhatti*/}
-            {/*</Footer>*/}
+        <Layout className="content-layout-main">
+            {renderHeader()}
+            <Content className={`content-layout-content ${className}`}>
+                {renderContent()}
+            </Content>
         </Layout>
     );
 };

@@ -1,11 +1,10 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NotificationsProps } from './types';
-import { ContentLayout } from '@layouts';
+import { AppLayoutContent } from '@layouts/AppLayout';
 import { selectData } from './selector';
 import NotificationsPageActions from './actions';
 import NotificationsSider from './NotificationsSider';
-import NotificationsHeader from './NotificationsHeader';
 import NotificationsContent from './NotificationsContent';
 import './Notifications.less';
 
@@ -21,11 +20,9 @@ const Notifications: React.FunctionComponent<NotificationsProps> = () => {
     }, []);
 
     return (
-        <ContentLayout
-            // header={<NotificationsHeader />}
+        <AppLayoutContent
             sider={<NotificationsSider />}
             content={<NotificationsContent />}
-            // showSpinner={!isInitialized}
             className="notifications-view"
         />
     );

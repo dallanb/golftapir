@@ -1,5 +1,5 @@
-import { ReactElement } from 'react';
+import { ReactNode } from 'react';
 
 export interface AppLayoutSiderProps {
-    content?: ReactElement;
+    content?: ReactNode;
 }

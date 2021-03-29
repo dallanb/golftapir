@@ -1,11 +1,19 @@
 import React from 'react';
-import AppLayoutSider from '@layouts/AppLayout/AppLayoutSider';
+import SiderLayoutContent from '@layouts/SiderLayout/SiderLayoutContent';
+import CreateButton from './CreateButton';
+import SearchInput from './SearchInput';
 import { ContestsSiderProps } from './types';
-import ContestsSiderContent from './ContestsSiderContent';
 import './ContestsSider.less';
 
-const ContestsSider: React.FunctionComponent<ContestsSiderProps> = () => {
-    return <AppLayoutSider content={<ContestsSiderContent />} />;
+const ContestsSider: React.FunctionComponent<ContestsSiderProps> = ({}) => {
+    return (
+        <SiderLayoutContent>
+            <>
+                <SearchInput />
+                <CreateButton />
+            </>
+        </SiderLayoutContent>
+    );
 };
 
 export default ContestsSider;

@@ -6,9 +6,11 @@ import { ContestTile, FixedSizeList } from '@components';
 import { getRefHeight } from '@utils';
 import MemberPageContentMemberResultsActions from '../actions';
 import './MemberResultsList.less';
+import { get as _get } from 'lodash';
 
 const MemberResultsList: React.FunctionComponent<MemberResultsListProps> = ({
     containerRef,
+    containerDimensions,
     data,
     metadata,
     options,
@@ -21,8 +23,13 @@ const MemberResultsList: React.FunctionComponent<MemberResultsListProps> = ({
     const tableDimensions = {
         size: 100,
         width: '100%',
-        height: getRefHeight(containerRef, 200),
+        height: _get(
+            containerDimensions,
+            ['height'],
+            getRefHeight(containerRef, 200)
+        ),
     };
+    console.log(tableDimensions);
 
     const loadMore = (start: number, stop: number) => {
         dispatch(

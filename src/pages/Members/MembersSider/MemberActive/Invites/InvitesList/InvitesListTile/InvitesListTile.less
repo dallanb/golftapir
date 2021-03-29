@@ -1,0 +1,55 @@
+@import '../../../../../../../assets/styles/statics';
+.invites-list-tile-view {
+    .invites-list-tile-card {
+        display: flex;
+        height: 100%;
+        background: inherit;
+
+        &.filled {
+            background: @tile-fill;
+        }
+
+        .ant-card-body {
+            width: 100%;
+            padding: 6px 12px;
+        }
+
+        .invites-list-tile-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 100%;
+            .invites-list-tile-content-main {
+                display: flex;
+                margin-right: 16px;
+                overflow: hidden;
+                .invites-list-tile-content-main-info {
+                    .invites-list-tile-content-main-name {
+                        display: flex;
+                        font-weight: bold;
+                        font-size: 12px;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        .invites-list-tile-content-main-display-name {
+                            padding-right: 4px;
+                        }
+                        .invites-list-tile-content-main-username {
+                            color: fade(@primary-color, 50%);
+                            font-weight: normal;
+                        }
+                    }
+
+                    .invites-list-tile-content-main-status {
+                    }
+                }
+            }
+            .invites-list-tile-content-side {
+                display: flex;
+            }
+        }
+
+        .invites-list-tile-button {
+        }
+    }
+}

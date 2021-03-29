@@ -3,9 +3,10 @@ import { combineReducers } from 'redux';
 export { default } from './LeaguesSider';
 
 // Reducer
-import { reducer as contentReducer } from './LeaguesSiderContent';
+import { reducer as searchReducer } from './SearchInput';
 export const reducer = combineReducers({
-    content: contentReducer,
+    search: searchReducer,
 });
+
 // Saga
-export { LeaguesPageSiderContentSearchSaga } from './LeaguesSiderContent';
+export { LeaguesPageSiderSearchSaga } from './SearchInput';

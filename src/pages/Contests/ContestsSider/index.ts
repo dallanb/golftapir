@@ -3,9 +3,10 @@ import { combineReducers } from 'redux';
 export { default } from './ContestsSider';
 
 // Reducer
-import { reducer as contentReducer } from './ContestsSiderContent';
+import { reducer as searchReducer } from './SearchInput';
 export const reducer = combineReducers({
-    content: contentReducer,
+    search: searchReducer,
 });
+
 // Saga
-export { ContestsPageSiderContentSearchSaga } from './ContestsSiderContent';
+export { ContestsPageSiderSearchSaga } from './SearchInput';
