@@ -5,4 +5,5 @@ export interface AvatarProps {
     size?: number | 'small' | 'large' | 'default' | undefined;
     shape?: 'circle' | 'square';
     style?: any;
+    border?: boolean;
 }

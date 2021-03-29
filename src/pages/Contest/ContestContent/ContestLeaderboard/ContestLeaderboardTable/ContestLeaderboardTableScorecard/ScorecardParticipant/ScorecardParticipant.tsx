@@ -30,6 +30,7 @@ const ScorecardParticipant: React.FunctionComponent<ScorecardParticipantProps> =
                         src={avatar && withS3URL(avatar)}
                         name={name}
                         size={84}
+                        border
                     />
                 </div>
                 <div className="scorecard-participant-user-name">{name}</div>

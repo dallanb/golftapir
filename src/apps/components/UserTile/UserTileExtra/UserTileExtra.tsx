@@ -47,6 +47,7 @@ const UserTileExtra: React.FunctionComponent<UserTileExtraProps> = ({
                             name={league.name}
                             shape="square"
                             size={24}
+                            border
                         />
                     </div>
                     <div className="user-tile-extra-league-name">

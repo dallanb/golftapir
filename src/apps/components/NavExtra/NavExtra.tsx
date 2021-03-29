@@ -65,6 +65,7 @@ const NavExtra: React.FunctionComponent<NavExtraProps> = () => {
                             name={league.name}
                             shape="square"
                             size={24}
+                            border
                         />
                     </div>
                     <div className="nav-extra-league-name">{league.name}</div>
@@ -104,6 +105,7 @@ const NavExtra: React.FunctionComponent<NavExtraProps> = () => {
                         shape={'square'}
                         size={36}
                         className="nav-extra-user-avatar"
+                        border
                     />
                 </div>
                 <div className="nav-extra-user-name">
