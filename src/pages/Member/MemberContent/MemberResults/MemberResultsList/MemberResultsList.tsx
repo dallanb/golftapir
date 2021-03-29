@@ -6,6 +6,7 @@ import { ContestTile, FixedSizeList } from '@components';
 import { getRefHeight } from '@utils';
 import MemberPageContentMemberResultsActions from '../actions';
 import './MemberResultsList.less';
+import CONSTANTS from '@locale/en-CA';
 
 const MemberResultsList: React.FunctionComponent<MemberResultsListProps> = ({
     containerRef,
@@ -49,7 +50,7 @@ const MemberResultsList: React.FunctionComponent<MemberResultsListProps> = ({
             isNextPageLoading={isFetching}
             minimumBatchSize={10}
             rowRenderer={(props) => ContestTile({ props, history, params })}
-            emptyDescription={'No Contests'}
+            emptyDescription={CONSTANTS.PAGES.MEMBER.LIST.EMPTY}
         />
     );
 };

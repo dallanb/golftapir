@@ -261,7 +261,10 @@ const CONSTANTS = {
         HOME: {
             TITLE: 'Home',
             DESCRIPTION: 'Home Page',
-            LEAGUES: 'Leagues List',
+            LEAGUES: {
+                TITLE: 'Leagues List',
+                EMPTY: 'No Leagues',
+            },
             MEMBER: 'Player Card',
         },
         LEAGUE_HOME: {
@@ -328,10 +331,16 @@ const CONSTANTS = {
             TITLE: 'Contests',
             DESCRIPTION: 'View Contests',
             SEARCH: 'Search Contests',
+            LIST: {
+                EMPTY: 'No Contests',
+            },
         },
         NOTIFICATIONS: {
             TITLE: 'Notifications',
             DESCRIPTION: 'View Notifications',
+            LIST: {
+                EMPTY: 'No Notifications',
+            },
         },
         COMPETITOR: {
             TITLE: 'Competitor',
@@ -414,7 +423,8 @@ const CONSTANTS = {
             },
             SUCCESS_MODAL: {
                 TITLE: 'Thank you for adding a course',
-                DESCRIPTION: ' will be added to your balance after the course has been approved by an administrator'
+                DESCRIPTION:
+                    ' will be added to your balance after the course has been approved by an administrator',
             },
         },
         ACCOUNT: {
@@ -471,6 +481,9 @@ const CONSTANTS = {
                     EMAIL: 'Email',
                     COUNTRY: 'Country',
                 },
+            },
+            LIST: {
+                EMPTY: 'No Contests',
             },
         },
         MEMBERS: {

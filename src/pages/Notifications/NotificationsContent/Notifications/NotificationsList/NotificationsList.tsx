@@ -15,6 +15,7 @@ import { NotificationActions } from '@actions';
 import { selectLeagues } from '@selectors/BaseSelector';
 import './NotificationsList.less';
 import { filterLeaguesByNotification } from '@pages/Notifications/NotificationsContent/Notifications/utils';
+import CONSTANTS from '@locale/en-CA';
 
 const NotificationsList: React.FunctionComponent<NotificationsListProps> = ({
     containerRef,
@@ -99,7 +100,7 @@ const NotificationsList: React.FunctionComponent<NotificationsListProps> = ({
             rowRenderer={(props) =>
                 NotificationsListTile({ props, onClick: tileOnClick, actions })
             }
-            emptyDescription={'No Notifications'}
+            emptyDescription={CONSTANTS.PAGES.NOTIFICATIONS.LIST.EMPTY}
         />
     );
 };

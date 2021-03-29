@@ -4,6 +4,7 @@ import { LeaguesListProps } from './types';
 import { FixedSizeList } from '@components';
 import LeaguesListTile from './LeaguesListTile';
 import './LeaguesList.less';
+import CONSTANTS from '@locale/en-CA';
 
 const LeaguesList: React.FunctionComponent<LeaguesListProps> = ({
     containerRef,
@@ -28,7 +29,7 @@ const LeaguesList: React.FunctionComponent<LeaguesListProps> = ({
             isNextPageLoading={false}
             minimumBatchSize={10}
             rowRenderer={(props) => LeaguesListTile({ props, history })}
-            emptyDescription={'No Leagues'}
+            emptyDescription={CONSTANTS.PAGES.HOME.LEAGUES.EMPTY}
         />
     );
 };
