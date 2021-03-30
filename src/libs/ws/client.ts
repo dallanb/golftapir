@@ -57,7 +57,7 @@ class Client {
                         setTimeout(() => {
                             this.init();
                             this._incrementReconnectAttempts();
-                        }, 100);
+                        }, 1000);
                     }
             }
         };
