@@ -1,6 +1,7 @@
 import { ClientProxy } from '@services';
 import qs from 'querystring';
 import { omitBy as _omitBy, isNil as _isNil } from 'lodash';
+import { number } from 'yup';
 
 class Client {
     private _socket?: WebSocket;
@@ -8,17 +9,24 @@ class Client {
     private readonly _url: string;
     private readonly _maxReconnectAttempts: number;
     private readonly _socketOptions: { endpoint: string };
+    private _errorHandler: (code: number) => void;
 
     constructor(
         url: string,
         options?: {
             maxReconnectAttempts?: number;
+            errorHandler?: (code: number) => void;
         }
     ) {
         this._url = url;
         this._socket = undefined;
         this._maxReconnectAttempts = options?.maxReconnectAttempts || 10;
         this._reconnectAttempts = 0;
+        this._errorHandler =
+            options?.errorHandler ||
+            function () {
+                return undefined;
+            };
         this._socketOptions = {
             endpoint: url,
         };
@@ -52,7 +60,9 @@ class Client {
                     console.info('normal closure');
                     break;
                 default:
+                    console.info('unknown closure'); // show notification
                     console.info('reconnecting');
+                    this._errorHandler(event.code);
                     if (this._reconnectAttempts < this._maxReconnectAttempts) {
                         setTimeout(() => {
                             this.init();

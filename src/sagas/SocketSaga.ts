@@ -6,12 +6,21 @@ import { WebSocketNotificationClient } from '@libs';
 import { SocketActions, SocketTypes } from '@actions';
 import { message } from '@utils';
 import CONSTANTS from '@locale/en-CA';
+import { notification } from 'antd';
+
+const wsClient = new WebSocketNotificationClient({
+    errorHandler: (code: number) =>
+        notification.error({
+            key: code.toString(),
+            message: 'Unable to connect to live updates',
+            placement: 'bottomRight',
+            duration: 0,
+        }),
+});
 
 function subscribe(options: any) {
     const { eventHandler } = options;
-    return eventChannel((emitter) =>
-        eventHandler(WebSocketNotificationClient.socket, emitter)
-    );
+    return eventChannel((emitter) => eventHandler(wsClient.socket, emitter));
 }
 
 function* read(options: any) {
@@ -24,7 +33,7 @@ function* read(options: any) {
 
 function* write({ data }: AnyAction) {
     try {
-        WebSocketNotificationClient.socket?.send(data);
+        wsClient.socket?.send(data);
         yield put(SocketActions.writeSuccess());
     } catch (err) {
         yield put(SocketActions.writeFailure());
@@ -34,7 +43,7 @@ function* write({ data }: AnyAction) {
 function* init({ options }: AnyAction) {
     try {
         // maybe notify the server that the user has logged in?
-        const status = yield WebSocketNotificationClient.init();
+        const status = yield wsClient.init();
         if (!status) {
             throw new Error();
         }
@@ -47,7 +56,7 @@ function* init({ options }: AnyAction) {
 
 function* terminate({}: AnyAction) {
     try {
-        yield WebSocketNotificationClient.terminate();
+        yield wsClient.terminate();
         yield put(SocketActions.terminateSuccess());
     } catch (err) {
         message.error(CONSTANTS.SOCKET.ERROR.TERMINATE);
