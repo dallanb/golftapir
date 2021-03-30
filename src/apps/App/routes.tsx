@@ -5,14 +5,14 @@ import constantRoutes from '@constants/routes';
 export const routes: any = [
     {
         path: constantRoutes.APPS.AUTH_APP.ROUTE,
-        render: () => <AuthApp />,
+        render: (props: any) => <AuthApp {...props} />,
     },
     {
         path: constantRoutes.APPS.MEMBER_APP.ROUTE,
-        render: () => <MemberApp />,
+        render: (props: any) => <MemberApp {...props} />,
     },
     {
         path: constantRoutes.APPS.LEAGUE_APP.ROUTE,
-        render: () => <LeagueApp />,
+        render: (props: any) => <LeagueApp {...props} />,
     },
 ];

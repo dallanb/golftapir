@@ -179,7 +179,7 @@ function configStore(options?: { preloadedState: any }): any {
     }
     sagaMiddleware.run(AppSaga);
 
-    return { store };
+    return store;
 }
 
 export default configStore;

@@ -17,6 +17,10 @@ export const selectIsInitialized = createSelector([getApp], (app) =>
     _get(app, ['isInitialized'], false)
 );
 
+export const selectIsTerminating = createSelector([getApp], (app) =>
+    _get(app, ['isTerminating'], false)
+);
+
 export const selectLeagueUUID = createSelector([getApp], (app) =>
     _get(app, ['uuid'], undefined)
 );

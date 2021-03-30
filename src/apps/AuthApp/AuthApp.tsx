@@ -7,7 +7,7 @@ import { MessageModal, MessageSpinner } from '../components';
 
 const AuthApp: React.FunctionComponent = () => {
     const preloadedState = loadState();
-    const { store } = configStore({ preloadedState });
+    const store = configStore({ preloadedState });
     return (
         <Provider store={store}>
             <MessageModal />

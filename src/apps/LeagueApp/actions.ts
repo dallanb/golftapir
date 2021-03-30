@@ -7,6 +7,8 @@ const { Types, Creators } = createActions(
         initSuccess: null,
         initFailure: ['err'],
         terminate: null,
+        terminateSuccess: null,
+        terminateFailure: ['err'],
         refresh: ['uuid'],
         refreshSuccess: null,
         refreshFailure: ['err'],

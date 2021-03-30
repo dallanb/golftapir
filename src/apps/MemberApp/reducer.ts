@@ -8,6 +8,7 @@ export interface MemberAppInterface {
     readonly isFetching: boolean;
     readonly isRefreshing: boolean;
     readonly isInitialized: boolean;
+    readonly isTerminating: boolean;
     readonly err?: Error;
 }
 
@@ -16,6 +17,7 @@ const INITIAL_STATE: MemberAppInterface = {
     isFetching: false,
     isRefreshing: false,
     isInitialized: false,
+    isTerminating: false,
     err: undefined,
 };
 
@@ -64,8 +66,18 @@ function refreshFailure(state: any, { err }: any) {
     });
 }
 
-function terminate() {
+function terminate(state: any) {
+    return Immutable.merge(state, {
+        isTerminating: true,
+    });
+}
+
+function terminateSuccess() {
     return INITIAL_STATE;
+}
+
+function terminateFailure(state: any, { err }: any) {
+    return Immutable.merge(state, { ...INITIAL_STATE, err });
 }
 
 function set(state: any, { data }: any) {
@@ -82,6 +94,8 @@ const HANDLERS = {
     [MemberAppTypes.REFRESH_SUCCESS]: refreshSuccess,
     [MemberAppTypes.REFRESH_FAILURE]: refreshFailure,
     [MemberAppTypes.TERMINATE]: terminate,
+    [MemberAppTypes.TERMINATE_SUCCESS]: terminateSuccess,
+    [MemberAppTypes.TERMINATE_FAILURE]: terminateFailure,
     [MemberAppTypes.SET]: set,
 };
 

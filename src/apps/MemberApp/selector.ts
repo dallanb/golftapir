@@ -11,3 +11,7 @@ export const selectData = createSelector(
 export const selectIsInitialized = createSelector([getMemberApp], (memberApp) =>
     _get(memberApp, ['isInitialized'], false)
 );
+
+export const selectIsTerminating = createSelector([getMemberApp], (memberApp) =>
+    _get(memberApp, ['isTerminating'], false)
+);

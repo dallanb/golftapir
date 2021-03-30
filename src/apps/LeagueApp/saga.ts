@@ -1,13 +1,4 @@
-import {
-    all,
-    call,
-    delay,
-    fork,
-    put,
-    putResolve,
-    select,
-    takeLatest,
-} from 'redux-saga/effects';
+import { all, call, put, select, take, takeLatest } from 'redux-saga/effects';
 import { isNil as _isNil } from 'lodash';
 import { AnyAction } from 'redux';
 import { get as _get, isObject as _isObject } from 'lodash';
@@ -16,7 +7,9 @@ import {
     AppActions,
     AppTypes,
     BaseActions,
+    BaseTypes,
     LeagueTopicSocketActions,
+    LeagueTopicSocketTypes,
     SpinnerActions,
 } from '@actions';
 import { socketEventHandlers, topicSocketEventHandlers } from './utils';
@@ -82,8 +75,14 @@ function* terminate() {
     try {
         yield put(BaseActions.terminateSockets());
         yield put(LeagueTopicSocketActions.terminate());
+        yield all([
+            take(BaseTypes.TERMINATE_SOCKETS_SUCCESS),
+            take(LeagueTopicSocketTypes.TERMINATE_SUCCESS),
+        ]);
+        yield put(LeagueAppActions.terminateSuccess());
     } catch (err) {
         console.error(err);
+        yield put(LeagueAppActions.terminateFailure(err));
     }
 }
 

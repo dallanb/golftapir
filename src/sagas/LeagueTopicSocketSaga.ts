@@ -5,12 +5,33 @@ import { WebSocketLeagueTopicClient } from '@libs';
 import { LeagueTopicSocketActions, LeagueTopicSocketTypes } from '@actions';
 import { message } from '@utils';
 import CONSTANTS from '@locale/en-CA';
+import { notification } from 'antd';
+
+let key: number = 0;
+const wsClient = new WebSocketLeagueTopicClient({
+    errorHandler: (code: number) => {
+        key = code;
+        notification.error({
+            key: key.toString(),
+            message: 'Unable to connect to live updates',
+            placement: 'bottomRight',
+            duration: 0,
+        });
+    },
+    reconnectHandler: () => {
+        notification.close(key.toString());
+        notification.success({
+            key: key.toString(),
+            message: 'Reconnected to live updates',
+            placement: 'bottomRight',
+            duration: 5,
+        });
+    },
+});
 
 function subscribe(options: any) {
     const { eventHandler } = options;
-    return eventChannel((emitter) =>
-        eventHandler(WebSocketLeagueTopicClient.socket, emitter)
-    );
+    return eventChannel((emitter) => eventHandler(wsClient.socket, emitter));
 }
 
 function* read(options: any) {
@@ -23,7 +44,7 @@ function* read(options: any) {
 
 function* write({ data }: AnyAction) {
     try {
-        WebSocketLeagueTopicClient.socket?.send(data);
+        wsClient.socket?.send(data);
         yield put(LeagueTopicSocketActions.writeSuccess());
     } catch (err) {
         yield put(LeagueTopicSocketActions.writeFailure());
@@ -33,7 +54,7 @@ function* write({ data }: AnyAction) {
 function* init({ data, options }: AnyAction) {
     try {
         // maybe notify the server that the user has logged in?
-        const status = yield WebSocketLeagueTopicClient.init(data.uuid);
+        const status = yield wsClient.init(data.uuid);
         if (!status) {
             throw new Error();
         }
@@ -47,7 +68,7 @@ function* init({ data, options }: AnyAction) {
 
 function* terminate({}: AnyAction) {
     try {
-        yield WebSocketLeagueTopicClient.terminate();
+        yield wsClient.terminate();
         yield put(LeagueTopicSocketActions.terminateSuccess());
     } catch (err) {
         message.error(CONSTANTS.SOCKET.ERROR.TERMINATE);

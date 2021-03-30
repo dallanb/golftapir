@@ -8,14 +8,26 @@ import { message } from '@utils';
 import CONSTANTS from '@locale/en-CA';
 import { notification } from 'antd';
 
+let key: number = 0;
 const wsClient = new WebSocketNotificationClient({
-    errorHandler: (code: number) =>
+    errorHandler: (code: number) => {
+        key = code;
         notification.error({
-            key: code.toString(),
+            key: key.toString(),
             message: 'Unable to connect to live updates',
             placement: 'bottomRight',
             duration: 0,
-        }),
+        });
+    },
+    reconnectHandler: () => {
+        notification.close(key.toString());
+        notification.success({
+            key: key.toString(),
+            message: 'Reconnected to live updates',
+            placement: 'bottomRight',
+            duration: 5,
+        });
+    },
 });
 
 function subscribe(options: any) {

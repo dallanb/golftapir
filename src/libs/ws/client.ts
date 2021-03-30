@@ -1,7 +1,6 @@
 import { ClientProxy } from '@services';
 import qs from 'querystring';
 import { omitBy as _omitBy, isNil as _isNil } from 'lodash';
-import { number } from 'yup';
 
 class Client {
     private _socket?: WebSocket;
@@ -9,13 +8,15 @@ class Client {
     private readonly _url: string;
     private readonly _maxReconnectAttempts: number;
     private readonly _socketOptions: { endpoint: string };
-    private _errorHandler: (code: number) => void;
+    private readonly _errorHandler: (code: number) => void;
+    private readonly _reconnectHandler: () => void;
 
     constructor(
         url: string,
         options?: {
             maxReconnectAttempts?: number;
             errorHandler?: (code: number) => void;
+            reconnectHandler?: () => void;
         }
     ) {
         this._url = url;
@@ -24,6 +25,11 @@ class Client {
         this._reconnectAttempts = 0;
         this._errorHandler =
             options?.errorHandler ||
+            function () {
+                return undefined;
+            };
+        this._reconnectHandler =
+            options?.reconnectHandler ||
             function () {
                 return undefined;
             };
@@ -45,7 +51,10 @@ class Client {
     }
 
     // Init will return websocket connect status
-    async init(uuid?: string): Promise<number | undefined> {
+    async init(
+        uuid?: string
+        // isReconnect?: boolean
+    ): Promise<number | undefined> {
         // need to pass JWT in order to not be stopped by KONG Gateway
         const query = qs.stringify(
             _omitBy({ jwt: ClientProxy.accessToken, uuid }, _isNil)
@@ -64,9 +73,14 @@ class Client {
                     console.info('reconnecting');
                     this._errorHandler(event.code);
                     if (this._reconnectAttempts < this._maxReconnectAttempts) {
-                        setTimeout(() => {
-                            this.init();
+                        setTimeout(async () => {
                             this._incrementReconnectAttempts();
+                            const status = await this.init(uuid);
+                            if (status == 1) {
+                                // socket is open
+                                this._reconnectHandler();
+                                this._resetReconnectAttempts();
+                            }
                         }, 1000);
                     }
             }
@@ -119,6 +133,10 @@ class Client {
 
     _incrementReconnectAttempts() {
         this._reconnectAttempts += 1;
+    }
+
+    _resetReconnectAttempts() {
+        this._reconnectAttempts = 0;
     }
 }
 
