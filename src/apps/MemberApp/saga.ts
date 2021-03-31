@@ -17,7 +17,7 @@ function* init() {
     try {
         if (!ClientProxy.accessToken) yield call(refreshAuth);
         // yield put(BaseActions.initSockets(socketEventHandlers));
-        yield put(BaseActions.initMe());
+        yield put(BaseActions.initMe(null));
         yield put(BaseActions.initLeagues());
         yield put(BaseActions.initNotifications());
 
