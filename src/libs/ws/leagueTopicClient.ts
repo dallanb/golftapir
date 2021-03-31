@@ -13,16 +13,21 @@ class LeagueTopicClient extends Client {
                     notification.destroy();
                     notification.error({
                         key: this._key.toString(),
-                        message: 'Unable to connect to live updates',
+                        message:
+                            'Unable to connect to live updates. Click to try and reconnect.',
                         placement: 'bottomRight',
                         duration: 0,
+                        onClick: () => {
+                            this._resetReconnectAttempts();
+                            this.reconnect();
+                        },
                     });
                 } else {
+                    // notification.close(`error_${this._key.toString()}`);
                     notification.warn({
                         key: this._key.toString(),
-                        message: reconnectLimitReached
-                            ? 'Unable to connect to live updates'
-                            : 'Lost connection to live updates, attempting to reconnect...',
+                        message:
+                            'Lost connection to live updates, attempting to reconnect...',
                         placement: 'bottomRight',
                         duration: 0,
                     });

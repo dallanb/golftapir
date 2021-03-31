@@ -13,16 +13,21 @@ class ContestTopicClient extends Client {
                     notification.destroy();
                     notification.error({
                         key: this._key.toString(),
-                        message: 'Unable to connect to live updates',
+                        message:
+                            'Unable to connect to live updates. Click to try and reconnect.',
                         placement: 'bottomRight',
                         duration: 0,
+                        onClick: () => {
+                            this._resetReconnectAttempts();
+                            this.reconnect();
+                        },
                     });
                 } else {
+                    // notification.close(`error_${this._key.toString()}`);
                     notification.warn({
                         key: this._key.toString(),
-                        message: reconnectLimitReached
-                            ? 'Unable to connect to live updates'
-                            : 'Lost connection to live updates, attempting to reconnect...',
+                        message:
+                            'Lost connection to live updates, attempting to reconnect...',
                         placement: 'bottomRight',
                         duration: 0,
                     });
@@ -47,6 +52,9 @@ class ContestTopicClient extends Client {
             return await this.init(uuid);
         } else if (this._uuid !== uuid) {
             this.terminate();
+            return await this.init(uuid);
+        } else if (wsStatus === 3 && this._uuid === uuid) {
+            // reopen a closed socket
             return await this.init(uuid);
         }
         return wsStatus;

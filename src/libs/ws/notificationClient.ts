@@ -26,9 +26,8 @@ class NotificationClient extends Client {
                     // notification.close(`error_${this._key.toString()}`);
                     notification.warn({
                         key: this._key.toString(),
-                        message: reconnectLimitReached
-                            ? 'Unable to connect to live updates'
-                            : 'Lost connection to live updates, attempting to reconnect...',
+                        message:
+                            'Lost connection to live updates, attempting to reconnect...',
                         placement: 'bottomRight',
                         duration: 0,
                     });
