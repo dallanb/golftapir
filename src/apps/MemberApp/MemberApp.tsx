@@ -8,7 +8,7 @@ import { loadState } from '../../localStorage';
 
 const MemberApp: React.FunctionComponent<MemberAppProps> = () => {
     const preloadedState = loadState();
-    const { store } = configStore({ preloadedState });
+    const store = configStore({ preloadedState });
     return (
         <Provider store={store}>
             <MessageModal />

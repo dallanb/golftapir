@@ -7,8 +7,8 @@ import ComponentContent from '@layouts/ComponentContent';
 import { OverlaySpin } from '@components';
 import { selectIsInitialized as selectIsDataInitialized } from '@pages/Account/selector';
 import { selectIsInitialized, selectIsSubmitting } from './selector';
-import './Account.less';
 import CONSTANTS from '@locale/en-CA';
+import './Account.less';
 
 const Account: React.FunctionComponent<AccountProps> = ({}) => {
     const dispatch = useDispatch();
@@ -18,7 +18,6 @@ const Account: React.FunctionComponent<AccountProps> = ({}) => {
     const [isDataInitializing, setDataIsInitializing] = useState(true);
 
     useEffect(() => {
-        dispatch(AccountPageContentAccountActions.init());
         return () => {
             dispatch(AccountPageContentAccountActions.terminate());
         };

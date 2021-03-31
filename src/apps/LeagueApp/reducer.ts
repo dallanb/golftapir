@@ -9,6 +9,7 @@ export interface LeagueAppInterface {
     readonly isFetching: boolean;
     readonly isRefreshing: boolean;
     readonly isInitialized: boolean;
+    readonly isTerminating: boolean;
     readonly err?: Error;
     readonly uuid?: string;
     readonly league: any;
@@ -21,6 +22,7 @@ const INITIAL_STATE: LeagueAppInterface = {
     isFetching: false,
     isRefreshing: false,
     isInitialized: false,
+    isTerminating: false,
     err: undefined,
     uuid: undefined,
     league: {
@@ -91,8 +93,18 @@ function refreshFailure(state: any, { err }: any) {
     });
 }
 
-function terminate() {
+function terminate(state: any) {
+    return Immutable.merge(state, {
+        isTerminating: true,
+    });
+}
+
+function terminateSuccess() {
     return INITIAL_STATE;
+}
+
+function terminateFailure(state: any, { err }: any) {
+    return Immutable.merge(state, { ...INITIAL_STATE, err });
 }
 
 function set(state: any, { data }: any) {
@@ -296,6 +308,8 @@ const HANDLERS = {
     [LeagueAppTypes.REFRESH_SUCCESS]: refreshSuccess,
     [LeagueAppTypes.REFRESH_FAILURE]: refreshFailure,
     [LeagueAppTypes.TERMINATE]: terminate,
+    [LeagueAppTypes.TERMINATE_SUCCESS]: terminateSuccess,
+    [LeagueAppTypes.TERMINATE_FAILURE]: terminateFailure,
     [LeagueAppTypes.SET]: set,
     // League
     [LeagueAppTypes.INIT_LEAGUE]: initLeague,

@@ -33,7 +33,6 @@ import {
     AccountSaga,
     BaseSaga,
     AuthSaga,
-    ContestTopicSocketSaga,
     CourseSaga,
     LeagueSaga,
     MemberSaga,
@@ -87,7 +86,6 @@ function configStore(options?: { preloadedState: any }): any {
             fork(MemberAppSaga),
             fork(AccountSaga),
             fork(AuthSaga),
-            fork(ContestTopicSocketSaga),
             fork(CourseSaga),
             fork(LeagueSaga),
             fork(MemberSaga),
@@ -109,7 +107,7 @@ function configStore(options?: { preloadedState: any }): any {
     }
     sagaMiddleware.run(AppSaga);
 
-    return { store };
+    return store;
 }
 
 export default configStore;

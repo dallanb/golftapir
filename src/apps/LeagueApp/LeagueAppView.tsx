@@ -16,7 +16,7 @@ import { AppLoading, ProtectedRoute } from '@components';
 import { routes, protectedRoutes } from './routes';
 import constants from '@constants';
 import constantRoutes from '@constants/routes';
-import { AuthActions } from '@actions';
+import { AuthActions, SocketActions } from '@actions';
 import LeagueAppActions from './actions';
 import statics from '@apps/LeagueApp/statics';
 import { FirebaseClient } from '@libs';
@@ -29,7 +29,9 @@ import {
 import { selectData as selectBaseData } from '@selectors/BaseSelector';
 import { AppLayoutNav } from '@layouts/AppLayout';
 import { NavExtra, NavMenu } from '@apps/components';
-import { ResizeContext } from '@contexts';
+import { ResizeContext, WebSocketContext } from '@contexts';
+import { socketEventHandlers as notificationEventHandler } from '@apps/MemberApp/utils';
+import { socketEventHandlers as leagueTopicEventHandler } from './utils';
 
 const LeagueAppView: React.FunctionComponent<LeagueAppViewProps> = () => {
     const dispatch = useDispatch();
@@ -37,6 +39,7 @@ const LeagueAppView: React.FunctionComponent<LeagueAppViewProps> = () => {
     const location = useLocation();
     const params = useParams();
     const dimensions = useContext(ResizeContext);
+    const { notificationWs, leagueTopicWs } = useContext(WebSocketContext);
 
     const state = _get(location, ['state'], null);
     const paramLeagueUUID = _get(params, ['league_uuid'], null);
@@ -92,6 +95,7 @@ const LeagueAppView: React.FunctionComponent<LeagueAppViewProps> = () => {
         }
         return () => {
             dispatch(LeagueAppActions.terminate());
+            dispatch(SocketActions.terminate(leagueTopicWs));
         };
     }, []);
 
@@ -105,6 +109,25 @@ const LeagueAppView: React.FunctionComponent<LeagueAppViewProps> = () => {
             dispatch(LeagueAppActions.refresh(paramLeagueUUID));
         }
     }, [isReady, isFetching, paramLeagueUUID]);
+
+    useEffect(() => {
+        if (isInitialized && isLoggedIn) {
+            dispatch(
+                SocketActions.init(notificationWs, undefined, {
+                    eventHandler: notificationEventHandler,
+                })
+            );
+            dispatch(
+                SocketActions.init(
+                    leagueTopicWs,
+                    { uuid: paramLeagueUUID },
+                    {
+                        eventHandler: leagueTopicEventHandler,
+                    }
+                )
+            );
+        }
+    }, [isInitialized, isLoggedIn, paramLeagueUUID]);
 
     useEffect(() => {
         if (

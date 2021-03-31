@@ -8,7 +8,7 @@ import { MessageModal, MessageSpinner } from '@apps/components';
 
 const LeagueApp: React.FunctionComponent<LeagueAppProps> = () => {
     const preloadedState = loadState();
-    const { store } = configStore({ preloadedState });
+    const store = configStore({ preloadedState });
     return (
         <Provider store={store}>
             <MessageModal />
