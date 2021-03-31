@@ -8,6 +8,7 @@ export { default as getName } from './getName';
 export { default as getRefHeight } from './getRefHeight';
 export { default as getRouteBreadcrumb } from './getRouteBreadcrumb';
 export { default as insert } from './insert';
+export { default as localStorageClear } from './localStorageClear';
 export { default as localStorageSave } from './localStorageSave';
 export { default as mapActionColour } from './mapActionColour';
 export { default as mapActionLabel } from './mapActionLabel';

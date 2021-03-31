@@ -94,7 +94,7 @@ function* refresh() {
         tokenWatchTask = yield fork(tokenCheck, expiry);
         yield put(AuthActions.refreshSuccess(user, expiry));
     } catch (err) {
-        yield put(AuthActions.refreshFailure(err.toJSON ? err: err));
+        yield put(AuthActions.refreshFailure(err.toJSON ? err : err));
         message.error(CONSTANTS.AUTH.ERROR.SESSION);
     }
 }
