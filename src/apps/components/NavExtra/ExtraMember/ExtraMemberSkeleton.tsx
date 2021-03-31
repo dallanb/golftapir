@@ -9,12 +9,14 @@ const ExtraMemberSkeleton: React.FunctionComponent = () => {
                     shape="square"
                     size={36}
                     className="nav-extra-user-avatar"
+                    active
                 />
             </div>
             <div className="nav-extra-user-name">
                 <Skeleton.Input
                     style={{ width: 90 }}
                     className="nav-extra-user-name-display-name"
+                    active
                 />
             </div>
         </div>
