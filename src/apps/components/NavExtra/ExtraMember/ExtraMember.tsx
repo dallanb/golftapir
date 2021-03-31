@@ -8,12 +8,16 @@ import { ExtraMemberProps } from './types';
 import './ExtraMember.less';
 
 const ExtraMember: React.FunctionComponent<ExtraMemberProps> = ({}) => {
-    const { data: user, isInitialized = false } = useSelector(selectMe);
+    const {
+        data: user,
+        isInitialized = false,
+        isRefreshing = true,
+    } = useSelector(selectMe);
     const displayName = _get(user, ['display_name'], '');
     const username = _get(user, ['username'], '');
     const src = useSelector(selectMyAvatarSrc);
 
-    if (!isInitialized) {
+    if (!isInitialized || isRefreshing) {
         return <ExtraMemberSkeleton />;
     }
     return (

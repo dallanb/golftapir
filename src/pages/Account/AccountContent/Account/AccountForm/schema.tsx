@@ -9,6 +9,7 @@ import {
 } from '@components';
 import CONSTANTS from '@locale/en-CA';
 import constants from '@constants';
+import { formatUploadSrc } from './utils';
 
 const FORM = CONSTANTS.PAGES.ACCOUNT.FORM;
 
@@ -26,6 +27,7 @@ export const fieldSchema = [
             uploadLabel: FORM.LABELS.UPLOAD_AVATAR,
             uploadIcon: CloudUploadOutlined,
             uploadS3Folder: constants.S3_FOLDERS.MEMBER.AVATAR,
+            uploadSrcFormatter: formatUploadSrc,
         },
     },
     {
