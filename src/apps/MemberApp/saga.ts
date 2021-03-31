@@ -16,7 +16,7 @@ import { socketEventHandlers } from './utils';
 function* init() {
     try {
         if (!ClientProxy.accessToken) yield call(refreshAuth);
-        yield put(BaseActions.initSockets(socketEventHandlers));
+        // yield put(BaseActions.initSockets(socketEventHandlers));
         yield put(BaseActions.initMe());
         yield put(BaseActions.initLeagues());
         yield put(BaseActions.initNotifications());
@@ -29,8 +29,8 @@ function* init() {
 
 function* terminate() {
     try {
-        yield put(BaseActions.terminateSockets());
-        yield take(BaseTypes.TERMINATE_SOCKETS_SUCCESS);
+        // yield put(BaseActions.terminateSockets());
+        // yield take(BaseTypes.TERMINATE_SOCKETS_SUCCESS);
         yield put(MemberAppActions.terminateSuccess());
     } catch (err) {
         console.error(err);

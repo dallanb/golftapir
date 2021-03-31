@@ -1,23 +1,23 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
     BrowserRouter as Router,
     Redirect,
     Route,
     Switch,
 } from 'react-router-dom';
+import { useResizeDetector } from 'react-resize-detector';
 import { routes } from './routes';
+import { ResizeContext } from '@contexts';
+import WebSocketProvider from './WebSocket';
 import './App.less';
 import '../../assets/styles/global.less';
-import { useResizeDetector } from 'react-resize-detector';
-import { ResizeContext, StoreContext } from '@contexts';
 
 const App: React.FunctionComponent = () => {
-    const [store, setStore] = useState({});
     const { ref, height, width } = useResizeDetector();
     return (
         <div id="app" ref={ref}>
             <ResizeContext.Provider value={{ height, width }}>
-                <StoreContext.Provider value={{ store, setStore }}>
+                <WebSocketProvider>
                     <Router>
                         <Switch>
                             {routes.map(({ path, render }: any) => (
@@ -28,7 +28,7 @@ const App: React.FunctionComponent = () => {
                             </Route>
                         </Switch>
                     </Router>
-                </StoreContext.Provider>
+                </WebSocketProvider>
             </ResizeContext.Provider>
         </div>
     );

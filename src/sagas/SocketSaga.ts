@@ -1,74 +1,54 @@
 import { AnyAction } from 'redux';
 import { eventChannel } from 'redux-saga';
-import { all, fork, take, call, put, takeLatest } from 'redux-saga/effects';
-import { isNil as _isNil } from 'lodash';
-import { WebSocketNotificationClient } from '@libs';
+import { all, fork, take, call, put, takeEvery } from 'redux-saga/effects';
+import { get as _get } from 'lodash';
 import { SocketActions, SocketTypes } from '@actions';
 import { message } from '@utils';
 import CONSTANTS from '@locale/en-CA';
-import { notification } from 'antd';
 
-let key: number = 0;
-const wsClient = new WebSocketNotificationClient({
-    errorHandler: (code: number) => {
-        key = code;
-        notification.error({
-            key: key.toString(),
-            message: 'Unable to connect to live updates',
-            placement: 'bottomRight',
-            duration: 0,
-        });
-    },
-    reconnectHandler: () => {
-        notification.close(key.toString());
-        notification.success({
-            key: key.toString(),
-            message: 'Reconnected to live updates',
-            placement: 'bottomRight',
-            duration: 5,
-        });
-    },
-});
-
-function subscribe(options: any) {
+function subscribe(ws: any, options: any) {
     const { eventHandler } = options;
-    return eventChannel((emitter) => eventHandler(wsClient.socket, emitter));
+    return eventChannel((emitter) => eventHandler(ws.socket, emitter));
 }
 
-function* read(options: any) {
-    const channel: any = yield call(subscribe, options);
+function* read(ws: any, options: any) {
+    const channel: any = yield call(subscribe, ws, options);
     while (true) {
         let action = yield take(channel);
         yield put(action);
     }
 }
 
-function* write({ data }: AnyAction) {
+function* write({ ws, data }: AnyAction) {
     try {
-        wsClient.socket?.send(data);
+        ws.socket?.send(data);
         yield put(SocketActions.writeSuccess());
     } catch (err) {
         yield put(SocketActions.writeFailure());
     }
 }
 
-function* init({ options }: AnyAction) {
+function* init({ ws, data, options }: AnyAction) {
     try {
-        // maybe notify the server that the user has logged in?
-        const status = yield wsClient.init();
-        if (!status) {
-            throw new Error();
+        // dont init if we are already connected
+        const uuid = _get(data, ['uuid']);
+        console.log(ws.status());
+        if (!ws.status()) {
+            const status = yield ws.init(uuid);
+            if (!status) {
+                throw new Error();
+            }
+            yield fork(read, ws, options);
         }
-        yield fork(read, options);
     } catch (err) {
         console.error(err);
         message.error(CONSTANTS.SOCKET.ERROR.INIT);
     }
 }
 
-function* terminate({}: AnyAction) {
+function* terminate({ ws }: AnyAction) {
     try {
-        yield wsClient.terminate();
+        yield ws.terminate();
         yield put(SocketActions.terminateSuccess());
     } catch (err) {
         message.error(CONSTANTS.SOCKET.ERROR.TERMINATE);
@@ -78,8 +58,8 @@ function* terminate({}: AnyAction) {
 
 export default function* SocketSaga() {
     yield all([
-        takeLatest(SocketTypes.INIT, init),
-        takeLatest(SocketTypes.TERMINATE, terminate),
-        takeLatest(SocketTypes.WRITE, write),
+        takeEvery(SocketTypes.INIT, init),
+        takeEvery(SocketTypes.TERMINATE, terminate),
+        takeEvery(SocketTypes.WRITE, write),
     ]);
 }

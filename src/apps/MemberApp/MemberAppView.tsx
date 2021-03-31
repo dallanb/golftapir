@@ -8,7 +8,7 @@ import { ComponentRoute, MemberAppViewProps } from './types';
 import { AppLoading, ProtectedRoute } from '@components';
 import { routes, protectedRoutes } from './routes';
 import constantRoutes from '@constants/routes';
-import { AuthActions } from '@actions';
+import { AuthActions, SocketActions } from '@actions';
 import MemberAppActions from './actions';
 import statics from '@apps/MemberApp/statics';
 import { FirebaseClient } from '@libs';
@@ -18,11 +18,17 @@ import { selectData as selectAppData } from '@selectors/AppSelector';
 import { selectData as selectBaseData } from '@selectors/BaseSelector';
 import { AppLayoutNav } from '@layouts/AppLayout';
 import { NavExtra, NavMenu } from '@apps/components';
-import { ResizeContext } from '@contexts';
+import { ResizeContext, WebSocketContext } from '@contexts';
+import { socketEventHandlers as eventHandler } from '@apps/MemberApp/utils';
 
 const MemberAppView: React.FunctionComponent<MemberAppViewProps> = () => {
     const dispatch = useDispatch();
     const dimensions = useContext(ResizeContext);
+    const { notificationWs } = useContext(WebSocketContext);
+    const { isInitialized } = useSelector(selectAppData);
+    const { me, pending, isLoggedIn, forceLogout } = useSelector(
+        selectBaseData
+    );
 
     useEffect(() => {
         dispatch(MemberAppActions.init());
@@ -39,10 +45,16 @@ const MemberAppView: React.FunctionComponent<MemberAppViewProps> = () => {
         };
     }, []);
 
-    const { isInitialized } = useSelector(selectAppData);
-    const { me, pending, isLoggedIn, forceLogout } = useSelector(
-        selectBaseData
-    );
+    useEffect(() => {
+        if (isInitialized && isLoggedIn) {
+            dispatch(
+                SocketActions.init(notificationWs, undefined, {
+                    eventHandler,
+                })
+            );
+        }
+    }, [isInitialized, isLoggedIn]);
+
     const name = _get(me, ['display_name'], '');
     const avatar = _get(me, ['avatar', 's3_filename'], '');
     const menuProps = { icons: { notifications: { pending } } };

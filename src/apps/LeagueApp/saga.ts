@@ -3,16 +3,7 @@ import { isNil as _isNil } from 'lodash';
 import { AnyAction } from 'redux';
 import { get as _get, isObject as _isObject } from 'lodash';
 import LeagueAppActions, { LeagueAppTypes } from './actions';
-import {
-    AppActions,
-    AppTypes,
-    BaseActions,
-    BaseTypes,
-    LeagueTopicSocketActions,
-    LeagueTopicSocketTypes,
-    SpinnerActions,
-} from '@actions';
-import { socketEventHandlers, topicSocketEventHandlers } from './utils';
+import { AppActions, AppTypes, BaseActions, SpinnerActions } from '@actions';
 import { ClientProxy } from '@services';
 import { refreshAuth } from '@helpers';
 import { fetchLeague, fetchLeagueMember, fetchLeagueMembers } from './helpers';
@@ -34,13 +25,6 @@ function* preInit({ data }: AnyAction) {
 function* init({ uuid }: AnyAction) {
     try {
         if (!ClientProxy.accessToken) yield call(refreshAuth);
-        yield put(BaseActions.initSockets(socketEventHandlers));
-        yield put(
-            LeagueTopicSocketActions.init(
-                { uuid },
-                { eventHandler: topicSocketEventHandlers }
-            )
-        );
         yield put(BaseActions.initMe(uuid));
         yield put(BaseActions.initLeagues());
         yield put(BaseActions.initNotifications());
@@ -73,12 +57,6 @@ function* refresh({ uuid }: AnyAction) {
 
 function* terminate() {
     try {
-        yield put(BaseActions.terminateSockets());
-        yield put(LeagueTopicSocketActions.terminate());
-        yield all([
-            take(BaseTypes.TERMINATE_SOCKETS_SUCCESS),
-            take(LeagueTopicSocketTypes.TERMINATE_SUCCESS),
-        ]);
         yield put(LeagueAppActions.terminateSuccess());
     } catch (err) {
         console.error(err);

@@ -2,13 +2,13 @@ import { createActions } from 'reduxsauce';
 
 const { Types, Creators } = createActions(
     {
-        init: ['options'],
+        init: ['ws', 'data', 'options'],
         initSuccess: null,
         initFailure: ['err'],
-        terminate: null,
+        terminate: ['ws'],
         terminateSuccess: null,
         terminateFailure: ['err'],
-        write: ['data'],
+        write: ['ws', 'data'],
         writeSuccess: null,
         writeFailure: ['err'],
     },
