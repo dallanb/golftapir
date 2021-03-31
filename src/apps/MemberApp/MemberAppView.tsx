@@ -19,7 +19,7 @@ import { selectData as selectBaseData } from '@selectors/BaseSelector';
 import { AppLayoutNav } from '@layouts/AppLayout';
 import { NavExtra, NavMenu } from '@apps/components';
 import { ResizeContext, WebSocketContext } from '@contexts';
-import { socketEventHandlers as eventHandler } from '@apps/MemberApp/utils';
+import { socketEventHandlers as eventHandler } from './utils';
 
 const MemberAppView: React.FunctionComponent<MemberAppViewProps> = () => {
     const dispatch = useDispatch();
