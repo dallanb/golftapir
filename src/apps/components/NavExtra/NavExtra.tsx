@@ -24,9 +24,10 @@ import routes from '@constants/routes';
 import constants from '@constants';
 import { Avatar, PendingBadge } from '@components';
 import ExtraWallet from './ExtraWallet';
+import ExtraMember from './ExtraMember';
 import OverlayMenu from '@apps/components/OverlayMenu';
-import './NavExtra.less';
 import CONSTANTS from '@locale/en-CA';
+import './NavExtra.less';
 
 const NavExtra: React.FunctionComponent<NavExtraProps> = () => {
     const history = useHistory();
@@ -34,11 +35,7 @@ const NavExtra: React.FunctionComponent<NavExtraProps> = () => {
     const uuid = useSelector(selectLeagueUUID);
     const leagues = useSelector(selectLeagues) || [];
     const { data: user } = useSelector(selectMe);
-    const displayName = _get(user, ['display_name'], '');
     const username = _get(user, ['username'], '');
-    const src = useSelector(selectMyAvatarSrc);
-    const memberStatus = useSelector(selectLeagueMemberStatus);
-    const role = statusToRole(memberStatus);
 
     const getExtraMenuItems: any = () => {
         const leagueMenuItems = leagues.map(({ league, member }: any) => (
@@ -97,26 +94,7 @@ const NavExtra: React.FunctionComponent<NavExtraProps> = () => {
     return (
         <div className="nav-extra">
             <ExtraWallet />
-            <div className="nav-extra-user">
-                <div className="nav-extra-user-avatar-wrapper">
-                    <Avatar
-                        name={displayName}
-                        src={src}
-                        shape={'square'}
-                        size={36}
-                        className="nav-extra-user-avatar"
-                        border
-                    />
-                </div>
-                <div className="nav-extra-user-name">
-                    <div className="nav-extra-user-name-display-name">
-                        {displayName}
-                    </div>
-                    <div className="nav-extra-user-name-username">
-                        {username}
-                    </div>
-                </div>
-            </div>
+            <ExtraMember />
             <div className="nav-extra-buttons">
                 <div className="nav-extra-notification">
                     <Button

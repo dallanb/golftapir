@@ -30,8 +30,10 @@ import { selectData as selectBaseData } from '@selectors/BaseSelector';
 import { AppLayoutNav } from '@layouts/AppLayout';
 import { NavExtra, NavMenu } from '@apps/components';
 import { ResizeContext, WebSocketContext } from '@contexts';
-import { socketEventHandlers as notificationEventHandler } from '@apps/MemberApp/utils';
-import { socketEventHandlers as leagueTopicEventHandler } from './utils';
+import {
+    socketEventHandlers as leagueTopicEventHandler,
+    socketEventHandlers as notificationEventHandler,
+} from './utils';
 
 const LeagueAppView: React.FunctionComponent<LeagueAppViewProps> = () => {
     const dispatch = useDispatch();
