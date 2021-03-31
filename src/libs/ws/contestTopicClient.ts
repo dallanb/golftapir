@@ -7,14 +7,26 @@ class ContestTopicClient extends Client {
     constructor(options?: {}) {
         super(config.WS_TOPIC_URL, {
             ...options,
-            errorHandler: (code: number) => {
+            errorHandler: (code: number, reconnectLimitReached: boolean) => {
                 this._key = code;
-                notification.error({
-                    key: this._key.toString(),
-                    message: 'Unable to connect to live updates',
-                    placement: 'bottomRight',
-                    duration: 0,
-                });
+                if (reconnectLimitReached) {
+                    notification.destroy();
+                    notification.error({
+                        key: this._key.toString(),
+                        message: 'Unable to connect to live updates',
+                        placement: 'bottomRight',
+                        duration: 0,
+                    });
+                } else {
+                    notification.warn({
+                        key: this._key.toString(),
+                        message: reconnectLimitReached
+                            ? 'Unable to connect to live updates'
+                            : 'Lost connection to live updates, attempting to reconnect...',
+                        placement: 'bottomRight',
+                        duration: 0,
+                    });
+                }
             },
             reconnectHandler: () => {
                 notification.close(this._key.toString());
@@ -38,6 +50,13 @@ class ContestTopicClient extends Client {
             return await this.init(uuid);
         }
         return wsStatus;
+    }
+
+    stop() {
+        const wsStatus = this.status();
+        if (wsStatus) {
+            return this.terminate();
+        }
     }
 }
 

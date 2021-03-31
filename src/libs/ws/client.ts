@@ -8,7 +8,10 @@ class Client {
     private readonly _url: string;
     private readonly _maxReconnectAttempts: number;
     private readonly _socketOptions: { endpoint: string };
-    private readonly _errorHandler: (code: number) => void;
+    private readonly _errorHandler: (
+        code: number,
+        reconnectLimitReached: boolean
+    ) => void;
     private readonly _reconnectHandler: () => void;
     protected _uuid: string | undefined;
 
@@ -16,7 +19,10 @@ class Client {
         url: string,
         options?: {
             maxReconnectAttempts?: number;
-            errorHandler?: (code: number) => void;
+            errorHandler?: (
+                code: number,
+                reconnectLimitReached: boolean
+            ) => void;
             reconnectHandler?: () => void;
         }
     ) {
@@ -72,19 +78,11 @@ class Client {
                     break;
                 default:
                     console.info('unknown closure'); // show notification
-                    console.info('reconnecting');
-                    this._errorHandler(event.code);
-                    if (this._reconnectAttempts < this._maxReconnectAttempts) {
-                        setTimeout(async () => {
-                            this._incrementReconnectAttempts();
-                            const status = await this.init(this._uuid);
-                            if (status == 1) {
-                                // socket is open
-                                this._reconnectHandler();
-                                this._resetReconnectAttempts();
-                            }
-                        }, 1000);
-                    }
+                    this._errorHandler(
+                        event.code,
+                        this._reconnectAttempts >= this._maxReconnectAttempts
+                    );
+                    this.reconnect();
             }
         };
 
@@ -117,6 +115,21 @@ class Client {
                 reject(err);
             }
         });
+    }
+
+    async reconnect(): Promise<void> {
+        console.info('reconnecting');
+        if (this._reconnectAttempts < this._maxReconnectAttempts) {
+            setTimeout(async () => {
+                this._incrementReconnectAttempts();
+                const status = await this.init(this._uuid);
+                if (status == 1) {
+                    // socket is open
+                    this._reconnectHandler();
+                    this._resetReconnectAttempts();
+                }
+            }, 1000);
+        }
     }
 
     _connect(): Promise<number | undefined> {

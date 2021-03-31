@@ -45,7 +45,7 @@ function* init({ ws, data, options }: AnyAction) {
 
 function* terminate({ ws }: AnyAction) {
     try {
-        yield ws.terminate();
+        yield ws.stop();
         yield put(SocketActions.terminateSuccess());
     } catch (err) {
         message.error(CONSTANTS.SOCKET.ERROR.TERMINATE);

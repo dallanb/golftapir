@@ -95,7 +95,7 @@ const LeagueAppView: React.FunctionComponent<LeagueAppViewProps> = () => {
         }
         return () => {
             dispatch(LeagueAppActions.terminate());
-            // TODO: trigger terminate socket from here
+            dispatch(SocketActions.terminate(leagueTopicWs));
         };
     }, []);
 

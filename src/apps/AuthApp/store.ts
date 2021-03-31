@@ -23,7 +23,7 @@ import {
     verifyPage,
     VerifyPageSaga,
 } from '@pages';
-import { AuthSaga, ModalSaga, SpinnerSaga } from '@sagas';
+import { AuthSaga, ModalSaga, SocketSaga, SpinnerSaga } from '@sagas';
 import { get as _get } from 'lodash';
 
 function configStore(options?: { preloadedState: any }): any {
@@ -66,6 +66,7 @@ function configStore(options?: { preloadedState: any }): any {
         yield all([
             fork(AuthSaga),
             fork(ModalSaga),
+            fork(SocketSaga),
             fork(SpinnerSaga),
             fork(ForgotPasswordPageSaga),
             fork(LoginPageSaga),
