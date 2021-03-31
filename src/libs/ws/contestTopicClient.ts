@@ -28,6 +28,17 @@ class ContestTopicClient extends Client {
         });
         this._key = 0;
     }
+
+    async run(uuid: string) {
+        const wsStatus = this.status();
+        if (!wsStatus) {
+            return await this.init(uuid);
+        } else if (this._uuid !== uuid) {
+            this.terminate();
+            return await this.init(uuid);
+        }
+        return wsStatus;
+    }
 }
 
 export default new ContestTopicClient();

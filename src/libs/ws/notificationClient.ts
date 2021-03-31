@@ -28,6 +28,14 @@ class NotificationClient extends Client {
         });
         this._key = 0;
     }
+
+    async run(uuid: string) {
+        const wsStatus = this.status();
+        if (!wsStatus) {
+            return await this.init(uuid);
+        }
+        return wsStatus;
+    }
 }
 
 export default new NotificationClient();

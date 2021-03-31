@@ -30,15 +30,12 @@ function* write({ ws, data }: AnyAction) {
 
 function* init({ ws, data, options }: AnyAction) {
     try {
-        // dont init if we are already connected
         const uuid = _get(data, ['uuid']);
-        console.log(ws.status());
-        if (!ws.status()) {
-            const status = yield ws.init(uuid);
-            if (!status) {
-                throw new Error();
-            }
+        const status = yield ws.run(uuid);
+        if (!!status) {
             yield fork(read, ws, options);
+        } else {
+            throw new Error();
         }
     } catch (err) {
         console.error(err);

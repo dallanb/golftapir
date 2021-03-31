@@ -10,6 +10,7 @@ class Client {
     private readonly _socketOptions: { endpoint: string };
     private readonly _errorHandler: (code: number) => void;
     private readonly _reconnectHandler: () => void;
+    protected _uuid: string | undefined;
 
     constructor(
         url: string,
@@ -55,9 +56,10 @@ class Client {
         uuid?: string
         // isReconnect?: boolean
     ): Promise<number | undefined> {
+        this._uuid = uuid;
         // need to pass JWT in order to not be stopped by KONG Gateway
         const query = qs.stringify(
-            _omitBy({ jwt: ClientProxy.accessToken, uuid }, _isNil)
+            _omitBy({ jwt: ClientProxy.accessToken, uuid: this._uuid }, _isNil)
         );
 
         this._socket = new WebSocket(`${this._url}?${query}`);
@@ -75,7 +77,7 @@ class Client {
                     if (this._reconnectAttempts < this._maxReconnectAttempts) {
                         setTimeout(async () => {
                             this._incrementReconnectAttempts();
-                            const status = await this.init(uuid);
+                            const status = await this.init(this._uuid);
                             if (status == 1) {
                                 // socket is open
                                 this._reconnectHandler();
