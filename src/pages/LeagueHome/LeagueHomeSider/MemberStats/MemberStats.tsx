@@ -11,6 +11,7 @@ import Wins from './Wins';
 import Winnings from './Winnings';
 import WinPercentage from './WinPercentage';
 import './MemberStats.less';
+import CONSTANTS from '@locale/en-CA';
 
 const MemberStats: React.FunctionComponent<MemberStatsProps> = () => {
     const dispatch = useDispatch();
@@ -38,7 +39,7 @@ const MemberStats: React.FunctionComponent<MemberStatsProps> = () => {
         <SiderComponentContent
             showSpinner={!isInitialized || !meIsInitialized}
             className="member-stats-wins"
-            title={'My Stats'}
+            title={CONSTANTS.PAGES.LEAGUE_HOME.STATS.TITLE}
         >
             <Wins value={winCount} />
             <WinPercentage value={winPercentage} />

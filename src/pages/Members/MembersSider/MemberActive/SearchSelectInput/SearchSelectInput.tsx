@@ -16,9 +16,9 @@ import { navigate, withAppRoute } from '@utils';
 import { selectLeagueMembersDataByStatus } from '@selectors/AppSelector';
 import { SiderComponentContent } from '@layouts/ComponentContent';
 import routes from '@constants/routes';
+import { checkMemberLimit } from './utils';
+import optionRenderer from './optionRenderer';
 import './SearchSelectInput.less';
-import { checkMemberLimit } from '@pages/Members/MembersSider/MemberActive/SearchSelectInput/utils';
-import optionRenderer from '@pages/Members/MembersSider/MemberActive/SearchSelectInput/optionRenderer';
 
 const { Option } = Select;
 
@@ -68,14 +68,14 @@ const SearchSelectInput: React.FunctionComponent<SearchInputProps> = () => {
         <SiderComponentContent
             className="search-input-component-content"
             bodyClassName={'search-input-component-content-body'}
-            title={'Invite'}
+            title={CONSTANTS.PAGES.MEMBERS.INVITE_FORM.TITLE}
         >
             <div className="search-select-input-wrapper">
                 <Select
                     showSearch
                     disabled={disabled}
                     value={value}
-                    placeholder={CONSTANTS.PAGES.MEMBERS.SEARCH}
+                    placeholder={CONSTANTS.PAGES.MEMBERS.INVITE_FORM.SEARCH}
                     loading={isSearching}
                     filterOption={false}
                     onSearch={_debounce(onSearch, 300, { maxWait: 1000 })}

@@ -1,12 +1,5 @@
 import { call, fork, put, select } from 'redux-saga/effects';
-import { keyBy as _keyBy } from 'lodash';
-import { ContestTopicSocketActions } from '@actions';
-import {
-    ContestService,
-    MemberService,
-    NotificationService,
-    WagerService,
-} from '@services';
+import { ContestService, NotificationService } from '@services';
 import ContestPageActions from './actions';
 import { socketEventHandlers } from './utils';
 import { selectLeagueMemberData } from '@selectors/AppSelector';
@@ -45,22 +38,10 @@ export function* initSubscribed(uuid: string) {
 }
 
 export function* initSocket(uuid: string) {
-    yield put(
-        ContestTopicSocketActions.init(
-            { uuid },
-            { eventHandler: socketEventHandlers }
-        )
-    );
+    // yield put(); // TODO: handle init of contest socket
+    // socketEventHandlers
 }
 
 export function* terminateSocket() {
-    yield put(ContestTopicSocketActions.terminate());
-}
-
-export function* initPayout(uuid: string) {
-    const { contest: payout }: any = yield call(
-        WagerService.fetchContestsComplete,
-        uuid
-    );
-    yield put(ContestPageActions.set({ payout }));
+    // yield put(); // TODO: handle terminate of contest socket
 }

@@ -9,6 +9,7 @@ import { navigate, withAppRoute } from '@utils';
 import { selectMyLeagueUUID } from '@selectors/BaseSelector';
 import { SiderComponentContent } from '@layouts/ComponentContent';
 import './CreateButton.less';
+import CONSTANTS from '@locale/en-CA';
 
 const CreateButton: React.FunctionComponent<CreateButtonProps> = () => {
     const history = useHistory();
@@ -27,10 +28,10 @@ const CreateButton: React.FunctionComponent<CreateButtonProps> = () => {
         <SiderComponentContent
             className="create-button space"
             bodyClassName={'create-button-body'}
-            title={'Actions'}
+            title={CONSTANTS.COMMON.ACTIONS}
         >
             <Button block type="primary" onClick={handleClick}>
-                Create Contest <PlusCircleOutlined />
+                {CONSTANTS.PAGES.CONTESTS.CREATE_CONTEST} <PlusCircleOutlined />
             </Button>
         </SiderComponentContent>
     );

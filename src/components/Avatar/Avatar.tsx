@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Avatar as AntdAvatar } from 'antd';
+import classnames from 'classnames';
 import { AvatarProps } from './types';
 import { getInitials, randomColourGenerator } from '@utils';
+import './Avatar.less';
 
 const Avatar: React.FunctionComponent<AvatarProps> = ({
     src,
@@ -10,6 +12,7 @@ const Avatar: React.FunctionComponent<AvatarProps> = ({
     size,
     shape,
     style = {},
+    border = false,
 }) => {
     const [localSrc, setLocalSrc] = useState(src);
 
@@ -35,11 +38,12 @@ const Avatar: React.FunctionComponent<AvatarProps> = ({
         setLocalSrc(undefined);
         return false;
     };
+    const cx = classnames(className, { bordered: border });
     return (
         <AntdAvatar
             onError={onError}
             src={localSrc}
-            className={className}
+            className={cx}
             size={size}
             shape={shape}
             style={localStyle}

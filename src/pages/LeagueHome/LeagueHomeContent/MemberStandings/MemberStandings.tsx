@@ -30,7 +30,7 @@ const MemberStandings: React.FunctionComponent<MemberStandingsProps> = () => {
             className="member-standings space"
             bodyClassName="member-standings-content"
             showSpinner={showSpinner}
-            title={CONSTANTS.PAGES.LEAGUE_HOME.STANDINGS}
+            title={CONSTANTS.PAGES.LEAGUE_HOME.STANDINGS.TITLE}
         >
             <MemberStandingsTable />
         </ComponentContent>

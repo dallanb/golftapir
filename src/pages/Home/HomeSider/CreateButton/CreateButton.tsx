@@ -8,6 +8,7 @@ import { navigate, withAppRoute } from '@utils';
 import constants from '@constants';
 import { SiderComponentContent } from '@layouts/ComponentContent';
 import './CreateButton.less';
+import CONSTANTS from '@locale/en-CA';
 
 const CreateButton: React.FunctionComponent<CreateButtonProps> = () => {
     const history = useHistory();
@@ -23,12 +24,12 @@ const CreateButton: React.FunctionComponent<CreateButtonProps> = () => {
 
     return (
         <SiderComponentContent
-            title={'Actions'}
+            title={CONSTANTS.COMMON.ACTIONS}
             className="create-button"
             bodyClassName={'create-button-body'}
         >
             <Button block type="primary" onClick={handleClick}>
-                Create League <PlusCircleOutlined />
+                {CONSTANTS.PAGES.HOME.CREATE_LEAGUE} <PlusCircleOutlined />
             </Button>
         </SiderComponentContent>
     );

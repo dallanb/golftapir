@@ -31,6 +31,7 @@ const ContestTileLeaderboard: React.FunctionComponent<ContestTileLeaderboardProp
                                     name={participantName}
                                     size={36}
                                     shape="square"
+                                    border
                                 />
                             </div>
                             <div className="leaderboard-active-content-stack">
@@ -57,6 +58,7 @@ const ContestTileLeaderboard: React.FunctionComponent<ContestTileLeaderboardProp
                                     name={participantName}
                                     size={36}
                                     shape="square"
+                                    border
                                 />
                             </div>
                             <div className="leaderboard-completed-content-stack">

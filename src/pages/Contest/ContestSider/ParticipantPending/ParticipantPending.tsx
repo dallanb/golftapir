@@ -11,6 +11,8 @@ import { selectMyWalletBalance } from '@selectors/BaseSelector';
 import constants from '@constants';
 import { SiderComponentContent } from '@layouts/ComponentContent';
 import './ParticipantPending.less';
+import CONSTANTS from '@locale/en-CA';
+import { SpinnerActions } from '@actions';
 
 const ParticipantPending: React.FunctionComponent<ParticipantPendingProps> = () => {
     const dispatch = useDispatch();
@@ -25,6 +27,7 @@ const ParticipantPending: React.FunctionComponent<ParticipantPendingProps> = () 
                 constants.STATUS.ACTIVE.KEY
             )
         );
+        dispatch(SpinnerActions.openSpinner());
     };
 
     const handleDeclineClick = () => {
@@ -34,13 +37,14 @@ const ParticipantPending: React.FunctionComponent<ParticipantPendingProps> = () 
                 constants.STATUS.INACTIVE.KEY
             )
         );
+        dispatch(SpinnerActions.openSpinner());
     };
 
     return (
         <SiderComponentContent
             className="participant-pending space"
             bodyClassName={'participant-pending-body'}
-            title={'Actions'}
+            title={CONSTANTS.COMMON.ACTIONS}
         >
             <div className="participant-pending-buttons">
                 <div className="participant-pending-buttons-button active">

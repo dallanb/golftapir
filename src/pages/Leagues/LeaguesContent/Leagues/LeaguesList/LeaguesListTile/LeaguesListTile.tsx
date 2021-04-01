@@ -58,6 +58,7 @@ const LeaguesListTile: React.FunctionComponent<LeaguesListTileProps> = ({
                                 shape="square"
                                 name={name}
                                 size={48}
+                                border
                             />
                         </div>
                         <div className="contest-list-tile-content-main-info">

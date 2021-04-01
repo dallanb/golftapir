@@ -17,7 +17,7 @@ const SearchInput: React.FunctionComponent<SearchInputProps> = () => {
     };
     return (
         <SiderComponentContent
-            title={'Search'}
+            title={CONSTANTS.COMMON.SEARCH}
             className="search-input-component-content"
             bodyClassName={'search-input-component-content-body'}
         >

@@ -10,6 +10,7 @@ import {
     baseReducer as base,
     modalReducer as modal,
     notificationReducer as notification,
+    spinnerReducer as spinner,
 } from '@reducers';
 import {
     ContestLeaderboardScoreChannel,
@@ -66,15 +67,14 @@ import {
     AuthSaga,
     BaseSaga,
     ContestSaga,
-    ContestTopicSocketSaga,
     CourseSaga,
     LeagueSaga,
-    LeagueTopicSocketSaga,
     MemberSaga,
     ModalSaga,
     NotificationSaga,
     ScoreSaga,
     SocketSaga,
+    SpinnerSaga,
 } from '@sagas';
 
 function configStore(options?: { preloadedState: any }): any {
@@ -103,6 +103,7 @@ function configStore(options?: { preloadedState: any }): any {
             auth,
             modal,
             notification,
+            spinner,
             contestPage,
             contestsPage,
             contestsCreatePage,
@@ -126,15 +127,14 @@ function configStore(options?: { preloadedState: any }): any {
             fork(AccountSaga),
             fork(AuthSaga),
             fork(ContestSaga),
-            fork(ContestTopicSocketSaga),
             fork(CourseSaga),
             fork(LeagueSaga),
-            fork(LeagueTopicSocketSaga),
             fork(MemberSaga),
             fork(ModalSaga),
             fork(NotificationSaga),
             fork(ScoreSaga),
             fork(SocketSaga),
+            fork(SpinnerSaga),
             fork(ContestPageSaga),
             fork(ContestPageContentContestLeaderboardSaga),
             fork(ContestLeaderboardScoreChannel),
@@ -175,7 +175,7 @@ function configStore(options?: { preloadedState: any }): any {
     }
     sagaMiddleware.run(AppSaga);
 
-    return { store };
+    return store;
 }
 
 export default configStore;

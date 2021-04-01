@@ -16,16 +16,19 @@ import { Avatar } from '@components';
 import MembersListTileActivatedOn from './MembersListTileActivatedOn';
 import MembersListTileCountry from './MembersListTileCountry';
 import './MembersListTile.less';
+import { UserOutlined } from '@ant-design/icons';
 
 const MembersListTile: React.FunctionComponent<MembersListTileProps> = ({
     props: { index, style, data },
     history,
     params,
-    readOnly,
+    data: { member, readOnly },
 }) => {
     const isEven = index % 2;
     const item = _get(data, [index], undefined);
     const member_uuid = _get(item, ['uuid'], null);
+    const myMember = member_uuid === member;
+
     const handleClick = (options: any) => {
         if (!readOnly) {
             navigate(
@@ -70,11 +73,15 @@ const MembersListTile: React.FunctionComponent<MembersListTileProps> = ({
                                 name={name}
                                 size={48}
                                 shape={'square'}
+                                border
                             />
                         </div>
                         <div className="members-list-tile-content-main-info">
                             <div className="members-list-tile-content-main-name">
                                 {name}
+                                {myMember && (
+                                    <UserOutlined className="members-list-tile-content-main-name-user" />
+                                )}
                             </div>
                             <div className="members-list-tile-content-main-status">
                                 <Badge

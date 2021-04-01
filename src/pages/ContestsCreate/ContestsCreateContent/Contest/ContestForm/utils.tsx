@@ -1,8 +1,8 @@
 import React from 'react';
 import { FormikProps, FormikValues } from 'formik';
 import { useSelector } from 'react-redux';
-import { Button, Select, Spin } from 'antd';
-import { keyBy as _keyBy, get as _get, isNil as _isNil } from 'lodash';
+import { Button, Select } from 'antd';
+import { keyBy as _keyBy, get as _get } from 'lodash';
 import { MinusCircleTwoTone, PlusCircleTwoTone } from '@ant-design/icons';
 import {
     selectSearchData as selectParticipantSearchData,
@@ -42,14 +42,19 @@ export const participantSearchSelectOptionRenderer = (
     );
 
     return Object.values(participants).map(
-        (participant: { member: string; display_name: string }) => (
+        (participant: {
+            member: string;
+            display_name: string;
+            uuid: string;
+        }) => (
             <Select.Option
                 key={participant.member}
                 value={participant.member}
                 disabled={
                     permanentParticipants.findIndex(
-                        ({ uuid }: { uuid: string }) =>
-                            uuid === participant.member
+                        ({ uuid }: { uuid: string }) => {
+                            return uuid === participant.uuid;
+                        }
                     ) > -1
                 }
             >
@@ -80,7 +85,7 @@ export const contestPayoutInParser = (value: string) => {
 
 export const contestPayoutLabelMaker = ({ name, value }: any) => {
     const place = parseInt(name[1]) + 1;
-    return `${ordinalSuffix(place)} place ${
+    return `${ordinalSuffix(place)} ${CONSTANTS.COMMON.PLACE.toLowerCase()} ${
         CONSTANTS.PAGES.CONTESTS_CREATE.FORM.LABELS.PAYOUT
     }`;
 };

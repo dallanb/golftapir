@@ -4,7 +4,9 @@ import ContestLeaderboardTableParticipant from './ContestLeaderboardTablePartici
 import ContestLeaderboardTableToggle from './ContestLeaderboardTableToggle';
 import ContestLeaderboardTablePosition from './ContestLeaderboardTablePosition';
 import { sortType } from '../utils';
+import CONSTANTS from '@locale/en-CA';
 
+const TABLE = CONSTANTS.PAGES.CONTEST.LEADERBOARD.TABLE;
 const columnsSchema = [
     {
         // Make an expander cell
@@ -25,7 +27,7 @@ const columnsSchema = [
         className: 'expander',
     },
     {
-        Header: 'Pos',
+        Header: TABLE.POSITION,
         accessor: 'rank',
         Cell: ({ row }: any) => <ContestLeaderboardTablePosition row={row} />,
         SubCell: () => null,
@@ -33,7 +35,7 @@ const columnsSchema = [
         sortType,
     },
     {
-        Header: 'Country',
+        Header: TABLE.COUNTRY,
         accessor: 'uuid',
         id: 'country',
         Cell: ({ value }: any) => (
@@ -43,7 +45,7 @@ const columnsSchema = [
         disableSortBy: true,
     },
     {
-        Header: 'Member',
+        Header: TABLE.PARTICIPANT,
         accessor: 'uuid',
         Cell: ({ value }: any) => (
             <ContestLeaderboardTableParticipant uuid={value} />
@@ -52,14 +54,14 @@ const columnsSchema = [
         disableSortBy: true,
     },
     {
-        Header: 'Score',
+        Header: TABLE.SCORE,
         accessor: 'score',
         Cell: ({ value }: any) => value,
         className: 'score',
         sortType,
     },
     {
-        Header: 'Strokes',
+        Header: TABLE.STROKES,
         accessor: 'strokes',
         Cell: ({ value }: any) => value,
         className: 'strokes',

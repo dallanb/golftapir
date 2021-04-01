@@ -1,6 +1,13 @@
-import { all, call, put, putResolve, takeLatest } from 'redux-saga/effects';
+import {
+    all,
+    call,
+    put,
+    putResolve,
+    take,
+    takeLatest,
+} from 'redux-saga/effects';
 import MemberAppActions, { MemberAppTypes } from './actions';
-import { BaseActions } from '@actions';
+import { BaseActions, BaseTypes } from '@actions';
 import { ClientProxy } from '@services';
 import { refreshAuth } from '@helpers';
 import { socketEventHandlers } from './utils';
@@ -9,8 +16,8 @@ import { socketEventHandlers } from './utils';
 function* init() {
     try {
         if (!ClientProxy.accessToken) yield call(refreshAuth);
-        yield put(BaseActions.initSockets(socketEventHandlers));
-        yield put(BaseActions.initMe());
+        // yield put(BaseActions.initSockets(socketEventHandlers));
+        yield put(BaseActions.initMe(null));
         yield put(BaseActions.initLeagues());
         yield put(BaseActions.initNotifications());
 
@@ -22,9 +29,12 @@ function* init() {
 
 function* terminate() {
     try {
-        yield put(BaseActions.terminateSockets());
+        // yield put(BaseActions.terminateSockets());
+        // yield take(BaseTypes.TERMINATE_SOCKETS_SUCCESS);
+        yield put(MemberAppActions.terminateSuccess());
     } catch (err) {
         console.error(err);
+        yield put(MemberAppActions.terminateFailure(err));
     }
 }
 

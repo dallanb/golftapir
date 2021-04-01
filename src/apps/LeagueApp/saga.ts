@@ -1,24 +1,9 @@
-import {
-    all,
-    call,
-    delay,
-    fork,
-    put,
-    putResolve,
-    select,
-    takeLatest,
-} from 'redux-saga/effects';
+import { all, call, put, select, take, takeLatest } from 'redux-saga/effects';
 import { isNil as _isNil } from 'lodash';
 import { AnyAction } from 'redux';
 import { get as _get, isObject as _isObject } from 'lodash';
 import LeagueAppActions, { LeagueAppTypes } from './actions';
-import {
-    AppActions,
-    AppTypes,
-    BaseActions,
-    LeagueTopicSocketActions,
-} from '@actions';
-import { socketEventHandlers, topicSocketEventHandlers } from './utils';
+import { AppActions, AppTypes, BaseActions, SpinnerActions } from '@actions';
 import { ClientProxy } from '@services';
 import { refreshAuth } from '@helpers';
 import { fetchLeague, fetchLeagueMember, fetchLeagueMembers } from './helpers';
@@ -40,13 +25,6 @@ function* preInit({ data }: AnyAction) {
 function* init({ uuid }: AnyAction) {
     try {
         if (!ClientProxy.accessToken) yield call(refreshAuth);
-        yield put(BaseActions.initSockets(socketEventHandlers));
-        yield put(
-            LeagueTopicSocketActions.init(
-                { uuid },
-                { eventHandler: topicSocketEventHandlers }
-            )
-        );
         yield put(BaseActions.initMe(uuid));
         yield put(BaseActions.initLeagues());
         yield put(BaseActions.initNotifications());
@@ -79,10 +57,10 @@ function* refresh({ uuid }: AnyAction) {
 
 function* terminate() {
     try {
-        yield put(BaseActions.terminateSockets());
-        yield put(LeagueTopicSocketActions.terminate());
+        yield put(LeagueAppActions.terminateSuccess());
     } catch (err) {
         console.error(err);
+        yield put(LeagueAppActions.terminateFailure(err));
     }
 }
 
@@ -124,6 +102,7 @@ function* leagueMemberActiveEvent({ uuid, payload }: AnyAction) {
         yield put(BaseActions.refreshMe(uuid));
         yield put(AppActions.refreshLeagueMember(uuid));
         yield put(AppActions.refreshLeagueMembers(uuid));
+        yield put(SpinnerActions.closeSpinner());
     } else {
         yield put(AppActions.refreshLeagueMembers(uuid));
     }
@@ -134,6 +113,7 @@ function* leagueMemberInactiveEvent({ uuid, payload }: AnyAction) {
     const myUserUUID = yield select(selectMyUserUUID);
     if (myUserUUID == sender) {
         yield put(AppActions.refreshLeagueMember(uuid));
+        yield put(SpinnerActions.closeSpinner());
     } else {
         yield put(AppActions.refreshLeagueMembers(uuid));
     }

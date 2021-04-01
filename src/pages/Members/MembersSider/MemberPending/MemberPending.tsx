@@ -5,8 +5,10 @@ import { MemberPendingProps } from './types';
 import MembersPageActions from '@pages/Members/actions';
 import { selectLeagueMember } from '@selectors/AppSelector';
 import constants from '@constants';
+import { SiderComponentContent } from '@layouts/ComponentContent';
+import CONSTANTS from '@locale/en-CA';
+import { SpinnerActions } from '@actions';
 import './MemberPending.less';
-import ComponentContent from '@layouts/ComponentContent';
 
 const MemberPending: React.FunctionComponent<MemberPendingProps> = () => {
     const dispatch = useDispatch();
@@ -18,6 +20,9 @@ const MemberPending: React.FunctionComponent<MemberPendingProps> = () => {
                 constants.STATUS.ACTIVE.KEY
             )
         );
+        dispatch(
+            SpinnerActions.openSpinner(CONSTANTS.PAGES.MEMBERS.INVITE.WAIT)
+        );
     };
 
     const handleDeclineClick = () => {
@@ -27,13 +32,16 @@ const MemberPending: React.FunctionComponent<MemberPendingProps> = () => {
                 constants.STATUS.INACTIVE.KEY
             )
         );
+        dispatch(
+            SpinnerActions.openSpinner(CONSTANTS.PAGES.MEMBERS.INVITE.WAIT)
+        );
     };
 
     return (
-        <ComponentContent
-            title={'Actions'}
-            className="member-pending"
-            bodyClassName="member-pending-body"
+        <SiderComponentContent
+            title={CONSTANTS.COMMON.ACTIONS}
+            className="member-pending-component-content"
+            bodyClassName="member-pending-component-content-body"
         >
             <div className="member-pending-buttons">
                 <div className="member-pending-buttons-button active">
@@ -52,7 +60,7 @@ const MemberPending: React.FunctionComponent<MemberPendingProps> = () => {
                     </Button>
                 </div>
             </div>
-        </ComponentContent>
+        </SiderComponentContent>
     );
 };
 

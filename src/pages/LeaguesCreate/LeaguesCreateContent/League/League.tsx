@@ -8,10 +8,11 @@ import LeaguesCreatePageContentLeagueActions from './actions';
 import { selectData } from './selector';
 import ComponentContent from '@layouts/ComponentContent';
 import routes from '@constants/routes';
-import { OverlaySpin } from '@components';
-import './League.less';
 import { navigate, withAppRoute } from '@utils';
 import constants from '@constants';
+import CONSTANTS from '@locale/en-CA';
+import { useSpinner } from '@hooks';
+import './League.less';
 
 const League: React.FunctionComponent<LeagueProps> = ({}) => {
     const dispatch = useDispatch();
@@ -20,6 +21,8 @@ const League: React.FunctionComponent<LeagueProps> = ({}) => {
     const options = _get(history, ['location', 'state'], undefined);
 
     const { isSubmitted, isSubmitting, result } = useSelector(selectData);
+
+    useSpinner(isSubmitting);
 
     useEffect(() => {
         if (isSubmitted && result) {
@@ -43,12 +46,11 @@ const League: React.FunctionComponent<LeagueProps> = ({}) => {
 
     return (
         <ComponentContent
-            title={'Create League'}
+            title={CONSTANTS.PAGES.LEAGUES_CREATE.FORM.TITLE}
             showSpinner={!isInitialized}
             className="league-component-content"
         >
             <LeagueForm />
-            <OverlaySpin visible={isSubmitting} />
         </ComponentContent>
     );
 };

@@ -1,53 +1,51 @@
 import { AnyAction } from 'redux';
 import { eventChannel } from 'redux-saga';
-import { all, fork, take, call, put, takeLatest } from 'redux-saga/effects';
-import { isNil as _isNil } from 'lodash';
-import { WebSocketNotificationClient } from '@libs';
+import { all, fork, take, call, put, takeEvery } from 'redux-saga/effects';
+import { get as _get } from 'lodash';
 import { SocketActions, SocketTypes } from '@actions';
 import { message } from '@utils';
 import CONSTANTS from '@locale/en-CA';
 
-function subscribe(options: any) {
+function subscribe(ws: any, options: any) {
     const { eventHandler } = options;
-    return eventChannel((emitter) =>
-        eventHandler(WebSocketNotificationClient.socket, emitter)
-    );
+    return eventChannel((emitter) => eventHandler(ws.socket, emitter));
 }
 
-function* read(options: any) {
-    const channel: any = yield call(subscribe, options);
+function* read(ws: any, options: any) {
+    const channel: any = yield call(subscribe, ws, options);
     while (true) {
         let action = yield take(channel);
         yield put(action);
     }
 }
 
-function* write({ data }: AnyAction) {
+function* write({ ws, data }: AnyAction) {
     try {
-        WebSocketNotificationClient.socket?.send(data);
+        ws.socket?.send(data);
         yield put(SocketActions.writeSuccess());
     } catch (err) {
         yield put(SocketActions.writeFailure());
     }
 }
 
-function* init({ options }: AnyAction) {
+function* init({ ws, data, options }: AnyAction) {
     try {
-        // maybe notify the server that the user has logged in?
-        const status = yield WebSocketNotificationClient.init();
-        if (!status) {
+        const uuid = _get(data, ['uuid']);
+        const status = yield ws.run(uuid);
+        if (!!status) {
+            yield fork(read, ws, options);
+        } else {
             throw new Error();
         }
-        yield fork(read, options);
     } catch (err) {
         console.error(err);
         message.error(CONSTANTS.SOCKET.ERROR.INIT);
     }
 }
 
-function* terminate({}: AnyAction) {
+function* terminate({ ws }: AnyAction) {
     try {
-        yield WebSocketNotificationClient.terminate();
+        yield ws.stop();
         yield put(SocketActions.terminateSuccess());
     } catch (err) {
         message.error(CONSTANTS.SOCKET.ERROR.TERMINATE);
@@ -57,8 +55,8 @@ function* terminate({}: AnyAction) {
 
 export default function* SocketSaga() {
     yield all([
-        takeLatest(SocketTypes.INIT, init),
-        takeLatest(SocketTypes.TERMINATE, terminate),
-        takeLatest(SocketTypes.WRITE, write),
+        takeEvery(SocketTypes.INIT, init),
+        takeEvery(SocketTypes.TERMINATE, terminate),
+        takeEvery(SocketTypes.WRITE, write),
     ]);
 }

@@ -8,6 +8,7 @@ import ContestPageSiderCourseActions from './actions';
 import { SiderComponentContent } from '@layouts/ComponentContent';
 import { formatCourseAddress } from './utils';
 import './Course.less';
+import CONSTANTS from '@locale/en-CA';
 
 const Course: React.FunctionComponent<CourseProps> = () => {
     const dispatch = useDispatch();
@@ -36,7 +37,7 @@ const Course: React.FunctionComponent<CourseProps> = () => {
         <SiderComponentContent
             className="course-component-content space"
             showSpinner={!isInitialized || !isDataInitialized}
-            title={'Course'}
+            title={CONSTANTS.PAGES.CONTEST.COURSE}
         >
             <div className="course">
                 <div className="course-name">{name}</div>

@@ -7,6 +7,7 @@ import {
     authReducer as auth,
     baseReducer as base,
     modalReducer as modal,
+    spinnerReducer as spinner,
 } from '@reducers';
 import {
     forgotPasswordPage,
@@ -22,7 +23,7 @@ import {
     verifyPage,
     VerifyPageSaga,
 } from '@pages';
-import { AuthSaga, ModalSaga } from '@sagas';
+import { AuthSaga, ModalSaga, SocketSaga, SpinnerSaga } from '@sagas';
 import { get as _get } from 'lodash';
 
 function configStore(options?: { preloadedState: any }): any {
@@ -49,6 +50,7 @@ function configStore(options?: { preloadedState: any }): any {
             auth,
             base,
             modal,
+            spinner,
             forgotPasswordPage,
             loginPage,
             logoutPage,
@@ -64,6 +66,8 @@ function configStore(options?: { preloadedState: any }): any {
         yield all([
             fork(AuthSaga),
             fork(ModalSaga),
+            fork(SocketSaga),
+            fork(SpinnerSaga),
             fork(ForgotPasswordPageSaga),
             fork(LoginPageSaga),
             fork(LogoutPageSaga),
@@ -74,7 +78,7 @@ function configStore(options?: { preloadedState: any }): any {
     }
     sagaMiddleware.run(memberAppSaga);
 
-    return { store };
+    return store;
 }
 
 export default configStore;
