@@ -5,4 +5,5 @@ export interface ContestTileProps {
     props: PropsWithChildren<ListChildComponentProps>;
     history: any;
     params: any;
+    data: any;
 }

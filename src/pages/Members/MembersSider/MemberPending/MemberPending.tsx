@@ -5,10 +5,10 @@ import { MemberPendingProps } from './types';
 import MembersPageActions from '@pages/Members/actions';
 import { selectLeagueMember } from '@selectors/AppSelector';
 import constants from '@constants';
-import ComponentContent from '@layouts/ComponentContent';
+import { SiderComponentContent } from '@layouts/ComponentContent';
 import CONSTANTS from '@locale/en-CA';
-import './MemberPending.less';
 import { SpinnerActions } from '@actions';
+import './MemberPending.less';
 
 const MemberPending: React.FunctionComponent<MemberPendingProps> = () => {
     const dispatch = useDispatch();
@@ -38,10 +38,10 @@ const MemberPending: React.FunctionComponent<MemberPendingProps> = () => {
     };
 
     return (
-        <ComponentContent
+        <SiderComponentContent
             title={CONSTANTS.COMMON.ACTIONS}
-            className="member-pending"
-            bodyClassName="member-pending-body"
+            className="member-pending-component-content"
+            bodyClassName="member-pending-component-content-body"
         >
             <div className="member-pending-buttons">
                 <div className="member-pending-buttons-button active">
@@ -60,7 +60,7 @@ const MemberPending: React.FunctionComponent<MemberPendingProps> = () => {
                     </Button>
                 </div>
             </div>
-        </ComponentContent>
+        </SiderComponentContent>
     );
 };
 

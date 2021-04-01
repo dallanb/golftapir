@@ -31,7 +31,7 @@ import { AppLayoutNav } from '@layouts/AppLayout';
 import { NavExtra, NavMenu } from '@apps/components';
 import { ResizeContext, WebSocketContext } from '@contexts';
 import {
-    socketEventHandlers as leagueTopicEventHandler,
+    topicSocketEventHandlers as leagueTopicEventHandler,
     socketEventHandlers as notificationEventHandler,
 } from './utils';
 

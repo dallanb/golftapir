@@ -16,9 +16,9 @@ import { navigate, withAppRoute } from '@utils';
 import { selectLeagueMembersDataByStatus } from '@selectors/AppSelector';
 import { SiderComponentContent } from '@layouts/ComponentContent';
 import routes from '@constants/routes';
+import { checkMemberLimit } from './utils';
+import optionRenderer from './optionRenderer';
 import './SearchSelectInput.less';
-import { checkMemberLimit } from '@pages/Members/MembersSider/MemberActive/SearchSelectInput/utils';
-import optionRenderer from '@pages/Members/MembersSider/MemberActive/SearchSelectInput/optionRenderer';
 
 const { Option } = Select;
 
