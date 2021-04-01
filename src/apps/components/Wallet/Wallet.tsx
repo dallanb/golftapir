@@ -11,7 +11,7 @@ import {
     selectMyWalletBalance,
 } from '@selectors/BaseSelector';
 import { selectLeagueMemberStatus } from '@selectors/AppSelector';
-import { statusToRole } from '@utils';
+import { roundToMoney, statusToRole } from '@utils';
 import constants from '@constants';
 import { ModalActions } from '@actions';
 import { bodyRenderer, footerRenderer, headerRenderer } from './WalletModal';
@@ -44,7 +44,7 @@ const Wallet: React.FunctionComponent<WalletProps> = () => {
                             twoToneColor={'orange'}
                             className="wallet-balance-amount-icon"
                         />
-                        {balance}
+                        {roundToMoney(balance)}
                     </div>
                 </div>
             </div>

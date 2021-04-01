@@ -2,6 +2,7 @@ import React from 'react';
 import Member from './Member';
 import MemberCountry from './MemberCountry';
 import CONSTANTS from '@locale/en-CA';
+import { roundToMoney } from '@utils';
 
 const TABLE = CONSTANTS.PAGES.LEAGUE_HOME.STANDINGS.TABLE;
 
@@ -34,7 +35,7 @@ const columnsSchema = [
     {
         Header: TABLE.WINNINGS,
         accessor: 'stat.winning_total',
-        Cell: ({ value }: any) => `$${value}`,
+        Cell: ({ value }: any) => `$${roundToMoney(value)}`,
         className: 'winning-total',
     },
 ];
