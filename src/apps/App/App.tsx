@@ -8,7 +8,9 @@ import {
 import { useResizeDetector } from 'react-resize-detector';
 import { routes } from './routes';
 import { ResizeContext } from '@contexts';
+import NetworkProvider from './Network';
 import WebSocketProvider from './WebSocket';
+import { NetworkNotification } from '@apps/components';
 import './App.less';
 import '../../assets/styles/global.less';
 
@@ -17,18 +19,25 @@ const App: React.FunctionComponent = () => {
     return (
         <div id="app" ref={ref}>
             <ResizeContext.Provider value={{ height, width }}>
-                <WebSocketProvider>
-                    <Router>
-                        <Switch>
-                            {routes.map(({ path, render }: any) => (
-                                <Route key={path} path={path} render={render} />
-                            ))}
-                            <Route>
-                                <Redirect to="/app" />
-                            </Route>
-                        </Switch>
-                    </Router>
-                </WebSocketProvider>
+                <NetworkProvider>
+                    <WebSocketProvider>
+                        <Router>
+                            <Switch>
+                                {routes.map(({ path, render }: any) => (
+                                    <Route
+                                        key={path}
+                                        path={path}
+                                        render={render}
+                                    />
+                                ))}
+                                <Route>
+                                    <Redirect to="/app" />
+                                </Route>
+                            </Switch>
+                        </Router>
+                        <NetworkNotification />
+                    </WebSocketProvider>
+                </NetworkProvider>
             </ResizeContext.Provider>
         </div>
     );
