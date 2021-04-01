@@ -68,7 +68,7 @@ const MemberAppView: React.FunctionComponent<MemberAppViewProps> = () => {
                 avatar={avatar}
                 menu={
                     <NavMenu
-                        app={constants.APPS.LEAGUE_APP}
+                        app={constants.APPS.MEMBER_APP}
                         menuProps={menuProps}
                         menuRoutes={statics}
                         dimensions={dimensions}
