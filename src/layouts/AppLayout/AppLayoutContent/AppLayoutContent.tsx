@@ -25,14 +25,12 @@ const AppLayoutContent: React.FunctionComponent<AppLayoutContentProps> = ({
     };
 
     const renderContent = () => {
-        const res = [];
-        if (content) {
-            res.push(content);
-        }
-        if (width < 992 && sider) {
-            res.push(sider);
-        }
-        return res;
+        return (
+            <>
+                {content && content}
+                {width < 992 && sider && sider}
+            </>
+        );
     };
 
     const renderSider = () => {

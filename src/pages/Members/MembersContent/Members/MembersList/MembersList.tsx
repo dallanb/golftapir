@@ -19,6 +19,7 @@ const MembersList: React.FunctionComponent<MembersListProps> = ({
     const memberStatus = useSelector(selectLeagueMemberStatus);
     const role = statusToRole(memberStatus);
     const readOnly = role < constants.ROLE.ACTIVE;
+    // TODO: Add the crown
 
     const tableDimensions = {
         size: 100,
