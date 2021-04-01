@@ -1,11 +1,11 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { Divider } from 'antd';
+import { Divider, Skeleton } from 'antd';
 import classnames from 'classnames';
 import { get as _get, takeRight as _takeRight } from 'lodash';
 import { DollarTwoTone } from '@ant-design/icons/lib';
-import { selectMyWalletBalance } from '@selectors/BaseSelector';
+import { selectMe, selectMyWalletBalance } from '@selectors/BaseSelector';
 import { ExtraWalletProps } from './types';
 import routes from '@constants/routes';
 import { selectLeagueMemberStatus } from '@selectors/AppSelector';
@@ -16,13 +16,14 @@ import {
     headerRenderer,
 } from '@apps/components/Wallet/WalletModal';
 import constants from '@constants';
-import { statusToRole } from '@utils';
-import './ExtraWallet.less';
+import { roundToMoney, statusToRole } from '@utils';
 import CONSTANTS from '@locale/en-CA';
+import './ExtraWallet.less';
 
 const ExtraWallet: React.FunctionComponent<ExtraWalletProps> = ({}) => {
     const dispatch = useDispatch();
     const params = useParams();
+    const { isInitialized, isRefreshing } = useSelector(selectMe);
     const isLeagueApp = _get(params, ['league_uuid'], undefined);
     const isWalletCreatePage =
         _takeRight(location.pathname.split('/'), 2).join('') ==
@@ -62,7 +63,14 @@ const ExtraWallet: React.FunctionComponent<ExtraWalletProps> = ({}) => {
                             twoToneColor={'orange'}
                             className="nav-extra-wallet-balance-amount-icon"
                         />
-                        {balance}
+                        {isInitialized && !isRefreshing ? (
+                            roundToMoney(balance)
+                        ) : (
+                            <Skeleton.Input
+                                style={{ width: 30, height: 15 }}
+                                active
+                            />
+                        )}
                     </div>
                 </div>
             </div>
