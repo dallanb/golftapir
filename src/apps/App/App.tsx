@@ -10,7 +10,7 @@ import { routes } from './routes';
 import { ResizeContext } from '@contexts';
 import NetworkProvider from './Network';
 import WebSocketProvider from './WebSocket';
-import { NetworkNotification } from '@apps/components';
+import { NetworkNotification } from '@containers';
 import './App.less';
 import '../../assets/styles/global.less';
 

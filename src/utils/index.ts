@@ -16,7 +16,6 @@ export { default as mapStatusColour } from './mapStatusColour';
 export { default as message } from './message';
 export { default as mergeRefs } from './mergeRefs';
 export { default as navigate } from './navigate';
-export { default as useNetworkDetector } from './useNetworkDetector';
 export { default as normalizeImage } from './normalizeImage';
 export { default as ordinalSuffix } from './ordinalSuffix';
 export { default as randomColourGenerator } from './randomColourGenerator';

@@ -406,6 +406,7 @@ const CONSTANTS = {
             DESCRIPTION: 'Create League',
             FORM: {
                 TITLE: 'Create Contest',
+                SUBMITTING: 'Creating Contest...',
                 LABELS: {
                     NAME: 'Name',
                     AVATAR: 'Avatar',

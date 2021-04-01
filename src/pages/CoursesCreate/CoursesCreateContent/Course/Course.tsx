@@ -8,12 +8,12 @@ import CoursesCreatePageContentCourseActions from './actions';
 import { selectData } from './selector';
 import ComponentContent from '@layouts/ComponentContent';
 import routes from '@constants/routes';
-import { OverlaySpin } from '@components';
 import { navigate, withAppRoute } from '@utils';
 import { ModalActions } from '@actions';
 import { headerRenderer, bodyRenderer } from './CourseSuccessModal';
-import './Course.less';
 import CONSTANTS from '@locale/en-CA';
+import { useSpinner } from '@hooks';
+import './Course.less';
 
 const Course: React.FunctionComponent<CourseProps> = ({}) => {
     const dispatch = useDispatch();
@@ -24,6 +24,7 @@ const Course: React.FunctionComponent<CourseProps> = ({}) => {
 
     const { isSubmitted, isSubmitting, result } = useSelector(selectData);
 
+    useSpinner(isSubmitting);
     useEffect(() => {
         if (isSubmitted && result) {
             navigate(
@@ -55,7 +56,6 @@ const Course: React.FunctionComponent<CourseProps> = ({}) => {
             className="course"
         >
             <CourseForm />
-            <OverlaySpin visible={isSubmitting} />
         </ComponentContent>
     );
 };

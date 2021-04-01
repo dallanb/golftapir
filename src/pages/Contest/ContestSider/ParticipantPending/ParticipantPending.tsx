@@ -12,6 +12,7 @@ import constants from '@constants';
 import { SiderComponentContent } from '@layouts/ComponentContent';
 import './ParticipantPending.less';
 import CONSTANTS from '@locale/en-CA';
+import { SpinnerActions } from '@actions';
 
 const ParticipantPending: React.FunctionComponent<ParticipantPendingProps> = () => {
     const dispatch = useDispatch();
@@ -26,6 +27,7 @@ const ParticipantPending: React.FunctionComponent<ParticipantPendingProps> = () 
                 constants.STATUS.ACTIVE.KEY
             )
         );
+        dispatch(SpinnerActions.openSpinner());
     };
 
     const handleDeclineClick = () => {
@@ -35,6 +37,7 @@ const ParticipantPending: React.FunctionComponent<ParticipantPendingProps> = () 
                 constants.STATUS.INACTIVE.KEY
             )
         );
+        dispatch(SpinnerActions.openSpinner());
     };
 
     return (

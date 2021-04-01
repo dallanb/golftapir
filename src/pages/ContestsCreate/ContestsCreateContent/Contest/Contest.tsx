@@ -8,10 +8,10 @@ import ContestsCreatePageContentContestActions from './actions';
 import { selectData } from './selector';
 import ComponentContent from '@layouts/ComponentContent';
 import routes from '@constants/routes';
-import { OverlaySpin } from '@components';
-import './Contest.less';
 import { navigate, withAppRoute } from '@utils';
 import CONSTANTS from '@locale/en-CA';
+import { useSpinner } from '@hooks';
+import './Contest.less';
 
 const Contest: React.FunctionComponent<ContestProps> = ({}) => {
     const dispatch = useDispatch();
@@ -21,6 +21,7 @@ const Contest: React.FunctionComponent<ContestProps> = ({}) => {
     const options = _get(history, ['location', 'state'], undefined);
 
     const { isSubmitted, isSubmitting, result } = useSelector(selectData);
+    useSpinner(isSubmitting, CONSTANTS.PAGES.CONTESTS_CREATE.FORM.SUBMITTING);
 
     useEffect(() => {
         if (isSubmitted && result) {
@@ -53,7 +54,6 @@ const Contest: React.FunctionComponent<ContestProps> = ({}) => {
             className="contest"
         >
             <ContestForm />
-            <OverlaySpin visible={isSubmitting} />
         </ComponentContent>
     );
 };

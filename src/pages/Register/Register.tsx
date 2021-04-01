@@ -12,9 +12,9 @@ import routes from '@constants/routes';
 import constants from '@constants';
 import ComponentContent from '@layouts/ComponentContent';
 import RegisterButtons from './RegisterButtons';
-import { OverlaySpin } from '@components';
 import { ModalActions } from '@actions';
 import { bodyRenderer, headerRenderer } from './VerifyEmailModal';
+import { useSpinner } from '@hooks';
 import './Register.less';
 
 const Register: React.FunctionComponent<RegisterProps> = () => {
@@ -26,6 +26,7 @@ const Register: React.FunctionComponent<RegisterProps> = () => {
     const isRegistered = useSelector(selectIsRegistered);
     const isInitialized = useSelector(selectIsInitialized);
     const isSubmitting = useSelector(selectIsSubmitting);
+    useSpinner(isSubmitting);
 
     useEffect(() => {
         dispatch(RegisterFormActions.init(token));
@@ -55,7 +56,6 @@ const Register: React.FunctionComponent<RegisterProps> = () => {
         >
             <RegisterForm />
             <RegisterButtons />
-            <OverlaySpin visible={isSubmitting} />
         </ComponentContent>
     );
 };
