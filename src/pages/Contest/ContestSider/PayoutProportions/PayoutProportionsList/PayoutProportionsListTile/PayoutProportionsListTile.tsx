@@ -1,9 +1,9 @@
 import React from 'react';
 import classnames from 'classnames';
-import { get as _get } from 'lodash';
+import { get as _get, round as _round } from 'lodash';
 import { Card } from 'antd';
 import { PayoutProportionsListTileProps } from './types';
-import { ordinalSuffix } from '@utils';
+import { ordinalSuffix, roundToMoney } from '@utils';
 import './PayoutProportionsListTile.less';
 import constants from '@constants';
 import CONSTANTS from '@locale/en-CA';
@@ -39,7 +39,7 @@ const PayoutProportionListTile: React.FunctionComponent<PayoutProportionsListTil
                     <div className="payout-proportions-tile-content-side">
                         {status === constants.STATUS.PENDING.KEY
                             ? `${proportion * 100}%`
-                            : `$${payout}`}
+                            : `$${roundToMoney(payout)}`}
                     </div>
                 </div>
             </Card>

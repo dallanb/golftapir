@@ -21,6 +21,7 @@ export { default as normalizeImage } from './normalizeImage';
 export { default as ordinalSuffix } from './ordinalSuffix';
 export { default as randomColourGenerator } from './randomColourGenerator';
 export { default as remove } from './remove';
+export { default as roundToMoney } from './roundToMoney';
 export { default as searchSelectTagRenderer } from './searchSelectTagRenderer';
 export { default as scrollbarWidth } from './scrollbarWidth';
 export { default as statusToRole } from './statusToRole';
