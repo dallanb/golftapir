@@ -23,6 +23,7 @@ const MembersSider: React.FunctionComponent<MembersSiderProps> = () => {
         }
     };
     return (
+        // TODO: remove the spinner here and move it into the SiderComponentContents
         <SiderLayoutContent showSpinner={!isInitialized}>
             <>{contentRenderer(memberStatus)}</>
         </SiderLayoutContent>

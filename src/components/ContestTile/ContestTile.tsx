@@ -2,6 +2,7 @@ import React from 'react';
 import { Badge, Card } from 'antd';
 import { get as _get } from 'lodash';
 import classnames from 'classnames';
+import { UserOutlined } from '@ant-design/icons/lib';
 import { ContestTileProps } from './types';
 import ContestTileLeaderboard from './ContestTileLeaderboard';
 import ContestTileCourse from './ContestTileCourse';
@@ -16,6 +17,7 @@ const ContestTile: React.FunctionComponent<ContestTileProps> = ({
     props: { index, style, data },
     history,
     params,
+    data: { member },
 }) => {
     const isEven = index % 2;
     const item = _get(data, [index], undefined);
@@ -37,6 +39,7 @@ const ContestTile: React.FunctionComponent<ContestTileProps> = ({
     const course = _get(item, ['location'], '');
     const time = _get(item, ['start_time'], undefined);
     const participants = _get(item, ['participants'], {});
+    const myContest = !!_get(participants, [member], undefined);
     const cardCx = classnames('contest-list-tile-card', { filled: isEven });
     return (
         <div key={index} style={style} className="contest-list-tile-view">
@@ -59,6 +62,7 @@ const ContestTile: React.FunctionComponent<ContestTileProps> = ({
                         <div className="contest-list-tile-content-main-info">
                             <div className="contest-list-tile-content-main-name">
                                 {name}
+                                {myContest && <UserOutlined className="contest-list-tile-content-main-name-user"/>}
                             </div>
                             <div className="contest-list-tile-content-main-status">
                                 <Badge

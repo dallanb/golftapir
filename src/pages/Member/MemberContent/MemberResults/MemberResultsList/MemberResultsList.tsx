@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { get as _get } from 'lodash';
 import { MemberResultsListProps } from './types';
@@ -7,6 +7,7 @@ import { ContestTile, FixedSizeList } from '@components';
 import { getRefHeight } from '@utils';
 import MemberPageContentMemberResultsActions from '../actions';
 import CONSTANTS from '@locale/en-CA';
+import { selectMyUUID } from '@selectors/BaseSelector';
 import './MemberResultsList.less';
 
 const MemberResultsList: React.FunctionComponent<MemberResultsListProps> = ({
@@ -20,6 +21,7 @@ const MemberResultsList: React.FunctionComponent<MemberResultsListProps> = ({
     const dispatch = useDispatch();
     const history = useHistory();
     const params = useParams();
+    const member = useSelector(selectMyUUID);
 
     const tableDimensions = {
         size: 100,
@@ -55,7 +57,9 @@ const MemberResultsList: React.FunctionComponent<MemberResultsListProps> = ({
             loadNextPage={loadMore}
             isNextPageLoading={isFetching}
             minimumBatchSize={10}
-            rowRenderer={(props) => ContestTile({ props, history, params })}
+            rowRenderer={(props) =>
+                ContestTile({ props, history, params, data: { member } })
+            }
             emptyDescription={CONSTANTS.PAGES.MEMBER.LIST.EMPTY}
         />
     );
