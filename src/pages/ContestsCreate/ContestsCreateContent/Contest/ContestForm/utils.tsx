@@ -42,14 +42,19 @@ export const participantSearchSelectOptionRenderer = (
     );
 
     return Object.values(participants).map(
-        (participant: { member: string; display_name: string }) => (
+        (participant: {
+            member: string;
+            display_name: string;
+            uuid: string;
+        }) => (
             <Select.Option
                 key={participant.member}
                 value={participant.member}
                 disabled={
                     permanentParticipants.findIndex(
-                        ({ uuid }: { uuid: string }) =>
-                            uuid === participant.member
+                        ({ uuid }: { uuid: string }) => {
+                            return uuid === participant.uuid;
+                        }
                     ) > -1
                 }
             >
