@@ -1,6 +1,6 @@
 import React from 'react';
 import { NetworkContext } from '@contexts';
-import { useNetworkDetector } from '@utils';
+import { useNetworkDetector } from '@hooks';
 
 const Network: React.FunctionComponent = ({ children }) => {
     const isDisconnected = useNetworkDetector();

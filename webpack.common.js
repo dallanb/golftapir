@@ -22,6 +22,7 @@ module.exports = {
             '@constants': path.resolve(__dirname, 'src/constants'),
             '@contexts': path.resolve(__dirname, 'src/contexts'),
             '@helpers': path.resolve(__dirname, 'src/helpers'),
+            '@hooks': path.resolve(__dirname, 'src/hooks'),
             '@layouts': path.resolve(__dirname, 'src/layouts'),
             '@libs': path.resolve(__dirname, 'src/libs'),
             '@locale': path.resolve(__dirname, 'src/locale'),

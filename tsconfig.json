@@ -27,6 +27,8 @@
             "@contexts": ["contexts/index.ts"],
             "@helpers/*": ["helpers/*"],
             "@helpers": ["helpers/index.ts"],
+            "@hooks/*": ["hooks/*"],
+            "@hooks": ["hooks/index.ts"],
             "@layouts/*": ["layouts/*"],
             "@layouts": ["layouts/index.ts"],
             "@libs/*": ["libs/*"],
