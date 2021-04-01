@@ -11,9 +11,19 @@ import { ResizeContext } from '@contexts';
 import WebSocketProvider from './WebSocket';
 import './App.less';
 import '../../assets/styles/global.less';
+import { useNetworkDetector } from '@utils';
+import { notification } from 'antd';
 
 const App: React.FunctionComponent = () => {
     const { ref, height, width } = useResizeDetector();
+    const isDisconnected = useNetworkDetector();
+    isDisconnected
+        ? notification.error({
+              message: 'Internet connection lost...',
+              duration: 0,
+              placement: 'bottomRight',
+          })
+        : notification.close('network');
     return (
         <div id="app" ref={ref}>
             <ResizeContext.Provider value={{ height, width }}>
