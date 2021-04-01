@@ -18,6 +18,14 @@ export const socketEventHandlers = (socket: WebSocket, emitter: any) => {
                         break;
                 }
                 break;
+            case constants.TOPICS.LEAGUES:
+                switch (event) {
+                    case constants.EVENTS.LEAGUES.MEMBER_ACTIVE:
+                        // this event will be sent to the owner of the league on its inception?
+                        // emitter(BaseActions.refreshLeagues(null, 1000));
+                        break;
+                }
+                break;
             case constants.TOPICS.MEMBERS:
                 switch (event) {
                     case constants.EVENTS.MEMBERS.AVATAR_CREATED:

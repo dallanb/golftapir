@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 import AuthAppView from '@apps/AuthApp/AuthAppView';
 import { loadState } from '../../localStorage';
 import configStore from './store';
-import { MessageModal, MessageSpinner } from '../components';
+import { MessageModal, MessageSpinner } from '@containers';
 
 const AuthApp: React.FunctionComponent = () => {
     const preloadedState = loadState();

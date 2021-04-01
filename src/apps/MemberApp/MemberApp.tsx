@@ -1,7 +1,7 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import { MemberAppProps } from './types';
-import { MessageModal, MessageSpinner } from '../components';
+import { MessageModal, MessageSpinner } from '@containers';
 import configStore from './store';
 import MemberAppView from './MemberAppView';
 import { loadState } from '../../localStorage';

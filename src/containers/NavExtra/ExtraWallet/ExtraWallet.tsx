@@ -14,7 +14,7 @@ import {
     bodyRenderer,
     footerRenderer,
     headerRenderer,
-} from '@apps/components/Wallet/WalletModal';
+} from '@containers/Wallet/WalletModal';
 import constants from '@constants';
 import { roundToMoney, statusToRole } from '@utils';
 import CONSTANTS from '@locale/en-CA';

@@ -25,7 +25,7 @@ import constants from '@constants';
 import { Avatar, PendingBadge } from '@components';
 import ExtraWallet from './ExtraWallet';
 import ExtraMember from './ExtraMember';
-import OverlayMenu from '@apps/components/OverlayMenu';
+import OverlayMenu from '@containers/OverlayMenu';
 import CONSTANTS from '@locale/en-CA';
 import './NavExtra.less';
 

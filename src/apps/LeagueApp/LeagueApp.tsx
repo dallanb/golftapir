@@ -4,7 +4,7 @@ import { LeagueAppProps } from './types';
 import configStore from './store';
 import LeagueAppView from './LeagueAppView';
 import { loadState } from '../../localStorage';
-import { MessageModal, MessageSpinner } from '@apps/components';
+import { MessageModal, MessageSpinner } from '@containers';
 
 const LeagueApp: React.FunctionComponent<LeagueAppProps> = () => {
     const preloadedState = loadState();

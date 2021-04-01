@@ -23,6 +23,8 @@
             "@components": ["components/index.ts"],
             "@constants/*": ["constants/*"],
             "@constants": ["constants/index.ts"],
+            "@containers/*": ["containers/*"],
+            "@containers": ["containers/index.ts"],
             "@contexts/*": ["contexts/*"],
             "@contexts": ["contexts/index.ts"],
             "@helpers/*": ["helpers/*"],
