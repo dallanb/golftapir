@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { MembersListProps } from './types';
 import { FixedSizeList } from '@components';
-import { selectLeagueMemberStatus } from '@selectors/AppSelector';
+import { selectLeagueMemberData } from '@selectors/AppSelector';
 import MembersListTile from './MembersListTile';
 import { getRefHeight, statusToRole } from '@utils';
 import './MembersList.less';
@@ -16,10 +16,11 @@ const MembersList: React.FunctionComponent<MembersListProps> = ({
 }) => {
     const history = useHistory();
     const params = useParams();
-    const memberStatus = useSelector(selectLeagueMemberStatus);
+    const { status: memberStatus, uuid: member } = useSelector(
+        selectLeagueMemberData
+    );
     const role = statusToRole(memberStatus);
     const readOnly = role < constants.ROLE.ACTIVE;
-    // TODO: Add the crown
 
     const tableDimensions = {
         size: 100,
@@ -40,7 +41,12 @@ const MembersList: React.FunctionComponent<MembersListProps> = ({
             isNextPageLoading={isFetching}
             minimumBatchSize={10}
             rowRenderer={(props) =>
-                MembersListTile({ props, history, params, readOnly })
+                MembersListTile({
+                    props,
+                    history,
+                    params,
+                    data: { readOnly, member },
+                })
             }
         />
     );

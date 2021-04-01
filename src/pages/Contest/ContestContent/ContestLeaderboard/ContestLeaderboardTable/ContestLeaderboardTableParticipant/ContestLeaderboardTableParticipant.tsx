@@ -9,12 +9,15 @@ import { ContestParticipantsTableParticipantProps } from './types';
 import { prepareParticipant } from '@pages/Contest/utils';
 import { mapStatusColour, navigate, withAppRoute } from '@utils';
 import './ContestLeaderboardTableParticipant.less';
+import { selectMyUUID } from '@selectors/BaseSelector';
+import { UserOutlined } from '@ant-design/icons';
 
 const ContestLeaderboardTableParticipant: React.FunctionComponent<ContestParticipantsTableParticipantProps> = ({
     uuid,
 }) => {
     const history = useHistory();
     const params = useParams();
+    const memberUUID = useSelector(selectMyUUID);
     const {
         name,
         leagueMemberUUID,
@@ -26,6 +29,7 @@ const ContestLeaderboardTableParticipant: React.FunctionComponent<ContestPartici
         useSelector(selectContest),
         useSelector(selectLeagueMembersDataHashByMember)
     );
+    const myMember = member.member === memberUUID;
 
     return (
         <div
@@ -43,14 +47,11 @@ const ContestLeaderboardTableParticipant: React.FunctionComponent<ContestPartici
                 )
             }
         >
-            {/*<Avatar*/}
-            {/*    src={s3_filename && withS3URL(s3_filename)}*/}
-            {/*    name={name}*/}
-            {/*    size={36}*/}
-            {/*    className="contest-participants-table-participant-avatar"*/}
-            {/*/>*/}
             <div className="contest-participants-table-participant-name">
                 {name}
+                {myMember && (
+                    <UserOutlined className="contest-participants-table-participant-name-user" />
+                )}
             </div>
             <div className="contest-participants-table-participant-tags">
                 {tags.map((tag: string) => (
