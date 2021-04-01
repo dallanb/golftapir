@@ -1,15 +1,12 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { get as _get, takeRight as _takeRight } from 'lodash';
-import { Button } from 'antd';
+import { Button, Skeleton } from 'antd';
 import { DollarTwoTone, PlusOutlined } from '@ant-design/icons';
 import { WalletProps } from './types';
 import ComponentContent from '@layouts/ComponentContent';
-import {
-    selectMeIsInitialized,
-    selectMyWalletBalance,
-} from '@selectors/BaseSelector';
+import { selectMe, selectMyWalletBalance } from '@selectors/BaseSelector';
 import { selectLeagueMemberStatus } from '@selectors/AppSelector';
 import { roundToMoney, statusToRole } from '@utils';
 import constants from '@constants';
@@ -25,7 +22,7 @@ const Wallet: React.FunctionComponent<WalletProps> = () => {
     const isWalletCreatePage =
         _takeRight(location.pathname.split('/'), 2).join('') ==
         _takeRight(routes.ROUTES.COURSES_CREATE.ROUTE.split('/'), 2).join('');
-    const isInitialized = useSelector(selectMeIsInitialized);
+    const { isInitialized, isRefreshing } = useSelector(selectMe);
     const balance = useSelector(selectMyWalletBalance);
     const memberStatus = useSelector(selectLeagueMemberStatus);
     const role = statusToRole(memberStatus);
@@ -44,7 +41,11 @@ const Wallet: React.FunctionComponent<WalletProps> = () => {
                             twoToneColor={'orange'}
                             className="wallet-balance-amount-icon"
                         />
-                        {roundToMoney(balance)}
+                        {isInitialized && !isRefreshing ? (
+                            roundToMoney(balance)
+                        ) : (
+                            <Skeleton.Input style={{ width: 20 }} active />
+                        )}
                     </div>
                 </div>
             </div>

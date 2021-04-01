@@ -8,10 +8,10 @@ import MembersCreatePageContentMemberActions from './actions';
 import { selectData } from './selector';
 import ComponentContent from '@layouts/ComponentContent';
 import routes from '@constants/routes';
-import { OverlaySpin } from '@components';
 import { navigate, withAppRoute } from '@utils';
-import './Member.less';
 import CONSTANTS from '@locale/en-CA';
+import { useSpinner } from '@hooks';
+import './Member.less';
 
 const Member: React.FunctionComponent<MemberProps> = ({}) => {
     const dispatch = useDispatch();
@@ -21,7 +21,7 @@ const Member: React.FunctionComponent<MemberProps> = ({}) => {
     const options = _get(history, ['location', 'state'], undefined);
 
     const { isSubmitted, isSubmitting, result } = useSelector(selectData);
-
+    useSpinner(isSubmitting);
     useEffect(() => {
         if (isSubmitted && result) {
             navigate(
@@ -51,7 +51,6 @@ const Member: React.FunctionComponent<MemberProps> = ({}) => {
             title={CONSTANTS.PAGES.MEMBERS_CREATE.FORM.TITLE}
         >
             <MemberForm />
-            <OverlaySpin visible={isSubmitting} />
         </ComponentContent>
     );
 };

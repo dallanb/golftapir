@@ -28,7 +28,7 @@ import {
 } from '@selectors/AppSelector';
 import { selectData as selectBaseData } from '@selectors/BaseSelector';
 import { AppLayoutNav } from '@layouts/AppLayout';
-import { NavExtra, NavMenu } from '@apps/components';
+import { NavExtra, NavMenu } from '@containers';
 import { ResizeContext, WebSocketContext } from '@contexts';
 import {
     topicSocketEventHandlers as leagueTopicEventHandler,

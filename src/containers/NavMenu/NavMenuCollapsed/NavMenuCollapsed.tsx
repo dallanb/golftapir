@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Dropdown } from 'antd';
-import OverlayMenu from '@apps/components/OverlayMenu';
+import OverlayMenu from '@containers/OverlayMenu';
 import { MenuOutlined } from '@ant-design/icons';
 import defaultMenuItemRenderer from './defaultMenuItemRenderer';
 import { NavMenuCollapsedProps } from './types';

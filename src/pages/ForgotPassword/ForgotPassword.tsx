@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { get as _get } from 'lodash';
 import { ForgotPasswordProps } from './types';
 import ForgotPasswordFormActions from './actions';
 import {
@@ -13,9 +12,9 @@ import ComponentContent from '@layouts/ComponentContent';
 import { navigate, withAppRoute } from '@utils';
 import routes from '@constants/routes';
 import constants from '@constants';
-import { OverlaySpin } from '@components';
 import ForgotPasswordForm from './ForgotPasswordForm';
 import ForgotPasswordButtons from './ForgotPasswordButtons';
+import { useSpinner } from '@hooks';
 import './ForgotPassword.less';
 
 const ForgotPassword: React.FunctionComponent<ForgotPasswordProps> = () => {
@@ -24,7 +23,7 @@ const ForgotPassword: React.FunctionComponent<ForgotPasswordProps> = () => {
     const isInitialized = useSelector(selectIsInitialized);
     const isSubmitted = useSelector(selectIsSubmitted);
     const isSubmitting = useSelector(selectIsSubmitting);
-
+    useSpinner(isSubmitting);
     useEffect(() => {
         dispatch(ForgotPasswordFormActions.init());
         return () => {
@@ -50,7 +49,6 @@ const ForgotPassword: React.FunctionComponent<ForgotPasswordProps> = () => {
         >
             <ForgotPasswordForm />
             <ForgotPasswordButtons />
-            <OverlaySpin visible={isSubmitting} />
         </ComponentContent>
     );
 };

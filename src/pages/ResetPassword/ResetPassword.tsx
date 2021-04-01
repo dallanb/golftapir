@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { get as _get } from 'lodash';
 import { ResetPasswordProps } from './types';
 import ResetPasswordFormActions from './actions';
 import {
@@ -13,7 +12,7 @@ import ComponentContent from '@layouts/ComponentContent';
 import { navigate, withAppRoute } from '@utils';
 import routes from '@constants/routes';
 import constants from '@constants';
-import { OverlaySpin } from '@components';
+import { useSpinner } from '@hooks';
 import ResetPasswordForm from './ResetPasswordForm';
 import './ResetPassword.less';
 
@@ -23,7 +22,7 @@ const ResetPassword: React.FunctionComponent<ResetPasswordProps> = () => {
     const isInitialized = useSelector(selectIsInitialized);
     const isSubmitted = useSelector(selectIsSubmitted);
     const isSubmitting = useSelector(selectIsSubmitting);
-
+    useSpinner(isSubmitting);
     useEffect(() => {
         dispatch(ResetPasswordFormActions.init());
         return () => {
@@ -48,7 +47,6 @@ const ResetPassword: React.FunctionComponent<ResetPasswordProps> = () => {
             className="reset-password-view content-view"
         >
             <ResetPasswordForm />
-            <OverlaySpin visible={isSubmitting} />
         </ComponentContent>
     );
 };

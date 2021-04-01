@@ -3,7 +3,7 @@ import { all, call, fork, put, select, takeLatest } from 'redux-saga/effects';
 import { get as _get } from 'lodash';
 import { ContestService, NotificationService, WagerService } from '@services';
 import ContestPageActions, { ContestPageTypes } from './actions';
-import { BaseActions } from '@actions';
+import { BaseActions, SpinnerActions } from '@actions';
 import { selectContest } from './selector';
 import {
     initContest,
@@ -54,6 +54,7 @@ function* refresh() {
         yield call(initContest, uuid);
         yield put(BaseActions.refreshMe(leagueUUID));
         yield put(ContestPageActions.refreshSuccess());
+        yield put(SpinnerActions.closeSpinner());
     } catch (err) {
         yield put(ContestPageActions.refreshFailure(err));
     }

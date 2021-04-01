@@ -4,10 +4,10 @@ import AccountForm from './AccountForm';
 import { AccountProps } from './types';
 import AccountPageContentAccountActions from './actions';
 import ComponentContent from '@layouts/ComponentContent';
-import { OverlaySpin } from '@components';
 import { selectIsInitialized as selectIsDataInitialized } from '@pages/Account/selector';
 import { selectIsInitialized, selectIsSubmitting } from './selector';
 import CONSTANTS from '@locale/en-CA';
+import { useSpinner } from '@hooks';
 import './Account.less';
 
 const Account: React.FunctionComponent<AccountProps> = ({}) => {
@@ -16,6 +16,7 @@ const Account: React.FunctionComponent<AccountProps> = ({}) => {
     const isInitialized = useSelector(selectIsInitialized);
     const isSubmitting = useSelector(selectIsSubmitting);
     const [isDataInitializing, setDataIsInitializing] = useState(true);
+    useSpinner(isSubmitting);
 
     useEffect(() => {
         return () => {
@@ -38,7 +39,6 @@ const Account: React.FunctionComponent<AccountProps> = ({}) => {
             title={CONSTANTS.PAGES.ACCOUNT.FORM.TITLE}
         >
             <AccountForm />
-            <OverlaySpin visible={isSubmitting} />
         </ComponentContent>
     );
 };
