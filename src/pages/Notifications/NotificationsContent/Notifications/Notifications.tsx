@@ -1,20 +1,18 @@
-import React, { useContext, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { get as _get } from 'lodash';
 import NotificationsList from './NotificationsList';
 import { NotificationsProps } from './types';
 import NotificationsPageContentNotificationsActions from './actions';
 import { selectData } from './selector';
 import ComponentContent from '@layouts/ComponentContent';
 import CONSTANTS from '@locale/en-CA';
-import { ResizeContext } from '@contexts';
+import { useList } from '@hooks';
 import './Notifications.less';
 
 const Notifications: React.FunctionComponent<NotificationsProps> = ({}) => {
     const dispatch = useDispatch();
     const ref = useRef(null);
-    const dimensions = useContext(ResizeContext);
-    console.log(_get(dimensions, ['height']));
+    const { isResizing } = useList();
 
     useEffect(() => {
         dispatch(NotificationsPageContentNotificationsActions.init());
@@ -34,7 +32,7 @@ const Notifications: React.FunctionComponent<NotificationsProps> = ({}) => {
     return (
         <ComponentContent
             componentRef={ref}
-            showSpinner={!isInitialized}
+            showSpinner={!isInitialized || isResizing}
             className="notifications"
             title={CONSTANTS.PAGES.NOTIFICATIONS.LIST.TITLE}
         >

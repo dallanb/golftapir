@@ -12,12 +12,14 @@ import {
     selectLeagueMembersDataByStatus,
 } from '@selectors/AppSelector';
 import { organizeMembers } from '@pages/Members/utils';
-import './Members.less';
 import CONSTANTS from '@locale/en-CA';
+import { useList } from '@hooks';
+import './Members.less';
 
 const Members: React.FunctionComponent<MembersProps> = ({}) => {
     const dispatch = useDispatch();
     const ref = useRef(null);
+    const { isResizing } = useList();
 
     const { isInitialized, isRefreshing, isFetching } = useSelector(selectData);
     const {
@@ -28,7 +30,8 @@ const Members: React.FunctionComponent<MembersProps> = ({}) => {
         !isInitialized ||
         !leagueMembersIsInitialized ||
         isRefreshing ||
-        leagueMembersIsRefreshing;
+        leagueMembersIsRefreshing ||
+        isResizing;
 
     useEffect(() => {
         dispatch(MembersPageContentMembersActions.init());
