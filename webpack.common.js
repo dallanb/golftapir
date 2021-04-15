@@ -4,6 +4,7 @@ const Dotenv = require('dotenv-webpack');
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 const CompressionWebpackPlugin = require('compression-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+// const babelConfig = require('./.babelrc');
 
 module.exports = {
     entry: path.resolve(__dirname, 'src', 'index.tsx'),
@@ -39,7 +40,7 @@ module.exports = {
         rules: [
             {
                 test: /\.tsx?$/,
-                use: ['ts-loader'],
+                use: ['babel-loader'],
                 exclude: /node_modules/,
             },
             {

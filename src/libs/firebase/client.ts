@@ -1,7 +1,8 @@
 import firebase from 'firebase/app';
 import 'firebase/messaging';
-import Messaging = firebase.messaging.Messaging;
 import config from '../../config';
+
+const Messaging = firebase.messaging.Messaging;
 
 class Client {
     private readonly _config: any;

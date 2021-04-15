@@ -5,14 +5,16 @@ import { ContestsProps } from './types';
 import ContestsPageContentContestsActions from './actions';
 import { selectData } from './selector';
 import ComponentContent from '@layouts/ComponentContent';
-import './Contests.less';
 import { selectMyLeagueUUID } from '@selectors/BaseSelector';
 import CONSTANTS from '@locale/en-CA';
+import { useList } from '@hooks';
+import './Contests.less';
 
 const Contests: React.FunctionComponent<ContestsProps> = ({}) => {
     const dispatch = useDispatch();
     const ref = useRef(null);
     const leagueUUID = useSelector(selectMyLeagueUUID);
+    const { isResizing } = useList();
 
     useEffect(() => {
         dispatch(
@@ -34,7 +36,7 @@ const Contests: React.FunctionComponent<ContestsProps> = ({}) => {
     return (
         <ComponentContent
             componentRef={ref}
-            showSpinner={!isInitialized}
+            showSpinner={!isInitialized || isResizing}
             className="contests"
             title={CONSTANTS.PAGES.CONTESTS.LIST.TITLE}
         >

@@ -5,12 +5,14 @@ import { NotificationsProps } from './types';
 import NotificationsPageContentNotificationsActions from './actions';
 import { selectData } from './selector';
 import ComponentContent from '@layouts/ComponentContent';
-import './Notifications.less';
 import CONSTANTS from '@locale/en-CA';
+import { useList } from '@hooks';
+import './Notifications.less';
 
 const Notifications: React.FunctionComponent<NotificationsProps> = ({}) => {
     const dispatch = useDispatch();
     const ref = useRef(null);
+    const { isResizing } = useList();
 
     useEffect(() => {
         dispatch(NotificationsPageContentNotificationsActions.init());
@@ -30,7 +32,7 @@ const Notifications: React.FunctionComponent<NotificationsProps> = ({}) => {
     return (
         <ComponentContent
             componentRef={ref}
-            showSpinner={!isInitialized}
+            showSpinner={!isInitialized || isResizing}
             className="notifications"
             title={CONSTANTS.PAGES.NOTIFICATIONS.LIST.TITLE}
         >
