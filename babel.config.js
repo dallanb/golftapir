@@ -11,7 +11,7 @@ const plugins = [
 ];
 
 if (process.env.ENV === 'production') {
-    plugins.push(['transform-remove-console', { exclude: ['error', 'warn'] }]);
+    plugins.push(['transform-remove-console']);
 }
 
 module.exports = {

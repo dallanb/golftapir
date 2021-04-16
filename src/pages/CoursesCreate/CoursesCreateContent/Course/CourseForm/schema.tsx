@@ -2,7 +2,8 @@ import React from 'react';
 import * as Yup from 'yup';
 import { FloatLabelInputWrapper, NestedInputWrapper } from '@components';
 import CONSTANTS from '@locale/en-CA';
-import { courseHoleLabelMaker, courseHolesButtonsRenderer } from './utils';
+import { courseHoleLabelMaker, courseHolesButtonsRenderer, validateHolesLength } from './utils';
+import { get as _get } from 'lodash';
 
 const FORM = CONSTANTS.PAGES.COURSES_CREATE.FORM;
 export const fieldSchema = [
@@ -132,8 +133,16 @@ export const validationSchema = Yup.object({
     holes: Yup.array().of(
         Yup.object().shape({
             number: Yup.number(),
-            distance: Yup.number(),
-            par: Yup.number(),
+            distance: Yup.number().min(1, FORM.VALIDATION.DISTANCE_MIN).test(
+                'length-18',
+                FORM.VALIDATION.HOLES_LENGTH,
+                validateHolesLength
+            ),
+            par: Yup.number().min(1, FORM.VALIDATION.PAR_MIN).test(
+                'length-18',
+                FORM.VALIDATION.HOLES_LENGTH,
+                validateHolesLength
+            ),
         })
     ),
 });

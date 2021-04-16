@@ -1,4 +1,4 @@
-import { Formik, FormikProps, FormikValues } from 'formik';
+import {Formik, FormikProps, FormikValues, validateYupSchema, yupToFormErrors} from 'formik';
 import React from 'react';
 import { Button, Form as AntdForm } from 'antd';
 import { isNull as _isNull } from 'lodash';
@@ -16,6 +16,15 @@ class Form extends React.Component<FormProps> {
         super(props);
         this.formRenderer = props.formRenderer || defaultFormRenderer;
         this.fieldsRenderer = props.fieldsRenderer || defaultFieldsRenderer;
+    }
+
+    validate = (value: FormikValues) => {
+        try{
+            validateYupSchema(value, this.props.validationSchema, true, value)
+        } catch (e) {
+            return yupToFormErrors(e)
+        }
+        return {}
     }
 
     prepareForm = (formik: FormikProps<FormikValues>): JSX.Element => {
@@ -52,7 +61,6 @@ class Form extends React.Component<FormProps> {
     render() {
         const {
             initialValues,
-            validationSchema,
             onSubmit,
             validateOnBlur = false,
             validateOnChange = false,
@@ -61,7 +69,7 @@ class Form extends React.Component<FormProps> {
         return (
             <Formik
                 initialValues={initialValues}
-                validationSchema={validationSchema}
+                validate={this.validate}
                 onSubmit={onSubmit}
                 validateOnBlur={validateOnBlur}
                 validateOnChange={validateOnChange}
