@@ -473,6 +473,7 @@ const CONSTANTS = {
                     CITY_REQUIRED: 'City is required',
                     PROVINCE_REQUIRED: 'Province is required',
                     COUNTRY_REQUIRED: 'Country is required',
+                    HOLES_LENGTH: '18 Holes Required',
                 },
             },
             SUCCESS_MODAL: {
@@ -634,9 +635,9 @@ const CONSTANTS = {
         UPLOAD: {
             ERROR: {
                 IMAGE_TYPE: 'You can only upload JPG/PNG file!',
-                IMAGE_SIZE: 'Image must smaller than 1MB!'
-            }
-        }
+                IMAGE_SIZE: 'Image must smaller than 1MB!',
+            },
+        },
     },
 };
 
