@@ -473,7 +473,9 @@ const CONSTANTS = {
                     CITY_REQUIRED: 'City is required',
                     PROVINCE_REQUIRED: 'Province is required',
                     COUNTRY_REQUIRED: 'Country is required',
-                    HOLES_LENGTH: '18 Holes Required',
+                    HOLES_LENGTH: '18 holes are required',
+                    DISTANCE_MIN: 'Distance is required',
+                    PAR_MIN: 'Par is required'
                 },
             },
             SUCCESS_MODAL: {
