@@ -11,8 +11,7 @@ const config = {
     COURSE_URL: 'course.techtapir.com',
     LEAGUE_URL: 'league.techtapir.com',
     WAGER_URL: 'wager.techtapir.com',
-    GOLF_UUID: 'cbfa8bbc-075c-49b1-9f6a-e04b72f41d95',
-    // GOLF_UUID: '64580b95-7c99-41e9-921e-fa08c786f6ef',
+    GOLF_UUID: 'c7d5d15a-6c70-46c0-9d8d-9396f03243a6', // TODO: fix this, it is awful!
     NOTIFICATION_URL: 'notification.techtapir.com',
     SCORE_URL: 'score.techtapir.com',
     S3_URL: 'https://golftapir.s3-us-west-2.amazonaws.com',
