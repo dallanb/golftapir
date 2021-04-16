@@ -27,6 +27,7 @@ export { default as statusToRole } from './statusToRole';
 export { default as topicToRouteMapper } from './topicToRouteMapper';
 export { default as totalStrokeCalculator } from './totalStrokeCalculator';
 export { default as upsert } from './upsert';
+export { default as validateUploadImage } from './validateUploadImage';
 export { default as withAppRoute } from './withAppRoute';
 export { default as withDynamicRoute } from './withDynamicRoute';
 export { default as withS3URL } from './withS3URL';
