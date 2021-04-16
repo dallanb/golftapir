@@ -10,7 +10,7 @@ import {
 import { antdFormatName, mapCountryOptions } from './utils';
 import { Avatar, DateTimePicker } from '@components';
 import { UploadField } from './components';
-import { normalizeImage, withS3URL } from '@utils';
+import {normalizeImage, validateUploadImage, withS3URL} from '@utils';
 import constants from '@constants';
 // @ts-ignore
 import Flags from 'country-flag-icons/react/3x2';
@@ -208,12 +208,16 @@ const fieldRenderer = (
                     listType="picture-card"
                     showUploadList={false}
                     beforeUpload={(file) => {
+                        if(!validateUploadImage(file)) {
+                            return false
+                        }
                         normalizeImage(file).then((image) =>
                             formik.setFieldValue(name, image)
                         );
                         return false;
                     }}
                     openFileDialogOnClick={!value || _isEmpty(value)}
+                    accept={_get(options, ['accept'], 'image/png, image/jpeg')}
                     className={_get(options, ['className'], '')}
                 >
                     <UploadField

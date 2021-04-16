@@ -631,6 +631,12 @@ const CONSTANTS = {
                 ADD: 'Add',
             },
         },
+        UPLOAD: {
+            ERROR: {
+                IMAGE_TYPE: 'You can only upload JPG/PNG file!',
+                IMAGE_SIZE: 'Image must smaller than 1MB!'
+            }
+        }
     },
 };
 
