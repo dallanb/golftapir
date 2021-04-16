@@ -23,6 +23,7 @@ const FloatLabelInputWrapper: React.FunctionComponent<FloatLabelInputWrapperProp
         'label-float': focus || (!_isNil(value) && value.length !== 0),
     });
     const Label = typeof label === 'function' ? label({ name, value }) : label;
+    console.log(name);
     return (
         <div
             className={cx}

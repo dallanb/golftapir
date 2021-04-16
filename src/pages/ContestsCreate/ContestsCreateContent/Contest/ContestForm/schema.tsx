@@ -206,7 +206,6 @@ export const validationSchema = (walletBalance: number) =>
                     FORM.VALIDATION.PAYOUT_BUY_IN_REQUIRED,
                     function () {
                         const values = _get(this, ['parent']);
-                        console.log(values);
                         return values.length === 1 && values[0] === 100;
                     }
                 )

@@ -1,4 +1,4 @@
-import { toLower as _toLower, startCase as _startCase } from 'lodash';
+import {toLower as _toLower, startCase as _startCase, get as _get} from 'lodash';
 import { Button } from 'antd';
 import React from 'react';
 import { MinusCircleTwoTone, PlusCircleTwoTone } from '@ant-design/icons/lib';
@@ -41,3 +41,14 @@ export const courseHolesButtonsRenderer = ({
         </div>
     );
 };
+
+export function validateHolesLength(this: any) {
+    const context = _get(this, ['options', 'context']);
+    const index = _get(this, ['options', 'index'], 0);
+    const holes = _get(context, ['holes'], [])
+    if(holes.length === index +1){
+
+        return holes.length === 18;
+    }
+    return true
+}
