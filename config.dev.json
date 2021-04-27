@@ -1,0 +1,19 @@
+{
+  "PROTOCOL": "http",
+  "HOST": "0.0.0.0",
+  "PORT": "3000",
+  "AUTH_URL": "auth.qaw.techtapir.com",
+  "ACCOUNT_URL": "account.qaw.techtapir.com",
+  "CONTEST_URL": "contest.qaw.techtapir.com",
+  "MEMBER_URL": "member.qaw.techtapir.com",
+  "COURSE_URL": "course.qaw.techtapir.com",
+  "LEAGUE_URL": "league.qaw.techtapir.com",
+  "WAGER_URL": "wager.qaw.techtapir.com",
+  "GOLF_UUID": "653252cc-13e6-402f-8bbf-5acb8ccac85f",
+  "NOTIFICATION_URL": "notification.qaw.techtapir.com",
+  "SCORE_URL": "score.qaw.techtapir.com",
+  "S3_URL": "https://golftapir.s3-us-west-2.amazonaws.com/qaw",
+  "WS_NOTIFICATION_URL": "wss://notification.qaw.techtapir.com/notification",
+  "WS_TOPIC_URL": "wss://notification.qaw.techtapir.com/topic",
+  "MAX_LEAGUE_MEMBERS": 10
+}

@@ -7,7 +7,7 @@ const plugins = [
     '@babel/proposal-class-properties',
     '@babel/proposal-object-rest-spread',
     '@babel/plugin-transform-runtime',
-    ['import', { libraryName: 'antd', libraryDirectory: 'lib' }, 'antd'],
+    ['import', {libraryName: 'antd', libraryDirectory: 'lib'}, 'antd'],
 ];
 
 if (process.env.NODE_ENV === 'production') {

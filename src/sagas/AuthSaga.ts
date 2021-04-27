@@ -1,4 +1,4 @@
-import { AnyAction } from 'redux';
+import {AnyAction} from 'redux';
 import {
     all,
     call,
@@ -9,11 +9,11 @@ import {
     take,
     takeLatest,
 } from 'redux-saga/effects';
-import { authErrorMessage, message } from '@utils';
-import AuthActions, { AuthTypes } from '@actions/AuthActions';
-import { ClientProxy, AuthService } from '@services';
+import {authErrorMessage, message} from '@utils';
+import AuthActions, {AuthTypes} from '@actions/AuthActions';
+import {ClientProxy, AuthService} from '@services';
 import CONSTANTS from '@locale/en-CA';
-import { countdown } from '@utils';
+import {countdown} from '@utils';
 
 let tokenWatchTask: any;
 
@@ -21,11 +21,11 @@ function* ping() {
     yield call(AuthService.ping);
 }
 
-function* login({ email, password }: AnyAction) {
+function* login({email, password}: AnyAction) {
     try {
         yield tokenWatchTask && cancel(tokenWatchTask);
-        const res: any = yield call(AuthService.login, { email, password });
-        const { user, access_token, expiry } = res;
+        const res: any = yield call(AuthService.login, {email, password});
+        const {user, access_token, expiry} = res;
         ClientProxy.accessToken = access_token;
         tokenWatchTask = yield fork(tokenCheck, expiry);
         yield put(AuthActions.loginSuccess(user, expiry));
@@ -33,7 +33,7 @@ function* login({ email, password }: AnyAction) {
     } catch (err) {
         const {
             response: {
-                data: { msg },
+                data: {msg},
                 status,
             },
         } = err;
@@ -45,13 +45,13 @@ function* login({ email, password }: AnyAction) {
 }
 
 function* register({
-    email,
-    username,
-    password,
-    display_name,
-    country,
-    token,
-}: AnyAction) {
+                       email,
+                       username,
+                       password,
+                       display_name,
+                       country,
+                       token,
+                   }: AnyAction) {
     try {
         const payload = Object.assign(
             {},
@@ -62,10 +62,10 @@ function* register({
                 display_name,
                 country,
             },
-            token && { token }
+            token && {token}
         );
         const res: any = yield call(AuthService.register, payload);
-        const { user } = res;
+        const {user} = res;
         yield put(AuthActions.registerSuccess(user));
         message.success(CONSTANTS.AUTH.SUCCESS.REGISTER);
     } catch (err) {
@@ -74,9 +74,9 @@ function* register({
     }
 }
 
-function* verify({ token }: AnyAction) {
+function* verify({token}: AnyAction) {
     try {
-        yield call(AuthService.verify, { token });
+        yield call(AuthService.verify, {token});
         yield put(AuthActions.verifySuccess());
         message.success(CONSTANTS.AUTH.SUCCESS.VERIFY);
     } catch (err) {
@@ -89,7 +89,7 @@ function* refresh() {
     try {
         yield tokenWatchTask && cancel(tokenWatchTask);
         const res: any = yield call(AuthService.refresh);
-        const { access_token, user, expiry } = res;
+        const {access_token, user, expiry} = res;
         ClientProxy.accessToken = access_token;
         tokenWatchTask = yield fork(tokenCheck, expiry);
         yield put(AuthActions.refreshSuccess(user, expiry));
@@ -112,9 +112,9 @@ function* logout() {
     }
 }
 
-function* forgotPassword({ email }: AnyAction) {
+function* forgotPassword({email}: AnyAction) {
     try {
-        yield call(AuthService.forgotPassword, { email });
+        yield call(AuthService.forgotPassword, {email});
         yield put(AuthActions.forgotPasswordSuccess());
         message.success(CONSTANTS.AUTH.SUCCESS.FORGOT_PASSWORD);
     } catch (err) {
@@ -123,9 +123,9 @@ function* forgotPassword({ email }: AnyAction) {
     }
 }
 
-function* resetPassword({ password, token }: AnyAction) {
+function* resetPassword({password, token}: AnyAction) {
     try {
-        yield call(AuthService.resetPassword, { password, token });
+        yield call(AuthService.resetPassword, {password, token});
         yield put(AuthActions.resetPasswordSuccess());
         message.success(CONSTANTS.AUTH.SUCCESS.RESET_PASSWORD);
     } catch (err) {

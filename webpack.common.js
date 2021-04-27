@@ -32,6 +32,7 @@ module.exports = {
             '@selectors': path.resolve(__dirname, 'src/selectors'),
             '@services': path.resolve(__dirname, 'src/services'),
             '@utils': path.resolve(__dirname, 'src/utils'),
+            // 'Config':
         },
     },
     module: {

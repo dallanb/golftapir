@@ -1,5 +1,5 @@
 import Client from './client';
-import config from 'config';
+import config from 'Config';
 import { notification } from 'antd';
 
 class ContestTopicClient extends Client {
