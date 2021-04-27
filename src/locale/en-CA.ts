@@ -48,6 +48,7 @@ const CONSTANTS = {
             VERIFY: 'Verification unsuccessful',
             FORGOT_PASSWORD: 'Forgot Password Email unsuccessful',
             RESET_PASSWORD: 'Password Reset unsuccessful',
+            SESSION_LOGIN: 'Not Logged in',
         },
     },
     CONTEST: {
@@ -475,7 +476,7 @@ const CONSTANTS = {
                     COUNTRY_REQUIRED: 'Country is required',
                     HOLES_LENGTH: '18 holes are required',
                     DISTANCE_MIN: 'Distance is required',
-                    PAR_MIN: 'Par is required'
+                    PAR_MIN: 'Par is required',
                 },
             },
             SUCCESS_MODAL: {
