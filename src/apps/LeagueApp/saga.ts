@@ -8,7 +8,8 @@ import { ClientProxy } from '@services';
 import { refreshAuth } from '@helpers';
 import { fetchLeague, fetchLeagueMember, fetchLeagueMembers } from './helpers';
 import { selectLeagueData } from '@apps/LeagueApp/selector';
-import { selectMyUserUUID } from '@selectors/BaseSelector';
+import { selectData, selectMyUserUUID } from '@selectors/BaseSelector';
+import CONSTANTS from '@locale/en-CA';
 
 // Action Handlers
 function* preInit({ data }: AnyAction) {
@@ -24,6 +25,10 @@ function* preInit({ data }: AnyAction) {
 
 function* init({ uuid }: AnyAction) {
     try {
+        const data = yield select(selectData);
+        if (!data || !data.isLoggedIn) {
+            throw new Error(CONSTANTS.AUTH.ERROR.SESSION_LOGIN);
+        }
         if (!ClientProxy.accessToken) yield call(refreshAuth);
         yield put(BaseActions.initMe(uuid));
         yield put(BaseActions.initLeagues());

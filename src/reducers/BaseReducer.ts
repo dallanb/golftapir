@@ -43,7 +43,7 @@ const INITIAL_STATE: BaseInterface = {
         err: undefined,
     },
     isLoggedIn: false,
-    forceLogout: false,
+    forceLogout: true,
     expiry: 0,
     pending: 0,
 };
