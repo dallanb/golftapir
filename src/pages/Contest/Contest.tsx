@@ -9,7 +9,10 @@ import ContestSider from './ContestSider';
 import ContestContent from './ContestContent';
 import { WebSocketContext } from '@contexts';
 import { SocketActions } from '@actions';
-import { socketEventHandlers as eventHandler } from './utils';
+import {
+    isNextPathContest,
+    socketEventHandlers as eventHandler,
+} from './utils';
 import './Contest.less';
 
 const Contest: React.FunctionComponent<ContestProps> = () => {
@@ -32,7 +35,9 @@ const Contest: React.FunctionComponent<ContestProps> = () => {
         );
         return () => {
             dispatch(ContestPageActions.terminate());
-            dispatch(SocketActions.terminate(contestTopicWs));
+            if (!isNextPathContest(contestUUID, history.location.pathname)) {
+                dispatch(SocketActions.terminate(contestTopicWs));
+            }
         };
     }, []);
 

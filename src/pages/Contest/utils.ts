@@ -2,6 +2,7 @@ import { countBy as _countBy, get as _get, set as _set } from 'lodash';
 import constants from '@constants';
 import moment from 'moment';
 import ContestPageActions from './actions';
+import routes from '@constants/routes';
 
 export const prepareParticipant = (
     uuid: string,
@@ -65,6 +66,42 @@ export const mergeContestParticipant = (
             ? { ...existingParticipant, ...newParticipant }
             : existingParticipant
     );
+
+export const isNextPathContest = (uuid: string, nextPath: string) => {
+    const routeSnippets = nextPath.split('/').slice(-3);
+    // two options here at the moment for contest paths
+    // routes.ROUTES.CONTEST && routes.ROUTES.CONTEST_UPDATE
+    // if routesSnippets[2] is 'update' we will try CONTEST_UPDATE
+    // if routesSnippets[2] is a uuid we will try CONTEST
+    if (routeSnippets[2] === 'update') {
+        const updateRouteSnippets = routes.ROUTES.CONTEST_UPDATE.ROUTE.split(
+            '/'
+        ).slice(1);
+        return routeSnippets.every((snippet, index) => {
+            if (updateRouteSnippets[index] === ':contest_uuid') {
+                console.log(snippet);
+                console.log(uuid);
+                return snippet === uuid;
+            } else {
+                console.log(snippet);
+                console.log(updateRouteSnippets[index]);
+                return snippet === updateRouteSnippets[index];
+            }
+        });
+    } else if (routeSnippets[1] === 'contests') {
+        const readRouteSnippets = routes.ROUTES.CONTEST.ROUTE.split('/').slice(
+            1
+        );
+        return routeSnippets.slice(1).every((snippet, index) => {
+            if (readRouteSnippets[index] === ':contest_uuid') {
+                return snippet === uuid;
+            } else {
+                return snippet === readRouteSnippets[index];
+            }
+        });
+    }
+    return false;
+};
 
 export const socketEventHandlers = (socket: WebSocket, emitter: any) => {
     socket.onmessage = (evt: MessageEvent) => {

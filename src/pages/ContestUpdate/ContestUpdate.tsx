@@ -10,7 +10,7 @@ import ContestUpdatePageActions from './actions';
 import ContestUpdateContent from './ContestUpdateContent';
 import ContestUpdateSider from './ContestUpdateSider';
 import './ContestUpdate.less';
-import { socketEventHandlers as eventHandler } from '@pages/Contest/utils';
+import {isNextPathContest, socketEventHandlers as eventHandler} from '@pages/Contest/utils';
 
 const ContestUpdate: React.FunctionComponent<ContestUpdateProps> = () => {
     const dispatch = useDispatch();
@@ -31,18 +31,11 @@ const ContestUpdate: React.FunctionComponent<ContestUpdateProps> = () => {
                 { eventHandler }
             )
         );
-        //         setTimeout(() => {
-        //             dispatch(
-        //                 SocketActions.init(
-        //                     contestTopicWs,
-        //                     { uuid: contestUUID },
-        //                     { eventHandler }
-        //                 )
-        //             );
-        //         }, 1000);
         return () => {
             dispatch(ContestUpdatePageActions.terminate());
-            dispatch(SocketActions.terminate(contestTopicWs));
+            if(!isNextPathContest(contestUUID, history.location.pathname)) {
+                dispatch(SocketActions.terminate(contestTopicWs));
+            }
         };
     }, []);
 
