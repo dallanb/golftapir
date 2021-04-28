@@ -9,8 +9,8 @@ import { ContestUpdateProps } from './types';
 import ContestUpdatePageActions from './actions';
 import ContestUpdateContent from './ContestUpdateContent';
 import ContestUpdateSider from './ContestUpdateSider';
-import './ContestUpdate.less';
 import {isNextPathContest, socketEventHandlers as eventHandler} from '@pages/Contest/utils';
+import './ContestUpdate.less';
 
 const ContestUpdate: React.FunctionComponent<ContestUpdateProps> = () => {
     const dispatch = useDispatch();

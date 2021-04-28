@@ -79,12 +79,8 @@ export const isNextPathContest = (uuid: string, nextPath: string) => {
         ).slice(1);
         return routeSnippets.every((snippet, index) => {
             if (updateRouteSnippets[index] === ':contest_uuid') {
-                console.log(snippet);
-                console.log(uuid);
                 return snippet === uuid;
             } else {
-                console.log(snippet);
-                console.log(updateRouteSnippets[index]);
                 return snippet === updateRouteSnippets[index];
             }
         });
