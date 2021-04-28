@@ -87,11 +87,11 @@ const LeagueAppView: React.FunctionComponent<LeagueAppViewProps> = () => {
             dispatch(LeagueAppActions.preInit(state));
             dispatch(LeagueAppActions.init(paramLeagueUUID));
             FirebaseClient.onMessageListener()
-                .then((payload) => {
+                .then(payload => {
                     const { title, body } = payload.data;
                     message.success(`${body}`);
                 })
-                .catch((err) => {
+                .catch(err => {
                     message.error(JSON.stringify(err));
                 });
         }
