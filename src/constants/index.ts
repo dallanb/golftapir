@@ -110,6 +110,9 @@ const constants = {
             PENDING: 'pending',
         },
         CONTESTS: {
+            AVATAR_CREATED: 'avatar_created',
+            AVATAR_UPDATED: 'avatar_updated',
+            AVATAR_DELETED: 'avatar_deleted',
             PARTICIPANT_INVITED: 'participant_invited',
             PARTICIPANT_INACTIVE: 'participant_inactive',
             PARTICIPANT_ACTIVE: 'participant_active',
@@ -118,6 +121,8 @@ const constants = {
             CONTEST_INACTIVE: 'contest_inactive',
             CONTEST_ACTIVE: 'contest_active',
             CONTEST_COMPLETED: 'contest_completed',
+            START_TIME_UPDATED: 'start_time_updated',
+            NAME_UPDATED: 'name_updated',
         },
         COURSES: {
             COURSE_APPROVED: 'course_approved',

@@ -5,12 +5,7 @@ import { ContestService, NotificationService, WagerService } from '@services';
 import ContestPageActions, { ContestPageTypes } from './actions';
 import { BaseActions, SpinnerActions } from '@actions';
 import { selectContest } from './selector';
-import {
-    initContest,
-    initSocket,
-    initSubscribed,
-    terminateSocket,
-} from './helpers';
+import { initContest, initSubscribed } from './helpers';
 import { selectLeagueUUID } from '@selectors/AppSelector';
 
 // Action Handlers
@@ -28,7 +23,6 @@ function* preInit({ data }: AnyAction) {
 function* init({ uuid }: AnyAction) {
     try {
         // TODO: consider updating these to be actions in the contest reducer?
-        yield fork(initSocket, uuid);
         yield fork(initSubscribed, uuid);
         yield put(ContestPageActions.fetchPayout(uuid));
         yield call(initContest, uuid);
@@ -40,7 +34,6 @@ function* init({ uuid }: AnyAction) {
 
 function* terminate() {
     try {
-        yield call(terminateSocket);
     } catch (err) {
         console.error(err);
     }

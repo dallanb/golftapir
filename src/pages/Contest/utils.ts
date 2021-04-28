@@ -95,6 +95,18 @@ export const socketEventHandlers = (socket: WebSocket, emitter: any) => {
                     case constants.EVENTS.CONTESTS.CONTEST_COMPLETED:
                         emitter(ContestPageActions.refresh());
                         break;
+                    case constants.EVENTS.CONTESTS.AVATAR_CREATED:
+                        emitter(ContestPageActions.refresh());
+                        break;
+                    case constants.EVENTS.CONTESTS.AVATAR_DELETED:
+                        emitter(ContestPageActions.refresh());
+                        break;
+                    case constants.EVENTS.CONTESTS.NAME_UPDATED:
+                        emitter(ContestPageActions.refresh());
+                        break;
+                    case constants.EVENTS.CONTESTS.START_TIME_UPDATED:
+                        emitter(ContestPageActions.refresh());
+                        break;
                     default:
                         break;
                 }

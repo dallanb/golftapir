@@ -64,6 +64,12 @@ export default {
             },
         });
     },
+    deleteAvatar(uuid: string) {
+        return ClientProxy.del({
+            url: config.CONTEST_URL,
+            endpoint: `/avatars/${uuid}`,
+        });
+    },
     fetchContestParticipants(uuid: string, query: any = {}) {
         return ClientProxy.get({
             url: config.CONTEST_URL,

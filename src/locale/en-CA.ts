@@ -55,6 +55,8 @@ const CONSTANTS = {
         SUCCESS: {
             CREATE: 'Contest creation successful!',
             UPDATE: 'Contest update successful!',
+            ASSIGN_AVATAR: 'Contest avatar update successful!',
+            DELETE_AVATAR: 'Contest avatar deletion successful!',
             FETCH_PARTICIPANT: 'Successfully fetched participant!',
             FETCH_PARTICIPANTS: 'Successfully fetched participants!',
             UPDATE_PARTICIPANT: 'Successfully updated!',

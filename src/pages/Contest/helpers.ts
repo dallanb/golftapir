@@ -36,12 +36,3 @@ export function* initSubscribed(uuid: string) {
     );
     yield put(ContestPageActions.set({ subscribed }));
 }
-
-export function* initSocket(uuid: string) {
-    // yield put(); // TODO: handle init of contest socket
-    // socketEventHandlers
-}
-
-export function* terminateSocket() {
-    // yield put(); // TODO: handle terminate of contest socket
-}

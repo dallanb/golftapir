@@ -1,9 +1,23 @@
 import { AnyAction } from 'redux';
-import { all, put, takeLatest } from 'redux-saga/effects';
+import { all, call, fork, put, select, takeLatest } from 'redux-saga/effects';
 import ContestUpdatePageActions, { ContestUpdatePageTypes } from './actions';
+import { ContestService } from '@services';
 
-function* init({ data: contest }: AnyAction) {
+// Action Handlers
+function* preInit({ data: contest }: AnyAction) {
+    yield put(ContestUpdatePageActions.set({ contest }));
+}
+function* init({ uuid }: AnyAction) {
     try {
+        // yield fork(initSocket, uuid);
+        // force call for now since we need avatar information
+        const { contests: contest }: any = yield call(
+            ContestService.fetchContest,
+            uuid,
+            {
+                include: 'avatar',
+            }
+        );
         yield put(ContestUpdatePageActions.set({ contest }));
         yield put(ContestUpdatePageActions.initSuccess());
     } catch (err) {
@@ -11,6 +25,18 @@ function* init({ data: contest }: AnyAction) {
     }
 }
 
+function* terminate() {
+    try {
+        // yield call(terminateSocket);
+    } catch (err) {
+        console.error(err);
+    }
+}
+
 export default function* ContestsCreatePageSaga() {
-    yield all([takeLatest(ContestUpdatePageTypes.INIT, init)]);
+    yield all([
+        takeLatest(ContestUpdatePageTypes.PRE_INIT, preInit),
+        takeLatest(ContestUpdatePageTypes.INIT, init),
+        takeLatest(ContestUpdatePageTypes.TERMINATE, terminate),
+    ]);
 }

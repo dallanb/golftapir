@@ -4,7 +4,10 @@ import { notification } from 'antd';
 
 class ContestTopicClient extends Client {
     private _key: number;
-    constructor(options?: {}) {
+    private _runAttempts: number;
+    private readonly _maxRunAttempts: number;
+
+    constructor(options?: { maxRunAttempts?: number }) {
         super(config.WS_TOPIC_URL, {
             ...options,
             errorHandler: (code: number, reconnectLimitReached: boolean) => {
@@ -44,19 +47,49 @@ class ContestTopicClient extends Client {
             },
         });
         this._key = 0;
+        this._maxRunAttempts = options?.maxRunAttempts || 5;
+        this._runAttempts = 0;
+    }
+
+    get runAttempts(): number {
+        return this._runAttempts;
+    }
+
+    get maxRunAttempts(): number {
+        return this._maxRunAttempts;
     }
 
     async run(uuid: string) {
+        if (this._runAttempts >= this._maxRunAttempts) {
+            console.error('max run attempts reached');
+        }
+        this._incrementRunAttempts();
         const wsStatus = this.status();
         if (!wsStatus) {
+            this._resetRunAttempts();
             return await this.init(uuid);
         } else if (this._uuid !== uuid) {
+            // close an existing socket and open a new one
+            this._resetRunAttempts();
             this.terminate();
             return await this.init(uuid);
-        } else if (wsStatus === 3 && this._uuid === uuid) {
+        } else if (wsStatus === WebSocket.CLOSED && this._uuid === uuid) {
             // reopen a closed socket
+            this._resetRunAttempts();
+            return await this.init(uuid);
+        } else if (wsStatus === WebSocket.CLOSING && this._uuid === uuid) {
+            // wait for a socket to close and then reopen
+            while (this.status() === WebSocket.CLOSING) {
+                if (this._runAttempts >= this._maxRunAttempts) {
+                    return WebSocket.CLOSED;
+                }
+                await new Promise(resolve => setTimeout(resolve, 100));
+                this._incrementRunAttempts();
+            }
+            this._resetRunAttempts();
             return await this.init(uuid);
         }
+
         return wsStatus;
     }
 
@@ -65,6 +98,14 @@ class ContestTopicClient extends Client {
         if (wsStatus) {
             return this.terminate();
         }
+    }
+
+    _incrementRunAttempts() {
+        this._runAttempts += 1;
+    }
+
+    _resetRunAttempts() {
+        this._runAttempts = 0;
     }
 }
 
