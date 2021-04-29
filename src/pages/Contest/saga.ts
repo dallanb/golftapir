@@ -1,31 +1,18 @@
 import { AnyAction } from 'redux';
 import { all, call, fork, put, select, takeLatest } from 'redux-saga/effects';
-import { get as _get } from 'lodash';
 import { ContestService, NotificationService, WagerService } from '@services';
 import ContestPageActions, { ContestPageTypes } from './actions';
 import { BaseActions, SpinnerActions } from '@actions';
-import { selectContest } from './selector';
+import { selectContest } from '@modules/Contest/selector';
 import { initContest, initSubscribed } from './helpers';
 import { selectLeagueUUID } from '@selectors/AppSelector';
 
 // Action Handlers
-function* preInit({ data }: AnyAction) {
-    const contest = _get(data, ['contest'], undefined);
-    const participant = _get(data, ['participant'], undefined);
-    if (contest) {
-        yield put(ContestPageActions.set({ contest }));
-    }
-    if (participant) {
-        yield put(ContestPageActions.set({ participant }));
-    }
-}
-
 function* init({ uuid }: AnyAction) {
     try {
         // TODO: consider updating these to be actions in the contest reducer?
         yield fork(initSubscribed, uuid);
         yield put(ContestPageActions.fetchPayout(uuid));
-        yield call(initContest, uuid);
         yield put(ContestPageActions.initSuccess());
     } catch (err) {
         yield put(ContestPageActions.initFailure(err));
@@ -103,7 +90,6 @@ function* fetchPayout({ uuid }: AnyAction) {
 
 export default function* ContestPageSaga() {
     yield all([
-        takeLatest(ContestPageTypes.PRE_INIT, preInit),
         takeLatest(ContestPageTypes.INIT, init),
         takeLatest(ContestPageTypes.TERMINATE, terminate),
         takeLatest(ContestPageTypes.REFRESH, refresh),

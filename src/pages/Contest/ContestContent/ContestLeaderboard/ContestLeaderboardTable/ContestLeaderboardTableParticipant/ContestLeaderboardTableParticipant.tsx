@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { Tag } from 'antd';
 import routes from '@constants/routes';
-import { selectContest } from '@pages/Contest/selector';
+import { selectContest } from '@modules/Contest/selector';
 import { selectLeagueMembersDataHashByMember } from '@selectors/AppSelector';
 import { ContestParticipantsTableParticipantProps } from './types';
 import { prepareParticipant } from '@pages/Contest/utils';

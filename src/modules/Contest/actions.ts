@@ -2,7 +2,8 @@ import { createActions } from 'reduxsauce';
 
 const { Types, Creators } = createActions(
     {
-        init: [],
+        preInit: ['data'],
+        init: ['uuid'],
         initSuccess: null,
         initFailure: ['err'],
         terminate: null,
@@ -12,6 +13,7 @@ const { Types, Creators } = createActions(
         refreshSuccess: null,
         refreshFailure: ['err'],
         set: ['data'],
+        setUUID: ['uuid'],
     },
     {
         prefix: 'CONTEST_MODULE_',

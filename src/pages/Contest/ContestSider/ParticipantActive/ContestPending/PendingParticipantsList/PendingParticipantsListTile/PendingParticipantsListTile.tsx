@@ -8,7 +8,7 @@ import Flags from 'country-flag-icons/react/3x2';
 import { selectLeagueMembersDataHashByMember } from '@selectors/AppSelector';
 import { PendingParticipantsListTileProps } from './types';
 import { prepareParticipant } from '@pages/Contest/utils';
-import { selectContest } from '@pages/Contest/selector';
+import { selectContest } from '@modules/Contest/selector';
 import constants from '@constants';
 import './PendingParticipantsListTile.less';
 

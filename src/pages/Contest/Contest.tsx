@@ -11,19 +11,13 @@ import './Contest.less';
 
 const Contest: React.FunctionComponent<ContestProps> = () => {
     const dispatch = useDispatch();
-    const history = useHistory();
     const params = useParams();
-    const state = _get(history, ['location', 'state'], null);
     const contestUUID = _get(params, ['contest_uuid'], null);
 
     useEffect(() => {
-        dispatch(ContestPageActions.preInit(state));
         dispatch(ContestPageActions.init(contestUUID));
         return () => {
             dispatch(ContestPageActions.terminate());
-            // if (!isNextPathContest(contestUUID, history.location.pathname)) {
-            //     dispatch(SocketActions.terminate(contestTopicWs));
-            // }
         };
     }, []);
 

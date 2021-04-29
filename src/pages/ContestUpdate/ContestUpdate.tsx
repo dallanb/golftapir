@@ -13,20 +13,13 @@ import './ContestUpdate.less';
 
 const ContestUpdate: React.FunctionComponent<ContestUpdateProps> = () => {
     const dispatch = useDispatch();
-
-    const history = useHistory();
     const params = useParams();
-    const contest = _get(history, ['location', 'state'], null);
     const contestUUID = _get(params, ['contest_uuid'], null);
 
     useEffect(() => {
-        dispatch(ContestUpdatePageActions.preInit(contest));
         dispatch(ContestUpdatePageActions.init(contestUUID));
         return () => {
             dispatch(ContestUpdatePageActions.terminate());
-            // if (!isNextPathContest(contestUUID, history.location.pathname)) {
-            //     dispatch(SocketActions.terminate(contestTopicWs));
-            // }
         };
     }, []);
 

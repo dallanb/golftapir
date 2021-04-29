@@ -12,7 +12,7 @@ import ContestPageContentContestLeaderboardActions, {
     ContestPageContentContestLeaderboardTypes,
 } from './actions';
 import { ContestPageTypes } from '@pages/Contest/actions';
-import { selectContestParticipants } from '@pages/Contest/selector';
+import { selectContestParticipants } from '@modules/Contest/selector';
 import { initLookup, handleScoreUpdate } from './utils';
 import {
     selectIsInitialized,
@@ -32,11 +32,7 @@ function* init() {
         );
         yield put(ContestPageContentContestLeaderboardActions.initSuccess());
     } catch (err) {
-        yield put(
-            ContestPageContentContestLeaderboardActions.initFailure(
-                err
-            )
-        );
+        yield put(ContestPageContentContestLeaderboardActions.initFailure(err));
     }
 }
 

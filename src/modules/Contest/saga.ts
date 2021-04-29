@@ -1,25 +1,25 @@
-import { all, call, put, select, takeLatest } from 'redux-saga/effects';
+import { AnyAction } from 'redux';
+import { all, call, put, takeLatest } from 'redux-saga/effects';
 import ContestModuleActions, { ContestModuleTypes } from './actions';
 import { BaseActions } from '@actions';
-import { ClientProxy } from '@services';
-import { refreshAuth } from '@helpers';
-import { selectData } from '@selectors/BaseSelector';
-import CONSTANTS from '@locale/en-CA';
+import { get as _get } from 'lodash';
+import { fetchContest } from './helpers';
 
 // Action Handlers
-function* init() {
-    try {
-        const data = yield select(selectData);
-        console.log(data);
-        if (!data || !data.isLoggedIn) {
-            throw new Error(CONSTANTS.AUTH.ERROR.SESSION_LOGIN);
-        }
-        if (!ClientProxy.accessToken) yield call(refreshAuth);
-        // yield put(BaseActions.initSockets(socketEventHandlers));
-        yield put(BaseActions.initMe(null));
-        yield put(BaseActions.initLeagues());
-        yield put(BaseActions.initNotifications());
+function* preInit({ data }: AnyAction) {
+    const contest = _get(data, ['contest'], undefined);
+    const participant = _get(data, ['participant'], undefined);
+    if (contest) {
+        yield put(ContestModuleActions.set({ contest }));
+    }
+    if (participant) {
+        yield put(ContestModuleActions.set({ participant }));
+    }
+}
 
+function* init({ uuid }: AnyAction) {
+    try {
+        yield call(fetchContest, uuid);
         yield put(ContestModuleActions.initSuccess());
     } catch (err) {
         yield put(ContestModuleActions.initFailure(err));
@@ -28,8 +28,6 @@ function* init() {
 
 function* terminate() {
     try {
-        // yield put(BaseActions.terminateSockets());
-        // yield take(BaseTypes.TERMINATE_SOCKETS_SUCCESS);
         yield put(ContestModuleActions.terminateSuccess());
     } catch (err) {
         console.error(err);
@@ -37,9 +35,9 @@ function* terminate() {
     }
 }
 
-function* refresh() {
+function* refresh({ uuid }: AnyAction) {
     try {
-        yield put(BaseActions.refreshMe());
+        yield call(fetchContest, uuid);
         yield put(ContestModuleActions.refreshSuccess());
     } catch (err) {
         yield put(ContestModuleActions.refreshFailure());
@@ -48,6 +46,7 @@ function* refresh() {
 
 export default function* ContestModuleSaga() {
     yield all([
+        takeLatest(ContestModuleTypes.PRE_INIT, preInit),
         takeLatest(ContestModuleTypes.INIT, init),
         takeLatest(ContestModuleTypes.TERMINATE, terminate),
         takeLatest(ContestModuleTypes.REFRESH, refresh),

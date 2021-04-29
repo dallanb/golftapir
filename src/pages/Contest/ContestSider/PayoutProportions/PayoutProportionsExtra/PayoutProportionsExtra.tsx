@@ -3,10 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ReloadOutlined } from '@ant-design/icons';
 import { PayoutProportionsExtraProps } from './types';
 import classnames from 'classnames';
-import {
-    selectContestUUID,
-    selectPayoutIsFetching,
-} from '@pages/Contest/selector';
+import { selectPayoutIsFetching } from '@pages/Contest/selector';
+import { selectContestUUID } from '@modules/Contest/selector';
 import ContestPageActions from '@pages/Contest/actions';
 import './PayoutProportionsExtra.less';
 

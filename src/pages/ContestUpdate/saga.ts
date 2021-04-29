@@ -4,9 +4,6 @@ import ContestUpdatePageActions, { ContestUpdatePageTypes } from './actions';
 import { ContestService } from '@services';
 
 // Action Handlers
-function* preInit({ data: contest }: AnyAction) {
-    yield put(ContestUpdatePageActions.set({ contest }));
-}
 function* init({ uuid }: AnyAction) {
     try {
         // yield fork(initSocket, uuid);
@@ -35,7 +32,6 @@ function* terminate() {
 
 export default function* ContestsCreatePageSaga() {
     yield all([
-        takeLatest(ContestUpdatePageTypes.PRE_INIT, preInit),
         takeLatest(ContestUpdatePageTypes.INIT, init),
         takeLatest(ContestUpdatePageTypes.TERMINATE, terminate),
     ]);

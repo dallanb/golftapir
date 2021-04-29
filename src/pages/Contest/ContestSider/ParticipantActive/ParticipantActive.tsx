@@ -1,7 +1,8 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { ParticipantActiveProps } from './types';
-import { selectContestStatus, selectIsOwner } from '@pages/Contest/selector';
+import { selectIsOwner } from '@pages/Contest/selector';
+import { selectContestStatus } from '@modules/Contest/selector';
 import constants from '@constants';
 import ContestActive from './ContestActive';
 import ContestPending from './ContestPending';

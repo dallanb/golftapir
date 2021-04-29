@@ -16,7 +16,7 @@ import ContestPageSiderParticipantActiveContestPendingActions, {
 import {
     selectContestStatus,
     selectContestUUID,
-} from '@pages/Contest/selector';
+} from '@modules/Contest/selector';
 import constants from '@constants';
 import { keyBy as _keyBy } from 'lodash';
 import { fetchPendingParticipants } from './helpers';

@@ -1,7 +1,6 @@
 import { call, fork, put, select } from 'redux-saga/effects';
 import { ContestService, NotificationService } from '@services';
 import ContestPageActions from './actions';
-import { socketEventHandlers } from './utils';
 import { selectLeagueMemberData } from '@selectors/AppSelector';
 
 export function* initContest(uuid: string) {

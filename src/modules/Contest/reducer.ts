@@ -10,6 +10,9 @@ export interface ContestModuleInterface {
     readonly isInitialized: boolean;
     readonly isTerminating: boolean;
     readonly err?: Error;
+    readonly uuid?: string;
+    readonly contest?: any;
+    readonly participant?: any;
 }
 
 /* ------------- Initial State ------------- */
@@ -19,6 +22,9 @@ const INITIAL_STATE: ContestModuleInterface = {
     isInitialized: false,
     isTerminating: false,
     err: undefined,
+    uuid: undefined,
+    contest: undefined,
+    participant: undefined,
 };
 
 /* ------------- Reducers ------------- */

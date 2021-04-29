@@ -9,7 +9,7 @@ import renderRow from './renderRow';
 import ContestPageContentContestLeaderboardScorecardActions from './actions';
 import ScorecardParticipant from './ScorecardParticipant';
 import HoleScoreInfo from './HoleScoreInfo';
-import { selectContestUUID } from '@pages/Contest/selector';
+import { selectContestUUID } from '@modules/Contest/selector';
 import './ContestLeaderboardTableScorecard.less';
 
 const ContestLeaderboardTableScorecard: React.FunctionComponent<ContestLeaderboardTableScorecardProps> = ({

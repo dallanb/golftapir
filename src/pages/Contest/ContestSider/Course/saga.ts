@@ -2,7 +2,7 @@ import { all, call, put, select, takeLatest } from 'redux-saga/effects';
 import ContestPageSiderCourseActions, {
     ContestPageSiderCourseTypes,
 } from './actions';
-import { selectContestUUID } from '@pages/Contest/selector';
+import { selectContestUUID } from '@modules/Contest/selector';
 import { initCourse } from './helpers';
 
 function* init() {
