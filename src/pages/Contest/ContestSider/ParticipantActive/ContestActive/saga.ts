@@ -1,10 +1,7 @@
-import { AnyAction } from 'redux';
 import {
     all,
     call,
     cancel,
-    debounce,
-    delay,
     fork,
     put,
     select,
@@ -14,7 +11,7 @@ import {
 import ContestPageSiderParticipantActiveContestActiveActions, {
     ContestPageSiderParticipantActiveContestActiveTypes,
 } from './actions';
-import { selectContestUUID } from '@pages/Contest/selector';
+import { selectContestUUID } from '@modules/Contest/selector';
 import { initSheet, debouncedHoleStrokeUpdate } from './helpers';
 
 function* init() {
@@ -60,7 +57,7 @@ export function* ContestStrokeUpdateChannel() {
             debouncedHoleStrokeUpdate,
             holeId,
             strokes,
-            (id) => map.delete(id)
+            id => map.delete(id)
         );
         map.set(holeId, newTask);
     }

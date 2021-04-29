@@ -8,7 +8,7 @@ import { selectIsInitialized, selectIsRefreshing } from './selector';
 import {
     selectIsRefreshing as selectIsDataRefreshing,
     selectIsInitialized as selectIsDataInitialized,
-} from '@pages/Contest/selector';
+} from '@modules/Contest/selector';
 import CONSTANTS from '@locale/en-CA';
 import { selectLeagueMembersIsFetching } from '@selectors/AppSelector';
 import './ContestLeaderboard.less';

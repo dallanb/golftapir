@@ -4,7 +4,8 @@ import { ContestInfoFormProps } from './types';
 import { Form } from '@components';
 import { fieldSchema, validationSchema } from './schema';
 import { prepareInitialValues } from '../utils';
-import { selectContest, selectPayoutData } from '@pages/Contest/selector';
+import { selectPayoutData } from '@pages/Contest/selector';
+import { selectContest } from '@modules/Contest/selector';
 import './ContestInfoForm.less';
 
 const ContestInfoForm: React.FunctionComponent<ContestInfoFormProps> = () => {

@@ -5,7 +5,7 @@ import { Empty } from 'antd';
 import { EmptyList, FixedSizeList } from '@components';
 import { PayoutProportionsListProps } from './types';
 import PayoutProportionsListTile from './PayoutProportionsListTile';
-import { selectContestStatus } from '@pages/Contest/selector';
+import { selectContestStatus } from '@modules/Contest/selector';
 import './PayoutProportionsList.less';
 import { getRefHeight } from '@utils';
 
@@ -36,9 +36,7 @@ const PayoutProportionsList: React.FunctionComponent<PayoutProportionsListProps>
             items={data}
             loadNextPage={loadMore}
             minimumBatchSize={10}
-            rowRenderer={(props) =>
-                PayoutProportionsListTile({ props, status })
-            }
+            rowRenderer={props => PayoutProportionsListTile({ props, status })}
             empty={
                 <EmptyList
                     description={'No wagers'}

@@ -37,6 +37,8 @@
             "@libs": ["libs/index.ts"],
             "@locale/*": ["locale/*"],
             "@locale": ["locale/index.ts"],
+            "@modules/*": ["modules/*"],
+            "@modules": ["modules/index.ts"],
             "@pages/*": ["pages/*"],
             "@pages": ["pages/index.ts"],
             "@reducers/*": ["reducers/*"],

@@ -12,6 +12,7 @@ import {
     notificationReducer as notification,
     spinnerReducer as spinner,
 } from '@reducers';
+import { contestModule, ContestModuleSaga } from '@modules';
 import {
     ContestLeaderboardScoreChannel,
     contestPage,
@@ -104,6 +105,7 @@ function configStore(options?: { preloadedState: any }): any {
             modal,
             notification,
             spinner,
+            contestModule,
             contestPage,
             contestsPage,
             contestsCreatePage,
@@ -135,6 +137,7 @@ function configStore(options?: { preloadedState: any }): any {
             fork(ScoreSaga),
             fork(SocketSaga),
             fork(SpinnerSaga),
+            fork(ContestModuleSaga),
             fork(ContestPageSaga),
             fork(ContestPageContentContestLeaderboardSaga),
             fork(ContestLeaderboardScoreChannel),

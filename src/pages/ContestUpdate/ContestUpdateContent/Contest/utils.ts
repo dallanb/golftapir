@@ -1,8 +1,10 @@
-import { pick as _pick } from 'lodash';
+import { get as _get, pick as _pick } from 'lodash';
 import { withS3URL } from '@utils';
 
 export const prepareInitialValues = (contestData: any) => {
-    return _pick(contestData, ['name', 'avatar', 'start_time']);
+    const filename = _get(contestData, ['avatar', 's3_filename'], undefined);
+    const avatar = filename && `${filename}?t=${new Date().getTime()}`;
+    return { ..._pick(contestData, ['name', 'start_time']), avatar };
 };
 
 export const formatUploadSrc = (

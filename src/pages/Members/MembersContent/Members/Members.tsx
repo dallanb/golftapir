@@ -15,6 +15,7 @@ import { organizeMembers } from '@pages/Members/utils';
 import CONSTANTS from '@locale/en-CA';
 import { useList } from '@hooks';
 import './Members.less';
+import { SpinnerActions } from '@actions';
 
 const Members: React.FunctionComponent<MembersProps> = ({}) => {
     const dispatch = useDispatch();

@@ -2,13 +2,13 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button } from 'antd';
 import { ContestButtonsProps } from './types';
-import { selectMyParticipant } from '@pages/Contest/selector';
+import { selectMyParticipant } from '@modules/Contest/selector';
 import ContestPageActions from '@pages/Contest/actions';
 import constants from '@constants';
 import { SiderComponentContent } from '@layouts/ComponentContent';
 import { selectData } from '../selector';
-import './ContestButtons.less';
 import CONSTANTS from '@locale/en-CA';
+import './ContestButtons.less';
 
 const ContestButtons: React.FunctionComponent<ContestButtonsProps> = () => {
     const dispatch = useDispatch();

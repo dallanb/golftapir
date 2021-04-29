@@ -8,6 +8,8 @@ import ContestUpdatePageContentContestActions, {
 import { prepareInitialValues } from './utils';
 import { selectUUID } from './selector';
 import { selectContest } from '@pages/ContestUpdate/selector';
+import CONSTANTS from '@locale/en-CA';
+import { message } from '@utils';
 
 function* init() {
     try {
@@ -21,9 +23,7 @@ function* init() {
         yield put(ContestUpdatePageContentContestActions.setUUID(contest.uuid));
         yield put(ContestUpdatePageContentContestActions.initSuccess());
     } catch (err) {
-        yield put(
-            ContestUpdatePageContentContestActions.initFailure(err)
-        );
+        yield put(ContestUpdatePageContentContestActions.initFailure(err));
     }
 }
 
@@ -33,10 +33,22 @@ function* submit({ data }: AnyAction) {
         const contestData = _omit(data, ['avatar']);
         if (!_isEmpty(contestData)) {
             yield call(ContestService.updateContest, uuid, contestData);
+            message.success(CONSTANTS.CONTEST.SUCCESS.UPDATE);
         }
         const avatarData = _pick(data, ['avatar']);
         if (!_isEmpty(avatarData)) {
-            yield call(ContestService.assignAvatar, uuid, avatarData.avatar);
+            if (avatarData.avatar) {
+                yield call(
+                    ContestService.assignAvatar,
+                    uuid,
+                    avatarData.avatar
+                );
+                message.success(CONSTANTS.CONTEST.SUCCESS.ASSIGN_AVATAR);
+            } else {
+                const contest = yield select(selectContest);
+                yield call(ContestService.deleteAvatar, contest.avatar.uuid);
+                message.success(CONSTANTS.CONTEST.SUCCESS.DELETE_AVATAR);
+            }
         }
         yield put(ContestUpdatePageContentContestActions.submitSuccess());
     } catch (err) {

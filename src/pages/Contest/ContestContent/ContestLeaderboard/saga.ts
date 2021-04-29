@@ -11,8 +11,8 @@ import {
 import ContestPageContentContestLeaderboardActions, {
     ContestPageContentContestLeaderboardTypes,
 } from './actions';
-import { ContestPageTypes } from '@pages/Contest/actions';
-import { selectContestParticipants } from '@pages/Contest/selector';
+import { ContestModuleTypes } from '@modules/Contest/actions';
+import { selectContestParticipants } from '@modules/Contest/selector';
 import { initLookup, handleScoreUpdate } from './utils';
 import {
     selectIsInitialized,
@@ -32,11 +32,7 @@ function* init() {
         );
         yield put(ContestPageContentContestLeaderboardActions.initSuccess());
     } catch (err) {
-        yield put(
-            ContestPageContentContestLeaderboardActions.initFailure(
-                err
-            )
-        );
+        yield put(ContestPageContentContestLeaderboardActions.initFailure(err));
     }
 }
 
@@ -66,7 +62,7 @@ export function* ContestPageContentContestLeaderboardSaga() {
 export function* ContestLeaderboardScoreChannel() {
     const buffer: any = buffers.expanding();
     const actionChan = yield actionChannel(
-        ContestPageTypes.UPDATE_CONTEST_PARTICIPANT_SCORE,
+        ContestModuleTypes.UPDATE_CONTEST_PARTICIPANT_SCORE,
         buffer
     );
     const resChan = channel(buffers.expanding());
