@@ -14,6 +14,10 @@ const { Types, Creators } = createActions(
         refreshFailure: ['err'],
         set: ['data'],
         setUUID: ['uuid'],
+        setAvatar: ['avatar'],
+        setName: ['name'],
+        setStartTime: ['start_time'],
+        updateContestParticipantScore: ['participant', 'strokes', 'score'],
     },
     {
         prefix: 'CONTEST_MODULE_',

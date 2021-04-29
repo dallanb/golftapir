@@ -46,27 +46,27 @@ export const socketEventHandlers = (socket: WebSocket, emitter: any) => {
                         break;
                     case constants.EVENTS.CONTESTS.AVATAR_CREATED:
                         emitter(
-                            ContestModuleActions.refresh(data.contest_uuid)
+                            ContestModuleActions.setAvatar(data.s3_filename)
                         );
                         break;
                     case constants.EVENTS.CONTESTS.AVATAR_UPDATED:
                         emitter(
-                            ContestModuleActions.refresh(data.contest_uuid)
+                            ContestModuleActions.setAvatar(data.s3_filename)
                         );
                         break;
                     case constants.EVENTS.CONTESTS.AVATAR_DELETED:
                         emitter(
-                            ContestModuleActions.refresh(data.contest_uuid)
+                            ContestModuleActions.setAvatar(null)
                         );
                         break;
                     case constants.EVENTS.CONTESTS.NAME_UPDATED:
                         emitter(
-                            ContestModuleActions.refresh(data.contest_uuid)
+                            ContestModuleActions.setName(data.name)
                         );
                         break;
                     case constants.EVENTS.CONTESTS.START_TIME_UPDATED:
                         emitter(
-                            ContestModuleActions.refresh(data.contest_uuid)
+                            ContestModuleActions.setStartTime(data.start_time)
                         );
                         break;
                     default:

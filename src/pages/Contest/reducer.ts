@@ -85,22 +85,6 @@ function unsubscribeSuccess(state = INITIAL_STATE) {
     });
 }
 
-function updateContestParticipantScore(
-    state = INITIAL_STATE,
-    { participant, strokes, score }: any
-) {
-    const participants = Object.assign({}, state.contest.participants, {
-        [participant]: {
-            ...state.contest.participants[participant],
-            score,
-            strokes,
-        },
-    });
-    return Immutable.merge(state, {
-        contest: { ...state.contest, participants },
-    });
-}
-
 function fetchPayout(state = INITIAL_STATE) {
     return Immutable.merge(state, {
         payout: {
@@ -142,7 +126,6 @@ const HANDLERS = {
     [ContestPageTypes.SET]: set,
     [ContestPageTypes.SUBSCRIBE_SUCCESS]: subscribeSuccess,
     [ContestPageTypes.UNSUBSCRIBE_SUCCESS]: unsubscribeSuccess,
-    [ContestPageTypes.UPDATE_CONTEST_PARTICIPANT_SCORE]: updateContestParticipantScore,
     [ContestPageTypes.FETCH_PAYOUT]: fetchPayout,
     [ContestPageTypes.FETCH_PAYOUT_SUCCESS]: fetchPayoutSuccess,
     [ContestPageTypes.FETCH_PAYOUT_FAILURE]: fetchPayoutFailure,

@@ -2,6 +2,7 @@
 import { static as Immutable } from 'seamless-immutable';
 import { createReducer } from 'reduxsauce';
 import { ContestModuleTypes } from './actions';
+import { set as _set } from 'lodash';
 
 /* ------------- Interface ------------- */
 export interface ContestModuleInterface {
@@ -92,6 +93,56 @@ function set(state: any, { data }: any) {
     });
 }
 
+function setUUID(state: any, { uuid }: any) {
+    return Immutable.merge(state, {
+        uuid,
+    });
+}
+
+function setAvatar(state: any, { avatar }: any) {
+    const currAvatar = avatar && `${avatar}?t=${new Date().getTime()}`;
+    return Immutable.merge(state, {
+        contest: {
+            ...state.contest,
+            avatar: currAvatar,
+        },
+    });
+}
+
+function setName(state: any, { name }: any) {
+    return Immutable.merge(state, {
+        contest: {
+            ...state.contest,
+            name,
+        },
+    });
+}
+
+function setStartTime(state: any, { start_time }: any) {
+    return Immutable.merge(state, {
+        contest: {
+            ...state.contest,
+            start_time,
+        },
+    });
+}
+
+function updateContestParticipantScore(
+    state = INITIAL_STATE,
+    { participant, strokes, score }: any
+) {
+    const participants = Object.assign({}, state.contest.participants, {
+        [participant]: {
+            ...state.contest.participants[participant],
+            score,
+            strokes,
+        },
+    });
+    return Immutable.merge(state, {
+        contest: { ...state.contest, participants },
+    });
+}
+
 const HANDLERS = {
     [ContestModuleTypes.INIT]: init,
     [ContestModuleTypes.INIT_SUCCESS]: initSuccess,
@@ -103,6 +154,11 @@ const HANDLERS = {
     [ContestModuleTypes.TERMINATE_SUCCESS]: terminateSuccess,
     [ContestModuleTypes.TERMINATE_FAILURE]: terminateFailure,
     [ContestModuleTypes.SET]: set,
+    [ContestModuleTypes.SET_UUID]: setUUID,
+    [ContestModuleTypes.SET_AVATAR]: setAvatar,
+    [ContestModuleTypes.SET_NAME]: setName,
+    [ContestModuleTypes.SET_START_TIME]: setStartTime,
+    [ContestModuleTypes.UPDATE_CONTEST_PARTICIPANT_SCORE]: updateContestParticipantScore,
 };
 
 export const reducer = createReducer(INITIAL_STATE, HANDLERS);

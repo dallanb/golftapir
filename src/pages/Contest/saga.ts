@@ -2,9 +2,10 @@ import { AnyAction } from 'redux';
 import { all, call, fork, put, select, takeLatest } from 'redux-saga/effects';
 import { ContestService, NotificationService, WagerService } from '@services';
 import ContestPageActions, { ContestPageTypes } from './actions';
+import { ContestModuleTypes } from '@modules/Contest/actions';
 import { BaseActions, SpinnerActions } from '@actions';
 import { selectContest } from '@modules/Contest/selector';
-import { initContest, initSubscribed } from './helpers';
+import { initSubscribed } from './helpers';
 import { selectLeagueUUID } from '@selectors/AppSelector';
 
 // Action Handlers
@@ -31,7 +32,6 @@ function* refresh() {
         const leagueUUID = yield select(selectLeagueUUID);
         const { uuid } = yield select(selectContest);
         yield put(ContestPageActions.fetchPayout(uuid));
-        yield call(initContest, uuid);
         yield put(BaseActions.refreshMe(leagueUUID));
         yield put(ContestPageActions.refreshSuccess());
         yield put(SpinnerActions.closeSpinner());
@@ -93,6 +93,7 @@ export default function* ContestPageSaga() {
         takeLatest(ContestPageTypes.INIT, init),
         takeLatest(ContestPageTypes.TERMINATE, terminate),
         takeLatest(ContestPageTypes.REFRESH, refresh),
+        takeLatest(ContestModuleTypes.REFRESH, refresh),
         takeLatest(ContestPageTypes.SUBSCRIBE, subscribe),
         takeLatest(ContestPageTypes.UNSUBSCRIBE, unsubscribe),
         takeLatest(
