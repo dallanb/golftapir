@@ -55,13 +55,11 @@ export const socketEventHandlers = (socket: WebSocket, emitter: any) => {
                         );
                         break;
                     case constants.EVENTS.CONTESTS.AVATAR_DELETED:
-                        emitter(
-                            ContestModuleActions.setAvatar(null)
-                        );
+                        emitter(ContestModuleActions.setAvatar(null));
                         break;
                     case constants.EVENTS.CONTESTS.NAME_UPDATED:
                         emitter(
-                            ContestModuleActions.setName(data.name)
+                            ContestModuleActions.setName(data.name) // my issue with handling update like this is that the client is assuming this is what the server would have returned
                         );
                         break;
                     case constants.EVENTS.CONTESTS.START_TIME_UPDATED:
