@@ -3,10 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Button } from 'antd';
 import { ParticipantPendingProps } from './types';
 import ContestPageActions from '@pages/Contest/actions';
-import {
-    selectPayoutBuyIn,
-    selectMyParticipant,
-} from '@pages/Contest/selector';
+import { selectPayoutBuyIn } from '@pages/Contest/selector';
+import { selectMyParticipant } from '@modules/Contest/selector';
 import { selectMyWalletBalance } from '@selectors/BaseSelector';
 import constants from '@constants';
 import { SiderComponentContent } from '@layouts/ComponentContent';

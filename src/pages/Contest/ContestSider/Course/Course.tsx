@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { get as _get, pick as _pick } from 'lodash';
 import { CourseProps } from './types';
-import { selectIsInitialized as selectDataIsInitialized } from '@pages/Contest/selector';
+import { selectIsInitialized as selectDataIsInitialized } from '@modules/Contest/selector';
 import { selectData } from './selector';
 import ContestPageSiderCourseActions from './actions';
 import { SiderComponentContent } from '@layouts/ComponentContent';

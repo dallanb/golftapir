@@ -1,5 +1,5 @@
 import ClientProxy from './ClientProxy';
-import config from 'config';
+import config from 'Config';
 import { getFormData } from '@services/utils';
 
 export default {
@@ -62,6 +62,12 @@ export default {
             headers: {
                 'Content-Type': 'multipart/form-data',
             },
+        });
+    },
+    deleteAvatar(uuid: string) {
+        return ClientProxy.del({
+            url: config.CONTEST_URL,
+            endpoint: `/avatars/${uuid}`,
         });
     },
     fetchContestParticipants(uuid: string, query: any = {}) {

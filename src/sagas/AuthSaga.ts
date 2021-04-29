@@ -6,6 +6,7 @@ import {
     cancelled,
     fork,
     put,
+    select,
     take,
     takeLatest,
 } from 'redux-saga/effects';
@@ -14,6 +15,7 @@ import AuthActions, { AuthTypes } from '@actions/AuthActions';
 import { ClientProxy, AuthService } from '@services';
 import CONSTANTS from '@locale/en-CA';
 import { countdown } from '@utils';
+import { selectData } from '@selectors/BaseSelector';
 
 let tokenWatchTask: any;
 

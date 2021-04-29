@@ -1,5 +1,5 @@
 import ClientProxy from './ClientProxy';
-import config from 'config';
+import config from 'Config';
 
 export default {
     fetchAccount(uuid: string, query: any = {}) {

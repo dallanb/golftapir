@@ -2,7 +2,7 @@ import React from 'react';
 import { MinusCircleTwoTone, PlusCircleTwoTone } from '@ant-design/icons/lib';
 import { ContestLeaderboardTableToggleProps } from './types';
 import { useSelector } from 'react-redux';
-import { selectContestStatus } from '@pages/Contest/selector';
+import { selectContestStatus } from '@modules/Contest/selector';
 import constants from '@constants';
 import { Button } from 'antd';
 

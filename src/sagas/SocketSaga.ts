@@ -8,7 +8,7 @@ import CONSTANTS from '@locale/en-CA';
 
 function subscribe(ws: any, options: any) {
     const { eventHandler } = options;
-    return eventChannel((emitter) => eventHandler(ws.socket, emitter));
+    return eventChannel(emitter => eventHandler(ws.socket, emitter));
 }
 
 function* read(ws: any, options: any) {
@@ -32,7 +32,7 @@ function* init({ ws, data, options }: AnyAction) {
     try {
         const uuid = _get(data, ['uuid']);
         const status = yield ws.run(uuid);
-        if (!!status) {
+        if (status === WebSocket.OPEN) {
             yield fork(read, ws, options);
         } else {
             throw new Error();

@@ -4,11 +4,8 @@ import { useHistory } from 'react-router-dom';
 import classnames from 'classnames';
 import { ContestInfoExtraProps } from './types';
 import { selectMyLeagueUUID } from '@selectors/BaseSelector';
-import {
-    selectContest,
-    selectIsOwner,
-    selectSubscribed,
-} from '@pages/Contest/selector';
+import { selectIsOwner, selectSubscribed } from '@pages/Contest/selector';
+import { selectContest } from '@modules/Contest/selector';
 import { navigate, withAppRoute } from '@utils';
 import routes from '@constants/routes';
 import constants from '@constants';

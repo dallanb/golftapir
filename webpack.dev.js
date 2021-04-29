@@ -1,6 +1,7 @@
 const path = require('path');
 const { merge } = require('webpack-merge');
 const common = require('./webpack.common');
+const config = require('./config.dev.json')
 
 module.exports = merge(common, {
     mode: 'development',
@@ -12,4 +13,7 @@ module.exports = merge(common, {
         historyApiFallback: true,
         https: true,
     },
+    externals: {
+        'Config': JSON.stringify(config)
+    }
 });

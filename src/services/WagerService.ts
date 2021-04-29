@@ -1,5 +1,5 @@
 import ClientProxy from './ClientProxy';
-import config from 'config';
+import config from 'Config';
 
 export default {
     fetchWager(uuid: string, query: any = {}) {

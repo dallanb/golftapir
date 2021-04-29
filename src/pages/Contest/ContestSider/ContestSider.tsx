@@ -12,7 +12,7 @@ import { ContestSiderProps } from './types';
 import {
     selectIsInitialized,
     selectMyParticipantStatus,
-} from '@pages/Contest/selector';
+} from '@modules/Contest/selector';
 import constants from '@constants';
 import './ContestSider.less';
 import { SiderComponentContent } from '@layouts/ComponentContent';

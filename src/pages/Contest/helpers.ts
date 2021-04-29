@@ -1,7 +1,6 @@
 import { call, fork, put, select } from 'redux-saga/effects';
 import { ContestService, NotificationService } from '@services';
 import ContestPageActions from './actions';
-import { socketEventHandlers } from './utils';
 import { selectLeagueMemberData } from '@selectors/AppSelector';
 
 export function* initContest(uuid: string) {
@@ -35,13 +34,4 @@ export function* initSubscribed(uuid: string) {
         }
     );
     yield put(ContestPageActions.set({ subscribed }));
-}
-
-export function* initSocket(uuid: string) {
-    // yield put(); // TODO: handle init of contest socket
-    // socketEventHandlers
-}
-
-export function* terminateSocket() {
-    // yield put(); // TODO: handle terminate of contest socket
 }

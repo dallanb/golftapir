@@ -48,12 +48,15 @@ const CONSTANTS = {
             VERIFY: 'Verification unsuccessful',
             FORGOT_PASSWORD: 'Forgot Password Email unsuccessful',
             RESET_PASSWORD: 'Password Reset unsuccessful',
+            SESSION_LOGIN: 'Not Logged in',
         },
     },
     CONTEST: {
         SUCCESS: {
             CREATE: 'Contest creation successful!',
             UPDATE: 'Contest update successful!',
+            ASSIGN_AVATAR: 'Contest avatar update successful!',
+            DELETE_AVATAR: 'Contest avatar deletion successful!',
             FETCH_PARTICIPANT: 'Successfully fetched participant!',
             FETCH_PARTICIPANTS: 'Successfully fetched participants!',
             UPDATE_PARTICIPANT: 'Successfully updated!',
@@ -475,7 +478,7 @@ const CONSTANTS = {
                     COUNTRY_REQUIRED: 'Country is required',
                     HOLES_LENGTH: '18 holes are required',
                     DISTANCE_MIN: 'Distance is required',
-                    PAR_MIN: 'Par is required'
+                    PAR_MIN: 'Par is required',
                 },
             },
             SUCCESS_MODAL: {

@@ -5,8 +5,8 @@ import { ContestInfoProps } from './types';
 import ContestInfoForm from './ContestInfoForm';
 import ComponentContent from '@layouts/ComponentContent';
 import CONSTANTS from '@locale/en-CA';
+import { selectIsInitialized } from '@modules/Contest/selector';
 import {
-    selectIsInitialized,
     selectIsRefreshing,
     selectPayoutIsFetching,
 } from '@pages/Contest/selector';

@@ -1,5 +1,5 @@
 import constants from '@constants';
-import config from 'config';
+import config from 'Config';
 
 // return False if we are at or past member limit else True
 export const checkMemberLimit = (membersData: any) =>

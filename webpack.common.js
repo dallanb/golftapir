@@ -26,12 +26,14 @@ module.exports = {
             '@layouts': path.resolve(__dirname, 'src/layouts'),
             '@libs': path.resolve(__dirname, 'src/libs'),
             '@locale': path.resolve(__dirname, 'src/locale'),
+            '@modules': path.resolve(__dirname, 'src/modules'),
             '@pages': path.resolve(__dirname, 'src/pages'),
             '@reducers': path.resolve(__dirname, 'src/reducers'),
             '@sagas': path.resolve(__dirname, 'src/sagas'),
             '@selectors': path.resolve(__dirname, 'src/selectors'),
             '@services': path.resolve(__dirname, 'src/services'),
             '@utils': path.resolve(__dirname, 'src/utils'),
+            // 'Config':
         },
     },
     module: {

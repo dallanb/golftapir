@@ -7,9 +7,9 @@ import { findLowestScoringParticipant } from '@pages/Contests/utils';
 // @ts-ignore
 import Flags from 'country-flag-icons/react/3x2';
 import {
-    selectContestParticipants,
     selectIsInitialized,
-} from '@pages/Contest/selector';
+    selectContestParticipants,
+} from '@modules/Contest/selector';
 import { selectLeagueMembersDataHashByMember } from '@selectors/AppSelector';
 import CONSTANTS from '@locale/en-CA';
 import './ContestCompleted.less';
