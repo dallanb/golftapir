@@ -63,6 +63,14 @@ export const selectContestStatus = createSelector(
     contestModule => _get(contestModule, ['contest', 'status'], undefined)
 );
 
+export const selectIsContestUpdating = createSelector(
+    [getContestModule],
+    contestModule =>
+        _get(contestModule, ['isContestNameUpdating'], false) ||
+        _get(contestModule, ['isContestAvatarUpdating'], false) ||
+        _get(contestModule, ['isContestStartTimeUpdating'], false)
+);
+
 export const selectContestParticipants = createSelector(
     [getContestModule],
     contestModule => _get(contestModule, ['contest', 'participants'], undefined)

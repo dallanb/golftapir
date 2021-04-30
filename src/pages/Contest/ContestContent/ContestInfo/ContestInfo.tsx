@@ -5,7 +5,11 @@ import { ContestInfoProps } from './types';
 import ContestInfoForm from './ContestInfoForm';
 import ComponentContent from '@layouts/ComponentContent';
 import CONSTANTS from '@locale/en-CA';
-import { selectIsInitialized } from '@modules/Contest/selector';
+import {
+    selectIsInitialized,
+    selectIsContestUpdating,
+    selectIsRefreshing as selectIsDataRefreshing,
+} from '@modules/Contest/selector';
 import {
     selectIsRefreshing,
     selectPayoutIsFetching,
@@ -18,10 +22,18 @@ const ContestInfo: React.FunctionComponent<ContestInfoProps> = () => {
     const isInitialized = useSelector(selectIsInitialized);
     const payoutIsFetching = useSelector(selectPayoutIsFetching);
     const isRefreshing = useSelector(selectIsRefreshing);
+    const isContestUpdating = useSelector(selectIsContestUpdating);
+    const isDataRefreshing = useSelector(selectIsDataRefreshing);
+    const showSpinner =
+        !isInitialized ||
+        payoutIsFetching ||
+        isRefreshing ||
+        isDataRefreshing ||
+        isContestUpdating;
     return (
         <ComponentContent
             componentRef={ref}
-            showSpinner={!isInitialized || payoutIsFetching || isRefreshing}
+            showSpinner={showSpinner}
             className="contest-info"
             bodyClassName="contest-info-content"
             title={CONSTANTS.PAGES.CONTEST.INFO}

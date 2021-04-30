@@ -44,11 +44,48 @@ function* refresh({ uuid }: AnyAction) {
     }
 }
 
+function* updateContestName({ data }: AnyAction) {
+    try {
+        yield put(ContestModuleActions.updateContestNameSuccess(data.name));
+    } catch (err) {
+        yield put(ContestModuleActions.updateContestNameFailure(err));
+    }
+}
+
+function* updateContestAvatar({ data }: AnyAction) {
+    try {
+        const avatar =
+            data.avatar && `${data.avatar}?t=${new Date().getTime()}`;
+        yield put(ContestModuleActions.updateContestAvatarSuccess(avatar));
+    } catch (err) {
+        yield put(ContestModuleActions.updateContestAvatarFailure(err));
+    }
+}
+
+function* updateContestStartTime({ data }: AnyAction) {
+    try {
+        yield put(
+            ContestModuleActions.updateContestStartTimeSuccess(data.start_time)
+        );
+    } catch (err) {
+        yield put(ContestModuleActions.updateContestStartTimeFailure(err));
+    }
+}
+
 export default function* ContestModuleSaga() {
     yield all([
         takeLatest(ContestModuleTypes.PRE_INIT, preInit),
         takeLatest(ContestModuleTypes.INIT, init),
         takeLatest(ContestModuleTypes.TERMINATE, terminate),
         takeLatest(ContestModuleTypes.REFRESH, refresh),
+        takeLatest(ContestModuleTypes.UPDATE_CONTEST_NAME, updateContestName),
+        takeLatest(
+            ContestModuleTypes.UPDATE_CONTEST_AVATAR,
+            updateContestAvatar
+        ),
+        takeLatest(
+            ContestModuleTypes.UPDATE_CONTEST_START_TIME,
+            updateContestStartTime
+        ),
     ]);
 }

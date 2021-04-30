@@ -2,13 +2,15 @@
 import { static as Immutable } from 'seamless-immutable';
 import { createReducer } from 'reduxsauce';
 import { ContestModuleTypes } from './actions';
-import { set as _set } from 'lodash';
 
 /* ------------- Interface ------------- */
 export interface ContestModuleInterface {
     readonly isFetching: boolean;
     readonly isRefreshing: boolean;
     readonly isInitialized: boolean;
+    readonly isContestNameUpdating: boolean;
+    readonly isContestAvatarUpdating: boolean;
+    readonly isContestStartTimeUpdating: boolean;
     readonly isTerminating: boolean;
     readonly err?: Error;
     readonly uuid?: string;
@@ -22,6 +24,9 @@ const INITIAL_STATE: ContestModuleInterface = {
     isRefreshing: false,
     isInitialized: false,
     isTerminating: false,
+    isContestNameUpdating: false,
+    isContestAvatarUpdating: false,
+    isContestStartTimeUpdating: false,
     err: undefined,
     uuid: undefined,
     contest: undefined,
@@ -99,18 +104,15 @@ function setUUID(state: any, { uuid }: any) {
     });
 }
 
-function setAvatar(state: any, { avatar }: any) {
-    const currAvatar = avatar && `${avatar}?t=${new Date().getTime()}`;
+function updateContestName(state: any, { data }: any) {
     return Immutable.merge(state, {
-        contest: {
-            ...state.contest,
-            avatar: currAvatar,
-        },
+        isContestNameUpdating: true,
     });
 }
 
-function setName(state: any, { name }: any) {
+function updateContestNameSuccess(state: any, { name }: any) {
     return Immutable.merge(state, {
+        isContestNameUpdating: false,
         contest: {
             ...state.contest,
             name,
@@ -118,12 +120,56 @@ function setName(state: any, { name }: any) {
     });
 }
 
-function setStartTime(state: any, { start_time }: any) {
+function updateContestNameFailure(state: any, { err }: any) {
     return Immutable.merge(state, {
+        isContestNameUpdating: false,
+        err,
+    });
+}
+
+function updateContestAvatar(state: any, { data }: any) {
+    return Immutable.merge(state, {
+        isContestAvatarUpdating: true,
+    });
+}
+
+function updateContestAvatarSuccess(state: any, { avatar }: any) {
+    return Immutable.merge(state, {
+        isContestAvatarUpdating: false,
+        contest: {
+            ...state.contest,
+            avatar,
+        },
+    });
+}
+
+function updateContestAvatarFailure(state: any, { err }: any) {
+    return Immutable.merge(state, {
+        isContestAvatarUpdating: false,
+        err,
+    });
+}
+
+function updateContestStartTime(state: any, { data }: any) {
+    return Immutable.merge(state, {
+        isContestStartTimeUpdating: true,
+    });
+}
+
+function updateContestStartTimeSuccess(state: any, { start_time }: any) {
+    return Immutable.merge(state, {
+        isContestStartTimeUpdating: false,
         contest: {
             ...state.contest,
             start_time,
         },
+    });
+}
+
+function updateContestStartTimeFailure(state: any, { err }: any) {
+    return Immutable.merge(state, {
+        isContestStartTimeUpdating: false,
+        err,
     });
 }
 
@@ -153,11 +199,17 @@ const HANDLERS = {
     [ContestModuleTypes.TERMINATE]: terminate,
     [ContestModuleTypes.TERMINATE_SUCCESS]: terminateSuccess,
     [ContestModuleTypes.TERMINATE_FAILURE]: terminateFailure,
+    [ContestModuleTypes.UPDATE_CONTEST_NAME]: updateContestName,
+    [ContestModuleTypes.UPDATE_CONTEST_NAME_SUCCESS]: updateContestNameSuccess,
+    [ContestModuleTypes.UPDATE_CONTEST_NAME_FAILURE]: updateContestNameFailure,
+    [ContestModuleTypes.UPDATE_CONTEST_AVATAR]: updateContestAvatar,
+    [ContestModuleTypes.UPDATE_CONTEST_AVATAR_SUCCESS]: updateContestAvatarSuccess,
+    [ContestModuleTypes.UPDATE_CONTEST_AVATAR_FAILURE]: updateContestAvatarFailure,
+    [ContestModuleTypes.UPDATE_CONTEST_START_TIME]: updateContestStartTime,
+    [ContestModuleTypes.UPDATE_CONTEST_START_TIME_SUCCESS]: updateContestStartTimeSuccess,
+    [ContestModuleTypes.UPDATE_CONTEST_START_TIME_FAILURE]: updateContestStartTimeFailure,
     [ContestModuleTypes.SET]: set,
     [ContestModuleTypes.SET_UUID]: setUUID,
-    [ContestModuleTypes.SET_AVATAR]: setAvatar,
-    [ContestModuleTypes.SET_NAME]: setName,
-    [ContestModuleTypes.SET_START_TIME]: setStartTime,
     [ContestModuleTypes.UPDATE_CONTEST_PARTICIPANT_SCORE]: updateContestParticipantScore,
 };
 

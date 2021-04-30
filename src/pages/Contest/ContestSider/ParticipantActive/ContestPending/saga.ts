@@ -20,6 +20,7 @@ import {
 import constants from '@constants';
 import { keyBy as _keyBy } from 'lodash';
 import { fetchPendingParticipants } from './helpers';
+import { ContestModuleTypes } from '@modules/Contest/actions';
 
 function* init() {
     try {
@@ -105,6 +106,6 @@ export default function* ContestPageSiderParticipantActiveContestPendingSaga() {
             ContestPageSiderParticipantActiveContestPendingTypes.FETCH_DATA,
             fetchData
         ),
-        takeLatest(ContestPageTypes.REFRESH, basePageRefresh),
+        takeLatest(ContestModuleTypes.REFRESH, basePageRefresh),
     ]);
 }
