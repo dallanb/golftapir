@@ -46,25 +46,37 @@ export const socketEventHandlers = (socket: WebSocket, emitter: any) => {
                         break;
                     case constants.EVENTS.CONTESTS.AVATAR_CREATED:
                         emitter(
-                            ContestModuleActions.setAvatar(data.s3_filename)
+                            ContestModuleActions.updateContestAvatar({
+                                avatar: data.s3_filename,
+                            })
                         );
                         break;
                     case constants.EVENTS.CONTESTS.AVATAR_UPDATED:
                         emitter(
-                            ContestModuleActions.setAvatar(data.s3_filename)
+                            ContestModuleActions.updateContestAvatar({
+                                avatar: data.s3_filename,
+                            })
                         );
                         break;
                     case constants.EVENTS.CONTESTS.AVATAR_DELETED:
-                        emitter(ContestModuleActions.setAvatar(null));
+                        emitter(
+                            ContestModuleActions.updateContestAvatar({
+                                avatar: null,
+                            })
+                        );
                         break;
                     case constants.EVENTS.CONTESTS.NAME_UPDATED:
                         emitter(
-                            ContestModuleActions.setName(data.name) // my issue with handling update like this is that the client is assuming this is what the server would have returned
+                            ContestModuleActions.updateContestName({
+                                name: data.name,
+                            }) // my issue with handling update like this is that the client is assuming this is what the server would have returned
                         );
                         break;
                     case constants.EVENTS.CONTESTS.START_TIME_UPDATED:
                         emitter(
-                            ContestModuleActions.setStartTime(data.start_time)
+                            ContestModuleActions.updateContestStartTime({
+                                start_time: data.start_time,
+                            })
                         );
                         break;
                     default:
