@@ -8,12 +8,14 @@ import ContestActive from './ContestActive';
 import ContestPending from './ContestPending';
 import ContestReady from './ContestReady';
 import './ParticipantActive.less';
+import { selectMe } from '@selectors/BaseSelector';
 
 const ParticipantActive: React.FunctionComponent<ParticipantActiveProps> = () => {
     const status = useSelector(selectContestStatus);
     const isOwner = useSelector(selectIsOwner);
-
+    const { isRefreshing, isInitialized } = useSelector(selectMe);
     let content = null;
+    if (isRefreshing || !isInitialized) return content;
     switch (status) {
         case constants.STATUS.PENDING.KEY:
             if (isOwner) {
